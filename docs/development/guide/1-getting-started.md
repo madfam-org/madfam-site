@@ -38,7 +38,7 @@ Welcome to the MADFAM development team! This comprehensive guide will get you up
 
 ```bash
 # 1. Clone the repository
-git clone git@github.com:madfam-io/biz-site.git
+git clone git@github.com:madfam-org/biz-site.git
 cd biz-site
 
 # 2. Install dependencies (this may take 2-3 minutes)

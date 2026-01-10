@@ -112,7 +112,7 @@ The GitHub Action will:
 
 #### Access Staging
 
-- URL: `https://madfam-io.github.io/biz-site`
+- URL: `https://madfam-org.github.io/biz-site`
 - Or with custom domain: `https://staging.madfam.io`
 
 **Important Limitations:**
@@ -293,13 +293,11 @@ git push origin main
 ### Monitoring Services
 
 1. **Vercel Analytics** (Production)
-
    - Real User Metrics
    - Web Vitals
    - Error tracking
 
 2. **Plausible Analytics**
-
    - Page views
    - User journeys
    - Conversion tracking
@@ -377,7 +375,6 @@ Before deploying to production:
 Configure notifications in GitHub/Vercel:
 
 1. **Slack Integration**
-
    - GitHub Actions: Add Slack webhook
    - Vercel: Connect Slack in settings
 
@@ -388,6 +385,6 @@ Configure notifications in GitHub/Vercel:
 ## Useful Links
 
 - [Vercel Dashboard](https://vercel.com/dashboard)
-- [GitHub Actions](https://github.com/madfam-io/biz-site/actions)
-- [Deployment Status](https://github.com/madfam-io/biz-site/deployments)
+- [GitHub Actions](https://github.com/madfam-org/biz-site/actions)
+- [Deployment Status](https://github.com/madfam-org/biz-site/deployments)
 - [Analytics Dashboard](https://plausible.io/madfam.io)

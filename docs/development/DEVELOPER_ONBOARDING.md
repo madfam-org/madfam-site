@@ -17,7 +17,7 @@ git --version     # Any recent version
 
 ```bash
 # Clone repository
-git clone https://github.com/madfam-io/biz-site.git
+git clone https://github.com/madfam-org/biz-site.git
 cd biz-site
 
 # Install dependencies

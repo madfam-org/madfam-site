@@ -31,7 +31,7 @@ Comprehensive audit of ALL external URLs/links across the MADFAM biz-site codeba
 | **Instagram**          | `https://instagram.com/madfam.io`                        | Footer.tsx (L53), seo.ts (L356)       | ACTIVE |
 | **Facebook**           | `https://www.facebook.com/people/Madfam/61578707019539/` | Footer.tsx (L54), seo.ts (L357)       | ACTIVE |
 | **TikTok**             | `https://tiktok.com/@madfam.io`                          | Footer.tsx (L55), seo.ts (L358)       | ACTIVE |
-| **GitHub**             | `https://github.com/madfam-io`                           | Footer.tsx (L56), seo.ts (L359)       | ACTIVE |
+| **GitHub**             | `https://github.com/madfam-org`                          | Footer.tsx (L56), seo.ts (L359)       | ACTIVE |
 | **YouTube Channel**    | `https://www.youtube.com/@innovacionesmadfam`            | guides/page.tsx (L204), seo.ts (L360) | ACTIVE |
 
 ---

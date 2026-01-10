@@ -25,7 +25,7 @@ By participating in this project, you agree to:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/madfam-io/biz-site.git
+   git clone https://github.com/madfam-org/biz-site.git
    cd biz-site
    ```
 
@@ -73,7 +73,6 @@ We use Git Flow:
    ```
 
 2. **Make changes**
-
    - Write code
    - Add tests
    - Update documentation
@@ -393,13 +392,11 @@ pnpm audit fix
 ### Common Issues
 
 1. **Module not found**
-
    - Check import paths
    - Verify package is installed
    - Restart dev server
 
 2. **Type errors**
-
    - Run `pnpm typecheck`
    - Check for missing types
    - Update TypeScript

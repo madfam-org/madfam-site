@@ -250,17 +250,17 @@ cat .vercel/project.json
 
 ```
 Teams to create:
-- @madfam-io/developers (all developers)
-- @madfam-io/devops (DevOps engineers)
-- @madfam-io/web-team (frontend developers)
-- @madfam-io/backend-team (backend developers)
-- @madfam-io/design-team (designers)
-- @madfam-io/qa-team (QA engineers)
-- @madfam-io/security-team (security reviewers)
-- @madfam-io/database-team (database admins)
-- @madfam-io/i18n-team (translation coordinators)
-- @madfam-io/cms-team (CMS content managers)
-- @madfam-io/data-team (data analysts)
+- @madfam-org/developers (all developers)
+- @madfam-org/devops (DevOps engineers)
+- @madfam-org/web-team (frontend developers)
+- @madfam-org/backend-team (backend developers)
+- @madfam-org/design-team (designers)
+- @madfam-org/qa-team (QA engineers)
+- @madfam-org/security-team (security reviewers)
+- @madfam-org/database-team (database admins)
+- @madfam-org/i18n-team (translation coordinators)
+- @madfam-org/cms-team (CMS content managers)
+- @madfam-org/data-team (data analysts)
 ```
 
 3. Add members to each team
@@ -431,9 +431,9 @@ Recommend team members configure:
 ```markdown
 # MADFAM Corporate Website
 
-[![CI](https://github.com/madfam-io/biz-site/actions/workflows/ci.yml/badge.svg)](https://github.com/madfam-io/biz-site/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/madfam-io/biz-site/actions/workflows/codeql.yml/badge.svg)](https://github.com/madfam-io/biz-site/actions/workflows/codeql.yml)
-[![Deployment](https://github.com/madfam-io/biz-site/actions/workflows/deploy.yml/badge.svg)](https://github.com/madfam-io/biz-site/actions/workflows/deploy.yml)
+[![CI](https://github.com/madfam-org/biz-site/actions/workflows/ci.yml/badge.svg)](https://github.com/madfam-org/biz-site/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/madfam-org/biz-site/actions/workflows/codeql.yml/badge.svg)](https://github.com/madfam-org/biz-site/actions/workflows/codeql.yml)
+[![Deployment](https://github.com/madfam-org/biz-site/actions/workflows/deploy.yml/badge.svg)](https://github.com/madfam-org/biz-site/actions/workflows/deploy.yml)
 ```
 
 2. Create or update CONTRIBUTING.md with:

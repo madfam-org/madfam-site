@@ -356,7 +356,7 @@ export class SEOService {
             'https://instagram.com/madfam.io',
             'https://www.facebook.com/people/Madfam/61578707019539/',
             'https://tiktok.com/@madfam.io',
-            'https://github.com/madfam-io',
+            'https://github.com/madfam-org',
             'https://www.youtube.com/@innovacionesmadfam',
           ],
           address: {

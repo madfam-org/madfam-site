@@ -124,7 +124,7 @@ This project is proprietary software. See [LICENSE](./LICENSE) for details.
 
 For support, please contact:
 
-- **Technical Issues**: [GitHub Issues](https://github.com/madfam-io/biz-site/issues)
+- **Technical Issues**: [GitHub Issues](https://github.com/madfam-org/biz-site/issues)
 - **Business Inquiries**: hello@madfam.io
 - **Security Issues**: security@madfam.io
 

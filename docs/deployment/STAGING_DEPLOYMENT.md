@@ -79,7 +79,7 @@ The GitHub Action:
 
 1. Runs the staging build
 2. Deploys to GitHub Pages
-3. Available at: https://madfam-io.github.io/biz-site/
+3. Available at: https://madfam-org.github.io/biz-site/
 
 ## Environment Detection
 

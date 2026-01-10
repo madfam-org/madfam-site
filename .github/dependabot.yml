@@ -9,9 +9,9 @@ updates:
       time: "09:00"
     open-pull-requests-limit: 5
     reviewers:
-      - "madfam-io/developers"
+      - "madfam-org/developers"
     assignees:
-      - "madfam-io/developers"
+      - "madfam-org/developers"
     commit-message:
       prefix: "chore"
       include: "scope"

@@ -15,7 +15,7 @@ spec:
     context: .
     source:
       git:
-        repository: https://github.com/madfam-io/madfam-site
+        repository: https://github.com/madfam-org/madfam-site
         branch: main
         autoDeploy: true
 

@@ -151,6 +151,7 @@ biz-site/
 All routes support internationalization with Spanish (es), English (en), and Portuguese (pt) locales:
 
 **Public Pages**
+
 - `/` - Corporate homepage
 - `/solutions` - Business units (Aureo Labs, Primavera3D, MADFAM Co-Labs, Showtech)
 - `/products` - Product showcase (PENNY, MedSync, AeroControl)
@@ -159,25 +160,30 @@ All routes support internationalization with Spanish (es), English (en), and Por
 - `/impact` - ESG and sustainability metrics
 
 **Interactive Tools**
+
 - `/assessment` - AI capability assessment tool
 - `/calculator` - ROI and cost calculator
 - `/estimator` - Project estimation tool
 
 **Content**
+
 - `/blog` - Articles and guides
 - `/case-studies` - Customer success stories
 - `/showcase` - Technology demonstrations
 - `/guides` - Documentation and tutorials
 
 **Demos**
+
 - `/demo/dhanam` - Financial wellness platform demo
 - `/demo/forge-sight` - Analytics platform demo
 
 **User Portal**
+
 - `/dashboard` - User dashboard and analytics
 - `/auth/signin` - Authentication page
 
 **Legal**
+
 - `/privacy` - Privacy policy
 - `/terms` - Terms of service
 - `/cookies` - Cookie policy
@@ -187,23 +193,23 @@ All routes support internationalization with Spanish (es), English (en), and Por
 
 ## 🛠️ Technology Stack
 
-| Category       | Technology            | Version  | Purpose                          |
-| -------------- | --------------------- | -------- | -------------------------------- |
-| **Frontend**   | Next.js               | 14.2.33  | React framework with App Router  |
-| **Language**   | TypeScript            | 5.9.3    | Type-safe development            |
-| **UI**         | React                 | 19.2.0   | Modern UI library                |
-| **Styling**    | Tailwind CSS          | 4.1.17   | Utility-first CSS framework      |
-| **Animation**  | Framer Motion         | 11.18.0  | Smooth animations & transitions  |
-| **Forms**      | React Hook Form + Zod | 7.66.0   | Form handling and validation     |
-| **i18n**       | next-intl             | 4.5.3    | Internationalization             |
-| **Database**   | Prisma + PostgreSQL   | 6.19.0   | Type-safe database ORM           |
-| **Auth**       | NextAuth              | 4.24.13  | Authentication solution          |
-| **Analytics**  | Plausible             | Latest   | Privacy-first analytics          |
-| **CMS**        | Payload CMS           | 3.54.0   | Headless content management      |
-| **Testing**    | Vitest + Playwright   | 4.0.8    | Unit and E2E testing             |
-| **Deployment** | Vercel + GitHub Pages | Latest   | Production and staging           |
-| **CI/CD**      | GitHub Actions        | Latest   | Automated workflows              |
-| **Monorepo**   | Turborepo + pnpm      | 2.6.1    | Workspace management             |
+| Category       | Technology            | Version | Purpose                         |
+| -------------- | --------------------- | ------- | ------------------------------- |
+| **Frontend**   | Next.js               | 14.2.33 | React framework with App Router |
+| **Language**   | TypeScript            | 5.9.3   | Type-safe development           |
+| **UI**         | React                 | 19.2.0  | Modern UI library               |
+| **Styling**    | Tailwind CSS          | 4.1.17  | Utility-first CSS framework     |
+| **Animation**  | Framer Motion         | 11.18.0 | Smooth animations & transitions |
+| **Forms**      | React Hook Form + Zod | 7.66.0  | Form handling and validation    |
+| **i18n**       | next-intl             | 4.5.3   | Internationalization            |
+| **Database**   | Prisma + PostgreSQL   | 6.19.0  | Type-safe database ORM          |
+| **Auth**       | NextAuth              | 4.24.13 | Authentication solution         |
+| **Analytics**  | Plausible             | Latest  | Privacy-first analytics         |
+| **CMS**        | Payload CMS           | 3.54.0  | Headless content management     |
+| **Testing**    | Vitest + Playwright   | 4.0.8   | Unit and E2E testing            |
+| **Deployment** | Vercel + GitHub Pages | Latest  | Production and staging          |
+| **CI/CD**      | GitHub Actions        | Latest  | Automated workflows             |
+| **Monorepo**   | Turborepo + pnpm      | 2.6.1   | Workspace management            |
 
 ## 🚢 Deployment
 
@@ -238,6 +244,7 @@ docker-compose up web postgres
 ```
 
 The Docker configuration includes:
+
 - Production-ready Next.js build (port 3000)
 - Development server with hot reload (port 3001)
 - PostgreSQL 15 database for CMS and data persistence
@@ -350,7 +357,7 @@ This project is proprietary software. All rights reserved by MADFAM.
 - [Production Site](https://madfam.io)
 - [Staging Site](https://madfam.github.io/biz-site)
 - [Documentation](./docs)
-- [Issues](https://github.com/madfam-io/biz-site/issues)
+- [Issues](https://github.com/madfam-org/biz-site/issues)
 
 ---
 

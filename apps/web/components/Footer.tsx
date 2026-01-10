@@ -55,7 +55,7 @@ export function Footer() {
       icon: 'fb',
     },
     { name: t('footer.social.tiktok'), href: 'https://tiktok.com/@madfam.io', icon: 'tt' },
-    { name: t('footer.social.github'), href: 'https://github.com/madfam-io', icon: 'gh' },
+    { name: t('footer.social.github'), href: 'https://github.com/madfam-org', icon: 'gh' },
   ];
 
   return (

@@ -28,7 +28,7 @@
 | Instagram | https://instagram.com/madfam.io                        |
 | Facebook  | https://www.facebook.com/people/Madfam/61578707019539/ |
 | TikTok    | https://tiktok.com/@madfam.io                          |
-| GitHub    | https://github.com/madfam-io                           |
+| GitHub    | https://github.com/madfam-org                          |
 | YouTube   | https://www.youtube.com/@innovacionesmadfam            |
 
 ## Main Domains
