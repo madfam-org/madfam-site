@@ -203,7 +203,7 @@ const pricingTiers = {
 
 // Recommendation logic
 function getRecommendation(filters: FilterState): string | null {
-  const { industry, companySize, budget, useCase } = filters;
+  const { industry, companySize: _companySize, budget, useCase } = filters;
 
   // Use case based recommendations
   if (useCase === 'employee-wellness') return 'dhanam';

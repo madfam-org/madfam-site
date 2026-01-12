@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { ArrowRightIcon, ArrowDownIcon, PlayIcon } from '@heroicons/react/24/outline';
 import { Button, Container, Heading } from '@/components/ui';
 import Link from 'next/link';
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { AnimatedText } from '@/components/AnimatedText';
 import { Badge } from '@/components/corporate/Badge';
 import { ClientLogos } from '@/components/corporate/ClientLogos';
@@ -71,9 +71,9 @@ const businessArms = [
 ];
 
 export function VisionFirstHomePage() {
-  const t = useTranslations();
+  // const t = useTranslations(); // Reserved for future i18n
   const locale = useLocale();
-  const [activeSection, setActiveSection] = useState(0);
+  const [_activeSection, setActiveSection] = useState(0); // Tracks scroll position
 
   // Scroll-based section tracking
   useEffect(() => {
@@ -101,17 +101,12 @@ export function VisionFirstHomePage() {
         {/* Animated background - Solarpunk aesthetic */}
         <div className="absolute inset-0">
           {/* Gradient orbs */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2c8136] rounded-full filter blur-[128px] opacity-20 animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#58326f] rounded-full filter blur-[128px] opacity-20 animate-pulse animation-delay-1000" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#eebc15] rounded-full filter blur-[96px] opacity-10 animate-pulse animation-delay-2000" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-green rounded-full filter blur-brand-3xl opacity-20 animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-purple rounded-full filter blur-brand-3xl opacity-20 animate-pulse animation-delay-1000" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand-yellow rounded-full filter blur-brand-xl opacity-10 animate-pulse animation-delay-2000" />
 
           {/* Geometric pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-[0.03]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
+          <div className="absolute inset-0 opacity-[0.03] bg-pattern-geometric" />
         </div>
 
         <Container className="relative z-10 text-center">
@@ -128,9 +123,7 @@ export function VisionFirstHomePage() {
               className="text-white mb-6 text-5xl md:text-7xl font-bold tracking-tight"
             >
               <span className="block">Building</span>
-              <span className="block bg-gradient-to-r from-[#2c8136] via-[#58326f] to-[#eebc15] bg-clip-text text-transparent">
-                Regenerative Futures
-              </span>
+              <span className="block text-gradient-brand">Regenerative Futures</span>
             </Heading>
 
             <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-12">
@@ -209,7 +202,7 @@ export function VisionFirstHomePage() {
       <section data-section="impact" className="py-24 bg-neutral-900 relative overflow-hidden">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#2c8136] via-transparent to-[#58326f]" />
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-brand-subtle" />
         </div>
 
         <Container className="relative z-10">
@@ -230,7 +223,7 @@ export function VisionFirstHomePage() {
               <div key={metric.label} className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                   {metric.value}
-                  <span className="text-[#eebc15]">{metric.suffix}</span>
+                  <span className="text-brand-yellow">{metric.suffix}</span>
                 </div>
                 <div className="text-white/60 text-sm uppercase tracking-wider">{metric.label}</div>
               </div>
@@ -388,8 +381,8 @@ export function VisionFirstHomePage() {
       >
         {/* Background elements */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#2c8136] rounded-full filter blur-[100px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#58326f] rounded-full filter blur-[100px]" />
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-green rounded-full filter blur-brand-2xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-brand-purple rounded-full filter blur-brand-2xl" />
         </div>
 
         <Container className="relative z-10">
@@ -407,7 +400,7 @@ export function VisionFirstHomePage() {
                 <Button
                   size="lg"
                   variant="secondary"
-                  className="bg-gradient-to-r from-[#2c8136] to-[#58326f] text-white border-0 hover:opacity-90"
+                  className="bg-gradient-brand text-white border-0 hover:opacity-90"
                 >
                   Take AI Assessment
                   <ArrowRightIcon className="w-4 h-4 ml-2" />

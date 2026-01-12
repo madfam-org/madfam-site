@@ -101,15 +101,15 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
   return (
     <main className="min-h-screen bg-gradient-to-b from-neutral-50 to-white">
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-[#2c8136]/5 to-[#58326f]/5">
+      <section className="py-16 lg:py-24 bg-gradient-to-br from-brand-green/5 to-brand-purple/5">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <Heading level={1} className="text-4xl lg:text-6xl font-bold text-neutral-900 mb-6">
               {t('hero.title')}
             </Heading>
             <p className="text-xl text-neutral-600 mb-8 leading-relaxed">{corporateT('purpose')}</p>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#2c8136]/10 rounded-full text-sm text-[#2c8136]">
-              <span className="w-2 h-2 bg-[#2c8136] rounded-full animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-green/10 rounded-full text-sm text-brand-green">
+              <span className="w-2 h-2 bg-brand-green rounded-full animate-pulse" />
               {t('hero.badge')}
             </div>
           </div>

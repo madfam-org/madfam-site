@@ -10,7 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Brand Colors
+        // Brand Colors - Single Source of Truth (from packages/ui/src/themes/brand-colors.ts)
+        brand: {
+          green: 'var(--logo-green)',
+          'green-light': '#52b788',
+          'green-dark': '#1e5128',
+          purple: 'var(--logo-purple)',
+          'purple-light': '#7d4f96',
+          'purple-dark': '#3d1e4f',
+          yellow: 'var(--logo-yellow)',
+          'yellow-light': '#f7d64a',
+          'yellow-dark': '#d4a20d',
+        },
+        // Legacy Creative Colors
         sun: '#FFD93D',
         leaf: '#6BCB77',
         lavender: '#9B59B6',
@@ -23,6 +35,11 @@ const config: Config = {
         creative: 'var(--color-lavender)',
         surface: 'var(--color-pearl)',
       },
+      blur: {
+        'brand-xl': '96px',
+        'brand-2xl': '100px',
+        'brand-3xl': '128px',
+      },
       fontFamily: {
         heading: ['var(--font-poppins)', 'system-ui', 'sans-serif'],
         body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
@@ -30,22 +47,22 @@ const config: Config = {
       },
       fontSize: {
         'display-xl': 'clamp(3rem, 5vw, 5rem)',
-        'display': 'clamp(2.5rem, 4vw, 4rem)',
+        display: 'clamp(2.5rem, 4vw, 4rem)',
         'heading-1': 'clamp(2rem, 3vw, 3rem)',
         'heading-2': 'clamp(1.5rem, 2.5vw, 2.5rem)',
         'heading-3': 'clamp(1.25rem, 2vw, 2rem)',
         'body-lg': 'clamp(1.125rem, 1.5vw, 1.25rem)',
       },
       spacing: {
-        'section': 'clamp(3rem, 8vw, 6rem)',
+        section: 'clamp(3rem, 8vw, 6rem)',
       },
       animation: {
         'fade-up': 'fadeUp 0.5s ease-out',
         'fade-in': 'fadeIn 0.5s ease-out',
         'slide-up': 'slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1)',
         'scale-in': 'scaleIn 0.5s ease-out',
-        'float': 'float 6s ease-in-out infinite',
-        'shimmer': 'shimmer 2s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
+        shimmer: 'shimmer 2s ease-in-out infinite',
         'spin-slow': 'spin 20s linear infinite',
       },
       keyframes: {
@@ -77,7 +94,8 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-brand': 'linear-gradient(135deg, var(--color-obsidian) 0%, var(--color-lavender) 100%)',
+        'gradient-brand':
+          'linear-gradient(135deg, var(--color-obsidian) 0%, var(--color-lavender) 100%)',
         'mesh-gradient': `
           radial-gradient(at 40% 20%, var(--color-sun) 0px, transparent 50%),
           radial-gradient(at 80% 0%, var(--color-lavender) 0px, transparent 50%),

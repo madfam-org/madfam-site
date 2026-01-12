@@ -6,6 +6,7 @@ export enum LeadStatus {
   NEW = 'NEW',
   CONTACTED = 'CONTACTED',
   QUALIFIED = 'QUALIFIED',
+  UNQUALIFIED = 'UNQUALIFIED',
   CONVERTED = 'CONVERTED',
   LOST = 'LOST',
 }
@@ -14,7 +15,13 @@ export enum LeadSource {
   WEBSITE = 'WEBSITE',
   REFERRAL = 'REFERRAL',
   SOCIAL = 'SOCIAL',
+  EVENT = 'EVENT',
+  DIRECT = 'DIRECT',
   OTHER = 'OTHER',
+  DEMO_REQUEST = 'DEMO_REQUEST',
+  ROI_CALCULATOR = 'ROI_CALCULATOR',
+  CONTACT_FORM = 'CONTACT_FORM',
+  ASSESSMENT = 'ASSESSMENT',
 }
 
 export enum UserRole {
@@ -24,6 +31,7 @@ export enum UserRole {
 }
 
 export enum AssessmentStatus {
-  PENDING = 'PENDING',
+  STARTED = 'STARTED',
   COMPLETED = 'COMPLETED',
+  ABANDONED = 'ABANDONED',
 }

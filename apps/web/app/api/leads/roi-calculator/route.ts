@@ -285,7 +285,7 @@ function getEmailSubject(lang: string, roiPercentage: number): string {
     pt: `Sua análise de ROI: ${roiFormatted}% de retorno potencial`,
   };
 
-  return subjects[lang] || subjects['en'];
+  return subjects[lang] ?? subjects['en'] ?? `Your ROI Analysis: ${roiFormatted}% potential return`;
 }
 
 function getSuccessMessage(lang: string): string {
@@ -295,7 +295,11 @@ function getSuccessMessage(lang: string): string {
     pt: 'Obrigado. Enviamos sua análise de ROI completa para seu email. Um especialista entrará em contato em breve.',
   };
 
-  return messages[lang] || messages['en'];
+  return (
+    messages[lang] ??
+    messages['en'] ??
+    "Thank you. We've sent your complete ROI analysis to your email."
+  );
 }
 
 const handlePOSTWithSecurity = async (request: NextRequest) => {

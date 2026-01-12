@@ -325,7 +325,7 @@ function getSuccessMessage(lang: string): string {
     pt: 'Obrigado pelo seu interesse. Sua demo personalizada está pronta. Verifique seu email para os próximos passos.',
   };
 
-  return messages[lang] || messages['en'];
+  return messages[lang] ?? messages['en'] ?? 'Thank you for your interest.';
 }
 
 const handlePOSTWithSecurity = async (request: NextRequest) => {

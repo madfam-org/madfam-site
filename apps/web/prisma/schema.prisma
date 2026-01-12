@@ -28,6 +28,10 @@ enum LeadSource {
   EVENT
   DIRECT
   OTHER
+  DEMO_REQUEST
+  ROI_CALCULATOR
+  CONTACT_FORM
+  ASSESSMENT
 }
 
 enum UserRole {
@@ -55,6 +59,8 @@ model Lead {
   source      LeadSource  @default(WEBSITE)
   score       Int         @default(0)
   status      LeadStatus  @default(NEW)
+  tags        String[]    @default([])
+  metadata    Json?
 
   // Metadata
   industry    String?

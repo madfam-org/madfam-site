@@ -4,10 +4,21 @@
   "private": true,
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./themes/brand-colors": "./src/themes/brand-colors.ts",
+    "./themes/brand-bridge": "./src/themes/brand-bridge.tsx"
+  },
   "scripts": {
     "build": "echo 'Local UI - no build needed'",
     "dev": "echo 'Local UI package'",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.4",

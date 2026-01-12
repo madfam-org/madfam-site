@@ -23,6 +23,7 @@
     "paths": {
       "@/*": ["./*"],
       "@madfam-site/ui": ["../../packages/ui/src"],
+      "@madfam-site/ui/*": ["../../packages/ui/src/*"],
       "@madfam/core": ["../../packages/core/src"],
       "@madfam/analytics": ["../../packages/analytics/src"],
       "@madfam/i18n": ["../../packages/i18n/src"]

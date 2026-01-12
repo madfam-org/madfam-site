@@ -119,9 +119,9 @@ export function CorporateHomePage() {
       <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 overflow-hidden">
         {/* Background decoration - Subtle solarpunk accents */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#2c8136] rounded-full filter blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#58326f] rounded-full filter blur-3xl animate-pulse animation-delay-1000" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#eebc15] rounded-full filter blur-3xl opacity-5" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-brand-green rounded-full filter blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-purple rounded-full filter blur-3xl animate-pulse animation-delay-1000" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand-yellow rounded-full filter blur-3xl opacity-5" />
         </div>
 
         <Container className="relative z-10">
@@ -135,14 +135,14 @@ export function CorporateHomePage() {
               <div className="mb-4">
                 <Badge
                   variant="by-madfam"
-                  className="text-white bg-white/10 border-[#2c8136]/20 backdrop-blur-sm"
+                  className="text-white bg-white/10 border-brand-green/20 backdrop-blur-sm"
                 >
                   {t('corporate.hero.badge')}
                 </Badge>
               </div>
               <Heading level={1} className="text-white mb-6 relative">
                 <span className="relative z-10">{personaContent.title}</span>
-                <span className="absolute -inset-1 bg-gradient-to-r from-[#2c8136]/10 to-[#58326f]/10 blur-lg" />
+                <span className="absolute -inset-1 bg-gradient-to-r from-brand-green/10 to-brand-purple/10 blur-lg" />
               </Heading>
               <p className="text-xl text-white/90 mb-8 max-w-4xl leading-relaxed">
                 {personaContent.subtitle}
@@ -153,7 +153,7 @@ export function CorporateHomePage() {
                 {personaContent.benefits.map((benefit, index) => (
                   <div key={index} className="flex items-start gap-2 text-white/80">
                     <svg
-                      className="w-5 h-5 text-[#2c8136] flex-shrink-0 mt-0.5"
+                      className="w-5 h-5 text-brand-green flex-shrink-0 mt-0.5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -193,7 +193,7 @@ export function CorporateHomePage() {
 
             {/* Corporate Structure Visualization */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 animate-fade-up animation-delay-600 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#2c8136]/5 via-transparent to-[#58326f]/5" />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-green/5 via-transparent to-brand-purple/5" />
               <div className="flex items-center justify-center gap-8 text-white/80 relative z-10">
                 <span className="text-lg font-semibold text-white">MADFAM</span>
                 <ArrowRightIcon className="w-5 h-5" />
@@ -281,13 +281,7 @@ export function CorporateHomePage() {
       {/* Our Solutions Section */}
       <section className="py-20 bg-neutral-50 relative">
         {/* Subtle pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, #2c8136 0%, transparent 50%),
-                           radial-gradient(circle at 80% 80%, #58326f 0%, transparent 50%)`,
-          }}
-        />
+        <div className="absolute inset-0 opacity-[0.02] bg-hero-decoration" />
         <Container>
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
