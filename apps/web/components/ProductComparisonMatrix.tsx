@@ -203,7 +203,7 @@ const pricingTiers = {
 
 // Recommendation logic
 function getRecommendation(filters: FilterState): string | null {
-  const { industry, companySize: _companySize, budget, useCase } = filters;
+  const { industry, budget, useCase } = filters;
 
   // Use case based recommendations
   if (useCase === 'employee-wellness') return 'dhanam';
@@ -422,7 +422,7 @@ export function ProductComparisonMatrix() {
               {/* Product Headers */}
               <thead>
                 <tr>
-                  <th className="w-1/5 p-4 text-left bg-white"></th>
+                  <th className="w-1/5 p-4 text-left bg-white" />
                   {visibleProducts.map(product => (
                     <th
                       key={product.id}
@@ -525,7 +525,7 @@ export function ProductComparisonMatrix() {
 
                 {/* CTA Row */}
                 <tr className="bg-white">
-                  <td className="p-4"></td>
+                  <td className="p-4" />
                   {visibleProducts.map(product => (
                     <td key={`cta-${product.id}`} className="p-4 text-center">
                       <div className="flex flex-col gap-2">

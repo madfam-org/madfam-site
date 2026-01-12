@@ -73,7 +73,7 @@ const businessArms = [
 export function VisionFirstHomePage() {
   // const t = useTranslations(); // Reserved for future i18n
   const locale = useLocale();
-  const [_activeSection, setActiveSection] = useState(0); // Tracks scroll position
+  const [, setActiveSection] = useState(0); // Tracks scroll position
 
   // Scroll-based section tracking
   useEffect(() => {
@@ -214,7 +214,8 @@ export function VisionFirstHomePage() {
               Making a Difference Across LATAM
             </Heading>
             <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Real numbers, real impact. Here's what we've achieved together with our partners.
+              Real numbers, real impact. Here&apos;s what we&apos;ve achieved together with our
+              partners.
             </p>
           </div>
 
@@ -391,8 +392,8 @@ export function VisionFirstHomePage() {
               Ready to Build Something Meaningful?
             </Heading>
             <p className="text-xl text-white/80 mb-12">
-              Whether you're looking to transform your organization or explore what's possible, we'd
-              love to hear from you.
+              Whether you&apos;re looking to transform your organization or explore what&apos;s
+              possible, we&apos;d love to hear from you.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
