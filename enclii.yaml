@@ -1,0 +1,12 @@
+apiVersion: enclii.dev/v1
+kind: Service
+metadata:
+  name: madfam-site
+  project: madfam-site
+spec:
+  runtime:
+    port: 3000
+  domains:
+    - name: madfam.io
+    - name: www.madfam.io
+    - name: docs.madfam.io
