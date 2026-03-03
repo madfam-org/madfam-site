@@ -1,8 +1,7 @@
 import { analytics } from '@madfam/analytics';
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
 import { z } from 'zod';
-import { authOptions } from '@/lib/auth';
+import { getServerAuth } from '@/lib/auth';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
@@ -179,7 +178,7 @@ export async function GET(request: NextRequest) {
 
     if (assessmentId) {
       // Get session for authorization
-      const session = await getServerSession(authOptions);
+      const session = await getServerAuth();
 
       // Fetch existing assessment results
       const assessment = await prisma.assessment.findUnique({
@@ -206,10 +205,7 @@ export async function GET(request: NextRequest) {
           assessmentId,
           ip: request.headers.get('x-forwarded-for')?.split(',')[0],
         });
-        return NextResponse.json(
-          { error: 'Authentication required' },
-          { status: 401 }
-        );
+        return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
       }
 
       // Check if user owns this assessment (via lead email) or is admin
@@ -342,7 +338,7 @@ async function handlePOST(request: NextRequest) {
             score: results.score,
           },
         }),
-      }).catch((error) => {
+      }).catch(error => {
         apiLogger.error('Failed to trigger n8n webhook for assessment', error, {
           assessmentId: assessment.id,
         });

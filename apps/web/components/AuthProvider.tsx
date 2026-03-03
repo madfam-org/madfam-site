@@ -1,13 +1,16 @@
 'use client';
 
+import { JanuaProvider } from '@janua/nextjs';
 import { ReactNode } from 'react';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
+const januaConfig = {
+  baseURL: process.env.NEXT_PUBLIC_JANUA_URL || 'https://auth.madfam.io',
+};
+
 export function AuthProvider({ children }: AuthProviderProps) {
-  // NextAuth is disabled for the public corporate site
-  // Authentication will be added when needed for specific features
-  return <>{children}</>;
+  return <JanuaProvider config={januaConfig}>{children}</JanuaProvider>;
 }

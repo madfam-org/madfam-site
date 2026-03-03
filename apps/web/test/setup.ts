@@ -25,16 +25,11 @@ vi.mock('next/navigation', () => ({
   },
 }));
 
-// Mock next-auth
-vi.mock('next-auth/react', () => ({
-  useSession() {
-    return {
-      data: null,
-      status: 'unauthenticated',
-    };
-  },
-  signIn: vi.fn(),
-  signOut: vi.fn(),
+// Mock Janua auth
+vi.mock('@janua/nextjs', () => ({
+  useJanua: () => ({ client: { getAccessToken: () => null } }),
+  useUser: () => ({ user: null }),
+  useAuth: () => ({ isAuthenticated: false, isLoading: false, signOut: vi.fn() }),
 }));
 
 // Mock @madfam/analytics (package not yet implemented)

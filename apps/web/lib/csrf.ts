@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from './auth';
+import { getServerAuth } from './auth';
 import { apiLogger } from './logger';
 import { validateCsrfToken } from './security';
 
@@ -20,7 +19,7 @@ export async function withCsrfProtection(
   }
 
   // Get session to retrieve CSRF token
-  const session = await getServerSession(authOptions);
+  const session = await getServerAuth();
 
   // Get CSRF token from session
   const sessionCsrfToken = session?.csrfToken;
