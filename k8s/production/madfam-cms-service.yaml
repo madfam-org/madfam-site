@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: madfam-cms
+  labels:
+    app: madfam-cms
+    app.kubernetes.io/name: madfam-cms
+    app.kubernetes.io/component: cms
+    app.kubernetes.io/part-of: madfam-platform
+    enclii.dev/managed-by: switchyard
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: madfam-cms

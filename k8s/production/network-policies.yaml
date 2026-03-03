@@ -1,0 +1,143 @@
+---
+# Default deny all ingress and egress
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  labels:
+    app.kubernetes.io/part-of: madfam-platform
+    enclii.dev/managed-by: switchyard
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: madfam-platform
+  policyTypes:
+    - Ingress
+    - Egress
+---
+# Allow ingress from Cloudflare tunnel on port 80
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-cloudflare-ingress
+  labels:
+    app.kubernetes.io/part-of: madfam-platform
+    enclii.dev/managed-by: switchyard
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: madfam-platform
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: cloudflare-tunnel
+          podSelector:
+            matchLabels:
+              app: cloudflared
+      ports:
+        - protocol: TCP
+          port: 3000
+---
+# Allow egress to data namespace (PostgreSQL + PgBouncer)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-database
+  labels:
+    app.kubernetes.io/part-of: madfam-platform
+    enclii.dev/managed-by: switchyard
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: madfam-platform
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: data
+      ports:
+        - protocol: TCP
+          port: 5432
+        - protocol: TCP
+          port: 6432
+---
+# Allow egress to DNS (kube-system, port 53)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-dns
+  labels:
+    app.kubernetes.io/part-of: madfam-platform
+    enclii.dev/managed-by: switchyard
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: madfam-platform
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 53
+---
+# Allow egress to HTTPS (external APIs, Janua SSO, etc.)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-https
+  labels:
+    app.kubernetes.io/part-of: madfam-platform
+    enclii.dev/managed-by: switchyard
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: madfam-platform
+  policyTypes:
+    - Egress
+  egress:
+    - ports:
+        - protocol: TCP
+          port: 443
+---
+# Allow intra-namespace traffic (web <-> cms)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-intra-namespace
+  labels:
+    app.kubernetes.io/part-of: madfam-platform
+    enclii.dev/managed-by: switchyard
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: madfam-platform
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/part-of: madfam-platform
+      ports:
+        - protocol: TCP
+          port: 3000
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/part-of: madfam-platform
+      ports:
+        - protocol: TCP
+          port: 3000

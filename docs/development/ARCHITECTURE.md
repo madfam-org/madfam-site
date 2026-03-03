@@ -228,9 +228,20 @@ enum ServiceTier {
 
 ```
 Development → Staging → Production
-   Local      GitHub     Vercel
+   Local      GitHub     Kubernetes (self-hosted) or Vercel (serverless)
               Pages
 ```
+
+### Containerized Deployment (Kubernetes)
+
+The project includes a full K8s deployment stack:
+
+- **Dockerfiles**: Multi-stage builds for `apps/web` and `apps/cms`
+- **K8s manifests**: `k8s/production/` with Kustomize, network policies, resource quotas
+- **CI/CD**: GitHub Actions build → GHCR → cosign signing → digest commit (GitOps)
+- **Security**: Non-root containers, read-only rootfs, seccomp, default-deny NetworkPolicy
+
+See `docs/deployment/DEPLOYMENT.md` and `docs/infrastructure/INFRASTRUCTURE_REQUIREMENTS.md` for details.
 
 ### Feature Flags
 
@@ -293,14 +304,17 @@ const features = {
 
 ## Decision Log
 
-| Decision     | Rationale                    | Date    |
-| ------------ | ---------------------------- | ------- |
-| Next.js 14   | Latest features, App Router  | 2024-01 |
-| Monorepo     | Code sharing, atomic changes | 2024-01 |
-| Tailwind CSS | Utility-first, performance   | 2024-01 |
-| Plausible    | Privacy-first analytics      | 2024-01 |
-| TypeScript   | Type safety, DX              | 2024-01 |
-| Vercel       | Next.js optimization         | 2024-01 |
+| Decision     | Rationale                                                | Date    |
+| ------------ | -------------------------------------------------------- | ------- |
+| Next.js 14   | Latest features, App Router                              | 2024-01 |
+| Monorepo     | Code sharing, atomic changes                             | 2024-01 |
+| Tailwind CSS | Utility-first, performance                               | 2024-01 |
+| Plausible    | Privacy-first analytics                                  | 2024-01 |
+| TypeScript   | Type safety, DX                                          | 2024-01 |
+| Vercel       | Next.js optimization                                     | 2024-01 |
+| Kubernetes   | Self-hosted production, full control, security hardening | 2025-03 |
+| Cosign       | Supply-chain security for container images               | 2025-03 |
+| Kustomize    | GitOps-friendly K8s manifest management                  | 2025-03 |
 
 ## References
 

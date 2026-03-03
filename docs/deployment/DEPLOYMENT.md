@@ -84,7 +84,72 @@ RESEND_API_KEY=re_...
 
 ## Deployment Workflows
 
-### 1. Staging Deployment (GitHub Pages)
+### Production Deployment Options
+
+The project supports two production deployment strategies:
+
+| Strategy       | When to Use               | Details                                                         |
+| -------------- | ------------------------- | --------------------------------------------------------------- |
+| **Vercel**     | Serverless, zero-ops      | Push to `main` triggers Vercel auto-deploy                      |
+| **Kubernetes** | Self-hosted, full control | Push to `main` triggers Docker build → GHCR → K8s via Kustomize |
+
+See below for details on each strategy.
+
+### 1. Kubernetes Deployment (Self-Hosted)
+
+The project includes full Kubernetes manifests under `k8s/production/` and two GitHub Actions workflows (`deploy-web.yml`, `deploy-cms.yml`) that implement a GitOps-style deployment pipeline.
+
+#### How It Works
+
+1. Push to `main` (with changes in `apps/web/` or `apps/cms/`) triggers the respective workflow
+2. Docker image is built and pushed to `ghcr.io/madfam-org/madfam-site/{web,cms}`
+3. Image is signed with [cosign](https://github.com/sigstore/cosign) for supply-chain security
+4. The workflow updates `k8s/production/kustomization.yaml` with the new image digest
+5. A GitOps operator (e.g., Flux, ArgoCD) or manual `kubectl apply -k` picks up the change
+
+#### K8s Manifests
+
+```
+k8s/production/
+├── kustomization.yaml          # Kustomize entrypoint with image references
+├── namespace.yaml              # madfam-site namespace
+├── madfam-web-deployment.yaml  # Web app (Next.js) deployment
+├── madfam-web-service.yaml     # Web ClusterIP service (port 80 → 3000)
+├── madfam-cms-deployment.yaml  # CMS (Payload) deployment
+├── madfam-cms-service.yaml     # CMS ClusterIP service (port 80 → 3000)
+├── network-policies.yaml       # Default-deny + allow Cloudflare, DB, DNS, HTTPS
+├── resource-quota.yaml         # CPU/memory limits and LimitRange
+└── secrets-template.yaml       # Template for kubectl create secret
+```
+
+#### Security Hardening
+
+- Non-root containers (UID 1001)
+- Read-only root filesystem with `/tmp` emptyDir
+- `seccompProfile: RuntimeDefault`
+- All capabilities dropped
+- Network policies: default-deny with explicit allow rules
+- Image signing with cosign (keyless, OIDC-based)
+
+#### Deploying Manually
+
+```bash
+# Create namespace and secrets first
+kubectl apply -f k8s/production/namespace.yaml
+kubectl create secret generic madfam-site-secrets \
+  --namespace=madfam-site \
+  --from-literal=DATABASE_URL='postgresql://...' \
+  --from-literal=NEXTAUTH_SECRET='...' \
+  --from-literal=NEXTAUTH_URL='https://madfam.io' \
+  --from-literal=JANUA_CLIENT_ID='...' \
+  --from-literal=JANUA_SECRET='...' \
+  --from-literal=PAYLOAD_SECRET='...'
+
+# Apply all manifests
+kubectl apply -k k8s/production/
+```
+
+### 2. Staging Deployment (GitHub Pages)
 
 Staging is automatically deployed when pushing to the `staging` branch.
 
@@ -122,7 +187,7 @@ The GitHub Action will:
 - No database operations
 - Static content only
 
-### 2. Production Deployment (Vercel)
+### 3. Production Deployment (Vercel)
 
 Production is deployed when creating a new release tag.
 
@@ -151,7 +216,7 @@ npm i -g vercel
 vercel --prod
 ```
 
-### 3. Preview Deployments
+### 4. Preview Deployments
 
 Vercel automatically creates preview deployments for pull requests.
 
@@ -183,13 +248,23 @@ Triggers on push to `staging`:
 - Deploys to GitHub Pages
 - Posts deployment URL
 
-#### Production Deployment
+#### Production Deployment (Vercel)
 
 Triggers on release creation:
 
 - Builds optimized production build
 - Deploys to Vercel
 - Runs smoke tests
+
+#### Container Deployment (.github/workflows/deploy-web.yml, deploy-cms.yml)
+
+Triggers on push to `main` (path-filtered):
+
+- Builds Docker image with multi-stage Dockerfile
+- Pushes to GitHub Container Registry (GHCR)
+- Signs image with cosign (keyless OIDC)
+- Updates `k8s/production/kustomization.yaml` with new digest
+- Reports lifecycle event to Enclii callback API
 
 ## Build Commands
 

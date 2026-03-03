@@ -1,0 +1,27 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: madfam-site
+
+resources:
+  - namespace.yaml
+  - madfam-web-deployment.yaml
+  - madfam-web-service.yaml
+  - madfam-cms-deployment.yaml
+  - madfam-cms-service.yaml
+  - network-policies.yaml
+  - resource-quota.yaml
+  - secrets-template.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: madfam-platform
+      enclii.dev/managed-by: switchyard
+    includeSelectors: false
+
+images:
+  - name: ghcr.io/madfam-org/madfam-site/web
+    newTag: latest
+  - name: ghcr.io/madfam-org/madfam-site/cms
+    newTag: latest

@@ -53,7 +53,35 @@ The MADFAM corporate website requires a hybrid infrastructure approach. **Vercel
 
 ## Recommended Architecture
 
-### Option 1: Vercel + Railway (Recommended)
+### Option 0: Kubernetes (Self-Hosted) — Current
+
+The project now includes production-ready Kubernetes manifests under `k8s/production/` with CI/CD pipelines for automated container builds and deployment.
+
+```yaml
+Infrastructure:
+  Kubernetes Cluster:
+    - madfam-web: Next.js app (Deployment + ClusterIP Service)
+    - madfam-cms: Payload CMS (Deployment + ClusterIP Service)
+    - Network Policies: default-deny, Cloudflare ingress, DB egress, DNS, HTTPS
+    - Resource Quotas: 500m–1.5 CPU, 1–2Gi memory, 10 pods max
+
+  External Services:
+    - PostgreSQL: Accessed via data namespace (ports 5432/6432)
+    - Cloudflare Tunnel: Ingress to cluster
+    - GHCR: Container image registry (ghcr.io/madfam-org/madfam-site)
+    - Cosign: Image signing for supply-chain security
+
+  CI/CD:
+    - deploy-web.yml: Build → Push → Sign → Update kustomization digest
+    - deploy-cms.yml: Build → Push → Sign → Update kustomization digest
+    - GitOps: kustomization.yaml updated automatically with image digests
+```
+
+**Security**: Non-root (UID 1001), read-only rootfs, seccomp, all caps dropped, network segmentation.
+
+See `docs/deployment/DEPLOYMENT.md` for setup instructions.
+
+### Option 1: Vercel + Railway
 
 ```yaml
 Infrastructure Split:
