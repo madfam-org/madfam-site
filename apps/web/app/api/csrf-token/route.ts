@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { getServerAuth } from '@/lib/auth';
 import { apiLogger } from '@/lib/logger';
 import { generateCsrfToken } from '@/lib/security';
 
@@ -13,7 +12,7 @@ export const dynamic = 'force-dynamic';
  */
 export async function GET(_request: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await getServerAuth();
 
     // Return existing CSRF token from session, or generate a new one for anonymous users
     const csrfToken = session?.csrfToken || generateCsrfToken();

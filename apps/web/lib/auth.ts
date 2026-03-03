@@ -1,193 +1,68 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import bcrypt from 'bcryptjs';
-import type { NextAuthOptions } from 'next-auth';
-import type { Adapter } from 'next-auth/adapters';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { UserRole } from '@/lib/prisma-types';
-import { JanuaCredentialsProvider, januaJwtCallback, januaSessionCallback } from './janua-auth';
-import { prisma } from './prisma';
-import { generateCsrfToken } from './security';
-
-// Check if Janua auth is enabled (default: true for unified auth)
-const JANUA_ENABLED = process.env.JANUA_ENABLED !== 'false';
-
 /**
- * NextAuth configuration
- * Using PrismaAdapter for database persistence with proper typing
+ * Auth utilities — wraps @janua/nextjs for server-side session access.
+ *
+ * Replaces NextAuth v4's getServerSession(authOptions) with Janua SDK.
+ * Preserves the same session shape (user.role, csrfToken, etc.) so
+ * consumers (API routes, server components) work without changes.
  */
-export const authOptions: NextAuthOptions = {
-  // PrismaAdapter returns a compatible adapter, but TypeScript needs help understanding this
-  // The adapter conforms to the NextAuth Adapter interface
-  adapter: PrismaAdapter(prisma) as Adapter,
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-  cookies: {
-    sessionToken: {
-      name: `${process.env.NODE_ENV === 'production' ? '__Secure-' : ''}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-      },
-    },
-  },
-  pages: {
-    signIn: '/auth/signin',
-    signOut: '/auth/signout',
-    error: '/auth/error',
-  },
-  providers: [
-    // Janua authentication (primary - unified MADFAM auth)
-    ...(JANUA_ENABLED ? [JanuaCredentialsProvider] : []),
-    // Local credentials (fallback for development/migration)
-    CredentialsProvider({
-      id: 'local',
-      name: 'Local',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null;
-        }
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
+import { getSession as januaGetSession } from '@janua/nextjs';
+import { UserRole } from '@/lib/prisma-types';
+import { generateCsrfToken } from '@/lib/security';
 
-        if (!user || !user.passwordHash) {
-          return null;
-        }
+const JANUA_APP_ID = process.env.JANUA_APP_ID || 'madfam-web';
+const JANUA_API_KEY = process.env.JANUA_API_KEY || '';
+const JANUA_JWT_SECRET = process.env.JANUA_JWT_SECRET || '';
 
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.passwordHash);
-
-        if (!isPasswordValid) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: UserRole[user.role as keyof typeof UserRole],
-          image: user.image,
-        };
-      },
-    }),
-  ],
-  callbacks: {
-    async jwt({ token, user, trigger, account }) {
-      // Handle Janua authentication
-      if (user && account?.provider === 'janua') {
-        const januaUser = user as typeof user & {
-          januaAccessToken: string;
-          januaRefreshToken: string;
-          januaTokenExpiry: number;
-          orgId?: string;
-          permissions: string[];
-        };
-        const januaToken = await januaJwtCallback(token, {
-          id: januaUser.id,
-          role: januaUser.role,
-          januaAccessToken: januaUser.januaAccessToken,
-          januaRefreshToken: januaUser.januaRefreshToken,
-          januaTokenExpiry: januaUser.januaTokenExpiry,
-          orgId: januaUser.orgId,
-          permissions: januaUser.permissions,
-        });
-        // Generate CSRF token
-        if (!januaToken.csrfToken || trigger === 'signIn') {
-          januaToken.csrfToken = generateCsrfToken();
-        }
-        return januaToken;
-      }
-
-      // Handle local authentication
-      if (user) {
-        token.id = user.id;
-        token.role = (user as { role?: UserRole }).role || UserRole.VIEWER;
-        token.authProvider = 'local';
-      }
-
-      // Generate CSRF token on sign in or if not present
-      if (!token.csrfToken || trigger === 'signIn') {
-        token.csrfToken = generateCsrfToken();
-      }
-
-      return token;
-    },
-    async session({ session, token }) {
-      // Handle Janua session
-      if (token.authProvider === 'janua') {
-        const januaSession = januaSessionCallback(session, token);
-        return {
-          ...januaSession,
-          csrfToken: token.csrfToken as string,
-        } as typeof session;
-      }
-
-      // Handle local session
-      if (session?.user) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as UserRole;
-      }
-
-      // Add CSRF token to session
-      session.csrfToken = token.csrfToken as string;
-      session.authProvider = token.authProvider as string;
-
-      return session;
-    },
-  },
-};
-
-// Type augmentation for NextAuth
-declare module 'next-auth' {
-  interface User {
-    role: UserRole;
-    // Janua-specific fields (optional for local auth)
-    januaAccessToken?: string;
-    januaRefreshToken?: string;
-    januaTokenExpiry?: number;
-    orgId?: string;
-    permissions?: string[];
-  }
-
-  interface Session {
-    user: {
-      id: string;
-      role: UserRole;
-      email?: string | null;
-      name?: string | null;
-      image?: string | null;
-      orgId?: string;
-      permissions?: string[];
-    };
-    csrfToken: string;
-    authProvider?: string;
-    januaAccessToken?: string;
-    error?: string;
-  }
-}
-
-declare module 'next-auth/jwt' {
-  interface JWT {
+export interface MadfamSession {
+  user: {
     id: string;
     role: UserRole;
-    csrfToken: string;
-    authProvider?: string;
-    // Janua-specific fields
-    januaAccessToken?: string;
-    januaRefreshToken?: string;
-    januaTokenExpiry?: number;
+    email?: string | null;
+    name?: string | null;
+    image?: string | null;
     orgId?: string;
     permissions?: string[];
-    error?: string;
+  };
+  csrfToken: string;
+  authProvider?: string;
+  januaAccessToken?: string;
+  error?: string;
+}
+
+/**
+ * Server-side session access — drop-in replacement for getServerSession(authOptions).
+ */
+export async function getServerAuth(): Promise<MadfamSession | null> {
+  try {
+    const session = await januaGetSession(JANUA_APP_ID, JANUA_API_KEY, JANUA_JWT_SECRET);
+
+    if (!session?.user) {
+      return null;
+    }
+
+    const claims = session.user as Record<string, unknown>;
+
+    // Map Janua role to UserRole enum
+    const roleStr = (claims.role as string) || 'VIEWER';
+    const role = (UserRole[roleStr as keyof typeof UserRole] || UserRole.VIEWER) as UserRole;
+
+    return {
+      user: {
+        id: session.user.id || '',
+        role,
+        email: session.user.email,
+        name: session.user.name || session.user.display_name,
+        image: (claims.picture as string) || (claims.avatar as string) || null,
+        orgId: (claims.org_id as string) || undefined,
+        permissions: (claims.permissions as string[]) || [],
+      },
+      csrfToken: generateCsrfToken(),
+      authProvider: 'janua',
+      januaAccessToken: (session.session as Record<string, unknown>)?.accessToken as string,
+    };
+  } catch (error) {
+    console.error('Failed to get auth session:', error);
+    return null;
   }
 }

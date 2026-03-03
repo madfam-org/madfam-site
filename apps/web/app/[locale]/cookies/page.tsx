@@ -55,7 +55,7 @@ export default async function CookiesPage({ params }: { params: Promise<{ locale
               </thead>
               <tbody>
                 <tr className="border-b">
-                  <td className="py-2">next-auth.session-token</td>
+                  <td className="py-2">janua-session</td>
                   <td className="py-2">Authentication session</td>
                   <td className="py-2">Session</td>
                 </tr>
