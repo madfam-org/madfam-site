@@ -5,7 +5,14 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@madfam/ui', '@madfam/core', '@madfam/analytics', '@madfam/i18n'],
+  transpilePackages: [
+    '@madfam/ui',
+    '@madfam/core',
+    '@madfam/analytics',
+    '@madfam/i18n',
+    '@janua/nextjs',
+    '@janua/ui',
+  ],
 
   // Use static export only for GitHub Pages
   output: process.env.DEPLOY_TARGET === 'github-pages' ? 'export' : undefined,
