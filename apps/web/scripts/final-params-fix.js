@@ -4,8 +4,6 @@ const fs = require('fs');
 
 const filesToFix = [
   'app/[locale]/solutions/colabs/page.tsx',
-  'app/[locale]/solutions/primavera3d/page.tsx',
-  'app/[locale]/solutions/aureo-labs/page.tsx',
   'app/[locale]/solutions/page.tsx',
   'app/[locale]/programs/page.tsx',
 ];

@@ -299,22 +299,9 @@ export default function ForgeSightDemoPage() {
             </Card>
           </div>
 
-          {/* Social Proof */}
+          {/* Ecosystem Note */}
           <div className="max-w-2xl mx-auto mt-8 text-center">
-            <p className="text-sm text-neutral-600 mb-4">
-              Trusted by design teams and fabrication shops across LATAM
-            </p>
-            <div className="flex items-center justify-center gap-8 opacity-50">
-              <div className="h-12 w-24 bg-neutral-200 rounded flex items-center justify-center">
-                <span className="text-xs text-neutral-500">Client</span>
-              </div>
-              <div className="h-12 w-24 bg-neutral-200 rounded flex items-center justify-center">
-                <span className="text-xs text-neutral-500">Logo</span>
-              </div>
-              <div className="h-12 w-24 bg-neutral-200 rounded flex items-center justify-center">
-                <span className="text-xs text-neutral-500">Here</span>
-              </div>
-            </div>
+            <p className="text-sm text-neutral-500">Forge Sight is built by MADFAM</p>
           </div>
         </Container>
       </section>

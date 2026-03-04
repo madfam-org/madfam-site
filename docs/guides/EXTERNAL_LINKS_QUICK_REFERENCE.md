@@ -11,12 +11,10 @@
 | Factlas       | https://www.factl.as         | ⏳ COMING SOON |
 | AVALA         | # (placeholder)              | ⏳ COMING SOON |
 
-## Corporate Arms
+## Partners
 
-| Arm                            | URL                           |
+| Partner                        | URL                           |
 | ------------------------------ | ----------------------------- |
-| Aureo Labs                     | https://www.aureolabs.dev     |
-| Primavera3D                    | https://www.primavera3d.pro   |
 | La Ciencia del Juego (Partner) | https://lacienciadeljuego.com |
 
 ## Social Media

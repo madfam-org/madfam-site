@@ -325,7 +325,7 @@ enum ProductFit {
   FORGE_SIGHT = 'forge_sight',
   AVALA = 'avala',
   FACTLAS = 'factlas',
-  AUREO_LABS = 'aureo_labs',
+  MADFAM_PLATFORM = 'madfam_platform',
   CUSTOM = 'custom',
 }
 ```

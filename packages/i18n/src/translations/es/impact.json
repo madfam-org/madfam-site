@@ -45,8 +45,8 @@
         "ODS7 Energía asequible y no contaminante"
       ]
     },
-    "aureoLabs": {
-      "name": "Aureo Labs (Plataformas)",
+    "platforms": {
+      "name": "Plataformas Digitales",
       "summary": "Plataformas de IA que habilitan automatización segura y auditable con prácticas de datos de privacidad primero.",
       "sdgs": [
         "ODS9 Industria, innovación e infraestructura",
@@ -54,8 +54,8 @@
         "ODS16 Paz, justicia e instituciones sólidas"
       ]
     },
-    "primavera3d": {
-      "name": "Primavera3D (Unidad de Manufactura)",
+    "manufacturing": {
+      "name": "Manufactura y Fabricación Digital",
       "summary": "Fabricación digital y manufactura avanzada que habilitan circularidad de materiales y producción local.",
       "sdgs": [
         "ODS8 Trabajo decente y crecimiento económico",

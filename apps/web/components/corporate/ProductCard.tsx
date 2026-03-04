@@ -39,9 +39,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.sdgs && product.sdgs.length > 0 && (
               <SDGInlineBadge count={product.sdgs.length} />
             )}
-            <Badge variant={product.badge.includes('Aureo') ? 'aureo-product' : 'by-madfam'}>
-              {product.badge}
-            </Badge>
+            <Badge variant="by-madfam">{product.badge}</Badge>
           </div>
         </div>
 

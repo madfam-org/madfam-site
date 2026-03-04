@@ -109,12 +109,12 @@ export class SEOService {
   generateServiceMetadata(
     serviceName: string,
     serviceDescription: string,
-    serviceTier: string,
+    serviceCategory: string,
     locale: 'es' | 'en' | 'pt' = 'es'
   ): Metadata {
     const content = {
       es: {
-        title: `${serviceName} | Servicios ${serviceTier} | MADFAM`,
+        title: `${serviceName} | Servicios ${serviceCategory} | MADFAM`,
         description: serviceDescription,
         keywords: [
           'transformación digital',
@@ -127,7 +127,7 @@ export class SEOService {
         ],
       },
       en: {
-        title: `${serviceName} | ${serviceTier} Services | MADFAM`,
+        title: `${serviceName} | ${serviceCategory} Services | MADFAM`,
         description: serviceDescription,
         keywords: [
           'digital transformation',
@@ -140,7 +140,7 @@ export class SEOService {
         ],
       },
       pt: {
-        title: `${serviceName} | Serviços ${serviceTier} | MADFAM`,
+        title: `${serviceName} | Serviços ${serviceCategory} | MADFAM`,
         description: serviceDescription,
         keywords: [
           'transformação digital',
@@ -184,6 +184,11 @@ export class SEOService {
           'transformación digital',
           'Penny',
           'Dhanam',
+          'Enclii',
+          'Janua',
+          'Forge Sight',
+          'Yantra4D',
+          'Cotiza Studio',
         ],
       },
       en: {
@@ -197,6 +202,11 @@ export class SEOService {
           'digital transformation',
           'Penny',
           'Dhanam',
+          'Enclii',
+          'Janua',
+          'Forge Sight',
+          'Yantra4D',
+          'Cotiza Studio',
         ],
       },
       pt: {
@@ -210,6 +220,11 @@ export class SEOService {
           'transformação digital',
           'Penny',
           'Dhanam',
+          'Enclii',
+          'Janua',
+          'Forge Sight',
+          'Yantra4D',
+          'Cotiza Studio',
         ],
       },
     };
@@ -343,7 +358,7 @@ export class SEOService {
           name: 'MADFAM',
           description: 'Transformación digital e inteligencia artificial en México y LATAM',
           url: this.baseUrl,
-          logo: `${this.baseUrl}/logo.png`,
+          logo: `${this.baseUrl}/assets/brand/madfam-logo.svg`,
           contactPoint: {
             '@type': 'ContactPoint',
             telephone: '+52-55-3410-6519',
@@ -413,7 +428,7 @@ export class SEOService {
             name: 'MADFAM',
             logo: {
               '@type': 'ImageObject',
-              url: `${this.baseUrl}/logo.png`,
+              url: `${this.baseUrl}/assets/brand/madfam-logo.svg`,
             },
           },
           datePublished: data.publishedTime,
@@ -465,6 +480,42 @@ export class SEOService {
         lastModified: now,
         changeFrequency: 'monthly',
         priority: 0.8,
+      },
+      {
+        url: '/solutions',
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.9,
+      },
+      {
+        url: '/solutions/colabs',
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.8,
+      },
+      {
+        url: '/impact',
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      },
+      {
+        url: '/blog',
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: '/careers',
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      },
+      {
+        url: '/case-studies',
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.7,
       },
       {
         url: '/calculator',

@@ -165,7 +165,7 @@ If yes, describe migration path:
 
 **For MADFAM Team:**
 
-- Business Unit: [ ] Aureo Labs [ ] Primavera3D [ ] Co-Labs [ ] Showtech [ ] General
+- Business Unit: [ ] Co-Labs [ ] Showtech [ ] General
 - Product: [ ] PENNY [ ] Dhanam [ ] Cotiza Studio [ ] Forge Sight [ ] AVALA [ ] Factlas [ ] None
 - Sprint:
 - Estimated effort:

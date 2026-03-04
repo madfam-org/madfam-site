@@ -79,9 +79,7 @@ export function ProgramCard({ program }: ProgramCardProps) {
           </div>
           <div className="flex-1">
             <h3 className="text-xl font-bold text-neutral-900 mb-1">{program.name}</h3>
-            <Badge variant={program.badge.includes('Aureo') ? 'aureo-product' : 'by-madfam'}>
-              {program.badge}
-            </Badge>
+            <Badge variant="by-madfam">{program.badge}</Badge>
           </div>
         </div>
 

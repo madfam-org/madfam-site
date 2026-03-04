@@ -27,6 +27,7 @@ export default async function ProgramsPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'corporate.programs' });
   const commonT = await getTranslations({ locale, namespace: 'common' });
+  const badgesT = await getTranslations({ locale, namespace: 'corporate.solutions.badges' });
 
   // Programs
   const programs = [
@@ -34,8 +35,8 @@ export default async function ProgramsPage({ params }: Props) {
       id: 'design-fabrication',
       name: t('designFabrication.name'),
       description: t('designFabrication.description'),
-      provider: 'Primavera3D',
-      badge: 'por MADFAM',
+      provider: 'MADFAM',
+      badge: badgesT('byMadfam'),
       icon: 'cube',
       timeline: t('designFabrication.timeline'),
       targetMarket: t('designFabrication.targetMarket'),
@@ -52,8 +53,8 @@ export default async function ProgramsPage({ params }: Props) {
       id: 'strategy-enablement',
       name: t('strategyEnablement.name'),
       description: t('strategyEnablement.description'),
-      provider: 'MADFAM/Aureo',
-      badge: 'por MADFAM',
+      provider: 'MADFAM',
+      badge: badgesT('byMadfam'),
       icon: 'cog',
       timeline: t('strategyEnablement.timeline'),
       targetMarket: t('strategyEnablement.targetMarket'),
@@ -70,8 +71,8 @@ export default async function ProgramsPage({ params }: Props) {
       id: 'platform-pilots',
       name: t('platformPilots.name'),
       description: t('platformPilots.description'),
-      provider: 'Aureo Labs',
-      badge: 'un producto de Aureo Labs',
+      provider: 'MADFAM',
+      badge: badgesT('byMadfam'),
       icon: 'rocket',
       timeline: t('platformPilots.timeline'),
       targetMarket: t('platformPilots.targetMarket'),
@@ -90,7 +91,7 @@ export default async function ProgramsPage({ params }: Props) {
       name: t('strategicPartnerships.name'),
       description: t('strategicPartnerships.description'),
       provider: 'MADFAM',
-      badge: 'por MADFAM',
+      badge: badgesT('byMadfam'),
       icon: 'building',
       timeline: t('strategicPartnerships.timeline'),
       targetMarket: t('strategicPartnerships.targetMarket'),

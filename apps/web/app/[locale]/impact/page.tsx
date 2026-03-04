@@ -51,15 +51,15 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
       icon: '🔍',
     },
     {
-      product: t('sdgMap.aureoLabs.name'),
-      summary: t('sdgMap.aureoLabs.summary'),
-      sdgs: t.raw('sdgMap.aureoLabs.sdgs') as string[],
+      product: t('sdgMap.platforms.name'),
+      summary: t('sdgMap.platforms.summary'),
+      sdgs: t.raw('sdgMap.platforms.sdgs') as string[],
       icon: '🧪',
     },
     {
-      product: t('sdgMap.primavera3d.name'),
-      summary: t('sdgMap.primavera3d.summary'),
-      sdgs: t.raw('sdgMap.primavera3d.sdgs') as string[],
+      product: t('sdgMap.manufacturing.name'),
+      summary: t('sdgMap.manufacturing.summary'),
+      sdgs: t.raw('sdgMap.manufacturing.sdgs') as string[],
       icon: '🏭',
     },
     {

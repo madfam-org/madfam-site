@@ -24,8 +24,6 @@ export const i18nConfig = {
     es: {
       // NEW: Corporate structure routes (updated to use '/solutions')
       '/solutions': '/soluciones',
-      '/solutions/aureo-labs': '/soluciones/aureo-labs',
-      '/solutions/primavera3d': '/soluciones/primavera3d',
       '/solutions/colabs': '/soluciones/colabs',
       '/solutions/showtech': '/soluciones/showtech',
       '/products': '/productos',
@@ -49,8 +47,6 @@ export const i18nConfig = {
     pt: {
       // Portuguese routes (updated to use '/solutions')
       '/solutions': '/solucoes',
-      '/solutions/aureo-labs': '/solucoes/aureo-labs',
-      '/solutions/primavera3d': '/solucoes/primavera3d',
       '/solutions/colabs': '/solucoes/colabs',
       '/solutions/showtech': '/solucoes/showtech',
       '/products': '/produtos',

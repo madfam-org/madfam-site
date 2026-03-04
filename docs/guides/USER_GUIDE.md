@@ -19,7 +19,7 @@ Purpose-built programs designed to match your AI journey:
 
 - **Dhanam** - Financial wellness platform (https://www.dhan.am)
 - **Forge Sight** - Analytics platform
-- **PENNY** - AI assistant for consumers and enterprises (In Development by Aureo Labs)
+- **PENNY** - AI assistant for consumers and enterprises (In Development)
 - **Cotiza Studio** - Quoting and estimation tool
 - **Enclii** - Cloud deployment and infrastructure platform
 - **Janua** - Authentication and identity platform
@@ -341,7 +341,7 @@ Calculate the potential return on investment for MADFAM programs based on your s
 
 ### **PENNY** (`/productos/penny`)
 
-**AI Assistant** for consumers and enterprises. In Development by Aureo Labs, a MADFAM Company.
+**AI Assistant** for consumers and enterprises. In Development by MADFAM.
 
 **Key Features:**
 

@@ -38,7 +38,7 @@ const products = [
     color: 'blue',
     url: 'https://www.dhan.am',
     demoUrl: '/demo/dhanam',
-    badge: 'Aureo Labs',
+    badge: 'MADFAM',
     icon: '💰',
   },
   {
@@ -48,16 +48,15 @@ const products = [
     color: 'green',
     url: 'https://www.forgesight.quest',
     demoUrl: '/demo/forge-sight',
-    badge: 'Aureo Labs',
+    badge: 'MADFAM',
     icon: '🏭',
   },
   {
     id: 'penny',
     name: 'PENNY',
-    tagline: 'AI Assistant',
+    tagline: 'AI Assistant (In Development)',
     color: 'purple',
-    url: '/products/penny',
-    demoUrl: '/demo/penny',
+    url: '/products',
     badge: 'MADFAM',
     icon: '🤖',
   },
@@ -67,8 +66,7 @@ const products = [
     tagline: 'Quoting & Estimation',
     color: 'amber',
     url: 'https://cotiza.studio',
-    demoUrl: '/demo/cotiza',
-    badge: 'Aureo Labs',
+    badge: 'MADFAM',
     icon: '📊',
   },
 ];
@@ -190,9 +188,9 @@ const pricingTiers = {
     enterprise: { monthly: 'Custom', yearly: 'Custom' },
   },
   penny: {
-    starter: { monthly: 49, yearly: 490 },
-    pro: { monthly: 149, yearly: 1490 },
-    enterprise: { monthly: 'Custom', yearly: 'Custom' },
+    starter: { monthly: 'TBD', yearly: 'TBD' },
+    pro: { monthly: 'TBD', yearly: 'TBD' },
+    enterprise: { monthly: 'TBD', yearly: 'TBD' },
   },
   cotiza: {
     starter: { monthly: 79, yearly: 790 },
@@ -403,12 +401,14 @@ export function ProductComparisonMatrix() {
                   </p>
                 </div>
               </div>
-              <Link href={`/${locale}${products.find(p => p.id === recommendation)?.demoUrl}`}>
-                <Button size="sm">
-                  Try Demo
-                  <ArrowRightIcon className="w-4 h-4 ml-1" />
-                </Button>
-              </Link>
+              {products.find(p => p.id === recommendation)?.demoUrl && (
+                <Link href={`/${locale}${products.find(p => p.id === recommendation)?.demoUrl}`}>
+                  <Button size="sm">
+                    Try Demo
+                    <ArrowRightIcon className="w-4 h-4 ml-1" />
+                  </Button>
+                </Link>
+              )}
             </div>
           </Container>
         </section>
@@ -529,11 +529,13 @@ export function ProductComparisonMatrix() {
                   {visibleProducts.map(product => (
                     <td key={`cta-${product.id}`} className="p-4 text-center">
                       <div className="flex flex-col gap-2">
-                        <Link href={`/${locale}${product.demoUrl}`}>
-                          <Button className="w-full" size="sm">
-                            Try Demo
-                          </Button>
-                        </Link>
+                        {product.demoUrl && (
+                          <Link href={`/${locale}${product.demoUrl}`}>
+                            <Button className="w-full" size="sm">
+                              Try Demo
+                            </Button>
+                          </Link>
+                        )}
                         <Link
                           href={product.url}
                           target={product.url.startsWith('http') ? '_blank' : undefined}

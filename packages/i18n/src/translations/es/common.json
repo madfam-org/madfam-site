@@ -14,7 +14,6 @@
     "impact": "Impacto",
     "tagline": "Donde la creatividad humana se encuentra con la precisión de la IA",
     "businessSolutions": "Nuestras Soluciones",
-    "aureoLabsDesc": "Laboratorio de innovación digital",
     "comingSoon": "Próximamente",
     "moreSolutionsDesc": "Más soluciones en desarrollo",
     "caseStudies": "Casos de Éxito",
@@ -58,6 +57,7 @@
     "company": {
       "about": "Acerca de Nosotros",
       "units": "Soluciones",
+      "solutions": "Soluciones",
       "caseStudies": "Casos de Estudio",
       "careers": "Carreras"
     },

@@ -43,22 +43,23 @@ biz-site/
 
 ## Business Context
 
-### Corporate Arms (Business Units)
+### Corporate Structure
 
-- **Aureo Labs**: Digital innovation lab (a MADFAM Company)
-- **Primavera3D**: 3D design & fabrication studio (a MADFAM Company)
-- **MADFAM Co-Labs**: Innovation lab & educational programs (a MADFAM Company)
-- **Showtech**: Technology showcase & events (a MADFAM Company)
+All products and platforms are directly under **Innovaciones MADFAM**:
 
-### Products
+- **MADFAM Co-Labs**: Collaborations & co-creations (a MADFAM Company)
+- **Showtech**: Technology showcase & events (Coming Soon)
+
+### Products (by MADFAM)
 
 - **PENNY**: AI assistant for consumers & enterprises (In Development)
 - **Dhanam**: Financial wellness platform (https://www.dhan.am)
 - **Cotiza Studio**: Quoting/estimation tool
-- **Forge Sight**: Analytics platform
+- **Forge Sight**: Pricing intelligence platform
 - **Enclii**: Cloud deployment and infrastructure platform
 - **Janua**: Authentication and identity platform
-- **Yantra4D**: Spatial computing / 4D design platform
+- **Yantra4D**: Parametric design platform
+- **Pravara-MES**: Manufacturing execution system
 - **AVALA**: Training & certification platform (Coming Soon)
 
 ### Service Model
@@ -82,9 +83,9 @@ biz-site/
 
 ### Branding
 
-- Business units: "a MADFAM Company"
-- Products: "by [Unit], a MADFAM Company"
-- No references to deprecated SPARK product
+- Products: "by MADFAM"
+- Co-Labs / Showtech: "a MADFAM Company"
+- No references to deprecated SPARK, Aureo Labs, or Primavera3D
 
 ### Mobile Optimization
 

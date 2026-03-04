@@ -31,20 +31,6 @@
     "solutions": {
       "title": "Nuestras Soluciones",
       "subtitle": "Cada solución especializada en resolver problemas específicos",
-      "aureoLabs": {
-        "name": "Aureo Labs",
-        "tagline": "Laboratorio de Innovación Digital",
-        "description": "Centro de desarrollo de productos de software y soluciones digitales avanzadas",
-        "badge": "una Empresa MADFAM",
-        "focus": "Desarrollo de productos, investigación tecnológica, laboratorio de innovación"
-      },
-      "primavera3d": {
-        "name": "Primavera3D",
-        "tagline": "Estudio de Diseño Digital",
-        "description": "Especialista en modelado 3D, renderizado, animación y experiencias visuales",
-        "badge": "una Empresa MADFAM",
-        "focus": "Diseño 3D, visualización arquitectónica, animación, realidad virtual/aumentada"
-      },
       "showtech": {
         "name": "Showtech",
         "tagline": "División de Innovación en Entretenimiento",
@@ -59,10 +45,10 @@
       "subtitle": "Soluciones desarrolladas por nuestras unidades especializadas",
       "penny": {
         "name": "PENNY",
-        "tagline": "Tu Asistente Personal de IA",
+        "tagline": "Automatización Inteligente de Procesos",
         "description": "Asistente de IA que aprenderá de tus procesos y mejorará continuamente tu flujo de trabajo",
-        "badge": "un producto de Aureo Labs",
-        "developer": "Aureo Labs",
+        "badge": "un producto MADFAM",
+        "developer": "MADFAM",
         "status": "development"
       }
     },
@@ -72,19 +58,19 @@
       "designFabrication": {
         "name": "Diseño y Fabricación",
         "description": "Servicios integrales de diseño y fabricación digital",
-        "units": ["Primavera3D", "Aureo Labs"],
+        "units": ["MADFAM"],
         "focus": "Diseño 3D, modelado paramétrico, fabricación digital"
       },
       "strategyEnablement": {
         "name": "Estrategia y Habilitación",
         "description": "Talleres estratégicos y transformación organizacional",
-        "units": ["Aureo Labs"],
+        "units": ["MADFAM"],
         "focus": "Estrategia IA, gestión del cambio, desarrollo de capacidades"
       },
       "platformPilots": {
         "name": "Pilotos de Plataforma",
         "description": "Implementación de plataformas de IA y automatización",
-        "units": ["Aureo Labs"],
+        "units": ["MADFAM"],
         "focus": "Despliegue de plataforma, integración, capacitación de usuarios"
       },
       "strategicPartnerships": {
@@ -96,11 +82,6 @@
     },
     "badges": {
       "byMADFAM": "una Empresa MADFAM",
-      "aureoLabsProduct": "por Aureo Labs, una Empresa MADFAM",
-      "pennyProduct": "por Aureo Labs, una Empresa MADFAM",
-      "cotizaProduct": "por Aureo Labs, una Empresa MADFAM",
-      "forgeSightProduct": "por Aureo Labs, una Empresa MADFAM",
-      "dhanamProduct": "por Aureo Labs, una Empresa MADFAM",
       "poweredBy": "Powered by",
       "developedBy": "Desarrollado por",
       "inPartnershipWith": "en asociación con"
@@ -130,147 +111,6 @@
     "viewAll": "Ver todas las soluciones",
     "mainCapabilities": "Capacidades principales",
     "mainProducts": "Productos principales",
-    "aureoLabs": {
-      "tagline": "Laboratorio de innovación digital",
-      "description": "Desarrollamos plataformas de automatización inteligente y herramientas de productividad que transforman la forma de trabajar.",
-      "capabilities": {
-        "0": "Sistemas de IA Agéntica",
-        "1": "Desarrollo de Plataformas Web",
-        "2": "Integraciones API y Middleware",
-        "3": "Operaciones SRE y Seguridad",
-        "title": "Capacidades Core",
-        "agentic": {
-          "title": "Sistemas Agénticos",
-          "description": "Desarrollamos agentes de IA autónomos que ejecutan tareas complejas sin intervención humana."
-        },
-        "platforms": {
-          "title": "Plataformas Web",
-          "description": "Creamos plataformas escalables y seguras con arquitecturas modernas y experiencias excepcionales."
-        },
-        "integrations": {
-          "title": "Integraciones API",
-          "description": "Conectamos sistemas empresariales con integraciones robustas y documentación completa."
-        },
-        "sre": {
-          "title": "SRE & Seguridad",
-          "description": "Garantizamos disponibilidad 24/7 con monitoreo proactivo y prácticas de seguridad avanzadas."
-        }
-      },
-      "meta": {
-        "title": "Aureo Labs - Laboratorio de Innovación Digital | MADFAM",
-        "description": "Desarrollamos plataformas de automatización inteligente y herramientas de productividad que transforman la forma de trabajar."
-      },
-      "pitch": {
-        "title": "Construimos el futuro del trabajo",
-        "description": "En Aureo Labs desarrollamos herramientas que potencian la productividad y automatizan procesos complejos. Nuestras plataformas integran IA, automatización y experiencia de usuario excepcional para crear soluciones que realmente importan."
-      },
-      "links": {
-        "website": "Sitio web oficial",
-        "security": "Centro de Seguridad"
-      },
-      "products": {
-        "title": "Nuestros Productos",
-        "penny": {
-          "description": "Plataforma de chat y workbench de IA fácil de usar para consumidores y empresas. Tu asistente inteligente para tareas diarias y automatización empresarial.",
-          "audience": "Consumidores y empresas de todos los tamaños",
-          "cta": "Descubrir Penny",
-          "features": {
-            "0": "Interfaz de chat inteligente",
-            "1": "Automatización personal y empresarial",
-            "2": "Workbench para todos los usuarios"
-          }
-        },
-        "cotizaStudio": {
-          "description": "Sistema inteligente de cotizaciones y presupuestos con automatización completa del proceso de ventas.",
-          "audience": "Equipos de ventas y servicios",
-          "cta": "Probar Cotiza Studio",
-          "features": {
-            "0": "Cotizaciones instantáneas",
-            "1": "Seguimiento automatizado",
-            "2": "Análisis de conversión"
-          }
-        },
-        "forgeSight": {
-          "description": "Plataforma empresarial de inteligencia de precios que continuamente recopila, normaliza y compara precios en la industria global de fabricación digital.",
-          "audience": "Empresas de fabricación digital, servicios de impresión 3D y equipos de adquisiciones",
-          "cta": "Explorar Forge Sight",
-          "features": {
-            "0": "Descubrimiento de precios con IA de más de 1000 proveedores globales",
-            "1": "Benchmarking estadístico en tiempo real (p10/p50/p90) por material y región",
-            "2": "Seguridad empresarial con OAuth2/JWT y registros de auditoría completos"
-          }
-        },
-        "dhanam": {
-          "description": "Plataforma de finanzas y patrimonio diseñada para fundadores LATAM. Unifica presupuestos personales y empresariales con inteligencia ESG.",
-          "audience": "Individuos y asesores financieros",
-          "cta": "Visitar Dhanam",
-          "features": {
-            "0": "Insights financieros con IA",
-            "1": "Estrategias de riqueza personalizadas",
-            "2": "Seguimiento de portafolio en tiempo real"
-          }
-        },
-        "avala": {
-          "description": "Plataforma SaaS para diseñar, impartir y verificar aprendizajes alineados a Estándares de Competencia EC/CONOCER. Genera constancias DC-3 y asegura cumplimiento normativo.",
-          "audience": "Organizaciones de capacitación y empresas en LATAM",
-          "cta": "Próximamente",
-          "features": {
-            "0": "Autoría de formación alineada a EC/CONOCER",
-            "1": "Generación de DC-3 y cumplimiento SIRCE",
-            "2": "Credenciales verificables (Open Badges 3.0)"
-          }
-        },
-        "enclii": {
-          "description": "Nuestra propia PaaS soberana que impulsa toda la infraestructura de MADFAM. Nativa de GitOps, basada en Kubernetes, construida para equipos que necesitan soberanía en despliegues.",
-          "audience": "Equipos de desarrollo y organizaciones que requieren nube soberana",
-          "cta": "Ver en GitHub",
-          "features": {
-            "0": "Despliegues sin configuración con entornos de preview",
-            "1": "Orquestación Kubernetes nativa de GitOps",
-            "2": "Observabilidad y monitoreo integrados"
-          }
-        },
-        "janua": {
-          "description": "Plataforma de identidad auto-hospedada con SSO empresarial, aprovisionamiento SCIM, MFA y Passkeys. La capa de autenticación de cada producto MADFAM. Código abierto (AGPL-3.0).",
-          "audience": "Organizaciones que requieren autenticación soberana",
-          "cta": "Ver en GitHub",
-          "features": {
-            "0": "SSO empresarial y aprovisionamiento SCIM",
-            "1": "Soporte MFA y Passkey",
-            "2": "Auto-hospedado con soberanía total de datos"
-          }
-        }
-      },
-      "philosophy": {
-        "quote": "La innovación no es solo tecnología, es resolver problemas reales de formas inesperadas",
-        "principles": {
-          "title": "Principios de Desarrollo",
-          "approve": "Aprobar rápido",
-          "observe": "Observar métricas",
-          "undo": "Revertir sin miedo"
-        }
-      }
-    },
-    "primavera3d": {
-      "tagline": "Manufactura Avanzada y Fabricación Digital",
-      "description": "Estudio completo de fabricación digital: herramientas de diseño paramétrico (Yantra4D, SIM4D), análisis de geometría (Geom-Core), cotización automatizada (Cotiza Studio) y ejecución de manufactura (Pravara-MES). Hogar de los 40+ diseños paramétricos de código abierto.",
-      "capabilities": {
-        "0": "Herramientas de Diseño Paramétrico (Yantra4D)",
-        "1": "Análisis de Geometría y Simulación",
-        "2": "Cotización Automatizada (Cotiza Studio)",
-        "3": "Ejecución de Manufactura y Fabricación Digital"
-      },
-      "products": {
-        "yantra4d": {
-          "name": "Yantra4D",
-          "tagline": "Plataforma Abierta de Diseño Paramétrico",
-          "description": "Plataforma web para modelos paramétricos OpenSCAD. Sube diseños, obtén previews 3D instantáneos, exporta archivos STL. Impulsa 40+ diseños paramétricos de código abierto.",
-          "badge": "un producto de Primavera3D",
-          "developer": "Primavera3D",
-          "status": "active"
-        }
-      }
-    },
     "colabs": {
       "tagline": "Centro de Colaboración e Innovación Educativa",
       "description": "Espacio de co-creación donde convergen educación, tecnología y creatividad para formar a las nuevas generaciones",
@@ -279,6 +119,42 @@
         "1": "Laboratorios de Innovación",
         "2": "Workshops y Bootcamps",
         "3": "Colaboraciones Estratégicas"
+      },
+      "page": {
+        "badge": "una Empresa MADFAM",
+        "startCollaboration": "Iniciar colaboración",
+        "viewPrograms": "Ver programas",
+        "capabilitiesTitle": "Nuestras Capacidades",
+        "capabilityDescriptions": {
+          "0": "Programas educativos integrales que combinan ciencia, tecnología, ingeniería, arte y matemáticas",
+          "1": "Espacios equipados con tecnología de punta para la experimentación y el aprendizaje práctico",
+          "2": "Programas de capacitación intensiva en tecnologías emergentes y metodologías ágiles",
+          "3": "Alianzas con instituciones educativas y empresas líderes en innovación"
+        },
+        "programsTitle": "Programas Activos",
+        "programsSubtitle": "Iniciativas en marcha que están transformando la educación y formando a las nuevas generaciones",
+        "active": "Activo",
+        "inCollaborationWith": "En colaboración con:",
+        "learnMore": "Conocer más",
+        "partnershipsTitle": "Colaboraciones Estratégicas",
+        "partnershipsSubtitle": "Trabajamos con las mejores instituciones y empresas para crear experiencias educativas únicas",
+        "partners": {
+          "educational": {
+            "name": "Instituciones Educativas",
+            "description": "Universidades, colegios y centros de formación"
+          },
+          "tech": {
+            "name": "Empresas Tecnológicas",
+            "description": "Líderes en innovación y desarrollo tecnológico"
+          },
+          "social": {
+            "name": "Organizaciones Sociales",
+            "description": "ONGs y fundaciones comprometidas con la educación"
+          }
+        },
+        "ctaTitle": "¿Listo para transformar la educación?",
+        "ctaSubtitle": "Únete a MADFAM Co-Labs y sé parte de la revolución educativa que está formando a las nuevas generaciones.",
+        "visitPartner": "Visitar La Ciencia del Juego"
       }
     },
     "showtech": {
@@ -303,7 +179,9 @@
     },
     "structure": {
       "title": "Estructura Corporativa",
-      "description": "MADFAM coordina y dirige múltiples unidades especializadas, cada una enfocada en resolver problemas específicos de la industria."
+      "description": "MADFAM coordina y dirige múltiples unidades especializadas, cada una enfocada en resolver problemas específicos de la industria.",
+      "solutionsLabel": "Soluciones",
+      "productsLabel": "Productos"
     }
   },
   "products": {
@@ -330,13 +208,9 @@
     "upcomingSubtitle": "Productos y plataformas en desarrollo por nuestras unidades.",
     "structure": {
       "title": "Estructura de productos",
-      "aureoLabs": {
-        "description": "Laboratorio de innovación digital que desarrolla plataformas y workspaces inteligentes."
-      },
       "madfamDirect": {
-        "description": "Productos desarrollados directamente por la casa matriz para soluciones específicas."
+        "description": "Productos desarrollados directamente por MADFAM para soluciones específicas."
       },
-      "viewAureoLabs": "Ver Aureo Labs",
       "viewAllUnits": "Ver todas las soluciones"
     },
     "cta": {
@@ -353,6 +227,16 @@
         "0": "Interfaz intuitiva",
         "1": "Colaboración en equipo",
         "2": "Automatización visual"
+      }
+    },
+    "dhanam": {
+      "description": "Plataforma de finanzas y patrimonio diseñada para fundadores LATAM. Unifica presupuestos personales y empresariales con inteligencia ESG.",
+      "audience": "Individuos y asesores financieros",
+      "cta": "Visitar Dhanam",
+      "features": {
+        "0": "Insights financieros con IA",
+        "1": "Estrategias de riqueza personalizadas",
+        "2": "Seguimiento de portafolio en tiempo real"
       }
     }
   },
@@ -488,19 +372,17 @@
     "contactNow": "Contactar ahora"
   },
   "badges": {
-    "byMadfam": "una empresa MADFAM",
-    "aureoProduct": "un producto de Aureo Labs",
-    "aureoLabsProduct": "por Aureo Labs, una Empresa MADFAM"
+    "byMadfam": "una empresa MADFAM"
   },
   "poweredBy": {
     "title": "Impulsado por Nuestro Propio Stack",
     "subtitle": "Usamos lo que construimos. Cada producto que creamos, lo utilizamos.",
-    "description": "Este sitio web corre sobre Enclii (nuestra PaaS soberana), se autentica con Janua (nuestra plataforma de identidad), cotiza con Cotiza Studio y rastrea con Forge Sight. Cuando decimos que nuestras herramientas funcionan en producción, lo decimos en serio—porque dependemos de ellas todos los días.",
+    "description": "Este sitio web corre sobre Enclii (nuestra PaaS soberana) y se autentica con Janua (nuestra plataforma de identidad). Cotiza Studio y Forge Sight son construidos junto a nuestra infraestructura por el mismo equipo. Cuando decimos que nuestras herramientas funcionan en producción, lo decimos en serio.",
     "items": {
       "enclii": "Desplegado en Enclii",
       "janua": "Autenticado por Janua",
-      "cotiza": "Cotizado con Cotiza Studio",
-      "forgesight": "Rastreado por Forge Sight"
+      "cotiza": "Construido junto a Cotiza Studio",
+      "forgesight": "Construido junto a Forge Sight"
     }
   },
   "openSource": {

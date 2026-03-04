@@ -196,13 +196,13 @@ export function usePersonaContent(persona: Persona) {
         'Self-hosted or cloud deployment options',
         'Technical support & integration assistance',
       ],
-      recommendedPath: '/solutions/aureo-labs',
+      recommendedPath: '/products',
     },
     designer: {
       title: 'Amplify Creativity with AI-Powered Digital Fabrication',
       subtitle:
         'From concept to physical prototype in record time. Intelligent tools that optimize designs, estimate costs, and streamline production.',
-      primaryCTA: 'Explore Primavera3D',
+      primaryCTA: 'Explore Products',
       secondaryCTA: 'Try Forge Sight',
       benefits: [
         '3D printing & CNC optimization',
@@ -210,7 +210,7 @@ export function usePersonaContent(persona: Persona) {
         'Design iteration 5x faster',
         'Access to fabrication network',
       ],
-      recommendedPath: '/solutions/primavera3d',
+      recommendedPath: '/products',
     },
     educator: {
       title: 'Empower the Next Generation with AI Education',

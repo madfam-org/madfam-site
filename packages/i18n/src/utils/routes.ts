@@ -4,11 +4,9 @@ export type RouteKey =
   | 'home'
   // Corporate structure routes
   | 'solutions'
-  | 'solutions.aureo-labs'
-  | 'solutions.primavera3d'
   | 'solutions.colabs'
-  | 'solutions.showtech'
   | 'programs'
+  | 'case-studies'
   | 'work'
   | 'security'
   | 'impact'
@@ -36,30 +34,21 @@ const routes: Record<RouteKey, Record<Locale, string>> = {
     es: '/soluciones',
     pt: '/solucoes',
   },
-  'solutions.aureo-labs': {
-    en: '/solutions/aureo-labs',
-    es: '/soluciones/aureo-labs',
-    pt: '/solucoes/aureo-labs',
-  },
-  'solutions.primavera3d': {
-    en: '/solutions/primavera3d',
-    es: '/soluciones/primavera3d',
-    pt: '/solucoes/primavera3d',
-  },
   'solutions.colabs': {
     en: '/solutions/colabs',
     es: '/soluciones/colabs',
     pt: '/solucoes/colabs',
   },
-  'solutions.showtech': {
-    en: '/solutions/showtech',
-    es: '/soluciones/showtech',
-    pt: '/solucoes/showtech',
-  },
+
   programs: {
     en: '/programs',
     es: '/programas',
     pt: '/programas',
+  },
+  'case-studies': {
+    en: '/case-studies',
+    es: '/case-studies',
+    pt: '/case-studies',
   },
   work: {
     en: '/work',

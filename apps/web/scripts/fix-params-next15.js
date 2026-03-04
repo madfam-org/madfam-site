@@ -18,8 +18,6 @@ const filesToFix = [
   './app/[locale]/estimator/page.tsx',
   './app/[locale]/terms/page.tsx',
   './app/[locale]/solutions/colabs/page.tsx',
-  './app/[locale]/solutions/aureo-labs/page.tsx',
-  './app/[locale]/solutions/primavera3d/page.tsx',
   './app/[locale]/solutions/page.tsx',
   './app/[locale]/assessment/page.tsx',
   './app/[locale]/docs/page.tsx',

@@ -4,14 +4,14 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 interface BadgeProps {
-  variant: 'by-madfam' | 'aureo-product' | 'program' | string;
+  variant: 'by-madfam' | 'program' | string;
   children?: React.ReactNode;
   className?: string;
 }
 
 const badgeVariants = {
   'by-madfam': 'bg-neutral-100 text-neutral-700 border border-neutral-200',
-  'aureo-product': 'bg-amber-50 text-amber-700 border border-amber-200',
+  'madfam-product': 'bg-amber-50 text-amber-700 border border-amber-200',
   program: 'bg-blue-50 text-blue-700 border border-blue-200',
 };
 
@@ -20,7 +20,7 @@ export function Badge({ variant, children, className }: BadgeProps) {
 
   const badgeText = {
     'by-madfam': t('corporate.badges.byMadfam'),
-    'aureo-product': t('corporate.badges.aureoProduct'),
+    'madfam-product': t('corporate.badges.byMadfam'),
     program: '',
   };
   const variantClasses =

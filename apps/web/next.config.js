@@ -130,8 +130,6 @@ const nextConfig = {
 
     // Spanish rewrites - corporate structure
     rewrites.push(
-      { source: '/es/soluciones/aureo-labs', destination: '/es/solutions/aureo-labs' },
-      { source: '/es/soluciones/primavera3d', destination: '/es/solutions/primavera3d' },
       { source: '/es/soluciones/colabs', destination: '/es/solutions/colabs' },
       { source: '/es/soluciones/showtech', destination: '/es/solutions/showtech' }
     );
@@ -160,8 +158,6 @@ const nextConfig = {
 
     // Portuguese rewrites - corporate structure
     rewrites.push(
-      { source: '/pt/solucoes/aureo-labs', destination: '/pt/solutions/aureo-labs' },
-      { source: '/pt/solucoes/primavera3d', destination: '/pt/solutions/primavera3d' },
       { source: '/pt/solucoes/colabs', destination: '/pt/solutions/colabs' },
       { source: '/pt/solucoes/showtech', destination: '/pt/solutions/showtech' }
     );

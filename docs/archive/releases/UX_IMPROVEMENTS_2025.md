@@ -332,7 +332,7 @@ Benefits:
   - SOC 2 & GDPR compliant infrastructure
   - Self-hosted or cloud deployment options
   - Technical support & integration assistance
-Primary CTA: "Explore Technical Docs" → /solutions/aureo-labs
+Primary CTA: "Explore Technical Docs" → /products
 ```
 
 **4. 🎨 Designer/Creative**
@@ -345,7 +345,7 @@ Benefits:
   - Instant pricing for materials & processes
   - Design iteration 5x faster
   - Access to fabrication network
-Primary CTA: "Explore Primavera3D" → /solutions/primavera3d
+Primary CTA: "Explore Products" → /products
 ```
 
 **5. 📚 Educator/Researcher**

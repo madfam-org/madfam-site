@@ -143,18 +143,18 @@ export const corporateMapping = {
   // Program mapping
   DESIGN_FABRICATION: {
     program: 'design-fabrication',
-    arm: 'primavera3d',
-    provider: 'Primavera3D',
+    arm: 'madfam',
+    provider: 'MADFAM',
   },
   STRATEGY_ENABLEMENT: {
     program: 'strategy-enablement',
-    arm: 'madfam-aureo',
-    provider: 'MADFAM/Aureo',
+    arm: 'madfam',
+    provider: 'MADFAM',
   },
   PLATFORM_PILOTS: {
     program: 'platform-pilots',
-    arm: 'aureo-labs',
-    provider: 'Aureo Labs',
+    arm: 'madfam',
+    provider: 'MADFAM',
   },
   STRATEGIC_PARTNERSHIPS: {
     program: 'strategic-partnerships',
@@ -169,8 +169,8 @@ export const corporateMapping = {
  */
 export const productOwnership = {
   'forge-sight': {
-    arm: 'aureo-labs',
-    badge: 'plataforma de Aureo Labs',
+    arm: 'madfam',
+    badge: 'por MADFAM',
     url: 'https://www.forgesight.quest',
   },
   dhanam: {
@@ -179,8 +179,8 @@ export const productOwnership = {
     url: 'https://www.dhan.am',
   },
   avala: {
-    arm: 'aureo-labs',
-    badge: 'by Aureo Labs, a MADFAM Company',
+    arm: 'madfam',
+    badge: 'by MADFAM',
     url: '#',
   },
 };

@@ -36,31 +36,11 @@ const impactMetrics = [
   { value: '60+', label: 'Open Source Repos', suffix: '' },
   { value: '40+', label: 'Parametric Designs', suffix: '' },
   { value: '8', label: 'Products in Production', suffix: '' },
-  { value: '4', label: 'Business Units', suffix: '' },
+  { value: '9', label: 'Products', suffix: '' },
 ];
 
-// Business units / Arms
+// Business units
 const businessArms = [
-  {
-    name: 'Aureo Labs',
-    tagline: 'Digital Innovation Lab',
-    description:
-      'Sovereign cloud (Enclii), identity (Janua), pricing intelligence (Forge Sight), financial wellness (Dhanam), and intelligent quoting (Cotiza Studio)',
-    icon: '💡',
-    color: 'amber',
-    products: ['Enclii', 'Janua', 'Dhanam', 'Forge Sight', 'Cotiza Studio'],
-    href: 'https://aureolabs.dev',
-  },
-  {
-    name: 'Primavera3D',
-    tagline: 'Advanced Manufacturing & Digital Fabrication',
-    description:
-      'Parametric design (Yantra4D), geometry analysis, automated quoting, and manufacturing execution. 40+ open-source parametric designs.',
-    icon: '🎨',
-    color: 'green',
-    products: ['Yantra4D', 'Geom-Core', 'Pravara-MES'],
-    href: '/solutions/primavera3d',
-  },
   {
     name: 'MADFAM Co-Labs',
     tagline: 'Innovation Programs',
@@ -375,7 +355,7 @@ export function VisionFirstHomePage() {
       </section>
 
       {/* Client Logos */}
-      <ClientLogos variant="with-metrics" showPlaceholders={true} />
+      <ClientLogos variant="with-metrics" />
 
       {/* CTA Section */}
       <section

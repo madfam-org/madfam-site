@@ -11,8 +11,8 @@
 
 **🌟 Key Highlights:**
 
-- 🏢 Four business units: Aureo Labs, Primavera3D, MADFAM Co-Labs, Showtech
-- 🤖 Products: Dhanam, Forge Sight, Cotiza Studio, Enclii, Janua, Yantra4D
+- 🏢 Products directly under Innovaciones MADFAM, plus Co-Labs and Showtech
+- 🤖 Products: Dhanam, Forge Sight, Cotiza Studio, Enclii, Janua, Yantra4D, Pravara-MES
 - 🌐 Full internationalization (Spanish, English, Portuguese)
 - 📊 Privacy-first analytics with enterprise-grade security
 - 🎨 Modern design system with Tailwind CSS 4 and dark/light mode
@@ -102,21 +102,22 @@ biz-site/
 
 ## 🎯 Key Features
 
-### Business Units (Solutions)
+### Corporate Structure
 
-- **Aureo Labs** - Digital innovation laboratory focused on software products and technology research
-- **Primavera3D** - Digital design studio specializing in 3D modeling, visualization, and VR/AR
-- **MADFAM Co-Labs** - Innovation lab offering training, certification, and capability building programs
-- **Showtech** - Entertainment innovation division for audio hardware and live production
+All products are directly under **Innovaciones MADFAM**:
 
-### Products
+- **MADFAM Co-Labs** - Collaborations & co-creations
+- **Showtech** - Technology showcase & events (Coming Soon)
 
-- **Enclii** - Sovereign cloud PaaS powering MADFAM's infrastructure (by Aureo Labs)
-- **Janua** - Self-hosted identity platform with SSO, MFA, and Passkeys (by Aureo Labs)
+### Products (by MADFAM)
+
+- **Enclii** - Sovereign cloud PaaS powering MADFAM's infrastructure
+- **Janua** - Self-hosted identity platform with SSO, MFA, and Passkeys
 - **Dhanam** - Wealth & finance platform for LATAM founders at [dhan.am](https://www.dhan.am)
-- **Forge Sight** - Pricing intelligence for digital fabrication (by Aureo Labs)
-- **Cotiza Studio** - Intelligent quoting and budgeting system (by Aureo Labs)
-- **Yantra4D** - Open parametric design platform (by Primavera3D)
+- **Forge Sight** - Pricing intelligence for digital fabrication
+- **Cotiza Studio** - Intelligent quoting and budgeting system
+- **Yantra4D** - Open parametric design platform
+- **Pravara-MES** - Manufacturing execution system
 - **AVALA** - Competency-based training platform (Coming Soon)
 - **PENNY** - AI assistant platform (In Development)
 
@@ -155,7 +156,7 @@ All routes support internationalization with Spanish (es), English (en), and Por
 **Public Pages**
 
 - `/` - Corporate homepage
-- `/solutions` - Business units (Aureo Labs, Primavera3D, MADFAM Co-Labs, Showtech)
+- `/solutions` - MADFAM Co-Labs and Showtech
 - `/products` - Product showcase (Dhanam, Forge Sight, Cotiza Studio, and more)
 - `/programs` - Transformation and enablement programs
 - `/about` - Company information

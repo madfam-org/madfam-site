@@ -81,18 +81,6 @@ export function Navbar() {
           title: t('businessSolutions') || 'Business Units',
           items: [
             {
-              name: 'Aureo Labs',
-              href: getLocalizedUrl('solutions.aureo-labs', locale),
-              description: t('aureoLabsDesc') || 'Digital innovation laboratory',
-              icon: '🚀',
-            },
-            {
-              name: 'Primavera3D',
-              href: getLocalizedUrl('solutions.primavera3d', locale),
-              description: 'Advanced 3D manufacturing',
-              icon: '🏭',
-            },
-            {
               name: 'MADFAM Co-Labs',
               href: getLocalizedUrl('solutions.colabs', locale),
               description: 'Collaborative innovation spaces',
@@ -135,7 +123,7 @@ export function Navbar() {
             },
             {
               name: t('caseStudies') || 'Showcase',
-              href: getLocalizedUrl('showcase', locale),
+              href: `/${locale}/case-studies`,
               icon: '✨',
             },
             {

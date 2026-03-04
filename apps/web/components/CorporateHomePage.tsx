@@ -24,44 +24,26 @@ export function CorporateHomePage() {
   const [selectedPersona, setSelectedPersona] = useState<Persona>('default');
   const personaContent = usePersonaContent(selectedPersona);
 
-  // Featured Arms
+  // Featured Solutions
   const featuredSolutions = [
     {
-      id: 'aureo-labs',
-      name: 'Aureo Labs',
-      tagline: t('corporate.solutions.aureoLabs.tagline'),
-      description: t('corporate.solutions.aureoLabs.description'),
+      id: 'colabs',
+      name: 'MADFAM Co-Labs',
+      tagline: t('corporate.solutions.colabs.tagline'),
+      description: t('corporate.solutions.colabs.description'),
       badge: t('corporate.badges.byMadfam'),
-      accent: 'copper' as const,
+      accent: 'blue' as const,
       capabilities: [
-        t('corporate.solutions.aureoLabs.capabilities.0'),
-        t('corporate.solutions.aureoLabs.capabilities.1'),
-        t('corporate.solutions.aureoLabs.capabilities.2'),
-        t('corporate.solutions.aureoLabs.capabilities.3'),
+        t('corporate.solutions.colabs.capabilities.0'),
+        t('corporate.solutions.colabs.capabilities.1'),
+        t('corporate.solutions.colabs.capabilities.2'),
+        t('corporate.solutions.colabs.capabilities.3'),
       ],
       products: [
-        { name: 'Dhanam', url: 'https://www.dhan.am' },
-        { name: 'Forge Sight', url: 'https://www.forgesight.quest' },
+        { name: 'MADLAB', url: '/solutions/colabs#madlab' },
+        { name: 'Workshops', url: '/solutions/colabs#workshops' },
       ],
-      externalUrl: 'https://www.aureolabs.dev',
-    },
-    {
-      id: 'primavera3d',
-      name: 'Primavera3D',
-      tagline: t('corporate.solutions.primavera3d.tagline'),
-      description: t('corporate.solutions.primavera3d.description'),
-      badge: t('corporate.badges.byMadfam'),
-      accent: 'green' as const,
-      capabilities: [
-        t('corporate.solutions.primavera3d.capabilities.0'),
-        t('corporate.solutions.primavera3d.capabilities.1'),
-        t('corporate.solutions.primavera3d.capabilities.2'),
-        t('corporate.solutions.primavera3d.capabilities.3'),
-      ],
-      products: [
-        { name: 'Diseño 3D', url: '/programs#design-fabrication' },
-        { name: 'Modelado Paramétrico', url: '/programs#design-fabrication' },
-      ],
+      internalUrl: '/solutions/colabs',
     },
   ];
 
@@ -69,11 +51,11 @@ export function CorporateHomePage() {
   const featuredProducts = [
     {
       name: 'Dhanam',
-      description: t('corporate.solutions.aureoLabs.products.dhanam.description'),
-      audience: t('corporate.solutions.aureoLabs.products.dhanam.audience'),
-      badge: t('corporate.badges.aureoLabsProduct'),
+      description: t('corporate.products.dhanam.description'),
+      audience: t('corporate.products.dhanam.audience'),
+      badge: t('corporate.badges.byMadfam'),
       primaryCta: {
-        label: t('corporate.solutions.aureoLabs.products.dhanam.cta'),
+        label: t('corporate.products.dhanam.cta'),
         url: 'https://www.dhan.am',
         external: true,
       },
@@ -82,9 +64,9 @@ export function CorporateHomePage() {
         url: '/contact',
       },
       features: [
-        t('corporate.solutions.aureoLabs.products.dhanam.features.0'),
-        t('corporate.solutions.aureoLabs.products.dhanam.features.1'),
-        t('corporate.solutions.aureoLabs.products.dhanam.features.2'),
+        t('corporate.products.dhanam.features.0'),
+        t('corporate.products.dhanam.features.1'),
+        t('corporate.products.dhanam.features.2'),
       ],
     },
   ];
@@ -276,7 +258,7 @@ export function CorporateHomePage() {
       </section>
 
       {/* Trusted By - Client Logos */}
-      <ClientLogos variant="default" showPlaceholders={true} />
+      <ClientLogos variant="default" />
 
       {/* Our Solutions Section */}
       <section className="py-20 bg-neutral-50 relative">

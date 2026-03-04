@@ -45,8 +45,8 @@
         "SDG7 Affordable & Clean Energy"
       ]
     },
-    "aureoLabs": {
-      "name": "Aureo Labs (Platforms)",
+    "platforms": {
+      "name": "MADFAM Platforms",
       "summary": "AI platforms enabling secure, auditable automation with privacy-first data practices.",
       "sdgs": [
         "SDG9 Industry, Innovation & Infrastructure",
@@ -54,8 +54,8 @@
         "SDG16 Peace, Justice & Strong Institutions"
       ]
     },
-    "primavera3d": {
-      "name": "Primavera3D (Manufacturing Unit)",
+    "manufacturing": {
+      "name": "MADFAM Manufacturing",
       "summary": "Digital fabrication and advanced manufacturing that enable circular material flows and local production.",
       "sdgs": [
         "SDG8 Decent Work & Economic Growth",

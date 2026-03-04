@@ -302,9 +302,7 @@ https://www.forgesight.quest?source=madfam-demo-prep&role=designer&use_case=rapi
   ├── assessment                     # AI Assessment tool
   ├── calculator                     # ROI Calculator (if separate route)
   ├── contact                        # Contact form
-  ├── solutions/                     # Solutions (formerly /arms)
-  │   ├── aureo-labs
-  │   ├── primavera3d
+  ├── solutions/                     # Solutions
   │   └── colabs
   ├── products/
   │   ├── dhanam

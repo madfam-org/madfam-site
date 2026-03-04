@@ -28,49 +28,8 @@ export default async function SolutionsPage({ params }: Props) {
 
   const solutions = [
     {
-      id: 'aureo-labs',
-      name: 'Aureo Labs',
-      tagline: t('aureoLabs.tagline'),
-      description: t('aureoLabs.description'),
-      badge: 'a MADFAM Company',
-      accent: 'copper' as const,
-      capabilities: [
-        t('aureoLabs.capabilities.0'),
-        t('aureoLabs.capabilities.1'),
-        t('aureoLabs.capabilities.2'),
-        t('aureoLabs.capabilities.3'),
-      ],
-      products: [
-        { name: 'Dhanam', url: 'https://www.dhan.am' },
-        { name: 'Forge Sight', url: 'https://www.forgesight.quest' },
-      ],
-      externalUrl: 'https://www.aureolabs.dev',
-      internalUrl: '/solutions/aureo-labs',
-    },
-    {
-      id: 'primavera3d',
-      name: 'Primavera3D',
-      tagline: t('primavera3d.tagline'),
-      description: t('primavera3d.description'),
-      badge: 'a MADFAM Company',
-      accent: 'green' as const,
-      capabilities: [
-        t('primavera3d.capabilities.0'),
-        t('primavera3d.capabilities.1'),
-        t('primavera3d.capabilities.2'),
-        t('primavera3d.capabilities.3'),
-      ],
-      products: [
-        { name: 'Diseño 3D', url: '/programs#design-fabrication' },
-        { name: 'Modelado Paramétrico', url: '/programs#design-fabrication' },
-        { name: 'Visualización', url: '/programs#design-fabrication' },
-      ],
-      externalUrl: 'https://www.primavera3d.pro',
-      internalUrl: '/solutions/primavera3d',
-    },
-    {
       id: 'colabs',
-      name: 'MADFAM Co-labs',
+      name: 'MADFAM Co-Labs',
       tagline: t('colabs.tagline'),
       description: t('colabs.description'),
       badge: 'a MADFAM Company',
@@ -142,9 +101,9 @@ export default async function SolutionsPage({ params }: Props) {
           <div className="flex items-center justify-center gap-4 text-lg text-neutral-600">
             <span className="font-semibold text-neutral-900">MADFAM</span>
             <span>→</span>
-            <span>Soluciones</span>
+            <span>{t('structure.solutionsLabel')}</span>
             <span>→</span>
-            <span>Productos</span>
+            <span>{t('structure.productsLabel')}</span>
           </div>
           <p className="mt-6 text-neutral-600 leading-relaxed">{t('structure.description')}</p>
         </div>

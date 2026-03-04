@@ -13,10 +13,8 @@ const path = require('path');
 const filesToFix = [
   './app/[locale]/calculator/page.tsx',
   './app/[locale]/terms/page.tsx',
-  './app/[locale]/solutions/primavera3d/page.tsx',
   './app/[locale]/solutions/page.tsx',
   './app/[locale]/solutions/colabs/page.tsx',
-  './app/[locale]/solutions/aureo-labs/page.tsx',
   './app/[locale]/showcase/page.tsx',
   './app/[locale]/programs/page.tsx',
   './app/[locale]/products/page.tsx',
