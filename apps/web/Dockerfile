@@ -1,28 +1,33 @@
 # Base stage for dependencies
 FROM node:20-alpine AS base
 RUN apk add --no-cache libc6-compat
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
 WORKDIR /app
 
 # Dependencies stage
 FROM base AS deps
 # Copy root package files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-# Copy all package.json files
-COPY packages/*/package.json ./packages/
-COPY apps/*/package.json ./apps/
+# Copy package.json files preserving directory structure
+COPY apps/web/package.json ./apps/web/
+COPY apps/cms/package.json ./apps/cms/
+COPY packages/analytics/package.json ./packages/analytics/
+COPY packages/core/package.json ./packages/core/
+COPY packages/email/package.json ./packages/email/
+COPY packages/i18n/package.json ./packages/i18n/
+COPY packages/ui/package.json ./packages/ui/
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
 # Builder stage
 FROM base AS builder
 WORKDIR /app
-# Copy installed dependencies
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/packages ./packages
-COPY --from=deps /app/apps ./apps
-# Copy source code
+# Copy installed dependencies from deps stage
+COPY --from=deps /app/ ./
+# Copy source code on top
 COPY . .
+# Generate Prisma client
+RUN cd apps/web && npx prisma generate || echo "Prisma generation skipped"
 # Build the web app
 RUN pnpm turbo build --filter=@madfam/web
 
