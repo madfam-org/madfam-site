@@ -1,6 +1,6 @@
 'use client';
 
-import { SignIn } from '@janua/nextjs';
+import { SignInForm as SignIn } from '@janua/nextjs';
 import { useTranslations } from 'next-intl';
 
 export function SignInForm() {
