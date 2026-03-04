@@ -107,7 +107,6 @@ git push origin main --tags  # Auto-deploys to Vercel
 ```bash
 # Required for all environments
 DATABASE_URL=
-NEXTAUTH_SECRET=
 NEXT_PUBLIC_ENV=
 
 # Production only

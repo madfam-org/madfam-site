@@ -18,7 +18,6 @@ services:
       # Janua Auth Integration
       - JANUA_ENABLED=true
       - JANUA_JWT_SECRET=dev-shared-janua-secret-32chars!!
-      - NEXTAUTH_SECRET=dev-nextauth-secret-change-in-production
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:3000/api/health']
       interval: 30s
@@ -47,7 +46,6 @@ services:
       # Janua Auth Integration
       - JANUA_ENABLED=true
       - JANUA_JWT_SECRET=dev-shared-janua-secret-32chars!!
-      - NEXTAUTH_SECRET=dev-nextauth-secret-change-in-production
     networks:
       - madfam-shared-network
     restart: unless-stopped

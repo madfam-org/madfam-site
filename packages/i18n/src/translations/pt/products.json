@@ -1,9 +1,25 @@
 {
   "title": "Nossas plataformas",
   "subtitle": "Soluções tecnológicas que transformam a forma como você faz negócios",
+  "page": {
+    "heroTitle": "Nossos produtos",
+    "heroSubtitle": "Plataformas e ferramentas desenvolvidas pelas nossas unidades especializadas para resolver problemas reais.",
+    "categories": {
+      "platforms": "Plataformas",
+      "workspaces": "Workspaces",
+      "openData": "Dados abertos"
+    },
+    "catalogTitle": "Nosso catálogo",
+    "catalogSubtitle": "Plataformas e ferramentas desenvolvidas pelas nossas unidades especializadas.",
+    "ctaTitle": "Interessado nos nossos produtos?",
+    "ctaSubtitle": "Entre em contato com a unidade responsável ou agende uma demonstração personalizada.",
+    "contactNow": "Entrar em contato",
+    "viewSolutions": "Ver soluções"
+  },
   "penny": {
+    "name": "PENNY",
     "title": "PENNY",
-    "tagline": "Seu assistente de IA pessoal",
+    "tagline": "Automação Inteligente de Processos",
     "shortDescription": "Automação inteligente que aprende e melhora continuamente seus processos.",
     "description": "Automação inteligente que aprende com seus processos e melhora continuamente, tornando sua equipe mais produtiva.",
     "features": {

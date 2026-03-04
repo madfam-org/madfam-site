@@ -1,10 +1,10 @@
 {
   "meta": {
     "title": "Comparar Produtos | MADFAM",
-    "description": "Compare os produtos da MADFAM lado a lado. Encontre a solução perfeita para o seu negócio - Dhanam, Forge Sight, PENNY ou Cotiza."
+    "description": "Compare os produtos MADFAM lado a lado. Encontre a solução perfeita para as necessidades do seu negócio - Dhanam, Forge Sight, PENNY ou Cotiza."
   },
   "hero": {
-    "title": "Encontre Sua Solução Ideal",
+    "title": "Encontre Sua Solução Perfeita",
     "subtitle": "Compare nossos produtos lado a lado para encontrar o melhor ajuste para as necessidades do seu negócio"
   },
   "filters": {
@@ -41,8 +41,8 @@
     "tryDemo": "Testar Demo",
     "learnMore": "Saiba Mais",
     "downloadPdf": "Baixar Comparação (PDF)",
-    "notSure": "Ainda não tem certeza de qual solução é a ideal para você?",
-    "notSureDescription": "Faça nossa avaliação de IA de 3 minutos para obter recomendações personalizadas com base em suas necessidades e objetivos específicos.",
+    "notSure": "Ainda não tem certeza de qual solução é a certa para você?",
+    "notSureDescription": "Faça nossa avaliação de IA de 3 minutos para obter recomendações personalizadas com base nas suas necessidades e objetivos específicos.",
     "startAssessment": "Iniciar Avaliação IA",
     "talkToExpert": "Falar com um Especialista"
   }

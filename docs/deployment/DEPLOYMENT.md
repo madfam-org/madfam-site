@@ -140,8 +140,6 @@ kubectl apply -f k8s/production/namespace.yaml
 kubectl create secret generic madfam-site-secrets \
   --namespace=madfam-site \
   --from-literal=DATABASE_URL='postgresql://...' \
-  --from-literal=NEXTAUTH_SECRET='...' \
-  --from-literal=NEXTAUTH_URL='https://madfam.io' \
   --from-literal=JANUA_CLIENT_ID='...' \
   --from-literal=JANUA_SECRET='...' \
   --from-literal=PAYLOAD_SECRET='...'

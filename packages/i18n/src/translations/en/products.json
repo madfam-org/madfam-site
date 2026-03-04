@@ -1,6 +1,21 @@
 {
   "title": "Our Platforms",
   "subtitle": "Technology solutions that transform the way you do business",
+  "page": {
+    "heroTitle": "Our Products",
+    "heroSubtitle": "Platforms and tools developed by our specialized units to solve real problems.",
+    "categories": {
+      "platforms": "Platforms",
+      "workspaces": "Workspaces",
+      "openData": "Open Data"
+    },
+    "catalogTitle": "Our Catalog",
+    "catalogSubtitle": "Platforms and tools developed by our specialized units.",
+    "ctaTitle": "Interested in our products?",
+    "ctaSubtitle": "Contact the responsible unit or schedule a personalized demo.",
+    "contactNow": "Contact Now",
+    "viewSolutions": "View Solutions"
+  },
   "penny": {
     "name": "PENNY",
     "title": "PENNY",
@@ -42,6 +57,11 @@
     "trial": "Free 14-day trial"
   },
   "cotizaStudio": {
+    "name": "Cotiza Studio",
+    "title": "Cotiza Studio",
+    "tagline": "AI-Powered Instant Quotes",
+    "shortDescription": "AI-powered quote and proposal generator to close deals faster.",
+    "description": "Intelligent quoting and proposal system that uses AI to create personalized documents and streamline your sales process.",
     "features": {
       "0": "Instant generation",
       "1": "AI customization",
@@ -49,6 +69,11 @@
     }
   },
   "forgeSight": {
+    "name": "Forge Sight",
+    "title": "Forge Sight",
+    "tagline": "Predictive Analytics & Forecasting",
+    "shortDescription": "Advanced predictive analytics for data-driven decision making.",
+    "description": "Predictive analytics platform using AI to forecast trends and optimize business decisions with real-time data visualization.",
     "features": {
       "0": "Advanced predictive analytics",
       "1": "Real-time data visualization",

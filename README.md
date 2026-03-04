@@ -328,20 +328,12 @@ JANUA_API_URL=http://localhost:8000
 JANUA_JWT_SECRET=your-janua-secret
 NEXT_PUBLIC_ENV=development
 
-# Analytics
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io
-
 # Email (Resend)
 RESEND_API_KEY=re_xxxxxxxxxxxx
 
-# AI/LLM Integration
-OPENAI_API_KEY=sk-xxxxxxxxxxxx
-
 # Optional Integrations
 N8N_WEBHOOK_URL=https://n8n.madfam.io/webhook/xxx
-NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-recaptcha-site-key
 SENTRY_DSN=https://xxxx@sentry.io/xxxx
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxx
 ```
 
 See `.env.example` for a complete list of environment variables.

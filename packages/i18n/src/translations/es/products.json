@@ -1,6 +1,21 @@
 {
   "title": "Nuestras Plataformas",
   "subtitle": "Soluciones tecnológicas que transforman la forma en que haces negocios",
+  "page": {
+    "heroTitle": "Nuestros productos",
+    "heroSubtitle": "Plataformas y herramientas desarrolladas por nuestras unidades especializadas para resolver problemas reales.",
+    "categories": {
+      "platforms": "Plataformas",
+      "workspaces": "Workspaces",
+      "openData": "Datos abiertos"
+    },
+    "catalogTitle": "Nuestro catálogo",
+    "catalogSubtitle": "Plataformas y herramientas desarrolladas por nuestras unidades especializadas.",
+    "ctaTitle": "¿Interesado en nuestros productos?",
+    "ctaSubtitle": "Contacta con la unidad responsable o agenda una demostración personalizada.",
+    "contactNow": "Contactar ahora",
+    "viewSolutions": "Ver soluciones"
+  },
   "penny": {
     "name": "PENNY",
     "title": "PENNY",
@@ -42,6 +57,11 @@
     "trial": "Prueba gratis por 14 días"
   },
   "cotizaStudio": {
+    "name": "Cotiza Studio",
+    "title": "Cotiza Studio",
+    "tagline": "Cotizaciones Instantáneas con IA",
+    "shortDescription": "Generador de cotizaciones y propuestas impulsado por IA para cerrar negocios más rápido.",
+    "description": "Sistema inteligente de generación de cotizaciones y propuestas que usa IA para crear documentos personalizados.",
     "features": {
       "0": "Generación instantánea",
       "1": "Personalización con IA",
@@ -49,6 +69,11 @@
     }
   },
   "forgeSight": {
+    "name": "Forge Sight",
+    "title": "Forge Sight",
+    "tagline": "Análisis Predictivo y Pronóstico",
+    "shortDescription": "Análisis predictivo avanzado para toma de decisiones basada en datos.",
+    "description": "Plataforma de análisis predictivo que usa IA para prever tendencias y optimizar decisiones empresariales.",
     "features": {
       "0": "Análisis predictivo avanzado",
       "1": "Visualización de datos en tiempo real",

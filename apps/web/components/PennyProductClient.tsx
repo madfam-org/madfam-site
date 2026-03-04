@@ -121,18 +121,9 @@ export function PennyProductClient({
         background="gradient"
         className="pt-20"
       >
-        <div className="grid grid-cols-3 gap-8 text-center text-white/90">
-          <div>
-            <div className="text-2xl font-bold text-sun">10k+</div>
-            <div className="text-sm">{translations.activeUsers}</div>
-          </div>
-          <div>
-            <div className="text-2xl font-bold text-sun">1M+</div>
-            <div className="text-sm">{translations.tasksAutomated}</div>
-          </div>
-          <div>
-            <div className="text-2xl font-bold text-sun">99.8%</div>
-            <div className="text-sm">{translations.accuracy}</div>
+        <div className="text-center text-white/90">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-sm font-medium">
+            <span className="text-sun">In Development</span>
           </div>
         </div>
       </Hero>
