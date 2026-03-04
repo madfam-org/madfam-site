@@ -14,6 +14,7 @@
     "impact": "Impacto",
     "solutions": "Soluções",
     "tagline": "Onde a criatividade humana encontra a precisão da IA",
+    "businessSolutions": "Nossas Soluções",
     "businessArms": "Unidades de Negócio",
     "aureoLabsDesc": "Laboratório de inovação digital",
     "comingSoon": "Em Breve",
@@ -71,7 +72,10 @@
     "social": {
       "linkedin": "LinkedIn",
       "twitter": "Twitter",
-      "github": "GitHub"
+      "github": "GitHub",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok"
     }
   },
   "darkMode": {

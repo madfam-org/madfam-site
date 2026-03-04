@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "title": "Comparar Produtos | MADFAM",
+    "description": "Compare os produtos da MADFAM lado a lado. Encontre a solução perfeita para o seu negócio - Dhanam, Forge Sight, PENNY ou Cotiza."
+  },
+  "hero": {
+    "title": "Encontre Sua Solução Ideal",
+    "subtitle": "Compare nossos produtos lado a lado para encontrar o melhor ajuste para as necessidades do seu negócio"
+  },
+  "filters": {
+    "industry": "Indústria",
+    "companySize": "Tamanho da Empresa",
+    "budget": "Orçamento",
+    "useCase": "Caso de Uso",
+    "all": "Todos"
+  },
+  "products": {
+    "show": "Mostrar:",
+    "recommended": "Recomendado"
+  },
+  "recommendation": {
+    "basedOn": "Com base nas suas seleções, recomendamos",
+    "tryDemo": "Testar Demo"
+  },
+  "pricing": {
+    "startingPrice": "Preço Inicial",
+    "monthly": "Mensal",
+    "yearly": "Anual",
+    "perMonth": "/mês",
+    "perYear": "/ano",
+    "save": "Economize 17%",
+    "custom": "Personalizado"
+  },
+  "features": {
+    "coreCapabilities": "Capacidades Principais",
+    "integration": "Integração",
+    "supportSla": "Suporte e SLA",
+    "complianceSecurity": "Conformidade e Segurança"
+  },
+  "cta": {
+    "tryDemo": "Testar Demo",
+    "learnMore": "Saiba Mais",
+    "downloadPdf": "Baixar Comparação (PDF)",
+    "notSure": "Ainda não tem certeza de qual solução é a ideal para você?",
+    "notSureDescription": "Faça nossa avaliação de IA de 3 minutos para obter recomendações personalizadas com base em suas necessidades e objetivos específicos.",
+    "startAssessment": "Iniciar Avaliação IA",
+    "talkToExpert": "Falar com um Especialista"
+  }
+}

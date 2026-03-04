@@ -2,6 +2,7 @@
 import common from './common.json';
 import assessment from './assessment.json';
 import calculator from './calculator.json';
+import compare from './compare.json';
 import estimator from './estimator.json';
 import products from './products.json';
 import corporate from './corporate.json';
@@ -17,6 +18,7 @@ export default {
   ...common, // Spread common at root level for backward compatibility
   assessment,
   calculator,
+  compare,
   estimator,
   products,
   corporate,

@@ -57,6 +57,7 @@
     },
     "company": {
       "about": "About Us",
+      "units": "Solutions",
       "solutions": "Solutions",
       "caseStudies": "Case Studies",
       "careers": "Careers"
@@ -70,7 +71,10 @@
     "social": {
       "linkedin": "LinkedIn",
       "twitter": "Twitter",
-      "github": "GitHub"
+      "github": "GitHub",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok"
     }
   },
   "darkMode": {

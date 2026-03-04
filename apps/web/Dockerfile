@@ -28,6 +28,9 @@ COPY --from=deps /app/ ./
 COPY . .
 # Generate Prisma client
 RUN cd apps/web && npx prisma generate || echo "Prisma generation skipped"
+# Build-time env vars required by Janua auth (NEXT_PUBLIC_* are baked at build time)
+ARG NEXT_PUBLIC_JANUA_URL=https://auth.madfam.io
+ENV NEXT_PUBLIC_JANUA_URL=${NEXT_PUBLIC_JANUA_URL}
 # Build the web app
 RUN pnpm turbo build --filter=@madfam/web
 

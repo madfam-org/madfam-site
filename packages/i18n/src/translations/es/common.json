@@ -70,7 +70,10 @@
     "social": {
       "linkedin": "LinkedIn",
       "twitter": "Twitter",
-      "github": "GitHub"
+      "github": "GitHub",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok"
     }
   },
   "darkMode": {

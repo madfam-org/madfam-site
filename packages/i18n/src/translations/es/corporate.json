@@ -529,5 +529,10 @@
   "research": {
     "title": "Investigación e Incubación",
     "description": "Más allá de nuestros productos principales, MADFAM opera iniciativas de investigación en legal-tech, electroquímica, logística comunitaria y más. No todo proyecto se convierte en producto—pero cada proyecto nos enseña algo."
+  },
+  "trustedBy": {
+    "label": "Con la confianza de empresas líderes en LATAM",
+    "title": "Con la Confianza de Líderes de la Industria",
+    "subtitle": "Construyendo futuros regenerativos en América Latina"
   }
 }
