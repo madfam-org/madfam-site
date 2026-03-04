@@ -80,9 +80,8 @@ API_SECRET=your-secret-key
 ### Public Pages
 
 - `/` - Homepage
-- `/services` - Service tiers overview
-- `/services/level-[1-5]-*` - Individual service pages
-- `/products` - SPARK & PENNY showcase
+- `/services` - Transformation programs overview
+- `/products` - Product portfolio (Enclii, Janua, Dhanam, Forge Sight, etc.)
 - `/assessment` - AI readiness assessment
 - `/contact` - Contact form
 - `/about` - About MADFAM (coming soon)
@@ -97,14 +96,17 @@ API_SECRET=your-secret-key
 ## Components
 
 ### Layout Components
+
 - `Navbar` - Main navigation
 - `Footer` - Site footer
 
 ### Form Components
+
 - `LeadForm` - Lead capture form
 - `AIAssessment` - Interactive assessment
 
 ### UI Components
+
 - `ServiceCard` - Service tier display
 - Various components from `@madfam/ui` package
 
@@ -120,11 +122,11 @@ We use Tailwind CSS with custom configuration:
 ### Design Tokens
 
 ```css
---color-sun: #FFD93D;
---color-leaf: #6BCB77;
---color-lavender: #9B59B6;
---color-obsidian: #0A0E27;
---color-pearl: #FAFAFA;
+--color-sun: #ffd93d;
+--color-leaf: #6bcb77;
+--color-lavender: #9b59b6;
+--color-obsidian: #0a0e27;
+--color-pearl: #fafafa;
 ```
 
 ## Performance
@@ -257,6 +259,7 @@ Ensure `tsconfig.json` has correct paths:
 ### Static Export Issues
 
 For GitHub Pages deployment:
+
 - Avoid server-only features
 - Use `output: 'export'` in config
 - Check for dynamic routes without `getStaticPaths`

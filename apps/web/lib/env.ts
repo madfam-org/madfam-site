@@ -10,9 +10,9 @@ const serverEnvSchema = z.object({
   // Database
   DATABASE_URL: z.string().url().min(1),
 
-  // Authentication
-  NEXTAUTH_URL: z.string().url().optional(),
-  NEXTAUTH_SECRET: z.string().min(32),
+  // Authentication (Janua)
+  JANUA_URL: z.string().url().optional(),
+  JANUA_SECRET: z.string().min(32),
 
   // Encryption
   ENCRYPTION_KEY: z.string().min(32, 'Encryption key must be at least 32 characters'),
@@ -64,7 +64,10 @@ const serverEnvSchema = z.object({
 
 // Client-side environment variables (must be prefixed with NEXT_PUBLIC_)
 const clientEnvSchema = z.object({
-  NEXT_PUBLIC_ENV: z.enum(['development', 'staging', 'production']).optional().default('development'),
+  NEXT_PUBLIC_ENV: z
+    .enum(['development', 'staging', 'production'])
+    .optional()
+    .default('development'),
   NEXT_PUBLIC_FEATURE_FLAGS_ENABLED: z
     .string()
     .optional()
@@ -86,7 +89,9 @@ export function validateServerEnv() {
     return { success: true as const, data: parsed };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const missingVars = error.issues.map(err => `  - ${err.path.join('.')}: ${err.message}`).join('\n');
+      const missingVars = error.issues
+        .map(err => `  - ${err.path.join('.')}: ${err.message}`)
+        .join('\n');
 
       console.error('❌ Invalid server environment variables:');
       console.error(missingVars);
@@ -108,7 +113,9 @@ export function validateClientEnv() {
     return { success: true as const, data: parsed };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const missingVars = error.issues.map(err => `  - ${err.path.join('.')}: ${err.message}`).join('\n');
+      const missingVars = error.issues
+        .map(err => `  - ${err.path.join('.')}: ${err.message}`)
+        .join('\n');
 
       console.error('❌ Invalid client environment variables:');
       console.error(missingVars);
@@ -157,7 +164,7 @@ export const env = {
   ...process.env,
   ENCRYPTION_KEY: process.env.ENCRYPTION_KEY || '',
   API_SECRET: process.env.API_SECRET || '',
-  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || '',
+  JANUA_SECRET: process.env.JANUA_SECRET || '',
 } as ServerEnv;
 
 // Validate environment variables at module load time (server-side only)

@@ -83,11 +83,10 @@ export function Assessment({
       const score = Math.round((newAnswers.reduce((a, b) => a + b, 0) / maxPossibleScore) * 100);
 
       // Determine recommended tier based on score
-      let recommendedTier = 'L1_BASICS';
-      if (score >= 80) recommendedTier = 'L5_STRATEGIC';
-      else if (score >= 60) recommendedTier = 'L4_PLATFORMS';
-      else if (score >= 40) recommendedTier = 'L3_INTEGRATION';
-      else if (score >= 20) recommendedTier = 'L2_AUTOMATION';
+      let recommendedTier = 'DESIGN_FABRICATION';
+      if (score >= 75) recommendedTier = 'STRATEGIC_PARTNERSHIPS';
+      else if (score >= 50) recommendedTier = 'PLATFORM_PILOTS';
+      else if (score >= 25) recommendedTier = 'STRATEGY_ENABLEMENT';
 
       const result: AssessmentResult = {
         score,

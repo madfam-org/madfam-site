@@ -45,11 +45,10 @@ export function calculateResult(
   else level = 'beginner';
 
   let recommendedTier: AssessmentResult['recommendedTier'];
-  if (percentage >= 80) recommendedTier = 'L5_STRATEGIC';
-  else if (percentage >= 60) recommendedTier = 'L4_PLATFORMS';
-  else if (percentage >= 40) recommendedTier = 'L3_CONSULTING';
-  else if (percentage >= 20) recommendedTier = 'L2_ADVANCED';
-  else recommendedTier = 'L1_ESSENTIALS';
+  if (percentage >= 75) recommendedTier = 'STRATEGIC_PARTNERSHIPS';
+  else if (percentage >= 50) recommendedTier = 'PLATFORM_PILOTS';
+  else if (percentage >= 25) recommendedTier = 'STRATEGY_ENABLEMENT';
+  else recommendedTier = 'DESIGN_FABRICATION';
 
   const recommendations = generateRecommendations(normalizedCategoryScores, level);
 

@@ -18,12 +18,11 @@ export function AssessmentResults({ result, translations, onRestart }: Assessmen
     return 'bg-red-500';
   };
 
-  const tierColors = {
-    L1_ESSENTIALS: 'from-blue-500 to-blue-600',
-    L2_ADVANCED: 'from-purple-500 to-purple-600',
-    L3_CONSULTING: 'from-indigo-500 to-indigo-600',
-    L4_PLATFORMS: 'from-violet-500 to-violet-600',
-    L5_STRATEGIC: 'from-pink-500 to-pink-600',
+  const tierColors: Record<string, string> = {
+    DESIGN_FABRICATION: 'from-blue-500 to-blue-600',
+    STRATEGY_ENABLEMENT: 'from-indigo-500 to-indigo-600',
+    PLATFORM_PILOTS: 'from-violet-500 to-violet-600',
+    STRATEGIC_PARTNERSHIPS: 'from-pink-500 to-pink-600',
   };
 
   // Get score interpretation

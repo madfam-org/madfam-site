@@ -5,7 +5,7 @@
       "email": "Corporate email",
       "company": "Company",
       "phone": "Phone",
-      "tier": "Service of interest",
+      "program": "Program of interest",
       "message": "How can we help you?"
     },
     "placeholders": {
@@ -15,13 +15,12 @@
       "phone": "+1 555 123 4567",
       "message": "Tell us about your project or needs..."
     },
-    "tiers": {
-      "select": "Select a service",
-      "l1": "L1 - Essentials (3D Design)",
-      "l2": "L2 - Advanced (Parametric Design)",
-      "l3": "L3 - Consulting (Workshops)",
-      "l4": "L4 - Platforms (Penny & AI tools)",
-      "l5": "L5 - Strategic (vCTO)"
+    "programs": {
+      "select": "Select a program",
+      "designFabrication": "Design & Fabrication",
+      "strategyEnablement": "Strategy & Enablement",
+      "platformPilots": "Platform Pilots",
+      "strategicPartnerships": "Strategic Partnerships"
     },
     "errors": {
       "nameMin": "Name must be at least 2 characters",

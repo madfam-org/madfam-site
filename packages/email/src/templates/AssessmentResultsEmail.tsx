@@ -23,7 +23,9 @@ interface AssessmentResultsEmailProps {
   language?: 'es-MX' | 'en-US';
 }
 
-const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'http://localhost:3000';
 
 export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
   assessmentId,
@@ -44,7 +46,8 @@ export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
       recommendationsTitle: 'Recomendaciones:',
       nextSteps: 'Próximos pasos recomendados:',
       cta: 'Agendar consulta personalizada',
-      footer: 'Nuestro equipo revisará estos resultados y te contactará para discutir cómo podemos ayudarte.',
+      footer:
+        'Nuestro equipo revisará estos resultados y te contactará para discutir cómo podemos ayudarte.',
       signature: 'Equipo MADFAM',
     },
     'en-US': {
@@ -73,18 +76,16 @@ export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
 
   const tierLabels = {
     'es-MX': {
-      L1_ESSENTIALS: 'Esenciales',
-      L2_ADVANCED: 'Avanzado',
-      L3_CONSULTING: 'Consultoría',
-      L4_PLATFORMS: 'Plataformas',
-      L5_STRATEGIC: 'Estratégico',
+      DESIGN_FABRICATION: 'Diseño y Fabricación',
+      STRATEGY_ENABLEMENT: 'Estrategia y Habilitación',
+      PLATFORM_PILOTS: 'Pilotos de Plataforma',
+      STRATEGIC_PARTNERSHIPS: 'Alianzas Estratégicas',
     },
     'en-US': {
-      L1_ESSENTIALS: 'Essentials',
-      L2_ADVANCED: 'Advanced',
-      L3_CONSULTING: 'Consulting',
-      L4_PLATFORMS: 'Platforms',
-      L5_STRATEGIC: 'Strategic',
+      DESIGN_FABRICATION: 'Design & Fabrication',
+      STRATEGY_ENABLEMENT: 'Strategy & Enablement',
+      PLATFORM_PILOTS: 'Platform Pilots',
+      STRATEGIC_PARTNERSHIPS: 'Strategic Partnerships',
     },
   };
 
@@ -94,21 +95,13 @@ export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
       <Preview>{t.preview}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Img
-            src={`${baseUrl}/logo.png`}
-            width="170"
-            height="50"
-            alt="MADFAM"
-            style={logo}
-          />
+          <Img src={`${baseUrl}/logo.png`} width="170" height="50" alt="MADFAM" style={logo} />
           <Heading style={h1}>{t.title}</Heading>
-          
+
           <Section style={scoreContainer}>
             <div style={scoreBox}>
               <Text style={scoreLabel}>{t.scoreTitle}</Text>
-              <Text style={{...scoreNumber, color: getScoreColor(score)}}>
-                {score}
-              </Text>
+              <Text style={{ ...scoreNumber, color: getScoreColor(score) }}>{score}</Text>
               <Text style={scoreLabel}>{t.scoreOf}</Text>
             </div>
           </Section>
@@ -116,7 +109,7 @@ export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
           <Section style={tierContainer}>
             <Text style={tierLabel}>{t.tierTitle}</Text>
             <Text style={tierValue}>
-              {tierLabels[language][tier as keyof typeof tierLabels[typeof language]] || tier}
+              {tierLabels[language][tier as keyof (typeof tierLabels)[typeof language]] || tier}
             </Text>
           </Section>
 
@@ -151,7 +144,7 @@ export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
           <Hr style={hr} />
           <Text style={text}>{t.footer}</Text>
           <Text style={signature}>{t.signature}</Text>
-          
+
           <Hr style={hr} />
           <Text style={footer}>
             <Link href={`${baseUrl}`} style={link}>

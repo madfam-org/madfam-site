@@ -76,11 +76,10 @@ function calculateROILeadScore(lead: ROILeadData): number {
 
   // Higher tier interest
   const tierScores: Record<string, number> = {
-    L5_STRATEGIC: 20,
-    L4_PLATFORMS: 15,
-    L3_CONSULTING: 10,
-    L2_ADVANCED: 5,
-    L1_ESSENTIALS: 0,
+    STRATEGIC_PARTNERSHIPS: 20,
+    PLATFORM_PILOTS: 15,
+    STRATEGY_ENABLEMENT: 10,
+    DESIGN_FABRICATION: 5,
   };
   score += tierScores[lead.serviceTier] || 0;
 

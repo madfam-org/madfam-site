@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-The MADFAM corporate website requires a hybrid infrastructure approach. **Vercel alone is NOT sufficient** for 100% functionality. The recommended architecture is **Vercel + Railway**, with optional **Cloudflare R2** for scalable media storage.
+The MADFAM corporate website runs on **Enclii/Kubernetes** for production deployments. Vercel serves as a preview/fallback option for serverless deployments, and **Cloudflare R2** provides scalable media storage.
 
 ## Current Infrastructure Analysis
 
@@ -81,7 +81,7 @@ Infrastructure:
 
 See `docs/deployment/DEPLOYMENT.md` for setup instructions.
 
-### Option 1: Vercel + Railway
+### Option 1: Vercel (Preview/Fallback)
 
 ```yaml
 Infrastructure Split:
@@ -91,30 +91,17 @@ Infrastructure Split:
     - Database (Vercel Postgres)
     - Edge functions
     - Global CDN
-
-  Railway:
-    - Payload CMS (apps/cms)
-    - CMS PostgreSQL database
-    - Background job processor
-    - Email queue worker
-    - Media file storage
+    - Preview deployments for PRs
 ```
 
-**Monthly Cost**: ~$30-40
+**Use Case**: Preview deployments, fallback if K8s is unavailable.
 
-- Vercel Pro: $20/month
-- Railway: $10-20/month
-
-### Option 2: Vercel + Railway + Cloudflare R2
+### Option 2: Kubernetes + Cloudflare R2
 
 ```yaml
 Infrastructure Split:
-  Vercel:
+  Kubernetes (via Enclii):
     - Main Next.js application
-    - API routes
-    - Database (Vercel Postgres)
-
-  Railway:
     - Payload CMS
     - Background workers
     - Email processor
@@ -125,11 +112,7 @@ Infrastructure Split:
     - Backup storage
 ```
 
-**Monthly Cost**: ~$35-45
-
-- Vercel Pro: $20/month
-- Railway: $10/month
-- Cloudflare R2: $5-15/month (usage-based)
+**Monthly Cost**: Variable based on cluster size + $5-15/month (Cloudflare R2, usage-based)
 
 ## Component-Specific Requirements
 
@@ -146,7 +129,7 @@ Infrastructure Split:
 # Main App (Vercel)
 DATABASE_URL="postgres://[user]:[pass]@[host]/[db]?sslmode=require"
 
-# CMS (Railway)
+# CMS (Kubernetes)
 CMS_DATABASE_URL="postgresql://[user]:[pass]@[host]/[db]"
 ```
 
@@ -163,10 +146,10 @@ setInterval(() => {
 
 **Required Migration**:
 
-Option A - Railway Worker:
+Option A - Kubernetes CronJob/Worker:
 
 ```typescript
-// Deploy as separate service on Railway
+// Deploy as separate Deployment in K8s
 // apps/workers/email-processor.ts
 export class EmailWorker {
   async run() {
@@ -178,7 +161,7 @@ export class EmailWorker {
 }
 ```
 
-Option B - Vercel Cron:
+Option B - Vercel Cron (fallback):
 
 ```typescript
 // app/api/cron/emails/route.ts
@@ -205,22 +188,17 @@ export async function GET() {
 - File upload handling
 - Admin UI hosting
 
-**Railway Configuration**:
+**Kubernetes Deployment (via Dockerfile)**:
 
-```toml
-# railway.toml
-[build]
-builder = "nixpacks"
-buildCommand = "pnpm install && pnpm build --filter=@madfam/cms"
+The CMS is containerized and deployed to Kubernetes using the Dockerfile at `apps/cms/Dockerfile`. See `k8s/production/madfam-cms-deployment.yaml` for the K8s manifest.
 
-[deploy]
-startCommand = "cd apps/cms && pnpm start"
-healthcheckPath = "/api/health"
-restartPolicyType = "always"
+```bash
+# Build and push CMS image
+docker build -t ghcr.io/madfam-org/madfam-site/cms:latest -f apps/cms/Dockerfile .
+docker push ghcr.io/madfam-org/madfam-site/cms:latest
 
-[[services]]
-name = "cms"
-port = 3001
+# Deploy to K8s
+kubectl apply -k k8s/production/
 ```
 
 ### 4. Media Storage
@@ -261,15 +239,15 @@ export default buildConfig({
 
 ### Phase 1: Core Infrastructure (Week 1)
 
-1. Set up Vercel project for main app
-2. Configure Vercel Postgres
-3. Deploy Railway CMS instance
-4. Set up Railway PostgreSQL
+1. Set up Enclii/K8s cluster for production
+2. Configure PostgreSQL (external or in-cluster)
+3. Deploy CMS via Dockerfile + K8s manifests
+4. Configure Vercel for preview deployments
 
 ### Phase 2: Background Jobs (Week 2)
 
-1. Refactor email queue for Railway
-2. Deploy worker services
+1. Refactor email queue as K8s Deployment/CronJob
+2. Deploy worker services to cluster
 3. Test webhook integrations
 4. Verify job processing
 
@@ -296,7 +274,7 @@ export default buildConfig({
 DATABASE_URL=postgres://...
 
 # CMS Integration
-NEXT_PUBLIC_CMS_URL=https://cms.railway.app
+NEXT_PUBLIC_CMS_URL=https://cms.madfam.io
 CMS_API_KEY=...
 
 # Email Service
@@ -309,7 +287,7 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io
 N8N_API_KEY=...
 ```
 
-### Railway Environment
+### Kubernetes Environment (via Secrets)
 
 ```bash
 # Database
@@ -323,8 +301,10 @@ R2_BUCKET=madfam-media
 
 # Payload Config
 PAYLOAD_SECRET=...
-PAYLOAD_PUBLIC_SERVER_URL=https://cms.railway.app
+PAYLOAD_PUBLIC_SERVER_URL=https://cms.madfam.io
 ```
+
+See `k8s/production/secrets-template.yaml` for the full list of required secrets.
 
 ## Performance Considerations
 
@@ -335,12 +315,12 @@ PAYLOAD_PUBLIC_SERVER_URL=https://cms.railway.app
 - Optimize images with next/image
 - Use Edge Runtime where possible
 
-### Railway Optimization
+### Kubernetes Optimization
 
 - Use connection pooling for database
 - Implement Redis for caching (optional)
-- Set up health checks
-- Configure auto-scaling
+- Set up health checks and liveness/readiness probes
+- Configure Horizontal Pod Autoscaler (HPA)
 
 ### Cloudflare R2 Optimization
 
@@ -360,8 +340,8 @@ PAYLOAD_PUBLIC_SERVER_URL=https://cms.railway.app
 
 ### Access Control
 
-- Vercel: Team-based access
-- Railway: Project-based permissions
+- Vercel: Team-based access (preview/fallback)
+- Kubernetes: RBAC and namespace isolation
 - Cloudflare: IAM policies
 - CMS: Role-based access
 
@@ -370,7 +350,7 @@ PAYLOAD_PUBLIC_SERVER_URL=https://cms.railway.app
 ### Recommended Tools
 
 - Vercel Analytics (built-in)
-- Railway Metrics (built-in)
+- Kubernetes metrics (Prometheus/Grafana)
 - Plausible Analytics (privacy-first)
 - Sentry for error tracking (optional)
 
@@ -401,30 +381,30 @@ PAYLOAD_PUBLIC_SERVER_URL=https://cms.railway.app
 
 ### Current Estimated Costs
 
-- Vercel Pro: $20/month
-- Railway: $10-20/month
+- Kubernetes (via Enclii): Variable based on cluster size
+- Vercel (preview/fallback): $0-20/month
 - Cloudflare R2: $5-15/month
-- **Total**: $35-55/month
+- **Total**: Variable
 
 ### Cost Saving Opportunities
 
-1. Use Vercel hobby for staging
-2. Optimize Railway resource allocation
+1. Use Vercel hobby for preview deployments only
+2. Optimize Kubernetes resource requests/limits
 3. Implement aggressive caching
 4. Clean up unused media regularly
 
 ## Next Steps
 
-1. **Immediate**: Set up Vercel and Railway projects
-2. **Week 1**: Migrate core infrastructure
-3. **Week 2**: Implement background workers
-4. **Week 3**: Configure media storage
+1. **Immediate**: Verify Enclii/K8s cluster and Vercel preview config
+2. **Week 1**: Validate core infrastructure on Kubernetes
+3. **Week 2**: Implement background workers as K8s workloads
+4. **Week 3**: Configure media storage (Cloudflare R2)
 5. **Week 4**: Complete testing and optimization
 
 ## Support & Resources
 
 - [Vercel Documentation](https://vercel.com/docs)
-- [Railway Documentation](https://docs.railway.app)
+- [Kubernetes Documentation](https://kubernetes.io/docs/)
 - [Cloudflare R2 Documentation](https://developers.cloudflare.com/r2)
 - [Payload CMS Documentation](https://payloadcms.com/docs)
 

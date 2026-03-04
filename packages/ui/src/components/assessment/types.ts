@@ -23,11 +23,10 @@ export interface AssessmentResult {
   };
   recommendations: string[];
   recommendedTier:
-    | 'L1_ESSENTIALS'
-    | 'L2_ADVANCED'
-    | 'L3_CONSULTING'
-    | 'L4_PLATFORMS'
-    | 'L5_STRATEGIC';
+    | 'DESIGN_FABRICATION'
+    | 'STRATEGY_ENABLEMENT'
+    | 'PLATFORM_PILOTS'
+    | 'STRATEGIC_PARTNERSHIPS';
 }
 
 export interface AssessmentProps {
@@ -44,11 +43,10 @@ export interface AssessmentProps {
     recommendationsTitle: string;
     serviceRecommendationTitle: string;
     tierDescriptions: {
-      L1_ESSENTIALS: string;
-      L2_ADVANCED: string;
-      L3_CONSULTING: string;
-      L4_PLATFORMS: string;
-      L5_STRATEGIC: string;
+      DESIGN_FABRICATION: string;
+      STRATEGY_ENABLEMENT: string;
+      PLATFORM_PILOTS: string;
+      STRATEGIC_PARTNERSHIPS: string;
     };
     startButton: string;
     nextButton: string;

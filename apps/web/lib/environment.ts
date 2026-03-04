@@ -219,8 +219,8 @@ export function validateEnvironment(): { valid: boolean; errors: string[] } {
       errors.push('DATABASE_URL is required in production when database feature is enabled');
     }
 
-    if (!process.env.NEXTAUTH_SECRET && environment.features.authentication) {
-      errors.push('NEXTAUTH_SECRET is required in production when authentication is enabled');
+    if (!process.env.JANUA_SECRET && environment.features.authentication) {
+      errors.push('JANUA_SECRET is required in production when authentication is enabled');
     }
 
     if (!environment.services.sentry.dsn && environment.services.sentry.enabled) {

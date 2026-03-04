@@ -12,7 +12,7 @@
 **🌟 Key Highlights:**
 
 - 🏢 Four business units: Aureo Labs, Primavera3D, MADFAM Co-Labs, Showtech
-- 🤖 AI-powered products: PENNY, MedSync, AeroControl, and more
+- 🤖 Products: Dhanam, Forge Sight, Cotiza Studio, Enclii, Janua, Yantra4D
 - 🌐 Full internationalization (Spanish, English, Portuguese)
 - 📊 Privacy-first analytics with enterprise-grade security
 - 🎨 Modern design system with Tailwind CSS 4 and dark/light mode
@@ -111,12 +111,14 @@ biz-site/
 
 ### Products
 
-- **PENNY** - Intelligent process automation platform with NLP and enterprise security (by Aureo Labs)
-- **MedSync** - Healthcare data integration platform (by MADFAM Health)
-- **AeroControl** - Autonomous flight management system (by MADFAM Aero)
-- **Dhanam** - Financial wellness platform at [dhan.am](https://www.dhan.am)
-- **Forge Sight** - Analytics and business intelligence platform
-- **Cotiza Studio** - Project quoting and estimation tool
+- **Enclii** - Sovereign cloud PaaS powering MADFAM's infrastructure (by Aureo Labs)
+- **Janua** - Self-hosted identity platform with SSO, MFA, and Passkeys (by Aureo Labs)
+- **Dhanam** - Wealth & finance platform for LATAM founders at [dhan.am](https://www.dhan.am)
+- **Forge Sight** - Pricing intelligence for digital fabrication (by Aureo Labs)
+- **Cotiza Studio** - Intelligent quoting and budgeting system (by Aureo Labs)
+- **Yantra4D** - Open parametric design platform (by Primavera3D)
+- **AVALA** - Competency-based training platform (Coming Soon)
+- **PENNY** - AI assistant platform (In Development)
 
 ### Programs
 
@@ -154,7 +156,7 @@ All routes support internationalization with Spanish (es), English (en), and Por
 
 - `/` - Corporate homepage
 - `/solutions` - Business units (Aureo Labs, Primavera3D, MADFAM Co-Labs, Showtech)
-- `/products` - Product showcase (PENNY, MedSync, AeroControl)
+- `/products` - Product showcase (Dhanam, Forge Sight, Cotiza Studio, and more)
 - `/programs` - Transformation and enablement programs
 - `/about` - Company information
 - `/impact` - ESG and sustainability metrics
@@ -203,11 +205,11 @@ All routes support internationalization with Spanish (es), English (en), and Por
 | **Forms**      | React Hook Form + Zod | 7.66.0  | Form handling and validation    |
 | **i18n**       | next-intl             | 4.5.3   | Internationalization            |
 | **Database**   | Prisma + PostgreSQL   | 6.19.0  | Type-safe database ORM          |
-| **Auth**       | NextAuth              | 4.24.13 | Authentication solution         |
+| **Auth**       | Janua (@janua/nextjs) | Latest  | Sovereign authentication        |
 | **Analytics**  | Plausible             | Latest  | Privacy-first analytics         |
 | **CMS**        | Payload CMS           | 3.54.0  | Headless content management     |
 | **Testing**    | Vitest + Playwright   | 4.0.8   | Unit and E2E testing            |
-| **Deployment** | Vercel + GitHub Pages | Latest  | Production and staging          |
+| **Deployment** | Enclii (K8s)          | Latest  | Production via sovereign PaaS   |
 | **CI/CD**      | GitHub Actions        | Latest  | Automated workflows             |
 | **Monorepo**   | Turborepo + pnpm      | 2.6.1   | Workspace management            |
 
@@ -221,13 +223,12 @@ pnpm build:staging
 # Automatic deployment via GitHub Actions
 ```
 
-### Production (Vercel)
+### Production (Enclii / Kubernetes)
 
 ```bash
 git checkout main
-git tag v1.0.0
-git push origin v1.0.0
-# Automatic deployment via GitHub Actions
+git push origin main
+# Automatic deployment via GitOps CI/CD pipeline
 ```
 
 ### Docker (Local Development)
@@ -268,7 +269,7 @@ The application provides a comprehensive REST API:
 - `/api/assessment/*` - AI capability assessment processing and results
 - `/api/calculator/*` - ROI and project cost calculations
 - `/api/leads/*` - Lead management, scoring, and activity tracking
-- `/api/auth/[...nextauth]` - NextAuth authentication endpoints
+- `/api/auth/*` - Janua authentication endpoints
 
 ### Utility Endpoints
 
@@ -322,8 +323,8 @@ Create a `.env.local` file in `apps/web/`:
 ```env
 # Required
 DATABASE_URL=postgresql://user:password@localhost:5432/madfam
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your-secret-key-here
+JANUA_API_URL=http://localhost:8000
+JANUA_JWT_SECRET=your-janua-secret
 NEXT_PUBLIC_ENV=development
 
 # Analytics

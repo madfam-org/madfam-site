@@ -5,8 +5,8 @@ Content Management System powered by Payload CMS v2 for the MADFAM corporate web
 ## Features
 
 - **Content Collections**:
-  - Services (L1-L5 tiers)
-  - Products (SPARK, PENNY, etc.)
+  - Transformation Programs
+  - Products (Enclii, Janua, Dhanam, Forge Sight, etc.)
   - Case Studies
   - Blog Posts
   - Resources
@@ -22,6 +22,7 @@ Content Management System powered by Payload CMS v2 for the MADFAM corporate web
 ## Setup
 
 1. Copy `.env.example` to `.env`:
+
    ```bash
    cp .env.example .env
    ```
@@ -32,11 +33,13 @@ Content Management System powered by Payload CMS v2 for the MADFAM corporate web
    - `PAYLOAD_PUBLIC_SERVER_URL`: Set to your CMS URL
 
 3. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 4. Run database migrations (from web app):
+
    ```bash
    cd ../web && pnpm prisma:migrate
    ```
@@ -66,36 +69,43 @@ The CMS uses the same user database as the main web application. Users with `ADM
 ## Collections
 
 ### Services
+
 - Manage L1-L5 service tiers
 - Multilingual content
 - Feature lists and pricing
 
 ### Products
-- SPARK, PENNY, and other products
+
+- Enclii, Janua, Dhanam, Forge Sight, and other products
 - Features, pricing, and benefits
 - Related case studies
 
 ### Case Studies
+
 - Client success stories
 - Project details and outcomes
 - Related services and products
 
 ### Blog Posts
+
 - Articles and insights
 - Categories and tags
 - Author attribution
 
 ### Resources
+
 - Whitepapers, guides, templates
 - Downloadable content
 - Access control
 
 ### Team Members
+
 - Staff profiles
 - Roles and expertise
 - Social links
 
 ### Testimonials
+
 - Client feedback
 - Featured testimonials
 - Service associations
@@ -127,6 +137,7 @@ const query = `
 ## Deployment
 
 1. Build the application:
+
    ```bash
    pnpm build
    ```

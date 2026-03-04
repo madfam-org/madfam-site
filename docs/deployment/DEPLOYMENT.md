@@ -6,15 +6,16 @@ The MADFAM website uses a comprehensive multi-environment deployment strategy op
 
 - **Development**: Local development with SQLite and hot reload
 - **Staging**: GitHub Pages (static export for design/content review)
-- **Production**: Vercel + Railway (hybrid infrastructure for full functionality)
+- **Production**: Kubernetes via Enclii (containerized deployment with GitOps CI/CD)
 
-> **Important**: Vercel alone is NOT sufficient for 100% functionality. See [Infrastructure Requirements](../infrastructure/INFRASTRUCTURE_REQUIREMENTS.md) for details.
+> **Note**: Vercel is available as a preview/fallback deployment option. See [Infrastructure Requirements](../infrastructure/INFRASTRUCTURE_REQUIREMENTS.md) for details.
 
 ## Prerequisites
 
 - Node.js 20+ and pnpm 8+
 - Git and GitHub account
-- Vercel account (for production)
+- Docker and kubectl (for production K8s deployments via Enclii)
+- Vercel account (for preview/fallback deployments)
 - Environment variables configured
 
 ## Environment Configuration
@@ -67,8 +68,8 @@ NEXT_PUBLIC_API_URL=https://madfam.io/api
 # Database (Vercel)
 DATABASE_URL=postgresql://...
 
-# CMS Integration (Railway)
-NEXT_PUBLIC_CMS_URL=https://cms.madfam.railway.app
+# CMS Integration (Kubernetes via Enclii)
+NEXT_PUBLIC_CMS_URL=https://cms.madfam.io
 CMS_API_KEY=...
 
 # Feature Flags

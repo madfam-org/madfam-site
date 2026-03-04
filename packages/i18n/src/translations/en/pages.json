@@ -10,18 +10,15 @@
       "viewProducts": "View products"
     },
     "services": {
-      "title": "5-level services",
-      "subtitle": "From quick fixes to strategic transformation, we have the perfect level for your needs.",
-      "viewAll": "View all services"
+      "title": "Transformation Programs",
+      "subtitle": "From design and fabrication to strategic partnerships, we have the right program for your needs.",
+      "viewAll": "View all programs"
     },
     "products": {
       "title": "Our products",
-      "subtitle": "Revolutionary platforms that automate and optimize your business",
-      "spark": {
-        "description": "AI orchestration platform that connects, automates, and optimizes all your business processes in one place."
-      },
+      "subtitle": "Platforms and tools built by our specialized units",
       "penny": {
-        "description": "Intelligent process automation that learns, adapts, and continuously improves your workflow."
+        "description": "AI assistant platform currently in development. Will learn, adapt, and continuously improve your workflow."
       }
     },
     "cta": {

@@ -52,12 +52,14 @@ biz-site/
 
 ### Products
 
-- **PENNY**: AI assistant for consumers & enterprises
+- **PENNY**: AI assistant for consumers & enterprises (In Development)
 - **Dhanam**: Financial wellness platform (https://www.dhan.am)
 - **Cotiza Studio**: Quoting/estimation tool
 - **Forge Sight**: Analytics platform
+- **Enclii**: Cloud deployment and infrastructure platform
+- **Janua**: Authentication and identity platform
+- **Yantra4D**: Spatial computing / 4D design platform
 - **AVALA**: Training & certification platform (Coming Soon)
-- **Factlas**: Geographic intelligence platform (Coming Soon)
 
 ### Service Model
 
@@ -185,7 +187,7 @@ pnpm test
 
 - **Development**: `pnpm dev`
 - **Staging**: Push to staging branch
-- **Production**: Push to main branch → Vercel
+- **Production**: Push to main branch → Kubernetes via Enclii (Vercel available as preview/fallback)
 
 ## Performance Guidelines
 

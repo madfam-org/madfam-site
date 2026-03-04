@@ -12,24 +12,29 @@ graph TB
         Browser[Web Browser]
     end
 
-    subgraph "CDN Layer"
-        CF[Cloudflare CDN]
+    subgraph "CDN / Ingress"
+        CF[Cloudflare CDN + Tunnel]
     end
 
-    subgraph "Application Layer"
+    subgraph "Kubernetes Cluster (Enclii)"
         Next[Next.js App]
         API[API Routes]
+        CMS[Payload CMS]
     end
 
-    subgraph "Services"
+    subgraph "Auth"
+        Janua[Janua Auth]
+    end
+
+    subgraph "External Services"
         Analytics[Plausible Analytics]
         N8N[n8n Workflows]
-        CMS[Payload CMS]
     end
 
     Browser --> CF
     CF --> Next
     Next --> API
+    Next --> Janua
     API --> Analytics
     API --> N8N
     Next --> CMS
@@ -94,23 +99,9 @@ Components follow a hierarchical structure:
 - **Templates**: Page layouts
 - **Pages**: Actual pages with data
 
-### 3. Service Tier Model
+### 3. Service Model
 
-The business logic is organized around a 5-tier service model:
-
-```mermaid
-graph LR
-    L1[L1 Essentials<br/>3D Design] --> L2[L2 Advanced<br/>Parametric Design]
-    L2 --> L3[L3 Consulting<br/>Workshops & Training]
-    L3 --> L4[L4 Platforms<br/>SPARK & PENNY]
-    L4 --> L5[L5 Strategic<br/>vCTO Partnership]
-
-    style L1 fill:#6BCB77
-    style L2 fill:#FFD93D
-    style L3 fill:#9B59B6
-    style L4 fill:#0A0E27,color:#fff
-    style L5 fill:#FF6B6B
-```
+The business logic is organized around transformation programs focused on AI implementation and digital transformation (no longer tier-based L1-L5).
 
 ### 4. Data Flow Architecture
 
@@ -138,16 +129,6 @@ flowchart TD
     style A fill:#FFD93D
     style M fill:#9B59B6
     style O fill:#6BCB77
-```
-
-```typescript
-enum ServiceTier {
-  L1_ESSENTIALS = 'essentials',
-  L2_ADVANCED = 'advanced',
-  L3_CONSULTING = 'consulting',
-  L4_PLATFORMS = 'platforms',
-  L5_STRATEGIC = 'strategic',
-}
 ```
 
 ## Technology Decisions
@@ -284,23 +265,24 @@ const features = {
 - Basic lead capture
 - Manual content updates
 
-### Phase 2 (Q2 2024)
+### Phase 2 (Completed)
 
 - Payload CMS integration
-- Advanced lead scoring
+- Kubernetes production deployment via Enclii
+- Janua authentication (replacing NextAuth)
 - n8n workflow automation
 
-### Phase 3 (Q3 2024)
+### Phase 3 (In Progress)
 
-- AI-powered content
-- Personalization engine
-- Advanced analytics
+- AI-powered content and personalization
+- Advanced analytics with Forge Sight
+- Product platform launches (PENNY, Dhanam, Enclii, Janua)
 
-### Phase 4 (Q4 2024)
+### Phase 4 (Planned)
 
-- Multi-region deployment
+- Multi-region K8s deployment
 - Real-time features
-- Mobile app (React Native)
+- Yantra4D integration
 
 ## Decision Log
 

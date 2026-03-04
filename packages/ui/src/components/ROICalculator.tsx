@@ -6,13 +6,12 @@ import { cn } from '../lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Button } from './Button';
 
-// Service tier type - import from @madfam/core when available
+// Program type - maps to transformation programs
 type ServiceTier =
-  | 'L1_ESSENTIALS'
-  | 'L2_ADVANCED'
-  | 'L3_CONSULTING'
-  | 'L4_PLATFORMS'
-  | 'L5_STRATEGIC';
+  | 'DESIGN_FABRICATION'
+  | 'STRATEGY_ENABLEMENT'
+  | 'PLATFORM_PILOTS'
+  | 'STRATEGIC_PARTNERSHIPS';
 
 export interface ROICalculatorProps {
   serviceTier?: ServiceTier;
@@ -39,28 +38,26 @@ interface FormData {
   averageProjectValue: number;
 }
 
-// Service tier pricing (MXN)
+// Program pricing (MXN)
 const servicePricing: Record<ServiceTier, number> = {
-  L1_ESSENTIALS: 5000,
-  L2_ADVANCED: 15000,
-  L3_CONSULTING: 50000,
-  L4_PLATFORMS: 150000,
-  L5_STRATEGIC: 500000,
+  DESIGN_FABRICATION: 15000,
+  STRATEGY_ENABLEMENT: 50000,
+  PLATFORM_PILOTS: 150000,
+  STRATEGIC_PARTNERSHIPS: 500000,
 };
 
-// Efficiency and cost reduction multipliers per tier
+// Efficiency and cost reduction multipliers per program
 const tierMultipliers: Record<ServiceTier, { efficiency: number; costReduction: number }> = {
-  L1_ESSENTIALS: { efficiency: 0.15, costReduction: 0.1 },
-  L2_ADVANCED: { efficiency: 0.25, costReduction: 0.2 },
-  L3_CONSULTING: { efficiency: 0.35, costReduction: 0.25 },
-  L4_PLATFORMS: { efficiency: 0.5, costReduction: 0.35 },
-  L5_STRATEGIC: { efficiency: 0.7, costReduction: 0.5 },
+  DESIGN_FABRICATION: { efficiency: 0.2, costReduction: 0.15 },
+  STRATEGY_ENABLEMENT: { efficiency: 0.35, costReduction: 0.25 },
+  PLATFORM_PILOTS: { efficiency: 0.5, costReduction: 0.35 },
+  STRATEGIC_PARTNERSHIPS: { efficiency: 0.7, costReduction: 0.5 },
 };
 
 export const ROICalculator = React.forwardRef<HTMLDivElement, ROICalculatorProps>(
   (
     {
-      serviceTier = 'L3_CONSULTING',
+      serviceTier = 'STRATEGY_ENABLEMENT',
       title = 'ROI Calculator',
       currency = 'MXN',
       variant = 'full',
@@ -468,9 +465,7 @@ export const ROICalculator = React.forwardRef<HTMLDivElement, ROICalculatorProps
                           placeholder="tu@empresa.com"
                           required
                         />
-                        {emailError && (
-                          <p className="mt-1 text-sm text-red-600">{emailError}</p>
-                        )}
+                        {emailError && <p className="mt-1 text-sm text-red-600">{emailError}</p>}
                       </div>
 
                       <Button type="submit" variant="primary" className="w-full" size="lg">

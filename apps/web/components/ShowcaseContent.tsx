@@ -25,9 +25,9 @@ export function ShowcaseContent() {
     </svg>
   );
 
-  const SparkIcon = () => (
+  const CloudIcon = () => (
     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+      <path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
     </svg>
   );
 
@@ -45,7 +45,7 @@ export function ShowcaseContent() {
       link: { text: t('common.learnMore'), href: '/programs' },
     },
     {
-      icon: <SparkIcon />,
+      icon: <CloudIcon />,
       title: t('showcase.features.ai'),
       description: t('showcase.features.aiDesc'),
       badge: 'Popular',
@@ -114,7 +114,7 @@ export function ShowcaseContent() {
               <Button variant="primary" loading>
                 {t('showcase.buttons.loading')}
               </Button>
-              <Button variant="primary" icon={<SparkIcon />}>
+              <Button variant="primary" icon={<CloudIcon />}>
                 {t('showcase.buttons.withIcon')}
               </Button>
             </div>
@@ -154,20 +154,20 @@ export function ShowcaseContent() {
             </Heading>
             <div className="grid md:grid-cols-2 gap-6">
               <ProductCard
-                name="SPARK"
-                tagline={t('products.spark.tagline')}
-                description={t('products.spark.shortDescription')}
+                name="Enclii"
+                tagline={t('products.enclii.tagline')}
+                description={t('products.enclii.shortDescription')}
                 features={[
-                  { icon: <SparkIcon />, text: t('products.spark.features.0') },
-                  { text: t('products.spark.features.1') },
-                  { text: t('products.spark.features.2') },
+                  { icon: <CloudIcon />, text: t('products.enclii.features.0') },
+                  { text: t('products.enclii.features.1') },
+                  { text: t('products.enclii.features.2') },
                 ]}
-                badge={{ text: 'NEW', variant: 'new' }}
+                badge={{ text: 'ACTIVE', variant: 'new' }}
                 cta={{
                   primary: { text: t('common.getStarted'), href: '#' },
                   secondary: { text: t('common.learnMore'), href: '#' },
                 }}
-                logo={<SparkIcon />}
+                logo={<CloudIcon />}
               />
               <ProductCard
                 name="Penny"

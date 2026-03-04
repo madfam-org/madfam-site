@@ -31,16 +31,28 @@ export function Search() {
     () => [
       // Products
       {
-        id: 'spark',
-        title: 'SPARK',
+        id: 'enclii',
+        title: 'Enclii',
         description:
           locale === 'en'
-            ? 'AI orchestration platform to automate workflows'
+            ? 'Sovereign cloud platform — GitOps-native PaaS built on Kubernetes'
             : locale === 'pt'
-              ? 'Plataforma de orquestração de IA para automatizar fluxos de trabalho'
-              : 'Plataforma de orquestación de IA para automatizar flujos de trabajo',
+              ? 'Plataforma de nuvem soberana — PaaS GitOps-nativa construída sobre Kubernetes'
+              : 'Plataforma de nube soberana — PaaS GitOps-nativa construida sobre Kubernetes',
         type: 'product' as const,
-        url: `/${locale}/${locale === 'es' ? 'productos' : locale === 'pt' ? 'produtos' : 'products'}#spark`,
+        url: `/${locale}/${locale === 'es' ? 'productos' : locale === 'pt' ? 'produtos' : 'products'}#enclii`,
+      },
+      {
+        id: 'janua',
+        title: 'Janua',
+        description:
+          locale === 'en'
+            ? 'Self-hosted identity platform with enterprise SSO, MFA, and Passkeys'
+            : locale === 'pt'
+              ? 'Plataforma de identidade auto-hospedada com SSO empresarial, MFA e Passkeys'
+              : 'Plataforma de identidad auto-hospedada con SSO empresarial, MFA y Passkeys',
+        type: 'product' as const,
+        url: `/${locale}/${locale === 'es' ? 'productos' : locale === 'pt' ? 'produtos' : 'products'}#janua`,
       },
       {
         id: 'penny',

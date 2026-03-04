@@ -286,7 +286,7 @@ export function PennyProductClient({
                     variant={plan.popular ? 'creative' : 'primary'}
                     className="w-full"
                     onClick={() =>
-                      logServiceInquiry('L4_PLATFORMS', 'penny-pricing', {
+                      logServiceInquiry('PLATFORM_PILOTS', 'penny-pricing', {
                         plan: plan.name,
                         locale: currentLocale,
                       })
@@ -315,10 +315,10 @@ export function PennyProductClient({
             </div>
 
             <ROICalculator
-              serviceTier="L4_PLATFORMS"
+              serviceTier="PLATFORM_PILOTS"
               title={translations.roiCalculatorTitle}
               onCalculate={(results: ROIResults) => {
-                logServiceInquiry('L4_PLATFORMS', 'penny-roi-calculator', {
+                logServiceInquiry('PLATFORM_PILOTS', 'penny-roi-calculator', {
                   results,
                   locale: currentLocale,
                 });

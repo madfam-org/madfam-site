@@ -33,10 +33,10 @@ const visionPillars = [
 
 // Impact metrics
 const impactMetrics = [
-  { value: '50+', label: 'Enterprise Partners', suffix: '' },
-  { value: '12', label: 'Countries Served', suffix: '' },
-  { value: '2M+', label: 'Lives Impacted', suffix: '' },
-  { value: '98', label: 'Client Satisfaction', suffix: '%' },
+  { value: '60+', label: 'Open Source Repos', suffix: '' },
+  { value: '40+', label: 'Parametric Designs', suffix: '' },
+  { value: '8', label: 'Products in Production', suffix: '' },
+  { value: '4', label: 'Business Units', suffix: '' },
 ];
 
 // Business units / Arms
@@ -44,19 +44,21 @@ const businessArms = [
   {
     name: 'Aureo Labs',
     tagline: 'Digital Innovation Lab',
-    description: 'AI-powered products for financial wellness and manufacturing intelligence',
+    description:
+      'Sovereign cloud (Enclii), identity (Janua), pricing intelligence (Forge Sight), financial wellness (Dhanam), and intelligent quoting (Cotiza Studio)',
     icon: '💡',
     color: 'amber',
-    products: ['Dhanam', 'Forge Sight', 'Cotiza'],
+    products: ['Enclii', 'Janua', 'Dhanam', 'Forge Sight', 'Cotiza Studio'],
     href: 'https://aureolabs.dev',
   },
   {
     name: 'Primavera3D',
-    tagline: 'Design & Fabrication Studio',
-    description: 'Digital fabrication and parametric design for the physical world',
+    tagline: 'Advanced Manufacturing & Digital Fabrication',
+    description:
+      'Parametric design (Yantra4D), geometry analysis, automated quoting, and manufacturing execution. 40+ open-source parametric designs.',
     icon: '🎨',
     color: 'green',
-    products: ['3D Design', 'Parametric Modeling', 'Fabrication'],
+    products: ['Yantra4D', 'Geom-Core', 'Pravara-MES'],
     href: '/solutions/primavera3d',
   },
   {

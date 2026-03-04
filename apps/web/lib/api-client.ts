@@ -24,7 +24,7 @@ const mockAssessmentResponse = {
   assessmentId: 'mock-assessment-123',
   results: {
     score: 68,
-    tier: 'L3_CONSULTING',
+    tier: 'STRATEGY_ENABLEMENT',
     strengths: ['Strong technology foundation', 'Good strategic planning'],
     weaknesses: ['Process automation needs improvement'],
     recommendations: [

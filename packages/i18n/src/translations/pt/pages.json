@@ -8,18 +8,15 @@
       "viewProducts": "Ver produtos"
     },
     "services": {
-      "title": "Serviços de 5 níveis",
-      "subtitle": "De soluções rápidas à transformação estratégica, temos o nível perfeito para suas necessidades.",
-      "viewAll": "Ver todos os serviços"
+      "title": "Programas de Transformação",
+      "subtitle": "De design e fabricação a parcerias estratégicas, temos o programa certo para suas necessidades.",
+      "viewAll": "Ver todos os programas"
     },
     "products": {
       "title": "Nossos produtos",
-      "subtitle": "Plataformas revolucionárias que automatizam e otimizam seu negócio",
-      "spark": {
-        "description": "Plataforma de orquestração IA que conecta, automatiza e otimiza todos os seus processos de negócio em um só lugar."
-      },
+      "subtitle": "Plataformas e ferramentas desenvolvidas por nossas unidades especializadas",
       "penny": {
-        "description": "Automação inteligente de processos que aprende, adapta e melhora continuamente seu fluxo de trabalho."
+        "description": "Plataforma assistente de IA atualmente em desenvolvimento. Aprenderá, se adaptará e melhorará continuamente seu fluxo de trabalho."
       }
     },
     "cta": {

@@ -66,7 +66,7 @@ export function AssessmentWithAnalytics({
     });
 
     // Track purchase intent for higher-tier recommendations
-    if (['L4_PLATFORMS', 'L5_STRATEGIC'].includes(result.recommendedTier)) {
+    if (['PLATFORM_PILOTS', 'STRATEGIC_PARTNERSHIPS'].includes(result.recommendedTier)) {
       trackPurchaseIntent(result.recommendedTier);
     }
 

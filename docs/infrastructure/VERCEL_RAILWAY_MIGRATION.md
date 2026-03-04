@@ -1,4 +1,10 @@
-# Vercel + Railway Migration Guide
+# ARCHIVED: This document is historical. Production now runs on Enclii/K8s.
+
+> **Warning**: The Vercel + Railway migration described below is no longer the active deployment strategy. Production infrastructure has moved to Kubernetes via Enclii. This document is retained for historical reference only. See `docs/deployment/DEPLOYMENT.md` and `docs/infrastructure/INFRASTRUCTURE_REQUIREMENTS.md` for current deployment information.
+
+---
+
+# Vercel + Railway Migration Guide (Historical)
 
 ## Overview
 
@@ -250,7 +256,6 @@ aws s3 sync ./media s3://madfam-media/ \
 ### Test Checklist
 
 - [ ] **Main Application**
-
   - [ ] Homepage loads
   - [ ] All routes accessible
   - [ ] API routes functional
@@ -258,14 +263,12 @@ aws s3 sync ./media s3://madfam-media/ \
   - [ ] Forms submit correctly
 
 - [ ] **CMS**
-
   - [ ] Admin panel accessible
   - [ ] Content CRUD operations
   - [ ] Media uploads work
   - [ ] API endpoints respond
 
 - [ ] **Background Jobs**
-
   - [ ] Email queue processes
   - [ ] Webhooks receive data
   - [ ] Scheduled tasks run

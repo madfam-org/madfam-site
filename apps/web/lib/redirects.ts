@@ -140,28 +140,23 @@ export const programRedirects = [
  * Maps URLs to corporate structure
  */
 export const corporateMapping = {
-  // Service tier to Program mapping
-  L1_ESSENTIALS: {
+  // Program mapping
+  DESIGN_FABRICATION: {
     program: 'design-fabrication',
     arm: 'primavera3d',
     provider: 'Primavera3D',
   },
-  L2_ADVANCED: {
-    program: 'design-fabrication',
-    arm: 'primavera3d',
-    provider: 'Primavera3D',
-  },
-  L3_CONSULTING: {
+  STRATEGY_ENABLEMENT: {
     program: 'strategy-enablement',
     arm: 'madfam-aureo',
     provider: 'MADFAM/Aureo',
   },
-  L4_PLATFORMS: {
+  PLATFORM_PILOTS: {
     program: 'platform-pilots',
     arm: 'aureo-labs',
     provider: 'Aureo Labs',
   },
-  L5_STRATEGIC: {
+  STRATEGIC_PARTNERSHIPS: {
     program: 'strategic-partnerships',
     arm: 'madfam',
     provider: 'MADFAM',

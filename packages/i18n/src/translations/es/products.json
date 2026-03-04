@@ -55,13 +55,43 @@
       "2": "Modelos de IA personalizados"
     }
   },
-  "spark": {
-    "tagline": "Orquestación de Procesos con IA",
-    "shortDescription": "Plataforma de automatización inteligente que conecta y optimiza todos tus procesos empresariales.",
+  "enclii": {
+    "name": "Enclii",
+    "title": "Enclii",
+    "tagline": "Plataforma de Nube Soberana",
+    "shortDescription": "Nuestra propia PaaS que impulsa toda la infraestructura de MADFAM.",
+    "description": "Plataforma de nube soberana con despliegues sin configuración, entornos de preview y observabilidad integrada.",
+    "status": "active",
     "features": {
-      "0": "Automatización inteligente de flujos de trabajo",
-      "1": "Integración multiplataforma",
-      "2": "Optimización de procesos en tiempo real"
+      "0": "Despliegues sin configuración",
+      "1": "Kubernetes nativo de GitOps",
+      "2": "Observabilidad integrada"
+    }
+  },
+  "janua": {
+    "name": "Janua",
+    "title": "Janua",
+    "tagline": "Autenticación Soberana",
+    "shortDescription": "Plataforma de identidad auto-hospedada con SSO, MFA y Passkeys.",
+    "description": "Plataforma de identidad empresarial con SSO, aprovisionamiento SCIM, MFA y Passkeys.",
+    "status": "active",
+    "features": {
+      "0": "SSO empresarial y SCIM",
+      "1": "MFA y Passkeys",
+      "2": "Soberanía total de datos"
+    }
+  },
+  "yantra4d": {
+    "name": "Yantra4D",
+    "title": "Yantra4D",
+    "tagline": "Plataforma Abierta de Diseño Paramétrico",
+    "shortDescription": "Plataforma web para modelos paramétricos OpenSCAD con previews 3D instantáneos.",
+    "description": "Sube diseños paramétricos, obtén previews 3D instantáneos, exporta archivos STL.",
+    "status": "active",
+    "features": {
+      "0": "Modelos paramétricos OpenSCAD",
+      "1": "Preview 3D instantáneo y exportación STL",
+      "2": "40+ diseños de código abierto"
     }
   }
 }

@@ -48,9 +48,10 @@
       "showtech": {
         "name": "Showtech",
         "tagline": "Entertainment Innovation Division",
-        "description": "Innovation Division for Hardware and Software in the music and live entertainment industries",
+        "description": "Hardware and software innovation for the music and live entertainment industries.",
         "badge": "a MADFAM Company",
-        "focus": "Audio hardware, production software, immersive experiences, event technology"
+        "focus": "Audio hardware, production software, immersive experiences, event technology",
+        "status": "coming-soon"
       }
     },
     "products": {
@@ -59,23 +60,10 @@
       "penny": {
         "name": "PENNY",
         "tagline": "Intelligent Process Automation",
-        "description": "AI assistant that learns, adapts and continuously improves your workflow processes",
+        "description": "AI assistant that will learn, adapt, and continuously improve your workflow processes",
         "badge": "an Aureo Labs product",
-        "developer": "Aureo Labs"
-      },
-      "medSync": {
-        "name": "MedSync",
-        "tagline": "Healthcare Data Integration",
-        "description": "Comprehensive platform for healthcare data management and patient communication",
-        "badge": "a MADFAM Health product",
-        "developer": "MADFAM Health"
-      },
-      "aeroControl": {
-        "name": "AeroControl",
-        "tagline": "Autonomous Flight Management",
-        "description": "Advanced control system for autonomous drones and aerial vehicle fleets",
-        "badge": "a MADFAM Aero product",
-        "developer": "MADFAM Aero"
+        "developer": "Aureo Labs",
+        "status": "development"
       }
     },
     "programs": {
@@ -104,86 +92,6 @@
         "description": "Long-term vCTO partnerships and complete transformation",
         "units": ["All Units"],
         "focus": "Strategic leadership, complete digital transformation"
-      },
-      "essentials": {
-        "name": "Essentials",
-        "code": "P1",
-        "oldCode": "L1",
-        "title": "Programa Essentials",
-        "description": "Soluciones rápidas de diseño 3D e IA para necesidades inmediatas",
-        "provider": "Primavera3D",
-        "badge": "a MADFAM Company",
-        "duration": "1-2 semanas",
-        "deliverables": [
-          "Modelado 3D",
-          "Renderizado fotorrealista",
-          "Diseño gráfico",
-          "Animaciones básicas"
-        ]
-      },
-      "advanced": {
-        "name": "Advanced",
-        "code": "P2",
-        "oldCode": "L2",
-        "title": "Programa Advanced",
-        "description": "Diseño paramétrico y experiencias interactivas que transforman",
-        "provider": "Primavera3D",
-        "badge": "a MADFAM Company",
-        "duration": "3-6 semanas",
-        "deliverables": [
-          "Diseño paramétrico",
-          "Realidad aumentada/virtual",
-          "Visualización de datos 3D",
-          "Experiencias interactivas"
-        ]
-      },
-      "consulting": {
-        "name": "Consulting",
-        "code": "P3",
-        "oldCode": "L3",
-        "title": "Programa Consulting",
-        "description": "Transforma tu empresa con consultoría especializada en IA",
-        "provider": "Aureo Labs",
-        "badge": "a MADFAM Company",
-        "duration": "3-6 meses",
-        "deliverables": [
-          "Estrategia personalizada",
-          "Capacitación integral",
-          "Métricas de impacto",
-          "Mejora continua"
-        ]
-      },
-      "platforms": {
-        "name": "Platforms",
-        "code": "P4",
-        "oldCode": "L4",
-        "title": "Programa Platforms",
-        "description": "Implement Penny and other AI tools for complete transformation",
-        "provider": "Aureo Labs",
-        "badge": "a MADFAM Company",
-        "duration": "3-12 meses",
-        "deliverables": [
-          "AI platform implementation",
-          "Integración con sistemas",
-          "Capacitación de equipo",
-          "Soporte continuo"
-        ]
-      },
-      "strategic": {
-        "name": "Strategic",
-        "code": "P5",
-        "oldCode": "L5",
-        "title": "Programa Strategic",
-        "description": "Asociación vCTO para liderar tu transformación digital",
-        "provider": "MADFAM",
-        "badge": "a MADFAM Company",
-        "duration": "12+ meses",
-        "deliverables": [
-          "Liderazgo tecnológico",
-          "Arquitectura empresarial",
-          "Team management",
-          "Innovación continua"
-        ]
       }
     },
     "badges": {
@@ -198,10 +106,10 @@
       "inPartnershipWith": "in partnership with"
     },
     "messaging": {
-      "tagline": "Unidades expertas para problemas reales",
+      "tagline": "Expert units for real problems",
       "corporateVision": "Advanced manufacturing and digital innovation",
       "missionStatement": "We transform companies through specialized units that combine deep technical expertise with advanced digital innovation",
-      "valueProposition": "Cada unidad de MADFAM está diseñada para resolver problemas específicos de la industria con la máxima especialización y eficiencia"
+      "valueProposition": "Every MADFAM unit is designed to solve specific industry problems with maximum specialization and efficiency"
     }
   },
   "hero": {
@@ -220,7 +128,7 @@
     "subtitle": "Specialized capabilities delivering excellence in digital fabrication, AI platforms, and innovation programs.",
     "allByMadfam": "All solutions - MADFAM Companies",
     "viewAll": "View all solutions",
-    "mainCapabilities": "Capacidades principales",
+    "mainCapabilities": "Core Capabilities",
     "mainProducts": "Main products",
     "aureoLabs": {
       "tagline": "Digital innovation laboratory",
@@ -293,7 +201,7 @@
           }
         },
         "dhanam": {
-          "description": "Financial wellness and wealth management platform with AI-powered insights.",
+          "description": "Wealth and finance platform purpose-built for LATAM founders. Unifies personal and business budgeting with ESG insight.",
           "audience": "Individuals and financial advisors",
           "cta": "Visit Dhanam",
           "features": {
@@ -312,14 +220,24 @@
             "2": "Verifiable credentials (Open Badges 3.0)"
           }
         },
-        "factlas": {
-          "description": "Geographic intelligence platform that converts geospatial signals into auditable facts with coordinates. STAC-compliant catalog for discovering and analyzing location data.",
-          "audience": "Real estate developers, urban planners, and GIS analysts",
-          "cta": "Coming Soon",
+        "enclii": {
+          "description": "Our own sovereign PaaS powering MADFAM's entire infrastructure. GitOps-native, Kubernetes-based, built for teams that need deployment sovereignty.",
+          "audience": "Development teams and organizations requiring sovereign cloud",
+          "cta": "View on GitHub",
           "features": {
-            "0": "Geospatial fact verification and provenance",
-            "1": "STAC-compliant data catalog and search",
-            "2": "AI-powered site selection and change detection"
+            "0": "Zero-config deploys with preview environments",
+            "1": "GitOps-native Kubernetes orchestration",
+            "2": "Built-in observability and monitoring"
+          }
+        },
+        "janua": {
+          "description": "Self-hosted identity platform with enterprise SSO, SCIM provisioning, MFA, and Passkeys. The authentication layer for every MADFAM product. Open source (AGPL-3.0).",
+          "audience": "Organizations requiring sovereign authentication",
+          "cta": "View on GitHub",
+          "features": {
+            "0": "Enterprise SSO and SCIM provisioning",
+            "1": "MFA and Passkey support",
+            "2": "Self-hosted with full data sovereignty"
           }
         }
       },
@@ -334,13 +252,23 @@
       }
     },
     "primavera3d": {
-      "tagline": "Estudio de manufactura digital",
-      "description": "We create extraordinary visual experiences and parametric design solutions for advanced manufacturing.",
+      "tagline": "Advanced Manufacturing & Digital Fabrication",
+      "description": "Full-stack digital fabrication studio: parametric design tools (Yantra4D, SIM4D), geometry analysis (Geom-Core), automated quoting (Cotiza Studio), and manufacturing execution (Pravara-MES). Home of the 40+ open-source parametric design commons.",
       "capabilities": {
-        "0": "3D modeling",
-        "1": "Diseño paramétrico",
-        "2": "Visualización",
-        "3": "Fabricación digital"
+        "0": "Parametric Design Tools (Yantra4D)",
+        "1": "Geometry Analysis & Simulation",
+        "2": "Automated Quoting (Cotiza Studio)",
+        "3": "Manufacturing Execution & Digital Fabrication"
+      },
+      "products": {
+        "yantra4d": {
+          "name": "Yantra4D",
+          "tagline": "Open Parametric Design Platform",
+          "description": "Web platform for parametric OpenSCAD models. Upload designs, get instant 3D previews, export STL files. Powers 40+ open-source parametric designs.",
+          "badge": "a Primavera3D product",
+          "developer": "Primavera3D",
+          "status": "active"
+        }
       }
     },
     "colabs": {
@@ -355,7 +283,8 @@
     },
     "showtech": {
       "tagline": "Entertainment Innovation Division",
-      "description": "Innovation Division for Hardware and Software in the music and live entertainment industries",
+      "description": "Hardware and software innovation for the music and live entertainment industries.",
+      "status": "coming-soon",
       "capabilities": {
         "0": "Professional Audio Hardware",
         "1": "Music Production Software",
@@ -379,7 +308,7 @@
   },
   "products": {
     "title": "Our products",
-    "featuredTitle": "Productos destacados",
+    "featuredTitle": "Featured Products",
     "featuredSubtitle": "Platforms and tools developed by our specialized units.",
     "viewAll": "View all products",
     "idealFor": "Ideal for:",
@@ -389,26 +318,26 @@
       "description": "Platforms and tools developed by our specialized units to solve real problems."
     },
     "hero": {
-      "subtitle": "Platforms y herramientas desarrolladas por nuestras unidades especializadas para resolver problemas reales."
+      "subtitle": "Platforms and tools developed by our specialized units to solve real problems."
     },
     "categories": {
       "platforms": "Platforms",
       "workspaces": "Workspaces",
-      "openData": "Datos abiertos"
+      "openData": "Open Data"
     },
     "availableProducts": "Available products",
-    "availableProductsSubtitle": "Platforms y herramientas listas para implementar en tu organización.",
-    "upcomingSubtitle": "Productos y plataformas en desarrollo por nuestras unidades.",
+    "availableProductsSubtitle": "Platforms and tools ready to deploy in your organization.",
+    "upcomingSubtitle": "Products and platforms in development by our units.",
     "structure": {
       "title": "Product structure",
       "aureoLabs": {
-        "description": "Laboratorio de innovación digital que desarrolla plataformas y workspaces inteligentes."
+        "description": "Digital innovation lab developing intelligent platforms and workspaces."
       },
       "madfamDirect": {
-        "description": "Productos desarrollados directamente por la casa matriz para soluciones específicas."
+        "description": "Products developed directly by the parent company for specific solutions."
       },
-      "viewAureoLabs": "Ver Aureo Labs",
-      "viewAllUnits": "Ver todas las soluciones"
+      "viewAureoLabs": "View Aureo Labs",
+      "viewAllUnits": "View all solutions"
     },
     "cta": {
       "title": "Interested in our products?",
@@ -419,11 +348,11 @@
     "penny": {
       "description": "User-friendly AI chat and workbench platform for consumers and enterprises.",
       "audience": "Consumers and businesses",
-      "cta": "Ver PENNY",
+      "cta": "View PENNY",
       "features": {
-        "0": "Interfaz intuitiva",
-        "1": "Colaboración en equipo",
-        "2": "Automatización visual"
+        "0": "Intuitive interface",
+        "1": "Team collaboration",
+        "2": "Visual automation"
       }
     }
   },
@@ -431,15 +360,15 @@
     "title": "Transformation Programs",
     "processDescription": "Strategic 3-phase process: Strategy → Pilot → Scale",
     "updateLabel": "Update:",
-    "migrationNotice": "Our L1-L5 services are now specialized Programs by unit.",
+    "migrationNotice": "Our services are now specialized transformation programs by unit.",
     "viewAll": "View all programs",
     "before": "Before:",
-    "scheduleMarket": "Cronograma y mercado",
+    "scheduleMarket": "Timeline and market",
     "duration": "Duration:",
     "idealFor": "Ideal for:",
     "investment": "Investment:",
     "mainDeliverables": "Main deliverables",
-    "moreDeliverables": "+{n} más...",
+    "moreDeliverables": "+{n} more...",
     "includedPlatforms": "Included platforms",
     "deliveredBy": "Delivered by:",
     "requestInfo": "Request information",
@@ -507,7 +436,7 @@
     },
     "migration": {
       "title": "Service Migration Update",
-      "description": "Our L1-L5 services have evolved into specialized programs tailored to your business needs."
+      "description": "Our services have evolved into specialized programs tailored to your business needs."
     },
     "journey": {
       "title": "Your Transformation Journey",
@@ -541,14 +470,14 @@
     "title": "Why MADFAM?",
     "latamFirst": {
       "title": "LATAM-first",
-      "description": "Construido desde y para América Latina, con alcance global."
+      "description": "Built from and for Latin America, with global reach."
     },
     "privacyFirst": {
       "title": "Privacy-first",
-      "description": "Seguridad y privacidad de datos como principio fundamental."
+      "description": "Data security and privacy as a foundational principle."
     },
     "designExcellence": {
-      "title": "Excelencia en diseño",
+      "title": "Design Excellence",
       "description": "Where AI meets human creativity."
     }
   },
@@ -562,5 +491,43 @@
     "byMadfam": "a MADFAM Company",
     "aureoProduct": "an Aureo Labs product",
     "aureoLabsProduct": "by Aureo Labs, a MADFAM Company"
+  },
+  "poweredBy": {
+    "title": "Powered by Our Own Stack",
+    "subtitle": "We eat our own cooking. Every product we build, we use.",
+    "description": "This website runs on Enclii (our sovereign PaaS), authenticates with Janua (our identity platform), quotes with Cotiza Studio, and tracks with Forge Sight. When we say our tools work in production, we mean it—because we depend on them every day.",
+    "items": {
+      "enclii": "Deployed on Enclii",
+      "janua": "Authenticated by Janua",
+      "cotiza": "Quoted with Cotiza Studio",
+      "forgesight": "Tracked by Forge Sight"
+    }
+  },
+  "openSource": {
+    "title": "Built in the Open",
+    "subtitle": "60+ public repositories. We build in the open and contribute to the commons.",
+    "description": "From Janua (AGPL-3.0 identity platform) to Yantra4D Commons (40+ parametric designs free for anyone to use), we believe open source is how real infrastructure gets built. Our code is our resume.",
+    "cta": "View on GitHub",
+    "highlights": {
+      "repos": "60+ public repositories",
+      "designs": "40+ parametric designs in the commons",
+      "license": "Open source (AGPL-3.0, MIT)"
+    }
+  },
+  "bitsToAtoms": {
+    "title": "From Bits to Atoms",
+    "subtitle": "A complete pipeline from sovereign cloud to physical manufacturing.",
+    "description": "MADFAM's ecosystem connects the entire value chain: sovereign cloud infrastructure (Enclii) → identity and access (Janua) → parametric design (Yantra4D) → manufacturing execution (Pravara-MES) → financial intelligence (Dhanam). From software to hardware, from bits to atoms.",
+    "stages": {
+      "cloud": "Sovereign Cloud (Enclii)",
+      "identity": "Identity & Access (Janua)",
+      "design": "Parametric Design (Yantra4D)",
+      "manufacturing": "Manufacturing Execution",
+      "intelligence": "Financial Intelligence (Dhanam)"
+    }
+  },
+  "research": {
+    "title": "Research & Incubation",
+    "description": "Beyond our core products, MADFAM operates research initiatives in legal-tech, electrochemistry, community logistics, and more. Not every project becomes a product—but every project teaches us something."
   }
 }

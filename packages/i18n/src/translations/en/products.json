@@ -55,13 +55,43 @@
       "2": "Custom AI models"
     }
   },
-  "spark": {
-    "tagline": "AI Process Orchestration",
-    "shortDescription": "Intelligent automation platform that connects and optimizes all your business processes.",
+  "enclii": {
+    "name": "Enclii",
+    "title": "Enclii",
+    "tagline": "Sovereign Cloud Platform",
+    "shortDescription": "Our own PaaS powering MADFAM's entire infrastructure. GitOps-native, Kubernetes-based.",
+    "description": "Sovereign cloud platform with zero-config deploys, preview environments, and built-in observability. Powers every MADFAM product in production.",
+    "status": "active",
     "features": {
-      "0": "Smart workflow automation",
-      "1": "Cross-platform integration",
-      "2": "Real-time process optimization"
+      "0": "Zero-config deploys",
+      "1": "GitOps-native Kubernetes",
+      "2": "Built-in observability"
+    }
+  },
+  "janua": {
+    "name": "Janua",
+    "title": "Janua",
+    "tagline": "Sovereign Authentication",
+    "shortDescription": "Self-hosted identity platform with SSO, MFA, and Passkeys. Open source (AGPL-3.0).",
+    "description": "Enterprise identity platform with SSO, SCIM provisioning, MFA, and Passkeys. The authentication layer for every MADFAM product.",
+    "status": "active",
+    "features": {
+      "0": "Enterprise SSO & SCIM",
+      "1": "MFA and Passkeys",
+      "2": "Full data sovereignty"
+    }
+  },
+  "yantra4d": {
+    "name": "Yantra4D",
+    "title": "Yantra4D",
+    "tagline": "Open Parametric Design Platform",
+    "shortDescription": "Web platform for parametric OpenSCAD models with instant 3D previews and STL export.",
+    "description": "Upload parametric designs, get instant 3D previews, export STL files. Powers 40+ open-source parametric designs in the commons.",
+    "status": "active",
+    "features": {
+      "0": "Parametric OpenSCAD models",
+      "1": "Instant 3D preview & STL export",
+      "2": "40+ open-source designs"
     }
   }
 }

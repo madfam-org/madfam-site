@@ -48,9 +48,10 @@
       "showtech": {
         "name": "Showtech",
         "tagline": "Divisão de Inovação em Entretenimento",
-        "description": "Divisão de Inovação em Hardware e Software das indústrias de música e entretenimento ao vivo",
+        "description": "Inovação em hardware e software para as indústrias de música e entretenimento ao vivo.",
         "badge": "uma Empresa MADFAM",
-        "focus": "Hardware de áudio, software de produção, experiências imersivas, tecnologia de eventos"
+        "focus": "Hardware de áudio, software de produção, experiências imersivas, tecnologia de eventos",
+        "status": "coming-soon"
       }
     },
     "products": {
@@ -59,23 +60,10 @@
       "penny": {
         "name": "PENNY",
         "tagline": "Automação Inteligente de Processos",
-        "description": "Assistente IA que aprende, adapta e melhora continuamente seus processos de fluxo de trabalho",
+        "description": "Assistente de IA que aprenderá com seus processos e melhorará continuamente seu fluxo de trabalho",
         "badge": "por Aureo Labs, uma Empresa MADFAM",
-        "developer": "Aureo Labs"
-      },
-      "medSync": {
-        "name": "MedSync",
-        "tagline": "Integração de Dados de Saúde",
-        "description": "Plataforma abrangente para gerenciamento de dados de saúde e comunicação com pacientes",
-        "badge": "por MADFAM Health, uma Empresa MADFAM",
-        "developer": "MADFAM Health"
-      },
-      "aeroControl": {
-        "name": "AeroControl",
-        "tagline": "Gestão de Voo Autônomo",
-        "description": "Sistema de controle avançado para drones autônomos e frotas de veículos aéreos",
-        "badge": "por MADFAM Aero, uma Empresa MADFAM",
-        "developer": "MADFAM Aero"
+        "developer": "Aureo Labs",
+        "status": "development"
       }
     },
     "programs": {
@@ -104,86 +92,6 @@
         "description": "Parcerias vCTO de longo prazo e transformação completa",
         "units": ["Todas as Unidades"],
         "focus": "Liderança estratégica, transformação digital completa"
-      },
-      "essentials": {
-        "name": "Essentials",
-        "code": "P1",
-        "oldCode": "L1",
-        "title": "Programa Essentials",
-        "description": "Soluciones rápidas de diseño 3D e IA para necesidades inmediatas",
-        "provider": "Primavera3D",
-        "badge": "uma Empresa MADFAM",
-        "duration": "1-2 semanas",
-        "deliverables": [
-          "Modelado 3D",
-          "Renderizado fotorrealista",
-          "Diseño gráfico",
-          "Animaciones básicas"
-        ]
-      },
-      "advanced": {
-        "name": "Advanced",
-        "code": "P2",
-        "oldCode": "L2",
-        "title": "Programa Advanced",
-        "description": "Diseño paramétrico y experiencias interactivas que transforman",
-        "provider": "Primavera3D",
-        "badge": "uma Empresa MADFAM",
-        "duration": "3-6 semanas",
-        "deliverables": [
-          "Diseño paramétrico",
-          "Realidad aumentada/virtual",
-          "Visualización de datos 3D",
-          "Experiencias interactivas"
-        ]
-      },
-      "consulting": {
-        "name": "Consulting",
-        "code": "P3",
-        "oldCode": "L3",
-        "title": "Programa Consulting",
-        "description": "Transforma tu empresa con consultoría especializada en IA",
-        "provider": "Aureo Labs",
-        "badge": "uma Empresa MADFAM",
-        "duration": "3-6 meses",
-        "deliverables": [
-          "Estrategia personalizada",
-          "Capacitación integral",
-          "Métricas de impacto",
-          "Mejora continua"
-        ]
-      },
-      "platforms": {
-        "name": "Platforms",
-        "code": "P4",
-        "oldCode": "L4",
-        "title": "Programa Platforms",
-        "description": "Implementa Penny e outras ferramentas de IA para transformação completa",
-        "provider": "Aureo Labs",
-        "badge": "uma Empresa MADFAM",
-        "duration": "3-12 meses",
-        "deliverables": [
-          "Implementação de plataformas de IA",
-          "Integración con sistemas",
-          "Capacitación de equipo",
-          "Soporte continuo"
-        ]
-      },
-      "strategic": {
-        "name": "Strategic",
-        "code": "P5",
-        "oldCode": "L5",
-        "title": "Programa Strategic",
-        "description": "Asociación vCTO para liderar tu transformación digital",
-        "provider": "MADFAM",
-        "badge": "uma Empresa MADFAM",
-        "duration": "12+ meses",
-        "deliverables": [
-          "Liderazgo tecnológico",
-          "Arquitectura empresarial",
-          "Gestión de equipos",
-          "Innovación continua"
-        ]
       }
     },
     "badges": {
@@ -195,13 +103,13 @@
       "dhanamProduct": "por Aureo Labs, uma Empresa MADFAM",
       "poweredBy": "Powered by",
       "developedBy": "Desenvolvido por",
-      "inPartnershipWith": "en asociación con"
+      "inPartnershipWith": "em parceria com"
     },
     "messaging": {
-      "tagline": "Unidades expertas para problemas reales",
-      "corporateVision": "Manufactura avanzada e innovación digital",
-      "missionStatement": "Transformamos empresas a través de unidades especializadas que combinan experiencia técnica profunda con innovación digital avanzada",
-      "valueProposition": "Cada unidad de MADFAM está diseñada para resolver problemas específicos de la industria con la máxima especialización y eficiencia"
+      "tagline": "Unidades especializadas para problemas reais",
+      "corporateVision": "Manufatura avançada e inovação digital",
+      "missionStatement": "Transformamos empresas por meio de unidades especializadas que combinam expertise técnica profunda com inovação digital avançada",
+      "valueProposition": "Cada unidade da MADFAM é projetada para resolver problemas específicos da indústria com máxima especialização e eficiência"
     }
   },
   "hero": {
@@ -214,15 +122,15 @@
     "subtitle": "Construímos sistemas digitais e de manufatura inteligente que convertem eficiência e circularidade em impacto regenerativo mensurável."
   },
   "solutions": {
-    "title": "Nuestras unidades operativas",
-    "subtitle": "Equipos especializados que entregan excelencia en software, manufactura y más.",
+    "title": "Nossas Soluções",
+    "subtitle": "Equipes especializadas entregando excelência em software, manufatura e mais.",
     "allByMadfam": "Todas as unidades - Empresas MADFAM",
-    "viewAll": "Ver todas las soluciones",
-    "mainCapabilities": "Capacidades principales",
+    "viewAll": "Ver todas as soluções",
+    "mainCapabilities": "Capacidades Principais",
     "mainProducts": "Produtos principais",
     "aureoLabs": {
       "tagline": "Laboratório de inovação digital",
-      "description": "Desarrollamos plataformas de automatización inteligente y herramientas de productividad que transforman la forma de trabajar.",
+      "description": "Desenvolvemos plataformas de automação inteligente e ferramentas de produtividade que transformam a forma de trabalhar.",
       "capabilities": {
         "0": "Sistemas de IA Agêntica",
         "1": "Desenvolvimento de Plataformas Web",
@@ -291,7 +199,7 @@
           }
         },
         "dhanam": {
-          "description": "Plataforma de bem-estar financeiro e gestão patrimonial com insights alimentados por IA.",
+          "description": "Plataforma de finanças e patrimônio projetada para fundadores LATAM. Unifica orçamentos pessoais e empresariais com inteligência ESG.",
           "audience": "Indivíduos e consultores financeiros",
           "cta": "Visitar Dhanam",
           "features": {
@@ -310,14 +218,24 @@
             "2": "Credenciais verificáveis (Open Badges 3.0)"
           }
         },
-        "factlas": {
-          "description": "Plataforma de inteligência geográfica que converte sinais geoespaciais em fatos auditáveis com coordenadas. Catálogo compatível com STAC para descobrir e analisar dados de localização.",
-          "audience": "Desenvolvedores imobiliários, planejadores urbanos e analistas GIS",
-          "cta": "Em breve",
+        "enclii": {
+          "description": "Nossa própria PaaS soberana que alimenta toda a infraestrutura da MADFAM. Nativa de GitOps, baseada em Kubernetes, construída para equipes que precisam de soberania em implantações.",
+          "audience": "Equipes de desenvolvimento e organizações que requerem nuvem soberana",
+          "cta": "Ver no GitHub",
           "features": {
-            "0": "Verificação e procedência de fatos geoespaciais",
-            "1": "Catálogo e pesquisa compatível com STAC",
-            "2": "Seleção de sites e detecção de mudanças com IA"
+            "0": "Implantações sem configuração com ambientes de preview",
+            "1": "Orquestração Kubernetes nativa de GitOps",
+            "2": "Observabilidade e monitoramento integrados"
+          }
+        },
+        "janua": {
+          "description": "Plataforma de identidade auto-hospedada com SSO empresarial, provisionamento SCIM, MFA e Passkeys. A camada de autenticação de cada produto MADFAM. Código aberto (AGPL-3.0).",
+          "audience": "Organizações que requerem autenticação soberana",
+          "cta": "Ver no GitHub",
+          "features": {
+            "0": "SSO empresarial e provisionamento SCIM",
+            "1": "Suporte MFA e Passkey",
+            "2": "Auto-hospedado com soberania total de dados"
           }
         }
       },
@@ -332,13 +250,23 @@
       }
     },
     "primavera3d": {
-      "tagline": "Estudio de manufactura digital",
-      "description": "Creamos experiencias visuales extraordinarias y soluciones de diseño paramétrico para manufactura avanzada.",
+      "tagline": "Manufatura Avançada e Fabricação Digital",
+      "description": "Estúdio completo de fabricação digital: ferramentas de design paramétrico (Yantra4D, SIM4D), análise de geometria (Geom-Core), cotação automatizada (Cotiza Studio) e execução de manufatura (Pravara-MES). Lar dos 40+ designs paramétricos de código aberto.",
       "capabilities": {
-        "0": "Modelagem 3D",
-        "1": "Diseño paramétrico",
-        "2": "Visualización",
-        "3": "Fabricación digital"
+        "0": "Ferramentas de Design Paramétrico (Yantra4D)",
+        "1": "Análise de Geometria e Simulação",
+        "2": "Cotação Automatizada (Cotiza Studio)",
+        "3": "Execução de Manufatura e Fabricação Digital"
+      },
+      "products": {
+        "yantra4d": {
+          "name": "Yantra4D",
+          "tagline": "Plataforma Aberta de Design Paramétrico",
+          "description": "Plataforma web para modelos paramétricos OpenSCAD. Envie designs, obtenha previews 3D instantâneos, exporte arquivos STL. Alimenta 40+ designs paramétricos de código aberto.",
+          "badge": "um produto Primavera3D",
+          "developer": "Primavera3D",
+          "status": "active"
+        }
       }
     },
     "colabs": {
@@ -353,7 +281,8 @@
     },
     "showtech": {
       "tagline": "Divisão de Inovação em Entretenimento",
-      "description": "Divisão de Inovação em Hardware e Software das indústrias de música e entretenimento ao vivo",
+      "description": "Inovação em hardware e software para as indústrias de música e entretenimento ao vivo.",
+      "status": "coming-soon",
       "capabilities": {
         "0": "Hardware de Áudio Profissional",
         "1": "Software de Produção Musical",
@@ -376,18 +305,18 @@
     }
   },
   "products": {
-    "title": "Nuestros productos",
-    "featuredTitle": "Productos destacados",
-    "featuredSubtitle": "Plataformas y herramientas desarrolladas por nuestras unidades especializadas.",
-    "viewAll": "Ver todos los productos",
+    "title": "Nossos Produtos",
+    "featuredTitle": "Produtos em Destaque",
+    "featuredSubtitle": "Plataformas e ferramentas desenvolvidas por nossas unidades especializadas.",
+    "viewAll": "Ver todos os produtos",
     "idealFor": "Ideal para:",
     "mainFeatures": "Características principais",
     "meta": {
-      "title": "Nuestros productos | MADFAM",
-      "description": "Plataformas y herramientas desarrolladas por nuestras unidades especializadas para resolver problemas reales."
+      "title": "Nossos Produtos | MADFAM",
+      "description": "Plataformas e ferramentas desenvolvidas por nossas unidades especializadas para resolver problemas reais."
     },
     "hero": {
-      "subtitle": "Plataformas y herramientas desarrolladas por nuestras unidades especializadas para resolver problemas reales."
+      "subtitle": "Plataformas e ferramentas desenvolvidas por nossas unidades especializadas para resolver problemas reais."
     },
     "categories": {
       "platforms": "Plataformas",
@@ -396,7 +325,7 @@
     },
     "availableProducts": "Produtos disponíveis",
     "availableProductsSubtitle": "Plataformas e ferramentas prontas para implementar em sua organização.",
-    "upcomingSubtitle": "Productos y plataformas en desarrollo por nuestras unidades.",
+    "upcomingSubtitle": "Produtos e plataformas em desenvolvimento por nossas unidades.",
     "structure": {
       "title": "Estrutura de produtos",
       "aureoLabs": {
@@ -412,7 +341,7 @@
       "title": "Interessado em nossos produtos?",
       "subtitle": "Entre em contato com a unidade responsável ou agende uma demonstração personalizada.",
       "contactNow": "Entrar em contato",
-      "viewSolutions": "Ver soluciones"
+      "viewSolutions": "Ver soluções"
     },
     "penny": {
       "description": "Plataforma de chat e workbench de IA fácil de usar para consumidores e empresas.",
@@ -426,18 +355,18 @@
     }
   },
   "programs": {
-    "title": "Programas de transformación",
-    "processDescription": "Proceso estratégico en 3 fases: Estrategia → Piloto → Escala",
-    "updateLabel": "Actualización:",
-    "migrationNotice": "Nuestros servicios L1-L5 ahora son Programas especializados por unidad.",
-    "viewAll": "Ver todos los programas",
+    "title": "Programas de Transformação",
+    "processDescription": "Processo estratégico em 3 fases: Estratégia → Piloto → Escala",
+    "updateLabel": "Atualização:",
+    "migrationNotice": "Nossos serviços agora são Programas de transformação especializados por unidade.",
+    "viewAll": "Ver todos os programas",
     "before": "Antes:",
-    "scheduleMarket": "Cronograma y mercado",
+    "scheduleMarket": "Cronograma e mercado",
     "duration": "Duração:",
     "idealFor": "Ideal para:",
     "investment": "Investimento:",
     "mainDeliverables": "Entregáveis principais",
-    "moreDeliverables": "+{n} más...",
+    "moreDeliverables": "+{n} mais...",
     "includedPlatforms": "Plataformas incluídas",
     "deliveredBy": "Entregue por:",
     "requestInfo": "Solicitar informações",
@@ -505,7 +434,7 @@
     },
     "migration": {
       "title": "Atualização de Migração de Serviços",
-      "description": "Nossos serviços L1-L5 evoluíram para programas especializados adaptados às suas necessidades de negócio."
+      "description": "Nossos serviços evoluíram para programas especializados adaptados às suas necessidades de negócio."
     },
     "journey": {
       "title": "Sua Jornada de Transformação",
@@ -536,29 +465,67 @@
     }
   },
   "whyMadfam": {
-    "title": "¿Por qué MADFAM?",
+    "title": "Por que MADFAM?",
     "latamFirst": {
       "title": "LATAM-first",
-      "description": "Construido desde y para América Latina, con alcance global."
+      "description": "Construído de e para a América Latina, com alcance global."
     },
     "privacyFirst": {
       "title": "Privacy-first",
-      "description": "Seguridad y privacidad de datos como principio fundamental."
+      "description": "Segurança e privacidade de dados como princípio fundamental."
     },
     "designExcellence": {
-      "title": "Excelencia en diseño",
+      "title": "Excelência em Design",
       "description": "Onde a IA encontra a criatividade humana."
     }
   },
   "cta": {
-    "title": "¿Listo para transformar tu organización?",
-    "subtitle": "Descubre qué unidad y programa son perfectos para tu proyecto.",
-    "takeAssessment": "Tomar evaluación IA",
-    "contactNow": "Contactar ahora"
+    "title": "Pronto para transformar sua organização?",
+    "subtitle": "Descubra qual unidade e programa são perfeitos para o seu projeto.",
+    "takeAssessment": "Fazer avaliação de IA",
+    "contactNow": "Entrar em contato"
   },
   "badges": {
     "byMadfam": "uma empresa MADFAM",
     "aureoProduct": "um produto Aureo Labs",
     "aureoLabsProduct": "por Aureo Labs, uma Empresa MADFAM"
+  },
+  "poweredBy": {
+    "title": "Alimentado pelo Nosso Próprio Stack",
+    "subtitle": "Usamos o que construímos. Cada produto que criamos, utilizamos.",
+    "description": "Este site roda no Enclii (nossa PaaS soberana), autentica com Janua (nossa plataforma de identidade), cota com Cotiza Studio e rastreia com Forge Sight. Quando dizemos que nossas ferramentas funcionam em produção, é sério—porque dependemos delas todos os dias.",
+    "items": {
+      "enclii": "Implantado no Enclii",
+      "janua": "Autenticado pelo Janua",
+      "cotiza": "Cotado pelo Cotiza Studio",
+      "forgesight": "Rastreado pelo Forge Sight"
+    }
+  },
+  "openSource": {
+    "title": "Construído em Aberto",
+    "subtitle": "60+ repositórios públicos. Construímos em aberto e contribuímos para os comuns.",
+    "description": "Do Janua (plataforma de identidade AGPL-3.0) ao Yantra4D Commons (40+ designs paramétricos livres para qualquer pessoa), acreditamos que código aberto é como infraestrutura real é construída. Nosso código é nosso currículo.",
+    "cta": "Ver no GitHub",
+    "highlights": {
+      "repos": "60+ repositórios públicos",
+      "designs": "40+ designs paramétricos nos comuns",
+      "license": "Código aberto (AGPL-3.0, MIT)"
+    }
+  },
+  "bitsToAtoms": {
+    "title": "De Bits a Átomos",
+    "subtitle": "Um pipeline completo da nuvem soberana à manufatura física.",
+    "description": "O ecossistema da MADFAM conecta toda a cadeia de valor: infraestrutura de nuvem soberana (Enclii) → identidade e acesso (Janua) → design paramétrico (Yantra4D) → execução de manufatura (Pravara-MES) → inteligência financeira (Dhanam). Do software ao hardware, de bits a átomos.",
+    "stages": {
+      "cloud": "Nuvem Soberana (Enclii)",
+      "identity": "Identidade e Acesso (Janua)",
+      "design": "Design Paramétrico (Yantra4D)",
+      "manufacturing": "Execução de Manufatura",
+      "intelligence": "Inteligência Financeira (Dhanam)"
+    }
+  },
+  "research": {
+    "title": "Pesquisa e Incubação",
+    "description": "Além de nossos produtos principais, a MADFAM opera iniciativas de pesquisa em legal-tech, eletroquímica, logística comunitária e mais. Nem todo projeto se torna um produto—mas cada projeto nos ensina algo."
   }
 }

@@ -11,12 +11,13 @@ export function getDefaultTranslations(
       recommendationsTitle: 'Recomendaciones',
       serviceRecommendationTitle: 'Servicio Recomendado',
       tierDescriptions: {
-        L1_ESSENTIALS:
-          'Fundamentos de IA - Ideal para empresas iniciando su transformación digital',
-        L2_ADVANCED: 'Soluciones Avanzadas - Para organizaciones con bases digitales establecidas',
-        L3_CONSULTING: 'Consultoría Estratégica - Transformación integral con IA',
-        L4_PLATFORMS: 'Plataformas Enterprise - Soluciones escalables de IA',
-        L5_STRATEGIC: 'Partnership Estratégico - Innovación continua y liderazgo en IA',
+        DESIGN_FABRICATION:
+          'Diseño y Fabricación - Ideal para empresas que necesitan prototipado y fabricación digital',
+        STRATEGY_ENABLEMENT:
+          'Estrategia y Habilitación - Transformación integral con IA y consultoría estratégica',
+        PLATFORM_PILOTS:
+          'Pilotos de Plataforma - Soluciones escalables de IA y plataformas enterprise',
+        STRATEGIC_PARTNERSHIPS: 'Alianzas Estratégicas - Innovación continua y liderazgo en IA',
       },
       startButton: 'Comenzar Evaluación',
       nextButton: 'Siguiente',
@@ -44,12 +45,12 @@ export function getDefaultTranslations(
       recommendationsTitle: 'Recommendations',
       serviceRecommendationTitle: 'Recommended Service',
       tierDescriptions: {
-        L1_ESSENTIALS:
-          'AI Fundamentals - Ideal for companies starting their digital transformation',
-        L2_ADVANCED: 'Advanced Solutions - For organizations with established digital foundations',
-        L3_CONSULTING: 'Strategic Consulting - Comprehensive AI transformation',
-        L4_PLATFORMS: 'Enterprise Platforms - Scalable AI solutions',
-        L5_STRATEGIC: 'Strategic Partnership - Continuous innovation and AI leadership',
+        DESIGN_FABRICATION:
+          'Design & Fabrication - Ideal for companies needing prototyping and digital manufacturing',
+        STRATEGY_ENABLEMENT:
+          'Strategy & Enablement - Comprehensive AI transformation and strategic consulting',
+        PLATFORM_PILOTS: 'Platform Pilots - Scalable AI solutions and enterprise platforms',
+        STRATEGIC_PARTNERSHIPS: 'Strategic Partnerships - Continuous innovation and AI leadership',
       },
       startButton: 'Start Assessment',
       nextButton: 'Next',
@@ -77,12 +78,13 @@ export function getDefaultTranslations(
       recommendationsTitle: 'Recomendações',
       serviceRecommendationTitle: 'Serviço Recomendado',
       tierDescriptions: {
-        L1_ESSENTIALS:
-          'Fundamentos de IA - Ideal para empresas iniciando sua transformação digital',
-        L2_ADVANCED: 'Soluções Avançadas - Para organizações com bases digitais estabelecidas',
-        L3_CONSULTING: 'Consultoria Estratégica - Transformação integral com IA',
-        L4_PLATFORMS: 'Plataformas Enterprise - Soluções escaláveis de IA',
-        L5_STRATEGIC: 'Parceria Estratégica - Inovação contínua e liderança em IA',
+        DESIGN_FABRICATION:
+          'Design e Fabricação - Ideal para empresas que precisam de prototipagem e fabricação digital',
+        STRATEGY_ENABLEMENT:
+          'Estratégia e Habilitação - Transformação integral com IA e consultoria estratégica',
+        PLATFORM_PILOTS:
+          'Pilotos de Plataforma - Soluções escaláveis de IA e plataformas enterprise',
+        STRATEGIC_PARTNERSHIPS: 'Parcerias Estratégicas - Inovação contínua e liderança em IA',
       },
       startButton: 'Iniciar Avaliação',
       nextButton: 'Próximo',

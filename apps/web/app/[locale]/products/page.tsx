@@ -34,7 +34,56 @@ export default async function ProductsPage({ params }: Props) {
 
   // All products with ownership badges
   const products = [
-    // Aureo Labs Products
+    // Aureo Labs Products - Infrastructure
+    {
+      name: 'Enclii',
+      description:
+        "Sovereign cloud PaaS powering MADFAM's entire infrastructure. GitOps-native, Kubernetes-based, built for teams that need deployment sovereignty. Zero-config deploys, preview environments, built-in observability.",
+      audience: 'Development teams and organizations requiring sovereign cloud',
+      badge: 'by Aureo Labs, a MADFAM Company',
+      primaryCta: {
+        label: 'View on GitHub',
+        url: 'https://github.com/madfam-org/enclii',
+        external: true,
+      },
+      secondaryCta: {
+        label: commonT('nav.contact'),
+        url: '/contact',
+      },
+      features: [
+        'Zero-config deploys with preview environments',
+        'GitOps-native Kubernetes orchestration',
+        'Built-in observability and monitoring',
+      ],
+      category: 'Platform',
+      arm: 'aureo-labs',
+      sdgs: ['SDG9', 'SDG12'],
+    },
+    {
+      name: 'Janua',
+      description:
+        'Self-hosted identity platform with enterprise SSO, SCIM provisioning, MFA, and Passkeys. The authentication layer for every MADFAM product. Open source (AGPL-3.0).',
+      audience: 'Organizations requiring sovereign authentication',
+      badge: 'by Aureo Labs, a MADFAM Company',
+      primaryCta: {
+        label: 'View on GitHub',
+        url: 'https://github.com/madfam-org/janua',
+        external: true,
+      },
+      secondaryCta: {
+        label: commonT('nav.contact'),
+        url: '/contact',
+      },
+      features: [
+        'Enterprise SSO and SCIM provisioning',
+        'MFA and Passkey support',
+        'Self-hosted with full data sovereignty',
+      ],
+      category: 'Platform',
+      arm: 'aureo-labs',
+      sdgs: ['SDG9', 'SDG16'],
+    },
+    // Aureo Labs Products - Business
     {
       name: 'Forge Sight',
       description:
@@ -61,8 +110,9 @@ export default async function ProductsPage({ params }: Props) {
     },
     {
       name: 'Dhanam',
-      description: 'Financial wellness and wealth management platform with AI-powered insights.',
-      audience: 'Individuals and financial advisors',
+      description:
+        'Wealth and finance platform purpose-built for LATAM founders. Unifies personal and business budgeting with ESG insight.',
+      audience: 'LATAM founders and financial advisors',
       badge: 'by Aureo Labs, a MADFAM Company',
       primaryCta: {
         label: 'Visit Dhanam',
@@ -74,14 +124,40 @@ export default async function ProductsPage({ params }: Props) {
         url: '/contact',
       },
       features: [
-        'AI-powered financial insights',
-        'Personalized wealth strategies',
-        'Real-time portfolio tracking',
+        'Unified personal and business budgeting',
+        'ESG insight and tracking',
+        'Purpose-built for LATAM founders',
       ],
       category: 'Platform',
       arm: 'aureo-labs',
       sdgs: ['SDG8', 'SDG9', 'SDG10'],
     },
+    // Primavera3D Products
+    {
+      name: 'Yantra4D',
+      description:
+        'Web platform for parametric OpenSCAD models. Upload designs, get instant 3D previews, export STL files. Powers 40+ open-source parametric designs in the commons.',
+      audience: 'Designers, makers, and digital fabrication teams',
+      badge: 'by Primavera3D, a MADFAM Company',
+      primaryCta: {
+        label: 'View on GitHub',
+        url: 'https://github.com/madfam-org/yantra4d',
+        external: true,
+      },
+      secondaryCta: {
+        label: commonT('nav.contact'),
+        url: '/contact',
+      },
+      features: [
+        'Parametric OpenSCAD model hosting',
+        'Instant 3D preview and STL export',
+        '40+ open-source designs in the commons',
+      ],
+      category: 'Platform',
+      arm: 'primavera3d',
+      sdgs: ['SDG9', 'SDG12'],
+    },
+    // Coming Soon
     {
       name: 'AVALA',
       comingSoon: true,
@@ -106,6 +182,31 @@ export default async function ProductsPage({ params }: Props) {
       category: 'Platform',
       arm: 'aureo-labs',
       sdgs: ['SDG4', 'SDG8', 'SDG9'],
+    },
+    {
+      name: 'PENNY',
+      comingSoon: true,
+      description:
+        'AI assistant that will learn, adapt, and continuously improve your workflow processes. Currently in development.',
+      audience: 'Consumers and enterprises',
+      badge: 'by Aureo Labs, a MADFAM Company',
+      primaryCta: {
+        label: 'In Development',
+        url: '#',
+        comingSoon: true,
+      },
+      secondaryCta: {
+        label: commonT('nav.contact'),
+        url: '/contact',
+      },
+      features: [
+        'Intelligent chat interface',
+        'Personal and business automation',
+        'Enterprise-grade security',
+      ],
+      category: 'Platform',
+      arm: 'aureo-labs',
+      sdgs: ['SDG8', 'SDG9'],
     },
   ];
 
