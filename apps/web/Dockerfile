@@ -7,7 +7,7 @@ WORKDIR /app
 # Dependencies stage
 FROM base AS deps
 # Copy root package files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 # Copy package.json files preserving directory structure
 COPY apps/web/package.json ./apps/web/
 COPY apps/cms/package.json ./apps/cms/
