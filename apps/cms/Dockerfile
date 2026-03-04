@@ -17,21 +17,14 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps/cms/node_modules ./apps/cms/node_modules
+# Copy root tsconfig (extended by apps/cms/tsconfig.json)
+COPY tsconfig.json ./tsconfig.json
 # Copy CMS source
 COPY apps/cms/ ./apps/cms/
-# Transpile src/ only (avoids rootDir conflict with payload.config.ts)
-# payload.config.ts is loaded at runtime by Payload, not compiled here
+# Transpile src/ only — payload.config.ts is runtime-loaded by Payload, not compiled
+# Uses tsconfig.build.json which excludes payload.config.ts (rootDir conflict)
 RUN cd apps/cms && \
-    node_modules/.bin/tsc \
-      --project tsconfig.json \
-      --rootDir src \
-      --outDir dist \
-      --noEmit false \
-      --skipLibCheck true \
-    || node_modules/.bin/ts-node \
-         --transpile-only \
-         --project tsconfig.json \
-         -e "console.log('TypeScript check complete')"
+    node_modules/.bin/tsc --project tsconfig.build.json
 
 # Runner stage — minimal production image
 FROM node:20-alpine AS runner
