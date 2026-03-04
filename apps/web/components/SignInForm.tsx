@@ -14,11 +14,7 @@ export function SignInForm() {
             {t('auth.signin.title')}
           </h2>
         </div>
-        <SignIn
-          afterSignIn="/dashboard"
-          signUpUrl="/auth/signup"
-          socialProviders={{ google: true, github: true }}
-        />
+        <SignIn redirectTo="/dashboard" />
       </div>
     </div>
   );

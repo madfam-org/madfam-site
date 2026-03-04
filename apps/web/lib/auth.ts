@@ -41,7 +41,7 @@ export async function getServerAuth(): Promise<MadfamSession | null> {
       return null;
     }
 
-    const claims = session.user as Record<string, unknown>;
+    const claims = session.user as unknown as Record<string, unknown>;
 
     // Map Janua role to UserRole enum
     const roleStr = (claims.role as string) || 'VIEWER';
@@ -59,7 +59,8 @@ export async function getServerAuth(): Promise<MadfamSession | null> {
       },
       csrfToken: generateCsrfToken(),
       authProvider: 'janua',
-      januaAccessToken: (session.session as Record<string, unknown>)?.accessToken as string,
+      januaAccessToken: (session.session as unknown as Record<string, unknown>)
+        ?.accessToken as string,
     };
   } catch (error) {
     console.error('Failed to get auth session:', error);
