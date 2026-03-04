@@ -70,7 +70,7 @@ The CMS uses the same user database as the main web application. Users with `ADM
 
 ### Services
 
-- Manage L1-L5 service tiers
+- Manage transformation programs
 - Multilingual content
 - Feature lists and pricing
 
