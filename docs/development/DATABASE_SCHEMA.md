@@ -2,7 +2,7 @@
 
 ## Overview
 
-The MADFAM database schema is designed to support a comprehensive AI consultancy and lead generation system. Built with Prisma ORM and SQLite for development (PostgreSQL for production), the schema supports multi-tier service offerings, AI assessments, ROI calculations, and automated workflows.
+The MADFAM database schema is designed to support a comprehensive AI consultancy and lead generation system. Built with Prisma ORM and SQLite for development (PostgreSQL for production), the schema supports transformation program offerings, AI assessments, ROI calculations, and automated workflows.
 
 ## Database Configuration
 
@@ -39,7 +39,7 @@ model Lead {
   lastName    String?
   company     String?
   phone       String?
-  tier        ServiceTier
+  program     TransformationProgram
   message     String?
   source      LeadSource  @default(WEBSITE)
   score       Int         @default(0)
@@ -70,7 +70,7 @@ model Lead {
   // Indexes for performance
   @@index([email])
   @@index([status])
-  @@index([tier])
+  @@index([program])
   @@index([createdAt])
 }
 ```
@@ -78,7 +78,7 @@ model Lead {
 **Key Fields:**
 
 - `score` (0-100): Automated lead scoring based on qualification criteria
-- `tier`: Service tier interest (L1_ESSENTIALS to L5_STRATEGIC)
+- `program`: Transformation program interest (DESIGN_FABRICATION to STRATEGIC_PARTNERSHIPS)
 - `source`: Attribution tracking for marketing campaigns
 - `companySize`: Enum values for business classification
 
@@ -152,12 +152,12 @@ model Assessment {
   // Assessment Data
   answers    Json             // Question responses (1-5 scale)
   score      Int?             // Calculated score (0-100)
-  tier       ServiceTier?     // Recommended service tier
+  program    TransformationProgram?  // Recommended transformation program
 
   // AI-Generated Results (stored as JSON arrays)
   strengths  Json?            // ["Strong tech adoption", "Good team"]
   weaknesses Json?            // ["Process gaps", "Resource constraints"]
-  recommendations Json?       // ["Start with L3", "Focus on automation"]
+  recommendations Json?       // ["Start with Strategy & Enablement", "Focus on automation"]
 
   createdAt  DateTime         @default(now())
   completedAt DateTime?
@@ -173,12 +173,11 @@ model Assessment {
 
 - 10 questions across 4 categories (Technology, Process, Team, Strategy)
 - Weighted scoring system (Technology: 30%, Process: 25%, Team: 25%, Strategy: 20%)
-- Tier recommendations based on score ranges:
-  - 0-30: L1_ESSENTIALS
-  - 31-50: L2_ADVANCED
-  - 51-70: L3_CONSULTING
-  - 71-85: L4_PLATFORMS
-  - 86-100: L5_STRATEGIC
+- Program recommendations based on score ranges:
+  - 0-49: DESIGN_FABRICATION
+  - 50-99: STRATEGY_ENABLEMENT
+  - 100-149: PLATFORM_PILOTS
+  - 150+: STRATEGIC_PARTNERSHIPS
 
 ---
 
@@ -429,17 +428,16 @@ model Integration {
 
 ## Enums Reference
 
-### **ServiceTier**
+### **TransformationProgram**
 
-Business service level classification:
+Business transformation program classification:
 
 ```prisma
-enum ServiceTier {
-  L1_ESSENTIALS  // 3D design, basic graphics
-  L2_ADVANCED    // Parametric design, automation
-  L3_CONSULTING  // Workshops, training, process optimization
-  L4_PLATFORMS   // SPARK/PENNY implementation
-  L5_STRATEGIC   // vCTO partnerships, strategic transformation
+enum TransformationProgram {
+  DESIGN_FABRICATION      // 3D design, graphics, digital fabrication
+  STRATEGY_ENABLEMENT     // AI consulting, workshops, strategic enablement
+  PLATFORM_PILOTS         // AI and automation platform implementation
+  STRATEGIC_PARTNERSHIPS  // vCTO partnerships, complete digital transformation
 }
 ```
 
@@ -509,7 +507,7 @@ Optimized for common query patterns:
 -- Lead management queries
 CREATE INDEX idx_lead_email ON Lead(email);
 CREATE INDEX idx_lead_status ON Lead(status);
-CREATE INDEX idx_lead_tier ON Lead(tier);
+CREATE INDEX idx_lead_program ON Lead(program);
 CREATE INDEX idx_lead_created ON Lead(createdAt);
 
 -- Activity tracking
@@ -532,7 +530,7 @@ For complex queries:
 
 ```sql
 -- Lead scoring and filtering
-CREATE INDEX idx_lead_tier_status ON Lead(tier, status);
+CREATE INDEX idx_lead_program_status ON Lead(program, status);
 CREATE INDEX idx_lead_source_created ON Lead(source, createdAt);
 
 -- Time-series analytics
@@ -596,7 +594,7 @@ if (isBusinessEmail(lead.email)) score += 20;
 if (lead.message && lead.message.length > 50) score += 10;
 
 // Tier selection (+5)
-if (lead.tier) score += 5;
+if (lead.program) score += 5;
 
 // Industry relevance (+15 max)
 score += calculateIndustryScore(lead.industry);

@@ -1,7 +1,7 @@
+import Link from 'next/link';
 import { cn } from './utils';
 import { Card, CardContent } from './Card';
 import { Button } from './Button';
-import Link from 'next/link';
 
 type FeatureItem = string | { icon?: React.ReactNode; text: string };
 type BadgeItem = string | { text: string; variant?: string };

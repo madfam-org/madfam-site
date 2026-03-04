@@ -277,7 +277,7 @@ export const sampleTestimonials: TestimonialData[] = [
       image: '/testimonials/ana-garcia.jpg',
     },
     rating: 5,
-    service: 'L2 - Advanced',
+    service: 'Design & Fabrication',
     results: [
       { metric: 'Reducción de tiempo', value: '65%', description: 'En procesos de diseño' },
       { metric: 'Mejora en calidad', value: '40%', description: 'Evaluación de clientes' },
@@ -294,7 +294,7 @@ export const sampleTestimonials: TestimonialData[] = [
       image: '/testimonials/carlos-mendoza.jpg',
     },
     rating: 5,
-    service: 'L3 - Consulting',
+    service: 'Strategy & Enablement',
     results: [
       { metric: 'ROI en 6 meses', value: '320%', description: 'Retorno de inversión' },
       { metric: 'Procesos automatizados', value: '15', description: 'Workflows optimizados' },
@@ -311,7 +311,7 @@ export const sampleTestimonials: TestimonialData[] = [
       image: '/testimonials/maria-rodriguez.jpg',
     },
     rating: 5,
-    service: 'L4 - Platforms',
+    service: 'Platform Pilots',
     results: [
       { metric: 'Integraciones activas', value: '50+', description: 'Sistemas conectados' },
       {

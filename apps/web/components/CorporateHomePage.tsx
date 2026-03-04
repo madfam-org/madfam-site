@@ -6,10 +6,10 @@ import {
   RocketLaunchIcon,
   BuildingOffice2Icon,
 } from '@heroicons/react/24/outline';
-import { Button, Container, Heading } from '@/components/ui';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useState } from 'react';
+import { Button, Container, Heading } from '@/components/ui';
 import { AnimatedText } from '@/components/AnimatedText';
 import { Badge } from '@/components/corporate/Badge';
 import { ProductCard } from '@/components/corporate/ProductCard';

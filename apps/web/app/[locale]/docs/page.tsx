@@ -1,6 +1,6 @@
-import { Container, Heading, Card } from '@/components/ui';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading, Card } from '@/components/ui';
 
 export default async function DocsPage({ params }: { params: Promise<{ locale: string }> }) {
   await params; // Validate params exist

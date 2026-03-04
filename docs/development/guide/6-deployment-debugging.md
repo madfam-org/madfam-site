@@ -10,7 +10,7 @@ import { analytics } from '@madfam/analytics';
 
 // Lead generation
 analytics.trackLeadGenerated({
-  tier: 'L3_CONSULTING',
+  program: 'STRATEGY_ENABLEMENT',
   source: 'website',
   score: 85,
 });
@@ -18,7 +18,7 @@ analytics.trackLeadGenerated({
 // Assessment completion
 analytics.trackAssessmentCompleted({
   score: 76,
-  recommendedTier: 'L3_CONSULTING',
+  recommendedProgram: 'STRATEGY_ENABLEMENT',
   timeToComplete: 180, // seconds
 });
 
@@ -26,7 +26,7 @@ analytics.trackAssessmentCompleted({
 analytics.trackConversion({
   type: 'meeting_scheduled',
   value: 50000, // estimated deal size
-  tier: 'L4_PLATFORMS',
+  program: 'PLATFORM_PILOTS',
 });
 ```
 
@@ -71,13 +71,11 @@ try {
 ### **Environments**
 
 1. **Development** (`localhost:3002`)
-
    - Local development with hot reload
    - SQLite database
    - All feature flags enabled
 
 2. **Staging** (`staging.madfam.io`)
-
    - GitHub Pages deployment
    - Production-like environment
    - PostgreSQL database

@@ -1,8 +1,10 @@
 # MADFAM Documentation Index
 
+> **ARCHIVED**: This index references the deprecated L1-L5 service tier model. The current service model uses 4 transformation programs: Design & Fabrication, Strategy & Enablement, Platform Pilots, and Strategic Partnerships.
+
 ## 📚 Complete Documentation Suite
 
-This comprehensive documentation covers all aspects of the MADFAM AI consultancy platform - from user guides to technical implementation details. Everything has been updated and is current as of August 2025.
+This comprehensive documentation covers all aspects of the MADFAM AI consultancy platform - from user guides to technical implementation details.
 
 ---
 

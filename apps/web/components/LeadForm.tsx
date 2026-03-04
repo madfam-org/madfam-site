@@ -16,11 +16,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useFormTracking, useConversionTracking, useErrorTracking } from '@madfam/analytics';
 import { logger } from '@madfam/core';
-import { Button } from '@/components/ui';
 import { useTranslations, useLocale } from 'next-intl';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { Button } from '@/components/ui';
 
 const createLeadFormSchema = (t: (key: string) => string) =>
   z.object({

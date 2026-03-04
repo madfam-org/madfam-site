@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@/components/ui';
 import { useState, useEffect } from 'react';
+import { cn } from '@/components/ui';
 
 export type Persona = 'ceo' | 'cfo' | 'cto' | 'designer' | 'educator' | 'default';
 

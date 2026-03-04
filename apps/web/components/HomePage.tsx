@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Container, Heading } from '@/components/ui';
 import { useTranslations } from 'next-intl';
+import { Button, Container, Heading } from '@/components/ui';
 import { AnimatedText } from '@/components/AnimatedText';
 import { ScrollProgress } from '@/components/ScrollProgress';
 

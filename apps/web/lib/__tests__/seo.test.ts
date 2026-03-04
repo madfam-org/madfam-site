@@ -133,17 +133,23 @@ describe('SEO Service', () => {
     it('should generate sitemap entries for all main pages', () => {
       const sitemap = seoService.generateSitemapData();
 
-      expect(sitemap).toHaveLength(13);
+      expect(sitemap).toHaveLength(12);
       expect(sitemap[0].url).toBe('/');
       expect(sitemap[0].priority).toBe(1.0);
 
-      const servicePages = sitemap.filter(entry => entry.url.includes('/services/'));
-      expect(servicePages).toHaveLength(5);
+      const programPages = sitemap.filter(entry => entry.url.includes('/programs#'));
+      expect(programPages).toHaveLength(4);
 
-      const hasAllServiceLevels = [1, 2, 3, 4, 5].every(level =>
-        servicePages.some(page => page.url.includes(`level-${level}`))
+      const expectedPrograms = [
+        'design-fabrication',
+        'strategy-enablement',
+        'platform-pilots',
+        'strategic-partnerships',
+      ];
+      const hasAllPrograms = expectedPrograms.every(program =>
+        programPages.some(page => page.url.includes(program))
       );
-      expect(hasAllServiceLevels).toBe(true);
+      expect(hasAllPrograms).toBe(true);
     });
 
     it('should set appropriate change frequencies', () => {
@@ -152,8 +158,8 @@ describe('SEO Service', () => {
       const homepage = sitemap.find(entry => entry.url === '/');
       expect(homepage?.changeFrequency).toBe('weekly');
 
-      const servicePage = sitemap.find(entry => entry.url.includes('/services/level-'));
-      expect(servicePage?.changeFrequency).toBe('monthly');
+      const programPage = sitemap.find(entry => entry.url.includes('/programs#'));
+      expect(programPage?.changeFrequency).toBe('monthly');
     });
   });
 });

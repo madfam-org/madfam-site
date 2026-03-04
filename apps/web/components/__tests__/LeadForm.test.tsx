@@ -1,9 +1,9 @@
 import { analytics } from '@madfam/analytics';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach, type MockedFunction } from 'vitest';
+import { LeadForm } from '../LeadForm';
 import { apiClient } from '@/lib/api-client';
 import { render, screen, waitFor } from '@/test-utils/providers';
-import { LeadForm } from '../LeadForm';
 
 // Mock the API client
 vi.mock('@/lib/api-client', () => ({

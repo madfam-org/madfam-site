@@ -47,25 +47,21 @@
     }
   },
   "recommendations": {
-    "l1": {
-      "title": "Serviços essenciais de design",
-      "description": "Comece com serviços profissionais de design 3D e gráfico."
+    "designFabrication": {
+      "title": "Design e Fabricação",
+      "description": "Serviços profissionais de design 3D, gráfico e fabricação digital."
     },
-    "l2": {
-      "title": "Soluções avançadas de design",
-      "description": "Design paramétrico e experiências interativas para inovar."
+    "strategyEnablement": {
+      "title": "Estratégia e Capacitação",
+      "description": "Consultoria de IA, workshops e capacitação estratégica."
     },
-    "l3": {
-      "title": "Consultoria e treinamento especializado",
-      "description": "Workshops e consultoria ajudarão a definir sua estratégia de IA."
+    "platformPilots": {
+      "title": "Pilotos de Plataforma",
+      "description": "Pilotos de implementação de plataformas de IA e automação."
     },
-    "l4": {
-      "title": "Implementação de plataformas empresariais",
-      "description": "É hora de implementar Penny e outras ferramentas de IA para escalar sua operação."
-    },
-    "l5": {
-      "title": "Transformação estratégica completa",
-      "description": "Sua empresa está pronta para uma parceria vCTO e transformação abrangente."
+    "strategicPartnerships": {
+      "title": "Parcerias Estratégicas",
+      "description": "Parcerias vCTO e transformação digital abrangente."
     }
   },
   "title": "Avaliação de IA",

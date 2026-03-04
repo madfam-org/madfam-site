@@ -47,25 +47,21 @@
     }
   },
   "recommendations": {
-    "l1": {
-      "title": "Level 1: Essentials",
-      "description": "3D design and graphics foundational services"
+    "designFabrication": {
+      "title": "Design & Fabrication",
+      "description": "3D design, graphics, and digital fabrication services"
     },
-    "l2": {
-      "title": "Level 2: Advanced",
-      "description": "Parametric design and technical automation"
+    "strategyEnablement": {
+      "title": "Strategy & Enablement",
+      "description": "AI consulting, workshops, and strategic enablement"
     },
-    "l3": {
-      "title": "Level 3: Consulting",
-      "description": "AI consulting and strategic workshops"
+    "platformPilots": {
+      "title": "Platform Pilots",
+      "description": "AI and automation platform implementation pilots"
     },
-    "l4": {
-      "title": "Level 4: Platforms",
-      "description": "AI and automation platform implementation"
-    },
-    "l5": {
-      "title": "Level 5: Strategic",
-      "description": "vCTO partnerships and complete transformation"
+    "strategicPartnerships": {
+      "title": "Strategic Partnerships",
+      "description": "vCTO partnerships and complete digital transformation"
     }
   },
   "title": "AI Assessment",

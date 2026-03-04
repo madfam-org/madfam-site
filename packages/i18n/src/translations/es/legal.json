@@ -119,11 +119,10 @@
       "title": "2. Descripción de los Servicios",
       "description": "MADFAM proporciona servicios de consultoría tecnológica, diseño 3D, desarrollo de software, implementación de plataformas y servicios estratégicos de transformación digital, incluyendo pero no limitado a:",
       "items": [
-        "Diseño 3D y servicios gráficos (Level 1 - Essentials)",
-        "Diseño paramétrico y experiencias interactivas (Level 2 - Advanced)",
-        "Consultoría y capacitación (Level 3 - Consulting)",
-        "Implementación de plataformas de IA y automatización (Level 4 - Platforms)",
-        "Servicios de CTO virtual (Level 5 - Strategic)"
+        "Servicios de diseño y fabricación digital (Diseño y Fabricación)",
+        "Consultoría de IA, workshops y habilitación estratégica (Estrategia y Habilitación)",
+        "Pilotos de implementación de plataformas de IA y automatización (Pilotos de Plataforma)",
+        "Asociaciones vCTO y transformación digital integral (Alianzas Estratégicas)"
       ]
     },
     "websiteUse": {

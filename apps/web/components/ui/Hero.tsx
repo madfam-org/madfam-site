@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import { cn } from './utils';
 import { Container } from './Container';
 import { Heading } from './Heading';
 import { Button } from './Button';
-import Link from 'next/link';
 
 interface HeroCta {
   text: string;

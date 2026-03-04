@@ -42,6 +42,7 @@ export default defineConfig({
       // Workspace packages - these are mocked in test/setup.ts
       // We use empty modules to satisfy imports before mocks take over
       '@madfam/i18n': path.resolve(__dirname, '../../packages/i18n/src'),
+      '@madfam-site/ui': path.resolve(__dirname, '../../packages/ui/src'),
     },
   },
 });

@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import {
   Button,
   Hero,
@@ -10,8 +12,6 @@ import {
   Container,
   Heading,
 } from '@/components/ui';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 import { FeatureFlag, FeatureFlagDebug } from '@/components/FeatureFlag';
 
 export function ShowcaseContent() {

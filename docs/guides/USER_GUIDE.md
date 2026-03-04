@@ -4,26 +4,30 @@
 
 **Where AI meets human creativity** - MADFAM is your strategic partner for AI-driven business transformation. This guide will help you navigate our website and access our comprehensive suite of AI consultancy services and products.
 
-## 🌟 What We Offer
+## What We Offer
 
-### **Service Tiers (5 Levels)**
+### **Transformation Programs (4 Programs)**
 
-Progressive service levels designed to match your AI journey:
+Purpose-built programs designed to match your AI journey:
 
-- **L1 Essentials** - 3D design and basic graphics
-- **L2 Advanced** - Parametric design and automation
-- **L3 Consulting** - Workshops, training, and process optimization
-- **L4 Platforms** - SPARK & PENNY implementation
-- **L5 Strategic** - vCTO partnerships and strategic transformation
+- **Design & Fabrication** - 3D design, parametric design, graphics, and automation
+- **Strategy & Enablement** - Workshops, training, and process optimization
+- **Platform Pilots** - Platform implementation and deployment
+- **Strategic Partnerships** - vCTO partnerships and strategic transformation
 
-### **Premium Products**
+### **Products**
 
-- **SPARK** - AI orchestration platform for enterprise automation
-- **PENNY** - Process automation tool for workflow optimization
+- **Dhanam** - Financial wellness platform (https://www.dhan.am)
+- **Forge Sight** - Analytics platform
+- **PENNY** - AI assistant for consumers and enterprises (In Development by Aureo Labs)
+- **Cotiza Studio** - Quoting and estimation tool
+- **Enclii** - Cloud deployment and infrastructure platform
+- **Janua** - Authentication and identity platform
+- **Yantra4D** - Spatial computing and 4D design platform
 
 ---
 
-## 🌐 Language & Navigation
+## Language & Navigation
 
 ### **Supported Languages**
 
@@ -34,24 +38,24 @@ Progressive service levels designed to match your AI journey:
 ### **Changing Language**
 
 1. Look for the language selector in the top navigation
-2. Click the dropdown showing current language (🇲🇽 Español)
+2. Click the dropdown showing current language
 3. Select your preferred language:
-   - 🇲🇽 **Español** for Spanish
-   - 🇺🇸 **English** for English
-   - 🇧🇷 **Português** for Portuguese
+   - **Español** for Spanish
+   - **English** for English
+   - **Português** for Portuguese
 4. The page will automatically reload in your selected language
 
 ### **Navigation Structure**
 
 - **Inicio/Home** - Company overview and value proposition
-- **Servicios/Services** - Detailed service tier information
-- **Productos/Products** - SPARK and PENNY platform details
+- **Programs** - Detailed transformation program information
+- **Products** - Dhanam, Forge Sight, PENNY, Cotiza Studio, Enclii, Janua, Yantra4D
 - **Nosotros/About** - Company story, team, and mission
 - **Contacto/Contact** - Get in touch and request consultations
 
 ---
 
-## 🏠 Homepage Features
+## Homepage Features
 
 ### **Hero Section**
 
@@ -63,11 +67,11 @@ The homepage introduces MADFAM's core value: **"Donde la IA encuentra la creativ
 
 ### **Service Overview**
 
-Scroll down to see our **5-tier service model** with:
+Scroll down to see our **4 transformation programs** with:
 
-- Visual service tier cards (L1 through L5)
-- Service descriptions and key benefits
-- **"Learn More"** links to detailed service pages
+- Visual program cards for each transformation program
+- Program descriptions and key benefits
+- **"Learn More"** links to detailed program pages
 
 ### **Success Stories**
 
@@ -79,45 +83,37 @@ Real customer transformation examples showing:
 
 ---
 
-## 🛠️ Service Pages
+## Program Pages
 
-### **Service Tier Pages**
+### **Transformation Program Pages**
 
-Each tier has a dedicated page with comprehensive information:
+Each program has a dedicated section with comprehensive information:
 
-#### **L1 Essentials** (`/servicios/level-1-essentials`)
+#### **Design & Fabrication** (`/programs#design-fabrication`)
 
-- **Focus**: 3D design, basic graphics, visual content
-- **Ideal for**: Startups, small businesses, creative projects
-- **Deliverables**: Design assets, basic automation setup
-- **Timeline**: 2-4 weeks
-- **Investment**: Entry-level pricing
+- **Focus**: 3D design, parametric design, graphics, visual content, and automation
+- **Ideal for**: Startups, small businesses, creative projects, and growing businesses seeking process optimization
+- **Deliverables**: Design assets, custom automation tools, workflow optimization
+- **Timeline**: 2-8 weeks
+- **Investment**: Entry to mid-range pricing
 
-#### **L2 Advanced** (`/servicios/level-2-advanced`)
+#### **Strategy & Enablement** (`/programs#strategy-enablement`)
 
-- **Focus**: Parametric design, advanced automation
-- **Ideal for**: Growing businesses, process optimization
-- **Deliverables**: Custom automation tools, workflow optimization
-- **Timeline**: 4-8 weeks
-- **Investment**: Mid-tier pricing
-
-#### **L3 Consulting** (`/servicios/level-3-consulting`)
-
-- **Focus**: Workshops, training, strategic planning
+- **Focus**: Workshops, training, strategic planning, and process optimization
 - **Ideal for**: Organizations ready for AI transformation
 - **Deliverables**: Training programs, strategic roadmap
 - **Timeline**: 8-12 weeks
 - **Investment**: Comprehensive consulting package
 
-#### **L4 Platforms** (`/servicios/level-4-platforms`)
+#### **Platform Pilots** (`/programs#platform-pilots`)
 
-- **Focus**: SPARK & PENNY implementation
-- **Ideal for**: Enterprises requiring custom platforms
+- **Focus**: Platform implementation and deployment
+- **Ideal for**: Enterprises requiring custom platform solutions
 - **Deliverables**: Full platform deployment, integration
 - **Timeline**: 12-24 weeks
 - **Investment**: Platform implementation pricing
 
-#### **L5 Strategic** (`/servicios/level-5-strategic`)
+#### **Strategic Partnerships** (`/programs#strategic-partnerships`)
 
 - **Focus**: vCTO partnerships, long-term transformation
 - **Ideal for**: Enterprises seeking strategic AI leadership
@@ -125,16 +121,16 @@ Each tier has a dedicated page with comprehensive information:
 - **Timeline**: 6-12 month partnerships
 - **Investment**: Strategic partnership terms
 
-### **How to Choose Your Service Tier**
+### **How to Choose Your Program**
 
 1. **Take the AI Assessment** (recommended starting point)
-2. **Review tier descriptions** to understand scope and benefits
+2. **Review program descriptions** to understand scope and benefits
 3. **Consider your timeline** and available resources
 4. **Contact us** for personalized recommendations
 
 ---
 
-## 🧠 AI Assessment Tool
+## AI Assessment Tool
 
 ### **Purpose**
 
@@ -142,7 +138,7 @@ Our AI readiness assessment helps you:
 
 - **Evaluate** your current technology and processes
 - **Identify** opportunities for AI implementation
-- **Receive** personalized service tier recommendations
+- **Receive** personalized program recommendations
 - **Understand** your potential ROI and timeline
 
 ### **How to Access**
@@ -173,8 +169,7 @@ Our AI readiness assessment helps you:
 
 **Team & Culture (25% weight):** 6. **Team size and skills** - Technical team capabilities 7. **Change management** - Organization's adaptability to change 8. **Innovation culture** - Openness to new technologies
 
-**Strategic Alignment (20% weight):** 9. **Strategic priorities** - Business goals and AI alignment  
-10. **Success measurement** - Metrics and KPI tracking
+**Strategic Alignment (20% weight):** 9. **Strategic priorities** - Business goals and AI alignment 10. **Success measurement** - Metrics and KPI tracking
 
 **Rating Scale:**
 
@@ -190,11 +185,10 @@ Our AI readiness assessment helps you:
 
 **Overall Score** (0-100 scale)
 
-- **0-30**: L1 Essentials recommended
-- **31-50**: L2 Advanced recommended
-- **51-70**: L3 Consulting recommended
-- **71-85**: L4 Platforms recommended
-- **86-100**: L5 Strategic recommended
+- **0-35**: Design & Fabrication recommended
+- **36-60**: Strategy & Enablement recommended
+- **61-85**: Platform Pilots recommended
+- **86-100**: Strategic Partnerships recommended
 
 **Detailed Analysis:**
 
@@ -208,21 +202,21 @@ Our AI readiness assessment helps you:
 
 - **Download results** as PDF report
 - **Schedule consultation** with MADFAM experts
-- **Explore recommended services** in detail
+- **Explore recommended programs** in detail
 - **Share results** with your team
 
 ---
 
-## 💰 ROI Calculator
+## ROI Calculator
 
 ### **Purpose**
 
-Calculate the potential return on investment for MADFAM services based on your specific business metrics.
+Calculate the potential return on investment for MADFAM programs based on your specific business metrics.
 
 ### **How to Access**
 
 1. Visit `/calculator` directly
-2. Click **"Calculate ROI"** from service pages
+2. Click **"Calculate ROI"** from program pages
 3. Available after completing the assessment
 
 ### **Calculator Types**
@@ -252,7 +246,7 @@ Calculate the potential return on investment for MADFAM services based on your s
 - **3D Design** - Creative and visualization projects
 - **Process Automation** - Workflow optimization
 - **AI Consulting** - Strategic guidance and training
-- **Platform Implementation** - SPARK/PENNY deployment
+- **Platform Implementation** - Custom platform deployment
 - **Custom Solutions** - Tailored AI development
 
 **Project parameters:**
@@ -279,7 +273,7 @@ Calculate the potential return on investment for MADFAM services based on your s
 
 ---
 
-## 📞 Contact & Lead Generation
+## Contact & Lead Generation
 
 ### **Contact Methods**
 
@@ -289,7 +283,7 @@ Calculate the potential return on investment for MADFAM services based on your s
 
 - **Personal information** - Name, email, phone
 - **Company details** - Organization name and size
-- **Service interest** - Select preferred tier (L1-L5)
+- **Program interest** - Select preferred program
 - **Project description** - Detailed message about your needs
 - **Timeline preferences** - When you'd like to start
 - **Budget range** - Investment level for planning
@@ -330,75 +324,52 @@ Calculate the potential return on investment for MADFAM services based on your s
 
 ---
 
-## 🎯 Products Section
+## Products Section
 
-### **SPARK Platform** (`/productos/spark`)
+### **Dhanam** (`/productos/dhanam`)
 
-#### **Overview**
+**Financial Wellness Platform** for personal and enterprise financial health.
 
-**AI Orchestration Platform** for enterprise-level automation and intelligence.
+- **Website**: https://www.dhan.am
+- **Focus**: Financial planning, wellness tracking, and smart financial guidance
 
-**Key Features:**
+### **Forge Sight** (`/productos/forge-sight`)
 
-- **Workflow automation** across departments
-- **AI model integration** and management
-- **Real-time analytics** and reporting
-- **Custom dashboard** creation
-- **API integrations** with existing systems
-- **Scalable architecture** for growing businesses
+**Analytics Platform** for data-driven business intelligence.
 
-**Ideal For:**
+- **Focus**: Real-time analytics, reporting, and custom dashboard creation
 
-- **Medium to large enterprises** (100+ employees)
-- **Complex workflow** requirements
-- **Multiple system integrations** needed
-- **Advanced reporting** and analytics needs
-- **Scalable AI implementation** plans
+### **PENNY** (`/productos/penny`)
 
-#### **Implementation Process**
-
-1. **Discovery workshop** - Current system analysis
-2. **Custom configuration** - Platform setup for your needs
-3. **Integration development** - Connect existing systems
-4. **User training** - Team onboarding and education
-5. **Go-live support** - Launch assistance and monitoring
-6. **Ongoing optimization** - Continuous improvement
-
-### **PENNY Tool** (`/productos/penny`)
-
-#### **Overview**
-
-**Process Automation Tool** specialized in workflow optimization and task automation.
+**AI Assistant** for consumers and enterprises. In Development by Aureo Labs, a MADFAM Company.
 
 **Key Features:**
 
-- **Drag-and-drop** workflow builder
-- **Pre-built templates** for common processes
+- **Conversational AI** interface for consumer and enterprise use cases
 - **Smart notifications** and alerts
 - **Performance tracking** and optimization
 - **Team collaboration** features
 - **Mobile accessibility** for remote work
 
-**Ideal For:**
+### **Cotiza Studio** (`/productos/cotiza-studio`)
 
-- **Small to medium businesses** (10-100 employees)
-- **Specific process** automation needs
-- **Quick implementation** requirements
-- **Budget-conscious** organizations
-- **Team productivity** improvement focus
+**Quoting and Estimation Tool** for streamlined project scoping and pricing.
 
-#### **Getting Started with PENNY**
+### **Enclii** (`/productos/enclii`)
 
-1. **Free consultation** - Identify automation opportunities
-2. **Process mapping** - Document current workflows
-3. **PENNY configuration** - Set up automation rules
-4. **Team training** - User onboarding sessions
-5. **Pilot testing** - Small-scale implementation
-6. **Full deployment** - Organization-wide rollout
+**Cloud Deployment and Infrastructure Platform** for modern application hosting and DevOps.
+
+### **Janua** (`/productos/janua`)
+
+**Authentication and Identity Platform** for secure access management.
+
+### **Yantra4D** (`/productos/yantra4d`)
+
+**Spatial Computing and 4D Design Platform** for immersive design experiences.
 
 ---
 
-## 📊 Success Stories & Case Studies
+## Success Stories & Case Studies
 
 ### **Case Study Pages** (`/case-studies`)
 
@@ -408,8 +379,8 @@ Browse real customer success stories organized by:
 
 - **Industry sector** (Manufacturing, Services, Technology)
 - **Company size** (Startup, SME, Enterprise)
-- **Service tier** implemented (L1 through L5)
-- **Solution type** (SPARK, PENNY, Consulting)
+- **Program type** (Design & Fabrication, Strategy & Enablement, Platform Pilots, Strategic Partnerships)
+- **Solution type** (Dhanam, Forge Sight, PENNY, Consulting)
 
 #### **Case Study Format**
 
@@ -432,12 +403,12 @@ Each case study includes:
 
 ---
 
-## 🔧 Technical Resources
+## Technical Resources
 
 ### **Documentation Access**
 
 - **API Documentation** - For technical integration teams
-- **Platform Guides** - SPARK and PENNY user manuals
+- **Platform Guides** - Product user manuals
 - **Best Practices** - Implementation recommendations
 - **Video Tutorials** - Step-by-step guidance
 - **Webinar Recordings** - Educational content library
@@ -452,7 +423,7 @@ Each case study includes:
 
 ---
 
-## 💡 Getting Maximum Value
+## Getting Maximum Value
 
 ### **Recommended User Journey**
 
@@ -460,7 +431,7 @@ Each case study includes:
 
 1. **Start with homepage** - Understand MADFAM's value proposition
 2. **Take AI Assessment** - Get personalized recommendations
-3. **Review recommended tier** - Deep dive into suggested services
+3. **Review recommended program** - Deep dive into suggested program
 4. **Calculate ROI** - Understand potential returns
 5. **Contact for consultation** - Schedule expert discussion
 
@@ -483,7 +454,7 @@ Each case study includes:
 #### **Before Your Call**
 
 - **Complete the assessment** - Provide baseline information
-- **Review service tiers** - Come with informed questions
+- **Review programs** - Come with informed questions
 - **Calculate ROI** - Understand potential returns
 - **Prepare use cases** - Specific examples from your organization
 - **Identify stakeholders** - Know who needs to be involved
@@ -505,7 +476,7 @@ Each case study includes:
 
 ---
 
-## ❓ Frequently Asked Questions
+## Frequently Asked Questions
 
 ### **General Questions**
 
@@ -516,32 +487,31 @@ A: We work across all industries, with particular expertise in manufacturing, he
 A: Yes! While based in Mexico City, we serve clients globally. Our services are available in Spanish, English, and Portuguese to support international business needs.
 
 **Q: How long does a typical project take?**
-A: Timeline varies by service tier:
+A: Timeline varies by program:
 
-- L1 Essentials: 2-4 weeks
-- L2 Advanced: 4-8 weeks
-- L3 Consulting: 8-12 weeks
-- L4 Platforms: 12-24 weeks
-- L5 Strategic: 6-12 month partnerships
+- Design & Fabrication: 2-8 weeks
+- Strategy & Enablement: 8-12 weeks
+- Platform Pilots: 12-24 weeks
+- Strategic Partnerships: 6-12 month partnerships
 
 ### **Service Questions**
 
-**Q: How do I know which service tier is right for me?**
+**Q: How do I know which program is right for me?**
 A: Start with our AI Assessment tool. It analyzes your current capabilities and provides personalized recommendations. You can also schedule a consultation for expert guidance.
 
-**Q: Can I upgrade to a higher service tier later?**
-A: Absolutely! Our service tiers are designed to grow with your organization. Many clients start with L1 or L2 and gradually progress to higher tiers as their AI maturity increases.
+**Q: Can I move to a more advanced program later?**
+A: Absolutely! Our programs are designed to grow with your organization. Many clients start with Design & Fabrication and gradually progress to more advanced programs as their AI maturity increases.
 
 **Q: Do you provide ongoing support after implementation?**
-A: Yes, all our service tiers include post-implementation support. The level and duration vary by tier, with L4 and L5 including extended support periods.
+A: Yes, all our programs include post-implementation support. The scope and duration vary by program, with Platform Pilots and Strategic Partnerships including extended support periods.
 
 ### **Technical Questions**
 
 **Q: Will your solutions integrate with our existing systems?**
 A: Yes, integration capability is a core feature of our approach. We specialize in connecting new AI solutions with your existing business systems and workflows.
 
-**Q: Do we need technical staff to use SPARK or PENNY?**
-A: While technical knowledge is helpful, both platforms are designed for business users. We provide comprehensive training to ensure your team can effectively use and maintain the solutions.
+**Q: Do we need technical staff to use your products?**
+A: While technical knowledge is helpful, our products are designed for business users. We provide comprehensive training to ensure your team can effectively use and maintain the solutions.
 
 **Q: What about data security and privacy?**
 A: Data security is paramount in all our solutions. We implement enterprise-grade security measures and comply with relevant data protection regulations including GDPR and Mexican data privacy laws.
@@ -555,11 +525,11 @@ A: Most clients see initial returns within 3-6 months, with full ROI typically a
 A: We work with clients to structure payment terms that fit their budget and cash flow requirements. Options include milestone-based payments and extended payment schedules.
 
 **Q: Can you help with change management?**
-A: Yes! Organizational change management is integrated into our L3 Consulting and higher tiers. We help ensure your team successfully adopts new AI-powered processes.
+A: Yes! Organizational change management is integrated into our Strategy & Enablement and higher programs. We help ensure your team successfully adopts new AI-powered processes.
 
 ---
 
-## 🔐 Privacy & Security
+## Privacy & Security
 
 ### **Data Protection**
 
@@ -587,7 +557,7 @@ A: Yes! Organizational change management is integrated into our L3 Consulting an
 
 ---
 
-## 📱 Mobile Experience
+## Mobile Experience
 
 ### **Mobile Optimization**
 
@@ -609,7 +579,7 @@ The MADFAM website is fully optimized for mobile devices:
 
 ---
 
-## 🚀 Next Steps
+## Next Steps
 
 ### **Ready to Get Started?**
 
@@ -632,4 +602,4 @@ The MADFAM website is fully optimized for mobile devices:
 
 **Welcome to the future of AI-driven business transformation with MADFAM - Where AI meets human creativity!**
 
-Built with ❤️ by MADFAM - Your strategic AI partner
+Built by MADFAM - Your strategic AI partner

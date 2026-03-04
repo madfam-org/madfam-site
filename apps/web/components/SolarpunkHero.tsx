@@ -1,5 +1,8 @@
 'use client';
 
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 import {
   AnimatedLogo,
   BrandParticles,
@@ -8,9 +11,6 @@ import {
   Button,
   Container,
 } from '@/components/ui';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import React from 'react';
 
 export const SolarpunkHero: React.FC = () => {
   const t = useTranslations('hero');

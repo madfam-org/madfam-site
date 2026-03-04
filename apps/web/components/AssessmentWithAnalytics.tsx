@@ -1,7 +1,7 @@
 'use client';
 
-import { Assessment, AssessmentProps, AssessmentResult } from '@/components/ui';
 import { useEffect, useState, useCallback } from 'react';
+import { Assessment, AssessmentProps, AssessmentResult } from '@/components/ui';
 
 // Stub analytics hooks - replace with actual implementation when available
 function useFeatureTracking() {

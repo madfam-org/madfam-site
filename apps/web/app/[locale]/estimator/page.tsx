@@ -1,6 +1,6 @@
-import { Container, Heading } from '@/components/ui';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading } from '@/components/ui';
 import { ProjectEstimator } from '@/components/ProjectEstimator';
 
 export async function generateMetadata({

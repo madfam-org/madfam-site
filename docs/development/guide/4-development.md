@@ -122,7 +122,7 @@ model NewModel {
 const leads = await prisma.lead.findMany({
   where: {
     status: 'NEW',
-    tier: 'L3_CONSULTING',
+    program: 'STRATEGY_ENABLEMENT',
   },
   include: {
     assessments: true,
@@ -140,7 +140,7 @@ const newLead = await prisma.lead.create({
     email: 'user@company.com',
     firstName: 'John',
     lastName: 'Doe',
-    tier: 'L3_CONSULTING',
+    program: 'STRATEGY_ENABLEMENT',
     activities: {
       create: {
         type: 'lead_created',

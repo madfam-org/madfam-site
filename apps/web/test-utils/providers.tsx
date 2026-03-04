@@ -69,6 +69,9 @@ const messages = {
     social: {
       linkedin: 'LinkedIn',
       twitter: 'Twitter',
+      instagram: 'Instagram',
+      facebook: 'Facebook',
+      tiktok: 'TikTok',
       github: 'GitHub',
     },
   },

@@ -1,8 +1,8 @@
 'use client';
 
-import { cn } from '@/components/ui';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
+import { cn } from '@/components/ui';
 
 interface AnimatedButtonProps {
   children: ReactNode;

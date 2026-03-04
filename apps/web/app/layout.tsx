@@ -1,7 +1,7 @@
-import { BrandThemeProvider } from '@/components/ui';
 import { Metadata } from 'next';
 import { Inter, Poppins, Space_Mono } from 'next/font/google';
 import { DarkModeScript } from './dark-mode-script';
+import { BrandThemeProvider } from '@/components/ui';
 import './globals.css';
 
 const inter = Inter({

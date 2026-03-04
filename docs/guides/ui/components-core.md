@@ -35,12 +35,11 @@ interface AssessmentResult {
   level: 'beginner' | 'intermediate' | 'advanced' | 'expert';
   categoryScores: Record<string, number>;
   recommendations: string[];
-  recommendedTier:
-    | 'L1_ESSENTIALS'
-    | 'L2_ADVANCED'
-    | 'L3_CONSULTING'
-    | 'L4_PLATFORMS'
-    | 'L5_STRATEGIC';
+  recommendedProgram:
+    | 'DESIGN_FABRICATION'
+    | 'STRATEGY_ENABLEMENT'
+    | 'PLATFORM_PILOTS'
+    | 'STRATEGIC_PARTNERSHIPS';
 }
 ```
 
@@ -70,7 +69,7 @@ import { Assessment } from '@madfam/ui';
 - Multi-language support (Spanish, English, Portuguese)
 - Progress tracking with visual progress bar
 - Category-based scoring (Strategy, Technology, Data, Culture, Processes)
-- Automatic service tier recommendations
+- Automatic transformation program recommendations
 - Responsive design with mobile optimization
 - Built-in result visualization with charts
 

@@ -1,9 +1,9 @@
 'use client';
 
 import { analytics } from '@madfam/analytics';
-import { Button, Card, CardContent, Heading } from '@/components/ui';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { Button, Card, CardContent, Heading } from '@/components/ui';
 
 interface Question {
   id: string;
@@ -110,36 +110,36 @@ export function AIAssessment() {
     if (assessmentScore >= 200) {
       return {
         tier: 'Strategic Partnerships',
-        title: t('recommendations.l5.title'),
-        description: t('recommendations.l5.description'),
+        title: t('recommendations.strategicPartnerships.title'),
+        description: t('recommendations.strategicPartnerships.description'),
         color: 'obsidian',
       };
     } else if (assessmentScore >= 150) {
       return {
         tier: 'Platform Pilots',
-        title: t('recommendations.l4.title'),
-        description: t('recommendations.l4.description'),
+        title: t('recommendations.platformPilots.title'),
+        description: t('recommendations.platformPilots.description'),
         color: 'creative',
       };
     } else if (assessmentScore >= 100) {
       return {
         tier: 'Strategy & Enablement',
-        title: t('recommendations.l3.title'),
-        description: t('recommendations.l3.description'),
+        title: t('recommendations.strategyEnablement.title'),
+        description: t('recommendations.strategyEnablement.description'),
         color: 'lavender',
       };
     } else if (assessmentScore >= 50) {
       return {
-        tier: 'Advanced Design',
-        title: t('recommendations.l2.title'),
-        description: t('recommendations.l2.description'),
+        tier: 'Design & Fabrication',
+        title: t('recommendations.designFabrication.title'),
+        description: t('recommendations.designFabrication.description'),
         color: 'sun',
       };
     } else {
       return {
         tier: 'Design & Fabrication',
-        title: t('recommendations.l1.title'),
-        description: t('recommendations.l1.description'),
+        title: t('recommendations.designFabrication.title'),
+        description: t('recommendations.designFabrication.description'),
         color: 'leaf',
       };
     }

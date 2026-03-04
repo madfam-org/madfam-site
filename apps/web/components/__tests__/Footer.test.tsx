@@ -1,5 +1,5 @@
-import { render, screen } from '@/test-utils/providers';
 import { Footer } from '../Footer';
+import { render, screen } from '@/test-utils/providers';
 
 describe('Footer', () => {
   it('should display the current year dynamically', () => {

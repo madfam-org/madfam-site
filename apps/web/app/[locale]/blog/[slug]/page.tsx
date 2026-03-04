@@ -1,8 +1,8 @@
-import { Container, Heading } from '@/components/ui';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading } from '@/components/ui';
 import { cmsClient, getPublishedBlogPosts, type BlogPost } from '@/lib/cms';
 import { environment } from '@/lib/environment';
 import type { RichTextDocument, RichTextNode } from '@/types/content';

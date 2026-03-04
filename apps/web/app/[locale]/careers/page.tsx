@@ -1,5 +1,5 @@
-import { Container, Heading, Card, Button } from '@/components/ui';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading, Card, Button } from '@/components/ui';
 
 export default async function CareersPage({ params }: { params: Promise<{ locale: string }> }) {
   await params; // Validate params exist

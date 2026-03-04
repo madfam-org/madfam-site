@@ -1,5 +1,5 @@
-import { Container, Heading } from '@/components/ui';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading } from '@/components/ui';
 import { TranslationList } from '@/components/TranslationList';
 
 // Force dynamic rendering to bypass SSG issue

@@ -3,8 +3,8 @@
 import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { SDGInlineBadge } from '@/components/SDGBadge';
 import { Badge } from './Badge';
+import { SDGInlineBadge } from '@/components/SDGBadge';
 
 interface ProductCardProps {
   product: {

@@ -35,14 +35,6 @@ export const i18nConfig = {
       '/about': '/sobre',
       '/contact': '/contacto',
 
-      // LEGACY: Keep existing service routes for redirects
-      '/services': '/servicios',
-      '/services/level-1-essentials': '/servicios/nivel-1-esenciales',
-      '/services/level-2-advanced': '/servicios/nivel-2-avanzado',
-      '/services/level-3-consulting': '/servicios/nivel-3-consultoria',
-      '/services/level-4-platforms': '/servicios/nivel-4-plataformas',
-      '/services/level-5-strategic': '/servicios/nivel-5-estrategico',
-
       // PRESERVE: Existing routes
       '/assessment': '/evaluacion',
       '/calculator': '/calculadora',

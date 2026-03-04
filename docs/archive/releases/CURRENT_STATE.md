@@ -1,5 +1,7 @@
 # MADFAM Codebase - Current State
 
+> **ARCHIVED**: This document references the deprecated L1-L5 service tier model. The current service model uses 4 transformation programs. See `/CLAUDE.md` for current context.
+
 **Last Updated**: Friday, November 14, 2025
 **Branch**: `claude/audit-ux-brand-experience-014cRyqLMKZX3xktLAx7Dxp8`
 **Status**: Phase 1 UX Improvements Complete ✅

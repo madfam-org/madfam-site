@@ -1,7 +1,7 @@
-import { Container, Heading } from '@/components/ui';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading } from '@/components/ui';
 import { ROICalculator } from '@/components/ROICalculator';
 
 export async function generateMetadata({

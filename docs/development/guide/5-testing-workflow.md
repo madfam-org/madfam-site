@@ -5,13 +5,11 @@ Testing patterns, git workflow, and code review process
 ### **Test Types**
 
 1. **Unit Tests** (Vitest + Testing Library)
-
    - Components and utilities
    - Business logic functions
    - Database models
 
 2. **Integration Tests** (Vitest)
-
    - API endpoints
    - Database operations
    - Service integrations
@@ -111,7 +109,7 @@ test('lead capture flow', async ({ page }) => {
   await page.fill('[name="email"]', 'test@company.com');
   await page.fill('[name="name"]', 'John Doe');
   await page.fill('[name="company"]', 'Test Corp');
-  await page.selectOption('[name="tier"]', 'L3_CONSULTING');
+  await page.selectOption('[name="program"]', 'STRATEGY_ENABLEMENT');
 
   await page.click('button[type="submit"]');
 

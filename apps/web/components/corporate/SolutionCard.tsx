@@ -3,8 +3,8 @@
 import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/utils';
 import { Badge } from './Badge';
+import { cn } from '@/lib/utils';
 
 interface SolutionCardProps {
   solution: {

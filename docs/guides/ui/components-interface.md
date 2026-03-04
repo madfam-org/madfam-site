@@ -275,7 +275,7 @@ import { Hero } from '@madfam/ui';
 // Service page hero
 <Hero
   variant="service"
-  title="L3 - Consulting Services"
+  title="Strategy & Enablement"
   description="Strategic AI implementation guidance"
   background="mesh"
   cta={{ primary: { text: "Book Consultation", href: "/contact" } }}
@@ -293,7 +293,7 @@ import { Hero } from '@madfam/ui';
 ```typescript
 interface LeadFormProps {
   variant?: 'simple' | 'progressive' | 'detailed';
-  tier?: ServiceTier;
+  program?: TransformationProgram;
   source?: string;
   title?: string;
   description?: string;
@@ -308,7 +308,7 @@ interface LeadFormData {
   email: string;
   company?: string;
   phone?: string;
-  tier?: ServiceTier;
+  program?: TransformationProgram;
   industry?: string;
   companySize?: string;
   budget?: string;
@@ -318,12 +318,11 @@ interface LeadFormData {
   source?: string;
 }
 
-type ServiceTier =
-  | 'L1_ESSENTIALS'
-  | 'L2_ADVANCED'
-  | 'L3_CONSULTING'
-  | 'L4_PLATFORMS'
-  | 'L5_STRATEGIC';
+type TransformationProgram =
+  | 'DESIGN_FABRICATION'
+  | 'STRATEGY_ENABLEMENT'
+  | 'PLATFORM_PILOTS'
+  | 'STRATEGIC_PARTNERSHIPS';
 ```
 
 #### Variants
@@ -336,7 +335,7 @@ type ServiceTier =
 
 - Built-in validation for required fields
 - Progressive disclosure in multi-step variant
-- Service tier pre-selection
+- Program pre-selection
 - Industry and company size options
 - Budget and timeframe selection
 - Challenge selection (multiple choice)
@@ -358,11 +357,11 @@ import { LeadForm } from '@madfam/ui';
   onSuccess={() => router.push('/thank-you')}
 />
 
-// Progressive form with service tier
+// Progressive form with program selection
 <LeadForm
   variant="progressive"
-  tier="L3_CONSULTING"
-  source="consulting-page"
+  program="STRATEGY_ENABLEMENT"
+  source="strategy-page"
   onSubmit={handleLeadSubmission}
 />
 ```
@@ -503,7 +502,7 @@ import { ProductCard } from '@madfam/ui';
 
 ```typescript
 interface ROICalculatorProps {
-  serviceTier?: ServiceTier;
+  program?: TransformationProgram;
   title?: string;
   currency?: 'MXN' | 'USD';
   variant?: 'compact' | 'full';
@@ -521,13 +520,12 @@ interface ROIResults {
 }
 ```
 
-#### Service Tier Pricing (MXN)
+#### Program Pricing (MXN)
 
-- **L1_ESSENTIALS**: $5,000
-- **L2_ADVANCED**: $15,000
-- **L3_CONSULTING**: $50,000
-- **L4_PLATFORMS**: $150,000
-- **L5_STRATEGIC**: $500,000
+- **DESIGN_FABRICATION**: $15,000
+- **STRATEGY_ENABLEMENT**: $50,000
+- **PLATFORM_PILOTS**: $150,000
+- **STRATEGIC_PARTNERSHIPS**: $500,000
 
 #### Variants
 
@@ -541,7 +539,7 @@ import { ROICalculator } from '@madfam/ui';
 
 // Full calculator
 <ROICalculator
-  serviceTier="L3_CONSULTING"
+  program="STRATEGY_ENABLEMENT"
   title="Calculate Your ROI"
   currency="MXN"
   variant="full"
@@ -553,7 +551,7 @@ import { ROICalculator } from '@madfam/ui';
 // Compact version for sidebars
 <ROICalculator
   variant="compact"
-  serviceTier="L2_ADVANCED"
+  program="DESIGN_FABRICATION"
 />
 ```
 

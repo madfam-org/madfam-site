@@ -1,6 +1,6 @@
-import { Container, Heading } from '@/components/ui';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading } from '@/components/ui';
 import { getPublishedBlogPosts, type BlogPost } from '@/lib/cms';
 import { environment } from '@/lib/environment';
 

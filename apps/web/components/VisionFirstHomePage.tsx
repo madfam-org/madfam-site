@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { ArrowRightIcon, ArrowDownIcon, PlayIcon } from '@heroicons/react/24/outline';
-import { Button, Container, Heading } from '@/components/ui';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
+import { Button, Container, Heading } from '@/components/ui';
 import { AnimatedText } from '@/components/AnimatedText';
 import { Badge } from '@/components/corporate/Badge';
 import { ClientLogos } from '@/components/corporate/ClientLogos';

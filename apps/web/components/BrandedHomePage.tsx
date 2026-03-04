@@ -1,9 +1,9 @@
 'use client';
 
-import { StaticBrandPattern } from '@/components/ui';
 import React from 'react';
 import { BrandShowcase } from './BrandShowcase';
 import { SolarpunkHero } from './SolarpunkHero';
+import { StaticBrandPattern } from '@/components/ui';
 
 export const BrandedHomePage: React.FC = () => {
   return (

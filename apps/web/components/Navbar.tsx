@@ -1,7 +1,6 @@
 'use client';
 
 import { getLocalizedUrl, type Locale } from '@madfam/i18n';
-import { cn } from '@/components/ui';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +8,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { DarkModeToggle } from './DarkModeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { cn } from '@/components/ui';
 
 interface NavItem {
   name: string;

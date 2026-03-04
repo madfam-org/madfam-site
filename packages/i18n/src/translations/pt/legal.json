@@ -119,11 +119,10 @@
       "title": "2. Descrição dos Serviços",
       "description": "A MADFAM fornece serviços de consultoria tecnológica, design 3D, desenvolvimento de software, implementação de plataformas e serviços estratégicos de transformação digital, incluindo mas não limitado a:",
       "items": [
-        "Design 3D e serviços gráficos (Level 1 - Essentials)",
-        "Design paramétrico e experiências interativas (Level 2 - Advanced)",
-        "Consultoria e treinamento (Level 3 - Consulting)",
-        "Implementação de plataformas de IA e automação (Level 4 - Platforms)",
-        "Serviços de CTO virtual (Level 5 - Strategic)"
+        "Serviços de design e fabricação digital (Design e Fabricação)",
+        "Consultoria de IA, workshops e capacitação estratégica (Estratégia e Capacitação)",
+        "Pilotos de implementação de plataformas de IA e automação (Pilotos de Plataforma)",
+        "Parcerias vCTO e transformação digital abrangente (Parcerias Estratégicas)"
       ]
     },
     "websiteUse": {

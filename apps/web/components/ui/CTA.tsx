@@ -1,7 +1,7 @@
+import Link from 'next/link';
 import { cn } from './utils';
 import { Container } from './Container';
 import { Button } from './Button';
-import Link from 'next/link';
 
 interface CTAProps {
   title: string;

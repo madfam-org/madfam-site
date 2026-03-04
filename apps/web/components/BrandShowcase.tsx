@@ -1,7 +1,7 @@
 'use client';
 
-import { LogoSystem, LoadingLogo, LogoWithTagline, Button } from '@/components/ui';
 import React, { useState } from 'react';
+import { LogoSystem, LoadingLogo, LogoWithTagline, Button } from '@/components/ui';
 
 export const BrandShowcase: React.FC = () => {
   const [activeVariant, setActiveVariant] = useState<'full' | 'icon' | 'wordmark'>('full');

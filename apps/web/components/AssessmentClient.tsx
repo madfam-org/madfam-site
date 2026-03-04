@@ -1,6 +1,8 @@
 'use client';
 
 type Locale = 'es' | 'en' | 'pt';
+import { useParams } from 'next/navigation';
+import { useState } from 'react';
 import {
   Container,
   Heading,
@@ -13,8 +15,6 @@ import {
   type AssessmentResult,
   type LeadFormData,
 } from '@/components/ui';
-import { useParams } from 'next/navigation';
-import { useState } from 'react';
 import { logServiceInquiry } from '@/lib/logger';
 
 interface AssessmentClientProps {

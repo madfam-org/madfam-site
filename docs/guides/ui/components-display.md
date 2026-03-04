@@ -1,12 +1,16 @@
 # Display & Utility Components
 
-**Purpose**: Specialized card for displaying service tiers with pricing, features, and tier-specific styling.
+**Purpose**: Specialized card for displaying transformation programs with pricing, features, and program-specific styling.
 
 #### Props Interface
 
 ```typescript
 interface ServiceCardProps {
-  tier: 'L1' | 'L2' | 'L3' | 'L4' | 'L5';
+  program:
+    | 'design-fabrication'
+    | 'strategy-enablement'
+    | 'platform-pilots'
+    | 'strategic-partnerships';
   title: string;
   description: string;
   price?: {
@@ -27,13 +31,12 @@ interface ServiceCardProps {
 }
 ```
 
-#### Tier Colors & Gradients
+#### Program Colors & Gradients
 
-- **L1**: Leaf green (`border-leaf`, `from-leaf/10 to-leaf/5`)
-- **L2**: Sun yellow (`border-sun`, `from-sun/10 to-sun/5`)
-- **L3**: Lavender purple (`border-lavender`, `from-lavender/10 to-lavender/5`)
-- **L4**: Creative blend (`border-creative`, `from-creative/10 to-creative/5`)
-- **L5**: Obsidian dark (`border-obsidian`, `from-obsidian/10 to-obsidian/5`)
+- **Design & Fabrication**: Leaf green (`border-leaf`, `from-leaf/10 to-leaf/5`)
+- **Strategy & Enablement**: Lavender purple (`border-lavender`, `from-lavender/10 to-lavender/5`)
+- **Platform Pilots**: Creative blend (`border-creative`, `from-creative/10 to-creative/5`)
+- **Strategic Partnerships**: Obsidian dark (`border-obsidian`, `from-obsidian/10 to-obsidian/5`)
 
 #### Usage Examples
 
@@ -41,7 +44,7 @@ interface ServiceCardProps {
 import { ServiceCard } from '@madfam/ui';
 
 <ServiceCard
-  tier="L3"
+  program="strategy-enablement"
   title="AI Consulting"
   description="Strategic guidance for AI implementation"
   price={{ amount: 50000, currency: 'MXN', period: 'project' }}
@@ -54,7 +57,7 @@ import { ServiceCard } from '@madfam/ui';
   badge="Most Popular"
   cta={{
     text: 'Get Started',
-    href: '/contact?tier=L3',
+    href: '/contact?program=strategy-enablement',
     variant: 'creative',
   }}
   icon={<ConsultingIcon />}
@@ -177,7 +180,7 @@ import { Testimonial, TestimonialCard, TestimonialGrid } from '@madfam/ui';
       image: "/testimonials/ana.jpg"
     },
     rating: 5,
-    service: "L3 - Consulting",
+    service: "Strategy & Enablement",
     results: [
       { metric: "Efficiency Gain", value: "65%", description: "Process improvement" },
       { metric: "Cost Reduction", value: "$50k", description: "Annual savings" }

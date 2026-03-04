@@ -1,5 +1,5 @@
-import { Container, Heading, Card, CardContent } from '@/components/ui';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading, Card, CardContent } from '@/components/ui';
 import { LeadForm } from '@/components/LeadForm';
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {

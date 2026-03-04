@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@/components/ui';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cookie, Settings, X } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui';
 
 interface CookiePreferences {
   necessary: boolean;

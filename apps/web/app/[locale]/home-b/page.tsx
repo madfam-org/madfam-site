@@ -1,6 +1,6 @@
-import { VisionFirstHomePage } from '@/components/VisionFirstHomePage';
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { VisionFirstHomePage } from '@/components/VisionFirstHomePage';
 
 interface PageProps {
   params: Promise<{ locale: string }>;

@@ -83,9 +83,9 @@ Hierarchical organization for maintainability:
     },
     "services": {
       "title": "Nuestros Servicios",
-      "l1": {
-        "title": "L1 Essentials",
-        "description": "Diseño 3D y gráficos básicos"
+      "designFabrication": {
+        "title": "Diseño y Fabricación",
+        "description": "Servicios de diseño 3D, gráfico y fabricación digital"
       }
     }
   }
@@ -98,13 +98,12 @@ Service tier translations maintain consistency across all content:
 
 ```json
 {
-  "services": {
-    "tiers": {
-      "L1_ESSENTIALS": "Nivel 1: Essentials",
-      "L2_ADVANCED": "Nivel 2: Avanzado",
-      "L3_CONSULTING": "Nivel 3: Consultoría",
-      "L4_PLATFORMS": "Nivel 4: Plataformas",
-      "L5_STRATEGIC": "Nivel 5: Estratégico"
+  "programs": {
+    "types": {
+      "DESIGN_FABRICATION": "Diseño y Fabricación",
+      "STRATEGY_ENABLEMENT": "Estrategia y Habilitación",
+      "PLATFORM_PILOTS": "Pilotos de Plataforma",
+      "STRATEGIC_PARTNERSHIPS": "Alianzas Estratégicas"
     }
   },
   "products": {
@@ -247,7 +246,7 @@ export function LanguageSwitcher() {
 
 When switching languages, the system preserves the user's current page context:
 
-- `/es-MX/servicios/level-3-consulting` → `/en-US/services/level-3-consulting`
+- `/es/programas#strategy-enablement` → `/en/programs#strategy-enablement`
 - Query parameters are maintained
 - Scroll position is preserved when possible
 

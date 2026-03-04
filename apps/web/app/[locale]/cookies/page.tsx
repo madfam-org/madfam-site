@@ -1,5 +1,5 @@
-import { Container, Heading } from '@/components/ui';
 import { getTranslations } from 'next-intl/server';
+import { Container, Heading } from '@/components/ui';
 
 export default async function CookiesPage({ params }: { params: Promise<{ locale: string }> }) {
   await params; // Validate params exist
