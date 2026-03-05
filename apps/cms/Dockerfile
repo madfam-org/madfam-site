@@ -35,7 +35,7 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV TS_NODE_SKIP_PROJECT=true
 ENV TS_NODE_TRANSPILE_ONLY=true
-ENV TS_NODE_COMPILER_OPTIONS={"module":"commonjs","moduleResolution":"node","esModuleInterop":true,"allowImportingTsExtensions":true,"noEmit":true}
+ENV TS_NODE_COMPILER_OPTIONS="{\"module\":\"commonjs\",\"moduleResolution\":\"node\",\"esModuleInterop\":true,\"allowImportingTsExtensions\":true,\"noEmit\":true}"
 ENV NODE_OPTIONS="--max-old-space-size=384"
 
 # Create non-root user matching K8s securityContext (UID 1001 / GID 1001)
