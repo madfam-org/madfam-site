@@ -54,7 +54,7 @@ COPY --from=builder /app/apps/cms/dist ./apps/cms/dist
 # Payload v3 reads config at startup; ts-node is available via devDeps baked in
 COPY --from=builder /app/apps/cms/payload.config.ts ./apps/cms/payload.config.ts
 COPY --from=builder /app/apps/cms/src ./apps/cms/src
-COPY --from=builder /app/apps/cms/tsconfig.json ./apps/cms/tsconfig.json
+# tsconfig.json intentionally NOT copied — ts-node uses TS_NODE_SKIP_PROJECT=true
 
 # /tmp is mounted as an emptyDir by K8s for readOnlyRootFilesystem compliance
 USER payload
