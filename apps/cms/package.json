@@ -10,7 +10,6 @@
     "generate:schema": "payload generate:graphQLSchema"
   },
   "dependencies": {
-    "@payloadcms/bundler-webpack": "^1.0.7",
     "@payloadcms/db-postgres": "^3.54.0",
     "@payloadcms/richtext-slate": "^3.54.0",
     "cross-env": "^10.1.0",

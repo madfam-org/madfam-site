@@ -1,24 +1,22 @@
 import { buildConfig } from 'payload';
-import { webpackBundler } from '@payloadcms/bundler-webpack';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { slateEditor } from '@payloadcms/richtext-slate';
 
 // Collections
-import { Products } from './src/collections/Products.ts';
-import { CaseStudies } from './src/collections/CaseStudies.ts';
-import { BlogPosts } from './src/collections/BlogPosts.ts';
-import { Resources } from './src/collections/Resources.ts';
-import { TeamMembers } from './src/collections/TeamMembers.ts';
-import { Testimonials } from './src/collections/Testimonials.ts';
-import { Users } from './src/collections/Users.ts';
-import { Media } from './src/collections/Media.ts';
+import { Products } from './src/collections/Products';
+import { CaseStudies } from './src/collections/CaseStudies';
+import { BlogPosts } from './src/collections/BlogPosts';
+import { Resources } from './src/collections/Resources';
+import { TeamMembers } from './src/collections/TeamMembers';
+import { Testimonials } from './src/collections/Testimonials';
+import { Users } from './src/collections/Users';
+import { Media } from './src/collections/Media';
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3001',
   secret: process.env.PAYLOAD_SECRET || 'your-secret-key',
   admin: {
     user: 'users',
-    bundler: webpackBundler(),
   },
   editor: slateEditor({}),
   collections: [
