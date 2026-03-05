@@ -3,8 +3,6 @@ import type { CollectionConfig } from 'payload';
 export const Media: CollectionConfig = {
   slug: 'media',
   upload: {
-    staticURL: '/media',
-    staticDir: 'media',
     mimeTypes: ['image/*', 'video/*', 'application/pdf'],
     imageSizes: [
       {
