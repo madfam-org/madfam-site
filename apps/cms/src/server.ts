@@ -20,6 +20,11 @@ const start = async () => {
   const configModule = require(configPath);
   const config = configModule.default || configModule;
 
+  // Health endpoint for K8s probes (Payload v3 doesn't mount Express routes)
+  app.get('/api/health', (_req, res) => {
+    res.json({ status: 'ok' });
+  });
+
   await (payload.init as Function)({
     config,
     express: app,
