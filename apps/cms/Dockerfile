@@ -59,4 +59,4 @@ USER payload
 EXPOSE 3000
 
 WORKDIR /app/apps/cms
-CMD ["node", "dist/server.js"]
+CMD ["node", "--require", "ts-node/register", "dist/server.js"]

@@ -104,6 +104,12 @@ importers:
       payload:
         specifier: ^3.54.0
         version: 3.54.0(graphql@16.12.0)(typescript@5.9.3)
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@swc/core@1.15.3(@swc/helpers@0.5.17))(@types/node@24.10.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
     devDependencies:
       '@types/express':
         specifier: ^4.17.21
@@ -120,12 +126,6 @@ importers:
       nodemon:
         specifier: ^3.0.3
         version: 3.0.3
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.15.3(@swc/helpers@0.5.17))(@types/node@24.10.1)(typescript@5.9.3)
-      typescript:
-        specifier: ^5.7.2
-        version: 5.9.3
 
   apps/web:
     dependencies:

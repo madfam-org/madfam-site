@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import path from 'path';
 import payload from 'payload';
 
 dotenv.config();
@@ -13,12 +14,17 @@ const start = async () => {
   console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'Set' : 'Not set');
   console.log('PAYLOAD_SECRET:', process.env.PAYLOAD_SECRET ? 'Set' : 'Not set');
 
-  // Payload v3 init — config auto-discovered from payload.config.ts
-  // Use type assertion for v2/v3 API compatibility
+  // Load payload.config.ts via ts-node (available as prod dep)
+  const configPath = path.resolve(__dirname, '..', 'payload.config.ts');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const configModule = require(configPath);
+  const config = configModule.default || configModule;
+
   await (payload.init as Function)({
+    config,
     express: app,
     onInit: async () => {
-      (payload as any).logger?.info?.('Payload initialized');
+      console.log('Payload initialized successfully');
     },
   });
 
