@@ -1,17 +1,29 @@
 import dotenv from 'dotenv';
+import express from 'express';
+import payload from 'payload';
 
-// Load environment variables
 dotenv.config();
 
-// In Payload v3, the server is started automatically via the build process
-// This file is kept minimal for compatibility
+const app = express();
+const port = parseInt(process.env.PORT || '3000', 10);
 
-const PORT = process.env.PORT || 3001;
+const start = async () => {
+  console.log('CMS Configuration loaded');
+  console.log(`Port configured: ${port}`);
+  console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'Set' : 'Not set');
+  console.log('PAYLOAD_SECRET:', process.env.PAYLOAD_SECRET ? 'Set' : 'Not set');
 
-console.log('CMS Configuration loaded');
-console.log(`Port configured: ${PORT}`);
-console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'Set' : 'Not set');
-console.log('PAYLOAD_SECRET:', process.env.PAYLOAD_SECRET ? 'Set' : 'Not set');
+  await payload.init({
+    secret: process.env.PAYLOAD_SECRET || 'change-me',
+    express: app,
+    onInit: async () => {
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+    },
+  });
 
-// Export a placeholder for the build process
-export default {};
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`CMS listening on port ${port}`);
+  });
+};
+
+start();
