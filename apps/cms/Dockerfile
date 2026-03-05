@@ -34,6 +34,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV TS_NODE_SKIP_PROJECT=true
+ENV NODE_OPTIONS="--max-old-space-size=384"
 
 # Create non-root user matching K8s securityContext (UID 1001 / GID 1001)
 RUN addgroup --system --gid 1001 nodejs && \
