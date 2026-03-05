@@ -13,12 +13,12 @@ const start = async () => {
   console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'Set' : 'Not set');
   console.log('PAYLOAD_SECRET:', process.env.PAYLOAD_SECRET ? 'Set' : 'Not set');
 
-  // Payload v3: secret and db config are in payload.config.ts (buildConfig)
-  // init() only takes express app and onInit callback
-  await payload.init({
+  // Payload v3 init — config auto-discovered from payload.config.ts
+  // Use type assertion for v2/v3 API compatibility
+  await (payload.init as Function)({
     express: app,
     onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+      (payload as any).logger?.info?.('Payload initialized');
     },
   });
 
