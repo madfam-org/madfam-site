@@ -43,29 +43,38 @@ biz-site/
 
 ## Business Context
 
-### Corporate Structure
+### Ecosystem Structure
 
-All products and platforms are directly under **Innovaciones MADFAM**:
+MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entrepreneurs in LATAM. Three conversion paths:
 
+1. **Use a MADFAM Platform** — 9 digital platforms (each with Free + Pro tiers)
+2. **Use Primavera Maker Node** — Physical fabrication (3D printing, CNC, laser cutting)
+3. **Become an Ecosystem Member** — One membership unlocks Pro across all platforms + discounted fabrication
+
+### Digital Platforms (by MADFAM)
+
+- **Enclii**: Sovereign cloud PaaS
+- **Janua**: Self-hosted identity platform
+- **Dhanam**: Wealth & finance for LATAM founders (https://www.dhan.am)
+- **Forge Sight**: Pricing intelligence for digital fabrication
+- **Cotiza Studio**: Automated quoting and estimation
+- **Yantra4D**: Parametric design platform
+- **Pravara-MES**: Manufacturing execution system
+- **AVALA**: Competency-based training (Coming Soon)
+- **PENNY**: AI assistant (In Development)
+
+### Solutions
+
+- **Primavera Maker Node**: Physical fabrication hub (3D printing, CNC, laser cutting)
 - **MADFAM Co-Labs**: Collaborations & co-creations (a MADFAM Company)
 - **Showtech**: Technology showcase & events (Coming Soon)
 
-### Products (by MADFAM)
+### Programs
 
-- **PENNY**: AI assistant for consumers & enterprises (In Development)
-- **Dhanam**: Financial wellness platform (https://www.dhan.am)
-- **Cotiza Studio**: Quoting/estimation tool
-- **Forge Sight**: Pricing intelligence platform
-- **Enclii**: Cloud deployment and infrastructure platform
-- **Janua**: Authentication and identity platform
-- **Yantra4D**: Parametric design platform
-- **Pravara-MES**: Manufacturing execution system
-- **AVALA**: Training & certification platform (Coming Soon)
-
-### Service Model
-
-- Transformation programs (no longer tier-based L1-L5)
-- Focus on AI implementation and digital transformation
+- **Design & Fabrication** — End-to-end design and digital fabrication
+- **Launch Program** — Strategic consulting for startups entering the ecosystem
+- **Scale Program** — Platform integration and workflow automation for growing projects
+- **Partner Program** — Technology partnerships for organizations embedding MADFAM tech
 
 ## Critical Rules
 
@@ -83,9 +92,10 @@ All products and platforms are directly under **Innovaciones MADFAM**:
 
 ### Branding
 
-- Products: "by MADFAM"
+- Products/Platforms: "by MADFAM"
 - Co-Labs / Showtech: "a MADFAM Company"
 - No references to deprecated SPARK, Aureo Labs, or Primavera3D
+- Maker Node is "Primavera Maker Node" (formerly Primavera3D)
 
 ### Mobile Optimization
 
@@ -249,6 +259,6 @@ All detailed documentation is in `/docs/`:
 
 ---
 
-**Last Updated**: November 2024  
-**Version**: 1.0.0  
+**Last Updated**: March 2026
+**Version**: 2.0.0
 **Maintained by**: MADFAM Development Team

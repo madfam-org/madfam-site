@@ -29,7 +29,6 @@ interface DropdownSection {
 
 export function Navbar() {
   const t = useTranslations('common.nav');
-  const tCommon = useTranslations('common');
   const locale = useLocale() as Locale;
 
   // State management
@@ -72,42 +71,19 @@ export function Navbar() {
     lastScrollY.current = currentScrollY;
   });
 
-  // Navigation structure - organized and hierarchical
+  // Navigation structure - ecosystem-focused
   const primaryNavigation: NavItem[] = [
     {
-      name: t('solutions') || 'Solutions',
-      dropdown: [
-        {
-          title: t('businessSolutions') || 'Business Units',
-          items: [
-            {
-              name: 'MADFAM Co-Labs',
-              href: getLocalizedUrl('solutions.colabs', locale),
-              description: 'Collaborative innovation spaces',
-              icon: '🤝',
-            },
-          ],
-        },
-        {
-          title: t('programs') || 'Programs',
-          items: [
-            {
-              name: t('programs') || 'All Programs',
-              href: getLocalizedUrl('programs', locale),
-              description: 'Transformation initiatives',
-              icon: '📈',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: t('products') || 'Products',
+      name: t('platforms') || 'Platforms',
       href: getLocalizedUrl('products', locale),
     },
     {
-      name: t('impact') || 'Impact',
-      href: getLocalizedUrl('impact', locale),
+      name: t('makerNode') || 'Maker Node',
+      href: getLocalizedUrl('solutions.maker-node', locale),
+    },
+    {
+      name: t('ecosystem') || 'Ecosystem',
+      href: getLocalizedUrl('ecosystem', locale),
       highlight: true,
     },
     {
@@ -122,7 +98,17 @@ export function Navbar() {
               icon: '🏢',
             },
             {
-              name: t('caseStudies') || 'Showcase',
+              name: 'MADFAM Co-Labs',
+              href: getLocalizedUrl('solutions.colabs', locale),
+              icon: '🤝',
+            },
+            {
+              name: t('impact') || 'Impact',
+              href: getLocalizedUrl('impact', locale),
+              icon: '🌱',
+            },
+            {
+              name: t('showcase') || 'Showcase',
               href: `/${locale}/case-studies`,
               icon: '✨',
             },
@@ -354,16 +340,18 @@ export function Navbar() {
               {/* CTA buttons */}
               <div className="flex items-center gap-3">
                 <Link
-                  href={`/${locale}/assessment`}
+                  href={getLocalizedUrl('products', locale)}
                   className="px-4 py-2 text-sm font-medium text-obsidian dark:text-pearl hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-200"
                 >
-                  {tCommon('aiAssessment')}
+                  {t('explorePlatforms') || 'Explore Platforms'}
                 </Link>
                 <Link
-                  href={getLocalizedUrl('contact', locale)}
+                  href={getLocalizedUrl('ecosystem', locale)}
                   className="relative px-5 py-2.5 rounded-lg font-semibold text-sm overflow-hidden group bg-gradient-to-r from-leaf to-sun text-white hover:shadow-lg transition-all duration-300 transform hover:scale-105"
                 >
-                  <span className="relative z-10">{t('getStarted') || 'Get Started'}</span>
+                  <span className="relative z-10">
+                    {t('joinEcosystem') || 'Join the Ecosystem'}
+                  </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
                 </Link>
               </div>
@@ -452,18 +440,18 @@ export function Navbar() {
               {/* Mobile Actions */}
               <div className="pt-6 border-t border-gray-100 dark:border-gray-800 space-y-4">
                 <Link
-                  href={`/${locale}/assessment`}
+                  href={getLocalizedUrl('products', locale)}
                   className="block w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 rounded-lg text-center font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {tCommon('aiAssessment')}
+                  {t('explorePlatforms') || 'Explore Platforms'}
                 </Link>
                 <Link
-                  href={getLocalizedUrl('contact', locale)}
-                  className="block w-full px-4 py-3 bg-gradient-to-r from-lavender to-sun text-white rounded-lg text-center font-medium"
+                  href={getLocalizedUrl('ecosystem', locale)}
+                  className="block w-full px-4 py-3 bg-gradient-to-r from-leaf to-sun text-white rounded-lg text-center font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {t('contact')}
+                  {t('joinEcosystem') || 'Join the Ecosystem'}
                 </Link>
                 <div className="flex items-center justify-between px-4">
                   <LanguageSwitcher />

@@ -26,7 +26,13 @@
     "certifications": "Certificações",
     "company": "Empresa",
     "careers": "Carreiras",
-    "getStarted": "Começar"
+    "getStarted": "Começar",
+    "platforms": "Plataformas",
+    "ecosystem": "Ecossistema",
+    "makerNode": "Maker Node",
+    "joinEcosystem": "Junte-se ao Ecossistema",
+    "explorePlatforms": "Explorar Plataformas",
+    "showcase": "Showcase"
   },
   "cta": {
     "learnMore": "Saiba mais",
@@ -45,23 +51,37 @@
     "tagline": "Onde a IA encontra a criatividade humana",
     "cookies": "Cookies",
     "sections": {
-      "programs": "Programas",
-      "products": "Produtos",
-      "company": "Empresa",
-      "resources": "Recursos"
+      "platforms": "Plataformas",
+      "services": "Serviços",
+      "ecosystem": "Ecossistema",
+      "company": "Empresa"
     },
-    "programs": {
-      "designFabrication": "Design e Fabricação",
-      "strategyEnablement": "Estratégia e Habilitação",
-      "platformPilots": "Pilotos de Plataforma",
-      "strategicPartnerships": "Parcerias Estratégicas"
+    "platforms": {
+      "enclii": "Enclii",
+      "janua": "Janua",
+      "dhanam": "Dhanam",
+      "forgeSight": "Forge Sight",
+      "cotizaStudio": "Cotiza Studio",
+      "yantra4d": "Yantra4D",
+      "pravaraMes": "Pravara-MES",
+      "penny": "PENNY",
+      "avala": "AVALA"
+    },
+    "services": {
+      "makerNode": "Primavera Maker Node",
+      "colabs": "MADFAM Co-Labs",
+      "programs": "Programas"
+    },
+    "ecosystem": {
+      "membership": "Assinatura",
+      "pricing": "Preços",
+      "openSource": "Open Source",
+      "impact": "Impacto"
     },
     "company": {
       "about": "Sobre Nós",
-      "units": "Soluções",
-      "solutions": "Soluções",
-      "caseStudies": "Casos de Estudo",
-      "careers": "Carreiras"
+      "careers": "Carreiras",
+      "contact": "Contato"
     },
     "resources": {
       "assessment": "Avaliação de IA",

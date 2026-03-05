@@ -50,7 +50,7 @@ export default async function ProgramsPage({ params }: Props) {
       color: 'green' as const,
     },
     {
-      id: 'strategy-enablement',
+      id: 'launch-program',
       name: t('strategyEnablement.name'),
       description: t('strategyEnablement.description'),
       provider: 'MADFAM',
@@ -68,7 +68,7 @@ export default async function ProgramsPage({ params }: Props) {
       color: 'amber' as const,
     },
     {
-      id: 'platform-pilots',
+      id: 'scale-program',
       name: t('platformPilots.name'),
       description: t('platformPilots.description'),
       provider: 'MADFAM',
@@ -87,7 +87,7 @@ export default async function ProgramsPage({ params }: Props) {
       platforms: ['Penny', 'Dhanam'],
     },
     {
-      id: 'strategic-partnerships',
+      id: 'partner-program',
       name: t('strategicPartnerships.name'),
       description: t('strategicPartnerships.description'),
       provider: 'MADFAM',

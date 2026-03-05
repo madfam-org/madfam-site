@@ -155,6 +155,16 @@
         "visitPartner": "Visitar La Ciencia del Juego"
       }
     },
+    "makerNode": {
+      "tagline": "Centro de Fabricação Física",
+      "description": "Impressão 3D, usinagem CNC e corte a laser — do design digital à realidade física, integrado com o ecossistema MADFAM.",
+      "capabilities": {
+        "0": "Impressão 3D (FDM, SLA, SLS)",
+        "1": "Usinagem CNC",
+        "2": "Corte e Gravação a Laser",
+        "3": "Montagem Personalizada"
+      }
+    },
     "showtech": {
       "tagline": "Divisão de Inovação em Entretenimento",
       "description": "Inovação em hardware e software para as indústrias de música e entretenimento ao vivo.",
@@ -167,9 +177,9 @@
       }
     },
     "hero": {
-      "title": "Nossas Unidades de Negócio",
-      "subtitle": "Equipes especializadas entregando excelência em todas as indústrias",
-      "badge": "Unidades de Negócio"
+      "title": "Nossas Soluções",
+      "subtitle": "Fabricação física, inovação colaborativa e tecnologia de entretenimento — impulsionadas pelo ecossistema MADFAM",
+      "badge": "Soluções"
     },
     "meta": {
       "title": "Unidades de Negócio - MADFAM",
@@ -256,47 +266,47 @@
     "requestInfo": "Solicitar informações",
     "evaluate": "Avaliar",
     "strategyEnablement": {
-      "name": "Estratégia e Habilitação",
-      "description": "Consultoria estratégica e programas de habilitação para guiar sua transformação digital",
+      "name": "Programa de Lançamento",
+      "description": "Consultoria estratégica e habilitação para startups e fundadores entrando no ecossistema MADFAM",
       "timeline": "3-6 meses",
-      "targetMarket": "Empresas em crescimento",
+      "targetMarket": "Startups e fundadores",
       "investment": "A partir de $200,000 MXN",
       "deliverables": {
-        "0": "Roadmap de transformação",
+        "0": "Roadmap de integração",
         "1": "Workshops estratégicos",
         "2": "Treinamento de equipe",
-        "3": "Métricas de impacto"
+        "3": "Métricas de crescimento"
       }
     },
     "platformPilots": {
-      "name": "Pilotos de Plataforma",
-      "description": "Lance e valide plataformas alimentadas por IA com ROI comprovado antes da implantação completa",
+      "name": "Programa de Escala",
+      "description": "Cresça seu projeto com plataformas MADFAM — integre ferramentas, automatize fluxos e expanda seu alcance",
       "timeline": "3-12 meses",
-      "targetMarket": "Empresas médias a grandes",
+      "targetMarket": "Projetos e equipes em crescimento",
       "investment": "A partir de $500,000 MXN",
       "deliverables": {
-        "0": "Implementação de plataforma",
-        "1": "Integrações empresariais",
+        "0": "Integração de plataformas",
+        "1": "Automação de fluxos",
         "2": "Migração de dados",
         "3": "Suporte contínuo"
       }
     },
     "strategicPartnerships": {
-      "name": "Parcerias Estratégicas",
-      "description": "Parcerias tecnológicas de longo prazo com liderança vCTO integrada e inovação contínua",
+      "name": "Programa de Partners",
+      "description": "Integre tecnologia MADFAM na sua organização com liderança técnica dedicada e inovação contínua",
       "timeline": "12+ meses",
-      "targetMarket": "Corporações e grandes empresas",
+      "targetMarket": "Organizações integrando tecnologia MADFAM",
       "investment": "Personalizado",
       "deliverables": {
-        "0": "Liderança tecnológica vCTO",
-        "1": "Arquitetura empresarial",
-        "2": "Gestão de equipes",
+        "0": "Liderança técnica dedicada",
+        "1": "Arquitetura de plataforma",
+        "2": "Habilitação de equipe",
         "3": "Inovação contínua"
       }
     },
     "meta": {
-      "title": "Programas de Transformação - MADFAM",
-      "description": "Programas estruturados que combinam nossas unidades especializadas para levar sua empresa ao próximo nível."
+      "title": "Programas - MADFAM",
+      "description": "Programas para criadores e equipes: lance, escale ou associe-se ao ecossistema MADFAM."
     },
     "designFabrication": {
       "name": "Design e Fabricação",
@@ -312,39 +322,39 @@
       }
     },
     "hero": {
-      "title": "Programas de Transformação",
-      "subtitle": "Da consultoria inicial à transformação digital completa",
-      "assessmentCta": "Fazer Avaliação de IA"
+      "title": "Programas para Criadores e Equipes",
+      "subtitle": "Lance, escale ou associe-se — caminhos estruturados para aproveitar ao máximo o ecossistema MADFAM",
+      "assessmentCta": "Começar"
     },
     "migration": {
       "title": "Atualização de Migração de Serviços",
       "description": "Nossos serviços evoluíram para programas especializados adaptados às suas necessidades de negócio."
     },
     "journey": {
-      "title": "Sua Jornada de Transformação",
+      "title": "Seu Caminho de Crescimento",
       "strategy": {
-        "title": "Estratégia",
-        "description": "Desenhamos o roteiro para sua transformação"
+        "title": "Lançamento",
+        "description": "Ajudamos você a integrar-se e definir seu roadmap"
       },
       "pilot": {
-        "title": "Piloto",
-        "description": "Implementamos e validamos soluções"
+        "title": "Escala",
+        "description": "Integramos plataformas e automatizamos fluxos"
       },
       "scale": {
-        "title": "Escala",
-        "description": "Expandimos implementações bem-sucedidas"
+        "title": "Partners",
+        "description": "Integramos tecnologia para crescimento a longo prazo"
       }
     },
     "tools": {
-      "title": "Ferramentas e Recursos",
-      "description": "Use nossas ferramentas gratuitas para avaliar suas necessidades e calcular seu potencial de transformação",
+      "title": "Explore o Ecossistema",
+      "description": "Descubra plataformas, obtenha uma cotação de fabricação ou junte-se à assinatura do ecossistema",
       "assessment": {
-        "title": "Avaliação de IA",
-        "description": "Descubra seu programa de transformação ideal"
+        "title": "Explorar Plataformas",
+        "description": "Encontre as plataformas ideais para seu projeto"
       },
       "calculator": {
-        "title": "Calculadora de ROI",
-        "description": "Calcule o retorno do seu investimento"
+        "title": "Cotar Fabricação",
+        "description": "Preços instantâneos para impressão 3D, CNC e corte a laser"
       }
     }
   },

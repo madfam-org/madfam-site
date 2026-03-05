@@ -12,6 +12,7 @@ interface ProductCardProps {
     description: string;
     audience: string;
     badge: string;
+    tiers?: string;
     primaryCta: {
       label: string;
       url: string;
@@ -30,12 +31,17 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations();
   return (
-    <div className="bg-white border border-neutral-200 rounded-xl p-6 hover:border-neutral-300 transition-colors">
+    <div className="bg-white dark:bg-gray-900 border border-neutral-200 dark:border-gray-800 rounded-xl p-6 hover:border-neutral-300 dark:hover:border-gray-700 transition-colors">
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl font-bold text-neutral-900">{product.name}</h3>
+          <h3 className="text-xl font-bold text-neutral-900 dark:text-white">{product.name}</h3>
           <div className="flex items-center gap-2">
+            {product.tiers && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-leaf/10 text-leaf border border-leaf/20">
+                {product.tiers}
+              </span>
+            )}
             {product.sdgs && product.sdgs.length > 0 && (
               <SDGInlineBadge count={product.sdgs.length} />
             )}

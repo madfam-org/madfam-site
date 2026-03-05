@@ -28,6 +28,26 @@ export default async function SolutionsPage({ params }: Props) {
 
   const solutions = [
     {
+      id: 'maker-node',
+      name: 'Primavera Maker Node',
+      tagline: t('makerNode.tagline'),
+      description: t('makerNode.description'),
+      badge: 'by MADFAM',
+      accent: 'green' as const,
+      capabilities: [
+        t('makerNode.capabilities.0'),
+        t('makerNode.capabilities.1'),
+        t('makerNode.capabilities.2'),
+        t('makerNode.capabilities.3'),
+      ],
+      products: [
+        { name: 'Yantra4D', url: 'https://4d.madfam.io' },
+        { name: 'Cotiza Studio', url: 'https://cotiza.studio' },
+        { name: 'Pravara-MES', url: 'https://mes.madfam.io' },
+      ],
+      internalUrl: '/solutions/maker-node',
+    },
+    {
       id: 'colabs',
       name: 'MADFAM Co-Labs',
       tagline: t('colabs.tagline'),

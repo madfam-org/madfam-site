@@ -5,12 +5,14 @@ export type RouteKey =
   // Corporate structure routes
   | 'solutions'
   | 'solutions.colabs'
+  | 'solutions.maker-node'
   | 'programs'
   | 'case-studies'
   | 'work'
   | 'security'
   | 'impact'
   | 'showcase'
+  | 'ecosystem'
   // Core routes
   | 'products'
   | 'about'
@@ -38,6 +40,16 @@ const routes: Record<RouteKey, Record<Locale, string>> = {
     en: '/solutions/colabs',
     es: '/soluciones/colabs',
     pt: '/solucoes/colabs',
+  },
+  'solutions.maker-node': {
+    en: '/solutions/maker-node',
+    es: '/soluciones/maker-node',
+    pt: '/solucoes/maker-node',
+  },
+  ecosystem: {
+    en: '/ecosystem',
+    es: '/ecosistema',
+    pt: '/ecossistema',
   },
 
   programs: {

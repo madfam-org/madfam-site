@@ -12,6 +12,7 @@ import forms from './forms.json';
 import system from './system.json';
 import cookies from './cookies.json';
 import impact from './impact.json';
+import ecosystem from './ecosystem.json';
 
 export default {
   common,
@@ -28,4 +29,5 @@ export default {
   legal, // Legal namespace must come AFTER pages to prevent overwrite
   cookies, // Must come AFTER spreads to prevent pages.cookies overwrite
   impact,
+  ecosystem,
 };

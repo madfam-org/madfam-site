@@ -133,7 +133,7 @@ describe('SEO Service', () => {
     it('should generate sitemap entries for all main pages', () => {
       const sitemap = seoService.generateSitemapData();
 
-      expect(sitemap).toHaveLength(18);
+      expect(sitemap).toHaveLength(20);
       expect(sitemap[0].url).toBe('/');
       expect(sitemap[0].priority).toBe(1.0);
 

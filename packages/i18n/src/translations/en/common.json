@@ -24,7 +24,13 @@
     "certifications": "Certifications",
     "company": "Company",
     "careers": "Careers",
-    "getStarted": "Get Started"
+    "getStarted": "Get Started",
+    "platforms": "Platforms",
+    "ecosystem": "Ecosystem",
+    "makerNode": "Maker Node",
+    "joinEcosystem": "Join the Ecosystem",
+    "explorePlatforms": "Explore Platforms",
+    "showcase": "Showcase"
   },
   "cta": {
     "learnMore": "Learn more",
@@ -43,23 +49,37 @@
     "tagline": "Where AI meets human creativity",
     "cookies": "Cookies",
     "sections": {
-      "programs": "Programs",
-      "products": "Products",
-      "company": "Company",
-      "resources": "Resources"
+      "platforms": "Platforms",
+      "services": "Services",
+      "ecosystem": "Ecosystem",
+      "company": "Company"
     },
-    "programs": {
-      "designFabrication": "Design & Fabrication",
-      "strategyEnablement": "Strategy & Enablement",
-      "platformPilots": "Platform Pilots",
-      "strategicPartnerships": "Strategic Partnerships"
+    "platforms": {
+      "enclii": "Enclii",
+      "janua": "Janua",
+      "dhanam": "Dhanam",
+      "forgeSight": "Forge Sight",
+      "cotizaStudio": "Cotiza Studio",
+      "yantra4d": "Yantra4D",
+      "pravaraMes": "Pravara-MES",
+      "penny": "PENNY",
+      "avala": "AVALA"
+    },
+    "services": {
+      "makerNode": "Primavera Maker Node",
+      "colabs": "MADFAM Co-Labs",
+      "programs": "Programs"
+    },
+    "ecosystem": {
+      "membership": "Membership",
+      "pricing": "Pricing",
+      "openSource": "Open Source",
+      "impact": "Impact"
     },
     "company": {
       "about": "About Us",
-      "units": "Solutions",
-      "solutions": "Solutions",
-      "caseStudies": "Case Studies",
-      "careers": "Careers"
+      "careers": "Careers",
+      "contact": "Contact"
     },
     "resources": {
       "assessment": "AI Assessment",

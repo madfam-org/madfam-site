@@ -7,18 +7,18 @@
 ![Node.js](https://img.shields.io/badge/Node.js-20.x-green)
 ![License](https://img.shields.io/badge/License-Proprietary-red)
 
-> **The official corporate website for MADFAM** - where AI meets human creativity. Built with Next.js 14, TypeScript, and a modern monorepo architecture.
+> **The official website for MADFAM** — open platforms for creators, makers, and entrepreneurs building the future of LATAM. Built with Next.js 14, TypeScript, and a modern monorepo architecture.
 
 **🌟 Key Highlights:**
 
-- 🏢 Products directly under Innovaciones MADFAM, plus Co-Labs and Showtech
-- 🤖 Products: Dhanam, Forge Sight, Cotiza Studio, Enclii, Janua, Yantra4D, Pravara-MES
+- 🌱 Solarpunk ecosystem with 9 digital platforms + physical fabrication
+- 🔓 Each platform has Free + Pro tiers; Ecosystem Membership bundles Pro everywhere
+- 🏭 Primavera Maker Node: 3D printing, CNC machining, and laser cutting
 - 🌐 Full internationalization (Spanish, English, Portuguese)
 - 📊 Privacy-first analytics with enterprise-grade security
 - 🎨 Modern design system with Tailwind CSS 4 and dark/light mode
-- 🧮 Interactive tools: AI Assessment, ROI Calculator, Project Estimator
 
-**📅 Last Updated:** November 2025
+**📅 Last Updated:** March 2026
 
 ## 🚀 Quick Start
 
@@ -102,14 +102,15 @@ biz-site/
 
 ## 🎯 Key Features
 
-### Corporate Structure
+### Ecosystem Structure
 
-All products are directly under **Innovaciones MADFAM**:
+Three conversion paths into the MADFAM ecosystem:
 
-- **MADFAM Co-Labs** - Collaborations & co-creations
-- **Showtech** - Technology showcase & events (Coming Soon)
+1. **Use a MADFAM Platform** — 9 digital platforms, each with Free + Pro tiers
+2. **Use Primavera Maker Node** — Physical fabrication (3D printing, CNC, laser cutting)
+3. **Become an Ecosystem Member** — One membership unlocks Pro everywhere + discounted fabrication
 
-### Products (by MADFAM)
+### Digital Platforms (by MADFAM)
 
 - **Enclii** - Sovereign cloud PaaS powering MADFAM's infrastructure
 - **Janua** - Self-hosted identity platform with SSO, MFA, and Passkeys
@@ -121,19 +122,18 @@ All products are directly under **Innovaciones MADFAM**:
 - **AVALA** - Competency-based training platform (Coming Soon)
 - **PENNY** - AI assistant platform (In Development)
 
+### Solutions
+
+- **Primavera Maker Node** - Physical fabrication hub (3D printing, CNC, laser cutting)
+- **MADFAM Co-Labs** - Collaborations & co-creations
+- **Showtech** - Technology showcase & events (Coming Soon)
+
 ### Programs
 
-- **Design & Fabrication** - Advanced manufacturing and 3D design services
-- **Strategy & Enablement** - Digital transformation consulting and implementation
-- **Platform Pilots** - AI platform proof-of-concept deployments
-
-### Interactive Tools
-
-- 🧮 **AI Capability Assessment** - Evaluate organizational AI readiness with intelligent recommendations
-- 💰 **ROI Calculator** - Calculate potential returns from AI and digital transformation initiatives
-- 📊 **Project Estimator** - Get accurate project estimates with interactive configuration
-- 🎯 **Lead Scoring System** - Intelligent lead qualification and tracking
-- 📈 **Analytics Dashboard** - Real-time metrics and user insights
+- **Design & Fabrication** - End-to-end design and digital fabrication services
+- **Launch Program** - Strategic consulting for startups entering the ecosystem
+- **Scale Program** - Platform integration and workflow automation for growing projects
+- **Partner Program** - Technology partnerships for organizations embedding MADFAM tech
 
 ### Technical Features
 
@@ -155,10 +155,12 @@ All routes support internationalization with Spanish (es), English (en), and Por
 
 **Public Pages**
 
-- `/` - Corporate homepage
-- `/solutions` - MADFAM Co-Labs and Showtech
-- `/products` - Product showcase (Dhanam, Forge Sight, Cotiza Studio, and more)
-- `/programs` - Transformation and enablement programs
+- `/` - Ecosystem homepage (solarpunk landing)
+- `/ecosystem` - Ecosystem Membership page (pricing, comparison, FAQ)
+- `/products` - Platform showcase with Free/Pro tier badges
+- `/solutions` - Primavera Maker Node, Co-Labs, and Showtech
+- `/solutions/maker-node` - Primavera Maker Node dedicated page
+- `/programs` - Creator programs (Launch, Scale, Partner)
 - `/about` - Company information
 - `/impact` - ESG and sustainability metrics
 

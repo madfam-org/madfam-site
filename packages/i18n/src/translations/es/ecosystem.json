@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "title": "Ecosistema MADFAM | Una Membresía. Todas las Plataformas.",
+    "description": "Únete al Ecosistema MADFAM — desbloquea acceso Pro en las 9 plataformas más fabricación física con descuento."
+  },
+  "hero": {
+    "title": "Una Membresía. Todas las Plataformas.",
+    "subtitle": "Desbloquea acceso Pro en todas las plataformas MADFAM, más fabricación física con descuento — todo con una sola membresía.",
+    "badge": "Ecosistema",
+    "cta": "Únete al Ecosistema",
+    "secondaryCta": "Explorar Plataformas",
+    "ctaPrimary": "Únete al Ecosistema",
+    "ctaSecondary": "Explorar Plataformas"
+  },
+  "platformGrid": {
+    "title": "Todo Lo Que Obtienes",
+    "subtitle": "9 plataformas digitales + fabricación física, cada una con niveles Free y Pro.",
+    "freeTier": "Gratis",
+    "proTier": "Pro",
+    "includedOnLaunch": "Incluido al lanzamiento",
+    "comingSoon": "Próximamente"
+  },
+  "comparison": {
+    "title": "Compara Tus Opciones",
+    "subtitle": "Mira exactamente lo que obtienes en cada nivel.",
+    "featureLabel": "Característica",
+    "bestValue": "Mejor Valor",
+    "tiers": {
+      "free": "Gratis",
+      "freeNote": "Siempre disponible",
+      "pro": "Pro Individual",
+      "proNote": "Precio por plataforma",
+      "member": "Miembro del Ecosistema",
+      "memberNote": "Una membresía, todas las plataformas"
+    },
+    "features": {
+      "platformAccess": "Acceso a Plataformas",
+      "proFeatures": "Funciones Pro",
+      "makerNodeDiscount": "Descuento Maker Node",
+      "prioritySupport": "Soporte Prioritario",
+      "earlyAccess": "Acceso Anticipado",
+      "communityAccess": "Acceso a Comunidad"
+    },
+    "values": {
+      "free": "Solo nivel gratuito",
+      "individual": "Una plataforma",
+      "all": "Todas las plataformas",
+      "none": "—",
+      "single": "Completo (una plataforma)",
+      "discount": "Hasta 20% de descuento",
+      "standard": "Soporte por email",
+      "priority": "Soporte prioritario",
+      "yes": "Sí"
+    }
+  },
+  "pricing": {
+    "title": "Precios Simples y Transparentes",
+    "subtitle": "Una membresía, todas las plataformas — sin sorpresas.",
+    "monthly": "Mensual",
+    "yearly": "Anual",
+    "yearlyDiscount": "Ahorra ~2 meses",
+    "monthlyPrice": "TBD",
+    "yearlyPrice": "TBD",
+    "perMonth": "/mes",
+    "perYear": "/año",
+    "includedPlatforms": "Incluye Pro en las {count} plataformas",
+    "cta": "Únete al Ecosistema",
+    "waitlistNote": "Únete a la lista de espera — lanzamiento próximo"
+  },
+  "makerNode": {
+    "title": "Primavera Maker Node",
+    "badge": "Fabricación Física",
+    "subtitle": "Del diseño digital a la realidad física — los miembros obtienen fabricación con descuento.",
+    "description": "Impresión 3D, maquinado CNC y corte láser — integrado con Yantra4D para diseño y Cotiza Studio para cotización.",
+    "description2": "Los miembros del ecosistema reciben hasta 20% de descuento en todos los pedidos.",
+    "discount": "Hasta 20% de descuento para miembros",
+    "discountCalloutLabel": "Descuento para miembros del ecosistema",
+    "discountHeadline": "Beneficio de Miembro",
+    "discountBody": "Hasta 20% de descuento en todos los pedidos de fabricación física — impresión 3D, maquinado CNC y corte láser.",
+    "cta": "Explorar Maker Node",
+    "servicesLabel": "Servicios disponibles",
+    "services": {
+      "printing": { "name": "Impresión 3D", "detail": "FDM, SLA, SLS" },
+      "cnc": { "name": "Maquinado CNC", "detail": "Metales, maderas, plásticos" },
+      "laser": { "name": "Corte Láser", "detail": "Madera, acrílico, cuero" },
+      "assembly": { "name": "Ensamblaje", "detail": "Construcciones personalizadas" }
+    }
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Todo lo que necesitas saber sobre el Ecosistema MADFAM.",
+    "moreQuestions": "¿Tienes más preguntas?",
+    "contactLink": "Contáctanos",
+    "items": {
+      "q1": {
+        "question": "¿Puedo cambiar de Pro Individual a Membresía del Ecosistema?",
+        "answer": "Sí. Cuando te unes al Ecosistema, tu suscripción Pro Individual se acredita automáticamente a tu membresía. Sin doble cobro."
+      },
+      "q2": {
+        "question": "¿Hay prueba gratuita?",
+        "answer": "Cada plataforma tiene un nivel gratuito que puedes usar indefinidamente. La Membresía del Ecosistema desbloquea funciones Pro en todas las plataformas."
+      },
+      "q3": {
+        "question": "¿Qué pasa cuando lancen PENNY y AVALA?",
+        "answer": "Se incluyen automáticamente en tu Membresía del Ecosistema sin costo extra. Obtienes acceso Pro desde el primer día."
+      },
+      "q4": {
+        "question": "¿Cómo funciona el descuento en Maker Node?",
+        "answer": "Los Miembros del Ecosistema reciben hasta 20% de descuento en todos los pedidos de fabricación física."
+      },
+      "q5": {
+        "question": "¿Puedo cancelar en cualquier momento?",
+        "answer": "Sí. Las membresías mensuales se pueden cancelar en cualquier momento. Las anuales son reembolsables dentro de los primeros 30 días."
+      }
+    }
+  },
+  "cta": {
+    "title": "¿Listo para construir algo que importa?",
+    "subtitle": "Únete al Ecosistema MADFAM y desbloquea el potencial completo de cada plataforma.",
+    "primary": "Únete al Ecosistema",
+    "secondary": "Explorar Plataformas",
+    "primaryButton": "Únete al Ecosistema",
+    "secondaryButton": "Explorar Plataformas",
+    "disclaimer": "Sin tarjeta de crédito requerida. Únete a la lista de espera hoy."
+  },
+  "homepage": {
+    "hero": {
+      "title": "Tecnología que devuelve más de lo que toma",
+      "subtitle": "Plataformas abiertas para creadores, makers y emprendedores construyendo el futuro de LATAM.",
+      "exploreCta": "Explorar el Ecosistema",
+      "memberCta": "Ser Miembro"
+    },
+    "threePaths": {
+      "title": "Tres Caminos al Ecosistema",
+      "platforms": {
+        "title": "Usa Nuestras Plataformas",
+        "description": "9 plataformas abiertas para diseño, fabricación, finanzas, identidad e inteligencia.",
+        "cta": "Explorar Plataformas"
+      },
+      "maker": {
+        "title": "Hazlo Físico",
+        "description": "Impresión 3D, maquinado CNC y corte láser — del diseño digital a la realidad física.",
+        "cta": "Explorar Maker Node"
+      },
+      "membership": {
+        "title": "Únete al Ecosistema",
+        "description": "Una membresía desbloquea Pro en todas partes — más fabricación con descuento.",
+        "cta": "Ver Membresía"
+      }
+    },
+    "platformShowcase": {
+      "title": "Plataformas Abiertas para Creadores",
+      "subtitle": "Cada plataforma tiene un nivel gratuito. Los Miembros desbloquean Pro en todas."
+    },
+    "makerHighlight": {
+      "title": "Primavera Maker Node",
+      "subtitle": "Del diseño digital a la realidad física",
+      "description": "Impresión 3D, maquinado CNC y corte láser — integrado con Yantra4D y Cotiza Studio.",
+      "memberDiscount": "Los miembros ahorran hasta 20%"
+    },
+    "membershipValue": {
+      "title": "Una Membresía. Todas las Plataformas.",
+      "subtitle": "Acceso Pro en las 9 plataformas, fabricación con descuento, soporte prioritario y acceso anticipado.",
+      "cta": "Conocer la Membresía"
+    },
+    "whyMadfam": {
+      "title": "¿Por Qué MADFAM?",
+      "openSource": {
+        "title": "Open Source Primero",
+        "description": "60+ repositorios públicos. Nuestro código es nuestro currículum."
+      },
+      "latam": {
+        "title": "Hecho en LATAM",
+        "description": "Diseñado para las necesidades y realidades de América Latina."
+      },
+      "privacy": {
+        "title": "Privacidad Primero",
+        "description": "Tus datos son tuyos. Seguro por defecto, recolección mínima."
+      },
+      "solarpunk": {
+        "title": "Ética Solarpunk",
+        "description": "Tecnología que regenera en lugar de extraer."
+      }
+    },
+    "finalCta": {
+      "title": "¿Listo para construir algo que importa?",
+      "subtitle": "Elige tu camino al ecosistema MADFAM."
+    }
+  },
+  "makerNodePage": {
+    "meta": {
+      "title": "Primavera Maker Node | Del Diseño Digital a la Realidad Física | MADFAM",
+      "description": "Impresión 3D, maquinado CNC y corte láser — integrado con el ecosistema MADFAM."
+    },
+    "hero": {
+      "title": "Del Diseño Digital a la Realidad Física",
+      "subtitle": "Primavera Maker Node lleva tus diseños digitales al mundo físico con impresión 3D, maquinado CNC y corte láser.",
+      "badge": "Primavera Maker Node"
+    },
+    "services": {
+      "title": "Nuestros Servicios",
+      "printing": {
+        "title": "Impresión 3D",
+        "description": "Tecnologías FDM, SLA y SLS. PLA, PETG, ABS, resina, nylon.",
+        "materials": "PLA, PETG, ABS, Resina, Nylon"
+      },
+      "cnc": {
+        "title": "Maquinado CNC",
+        "description": "Fresado y torneado de precisión para metales, maderas y plásticos.",
+        "materials": "Aluminio, Acero, Madera, Acrílico"
+      },
+      "laser": {
+        "title": "Corte Láser",
+        "description": "Corte y grabado de alta precisión para madera, acrílico, cuero y más.",
+        "materials": "Madera, Acrílico, Cuero, Tela"
+      }
+    },
+    "workflow": {
+      "title": "Flujo de Trabajo Integrado",
+      "subtitle": "Del concepto al producto físico — impulsado por el ecosistema MADFAM.",
+      "steps": {
+        "design": {
+          "title": "Diseña",
+          "description": "Crea modelos paramétricos con Yantra4D",
+          "platform": "Yantra4D"
+        },
+        "quote": {
+          "title": "Cotiza",
+          "description": "Obtén precios al instante con Cotiza Studio",
+          "platform": "Cotiza Studio"
+        },
+        "fabricate": {
+          "title": "Fabrica",
+          "description": "Manufactura con Primavera Maker Node",
+          "platform": "Maker Node"
+        },
+        "track": {
+          "title": "Rastrea",
+          "description": "Monitorea producción con Pravara-MES",
+          "platform": "Pravara-MES"
+        }
+      }
+    },
+    "ecosystem": {
+      "title": "Parte del Ecosistema MADFAM",
+      "subtitle": "Maker Node se conecta con cada plataforma MADFAM.",
+      "memberBenefit": "Los miembros ahorran hasta 20% en todos los pedidos"
+    },
+    "cta": {
+      "title": "¿Listo Para Hacerlo Real?",
+      "subtitle": "Obtén una cotización para tu próximo proyecto.",
+      "primary": "Obtener Cotización",
+      "secondary": "Iniciar un Proyecto"
+    }
+  }
+}

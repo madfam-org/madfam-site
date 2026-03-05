@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { CorporateHomePage } from '@/components/CorporateHomePage';
+import { EcosystemHomePage } from '@/components/EcosystemHomePage';
 import { seoService } from '@/lib/seo';
 
 export async function generateMetadata({
@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function Page() {
-  return <CorporateHomePage />;
+  return <EcosystemHomePage />;
 }

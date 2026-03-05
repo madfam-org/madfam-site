@@ -157,6 +157,16 @@
         "visitPartner": "Visit La Ciencia del Juego"
       }
     },
+    "makerNode": {
+      "tagline": "Physical Fabrication Hub",
+      "description": "3D printing, CNC machining, and laser cutting — from digital design to physical reality, integrated with the MADFAM ecosystem.",
+      "capabilities": {
+        "0": "3D Printing (FDM, SLA, SLS)",
+        "1": "CNC Machining",
+        "2": "Laser Cutting & Engraving",
+        "3": "Custom Assembly"
+      }
+    },
     "showtech": {
       "tagline": "Entertainment Innovation Division",
       "description": "Hardware and software innovation for the music and live entertainment industries.",
@@ -170,7 +180,7 @@
     },
     "hero": {
       "title": "Our Solutions",
-      "subtitle": "Specialized capabilities delivering excellence across digital fabrication, AI platforms, and innovation programs",
+      "subtitle": "Physical fabrication, collaborative innovation, and entertainment technology — powered by the MADFAM ecosystem",
       "badge": "Solutions"
     },
     "meta": {
@@ -258,47 +268,47 @@
     "requestInfo": "Request information",
     "evaluate": "Evaluate",
     "strategyEnablement": {
-      "name": "Strategy & Enablement",
-      "description": "Strategic consulting and enablement programs to guide your digital transformation journey",
+      "name": "Launch Program",
+      "description": "Strategic consulting and enablement for startups and founders entering the MADFAM ecosystem",
       "timeline": "3-6 months",
-      "targetMarket": "Growing companies",
+      "targetMarket": "Startups and founders",
       "investment": "From $200,000 MXN",
       "deliverables": {
-        "0": "Transformation roadmap",
+        "0": "Platform onboarding roadmap",
         "1": "Strategic workshops",
         "2": "Team training",
-        "3": "Impact metrics"
+        "3": "Growth metrics"
       }
     },
     "platformPilots": {
-      "name": "Platform Pilots",
-      "description": "Launch and validate AI-powered platforms with proven ROI before full-scale deployment",
+      "name": "Scale Program",
+      "description": "Grow your project with MADFAM platforms — integrate tools, automate workflows, and expand your reach",
       "timeline": "3-12 months",
-      "targetMarket": "Medium to large companies",
+      "targetMarket": "Growing projects and teams",
       "investment": "From $500,000 MXN",
       "deliverables": {
-        "0": "Platform implementation",
-        "1": "Enterprise integrations",
+        "0": "Platform integration",
+        "1": "Workflow automation",
         "2": "Data migration",
         "3": "Ongoing support"
       }
     },
     "strategicPartnerships": {
-      "name": "Strategic Partnerships",
-      "description": "Long-term technology partnerships with embedded vCTO leadership and continuous innovation",
+      "name": "Partner Program",
+      "description": "Embed MADFAM technology into your organization with dedicated technical leadership and continuous innovation",
       "timeline": "12+ months",
-      "targetMarket": "Corporates and large enterprises",
+      "targetMarket": "Organizations embedding MADFAM tech",
       "investment": "Custom",
       "deliverables": {
-        "0": "vCTO technology leadership",
-        "1": "Enterprise architecture",
-        "2": "Team management",
+        "0": "Dedicated technical leadership",
+        "1": "Platform architecture",
+        "2": "Team enablement",
         "3": "Continuous innovation"
       }
     },
     "meta": {
-      "title": "Transformation Programs - MADFAM",
-      "description": "Structured programs that combine our specialized units to take your business to the next level."
+      "title": "Programs - MADFAM",
+      "description": "Creator-friendly programs to launch, scale, and partner with the MADFAM ecosystem."
     },
     "designFabrication": {
       "name": "Design & Fabrication",
@@ -314,39 +324,39 @@
       }
     },
     "hero": {
-      "title": "Transformation Programs",
-      "subtitle": "From initial consultancy to complete digital transformation",
-      "assessmentCta": "Take AI Assessment"
+      "title": "Programs for Creators and Teams",
+      "subtitle": "Launch, scale, or partner — structured paths to get the most from the MADFAM ecosystem",
+      "assessmentCta": "Get Started"
     },
     "migration": {
       "title": "Service Migration Update",
       "description": "Our services have evolved into specialized programs tailored to your business needs."
     },
     "journey": {
-      "title": "Your Transformation Journey",
+      "title": "Your Growth Journey",
       "strategy": {
-        "title": "Strategy",
-        "description": "We design the roadmap for your transformation"
+        "title": "Launch",
+        "description": "We help you onboard and define your roadmap"
       },
       "pilot": {
-        "title": "Pilot",
-        "description": "We implement and validate solutions"
+        "title": "Scale",
+        "description": "We integrate platforms and automate workflows"
       },
       "scale": {
-        "title": "Scale",
-        "description": "We expand successful implementations"
+        "title": "Partner",
+        "description": "We embed technology for long-term growth"
       }
     },
     "tools": {
-      "title": "Tools & Resources",
-      "description": "Use our free tools to evaluate your needs and calculate your transformation potential",
+      "title": "Explore the Ecosystem",
+      "description": "Discover platforms, get a fabrication quote, or join the ecosystem membership",
       "assessment": {
-        "title": "AI Assessment",
-        "description": "Discover your ideal transformation program"
+        "title": "Explore Platforms",
+        "description": "Find the right platforms for your project"
       },
       "calculator": {
-        "title": "ROI Calculator",
-        "description": "Calculate the return on your investment"
+        "title": "Get a Fabrication Quote",
+        "description": "Instant pricing for 3D printing, CNC, and laser cutting"
       }
     }
   },

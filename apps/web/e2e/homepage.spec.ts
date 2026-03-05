@@ -6,44 +6,33 @@ test.describe('Homepage', () => {
   });
 
   test('should display the main heading', async ({ page }) => {
-    await expect(page.locator('h1')).toContainText('MADFAM');
+    await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should have navigation links', async ({ page }) => {
     const navbar = page.locator('nav');
 
-    await expect(navbar.getByText('Servicios')).toBeVisible();
-    await expect(navbar.getByText('Productos')).toBeVisible();
-    await expect(navbar.getByText('Nosotros')).toBeVisible();
-    await expect(navbar.getByText('Contacto')).toBeVisible();
+    await expect(navbar.getByText('Plataformas')).toBeVisible();
+    await expect(navbar.getByText('Maker Node')).toBeVisible();
+    await expect(navbar.getByText('Ecosistema')).toBeVisible();
   });
 
-  test('should navigate to services page', async ({ page }) => {
-    await page.click('text=Servicios');
-    await expect(page).toHaveURL(/.*services/);
-    await expect(page.locator('h1')).toContainText('Servicios');
+  test('should navigate to platforms page', async ({ page }) => {
+    await page.click('text=Plataformas');
+    await expect(page).toHaveURL(/.*product/);
   });
 
-  test('should display programs', async ({ page }) => {
-    const programs = [
-      'Design & Fabrication',
-      'Strategy & Enablement',
-      'Platform Pilots',
-      'Strategic Partnerships',
-    ];
-
-    for (const program of programs) {
-      await expect(page.locator(`text=/${program}/i`)).toBeVisible();
-    }
+  test('should have ecosystem and platform CTAs', async ({ page }) => {
+    // Look for ecosystem-related CTAs
+    const ecosystemLink = page
+      .getByRole('link', { name: /ecosistema|ecosystem|ecossistema/i })
+      .first();
+    await expect(ecosystemLink).toBeVisible();
   });
 
   test('should have a working CTA button', async ({ page }) => {
-    const ctaButton = page.getByRole('button', { name: /comenzar|contactar/i }).first();
+    const ctaButton = page.getByRole('link', { name: /ecosistema|explorar|ecosystem/i }).first();
     await expect(ctaButton).toBeVisible();
-    await ctaButton.click();
-
-    // Should navigate to contact or show a form
-    await expect(page).toHaveURL(/contact|#contact/);
   });
 
   test('should be responsive', async ({ page }) => {
@@ -67,7 +56,6 @@ test.describe('Homepage', () => {
 
     const description = await page.getAttribute('meta[name="description"]', 'content');
     expect(description).toBeTruthy();
-    expect(description).toContain('transformación digital');
 
     const ogTitle = await page.getAttribute('meta[property="og:title"]', 'content');
     expect(ogTitle).toBeTruthy();

@@ -9,39 +9,79 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const navigation = {
-    servicios: [
+    platforms: [
+      { name: t('footer.platforms.enclii'), href: 'https://enclii.com', external: true },
+      { name: t('footer.platforms.janua'), href: 'https://janua.auth', external: true },
+      { name: t('footer.platforms.dhanam'), href: 'https://www.dhan.am', external: true },
       {
-        name: t('footer.programs.designFabrication'),
-        href: `${getLocalizedUrl('programs', locale)}#design-fabrication`,
+        name: t('footer.platforms.forgeSight'),
+        href: 'https://www.forgesight.quest',
+        external: true,
+      },
+      { name: t('footer.platforms.cotizaStudio'), href: 'https://cotiza.studio', external: true },
+      { name: t('footer.platforms.yantra4d'), href: 'https://yantra4d.com', external: true },
+      {
+        name: t('footer.platforms.pravaraMes'),
+        href: getLocalizedUrl('products', locale),
+        external: false,
       },
       {
-        name: t('footer.programs.strategyEnablement'),
-        href: `${getLocalizedUrl('programs', locale)}#strategy-enablement`,
+        name: t('footer.platforms.penny'),
+        href: getLocalizedUrl('products', locale),
+        external: false,
       },
       {
-        name: t('footer.programs.platformPilots'),
-        href: `${getLocalizedUrl('programs', locale)}#platform-pilots`,
-      },
-      {
-        name: t('footer.programs.strategicPartnerships'),
-        href: `${getLocalizedUrl('programs', locale)}#strategic-partnerships`,
+        name: t('footer.platforms.avala'),
+        href: getLocalizedUrl('products', locale),
+        external: false,
       },
     ],
-    productos: [
-      { name: 'Dhanam', href: 'https://www.dhan.am' },
-      { name: 'Forge Sight', href: 'https://www.forgesight.quest' },
+    services: [
+      {
+        name: t('footer.services.makerNode'),
+        href: getLocalizedUrl('solutions.maker-node', locale),
+        external: false,
+      },
+      {
+        name: t('footer.services.colabs'),
+        href: getLocalizedUrl('solutions.colabs', locale),
+        external: false,
+      },
+      {
+        name: t('footer.services.programs'),
+        href: getLocalizedUrl('programs', locale),
+        external: false,
+      },
     ],
-    empresa: [
-      { name: t('footer.company.about'), href: getLocalizedUrl('about', locale) },
-      { name: t('footer.company.units'), href: getLocalizedUrl('solutions', locale) },
-      { name: t('footer.company.caseStudies'), href: `/${locale}/case-studies` },
-      { name: t('footer.company.careers'), href: `/${locale}/careers` },
+    ecosystem: [
+      {
+        name: t('footer.ecosystem.membership'),
+        href: getLocalizedUrl('ecosystem', locale),
+        external: false,
+      },
+      {
+        name: t('footer.ecosystem.openSource'),
+        href: 'https://github.com/madfam-org',
+        external: true,
+      },
+      {
+        name: t('footer.ecosystem.impact'),
+        href: getLocalizedUrl('impact', locale),
+        external: false,
+      },
     ],
-    recursos: [
-      { name: t('footer.resources.assessment'), href: `/${locale}/assessment` },
-      { name: t('footer.resources.calculator'), href: `/${locale}/calculator` },
-      { name: t('footer.resources.guides'), href: `/${locale}/guides` },
-      { name: t('footer.resources.contact'), href: getLocalizedUrl('contact', locale) },
+    company: [
+      { name: t('footer.company.about'), href: getLocalizedUrl('about', locale), external: false },
+      {
+        name: t('footer.company.careers'),
+        href: getLocalizedUrl('careers', locale),
+        external: false,
+      },
+      {
+        name: t('footer.company.contact'),
+        href: getLocalizedUrl('contact', locale),
+        external: false,
+      },
     ],
   };
 
@@ -63,71 +103,38 @@ export function Footer() {
       <Container>
         <div className="py-12 lg:py-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="font-heading text-lg mb-4">{t('footer.sections.programs')}</h3>
-              <ul className="space-y-3">
-                {navigation.servicios.map(item => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-heading text-lg mb-4">{t('footer.sections.products')}</h3>
-              <ul className="space-y-3">
-                {navigation.productos.map(item => (
-                  <li key={item.name}>
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
-                    >
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-heading text-lg mb-4">{t('footer.sections.company')}</h3>
-              <ul className="space-y-3">
-                {navigation.empresa.map(item => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-heading text-lg mb-4">{t('footer.sections.resources')}</h3>
-              <ul className="space-y-3">
-                {navigation.recursos.map(item => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {(Object.entries(navigation) as [string, typeof navigation.platforms][]).map(
+              ([sectionKey, items]) => (
+                <div key={sectionKey}>
+                  <h3 className="font-heading text-lg mb-4">
+                    {t(`footer.sections.${sectionKey}`)}
+                  </h3>
+                  <ul className="space-y-3">
+                    {items.map(item => (
+                      <li key={item.name}>
+                        {item.external ? (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
+                          >
+                            {item.name}
+                          </a>
+                        ) : (
+                          <Link
+                            href={item.href}
+                            className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
+                          >
+                            {item.name}
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            )}
           </div>
 
           <div className="mt-12 pt-8 border-t border-white/10">
