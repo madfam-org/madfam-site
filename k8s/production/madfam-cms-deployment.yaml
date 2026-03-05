@@ -81,9 +81,9 @@ spec:
             httpGet:
               path: /api/health
               port: http
-            initialDelaySeconds: 5
+            initialDelaySeconds: 10
             periodSeconds: 5
-            failureThreshold: 12
+            failureThreshold: 24
           volumeMounts:
             - name: tmp
               mountPath: /tmp
