@@ -11,7 +11,7 @@ resources:
 - madfam-cms-service.yaml
 - network-policies.yaml
 - resource-quota.yaml
-- secrets-template.yaml
+# secrets-template.yaml removed — secrets managed via kubectl, not ArgoCD
 
 labels:
 - pairs:
