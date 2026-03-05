@@ -13,8 +13,9 @@ const start = async () => {
   console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'Set' : 'Not set');
   console.log('PAYLOAD_SECRET:', process.env.PAYLOAD_SECRET ? 'Set' : 'Not set');
 
+  // Payload v3: secret and db config are in payload.config.ts (buildConfig)
+  // init() only takes express app and onInit callback
   await payload.init({
-    secret: process.env.PAYLOAD_SECRET || 'change-me',
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
