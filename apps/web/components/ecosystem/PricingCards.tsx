@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
-import { getLocalizedUrl } from '@madfam/i18n';
-import type { Locale } from '@madfam/i18n';
+import { getLocalizedUrl, type Locale } from '@madfam/i18n';
 import { Button } from '@/components/ui';
 
 export function PricingCards() {

@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
-import { getLocalizedUrl } from '@madfam/i18n';
-import type { Locale } from '@madfam/i18n';
+import { getLocalizedUrl, type Locale } from '@madfam/i18n';
 import { Container, Button, BrandParticles } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
 import { PlatformGrid } from '@/components/ecosystem/PlatformGrid';
