@@ -10,3 +10,13 @@ spec:
     - name: madfam.io
     - name: www.madfam.io
     - name: docs.madfam.io
+  network:
+    services:
+      - name: madfam-web
+        port: 3000
+        ingress: [cloudflare-tunnel]
+        egress: [dns, https]
+      - name: madfam-cms
+        port: 3000
+        ingress: [cloudflare-tunnel]
+        egress: [dns, https, postgres]
