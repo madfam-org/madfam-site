@@ -25,6 +25,11 @@ const start = async () => {
     res.json({ status: 'ok' });
   });
 
+  // Root health endpoint for monitoring and K8s probes
+  app.get('/health', (_req, res) => {
+    res.json({ status: 'ok', service: 'cms' });
+  });
+
   await (payload.init as Function)({
     config,
     express: app,
