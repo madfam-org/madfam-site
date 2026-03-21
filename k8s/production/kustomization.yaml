@@ -21,7 +21,7 @@ labels:
     enclii.dev/managed-by: switchyard
 
 images:
-- digest: sha256:a3561e4a1e6f11fc21ef4e513178a02c7baf07e398dfddd3be7af1ae89f27216
+- digest: sha256:b9058991054557519832a1cc1895c31beab6a6a66470166dd178aea8b16c9fd5
   name: ghcr.io/madfam-org/madfam-site/cms
   newName: ghcr.io/madfam-org/madfam-site/cms
 - digest: sha256:43b8334dfb657c59c72a4e8784da3d7a1df7ff7285fbcc66f04e5520491ec071
