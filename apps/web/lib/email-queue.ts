@@ -1,7 +1,6 @@
+import { emailSender } from '@madfam/email/src/sender';
 import { apiLogger } from './logger';
 import { prisma } from './prisma';
-// TODO: Implement email sender
-// import { emailSender } from '@madfam/email/src/sender';
 
 /**
  * Type-safe email queue item interface
@@ -78,11 +77,14 @@ export class EmailQueueProcessor {
         data: { attempts: email.attempts + 1 },
       });
 
-      // TODO: Implement actual email sending
-      // For now, just mock the email sending
-      const mockSuccess = true; // In production, this would be actual email sending
+      // Send via Resend (requires RESEND_API_KEY env var)
+      const result = await emailSender.sendEmail({
+        to: email.to,
+        template: email.template,
+        data: email.data,
+      });
 
-      if (mockSuccess) {
+      if (result.success) {
         // Mark as sent
         await prisma.emailQueue.update({
           where: { id: email.id },
@@ -93,18 +95,19 @@ export class EmailQueueProcessor {
           },
         });
 
-        apiLogger.debug(`Email sent successfully: ${email.id}`);
+        apiLogger.debug(`Email sent successfully: ${email.id} (messageId: ${result.messageId})`);
       } else {
         // Mark as failed
+        const errorMsg = result.error || 'Email sending failed';
         await prisma.emailQueue.update({
           where: { id: email.id },
           data: {
             status: email.attempts + 1 >= 3 ? 'failed' : 'pending',
-            error: 'Mock email failed',
+            error: errorMsg,
           },
         });
 
-        apiLogger.error(`Email failed: ${email.id}`, new Error('Mock email failed'));
+        apiLogger.error(`Email failed: ${email.id}`, new Error(errorMsg));
       }
     } catch (error) {
       apiLogger.error(`Email processing error for ${email.id}`, error as Error);

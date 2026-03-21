@@ -10,60 +10,62 @@ const messages = {
       terms: 'Terms',
     },
   },
-  forms: {
-    leadForm: {
-      title: 'Contact Us',
-      fields: {
-        name: 'Name',
-        email: 'Email',
-        company: 'Company',
-        phone: 'Phone',
-        message: 'Message',
-      },
-      placeholders: {
-        name: 'Your name',
-        email: 'your@email.com',
-        company: 'Your company',
-        phone: 'Your phone number',
-        message: 'How can we help you?',
-      },
-      validation: {
-        nameRequired: 'Name is required',
-        emailRequired: 'Email is required',
-        emailInvalid: 'Invalid email',
-        messageRequired: 'Message is required',
-      },
-      submit: 'Send Inquiry',
-      submitting: 'Sending...',
+  // Top-level leadForm namespace (used by useTranslations('leadForm'))
+  leadForm: {
+    fields: {
+      name: 'Name',
+      email: 'Email',
+    },
+    placeholders: {
+      name: 'Your name',
+      email: 'your@email.com',
+    },
+    errors: {
+      nameMin: 'Name is required',
+      emailInvalid: 'Invalid email',
+      messageMin: 'Message is required',
+    },
+    messages: {
       success: 'Thank you for your interest. We will contact you soon.',
       error: 'An error occurred. Please try again.',
     },
+    requiredFields: 'Required fields',
+    submit: 'Send Inquiry',
   },
   footer: {
     tagline: 'Where AI meets human creativity',
     cookies: 'Cookies',
+    copyright: '© {year} MADFAM. All rights reserved.',
     sections: {
-      programs: 'Programs',
-      products: 'Products',
+      platforms: 'Platforms',
+      services: 'Solutions',
+      ecosystem: 'Ecosystem',
       company: 'Company',
-      resources: 'Resources',
     },
-    programs: {
-      designFabrication: 'Design & Fabrication',
-      strategyEnablement: 'Strategy & Enablement',
-      platformPilots: 'Platform Pilots',
-      strategicPartnerships: 'Strategic Partnerships',
+    platforms: {
+      enclii: 'Enclii',
+      janua: 'Janua',
+      dhanam: 'Dhanam',
+      forgeSight: 'Forge Sight',
+      cotizaStudio: 'Cotiza Studio',
+      yantra4d: 'Yantra4D',
+      pravaraMes: 'Pravara-MES',
+      penny: 'PENNY',
+      avala: 'AVALA',
+    },
+    services: {
+      makerNode: 'Primavera Maker Node',
+      colabs: 'MADFAM Co-Labs',
+      programs: 'Programs',
+    },
+    ecosystem: {
+      membership: 'Membership',
+      openSource: 'Open Source',
+      impact: 'Impact',
     },
     company: {
       about: 'About Us',
-      units: 'Business Units',
-      caseStudies: 'Case Studies',
       careers: 'Careers',
-    },
-    resources: {
-      assessment: 'AI Assessment',
-      calculator: 'ROI Calculator',
-      guides: 'Guides',
       contact: 'Contact',
     },
     social: {
@@ -86,34 +88,26 @@ const messagesEs = {
       terms: 'Términos',
     },
   },
-  forms: {
-    leadForm: {
-      title: 'Contáctanos',
-      fields: {
-        name: 'Nombre',
-        email: 'Correo electrónico',
-        company: 'Empresa',
-        phone: 'Teléfono',
-        message: 'Mensaje',
-      },
-      placeholders: {
-        name: 'Tu nombre',
-        email: 'tu@correo.com',
-        company: 'Tu empresa',
-        phone: 'Tu número de teléfono',
-        message: '¿Cómo podemos ayudarte?',
-      },
-      validation: {
-        nameRequired: 'El nombre es requerido',
-        emailRequired: 'El email es requerido',
-        emailInvalid: 'Email inválido',
-        messageRequired: 'El mensaje es requerido',
-      },
-      submit: 'Enviar consulta',
-      submitting: 'Enviando...',
+  leadForm: {
+    fields: {
+      name: 'Nombre',
+      email: 'Correo electrónico',
+    },
+    placeholders: {
+      name: 'Tu nombre',
+      email: 'tu@correo.com',
+    },
+    errors: {
+      nameMin: 'El nombre es requerido',
+      emailInvalid: 'Email inválido',
+      messageMin: 'El mensaje es requerido',
+    },
+    messages: {
       success: 'Gracias por tu interés. Nos pondremos en contacto pronto.',
       error: 'Ocurrió un error. Por favor intenta de nuevo.',
     },
+    requiredFields: 'Campos requeridos',
+    submit: 'Enviar consulta',
   },
   footer: messages.footer,
 };

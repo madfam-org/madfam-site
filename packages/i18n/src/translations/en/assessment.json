@@ -67,5 +67,97 @@
   "title": "AI Assessment",
   "subtitle": "Discover how AI can transform your business",
   "intro": "Answer a few quick questions to get personalized AI recommendations for your company",
-  "start": "Start Assessment"
+  "start": "Start Assessment",
+  "page": {
+    "strategicQuestions": "10 strategic questions",
+    "minutes": "5 minutes",
+    "instantResults": "Instant results",
+    "getPersonalizedStrategy": "Get your personalized strategy",
+    "strategySubtitle": "Based on your assessment results, we'll create a customized roadmap for your AI transformation journey.",
+    "requestSession": "Request your strategy session",
+    "sessionDescription": "Let's discuss your results and create a personalized plan for your AI transformation",
+    "scheduleSession": "Schedule strategy session",
+    "whyAssessment": "Why take the assessment?",
+    "whySubtitle": "Get actionable insights to accelerate your AI transformation journey",
+    "identifyGaps": "Identify Gaps",
+    "identifyGapsDesc": "Understand where your organization stands and what needs improvement",
+    "benchmarkProgress": "Benchmark Progress",
+    "benchmarkDesc": "Compare your maturity level with industry standards and best practices",
+    "getRecommendations": "Get Recommendations",
+    "recommendationsDesc": "Receive personalized recommendations and next steps for your AI journey",
+    "readyToTransform": "Ready to transform your business?",
+    "ctaSubtitle": "Take the assessment and discover how MADFAM can help you achieve your AI transformation goals"
+  },
+  "assessmentQuestions": {
+    "digital_strategy": {
+      "question": "How defined is your company's digital transformation strategy?",
+      "none": "We don't have a defined strategy",
+      "basic": "We have basic ideas but no formal plan",
+      "developing": "We are developing a strategy",
+      "implemented": "We have a clear and implemented strategy"
+    },
+    "technology_infrastructure": {
+      "question": "How would you describe your company's current technology infrastructure?",
+      "outdated": "Legacy systems and manual processes",
+      "mixed": "Mix of modern and legacy systems",
+      "modern": "Modern systems with some automation",
+      "advanced": "Advanced and automated tech infrastructure"
+    },
+    "data_analytics": {
+      "question": "How does your company handle data and analytics?",
+      "no_data": "We don't collect data systematically",
+      "basic_data": "We collect basic data without analysis",
+      "some_analytics": "We have basic analytics tools",
+      "advanced_analytics": "We use advanced analytics and BI"
+    },
+    "innovation_culture": {
+      "question": "How would you describe your company's innovation culture?",
+      "resistant": "Resistant to change and new technologies",
+      "cautious": "Cautious but open to gradual changes",
+      "adaptive": "Adaptive with a growth mindset",
+      "innovative": "Highly innovative and proactive"
+    },
+    "process_automation": {
+      "question": "How automated are your company's processes?",
+      "manual": "Primarily manual processes",
+      "partially": "Some automated processes",
+      "mostly": "Majority of processes automated",
+      "fully": "Fully automated processes"
+    },
+    "ai_experience": {
+      "question": "What is your experience with artificial intelligence?",
+      "none": "No experience with AI",
+      "basic": "Basic knowledge, no implementation",
+      "pilot": "Pilot projects or basic implementations",
+      "advanced": "Advanced AI implementations"
+    },
+    "team_skills": {
+      "question": "How would you evaluate your team's technical skills?",
+      "basic": "Basic skills, needs training",
+      "intermediate": "Intermediate skills with potential",
+      "good": "Good technical level with adaptability",
+      "expert": "Highly qualified and specialized team"
+    },
+    "budget_commitment": {
+      "question": "What is your budget commitment for innovation?",
+      "minimal": "Very limited budget",
+      "moderate": "Moderate budget for specific projects",
+      "significant": "Significant investment in innovation",
+      "substantial": "Robust budget for transformation"
+    },
+    "efficiency_urgency": {
+      "question": "How urgent is improving operational efficiency?",
+      "low": "Not an immediate priority",
+      "moderate": "Important but not urgent",
+      "high": "High priority for this year",
+      "critical": "Critical for business survival"
+    },
+    "competitive_position": {
+      "question": "How does your company compare technologically with competitors?",
+      "behind": "Significantly behind",
+      "catching_up": "Trying to catch up",
+      "competitive": "Competitive in the market",
+      "leading": "Leader in technological innovation"
+    }
+  }
 }

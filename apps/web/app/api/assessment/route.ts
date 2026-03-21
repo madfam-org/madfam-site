@@ -5,7 +5,7 @@ import { getServerAuth } from '@/lib/auth';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { AssessmentStatus } from '@/lib/prisma-types';
+import { AssessmentStatus } from '@prisma/client';
 import { withRateLimit } from '@/lib/rate-limit';
 
 // Assessment question types

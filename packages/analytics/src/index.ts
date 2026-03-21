@@ -13,41 +13,71 @@ const devLog = (category: string, event: string, ...args: unknown[]) => {
   }
 };
 
+// Send events to Plausible via sendBeacon when configured
+function sendPlausibleEvent(eventName: string, props?: Record<string, unknown>): void {
+  const domain =
+    typeof window !== 'undefined'
+      ? (window as any).__PLAUSIBLE_DOMAIN__
+      : process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+  if (!domain) return;
+
+  if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+    const payload = JSON.stringify({
+      name: eventName,
+      url: typeof window !== 'undefined' ? window.location.href : '',
+      domain,
+      props: props || {},
+    });
+    navigator.sendBeacon('https://plausible.io/api/event', payload);
+  }
+}
+
 // Analytics singleton for server-side tracking
 export const analytics = {
   track: (event: string, properties?: Record<string, unknown>) => {
     devLog('Track', event, properties);
+    sendPlausibleEvent(event, properties);
   },
   identify: (userId: string, traits?: Record<string, unknown>) => {
     devLog('Identify', userId, traits);
+    sendPlausibleEvent('identify', { userId, ...traits });
   },
   page: (name: string, properties?: Record<string, unknown>) => {
     devLog('Page', name, properties);
+    sendPlausibleEvent('pageview', { page: name, ...properties });
   },
   // Extended tracking methods used throughout the app
   trackAssessmentComplete: (properties?: Record<string, unknown>) => {
     devLog('Track', 'assessment_complete', properties);
+    sendPlausibleEvent('assessment_complete', properties);
   },
   trackCalculatorUsed: (properties?: Record<string, unknown>) => {
     devLog('Track', 'calculator_used', properties);
+    sendPlausibleEvent('calculator_used', properties);
   },
   trackLeadCaptured: (properties?: Record<string, unknown>) => {
     devLog('Track', 'lead_captured', properties);
+    sendPlausibleEvent('lead_captured', properties);
   },
   trackLanguageChanged: (oldLocale: string, newLocale: string) => {
     devLog('Track', 'language_changed', { from: oldLocale, to: newLocale });
+    sendPlausibleEvent('language_changed', { from: oldLocale, to: newLocale });
   },
   trackEngagement: (type: string, action: string, timestamp?: number) => {
     devLog('Track', 'engagement', { type, action, timestamp });
+    sendPlausibleEvent('engagement', { type, action, timestamp });
   },
   trackError: (message: string, location?: string, severity?: string) => {
     devLog('Track', 'error', { message, location, severity });
+    sendPlausibleEvent('error', { message, location, severity });
   },
   trackSessionQuality: (score: number, metadata?: Record<string, unknown>) => {
     devLog('Track', 'session_quality', { score, ...metadata });
+    sendPlausibleEvent('session_quality', { score, ...metadata });
   },
   trackROICalculated: (properties?: Record<string, unknown>) => {
     devLog('Track', 'roi_calculated', properties);
+    sendPlausibleEvent('roi_calculated', properties);
   },
 };
 

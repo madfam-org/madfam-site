@@ -11,6 +11,7 @@ resources:
 - madfam-cms-service.yaml
 - network-policies.yaml
 - resource-quota.yaml
+- madfam-web-hpa.yaml
 # secrets-template.yaml excluded — managed manually via kubectl
 # Live secret has argocd.argoproj.io/sync-options: Prune=false annotation
 

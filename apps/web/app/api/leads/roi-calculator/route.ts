@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { LeadSource, LeadStatus } from '@/lib/prisma-types';
+import { LeadSource, LeadStatus } from '@prisma/client';
 import { withRateLimit } from '@/lib/rate-limit';
 
 // ROI Calculator lead schema

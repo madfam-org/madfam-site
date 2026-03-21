@@ -46,7 +46,6 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
           PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING: 1
-        continue-on-error: true
 
       - name: TypeScript type checking
         run: pnpm typecheck
@@ -59,8 +58,7 @@ jobs:
         continue-on-error: true
 
       - name: Run tests
-        run: pnpm test --run || echo "No tests configured yet"
-        continue-on-error: true
+        run: pnpm test --run
         env:
           NODE_ENV: test
 
@@ -94,7 +92,6 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
           PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING: 1
-        continue-on-error: true
 
       - name: Build project
         run: pnpm build

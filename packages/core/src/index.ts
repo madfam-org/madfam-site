@@ -61,7 +61,7 @@ export const featureFlags: Record<string, FeatureFlag> = {
     environments: {
       development: true,
       staging: true,
-      production: false,
+      production: true,
     },
   },
   ADVANCED_ANALYTICS: {

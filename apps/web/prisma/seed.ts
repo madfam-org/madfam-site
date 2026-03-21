@@ -40,10 +40,10 @@ async function main() {
       key: 'PORTUGUESE_LOCALE',
       name: 'Portuguese Language',
       description: 'Full Portuguese (BR) translation',
-      enabled: false,
+      enabled: true,
       enabledDev: true,
       enabledStaging: true,
-      enabledProd: false,
+      enabledProd: true,
     },
     {
       key: 'ADVANCED_ANALYTICS_DASHBOARD',

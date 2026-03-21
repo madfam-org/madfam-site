@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { LeadSource, LeadStatus } from '@/lib/prisma-types';
+import { LeadSource, LeadStatus } from '@prisma/client';
 import { withRateLimit } from '@/lib/rate-limit';
 import { validateBearerToken } from '@/lib/security';
 
@@ -165,7 +165,7 @@ async function handlePOST(request: NextRequest) {
             source: lead.source,
           },
         }),
-      }).catch((error) => {
+      }).catch(error => {
         apiLogger.error('Failed to trigger n8n webhook', error, {
           leadId: lead.id,
         });
@@ -220,7 +220,8 @@ async function handleGET(request: NextRequest) {
 
     if (!validateBearerToken(authHeader, apiSecret)) {
       apiLogger.warn('Unauthorized leads API access attempt', {
-        ip: request.headers.get('x-forwarded-for')?.split(',')[0] || request.headers.get('x-real-ip'),
+        ip:
+          request.headers.get('x-forwarded-for')?.split(',')[0] || request.headers.get('x-real-ip'),
       });
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

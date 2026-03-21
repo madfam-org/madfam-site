@@ -52,11 +52,21 @@ export default function ForgeSightDemoPage() {
       })
     );
 
-    // TODO: Send to backend/CRM
-    // console.log('Forge Sight demo lead captured:', formData);
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // Send lead to backend
+    try {
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.email.split('@')[0],
+          email: formData.email,
+          source: 'DEMO_REQUEST',
+          message: `Forge Sight demo request — Role: ${formData.role}, Use case: ${formData.useCase}, Monthly volume: ${formData.monthlyVolume}`,
+        }),
+      });
+    } catch {
+      // Continue with redirect even if lead capture fails
+    }
 
     // Redirect to Forge Sight with tracking params
     const trackingParams = new URLSearchParams({
