@@ -149,7 +149,37 @@
       "department": "Department",
       "location": "Location",
       "type": "Type",
-      "applyNow": "Apply now"
+      "applyNow": "Apply now",
+      "list": {
+        "seniorFullStack": {
+          "title": "Senior Full-Stack Engineer",
+          "department": "Engineering",
+          "location": "Remote / Mexico City",
+          "type": "Full-time",
+          "description": "We are looking for an experienced engineer to help build scalable solutions for our enterprise clients."
+        },
+        "aiMl": {
+          "title": "AI/ML Engineer",
+          "department": "Innovation Lab",
+          "location": "Remote",
+          "type": "Full-time",
+          "description": "Join our team to develop cutting-edge AI solutions that transform businesses."
+        },
+        "productDesigner": {
+          "title": "Product Designer",
+          "department": "Design",
+          "location": "Mexico City",
+          "type": "Full-time",
+          "description": "Create beautiful, intuitive experiences for our digital products and platforms."
+        },
+        "bizDev": {
+          "title": "Business Development Manager",
+          "department": "Sales",
+          "location": "Mexico City / Remote",
+          "type": "Full-time",
+          "description": "Help us expand our reach and build relationships with enterprise clients."
+        }
+      }
     },
     "cta": {
       "title": "Don't see the right position?",
@@ -163,7 +193,62 @@
     "challenge": "Challenge",
     "solution": "Solution",
     "results": "Results",
-    "readFullCase": "Read full case"
+    "readFullCase": "Read full case",
+    "noCaseStudies": "No case studies available at the moment.",
+    "fallback": {
+      "0": {
+        "title": "Digital Transformation: From Legacy to Cloud-Native",
+        "client": "Global Manufacturing Corp",
+        "industry": "Manufacturing",
+        "challenge": "Outdated systems limiting growth and operational efficiency",
+        "solution": "Complete digital overhaul with cloud migration and AI-powered analytics",
+        "results": {
+          "0": {
+            "metric": "Cost Reduction",
+            "value": "40%",
+            "description": "reduction in operational costs"
+          },
+          "1": { "metric": "Speed", "value": "3x", "description": "faster time-to-market" },
+          "2": { "metric": "Uptime", "value": "99.9%", "description": "system uptime achieved" }
+        }
+      },
+      "1": {
+        "title": "Building a Next-Gen Trading Platform",
+        "client": "FinTech Innovations",
+        "industry": "Financial Services",
+        "challenge": "Need for real-time processing and regulatory compliance",
+        "solution": "Custom platform with ML-driven insights and automated compliance",
+        "results": {
+          "0": { "metric": "Latency", "value": "10ms", "description": "average latency" },
+          "1": { "metric": "Compliance", "value": "100%", "description": "regulatory compliance" },
+          "2": { "metric": "Savings", "value": "$2M", "description": "saved annually" }
+        }
+      },
+      "2": {
+        "title": "AI-Powered Patient Care System",
+        "client": "Healthcare Plus",
+        "industry": "Healthcare",
+        "challenge": "Fragmented patient data and inefficient care coordination",
+        "solution": "Unified healthcare platform with predictive analytics",
+        "results": {
+          "0": {
+            "metric": "Outcomes",
+            "value": "30%",
+            "description": "improvement in patient outcomes"
+          },
+          "1": {
+            "metric": "Efficiency",
+            "value": "50%",
+            "description": "reduction in administrative time"
+          },
+          "2": {
+            "metric": "Satisfaction",
+            "value": "2x",
+            "description": "increase in patient satisfaction"
+          }
+        }
+      }
+    }
   },
   "showcase": {
     "title": "Component Showcase",
@@ -204,6 +289,27 @@
       "aiDesc": "Seamlessly integrate artificial intelligence into your existing systems for enhanced decision-making and productivity.",
       "transformation": "Digital Transformation",
       "transformationDesc": "Complete business transformation with cutting-edge technology and strategic AI implementation."
+    },
+    "heroSubtitle": "MADFAM COMPONENTS",
+    "testimonials": {
+      "0": {
+        "quote": "MADFAM transformed our operations with their AI solutions. The ROI was evident within weeks.",
+        "name": "Maria González",
+        "role": "CEO",
+        "company": "TechCorp México"
+      },
+      "1": {
+        "quote": "The team's expertise in both AI and design thinking sets them apart. Highly recommended!",
+        "name": "Carlos Rivera",
+        "role": "Innovation Director",
+        "company": "StartupMX"
+      },
+      "2": {
+        "quote": "Professional, innovative, and results-driven. MADFAM is our go-to AI partner.",
+        "name": "Ana Martínez",
+        "role": "CTO",
+        "company": "FinTech Solutions"
+      }
     }
   },
   "blog": {
@@ -212,7 +318,28 @@
     "readMore": "Read more",
     "by": "By",
     "minRead": "min read",
-    "backToBlog": "Back to Blog"
+    "backToBlog": "Back to Blog",
+    "noPosts": "No blog posts available at the moment.",
+    "fallback": {
+      "0": {
+        "title": "The Future of AI in Business Transformation",
+        "excerpt": "Explore how artificial intelligence is reshaping the business landscape and creating new opportunities for growth and innovation.",
+        "author": "MADFAM Team",
+        "tag": "AI & Innovation"
+      },
+      "1": {
+        "title": "Building Scalable Digital Platforms: A Technical Guide",
+        "excerpt": "Learn the key architectural principles and best practices for building platforms that can grow with your business.",
+        "author": "MADFAM Engineering",
+        "tag": "Technical"
+      },
+      "2": {
+        "title": "Customer Success Story: Transforming Operations with Automation",
+        "excerpt": "How we helped a leading manufacturer reduce operational costs by 40% through intelligent automation solutions.",
+        "author": "MADFAM Team",
+        "tag": "Case Studies"
+      }
+    }
   },
   "guides": {
     "title": "Guides & Tutorials",
@@ -228,6 +355,74 @@
       "intermediate": "Intermediate",
       "advanced": "Advanced"
     },
+    "categories": {
+      "gettingStarted": "Getting Started",
+      "integration": "Integration Guides",
+      "bestPractices": "Best Practices",
+      "useCases": "Use Cases"
+    },
+    "items": {
+      "quickStart": {
+        "title": "Quick Start Guide",
+        "description": "Get up and running with MADFAM services in under 10 minutes",
+        "duration": "10 min"
+      },
+      "platformOverview": {
+        "title": "Platform Overview",
+        "description": "Understanding MADFAM's service architecture and capabilities",
+        "duration": "15 min"
+      },
+      "authSetup": {
+        "title": "Authentication Setup",
+        "description": "Configure authentication for your applications",
+        "duration": "20 min"
+      },
+      "restApi": {
+        "title": "REST API Integration",
+        "description": "Complete guide to integrating with our REST APIs",
+        "duration": "30 min"
+      },
+      "webhookConfig": {
+        "title": "Webhook Configuration",
+        "description": "Set up webhooks for real-time event notifications",
+        "duration": "25 min"
+      },
+      "sdkImpl": {
+        "title": "SDK Implementation",
+        "description": "Using our SDKs for JavaScript, Python, and Java",
+        "duration": "45 min"
+      },
+      "securityBest": {
+        "title": "Security Best Practices",
+        "description": "Ensure your integration follows security standards",
+        "duration": "30 min"
+      },
+      "perfOptimization": {
+        "title": "Performance Optimization",
+        "description": "Optimize your API calls and reduce latency",
+        "duration": "40 min"
+      },
+      "errorHandling": {
+        "title": "Error Handling Strategies",
+        "description": "Build resilient applications with proper error handling",
+        "duration": "35 min"
+      },
+      "aiChatbot": {
+        "title": "Building an AI Chatbot",
+        "description": "Step-by-step guide to create an intelligent chatbot",
+        "duration": "60 min"
+      },
+      "processAutomation": {
+        "title": "Process Automation",
+        "description": "Automate business processes with our workflow engine",
+        "duration": "45 min"
+      },
+      "analyticsDashboard": {
+        "title": "Data Analytics Dashboard",
+        "description": "Create real-time analytics dashboards",
+        "duration": "50 min"
+      }
+    },
     "videoTutorials": {
       "title": "Video tutorials",
       "description": "Prefer to learn through videos? Visit our YouTube channel for video tutorials and demos.",
@@ -241,22 +436,56 @@
     "categories": {
       "gettingStarted": {
         "title": "Getting Started",
-        "description": "Quick start guides and service overview"
+        "description": "Quick start guides and service overview",
+        "items": {
+          "intro": "Introduction to MADFAM",
+          "services": "Service Overview",
+          "architecture": "Platform Architecture",
+          "security": "Security & Compliance"
+        }
       },
       "api": {
         "title": "API Documentation",
-        "description": "Technical documentation for our APIs and integrations"
+        "description": "Technical documentation for our APIs and integrations",
+        "items": {
+          "reference": "API Reference",
+          "authentication": "Authentication",
+          "rateLimiting": "Rate Limiting",
+          "webhooks": "Webhooks"
+        }
       },
       "guides": {
         "title": "Guides & Tutorials",
-        "description": "Step-by-step guides for common use cases"
+        "description": "Step-by-step guides for common use cases",
+        "items": {
+          "integrationGuides": "Integration Guides",
+          "bestPractices": "Best Practices",
+          "migration": "Migration Guide",
+          "troubleshooting": "Troubleshooting"
+        }
       },
       "resources": {
         "title": "Resources",
-        "description": "Additional resources and support materials"
+        "description": "Additional resources and support materials",
+        "items": {
+          "caseStudies": "Case Studies",
+          "blog": "Blog & Updates",
+          "support": "Support Center",
+          "community": "Community Forum"
+        }
       }
     },
     "popularTopics": "Popular topics",
+    "popularTopicLabels": {
+      "authentication": "Authentication",
+      "apiKeys": "API Keys",
+      "webhooks": "Webhooks",
+      "rateLimits": "Rate Limits",
+      "errorHandling": "Error Handling",
+      "dataSecurity": "Data Security",
+      "integration": "Integration",
+      "migration": "Migration"
+    },
     "needHelp": {
       "title": "Need help?",
       "subtitle": "Can't find what you're looking for? Our support team is here to help.",

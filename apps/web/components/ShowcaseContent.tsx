@@ -81,7 +81,7 @@ export function ShowcaseContent() {
         <Hero
           variant="home"
           title={t('home.hero.title')}
-          subtitle="MADFAM COMPONENTS"
+          subtitle={t('showcase.heroSubtitle')}
           description={t('home.hero.subtitle')}
           cta={{
             primary: {
@@ -208,30 +208,30 @@ export function ShowcaseContent() {
             </Heading>
             <div className="grid md:grid-cols-3 gap-6">
               <TestimonialCard
-                quote="MADFAM transformed our operations with their AI solutions. The ROI was evident within weeks."
+                quote={t('showcase.testimonials.0.quote')}
                 author={{
-                  name: 'Maria González',
-                  role: 'CEO',
-                  company: 'TechCorp México',
+                  name: t('showcase.testimonials.0.name'),
+                  role: t('showcase.testimonials.0.role'),
+                  company: t('showcase.testimonials.0.company'),
                 }}
                 rating={5}
               />
               <TestimonialCard
-                quote="The team's expertise in both AI and design thinking sets them apart. Highly recommended!"
+                quote={t('showcase.testimonials.1.quote')}
                 author={{
-                  name: 'Carlos Rivera',
-                  role: 'Innovation Director',
-                  company: 'StartupMX',
+                  name: t('showcase.testimonials.1.name'),
+                  role: t('showcase.testimonials.1.role'),
+                  company: t('showcase.testimonials.1.company'),
                 }}
                 rating={5}
                 variant="featured"
               />
               <TestimonialCard
-                quote="Professional, innovative, and results-driven. MADFAM is our go-to AI partner."
+                quote={t('showcase.testimonials.2.quote')}
                 author={{
-                  name: 'Ana Martínez',
-                  role: 'CTO',
-                  company: 'FinTech Solutions',
+                  name: t('showcase.testimonials.2.name'),
+                  role: t('showcase.testimonials.2.role'),
+                  company: t('showcase.testimonials.2.company'),
                 }}
                 rating={4}
                 variant="compact"

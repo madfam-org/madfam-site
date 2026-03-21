@@ -8,43 +8,47 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
 
   const documentationSections = [
     {
+      id: 'getting-started',
       title: t('categories.gettingStarted.title'),
       description: t('categories.gettingStarted.description'),
       items: [
-        { title: 'Introduction to MADFAM', href: '#getting-started' },
-        { title: 'Service Overview', href: '/programs' },
-        { title: 'Platform Architecture', href: '#architecture' },
-        { title: 'Security & Compliance', href: '#security' },
+        { title: t('categories.gettingStarted.items.intro'), href: '#getting-started' },
+        { title: t('categories.gettingStarted.items.services'), href: '/programs' },
+        { title: t('categories.gettingStarted.items.architecture'), href: '#getting-started' },
+        { title: t('categories.gettingStarted.items.security'), href: '#getting-started' },
       ],
     },
     {
+      id: 'api',
       title: t('categories.api.title'),
       description: t('categories.api.description'),
       items: [
-        { title: 'API Reference', href: '/api' },
-        { title: 'Authentication', href: '#authentication' },
-        { title: 'Rate Limiting', href: '#rate-limits' },
-        { title: 'Webhooks', href: '#webhooks' },
+        { title: t('categories.api.items.reference'), href: '/api' },
+        { title: t('categories.api.items.authentication'), href: '#api' },
+        { title: t('categories.api.items.rateLimiting'), href: '#api' },
+        { title: t('categories.api.items.webhooks'), href: '#api' },
       ],
     },
     {
+      id: 'guides',
       title: t('categories.guides.title'),
       description: t('categories.guides.description'),
       items: [
-        { title: 'Integration Guides', href: '/guides' },
-        { title: 'Best Practices', href: '#best-practices' },
-        { title: 'Migration Guide', href: '#migration' },
-        { title: 'Troubleshooting', href: '#troubleshooting' },
+        { title: t('categories.guides.items.integrationGuides'), href: '/guides' },
+        { title: t('categories.guides.items.bestPractices'), href: '#guides' },
+        { title: t('categories.guides.items.migration'), href: '#guides' },
+        { title: t('categories.guides.items.troubleshooting'), href: '#guides' },
       ],
     },
     {
+      id: 'resources',
       title: t('categories.resources.title'),
       description: t('categories.resources.description'),
       items: [
-        { title: 'Case Studies', href: '/case-studies' },
-        { title: 'Blog & Updates', href: '/blog' },
-        { title: 'Support Center', href: '/contact' },
-        { title: 'Community Forum', href: 'https://github.com/madfam-org' },
+        { title: t('categories.resources.items.caseStudies'), href: '/case-studies' },
+        { title: t('categories.resources.items.blog'), href: '/blog' },
+        { title: t('categories.resources.items.support'), href: '/contact' },
+        { title: t('categories.resources.items.community'), href: 'https://github.com/madfam-org' },
       ],
     },
   ];
@@ -89,7 +93,7 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
           {/* Documentation Sections */}
           <div className="grid md:grid-cols-2 gap-8">
             {documentationSections.map((section, index) => (
-              <Card key={index} className="p-6">
+              <Card key={index} id={section.id} className="p-6">
                 <Heading level={3} className="mb-2">
                   {section.title}
                 </Heading>
@@ -117,23 +121,24 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
               {t('popularTopics')}
             </Heading>
             <div className="flex flex-wrap gap-3 justify-center">
-              {[
-                'Authentication',
-                'API Keys',
-                'Webhooks',
-                'Rate Limits',
-                'Error Handling',
-                'Data Security',
-                'Integration',
-                'Migration',
-              ].map(topic => (
-                <Link
-                  key={topic}
-                  href={`#${topic.toLowerCase().replace(' ', '-')}`}
+              {(
+                [
+                  'authentication',
+                  'apiKeys',
+                  'webhooks',
+                  'rateLimits',
+                  'errorHandling',
+                  'dataSecurity',
+                  'integration',
+                  'migration',
+                ] as const
+              ).map(key => (
+                <span
+                  key={key}
                   className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-lavender/10 transition-colors"
                 >
-                  {topic}
-                </Link>
+                  {t(`popularTopicLabels.${key}`)}
+                </span>
               ))}
             </div>
           </div>

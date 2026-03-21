@@ -28,6 +28,32 @@
       "perMinute": "Requisições por minuto",
       "perHour": "Requisições por hora",
       "perDay": "Requisições por dia"
+    },
+    "endpoints": {
+      "auth": {
+        "login": "Autenticar usuário e receber token de acesso",
+        "refresh": "Atualizar token de acesso usando token de atualização",
+        "logout": "Invalidar sessão e tokens do usuário"
+      },
+      "assessment": {
+        "submit": "Enviar avaliação de prontidão IA",
+        "retrieve": "Recuperar resultados da avaliação"
+      },
+      "calculator": {
+        "calculate": "Calcular ROI baseado em parâmetros de entrada",
+        "presets": "Obter presets de cálculo específicos por indústria"
+      },
+      "leads": {
+        "submit": "Enviar um novo lead",
+        "list": "Listar todos os leads (somente admin)",
+        "update": "Atualizar status do lead"
+      }
+    },
+    "quickLinks": {
+      "authGuide": "Guia de Autenticação",
+      "rateLimits": "Limites de Taxa",
+      "errorCodes": "Códigos de Erro",
+      "sdks": "SDKs e Bibliotecas"
     }
   },
   "dashboard": {

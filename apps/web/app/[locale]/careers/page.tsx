@@ -5,42 +5,15 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
   await params; // Validate params exist
   const t = await getTranslations('careers');
 
-  const openPositions = [
-    {
-      id: 1,
-      title: 'Senior Full-Stack Engineer',
-      department: 'Engineering',
-      location: 'Remote / Mexico City',
-      type: 'Full-time',
-      description:
-        'We are looking for an experienced engineer to help build scalable solutions for our enterprise clients.',
-    },
-    {
-      id: 2,
-      title: 'AI/ML Engineer',
-      department: 'Innovation Lab',
-      location: 'Remote',
-      type: 'Full-time',
-      description: 'Join our team to develop cutting-edge AI solutions that transform businesses.',
-    },
-    {
-      id: 3,
-      title: 'Product Designer',
-      department: 'Design',
-      location: 'Mexico City',
-      type: 'Full-time',
-      description:
-        'Create beautiful, intuitive experiences for our digital products and platforms.',
-    },
-    {
-      id: 4,
-      title: 'Business Development Manager',
-      department: 'Sales',
-      location: 'Mexico City / Remote',
-      type: 'Full-time',
-      description: 'Help us expand our reach and build relationships with enterprise clients.',
-    },
-  ];
+  const positionKeys = ['seniorFullStack', 'aiMl', 'productDesigner', 'bizDev'] as const;
+  const openPositions = positionKeys.map((key, index) => ({
+    id: index + 1,
+    title: t(`positions.list.${key}.title`),
+    department: t(`positions.list.${key}.department`),
+    location: t(`positions.list.${key}.location`),
+    type: t(`positions.list.${key}.type`),
+    description: t(`positions.list.${key}.description`),
+  }));
 
   const benefits = [
     { icon: '🏥', key: 'health' },

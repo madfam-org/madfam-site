@@ -26,70 +26,106 @@ type CommonCaseStudy = {
   };
 };
 
-// Fallback case studies for when CMS is unavailable
-const fallbackCaseStudies: CommonCaseStudy[] = [
-  {
-    id: '1',
-    title: 'Digital Transformation: From Legacy to Cloud-Native',
-    client: 'Global Manufacturing Corp',
-    industry: 'Manufacturing',
-    challenge: 'Outdated systems limiting growth and operational efficiency',
-    solution: 'Complete digital overhaul with cloud migration and AI-powered analytics',
-    results: [
-      { metric: 'Cost Reduction', value: '40%', description: 'reduction in operational costs' },
-      { metric: 'Speed', value: '3x', description: 'faster time-to-market' },
-      { metric: 'Uptime', value: '99.9%', description: 'system uptime achieved' },
-    ],
-    slug: 'global-manufacturing-digital-transformation',
-    status: 'published' as const,
-    publishedDate: '2024-03-01',
-    createdAt: '2024-03-01',
-    updatedAt: '2024-03-01',
-    featuredImage: undefined,
-  },
-  {
-    id: '2',
-    title: 'Building a Next-Gen Trading Platform',
-    client: 'FinTech Innovations',
-    industry: 'Financial Services',
-    challenge: 'Need for real-time processing and regulatory compliance',
-    solution: 'Custom platform with ML-driven insights and automated compliance',
-    results: [
-      { metric: 'Latency', value: '10ms', description: 'average latency' },
-      { metric: 'Compliance', value: '100%', description: 'regulatory compliance' },
-      { metric: 'Savings', value: '$2M', description: 'saved annually' },
-    ],
-    slug: 'fintech-trading-platform',
-    status: 'published' as const,
-    publishedDate: '2024-02-15',
-    createdAt: '2024-02-15',
-    updatedAt: '2024-02-15',
-    featuredImage: undefined,
-  },
-  {
-    id: '3',
-    title: 'AI-Powered Patient Care System',
-    client: 'Healthcare Plus',
-    industry: 'Healthcare',
-    challenge: 'Fragmented patient data and inefficient care coordination',
-    solution: 'Unified healthcare platform with predictive analytics',
-    results: [
-      { metric: 'Outcomes', value: '30%', description: 'improvement in patient outcomes' },
-      { metric: 'Efficiency', value: '50%', description: 'reduction in administrative time' },
-      { metric: 'Satisfaction', value: '2x', description: 'increase in patient satisfaction' },
-    ],
-    slug: 'healthcare-ai-patient-care',
-    status: 'published' as const,
-    publishedDate: '2024-02-01',
-    createdAt: '2024-02-01',
-    updatedAt: '2024-02-01',
-    featuredImage: undefined,
-  },
-];
-
 export default async function CaseStudiesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations('caseStudies');
+
+  // Fallback case studies for when CMS is unavailable
+  const fallbackCaseStudies: CommonCaseStudy[] = [
+    {
+      id: '1',
+      title: t('fallback.0.title'),
+      client: t('fallback.0.client'),
+      industry: t('fallback.0.industry'),
+      challenge: t('fallback.0.challenge'),
+      solution: t('fallback.0.solution'),
+      results: [
+        {
+          metric: t('fallback.0.results.0.metric'),
+          value: '40%',
+          description: t('fallback.0.results.0.description'),
+        },
+        {
+          metric: t('fallback.0.results.1.metric'),
+          value: '3x',
+          description: t('fallback.0.results.1.description'),
+        },
+        {
+          metric: t('fallback.0.results.2.metric'),
+          value: '99.9%',
+          description: t('fallback.0.results.2.description'),
+        },
+      ],
+      slug: 'global-manufacturing-digital-transformation',
+      status: 'published' as const,
+      publishedDate: '2024-03-01',
+      createdAt: '2024-03-01',
+      updatedAt: '2024-03-01',
+      featuredImage: undefined,
+    },
+    {
+      id: '2',
+      title: t('fallback.1.title'),
+      client: t('fallback.1.client'),
+      industry: t('fallback.1.industry'),
+      challenge: t('fallback.1.challenge'),
+      solution: t('fallback.1.solution'),
+      results: [
+        {
+          metric: t('fallback.1.results.0.metric'),
+          value: '10ms',
+          description: t('fallback.1.results.0.description'),
+        },
+        {
+          metric: t('fallback.1.results.1.metric'),
+          value: '100%',
+          description: t('fallback.1.results.1.description'),
+        },
+        {
+          metric: t('fallback.1.results.2.metric'),
+          value: '$2M',
+          description: t('fallback.1.results.2.description'),
+        },
+      ],
+      slug: 'fintech-trading-platform',
+      status: 'published' as const,
+      publishedDate: '2024-02-15',
+      createdAt: '2024-02-15',
+      updatedAt: '2024-02-15',
+      featuredImage: undefined,
+    },
+    {
+      id: '3',
+      title: t('fallback.2.title'),
+      client: t('fallback.2.client'),
+      industry: t('fallback.2.industry'),
+      challenge: t('fallback.2.challenge'),
+      solution: t('fallback.2.solution'),
+      results: [
+        {
+          metric: t('fallback.2.results.0.metric'),
+          value: '30%',
+          description: t('fallback.2.results.0.description'),
+        },
+        {
+          metric: t('fallback.2.results.1.metric'),
+          value: '50%',
+          description: t('fallback.2.results.1.description'),
+        },
+        {
+          metric: t('fallback.2.results.2.metric'),
+          value: '2x',
+          description: t('fallback.2.results.2.description'),
+        },
+      ],
+      slug: 'healthcare-ai-patient-care',
+      status: 'published' as const,
+      publishedDate: '2024-02-01',
+      createdAt: '2024-02-01',
+      updatedAt: '2024-02-01',
+      featuredImage: undefined,
+    },
+  ];
 
   // Fetch case studies from CMS or use fallback data
   let caseStudies: CommonCaseStudy[] = fallbackCaseStudies;
@@ -137,9 +173,7 @@ export default async function CaseStudiesPage({ params }: { params: Promise<{ lo
 
           {caseStudies.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
-                {t('noCaseStudies') || 'No case studies available at the moment.'}
-              </p>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">{t('noCaseStudies')}</p>
             </div>
           ) : (
             <div className="grid gap-8 md:gap-12">

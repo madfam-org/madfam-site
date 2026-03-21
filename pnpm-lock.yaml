@@ -136,8 +136,8 @@ importers:
         specifier: ^3.3.4
         version: 3.3.4(react-hook-form@7.66.0(react@18.3.1))
       '@janua/nextjs':
-        specifier: ^0.1.2
-        version: 0.1.2(@types/react-dom@18.2.18)(@types/react@19.2.4)(graphql@16.12.0)(immer@9.0.21)(next@15.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
+        specifier: ^0.1.6
+        version: 0.1.6(@types/react-dom@18.2.18)(@types/react@19.2.4)(graphql@16.12.0)(immer@9.0.21)(next@15.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
       '@janua/ui':
         specifier: ^0.1.1
         version: 0.1.1(@types/react-dom@18.2.18)(@types/react@19.2.4)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
@@ -1283,16 +1283,16 @@ packages:
     resolution: {integrity: sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==}
     engines: {node: '>=8'}
 
-  '@janua/nextjs@0.1.2':
-    resolution: {integrity: sha512-SP6TMXKQCmhd5q/fuBQptrNfs9TiEB5EJfkfDK+1RzFEHBFhWvEdVGi0ho4IzL8b/mXrsLQ8SOsak6YOoSalYg==}
+  '@janua/nextjs@0.1.6':
+    resolution: {integrity: sha512-KofsfQCuoniLRAIjJANebvNaf/HDJ97ahpL3K985rHs/wZDrvubO7QIEI0PKK+/w4F+/40mIC1GuhELiJyihBA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       next: '>=14.2.30'
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
 
-  '@janua/typescript-sdk@0.1.1':
-    resolution: {integrity: sha512-WPuGziVvVL5G3kI+0NZwb+V6ovITPpcJmLnwOk4oOoAiENruE8Hn9hFyWRpCnLkbZ7vkwaYIhYoMOHaxmZuFzw==}
+  '@janua/typescript-sdk@0.1.3':
+    resolution: {integrity: sha512-QApg3LF7MmcT4OCHyWE3cyVxirgdHwl9mI5ON/VKsDrGVGzRMZviKkh/BPfvHiYWIADKPt6EUo/QLxgdOPO8sw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@apollo/client': ^3.8.0
@@ -8639,9 +8639,9 @@ snapshots:
 
   '@istanbuljs/schema@0.1.3': {}
 
-  '@janua/nextjs@0.1.2(@types/react-dom@18.2.18)(@types/react@19.2.4)(graphql@16.12.0)(immer@9.0.21)(next@15.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))':
+  '@janua/nextjs@0.1.6(@types/react-dom@18.2.18)(@types/react@19.2.4)(graphql@16.12.0)(immer@9.0.21)(next@15.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))':
     dependencies:
-      '@janua/typescript-sdk': 0.1.1(graphql@16.12.0)
+      '@janua/typescript-sdk': 0.1.3(graphql@16.12.0)
       '@janua/ui': 0.1.1(@types/react-dom@18.2.18)(@types/react@19.2.4)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
       jose: 5.9.6
       next: 15.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -8658,7 +8658,7 @@ snapshots:
       - tailwindcss
       - use-sync-external-store
 
-  '@janua/typescript-sdk@0.1.1(graphql@16.12.0)':
+  '@janua/typescript-sdk@0.1.3(graphql@16.12.0)':
     optionalDependencies:
       graphql: 16.12.0
 

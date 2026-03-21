@@ -2,79 +2,6 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card } from '@/components/ui';
 
-const apiEndpoints = [
-  {
-    category: 'Authentication',
-    endpoints: [
-      {
-        method: 'POST',
-        path: '/api/auth/login',
-        description: 'Authenticate user and receive access token',
-      },
-      {
-        method: 'POST',
-        path: '/api/auth/refresh',
-        description: 'Refresh access token using refresh token',
-      },
-      {
-        method: 'POST',
-        path: '/api/auth/logout',
-        description: 'Invalidate user session and tokens',
-      },
-    ],
-  },
-  {
-    category: 'Assessment',
-    endpoints: [
-      {
-        method: 'POST',
-        path: '/api/assessment',
-        description: 'Submit AI readiness assessment',
-      },
-      {
-        method: 'GET',
-        path: '/api/assessment/:id',
-        description: 'Retrieve assessment results',
-      },
-    ],
-  },
-  {
-    category: 'Calculator',
-    endpoints: [
-      {
-        method: 'POST',
-        path: '/api/calculator',
-        description: 'Calculate ROI based on input parameters',
-      },
-      {
-        method: 'GET',
-        path: '/api/calculator/presets',
-        description: 'Get industry-specific calculation presets',
-      },
-    ],
-  },
-  {
-    category: 'Leads',
-    endpoints: [
-      {
-        method: 'POST',
-        path: '/api/leads',
-        description: 'Submit a new lead',
-      },
-      {
-        method: 'GET',
-        path: '/api/leads',
-        description: 'List all leads (admin only)',
-      },
-      {
-        method: 'PUT',
-        path: '/api/leads/:id',
-        description: 'Update lead status',
-      },
-    ],
-  },
-];
-
 const codeExamples = {
   auth: `// Authentication Example
 const response = await fetch('https://api.madfam.io/api/auth/login', {
@@ -110,6 +37,79 @@ export default async function ApiPage({ params }: { params: Promise<{ locale: st
   await params; // Validate params exist
   const t = await getTranslations('api');
 
+  const apiEndpoints = [
+    {
+      category: t('categories.authentication'),
+      endpoints: [
+        {
+          method: 'POST',
+          path: '/api/auth/login',
+          description: t('endpoints.auth.login'),
+        },
+        {
+          method: 'POST',
+          path: '/api/auth/refresh',
+          description: t('endpoints.auth.refresh'),
+        },
+        {
+          method: 'POST',
+          path: '/api/auth/logout',
+          description: t('endpoints.auth.logout'),
+        },
+      ],
+    },
+    {
+      category: t('categories.assessment'),
+      endpoints: [
+        {
+          method: 'POST',
+          path: '/api/assessment',
+          description: t('endpoints.assessment.submit'),
+        },
+        {
+          method: 'GET',
+          path: '/api/assessment/:id',
+          description: t('endpoints.assessment.retrieve'),
+        },
+      ],
+    },
+    {
+      category: t('categories.calculator'),
+      endpoints: [
+        {
+          method: 'POST',
+          path: '/api/calculator',
+          description: t('endpoints.calculator.calculate'),
+        },
+        {
+          method: 'GET',
+          path: '/api/calculator/presets',
+          description: t('endpoints.calculator.presets'),
+        },
+      ],
+    },
+    {
+      category: t('categories.leads'),
+      endpoints: [
+        {
+          method: 'POST',
+          path: '/api/leads',
+          description: t('endpoints.leads.submit'),
+        },
+        {
+          method: 'GET',
+          path: '/api/leads',
+          description: t('endpoints.leads.list'),
+        },
+        {
+          method: 'PUT',
+          path: '/api/leads/:id',
+          description: t('endpoints.leads.update'),
+        },
+      ],
+    },
+  ];
+
   return (
     <main className="min-h-screen py-20">
       <Container>
@@ -128,16 +128,16 @@ export default async function ApiPage({ params }: { params: Promise<{ locale: st
             <Card className="p-6">
               <div className="grid md:grid-cols-4 gap-4">
                 <Link href="/docs/auth" className="text-lavender hover:text-lavender/80">
-                  → Authentication Guide
+                  → {t('quickLinks.authGuide')}
                 </Link>
                 <Link href="/docs/rate-limits" className="text-lavender hover:text-lavender/80">
-                  → Rate Limits
+                  → {t('quickLinks.rateLimits')}
                 </Link>
                 <Link href="/docs/errors" className="text-lavender hover:text-lavender/80">
-                  → Error Codes
+                  → {t('quickLinks.errorCodes')}
                 </Link>
                 <Link href="/docs/sdks" className="text-lavender hover:text-lavender/80">
-                  → SDKs & Libraries
+                  → {t('quickLinks.sdks')}
                 </Link>
               </div>
             </Card>

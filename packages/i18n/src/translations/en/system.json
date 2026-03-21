@@ -28,6 +28,32 @@
       "perMinute": "Requests per minute",
       "perHour": "Requests per hour",
       "perDay": "Requests per day"
+    },
+    "endpoints": {
+      "auth": {
+        "login": "Authenticate user and receive access token",
+        "refresh": "Refresh access token using refresh token",
+        "logout": "Invalidate user session and tokens"
+      },
+      "assessment": {
+        "submit": "Submit AI readiness assessment",
+        "retrieve": "Retrieve assessment results"
+      },
+      "calculator": {
+        "calculate": "Calculate ROI based on input parameters",
+        "presets": "Get industry-specific calculation presets"
+      },
+      "leads": {
+        "submit": "Submit a new lead",
+        "list": "List all leads (admin only)",
+        "update": "Update lead status"
+      }
+    },
+    "quickLinks": {
+      "authGuide": "Authentication Guide",
+      "rateLimits": "Rate Limits",
+      "errorCodes": "Error Codes",
+      "sdks": "SDKs & Libraries"
     }
   },
   "dashboard": {

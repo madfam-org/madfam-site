@@ -27,7 +27,7 @@ export default async function ProgramsPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'corporate.programs' });
   const commonT = await getTranslations({ locale, namespace: 'common' });
-  const badgesT = await getTranslations({ locale, namespace: 'corporate.solutions.badges' });
+  const badgesT = await getTranslations({ locale, namespace: 'corporate.badges' });
 
   // Programs
   const programs = [

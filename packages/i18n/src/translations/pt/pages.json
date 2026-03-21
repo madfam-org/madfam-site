@@ -149,7 +149,37 @@
       "department": "Departamento",
       "location": "Localização",
       "type": "Tipo",
-      "applyNow": "Candidatar-se agora"
+      "applyNow": "Candidatar-se agora",
+      "list": {
+        "seniorFullStack": {
+          "title": "Engenheiro Full-Stack Sênior",
+          "department": "Engenharia",
+          "location": "Remoto / Cidade do México",
+          "type": "Tempo integral",
+          "description": "Estamos procurando um engenheiro experiente para ajudar a construir soluções escaláveis para nossos clientes empresariais."
+        },
+        "aiMl": {
+          "title": "Engenheiro IA/ML",
+          "department": "Laboratório de Inovação",
+          "location": "Remoto",
+          "type": "Tempo integral",
+          "description": "Junte-se à nossa equipe para desenvolver soluções de IA de ponta que transformam empresas."
+        },
+        "productDesigner": {
+          "title": "Designer de Produto",
+          "department": "Design",
+          "location": "Cidade do México",
+          "type": "Tempo integral",
+          "description": "Crie experiências bonitas e intuitivas para nossos produtos e plataformas digitais."
+        },
+        "bizDev": {
+          "title": "Gerente de Desenvolvimento de Negócios",
+          "department": "Vendas",
+          "location": "Cidade do México / Remoto",
+          "type": "Tempo integral",
+          "description": "Ajude-nos a expandir nosso alcance e construir relacionamentos com clientes empresariais."
+        }
+      }
     },
     "cta": {
       "title": "Não vê a posição certa?",
@@ -163,7 +193,74 @@
     "challenge": "Desafio",
     "solution": "Solução",
     "results": "Resultados",
-    "readFullCase": "Ler caso completo"
+    "readFullCase": "Ler caso completo",
+    "noCaseStudies": "Não há casos de estudo disponíveis no momento.",
+    "fallback": {
+      "0": {
+        "title": "Transformação Digital: De Legacy para Cloud-Native",
+        "client": "Global Manufacturing Corp",
+        "industry": "Manufatura",
+        "challenge": "Sistemas desatualizados limitando o crescimento e a eficiência operacional",
+        "solution": "Revisão digital completa com migração para nuvem e análise impulsionada por IA",
+        "results": {
+          "0": {
+            "metric": "Redução de Custos",
+            "value": "40%",
+            "description": "redução nos custos operacionais"
+          },
+          "1": {
+            "metric": "Velocidade",
+            "value": "3x",
+            "description": "mais rápido para o mercado"
+          },
+          "2": {
+            "metric": "Disponibilidade",
+            "value": "99.9%",
+            "description": "disponibilidade do sistema alcançada"
+          }
+        }
+      },
+      "1": {
+        "title": "Construindo uma Plataforma de Trading de Nova Geração",
+        "client": "FinTech Innovations",
+        "industry": "Serviços Financeiros",
+        "challenge": "Necessidade de processamento em tempo real e conformidade regulatória",
+        "solution": "Plataforma personalizada com insights impulsionados por ML e conformidade automatizada",
+        "results": {
+          "0": { "metric": "Latência", "value": "10ms", "description": "latência média" },
+          "1": {
+            "metric": "Conformidade",
+            "value": "100%",
+            "description": "conformidade regulatória"
+          },
+          "2": { "metric": "Economia", "value": "$2M", "description": "economizados anualmente" }
+        }
+      },
+      "2": {
+        "title": "Sistema de Atendimento ao Paciente Impulsionado por IA",
+        "client": "Healthcare Plus",
+        "industry": "Saúde",
+        "challenge": "Dados de pacientes fragmentados e coordenação de cuidados ineficiente",
+        "solution": "Plataforma unificada de saúde com análise preditiva",
+        "results": {
+          "0": {
+            "metric": "Resultados",
+            "value": "30%",
+            "description": "melhoria nos resultados dos pacientes"
+          },
+          "1": {
+            "metric": "Eficiência",
+            "value": "50%",
+            "description": "redução no tempo administrativo"
+          },
+          "2": {
+            "metric": "Satisfação",
+            "value": "2x",
+            "description": "aumento na satisfação do paciente"
+          }
+        }
+      }
+    }
   },
   "showcase": {
     "title": "Vitrine de Componentes",
@@ -204,6 +301,27 @@
       "aiDesc": "Integre perfeitamente a inteligência artificial aos seus sistemas existentes para melhorar a tomada de decisões e a produtividade.",
       "transformation": "Transformação Digital",
       "transformationDesc": "Transformação empresarial completa com tecnologia de ponta e implementação estratégica de IA."
+    },
+    "heroSubtitle": "COMPONENTES MADFAM",
+    "testimonials": {
+      "0": {
+        "quote": "MADFAM transformou nossas operações com suas soluções de IA. O ROI foi evidente em semanas.",
+        "name": "Maria González",
+        "role": "CEO",
+        "company": "TechCorp México"
+      },
+      "1": {
+        "quote": "A expertise da equipe em IA e design thinking os diferencia. Altamente recomendados!",
+        "name": "Carlos Rivera",
+        "role": "Diretor de Inovação",
+        "company": "StartupMX"
+      },
+      "2": {
+        "quote": "Profissionais, inovadores e orientados a resultados. MADFAM é nosso parceiro de IA preferido.",
+        "name": "Ana Martínez",
+        "role": "CTO",
+        "company": "FinTech Solutions"
+      }
     }
   },
   "blog": {
@@ -212,7 +330,28 @@
     "readMore": "Leia mais",
     "by": "Por",
     "minRead": "min de leitura",
-    "backToBlog": "Voltar ao Blog"
+    "backToBlog": "Voltar ao Blog",
+    "noPosts": "Não há publicações de blog disponíveis no momento.",
+    "fallback": {
+      "0": {
+        "title": "O Futuro da IA na Transformação Empresarial",
+        "excerpt": "Explore como a inteligência artificial está transformando o cenário empresarial e criando novas oportunidades de crescimento e inovação.",
+        "author": "Equipe MADFAM",
+        "tag": "IA e Inovação"
+      },
+      "1": {
+        "title": "Construindo Plataformas Digitais Escaláveis: Guia Técnico",
+        "excerpt": "Aprenda os princípios arquitetônicos chave e as melhores práticas para construir plataformas que possam crescer com seu negócio.",
+        "author": "Engenharia MADFAM",
+        "tag": "Técnico"
+      },
+      "2": {
+        "title": "História de Sucesso: Transformando Operações com Automação",
+        "excerpt": "Como ajudamos um fabricante líder a reduzir custos operacionais em 40% através de soluções inteligentes de automação.",
+        "author": "Equipe MADFAM",
+        "tag": "Casos de Sucesso"
+      }
+    }
   },
   "guides": {
     "title": "Guias e tutoriais",
@@ -228,6 +367,74 @@
       "intermediate": "Intermediário",
       "advanced": "Avançado"
     },
+    "categories": {
+      "gettingStarted": "Começando",
+      "integration": "Guias de Integração",
+      "bestPractices": "Melhores Práticas",
+      "useCases": "Casos de Uso"
+    },
+    "items": {
+      "quickStart": {
+        "title": "Guia de Início Rápido",
+        "description": "Comece a usar os serviços da MADFAM em menos de 10 minutos",
+        "duration": "10 min"
+      },
+      "platformOverview": {
+        "title": "Visão Geral da Plataforma",
+        "description": "Entenda a arquitetura e capacidades dos serviços da MADFAM",
+        "duration": "15 min"
+      },
+      "authSetup": {
+        "title": "Configuração de Autenticação",
+        "description": "Configure a autenticação para suas aplicações",
+        "duration": "20 min"
+      },
+      "restApi": {
+        "title": "Integração com API REST",
+        "description": "Guia completo para integração com nossas APIs REST",
+        "duration": "30 min"
+      },
+      "webhookConfig": {
+        "title": "Configuração de Webhooks",
+        "description": "Configure webhooks para notificações de eventos em tempo real",
+        "duration": "25 min"
+      },
+      "sdkImpl": {
+        "title": "Implementação de SDK",
+        "description": "Usando nossos SDKs para JavaScript, Python e Java",
+        "duration": "45 min"
+      },
+      "securityBest": {
+        "title": "Melhores Práticas de Segurança",
+        "description": "Garanta que sua integração siga os padrões de segurança",
+        "duration": "30 min"
+      },
+      "perfOptimization": {
+        "title": "Otimização de Desempenho",
+        "description": "Otimize suas chamadas API e reduza a latência",
+        "duration": "40 min"
+      },
+      "errorHandling": {
+        "title": "Estratégias de Tratamento de Erros",
+        "description": "Construa aplicações resilientes com tratamento adequado de erros",
+        "duration": "35 min"
+      },
+      "aiChatbot": {
+        "title": "Construindo um Chatbot IA",
+        "description": "Guia passo a passo para criar um chatbot inteligente",
+        "duration": "60 min"
+      },
+      "processAutomation": {
+        "title": "Automação de Processos",
+        "description": "Automatize processos empresariais com nosso motor de fluxos de trabalho",
+        "duration": "45 min"
+      },
+      "analyticsDashboard": {
+        "title": "Dashboard de Análise de Dados",
+        "description": "Crie dashboards de análise em tempo real",
+        "duration": "50 min"
+      }
+    },
     "videoTutorials": {
       "title": "Tutoriais em vídeo",
       "description": "Prefere aprender através de vídeos? Visite nosso canal do YouTube para tutoriais e demos em vídeo.",
@@ -241,22 +448,56 @@
     "categories": {
       "gettingStarted": {
         "title": "Começando",
-        "description": "Guias de início rápido e visão geral dos nossos serviços"
+        "description": "Guias de início rápido e visão geral dos nossos serviços",
+        "items": {
+          "intro": "Introdução ao MADFAM",
+          "services": "Visão Geral dos Serviços",
+          "architecture": "Arquitetura da Plataforma",
+          "security": "Segurança e Conformidade"
+        }
       },
       "api": {
         "title": "Documentação API",
-        "description": "Documentação técnica para nossas APIs e integrações"
+        "description": "Documentação técnica para nossas APIs e integrações",
+        "items": {
+          "reference": "Referência API",
+          "authentication": "Autenticação",
+          "rateLimiting": "Limitação de Taxa",
+          "webhooks": "Webhooks"
+        }
       },
       "guides": {
         "title": "Guias e tutoriais",
-        "description": "Guias passo a passo para casos de uso comuns"
+        "description": "Guias passo a passo para casos de uso comuns",
+        "items": {
+          "integrationGuides": "Guias de Integração",
+          "bestPractices": "Melhores Práticas",
+          "migration": "Guia de Migração",
+          "troubleshooting": "Solução de Problemas"
+        }
       },
       "resources": {
         "title": "Recursos",
-        "description": "Recursos adicionais e materiais de suporte"
+        "description": "Recursos adicionais e materiais de suporte",
+        "items": {
+          "caseStudies": "Casos de Sucesso",
+          "blog": "Blog e Novidades",
+          "support": "Centro de Suporte",
+          "community": "Fórum da Comunidade"
+        }
       }
     },
     "popularTopics": "Tópicos populares",
+    "popularTopicLabels": {
+      "authentication": "Autenticação",
+      "apiKeys": "Chaves API",
+      "webhooks": "Webhooks",
+      "rateLimits": "Limites de Taxa",
+      "errorHandling": "Tratamento de Erros",
+      "dataSecurity": "Segurança de Dados",
+      "integration": "Integração",
+      "migration": "Migração"
+    },
     "needHelp": {
       "title": "Precisa de ajuda?",
       "subtitle": "Não encontrou o que procura? Nossa equipe de suporte está aqui para ajudar.",

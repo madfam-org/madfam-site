@@ -19,62 +19,59 @@ type CommonBlogPost = {
   content?: string | Record<string, unknown> | import('@/types/content').RichTextDocument;
 };
 
-// Fallback blog data for static exports or when CMS is unavailable
-const fallbackBlogPosts: CommonBlogPost[] = [
-  {
-    id: '1',
-    title: 'The Future of AI in Business Transformation',
-    excerpt:
-      'Explore how artificial intelligence is reshaping the business landscape and creating new opportunities for growth and innovation.',
-    publishedDate: '2024-03-15',
-    author: { name: 'MADFAM Team', id: '1', email: 'team@madfam.io' },
-    slug: 'future-ai-business-transformation',
-    tags: [{ tag: 'AI & Innovation' }],
-    status: 'published' as const,
-    createdAt: '2024-03-15',
-    updatedAt: '2024-03-15',
-    content: 'Artificial Intelligence is transforming businesses...',
-  },
-  {
-    id: '2',
-    title: 'Building Scalable Digital Platforms: A Technical Guide',
-    excerpt:
-      'Learn the key architectural principles and best practices for building platforms that can grow with your business.',
-    publishedDate: '2024-03-10',
-    author: { name: 'MADFAM Engineering', id: '2', email: 'engineering@madfam.io' },
-    slug: 'building-scalable-digital-platforms',
-    tags: [{ tag: 'Technical' }],
-    status: 'published' as const,
-    createdAt: '2024-03-10',
-    updatedAt: '2024-03-10',
-    content: 'Building scalable platforms requires careful planning...',
-  },
-  {
-    id: '3',
-    title: 'Customer Success Story: Transforming Operations with Automation',
-    excerpt:
-      'How we helped a leading manufacturer reduce operational costs by 40% through intelligent automation solutions.',
-    publishedDate: '2024-03-05',
-    author: { name: 'MADFAM Team', id: '1', email: 'team@madfam.io' },
-    slug: 'customer-success-automation',
-    tags: [{ tag: 'Case Studies' }],
-    status: 'published' as const,
-    createdAt: '2024-03-05',
-    updatedAt: '2024-03-05',
-    content: 'When a leading manufacturing company approached us...',
-  },
-];
-
-function calculateReadTime(content: string): string {
+function calculateReadTime(content: string, minReadLabel: string): string {
   const wordsPerMinute = 200;
   const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
   const minutes = Math.ceil(words / wordsPerMinute);
-  return `${minutes} min read`;
+  return `${minutes} ${minReadLabel}`;
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations('blog');
+
+  // Fallback blog data for static exports or when CMS is unavailable
+  const fallbackBlogPosts: CommonBlogPost[] = [
+    {
+      id: '1',
+      title: t('fallback.0.title'),
+      excerpt: t('fallback.0.excerpt'),
+      publishedDate: '2024-03-15',
+      author: { name: t('fallback.0.author'), id: '1', email: 'team@madfam.io' },
+      slug: 'future-ai-business-transformation',
+      tags: [{ tag: t('fallback.0.tag') }],
+      status: 'published' as const,
+      createdAt: '2024-03-15',
+      updatedAt: '2024-03-15',
+      content: 'Artificial Intelligence is transforming businesses...',
+    },
+    {
+      id: '2',
+      title: t('fallback.1.title'),
+      excerpt: t('fallback.1.excerpt'),
+      publishedDate: '2024-03-10',
+      author: { name: t('fallback.1.author'), id: '2', email: 'engineering@madfam.io' },
+      slug: 'building-scalable-digital-platforms',
+      tags: [{ tag: t('fallback.1.tag') }],
+      status: 'published' as const,
+      createdAt: '2024-03-10',
+      updatedAt: '2024-03-10',
+      content: 'Building scalable platforms requires careful planning...',
+    },
+    {
+      id: '3',
+      title: t('fallback.2.title'),
+      excerpt: t('fallback.2.excerpt'),
+      publishedDate: '2024-03-05',
+      author: { name: t('fallback.2.author'), id: '1', email: 'team@madfam.io' },
+      slug: 'customer-success-automation',
+      tags: [{ tag: t('fallback.2.tag') }],
+      status: 'published' as const,
+      createdAt: '2024-03-05',
+      updatedAt: '2024-03-05',
+      content: 'When a leading manufacturing company approached us...',
+    },
+  ];
 
   // Fetch blog posts from CMS or use fallback data
   let blogPosts: CommonBlogPost[] = fallbackBlogPosts;
@@ -116,17 +113,15 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
 
           {blogPosts.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
-                {t('noPosts') || 'No blog posts available at the moment.'}
-              </p>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">{t('noPosts')}</p>
             </div>
           ) : (
             <div className="space-y-12">
               {blogPosts.map(post => {
                 const category = post.tags?.[0]?.tag || 'General';
                 const readTime = post.content
-                  ? calculateReadTime(JSON.stringify(post.content))
-                  : '5 min read';
+                  ? calculateReadTime(JSON.stringify(post.content), t('minRead'))
+                  : `5 ${t('minRead')}`;
                 const authorName = typeof post.author === 'object' ? post.author.name : post.author;
 
                 return (
@@ -141,7 +136,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                       <time dateTime={post.publishedDate}>
                         {new Date(post.publishedDate).toLocaleDateString()}
                       </time>
-                      <span>{readTime.replace('min read', t('minRead'))}</span>
+                      <span>{readTime}</span>
                     </div>
 
                     <h2 className="text-2xl font-bold mb-3 hover:text-lavender transition-colors">

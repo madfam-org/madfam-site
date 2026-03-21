@@ -1,111 +1,110 @@
-import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card } from '@/components/ui';
-
-const guides = [
-  {
-    category: 'Getting Started',
-    icon: '🚀',
-    guides: [
-      {
-        title: 'Quick Start Guide',
-        description: 'Get up and running with MADFAM services in under 10 minutes',
-        duration: '10 min',
-        difficulty: 'Beginner',
-      },
-      {
-        title: 'Platform Overview',
-        description: "Understanding MADFAM's service architecture and capabilities",
-        duration: '15 min',
-        difficulty: 'Beginner',
-      },
-      {
-        title: 'Authentication Setup',
-        description: 'Configure authentication for your applications',
-        duration: '20 min',
-        difficulty: 'Intermediate',
-      },
-    ],
-  },
-  {
-    category: 'Integration Guides',
-    icon: '🔗',
-    guides: [
-      {
-        title: 'REST API Integration',
-        description: 'Complete guide to integrating with our REST APIs',
-        duration: '30 min',
-        difficulty: 'Intermediate',
-      },
-      {
-        title: 'Webhook Configuration',
-        description: 'Set up webhooks for real-time event notifications',
-        duration: '25 min',
-        difficulty: 'Intermediate',
-      },
-      {
-        title: 'SDK Implementation',
-        description: 'Using our SDKs for JavaScript, Python, and Java',
-        duration: '45 min',
-        difficulty: 'Advanced',
-      },
-    ],
-  },
-  {
-    category: 'Best Practices',
-    icon: '✨',
-    guides: [
-      {
-        title: 'Security Best Practices',
-        description: 'Ensure your integration follows security standards',
-        duration: '30 min',
-        difficulty: 'Advanced',
-      },
-      {
-        title: 'Performance Optimization',
-        description: 'Optimize your API calls and reduce latency',
-        duration: '40 min',
-        difficulty: 'Advanced',
-      },
-      {
-        title: 'Error Handling Strategies',
-        description: 'Build resilient applications with proper error handling',
-        duration: '35 min',
-        difficulty: 'Intermediate',
-      },
-    ],
-  },
-  {
-    category: 'Use Cases',
-    icon: '💡',
-    guides: [
-      {
-        title: 'Building an AI Chatbot',
-        description: 'Step-by-step guide to create an intelligent chatbot',
-        duration: '60 min',
-        difficulty: 'Advanced',
-      },
-      {
-        title: 'Process Automation',
-        description: 'Automate business processes with our workflow engine',
-        duration: '45 min',
-        difficulty: 'Intermediate',
-      },
-      {
-        title: 'Data Analytics Dashboard',
-        description: 'Create real-time analytics dashboards',
-        duration: '50 min',
-        difficulty: 'Advanced',
-      },
-    ],
-  },
-];
 
 export default async function GuidesPage({ params }: { params: Promise<{ locale: string }> }) {
   await params; // Validate params exist
   const t = await getTranslations('guides');
 
-  const difficultyColors = {
+  const guides = [
+    {
+      category: t('categories.gettingStarted'),
+      icon: '🚀',
+      guides: [
+        {
+          title: t('items.quickStart.title'),
+          description: t('items.quickStart.description'),
+          duration: t('items.quickStart.duration'),
+          difficulty: t('difficulty.beginner'),
+        },
+        {
+          title: t('items.platformOverview.title'),
+          description: t('items.platformOverview.description'),
+          duration: t('items.platformOverview.duration'),
+          difficulty: t('difficulty.beginner'),
+        },
+        {
+          title: t('items.authSetup.title'),
+          description: t('items.authSetup.description'),
+          duration: t('items.authSetup.duration'),
+          difficulty: t('difficulty.intermediate'),
+        },
+      ],
+    },
+    {
+      category: t('categories.integration'),
+      icon: '🔗',
+      guides: [
+        {
+          title: t('items.restApi.title'),
+          description: t('items.restApi.description'),
+          duration: t('items.restApi.duration'),
+          difficulty: t('difficulty.intermediate'),
+        },
+        {
+          title: t('items.webhookConfig.title'),
+          description: t('items.webhookConfig.description'),
+          duration: t('items.webhookConfig.duration'),
+          difficulty: t('difficulty.intermediate'),
+        },
+        {
+          title: t('items.sdkImpl.title'),
+          description: t('items.sdkImpl.description'),
+          duration: t('items.sdkImpl.duration'),
+          difficulty: t('difficulty.advanced'),
+        },
+      ],
+    },
+    {
+      category: t('categories.bestPractices'),
+      icon: '✨',
+      guides: [
+        {
+          title: t('items.securityBest.title'),
+          description: t('items.securityBest.description'),
+          duration: t('items.securityBest.duration'),
+          difficulty: t('difficulty.advanced'),
+        },
+        {
+          title: t('items.perfOptimization.title'),
+          description: t('items.perfOptimization.description'),
+          duration: t('items.perfOptimization.duration'),
+          difficulty: t('difficulty.advanced'),
+        },
+        {
+          title: t('items.errorHandling.title'),
+          description: t('items.errorHandling.description'),
+          duration: t('items.errorHandling.duration'),
+          difficulty: t('difficulty.intermediate'),
+        },
+      ],
+    },
+    {
+      category: t('categories.useCases'),
+      icon: '💡',
+      guides: [
+        {
+          title: t('items.aiChatbot.title'),
+          description: t('items.aiChatbot.description'),
+          duration: t('items.aiChatbot.duration'),
+          difficulty: t('difficulty.advanced'),
+        },
+        {
+          title: t('items.processAutomation.title'),
+          description: t('items.processAutomation.description'),
+          duration: t('items.processAutomation.duration'),
+          difficulty: t('difficulty.intermediate'),
+        },
+        {
+          title: t('items.analyticsDashboard.title'),
+          description: t('items.analyticsDashboard.description'),
+          duration: t('items.analyticsDashboard.duration'),
+          difficulty: t('difficulty.advanced'),
+        },
+      ],
+    },
+  ];
+
+  const difficultyColors: Record<string, string> = {
     [t('difficulty.beginner')]:
       'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400',
     [t('difficulty.intermediate')]:
@@ -174,7 +173,7 @@ export default async function GuidesPage({ params }: { params: Promise<{ locale:
                           {guide.duration}
                         </span>
                         <span
-                          className={`px-2 py-1 rounded text-xs font-medium ${difficultyColors[guide.difficulty as keyof typeof difficultyColors]}`}
+                          className={`px-2 py-1 rounded text-xs font-medium ${difficultyColors[guide.difficulty] || ''}`}
                         >
                           {guide.difficulty}
                         </span>
@@ -196,7 +195,7 @@ export default async function GuidesPage({ params }: { params: Promise<{ locale:
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 {t('videoTutorials.description')}
               </p>
-              <Link
+              <a
                 href="https://www.youtube.com/@innovacionesmadfam"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -211,7 +210,7 @@ export default async function GuidesPage({ params }: { params: Promise<{ locale:
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
-              </Link>
+              </a>
             </Card>
           </div>
         </div>
