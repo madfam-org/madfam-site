@@ -133,7 +133,7 @@ describe('SEO Service', () => {
     it('should generate sitemap entries for all main pages', () => {
       const sitemap = seoService.generateSitemapData();
 
-      expect(sitemap).toHaveLength(20);
+      expect(sitemap).toHaveLength(29);
       expect(sitemap[0].url).toBe('/');
       expect(sitemap[0].priority).toBe(1.0);
 
@@ -150,6 +150,14 @@ describe('SEO Service', () => {
         programPages.some(page => page.url.includes(program))
       );
       expect(hasAllPrograms).toBe(true);
+
+      // Platform entries
+      const platformPages = sitemap.filter(entry => entry.url.includes('/platforms/'));
+      expect(platformPages).toHaveLength(8);
+
+      const platformsIndex = sitemap.find(entry => entry.url === '/platforms');
+      expect(platformsIndex).toBeDefined();
+      expect(platformsIndex?.priority).toBe(0.9);
     });
 
     it('should set appropriate change frequencies', () => {

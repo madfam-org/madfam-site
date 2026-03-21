@@ -1,4 +1,15 @@
 {
+  "index": {
+    "meta": {
+      "title": "Platforms | MADFAM",
+      "description": "Open platforms for creators, makers, and entrepreneurs — from sovereign cloud to parametric design."
+    },
+    "heroTitle": "Open Platforms for Everyone",
+    "heroSubtitle": "10 open platforms covering infrastructure, intelligence, standards, and applications — each with Free and Pro tiers.",
+    "ctaTitle": "Unlock Pro Everywhere",
+    "ctaSubtitle": "One membership gives you Pro access across all platforms, discounted fabrication, and priority support.",
+    "ctaButton": "Explore Membership"
+  },
   "shared": {
     "byMadfam": "by MADFAM",
     "freePlusPro": "Free + Pro",

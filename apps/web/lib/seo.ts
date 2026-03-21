@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { getProductionPlatforms } from '@/lib/data/platforms';
 
 export interface SEOConfig {
   title: string;
@@ -453,128 +454,146 @@ export class SEOService {
   }> {
     const now = new Date();
 
-    return [
+    const staticEntries = [
       {
         url: '/',
         lastModified: now,
-        changeFrequency: 'weekly',
+        changeFrequency: 'weekly' as const,
         priority: 1.0,
       },
       {
         url: '/programs',
         lastModified: now,
-        changeFrequency: 'weekly',
+        changeFrequency: 'weekly' as const,
         priority: 0.9,
       },
       {
         url: '/products',
         lastModified: now,
-        changeFrequency: 'weekly',
+        changeFrequency: 'weekly' as const,
         priority: 0.9,
       },
       {
         url: '/about',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.7,
       },
       {
         url: '/contact',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.8,
       },
       {
         url: '/solutions',
         lastModified: now,
-        changeFrequency: 'weekly',
+        changeFrequency: 'weekly' as const,
         priority: 0.9,
       },
       {
         url: '/solutions/colabs',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.8,
       },
       {
         url: '/impact',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.7,
       },
       {
         url: '/blog',
         lastModified: now,
-        changeFrequency: 'weekly',
+        changeFrequency: 'weekly' as const,
         priority: 0.7,
       },
       {
         url: '/careers',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.6,
       },
       {
         url: '/case-studies',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.7,
       },
       {
         url: '/calculator',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.7,
       },
       {
         url: '/assessment',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.7,
       },
       {
         url: '/estimator',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.7,
       },
       {
         url: '/ecosystem',
         lastModified: now,
-        changeFrequency: 'weekly',
+        changeFrequency: 'weekly' as const,
         priority: 0.9,
       },
       {
         url: '/solutions/maker-node',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.8,
       },
       {
         url: '/programs#design-fabrication',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.8,
       },
       {
         url: '/programs#strategy-enablement',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.8,
       },
       {
         url: '/programs#platform-pilots',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.8,
       },
       {
         url: '/programs#strategic-partnerships',
         lastModified: now,
-        changeFrequency: 'monthly',
+        changeFrequency: 'monthly' as const,
         priority: 0.8,
       },
     ];
+
+    // Platform pages
+    const platformEntries = [
+      {
+        url: '/platforms',
+        lastModified: now,
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+      },
+      ...getProductionPlatforms().map(p => ({
+        url: `/platforms/${p.slug}`,
+        lastModified: now,
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      })),
+    ];
+
+    return [...staticEntries, ...platformEntries];
   }
 }
 

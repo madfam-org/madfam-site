@@ -1,4 +1,15 @@
 {
+  "index": {
+    "meta": {
+      "title": "Plataformas | MADFAM",
+      "description": "Plataformas abertas para criadores, makers e empreendedores — de nuvem soberana a design paramétrico."
+    },
+    "heroTitle": "Plataformas Abertas para Todos",
+    "heroSubtitle": "10 plataformas abertas cobrindo infraestrutura, inteligência, padrões e aplicações — cada uma com níveis Free e Pro.",
+    "ctaTitle": "Desbloqueie Pro em Todas",
+    "ctaSubtitle": "Uma assinatura te dá acesso Pro em todas as plataformas, fabricação com desconto e suporte prioritário.",
+    "ctaButton": "Explorar Assinatura"
+  },
   "shared": {
     "byMadfam": "by MADFAM",
     "freePlusPro": "Grátis + Pro",

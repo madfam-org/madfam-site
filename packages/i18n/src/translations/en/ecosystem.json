@@ -186,6 +186,23 @@
     "finalCta": {
       "title": "Ready to build something that matters?",
       "subtitle": "Choose your path into the MADFAM ecosystem."
+    },
+    "personas": {
+      "makers": {
+        "title": "Makers & Designers",
+        "description": "Design parametric models, get instant quotes, and track production from a single workflow.",
+        "cta": "Explore Products"
+      },
+      "founders": {
+        "title": "Founders & Startups",
+        "description": "Launch on sovereign cloud, manage finances, and own your identity infrastructure from day one.",
+        "cta": "Explore Ecosystem"
+      },
+      "enterprises": {
+        "title": "Enterprises",
+        "description": "Pricing intelligence, regulatory compliance, and competency-based training at scale.",
+        "cta": "Contact Us"
+      }
     }
   },
   "makerNodePage": {

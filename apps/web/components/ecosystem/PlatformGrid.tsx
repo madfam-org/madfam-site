@@ -3,117 +3,7 @@
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { Badge } from '@/components/corporate/Badge';
-
-interface Platform {
-  name: string;
-  slug: string;
-  icon: string;
-  category: string;
-  hasFreeTier: boolean;
-  hasProTier: boolean;
-  comingSoon: boolean;
-  externalUrl?: string;
-}
-
-const PLATFORMS: Platform[] = [
-  {
-    name: 'Enclii',
-    slug: 'enclii',
-    icon: '☁️',
-    category: 'Infrastructure',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: false,
-    externalUrl: 'https://enclii.com',
-  },
-  {
-    name: 'Janua',
-    slug: 'janua',
-    icon: '🔐',
-    category: 'Infrastructure',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: false,
-    externalUrl: 'https://janua.auth',
-  },
-  {
-    name: 'Yantra4D',
-    slug: 'yantra4d',
-    icon: '📐',
-    category: 'Creation',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: false,
-    externalUrl: 'https://yantra4d.com',
-  },
-  {
-    name: 'Cotiza Studio',
-    slug: 'cotiza-studio',
-    icon: '📊',
-    category: 'Creation',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: false,
-    externalUrl: 'https://cotiza.studio',
-  },
-  {
-    name: 'Forge Sight',
-    slug: 'forge-sight',
-    icon: '🏭',
-    category: 'Intelligence',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: false,
-    externalUrl: 'https://forgesight.quest',
-  },
-  {
-    name: 'Dhanam',
-    slug: 'dhanam',
-    icon: '💰',
-    category: 'Intelligence',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: false,
-    externalUrl: 'https://dhan.am',
-  },
-  {
-    name: 'Tezca',
-    slug: 'tezca',
-    icon: '⚖️',
-    category: 'Standards',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: false,
-    externalUrl: 'https://tezca.mx',
-  },
-  {
-    name: 'Pravara-MES',
-    slug: 'pravara-mes',
-    icon: '⚙️',
-    category: 'Fabrication',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: false,
-  },
-  {
-    name: 'PENNY',
-    slug: 'penny',
-    icon: '🤖',
-    category: 'Assistant',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: true,
-  },
-  {
-    name: 'AVALA',
-    slug: 'avala',
-    icon: '🎓',
-    category: 'Learning',
-    hasFreeTier: true,
-    hasProTier: true,
-    comingSoon: true,
-  },
-];
+import { PLATFORMS, isComingSoon } from '@/lib/data/platforms';
 
 interface PlatformGridProps {
   /** Optional heading override — defaults to the `ecosystem.platformGrid.title` translation */
@@ -122,6 +12,7 @@ interface PlatformGridProps {
 
 export function PlatformGrid({ title }: PlatformGridProps = {}) {
   const t = useTranslations('ecosystem.platformGrid');
+  const tMaker = useTranslations('ecosystem.makerNode');
   const locale = useLocale();
 
   const heading = title ?? t('title');
@@ -137,10 +28,11 @@ export function PlatformGrid({ title }: PlatformGridProps = {}) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {PLATFORMS.map(platform => {
+          const comingSoon = isComingSoon(platform);
           const cardContent = (
             <div
               className={`relative flex items-start gap-4 p-5 rounded-xl border transition-all duration-300 ${
-                platform.comingSoon
+                comingSoon
                   ? 'bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 opacity-75'
                   : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:border-leaf/50 dark:hover:border-leaf/50 hover:shadow-md'
               }`}
@@ -156,7 +48,7 @@ export function PlatformGrid({ title }: PlatformGridProps = {}) {
                   <h3 className="font-semibold text-gray-900 dark:text-white text-sm">
                     {platform.name}
                   </h3>
-                  {platform.comingSoon && (
+                  {comingSoon && (
                     <Badge
                       variant="program"
                       className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-500 border-gray-300"
@@ -173,7 +65,7 @@ export function PlatformGrid({ title }: PlatformGridProps = {}) {
                   <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-leaf/10 text-leaf border border-leaf/20">
                     {t('proTier')}
                   </span>
-                  {platform.comingSoon && (
+                  {comingSoon && (
                     <span className="text-[10px] text-gray-400 italic">
                       {t('includedOnLaunch')}
                     </span>
@@ -183,7 +75,7 @@ export function PlatformGrid({ title }: PlatformGridProps = {}) {
             </div>
           );
 
-          return platform.comingSoon ? (
+          return comingSoon ? (
             <div key={platform.name}>{cardContent}</div>
           ) : (
             <Link key={platform.name} href={`/${locale}/platforms/${platform.slug}`}>
@@ -203,13 +95,13 @@ export function PlatformGrid({ title }: PlatformGridProps = {}) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <h3 className="font-semibold text-gray-900 dark:text-white text-sm">
-                Primavera Maker Node
+                {tMaker('title')}
               </h3>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Physical Fabrication</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{tMaker('badge')}</p>
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-leaf/10 text-leaf border border-leaf/20">
-                Up to 20% off for members
+                {tMaker('discount')}
               </span>
             </div>
           </div>

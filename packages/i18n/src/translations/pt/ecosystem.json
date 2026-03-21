@@ -185,6 +185,23 @@
     "finalCta": {
       "title": "Pronto para construir algo que importa?",
       "subtitle": "Escolha seu caminho para o ecossistema MADFAM."
+    },
+    "personas": {
+      "makers": {
+        "title": "Makers e Designers",
+        "description": "Projete modelos paramétricos, obtenha cotações instantâneas e acompanhe a produção em um único fluxo de trabalho.",
+        "cta": "Explorar Produtos"
+      },
+      "founders": {
+        "title": "Fundadores e Startups",
+        "description": "Lance em nuvem soberana, gerencie finanças e controle sua infraestrutura de identidade desde o primeiro dia.",
+        "cta": "Explorar Ecossistema"
+      },
+      "enterprises": {
+        "title": "Empresas",
+        "description": "Inteligência de preços, conformidade regulatória e treinamento baseado em competências em escala.",
+        "cta": "Fale Conosco"
+      }
     }
   },
   "makerNodePage": {
