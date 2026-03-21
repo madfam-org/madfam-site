@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: AssessmentPageProps): Promise
 }
 
 export default async function AssessmentPage({ params }: AssessmentPageProps) {
-  const { locale } = await params;
+  await params;
   const t = await getTranslations('assessment');
   const tCommon = await getTranslations('common');
 
@@ -146,7 +146,7 @@ export default async function AssessmentPage({ params }: AssessmentPageProps) {
     id,
     question: t(`assessmentQuestions.${id}.question`),
     category: questionCategories[id],
-    options: questionOptions[id].map(opt => ({
+    options: (questionOptions[id] ?? []).map(opt => ({
       ...opt,
       text: t(`assessmentQuestions.${id}.${opt.value}`),
     })),

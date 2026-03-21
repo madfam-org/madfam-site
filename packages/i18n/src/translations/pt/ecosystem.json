@@ -64,6 +64,15 @@
     "perMonth": "/mês",
     "perYear": "/ano",
     "includedPlatforms": "Inclui Pro em todas as {count} plataformas",
+    "savingsNote": "Pro Individual combinado: ~${individual}/mês | Ecossistema: ${ecosystem}/mês — Economize {percent}%",
+    "membershipTitle": "Assinatura do Ecossistema",
+    "features": {
+      "0": "Acesso Pro em todas as 9 plataformas",
+      "1": "Até 20% de desconto em pedidos Maker Node",
+      "2": "Suporte prioritário",
+      "3": "Acesso antecipado a PENNY e AVALA",
+      "4": "Comunidade exclusiva para membros"
+    },
     "cta": "Junte-se ao Ecossistema",
     "waitlistNote": "Entre na lista de espera — lançamento em breve"
   },
@@ -157,6 +166,12 @@
       "subtitle": "Do design digital à realidade física",
       "description": "Impressão 3D, usinagem CNC e corte a laser — integrado com Yantra4D e Cotiza Studio.",
       "memberDiscount": "Membros economizam até 20%"
+    },
+    "metrics": {
+      "vendors": "fornecedores rastreados",
+      "laws": "leis indexadas",
+      "cost": "vs $2K+ hospedagem na nuvem",
+      "designs": "designs open-source"
     },
     "membershipValue": {
       "title": "Uma Assinatura. Todas as Plataformas.",

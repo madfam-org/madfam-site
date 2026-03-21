@@ -135,12 +135,10 @@ class RedisCMSCache {
 // Public CMSCache — delegates to Redis or Memory
 // ---------------------------------------------------------------------------
 export class CMSCache {
-  private config: CacheConfig;
   private memory: MemoryCMSCache;
   private redis: RedisCMSCache | null;
 
   constructor(config: CacheConfig = DEFAULT_CACHE_CONFIG) {
-    this.config = config;
     this.memory = new MemoryCMSCache(config);
     this.redis = getRedisClient() ? new RedisCMSCache(config) : null;
   }

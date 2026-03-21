@@ -30,8 +30,6 @@ export const i18nConfig = {
       '/ecosystem': '/ecosistema',
       '/products': '/productos',
       '/programs': '/programas',
-      '/work': '/casos',
-      '/security': '/seguridad',
       '/about': '/sobre',
       '/contact': '/contacto',
 
@@ -55,8 +53,6 @@ export const i18nConfig = {
       '/ecosystem': '/ecossistema',
       '/products': '/produtos',
       '/programs': '/programas',
-      '/work': '/casos',
-      '/security': '/seguranca',
       '/about': '/sobre',
       '/contact': '/contato',
       '/careers': '/carreiras',

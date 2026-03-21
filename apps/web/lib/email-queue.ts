@@ -1,4 +1,4 @@
-import { emailSender } from '@madfam/email/src/sender';
+import { emailSender } from '@madfam/email/sender';
 import { apiLogger } from './logger';
 import { prisma } from './prisma';
 

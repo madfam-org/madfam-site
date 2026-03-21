@@ -61,7 +61,7 @@ export const SolarpunkHero: React.FC = () => {
               </Button>
             </Link>
 
-            <Link href="/work">
+            <Link href="/case-studies">
               <Button
                 variant="outline"
                 size="lg"

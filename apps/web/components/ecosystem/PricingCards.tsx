@@ -46,7 +46,7 @@ export function PricingCards() {
           <div className="bg-white dark:bg-gray-950 rounded-2xl p-8">
             <div className="text-center">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Ecosystem Membership
+                {t('membershipTitle')}
               </h3>
               <div className="mb-2">
                 <span className="text-4xl font-bold bg-gradient-to-r from-leaf to-lavender bg-clip-text text-transparent">
@@ -65,14 +65,8 @@ export function PricingCards() {
 
             {/* Features list */}
             <ul className="space-y-3 mb-8">
-              {[
-                'Pro access on all 9 platforms',
-                'Up to 20% off Maker Node orders',
-                'Priority support',
-                'Early access to PENNY & AVALA',
-                'Members-only community',
-              ].map(feature => (
-                <li key={feature} className="flex items-start gap-3">
+              {[0, 1, 2, 3, 4].map(i => (
+                <li key={i} className="flex items-start gap-3">
                   <svg
                     className="w-5 h-5 text-leaf flex-shrink-0 mt-0.5"
                     fill="currentColor"
@@ -85,7 +79,9 @@ export function PricingCards() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{feature}</span>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                    {t(`features.${i}`)}
+                  </span>
                 </li>
               ))}
             </ul>

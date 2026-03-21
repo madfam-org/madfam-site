@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface Metric {
   id: string;
   value: number | null;
   displayValue: string;
-  description: string;
+  descriptionKey: string;
   accentClass: string;
   prefix?: string;
   suffix?: string;
@@ -18,7 +19,7 @@ const METRICS: Metric[] = [
     id: 'vendors',
     value: 1000,
     displayValue: '1,000+',
-    description: 'vendors tracked',
+    descriptionKey: 'vendors',
     accentClass: 'text-amber-400',
     suffix: '+',
     animate: true,
@@ -27,7 +28,7 @@ const METRICS: Metric[] = [
     id: 'laws',
     value: 11696,
     displayValue: '11,696',
-    description: 'laws indexed',
+    descriptionKey: 'laws',
     accentClass: 'text-rose-400',
     animate: true,
   },
@@ -35,7 +36,7 @@ const METRICS: Metric[] = [
     id: 'cost',
     value: null,
     displayValue: '$55/mo',
-    description: 'vs $2K+ cloud hosting',
+    descriptionKey: 'cost',
     accentClass: 'text-blue-400',
     animate: false,
   },
@@ -43,7 +44,7 @@ const METRICS: Metric[] = [
     id: 'designs',
     value: 40,
     displayValue: '40+',
-    description: 'open-source designs',
+    descriptionKey: 'designs',
     accentClass: 'text-purple-400',
     suffix: '+',
     animate: true,
@@ -126,6 +127,7 @@ function AnimatedMetric({
 }
 
 export function MetricsBar(): React.ReactElement {
+  const tMetrics = useTranslations('ecosystem.homepage');
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -157,7 +159,9 @@ export function MetricsBar(): React.ReactElement {
           {METRICS.map(metric => (
             <div key={metric.id} className="flex flex-col items-center text-center">
               <AnimatedMetric metric={metric} isVisible={isVisible} />
-              <p className="mt-2 text-sm text-white/60">{metric.description}</p>
+              <p className="mt-2 text-sm text-white/60">
+                {tMetrics(`metrics.${metric.descriptionKey}`)}
+              </p>
             </div>
           ))}
         </div>

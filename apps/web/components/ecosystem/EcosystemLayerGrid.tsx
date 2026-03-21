@@ -27,6 +27,7 @@ function PlatformCard({
   locale: string;
   tagline: string;
 }): React.ReactElement {
+  const t = useTranslations('platforms');
   const comingSoon = isComingSoon(platform);
 
   const cardContent = (
@@ -56,7 +57,9 @@ function PlatformCard({
           </h3>
           {comingSoon && (
             <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-              {platform.status === 'coming-soon' ? 'Coming Soon' : 'In Development'}
+              {t(
+                `shared.status.${platform.status === 'coming-soon' ? 'comingSoon' : 'inDevelopment'}`
+              )}
             </span>
           )}
         </div>

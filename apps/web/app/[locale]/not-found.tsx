@@ -36,7 +36,7 @@ export default function NotFound() {
                 Go Home
               </Link>
               <Link
-                href="/services"
+                href="/programs"
                 className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300"
               >
                 Explore Services

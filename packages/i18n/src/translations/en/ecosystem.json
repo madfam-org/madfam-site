@@ -65,6 +65,14 @@
     "perYear": "/yr",
     "savingsNote": "Individual Pro combined: ~${individual}/mo | Ecosystem: ${ecosystem}/mo — Save {percent}%",
     "includedPlatforms": "Includes Pro on all {count} platforms",
+    "membershipTitle": "Ecosystem Membership",
+    "features": {
+      "0": "Pro access on all 9 platforms",
+      "1": "Up to 20% off Maker Node orders",
+      "2": "Priority support",
+      "3": "Early access to PENNY & AVALA",
+      "4": "Members-only community"
+    },
     "cta": "Join the Ecosystem",
     "waitlistNote": "Join the waitlist — launching soon"
   },
@@ -158,6 +166,12 @@
       "subtitle": "From digital design to physical reality",
       "description": "3D printing, CNC machining, and laser cutting — integrated with Yantra4D for design and Cotiza Studio for quoting.",
       "memberDiscount": "Ecosystem members save up to 20%"
+    },
+    "metrics": {
+      "vendors": "vendors tracked",
+      "laws": "laws indexed",
+      "cost": "vs $2K+ cloud hosting",
+      "designs": "open-source designs"
     },
     "membershipValue": {
       "title": "One Membership. Every Platform.",

@@ -11,10 +11,10 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
       title: t('categories.gettingStarted.title'),
       description: t('categories.gettingStarted.description'),
       items: [
-        { title: 'Introduction to MADFAM', href: '/docs/intro' },
-        { title: 'Service Overview', href: '/docs/services' },
-        { title: 'Platform Architecture', href: '/docs/architecture' },
-        { title: 'Security & Compliance', href: '/docs/security' },
+        { title: 'Introduction to MADFAM', href: '#getting-started' },
+        { title: 'Service Overview', href: '/programs' },
+        { title: 'Platform Architecture', href: '#architecture' },
+        { title: 'Security & Compliance', href: '#security' },
       ],
     },
     {
@@ -22,9 +22,9 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
       description: t('categories.api.description'),
       items: [
         { title: 'API Reference', href: '/api' },
-        { title: 'Authentication', href: '/docs/auth' },
-        { title: 'Rate Limiting', href: '/docs/rate-limits' },
-        { title: 'Webhooks', href: '/docs/webhooks' },
+        { title: 'Authentication', href: '#authentication' },
+        { title: 'Rate Limiting', href: '#rate-limits' },
+        { title: 'Webhooks', href: '#webhooks' },
       ],
     },
     {
@@ -32,9 +32,9 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
       description: t('categories.guides.description'),
       items: [
         { title: 'Integration Guides', href: '/guides' },
-        { title: 'Best Practices', href: '/docs/best-practices' },
-        { title: 'Migration Guide', href: '/docs/migration' },
-        { title: 'Troubleshooting', href: '/docs/troubleshooting' },
+        { title: 'Best Practices', href: '#best-practices' },
+        { title: 'Migration Guide', href: '#migration' },
+        { title: 'Troubleshooting', href: '#troubleshooting' },
       ],
     },
     {
@@ -43,8 +43,8 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
       items: [
         { title: 'Case Studies', href: '/case-studies' },
         { title: 'Blog & Updates', href: '/blog' },
-        { title: 'Support Center', href: '/docs/support' },
-        { title: 'Community Forum', href: '/docs/community' },
+        { title: 'Support Center', href: '/contact' },
+        { title: 'Community Forum', href: 'https://github.com/madfam-org' },
       ],
     },
   ];
@@ -129,7 +129,7 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
               ].map(topic => (
                 <Link
                   key={topic}
-                  href={`/docs/${topic.toLowerCase().replace(' ', '-')}`}
+                  href={`#${topic.toLowerCase().replace(' ', '-')}`}
                   className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-lavender/10 transition-colors"
                 >
                   {topic}
@@ -152,7 +152,7 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
                 {t('needHelp.contactSupport')}
               </Link>
               <Link
-                href="/docs/faq"
+                href="/contact"
                 className="px-6 py-3 border border-lavender text-lavender rounded-lg hover:bg-lavender/10 transition-colors"
               >
                 {t('needHelp.viewFaq')}

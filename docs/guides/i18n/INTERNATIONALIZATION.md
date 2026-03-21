@@ -171,10 +171,10 @@ Localized routes with different paths per language:
 ```typescript
 // lib/route-translations.ts
 export const routeTranslations = {
-  '/services': {
-    'es-MX': '/servicios',
-    'en-US': '/services',
-    'pt-BR': '/servicos',
+  '/programs': {
+    'es-MX': '/programas',
+    'en-US': '/programs',
+    'pt-BR': '/programas',
   },
   '/products/spark': {
     'es-MX': '/productos/spark',

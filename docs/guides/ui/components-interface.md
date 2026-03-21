@@ -59,7 +59,7 @@ import { CTA } from '@madfam/ui';
   }}
   secondaryCta={{
     text: "Learn More",
-    href: "/services",
+    href: "/programs",
     variant: "outline"
   }}
   background="gradient"

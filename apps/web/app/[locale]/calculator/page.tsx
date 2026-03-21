@@ -56,7 +56,7 @@ export default async function CalculatorPage({ params }: { params: Promise<{ loc
                   {t('calculator.cta.requestConsultation')}
                 </Link>
                 <Link
-                  href="/services"
+                  href="/programs"
                   className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 dark:border-gray-700 text-base font-medium rounded-lg text-obsidian dark:text-pearl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                 >
                   {t('calculator.cta.viewServices')}

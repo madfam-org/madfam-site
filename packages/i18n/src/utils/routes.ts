@@ -8,8 +8,6 @@ export type RouteKey =
   | 'solutions.maker-node'
   | 'programs'
   | 'case-studies'
-  | 'work'
-  | 'security'
   | 'impact'
   | 'showcase'
   | 'ecosystem'
@@ -62,16 +60,6 @@ const routes: Record<RouteKey, Record<Locale, string>> = {
     en: '/case-studies',
     es: '/case-studies',
     pt: '/case-studies',
-  },
-  work: {
-    en: '/work',
-    es: '/casos',
-    pt: '/casos',
-  },
-  security: {
-    en: '/security',
-    es: '/seguridad',
-    pt: '/seguranca',
   },
   impact: {
     en: '/impact',
