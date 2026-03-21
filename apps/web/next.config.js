@@ -234,7 +234,7 @@ const nextConfig = {
   serverExternalPackages: ['@prisma/client'],
 
   experimental: {
-    optimizeCss: false, // Disabled to avoid critters dependency issue
+    optimizeCss: true,
     scrollRestoration: true,
     serverMinification: true,
     optimizePackageImports: ['framer-motion', 'lucide-react'],
@@ -251,4 +251,13 @@ const nextConfig = {
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+// Sentry integration (only when DSN is configured)
+const { withSentryConfig } =
+  process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
+    ? require('@sentry/nextjs')
+    : { withSentryConfig: config => config };
+
+module.exports = withSentryConfig(withNextIntl(nextConfig), {
+  silent: true,
+  hideSourceMaps: true,
+});

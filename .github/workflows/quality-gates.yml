@@ -38,7 +38,6 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
           PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING: 1
-        continue-on-error: true
 
       # Type Checking
       - name: Type Check
@@ -60,10 +59,9 @@ jobs:
         run: pnpm audit --audit-level=high || true
         continue-on-error: true
 
-      # Testing (non-blocking until tests are implemented)
+      # Testing
       - name: Run Tests
-        run: pnpm run test --run || echo "Tests not yet fully configured"
-        continue-on-error: true
+        run: pnpm run test --run
 
       # Bundle Size Check (non-blocking until configured)
       - name: Bundle Size Analysis
@@ -126,7 +124,6 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
           PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING: 1
-        continue-on-error: true
 
       - name: Build for analysis
         run: pnpm run build

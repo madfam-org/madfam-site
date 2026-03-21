@@ -9,13 +9,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./test/setup.ts'],
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    exclude: [
-      '**/node_modules/**',
-      '**/e2e/**',
-      '**/tests/**',
-      // LeadForm test depends on @madfam/core and @madfam/analytics which are not yet implemented
-      '**/LeadForm.test.tsx',
-    ],
+    exclude: ['**/node_modules/**', '**/e2e/**', '**/tests/**'],
     coverage: {
       reporter: ['text', 'json', 'html'],
       exclude: [
@@ -42,6 +36,8 @@ export default defineConfig({
       // Workspace packages - these are mocked in test/setup.ts
       // We use empty modules to satisfy imports before mocks take over
       '@madfam/i18n': path.resolve(__dirname, '../../packages/i18n/src'),
+      '@madfam/core': path.resolve(__dirname, '../../packages/core/src'),
+      '@madfam/analytics': path.resolve(__dirname, '../../packages/analytics/src'),
       '@madfam-site/ui': path.resolve(__dirname, '../../packages/ui/src'),
     },
   },

@@ -67,5 +67,97 @@
   "title": "Evaluación de IA",
   "subtitle": "Descubre cómo la IA puede transformar tu negocio",
   "intro": "Responde algunas preguntas rápidas para obtener recomendaciones de IA personalizadas para tu empresa",
-  "start": "Iniciar Evaluación"
+  "start": "Iniciar Evaluación",
+  "page": {
+    "strategicQuestions": "10 preguntas estratégicas",
+    "minutes": "5 minutos",
+    "instantResults": "Resultados instantáneos",
+    "getPersonalizedStrategy": "Obtén tu estrategia personalizada",
+    "strategySubtitle": "Basados en los resultados de tu evaluación, crearemos un plan personalizado para tu viaje de transformación con IA.",
+    "requestSession": "Solicita tu sesión de estrategia",
+    "sessionDescription": "Discutamos tus resultados y creemos un plan personalizado para tu transformación con IA",
+    "scheduleSession": "Agendar sesión de estrategia",
+    "whyAssessment": "¿Por qué hacer la evaluación?",
+    "whySubtitle": "Obtén información accionable para acelerar tu transformación con IA",
+    "identifyGaps": "Identificar brechas",
+    "identifyGapsDesc": "Comprende dónde se encuentra tu organización y qué necesita mejorar",
+    "benchmarkProgress": "Comparar progreso",
+    "benchmarkDesc": "Compara tu nivel de madurez con estándares y mejores prácticas de la industria",
+    "getRecommendations": "Obtener recomendaciones",
+    "recommendationsDesc": "Recibe recomendaciones personalizadas y próximos pasos para tu viaje con IA",
+    "readyToTransform": "¿Listo para transformar tu negocio?",
+    "ctaSubtitle": "Haz la evaluación y descubre cómo MADFAM puede ayudarte a alcanzar tus metas de transformación con IA"
+  },
+  "assessmentQuestions": {
+    "digital_strategy": {
+      "question": "¿Qué tan definida está la estrategia de transformación digital de tu empresa?",
+      "none": "No tenemos una estrategia definida",
+      "basic": "Tenemos ideas básicas pero sin plan formal",
+      "developing": "Estamos desarrollando una estrategia",
+      "implemented": "Tenemos una estrategia clara e implementada"
+    },
+    "technology_infrastructure": {
+      "question": "¿Cómo describirías la infraestructura tecnológica actual de tu empresa?",
+      "outdated": "Sistemas legacy y procesos manuales",
+      "mixed": "Combinación de sistemas modernos y legacy",
+      "modern": "Sistemas modernos con algunas automaciones",
+      "advanced": "Infraestructura tecnológica avanzada y automatizada"
+    },
+    "data_analytics": {
+      "question": "¿Cómo maneja tu empresa los datos y analytics?",
+      "no_data": "No recopilamos datos de forma sistemática",
+      "basic_data": "Recopilamos datos básicos sin análisis",
+      "some_analytics": "Tenemos herramientas básicas de análisis",
+      "advanced_analytics": "Usamos analytics avanzados y BI"
+    },
+    "innovation_culture": {
+      "question": "¿Cómo es la cultura de innovación en tu empresa?",
+      "resistant": "Resistente al cambio y nuevas tecnologías",
+      "cautious": "Cautelosa pero abierta a cambios graduales",
+      "adaptive": "Adaptable y con mentalidad de crecimiento",
+      "innovative": "Altamente innovadora y proactiva"
+    },
+    "process_automation": {
+      "question": "¿Qué tan automatizados están los procesos de tu empresa?",
+      "manual": "Principalmente procesos manuales",
+      "partially": "Algunos procesos automatizados",
+      "mostly": "Mayoría de procesos automatizados",
+      "fully": "Procesos completamente automatizados"
+    },
+    "ai_experience": {
+      "question": "¿Cuál es tu experiencia con inteligencia artificial?",
+      "none": "Sin experiencia con IA",
+      "basic": "Conocimiento básico, sin implementación",
+      "pilot": "Proyectos piloto o implementaciones básicas",
+      "advanced": "Implementaciones avanzadas de IA"
+    },
+    "team_skills": {
+      "question": "¿Cómo evalúas las habilidades técnicas de tu equipo?",
+      "basic": "Habilidades básicas, necesita capacitación",
+      "intermediate": "Habilidades intermedias con potencial",
+      "good": "Buen nivel técnico con adaptabilidad",
+      "expert": "Equipo altamente calificado y especializado"
+    },
+    "budget_commitment": {
+      "question": "¿Cuál es el compromiso presupuestario para innovación?",
+      "minimal": "Presupuesto muy limitado",
+      "moderate": "Presupuesto moderado para proyectos específicos",
+      "significant": "Inversión significativa en innovación",
+      "substantial": "Presupuesto robusto para transformación"
+    },
+    "efficiency_urgency": {
+      "question": "¿Qué tan urgente es mejorar la eficiencia operativa?",
+      "low": "No es una prioridad inmediata",
+      "moderate": "Importante pero no urgente",
+      "high": "Prioridad alta para este año",
+      "critical": "Crítico para la supervivencia del negocio"
+    },
+    "competitive_position": {
+      "question": "¿Cómo se compara tu empresa tecnológicamente con la competencia?",
+      "behind": "Significativamente por detrás",
+      "catching_up": "Tratando de ponerse al día",
+      "competitive": "Competitiva en el mercado",
+      "leading": "Líder en innovación tecnológica"
+    }
+  }
 }

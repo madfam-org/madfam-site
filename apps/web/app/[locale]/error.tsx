@@ -16,11 +16,12 @@ export default function Error({
   const locale = useLocale();
 
   useEffect(() => {
-    // Log the error to an error reporting service
-    // TODO: Integrate with Sentry or similar error tracking service
-    // if (typeof window !== 'undefined' && window.Sentry) {
-    //   window.Sentry.captureException(error);
-    // }
+    // Report to Sentry if configured
+    import('@sentry/nextjs').then(Sentry => {
+      if (Sentry.isInitialized()) {
+        Sentry.captureException(error);
+      }
+    });
     console.error('Application error:', error);
   }, [error]);
 

@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getRedisClient } from './redis';
+import type Redis from 'ioredis';
 
 interface RateLimitOptions {
   windowMs?: number;
@@ -6,18 +8,104 @@ interface RateLimitOptions {
   keyGenerator?: (req: NextRequest) => string;
 }
 
-// In-memory store for rate limiting (consider using Redis in production)
-const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+interface RateLimitEntry {
+  count: number;
+  resetTime: number;
+}
 
-// Clean up expired entries periodically
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, value] of rateLimitStore.entries()) {
-    if (value.resetTime < now) {
-      rateLimitStore.delete(key);
-    }
+// ---------------------------------------------------------------------------
+// Store interface
+// ---------------------------------------------------------------------------
+
+interface RateLimitStore {
+  increment(key: string, windowMs: number): Promise<RateLimitEntry>;
+}
+
+// ---------------------------------------------------------------------------
+// MemoryStore – in-process Map (original behaviour)
+// ---------------------------------------------------------------------------
+
+class MemoryStore implements RateLimitStore {
+  private store = new Map<string, RateLimitEntry>();
+
+  constructor() {
+    // Clean up expired entries every 60 s
+    setInterval(() => {
+      const now = Date.now();
+      for (const [key, value] of this.store.entries()) {
+        if (value.resetTime < now) {
+          this.store.delete(key);
+        }
+      }
+    }, 60000);
   }
-}, 60000); // Clean up every minute
+
+  async increment(key: string, windowMs: number): Promise<RateLimitEntry> {
+    const now = Date.now();
+    let entry = this.store.get(key);
+
+    if (!entry || entry.resetTime < now) {
+      entry = { count: 0, resetTime: now + windowMs };
+    }
+
+    entry.count++;
+    this.store.set(key, entry);
+    return entry;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// RedisStore – distributed rate limiting via INCR + PEXPIRE
+// ---------------------------------------------------------------------------
+
+class RedisStore implements RateLimitStore {
+  private client: Redis;
+
+  constructor(client: Redis) {
+    this.client = client;
+  }
+
+  async increment(key: string, windowMs: number): Promise<RateLimitEntry> {
+    const redisKey = `ratelimit:${key}`;
+
+    // INCR is atomic; returns 1 on first call (key created)
+    const count = await this.client.incr(redisKey);
+
+    if (count === 1) {
+      // First request in this window – set the expiry
+      await this.client.pexpire(redisKey, windowMs);
+    }
+
+    // Retrieve remaining TTL so we can compute resetTime
+    const ttl = await this.client.pttl(redisKey);
+    const resetTime = Date.now() + (ttl > 0 ? ttl : windowMs);
+
+    return { count, resetTime };
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Store singleton – prefer Redis when available, fall back to memory
+// ---------------------------------------------------------------------------
+
+let store: RateLimitStore | null = null;
+
+function getStore(): RateLimitStore {
+  if (store) return store;
+
+  const redis = getRedisClient();
+  if (redis) {
+    store = new RedisStore(redis);
+  } else {
+    store = new MemoryStore();
+  }
+
+  return store;
+}
+
+// ---------------------------------------------------------------------------
+// Public API (signatures unchanged)
+// ---------------------------------------------------------------------------
 
 export function rateLimit(options: RateLimitOptions = {}) {
   const {
@@ -40,20 +128,7 @@ export function rateLimit(options: RateLimitOptions = {}) {
     const key = keyGenerator(request);
     const now = Date.now();
 
-    // Get or create rate limit entry
-    let rateLimitEntry = rateLimitStore.get(key);
-
-    if (!rateLimitEntry || rateLimitEntry.resetTime < now) {
-      // Create new entry or reset expired one
-      rateLimitEntry = {
-        count: 0,
-        resetTime: now + windowMs,
-      };
-    }
-
-    // Increment request count
-    rateLimitEntry.count++;
-    rateLimitStore.set(key, rateLimitEntry);
+    const rateLimitEntry = await getStore().increment(key, windowMs);
 
     // Check if rate limit exceeded
     if (rateLimitEntry.count > maxRequests) {

@@ -1,10 +1,21 @@
+import { createHash } from 'crypto';
 import { FeatureFlagProvider } from '@madfam/core';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getServerAuth } from '@/lib/auth';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { UserRole } from '@/lib/prisma-types';
+import { UserRole } from '@prisma/client';
+
+/**
+ * Generate a stable rollout percentage for a given identifier and flag key.
+ * Uses SHA-256 hash so the same user always gets the same result.
+ */
+function stableRolloutHash(flagKey: string, identifier: string): number {
+  const hash = createHash('sha256').update(`${flagKey}:${identifier}`).digest();
+  const uint32 = hash.readUInt32BE(0);
+  return uint32 % 100;
+}
 
 // Input validation schemas
 const CreateFlagSchema = z.object({
@@ -34,6 +45,13 @@ export async function GET(request: NextRequest) {
     const { searchParams } = request.nextUrl;
     const flag = searchParams.get('flag');
     const environment = searchParams.get('env') || process.env.NEXT_PUBLIC_ENV || 'development';
+
+    // Stable identifier for rollout: prefer userId query param, fall back to IP
+    const identifier =
+      searchParams.get('userId') ||
+      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      request.headers.get('x-real-ip') ||
+      'anonymous';
 
     if (flag) {
       // Get specific flag
@@ -73,8 +91,7 @@ export async function GET(request: NextRequest) {
       // Check rollout percentage if applicable
       let finalEnabled = isEnabled;
       if (isEnabled && environment === 'production' && featureFlag.rolloutPercentage) {
-        // Simple hash-based rollout (in real app, use user ID)
-        const hash = Math.floor(Math.random() * 100);
+        const hash = stableRolloutHash(featureFlag.key, identifier);
         finalEnabled = hash < featureFlag.rolloutPercentage;
       }
 
@@ -127,7 +144,7 @@ export async function GET(request: NextRequest) {
 
         // Check rollout percentage
         if (isEnabled && environment === 'production' && dbFlag.rolloutPercentage) {
-          const hash = Math.floor(Math.random() * 100);
+          const hash = stableRolloutHash(dbFlag.key, identifier);
           isEnabled = hash < dbFlag.rolloutPercentage;
         }
 

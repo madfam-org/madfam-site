@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { LeadStatus } from '@/lib/prisma-types';
+import { LeadStatus } from '@prisma/client';
 import { validateWebhookSignature, timingSafeEqual } from '@/lib/security';
 import type {
   WebhookEvent,
@@ -31,7 +31,8 @@ async function validateWebhookAuth(request: NextRequest, body: string): Promise<
 
     if (!isValid) {
       apiLogger.warn('Invalid webhook signature', {
-        ip: request.headers.get('x-forwarded-for')?.split(',')[0] || request.headers.get('x-real-ip'),
+        ip:
+          request.headers.get('x-forwarded-for')?.split(',')[0] || request.headers.get('x-real-ip'),
       });
     }
 
@@ -44,7 +45,8 @@ async function validateWebhookAuth(request: NextRequest, body: string): Promise<
 
     if (!isValid) {
       apiLogger.warn('Invalid webhook API key', {
-        ip: request.headers.get('x-forwarded-for')?.split(',')[0] || request.headers.get('x-real-ip'),
+        ip:
+          request.headers.get('x-forwarded-for')?.split(',')[0] || request.headers.get('x-real-ip'),
       });
     }
 

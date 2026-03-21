@@ -1,4 +1,4 @@
-export function DarkModeScript() {
+export function DarkModeScript({ nonce }: { nonce?: string }) {
   const script = `
     (function() {
       const theme = localStorage.getItem('theme');
@@ -8,5 +8,5 @@ export function DarkModeScript() {
     })();
   `;
 
-  return <script dangerouslySetInnerHTML={{ __html: script }} />;
+  return <script nonce={nonce} dangerouslySetInnerHTML={{ __html: script }} />;
 }

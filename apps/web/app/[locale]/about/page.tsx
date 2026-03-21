@@ -1,4 +1,5 @@
 import { getLocalizedContent, type Locale } from '@madfam/i18n';
+import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Button } from '@/components/ui';
@@ -299,11 +300,21 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-1"
               >
                 <div className="relative bg-white rounded-[14px] p-6 h-full">
-                  {/* Placeholder for team member photo */}
+                  {/* Team member photo with emoji fallback */}
                   <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-lavender/20 to-sun/20">
                     <div className="absolute inset-0 flex items-center justify-center text-4xl opacity-50">
                       👤
                     </div>
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      sizes="128px"
+                      className="object-cover relative z-10"
+                      onError={e => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
                   </div>
 
                   <h3 className="font-heading text-xl font-semibold text-center mb-1">

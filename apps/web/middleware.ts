@@ -13,6 +13,11 @@ export default function middleware(request: NextRequest) {
   // Let next-intl middleware handle all routing including root path
   const response = intlMiddleware(request);
 
+  // Generate a cryptographic nonce for CSP
+  // Using crypto.randomUUID() which is available in Edge Runtime,
+  // then base64-encoding it for use in CSP headers.
+  const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
+
   // Add security headers
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-Content-Type-Options', 'nosniff');
@@ -23,19 +28,19 @@ export default function middleware(request: NextRequest) {
     'camera=(), microphone=(), geolocation=(), interest-cohort=()'
   );
 
-  // Content Security Policy
-  // NOTE: We keep 'unsafe-inline' for script-src and style-src to support:
-  // 1. Dark mode script that must execute before hydration
-  // 2. Inline styles from Tailwind CSS and component libraries
-  // TODO: Implement nonce-based CSP for better security
-  // See: https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
+  // Content Security Policy with nonce-based script-src
+  // - 'nonce-...' allows only scripts with the matching nonce attribute
+  // - 'unsafe-inline' is kept as a fallback for older browsers that do not
+  //   support nonces (browsers that DO support nonces will ignore 'unsafe-inline')
+  // - 'strict-dynamic' propagates trust to scripts loaded by nonced scripts
+  // - style-src keeps 'unsafe-inline' because Tailwind injects styles at runtime
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-inline' https://vercel.live https://www.googletagmanager.com https://www.google-analytics.com;
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https://vercel.live https://www.googletagmanager.com https://www.google-analytics.com https://plausible.io;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' blob: data: https:;
     font-src 'self' https://fonts.gstatic.com;
-    connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://analytics.google.com;
+    connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://analytics.google.com https://plausible.io;
     media-src 'self';
     object-src 'none';
     base-uri 'self';
@@ -50,6 +55,10 @@ export default function middleware(request: NextRequest) {
     .trim();
 
   response.headers.set('Content-Security-Policy', cspHeader);
+
+  // Expose the nonce to server components via a request header
+  // so layout.tsx can read it with headers() and pass it to script tags
+  response.headers.set('x-nonce', nonce);
 
   // Add Strict-Transport-Security for production
   if (process.env.NODE_ENV === 'production') {

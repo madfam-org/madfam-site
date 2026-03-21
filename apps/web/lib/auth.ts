@@ -7,7 +7,7 @@
  */
 
 import { getSession as januaGetSession } from '@janua/nextjs';
-import { UserRole } from '@/lib/prisma-types';
+import { UserRole } from '@prisma/client';
 import { generateCsrfToken } from '@/lib/security';
 
 const JANUA_APP_ID = process.env.JANUA_APP_ID || 'madfam-web';
