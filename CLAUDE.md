@@ -48,7 +48,7 @@ biz-site/
 
 MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entrepreneurs in LATAM. Three conversion paths:
 
-1. **Use a MADFAM Platform** — 9 digital platforms (each with Free + Pro tiers)
+1. **Use a MADFAM Platform** — 10 digital platforms (each with Free + Pro tiers)
 2. **Use Primavera Maker Node** — Physical fabrication (3D printing, CNC, laser cutting)
 3. **Become an Ecosystem Member** — One membership unlocks Pro across all platforms + discounted fabrication
 
@@ -61,6 +61,7 @@ MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entr
 - **Cotiza Studio**: Automated quoting and estimation
 - **Yantra4D**: Parametric design platform
 - **Pravara-MES**: Manufacturing execution system
+- **Tezca**: Mexican regulatory intelligence (https://tezca.mx)
 - **AVALA**: Competency-based training (Coming Soon)
 - **PENNY**: AI assistant (In Development)
 
@@ -103,6 +104,13 @@ MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entr
 - Touch targets: 44px minimum, 48px recommended
 - Use MobileButton and MobileInput components
 - Font size 16px minimum for inputs (prevents iOS zoom)
+
+## Key Data Files
+
+- **Platform Registry**: `apps/web/lib/data/platforms.ts` — Single source of truth for all 10 platform metadata. Used by platform detail pages, homepage, products page, navbar, footer.
+- **Platform Translations**: `packages/i18n/src/translations/{en,es,pt}/platforms.json` — ~290 keys per locale with taglines, value props, features, CTAs, comparison tables, tech specs.
+- **Platform Detail Pages**: `apps/web/app/[locale]/platforms/[slug]/page.tsx` — Dynamic route with `generateStaticParams` for all 10 slugs.
+- **Integration Flow**: Design (Yantra4D) → Quote (Cotiza) → Price (Forge Sight) → Finance (Dhanam) → Manufacture (Pravara-MES) → Comply (Tezca/AVALA)
 
 ## Common Tasks
 

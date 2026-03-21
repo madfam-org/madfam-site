@@ -13,6 +13,7 @@ import system from './system.json';
 import cookies from './cookies.json';
 import impact from './impact.json';
 import ecosystem from './ecosystem.json';
+import platforms from './platforms.json';
 
 export default {
   common,
@@ -30,4 +31,5 @@ export default {
   cookies, // Must come AFTER spreads to prevent pages.cookies overwrite
   impact,
   ecosystem,
+  platforms,
 };

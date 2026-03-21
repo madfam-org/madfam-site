@@ -90,7 +90,20 @@ export function AssessmentClient({ translations, assessmentQuestions }: Assessme
                     assessmentResult,
                     locale: currentLocale,
                   });
-                  // TODO: Implement actual form submission
+                  await fetch('/api/leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      name: data.name,
+                      email: data.email,
+                      company: data.company,
+                      phone: data.phone,
+                      message: data.message || 'Strategy session request after AI assessment',
+                      source: 'ai-readiness-assessment',
+                      preferredLanguage: currentLocale,
+                      metadata: { assessmentResult },
+                    }),
+                  });
                 }}
               />
             </div>

@@ -10,19 +10,28 @@ export function Footer() {
 
   const navigation = {
     platforms: [
-      { name: t('footer.platforms.enclii'), href: 'https://enclii.com', external: true },
-      { name: t('footer.platforms.janua'), href: 'https://janua.auth', external: true },
-      { name: t('footer.platforms.dhanam'), href: 'https://www.dhan.am', external: true },
+      { name: t('footer.platforms.enclii'), href: `/${locale}/platforms/enclii`, external: false },
+      { name: t('footer.platforms.janua'), href: `/${locale}/platforms/janua`, external: false },
+      { name: t('footer.platforms.dhanam'), href: `/${locale}/platforms/dhanam`, external: false },
       {
         name: t('footer.platforms.forgeSight'),
-        href: 'https://www.forgesight.quest',
-        external: true,
+        href: `/${locale}/platforms/forge-sight`,
+        external: false,
       },
-      { name: t('footer.platforms.cotizaStudio'), href: 'https://cotiza.studio', external: true },
-      { name: t('footer.platforms.yantra4d'), href: 'https://yantra4d.com', external: true },
+      { name: t('footer.platforms.tezca'), href: `/${locale}/platforms/tezca`, external: false },
+      {
+        name: t('footer.platforms.cotizaStudio'),
+        href: `/${locale}/platforms/cotiza-studio`,
+        external: false,
+      },
+      {
+        name: t('footer.platforms.yantra4d'),
+        href: `/${locale}/platforms/yantra4d`,
+        external: false,
+      },
       {
         name: t('footer.platforms.pravaraMes'),
-        href: getLocalizedUrl('products', locale),
+        href: `/${locale}/platforms/pravara-mes`,
         external: false,
       },
       {

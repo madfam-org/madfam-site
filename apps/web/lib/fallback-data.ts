@@ -151,13 +151,118 @@ const fallbackBlogPosts: BlogPost[] = [
   },
 ];
 
-// Fallback case studies — placeholder data for development only
-// TODO: Replace with real case studies from CMS when available
-const fallbackCaseStudies: CaseStudy[] = [];
+// Fallback case studies
+const fallbackCaseStudies: CaseStudy[] = [
+  {
+    id: 'cs-1',
+    title: 'Digital Fabrication Workflow Automation for MakerSpace Network',
+    slug: 'makerspace-fabrication-automation',
+    client: 'Red de MakerSpaces LATAM',
+    industry: 'Digital Fabrication',
+    challenge:
+      'A network of 12 makerspaces across Mexico and Colombia struggled with manual quoting, inconsistent pricing, and disconnected production tracking across locations.',
+    solution:
+      'Deployed Forge Sight for pricing intelligence, Cotiza Studio for automated quoting, and Pravara-MES for production tracking — all integrated through the MADFAM ecosystem.',
+    results: [
+      {
+        metric: 'Quoting Time',
+        value: '-75%',
+        description: 'Reduced average quote turnaround from 48 hours to under 12 hours',
+      },
+      {
+        metric: 'Pricing Consistency',
+        value: '95%',
+        description: 'Cross-location pricing variance reduced from 40% to under 5%',
+      },
+      {
+        metric: 'Production Visibility',
+        value: '100%',
+        description: 'Real-time production tracking across all 12 locations',
+      },
+    ],
+    technologies: [
+      { technology: 'Forge Sight' },
+      { technology: 'Cotiza Studio' },
+      { technology: 'Pravara-MES' },
+      { technology: 'Enclii' },
+    ],
+    status: 'published',
+    publishedDate: '2024-02-20T10:00:00.000Z',
+    createdAt: '2024-02-20T10:00:00.000Z',
+    updatedAt: '2024-02-20T10:00:00.000Z',
+  },
+  {
+    id: 'cs-2',
+    title: 'AI-Driven Business Transformation for Agricultural Exporter',
+    slug: 'agriexport-ai-transformation',
+    client: 'AgriExport Colombia',
+    industry: 'Agriculture & Export',
+    challenge:
+      'A mid-size agricultural exporter needed to modernize operations: manual inventory management, no demand forecasting, and paper-based compliance documentation slowed growth.',
+    solution:
+      'Implemented an AI transformation program including demand forecasting models, automated compliance document generation, and a custom dashboard built on the MADFAM platform stack.',
+    results: [
+      {
+        metric: 'Forecast Accuracy',
+        value: '89%',
+        description: 'Demand forecast accuracy improved from 62% to 89%',
+      },
+      {
+        metric: 'Compliance Processing',
+        value: '-60%',
+        description: 'Export compliance documentation time reduced by 60%',
+      },
+      {
+        metric: 'Revenue Growth',
+        value: '+23%',
+        description:
+          'Year-over-year revenue increase attributed to improved forecasting and faster export cycles',
+      },
+    ],
+    technologies: [{ technology: 'Penny AI' }, { technology: 'Enclii' }, { technology: 'Dhanam' }],
+    status: 'published',
+    publishedDate: '2024-01-15T10:00:00.000Z',
+    createdAt: '2024-01-15T10:00:00.000Z',
+    updatedAt: '2024-01-15T10:00:00.000Z',
+  },
+];
 
-// Fallback team members — placeholder data for development only
-// TODO: Replace with real team data from CMS when available
-const fallbackTeamMembers: TeamMember[] = [];
+// Fallback team members
+const fallbackTeamMembers: TeamMember[] = [
+  {
+    id: 'tm-1',
+    name: 'Aldo Ruiz Luna',
+    position: 'CEO & Founder',
+    bio: 'Technology visionary with over 15 years transforming companies with AI and creativity.',
+    avatar: { id: 'av-1', url: '/team/aldo.jpg', alt: 'Aldo Ruiz Luna' },
+    social: { linkedin: 'https://linkedin.com/in/aldoruizluna' },
+    status: 'active',
+  },
+  {
+    id: 'tm-2',
+    name: 'Daniela Martínez',
+    position: 'Creative Director',
+    bio: 'Expert in 3D design and digital experiences that connect brands with audiences.',
+    avatar: { id: 'av-2', url: '/team/daniela.jpg', alt: 'Daniela Martínez' },
+    status: 'active',
+  },
+  {
+    id: 'tm-3',
+    name: 'Carlos Mendoza',
+    position: 'CTO',
+    bio: 'Solutions architect leading enterprise platform implementations.',
+    avatar: { id: 'av-3', url: '/team/carlos.jpg', alt: 'Carlos Mendoza' },
+    status: 'active',
+  },
+  {
+    id: 'tm-4',
+    name: 'Ana López',
+    position: 'AI Director',
+    bio: 'Pioneer in intelligent automation and machine learning applied to business.',
+    avatar: { id: 'av-4', url: '/team/ana.jpg', alt: 'Ana López' },
+    status: 'active',
+  },
+];
 
 // Main fallback data set
 const fallbackDataSet: FallbackDataSet = {

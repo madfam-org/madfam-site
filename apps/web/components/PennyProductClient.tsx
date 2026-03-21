@@ -343,7 +343,19 @@ export function PennyProductClient({
                   ...data,
                   locale: currentLocale,
                 });
-                // TODO: Implement actual form submission
+                await fetch('/api/leads', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    company: data.company,
+                    phone: data.phone,
+                    message: data.message || 'Penny AI demo request',
+                    source: 'penny-demo-request',
+                    preferredLanguage: currentLocale,
+                  }),
+                });
               }}
             />
           </div>
@@ -358,9 +370,17 @@ export function PennyProductClient({
               title={translations.newsletterTitle}
               description={translations.newsletterDescription}
               buttonText={translations.subscribe}
-              onSubscribe={async _email => {
-                // TODO: Implement newsletter subscription
-                // console.log('Newsletter subscription:', _email);
+              onSubscribe={async (email: string) => {
+                await fetch('/api/leads', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    name: email.split('@')[0],
+                    email,
+                    source: 'newsletter',
+                    message: 'Newsletter subscription from Penny page',
+                  }),
+                });
               }}
             />
           </div>

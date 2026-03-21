@@ -14,6 +14,7 @@ export type RouteKey =
   | 'showcase'
   | 'ecosystem'
   // Core routes
+  | 'platforms'
   | 'products'
   | 'about'
   | 'contact'
@@ -81,6 +82,11 @@ const routes: Record<RouteKey, Record<Locale, string>> = {
     en: '/showcase',
     es: '/casos',
     pt: '/casos',
+  },
+  platforms: {
+    en: '/platforms',
+    es: '/plataformas',
+    pt: '/plataformas',
   },
   products: {
     en: '/products',

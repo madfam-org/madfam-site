@@ -5,6 +5,7 @@ import { getLocalizedUrl, type Locale } from '@madfam/i18n';
 import { Container } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
 import { ProductCard } from '@/components/corporate/ProductCard';
+import { PLATFORMS, LAYERS, isComingSoon } from '@/lib/data/platforms';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -31,234 +32,45 @@ export default async function ProductsPage({ params }: Props) {
   const validLocale = locale as Locale;
   const commonT = await getTranslations({ locale, namespace: 'common' });
   const productsT = await getTranslations({ locale, namespace: 'products.page' });
+  const platformsT = await getTranslations({ locale, namespace: 'platforms' });
 
-  // All products grouped by use case with ecosystem tiers
-  const products = [
-    // Creation
-    {
-      name: 'Yantra4D',
-      description:
-        'Web platform for parametric OpenSCAD models. Upload designs, get instant 3D previews, export STL files. Powers 40+ open-source parametric designs in the commons.',
-      audience: 'Designers, makers, and digital fabrication enthusiasts',
+  function slugToKey(slug: string): string {
+    const map: Record<string, string> = {
+      'cotiza-studio': 'cotizaStudio',
+      'forge-sight': 'forgeSight',
+      'pravara-mes': 'pravaraMes',
+    };
+    return map[slug] || slug;
+  }
+
+  // Derive products from platform registry (single source of truth)
+  const products = PLATFORMS.map(p => {
+    const key = slugToKey(p.slug);
+    return {
+      name: p.name,
+      description: platformsT(`${key}.valueProp`),
+      audience: platformsT(`${key}.tagline`),
       badge: 'by MADFAM',
       tiers: 'Free + Pro',
+      comingSoon: isComingSoon(p),
       primaryCta: {
-        label: 'Visit Platform',
-        url: 'https://4d.madfam.io',
-        external: true,
+        label: platformsT(`${key}.cta.primary`),
+        url: isComingSoon(p) ? '#' : p.externalUrl || `/${locale}/platforms/${p.slug}`,
+        external: !isComingSoon(p) && !!p.externalUrl,
+        comingSoon: isComingSoon(p),
       },
       secondaryCta: {
         label: commonT('nav.contact'),
-        url: '/contact',
+        url: `/${locale}/platforms/${p.slug}`,
       },
-      features: [
-        'Parametric OpenSCAD model hosting',
-        'Instant 3D preview and STL export',
-        '40+ open-source designs in the commons',
-      ],
-      category: 'Creation',
-      sdgs: ['SDG9', 'SDG12'],
-    },
-    {
-      name: 'Cotiza Studio',
-      description:
-        'Automated quoting and estimation platform for digital fabrication services. Instant price calculations for 3D printing, CNC machining, and more.',
-      audience: 'Makers, fabrication shops, and design engineers',
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
-      primaryCta: {
-        label: 'Visit Platform',
-        url: 'https://cotiza.studio',
-        external: true,
-      },
-      secondaryCta: {
-        label: commonT('nav.contact'),
-        url: '/contact',
-      },
-      features: [
-        'Instant price calculations for fabrication services',
-        'Multi-process and multi-material support',
-        'Integration with Forge Sight pricing intelligence',
-      ],
-      category: 'Creation',
-      sdgs: ['SDG9', 'SDG12'],
-    },
-    // Infrastructure
-    {
-      name: 'Enclii',
-      description:
-        "Sovereign cloud PaaS powering MADFAM's entire infrastructure. GitOps-native, Kubernetes-based, built for teams that need deployment sovereignty.",
-      audience: 'Developers and teams who want full control of their infrastructure',
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
-      primaryCta: {
-        label: 'View on GitHub',
-        url: 'https://github.com/madfam-org/enclii',
-        external: true,
-      },
-      secondaryCta: {
-        label: commonT('nav.contact'),
-        url: '/contact',
-      },
-      features: [
-        'Zero-config deploys with preview environments',
-        'GitOps-native Kubernetes orchestration',
-        'Built-in observability and monitoring',
-      ],
-      category: 'Infrastructure',
-      sdgs: ['SDG9', 'SDG12'],
-    },
-    {
-      name: 'Janua',
-      description:
-        'Self-hosted identity platform with enterprise SSO, SCIM provisioning, MFA, and Passkeys. Open source (AGPL-3.0).',
-      audience: 'Developers and organizations who value data sovereignty',
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
-      primaryCta: {
-        label: 'View on GitHub',
-        url: 'https://github.com/madfam-org/janua',
-        external: true,
-      },
-      secondaryCta: {
-        label: commonT('nav.contact'),
-        url: '/contact',
-      },
-      features: [
-        'Enterprise SSO and SCIM provisioning',
-        'MFA and Passkey support',
-        'Self-hosted with full data sovereignty',
-      ],
-      category: 'Infrastructure',
-      sdgs: ['SDG9', 'SDG16'],
-    },
-    // Intelligence
-    {
-      name: 'Forge Sight',
-      description:
-        'Pricing intelligence platform for the global digital fabrication industry. Continuously harvests, normalizes, and benchmarks prices across vendors.',
-      audience: 'Fabrication businesses and procurement teams',
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
-      primaryCta: {
-        label: 'Visit Platform',
-        url: 'https://www.forgesight.quest',
-        external: true,
-      },
-      secondaryCta: {
-        label: commonT('nav.contact'),
-        url: '/contact',
-      },
-      features: [
-        'AI-powered price discovery from 1000+ vendors',
-        'Real-time benchmarking with statistical analysis',
-        'Enterprise security and compliance',
-      ],
-      category: 'Intelligence',
-      sdgs: ['SDG7', 'SDG9', 'SDG12'],
-    },
-    {
-      name: 'Dhanam',
-      description:
-        'Wealth and finance platform purpose-built for LATAM founders. Unifies personal and business budgeting with ESG insight.',
-      audience: 'Founders, freelancers, and financial advisors in LATAM',
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
-      primaryCta: {
-        label: 'Visit Dhanam',
-        url: 'https://www.dhan.am',
-        external: true,
-      },
-      secondaryCta: {
-        label: commonT('nav.contact'),
-        url: '/contact',
-      },
-      features: [
-        'Unified personal and business budgeting',
-        'ESG insight and tracking',
-        'Purpose-built for LATAM founders',
-      ],
-      category: 'Intelligence',
-      sdgs: ['SDG8', 'SDG9', 'SDG10'],
-    },
-    // Fabrication
-    {
-      name: 'Pravara-MES',
-      description:
-        'Manufacturing Execution System for digital fabrication workflows. Track jobs, manage queues, and monitor production in real-time.',
-      audience: 'Makers, fabrication shops, and manufacturing teams',
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
-      primaryCta: {
-        label: 'Visit Platform',
-        url: 'https://mes.madfam.io',
-        external: true,
-      },
-      secondaryCta: {
-        label: commonT('nav.contact'),
-        url: '/contact',
-      },
-      features: [
-        'Real-time production monitoring and job tracking',
-        'Queue management and scheduling',
-        'Integration with Yantra4D and Cotiza Studio',
-      ],
-      category: 'Fabrication',
-      sdgs: ['SDG9', 'SDG12'],
-    },
-    // Learning
-    {
-      name: 'AVALA',
-      comingSoon: true,
-      description:
-        'Platform for designing, delivering, and verifying competency-based training. Generates DC-3 certificates and ensures regulatory compliance.',
-      audience: 'Educators, training organizations, and learners',
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
-      primaryCta: {
-        label: 'Coming Soon',
-        url: '#',
-        comingSoon: true,
-      },
-      secondaryCta: {
-        label: commonT('nav.contact'),
-        url: '/contact',
-      },
-      features: [
-        'EC/CONOCER aligned training',
-        'DC-3 certificate generation',
-        'Verifiable credentials (Open Badges 3.0)',
-      ],
-      category: 'Learning',
-      sdgs: ['SDG4', 'SDG8', 'SDG9'],
-    },
-    // Assistant
-    {
-      name: 'PENNY',
-      comingSoon: true,
-      description:
-        'AI assistant that learns, adapts, and continuously improves your workflows. Currently in development.',
-      audience: 'Creators, entrepreneurs, and teams of all sizes',
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
-      primaryCta: {
-        label: 'In Development',
-        url: '#',
-        comingSoon: true,
-      },
-      secondaryCta: {
-        label: commonT('nav.contact'),
-        url: '/contact',
-      },
-      features: [
-        'Intelligent chat interface',
-        'Personal and business automation',
-        'Enterprise-grade security',
-      ],
-      category: 'Assistant',
-      sdgs: ['SDG8', 'SDG9'],
-    },
-  ];
+      features: Array.from({ length: Math.min(p.featureCount, 3) }, (_, i) =>
+        platformsT(`${key}.features.${i}`)
+      ),
+      category: p.category,
+      layer: p.layer,
+      slug: p.slug,
+    };
+  });
 
   const readyProducts = products.filter(p => !p.comingSoon);
   const comingSoonProducts = products.filter(p => p.comingSoon);
@@ -274,14 +86,14 @@ export default async function ProductsPage({ params }: Props) {
                 🌱
               </span>
               <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Unlock Pro on every platform with one membership
+                {platformsT('shared.cta.membership')}
               </p>
             </div>
             <Link
               href={getLocalizedUrl('ecosystem', validLocale)}
               className="text-sm font-semibold text-leaf hover:text-leaf/80 transition-colors flex items-center gap-1"
             >
-              Learn about Ecosystem Membership
+              {platformsT('shared.cta.membershipLink')}
               <svg
                 className="w-4 h-4"
                 fill="none"
@@ -306,20 +118,20 @@ export default async function ProductsPage({ params }: Props) {
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6">
-              Open platforms for creators, makers, and entrepreneurs
+              {productsT('heroTitle')}
             </h1>
             <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 leading-relaxed">
               {productsT('heroSubtitle')}
             </p>
 
-            {/* Category badges */}
+            {/* Layer badges */}
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <Badge variant="program">Creation</Badge>
-              <Badge variant="program">Infrastructure</Badge>
-              <Badge variant="program">Intelligence</Badge>
-              <Badge variant="program">Fabrication</Badge>
-              <Badge variant="program">Learning</Badge>
-              <Badge variant="program">Assistant</Badge>
+              {LAYERS.map(layer => (
+                <Badge key={layer.key} variant="program">
+                  <span aria-hidden="true">{layer.icon}</span>{' '}
+                  {platformsT(`shared.layers.${layer.key}`)}
+                </Badge>
+              ))}
             </div>
           </div>
         </Container>
@@ -337,10 +149,25 @@ export default async function ProductsPage({ params }: Props) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {readyProducts.map(product => (
-              <ProductCard key={product.name} product={product} />
-            ))}
+          {/* Products grouped by layer */}
+          <div className="max-w-6xl mx-auto">
+            {LAYERS.map(layer => {
+              const layerProducts = readyProducts.filter(p => p.layer === layer.key);
+              if (layerProducts.length === 0) return null;
+              return (
+                <div key={layer.key} className="mb-12">
+                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span aria-hidden="true">{layer.icon}</span>
+                    {platformsT(`shared.layers.${layer.key}`)}
+                  </h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {layerProducts.map(product => (
+                      <ProductCard key={product.name} product={product} />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Coming Soon Products */}
@@ -371,7 +198,7 @@ export default async function ProductsPage({ params }: Props) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href={getLocalizedUrl('ecosystem', validLocale)}>
                 <button className="px-8 py-3 bg-gradient-to-r from-leaf to-lavender text-white rounded-lg hover:from-leaf/90 hover:to-lavender/90 transition-colors font-medium">
-                  Join the Ecosystem
+                  {productsT('ctaButton')}
                 </button>
               </Link>
               <Link href={getLocalizedUrl('contact', validLocale)}>

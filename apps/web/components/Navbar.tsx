@@ -9,6 +9,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { DarkModeToggle } from './DarkModeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { cn } from '@/components/ui';
+import { PLATFORMS, LAYERS, isComingSoon } from '@/lib/data/platforms';
 
 interface NavItem {
   name: string;
@@ -75,7 +76,16 @@ export function Navbar() {
   const primaryNavigation: NavItem[] = [
     {
       name: t('platforms') || 'Platforms',
-      href: getLocalizedUrl('products', locale),
+      dropdown: LAYERS.map(layer => ({
+        title: layer.icon + ' ' + layer.key.charAt(0).toUpperCase() + layer.key.slice(1),
+        items: PLATFORMS.filter(p => p.layer === layer.key).map(p => ({
+          name: p.name + (isComingSoon(p) ? ' *' : ''),
+          href: isComingSoon(p)
+            ? getLocalizedUrl('products', locale)
+            : `/${locale}/platforms/${p.slug}`,
+          icon: p.icon,
+        })),
+      })),
     },
     {
       name: t('makerNode') || 'Maker Node',
@@ -269,7 +279,7 @@ export function Navbar() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 mt-3 min-w-[320px] bg-white dark:bg-obsidian rounded-xl shadow-2xl border border-gray-100 dark:border-gray-800 overflow-hidden"
+                            className="absolute top-full left-0 mt-3 min-w-[480px] bg-white dark:bg-obsidian rounded-xl shadow-2xl border border-gray-100 dark:border-gray-800 overflow-hidden"
                             onMouseEnter={() => handleDropdownEnter(item.name)}
                             onMouseLeave={handleDropdownLeave}
                             role="menu"
@@ -406,24 +416,31 @@ export function Navbar() {
                       <div className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
                         {item.name}
                       </div>
-                      {item.dropdown.map(section =>
-                        section.items.map(subItem => (
-                          <Link
-                            key={subItem.name}
-                            href={subItem.href}
-                            className="flex items-center gap-3 py-2 text-base text-obsidian/70 dark:text-pearl/70"
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            {subItem.icon && <span>{subItem.icon}</span>}
-                            <div>
-                              <div className="font-medium">{subItem.name}</div>
-                              {subItem.description && (
-                                <div className="text-xs text-gray-500">{subItem.description}</div>
-                              )}
+                      {item.dropdown.map(section => (
+                        <div key={section.title} className="mb-3">
+                          {section.title && (
+                            <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mt-2 mb-1 px-1">
+                              {section.title}
                             </div>
-                          </Link>
-                        ))
-                      )}
+                          )}
+                          {section.items.map(subItem => (
+                            <Link
+                              key={subItem.name}
+                              href={subItem.href}
+                              className="flex items-center gap-3 py-2 text-base text-obsidian/70 dark:text-pearl/70"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {subItem.icon && <span>{subItem.icon}</span>}
+                              <div>
+                                <div className="font-medium">{subItem.name}</div>
+                                {subItem.description && (
+                                  <div className="text-xs text-gray-500">{subItem.description}</div>
+                                )}
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
                     </div>
                   ) : (
                     <Link

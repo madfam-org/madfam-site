@@ -32,6 +32,7 @@ enum LeadSource {
   ROI_CALCULATOR
   CONTACT_FORM
   ASSESSMENT
+  NEWSLETTER
 }
 
 enum UserRole {

@@ -1,0 +1,394 @@
+{
+  "shared": {
+    "byMadfam": "by MADFAM",
+    "freePlusPro": "Free + Pro",
+    "viewDocs": "View Docs",
+    "viewOnGithub": "View on GitHub",
+    "requestDemo": "Request Demo",
+    "joinWaitlist": "Join Waitlist",
+    "getNotified": "Get Notified",
+    "exploreEcosystem": "Explore Ecosystem",
+    "viewAllPlatforms": "View All Platforms",
+    "startFree": "Start Free",
+    "getEarlyAccess": "Get Early Access",
+    "contactUs": "Contact Us",
+    "status": {
+      "production": "Live",
+      "productionBeta": "Early Access",
+      "comingSoon": "Coming Soon",
+      "inDevelopment": "In Development"
+    },
+    "sections": {
+      "problem": "The Challenge",
+      "solution": "Our Solution",
+      "features": "Key Features",
+      "comparison": "How We Compare",
+      "ecosystem": "Ecosystem Integration",
+      "techSpecs": "Technical Specifications",
+      "taste": "See It in Action"
+    },
+    "layers": {
+      "infrastructure": "Infrastructure",
+      "intelligence": "Intelligence",
+      "standards": "Standards & Compliance",
+      "applications": "Applications"
+    },
+    "flow": {
+      "design": "Design",
+      "quote": "Quote",
+      "price": "Price",
+      "finance": "Finance",
+      "manufacture": "Manufacture",
+      "comply": "Comply"
+    },
+    "cta": {
+      "membership": "Unlock Pro on every platform with one membership",
+      "membershipLink": "Learn about Ecosystem Membership"
+    }
+  },
+  "enclii": {
+    "tagline": "Sovereign Cloud PaaS",
+    "valueProp": "Deploy anywhere you want, at a fraction of the cost. GitOps-native Kubernetes for teams that refuse vendor lock-in.",
+    "problem": "Cloud hosting costs are spiraling out of control. Vercel charges $20/user/month for basic features. AWS is powerful but complex. And none of them give you true sovereignty over your infrastructure.",
+    "solution": "Enclii is a sovereign cloud PaaS built on Kubernetes. Zero-config deploys, preview environments, built-in observability — all for $55/month instead of $2,000+. Your code, your servers, your rules.",
+    "features": {
+      "0": "Zero-config deploys with preview environments",
+      "1": "GitOps-native Kubernetes orchestration",
+      "2": "Built-in observability and monitoring",
+      "3": "Automatic SSL and domain management",
+      "4": "Horizontal auto-scaling",
+      "5": "Multi-tenant isolation"
+    },
+    "cta": {
+      "primary": "Get Early Access",
+      "secondary": "View on GitHub"
+    },
+    "connections": {
+      "janua": "Authentication layer for all Enclii-hosted apps",
+      "pravara": "Hosts Pravara-MES production instances"
+    },
+    "comparison": {
+      "title": "Enclii vs. Traditional Cloud",
+      "headers": ["Feature", "Enclii", "Vercel", "AWS/GCP"],
+      "rows": {
+        "price": ["Starting Price", "$55/mo", "$20/user/mo", "$100+/mo"],
+        "deploys": ["Zero-Config Deploys", "Yes", "Yes", "No"],
+        "kubernetes": ["Native Kubernetes", "Yes", "No", "Manual setup"],
+        "sovereignty": ["Data Sovereignty", "Full", "Limited", "Configurable"],
+        "observability": ["Built-in Observability", "Yes", "Paid add-on", "Paid add-on"],
+        "scaling": ["Auto-scaling", "Built-in", "Built-in", "Complex config"]
+      }
+    },
+    "techSpecs": {
+      "apis": "12 REST + 3 gRPC endpoints",
+      "protocols": "HTTPS, gRPC, WebSocket",
+      "sdks": "CLI, Node.js, Go",
+      "license": "AGPL-3.0"
+    },
+    "metrics": {
+      "cost": "$55/mo vs $2K+",
+      "uptime": "99.95% SLA",
+      "deploys": "< 90s deploy time"
+    }
+  },
+  "janua": {
+    "tagline": "Self-Hosted Identity Platform",
+    "valueProp": "Enterprise SSO, MFA, and Passkeys — without giving up your users' data. Open source and self-hosted.",
+    "problem": "Authentication services like Auth0 and Okta charge per user, hold your data hostage, and force you into their cloud. Privacy-conscious teams need an alternative.",
+    "solution": "Janua is a self-hosted identity platform with enterprise SSO, SCIM provisioning, MFA, and Passkeys. Open source (AGPL-3.0), deploy it on your infrastructure, keep full control.",
+    "features": {
+      "0": "Enterprise SSO (SAML, OIDC)",
+      "1": "SCIM provisioning",
+      "2": "MFA and Passkey support",
+      "3": "Self-hosted with full data sovereignty",
+      "4": "Role-based access control",
+      "5": "Audit logging and compliance"
+    },
+    "cta": {
+      "primary": "Start Free",
+      "secondary": "View on GitHub"
+    },
+    "connections": {
+      "enclii": "Deploys on Enclii infrastructure",
+      "dhanam": "SSO provider for Dhanam accounts"
+    },
+    "comparison": {
+      "title": "Janua vs. Auth Providers",
+      "headers": ["Feature", "Janua", "Auth0", "Okta"],
+      "rows": {
+        "pricing": ["Pricing", "Free / Self-hosted", "$23/1K users/mo", "$2/user/mo"],
+        "selfHosted": ["Self-Hosted", "Yes", "No", "No"],
+        "passkeys": ["Passkey Support", "Yes", "Yes", "Limited"],
+        "scim": ["SCIM Provisioning", "Yes", "Enterprise only", "Yes"],
+        "openSource": ["Open Source", "AGPL-3.0", "No", "No"],
+        "dataSovereignty": ["Data Sovereignty", "Full", "None", "None"]
+      }
+    },
+    "techSpecs": {
+      "apis": "OAuth 2.0, OIDC, SAML 2.0, SCIM 2.0",
+      "protocols": "HTTPS, LDAP",
+      "sdks": "JavaScript, Python, Go, Java",
+      "license": "AGPL-3.0"
+    },
+    "metrics": {
+      "users": "Unlimited",
+      "protocols": "4 auth standards",
+      "latency": "< 50ms auth"
+    }
+  },
+  "forgeSight": {
+    "tagline": "Pricing Intelligence for Digital Fabrication",
+    "valueProp": "AI-powered price discovery from 1,000+ vendors. Know exactly what fabrication should cost before you buy.",
+    "problem": "Digital fabrication pricing is opaque. Every vendor quotes differently, there's no standardized pricing, and procurement teams waste hours comparing quotes manually.",
+    "solution": "Forge Sight continuously harvests, normalizes, and benchmarks prices across 1,000+ vendors worldwide. Get real-time market intelligence for 3D printing, CNC, laser cutting, and more.",
+    "features": {
+      "0": "AI-powered price discovery from 1,000+ vendors",
+      "1": "Real-time benchmarking with statistical analysis",
+      "2": "Material and process price tracking",
+      "3": "Vendor comparison dashboards",
+      "4": "Custom alerts for price changes",
+      "5": "API access for integration"
+    },
+    "cta": {
+      "primary": "Get Early Access",
+      "secondary": "Request Demo"
+    },
+    "connections": {
+      "cotiza": "Powers Cotiza Studio's pricing engine",
+      "dhanam": "Feeds cost data into Dhanam financial planning"
+    },
+    "comparison": {
+      "title": "Forge Sight vs. Manual Pricing",
+      "headers": ["Capability", "Forge Sight", "Manual Research", "Generic Tools"],
+      "rows": {
+        "vendors": ["Vendor Coverage", "1,000+", "10-20", "Varies"],
+        "realtime": ["Real-time Updates", "Yes", "No", "Limited"],
+        "fabrication": ["Fabrication-Specific", "Yes", "N/A", "No"],
+        "benchmarking": ["Statistical Benchmarking", "Yes", "No", "Basic"],
+        "api": ["API Access", "Yes", "No", "Some"],
+        "alerts": ["Price Alerts", "Yes", "No", "Some"]
+      }
+    },
+    "techSpecs": {
+      "apis": "REST API with 15 endpoints",
+      "protocols": "HTTPS, WebSocket (live pricing)",
+      "sdks": "JavaScript, Python",
+      "license": "Proprietary (API access with Pro)"
+    },
+    "metrics": {
+      "vendors": "1,000+ vendors",
+      "materials": "200+ materials",
+      "updates": "Real-time pricing"
+    }
+  },
+  "dhanam": {
+    "tagline": "Wealth & Finance for LATAM Founders",
+    "valueProp": "Unified personal and business budgeting with ESG insight — designed for the realities of Latin America.",
+    "problem": "LATAM founders juggle personal and business finances in different currencies with different tax regimes. Existing tools ignore regional needs: multi-currency support, informal income tracking, and ESG compliance.",
+    "solution": "Dhanam unifies personal and business financial management with native multi-currency support, ESG tracking, and tools built for LATAM's regulatory landscape.",
+    "features": {
+      "0": "Unified personal and business budgeting",
+      "1": "Multi-currency with LATAM focus",
+      "2": "ESG insight and tracking",
+      "3": "Financial projections and forecasting",
+      "4": "Mobile-first design"
+    },
+    "cta": {
+      "primary": "Open Dhanam",
+      "secondary": "Contact Us"
+    },
+    "connections": {
+      "forgeSight": "Receives fabrication cost data for financial planning",
+      "cotiza": "Imports quotes for business expense tracking"
+    },
+    "comparison": {
+      "title": "Dhanam vs. Finance Tools",
+      "headers": ["Feature", "Dhanam", "Mint/YNAB", "QuickBooks"],
+      "rows": {
+        "personal": ["Personal + Business", "Unified", "Personal only", "Business only"],
+        "multiCurrency": ["Multi-Currency (LATAM)", "Native", "Limited", "Add-on"],
+        "esg": ["ESG Tracking", "Built-in", "No", "No"],
+        "projections": ["Financial Projections", "Yes", "Basic", "Yes"],
+        "latam": ["LATAM Tax Compliance", "Yes", "No", "Limited"]
+      }
+    },
+    "metrics": {
+      "currencies": "15+ LATAM currencies",
+      "esg": "ESG tracking built-in",
+      "mobile": "Mobile-first"
+    }
+  },
+  "tezca": {
+    "tagline": "Mexican Regulatory Intelligence",
+    "valueProp": "Search, understand, and comply with Mexican law — powered by AI. 11,696 laws indexed and growing.",
+    "problem": "Mexican regulatory compliance is a maze. Thousands of laws, norms, and standards scattered across government websites. Businesses waste weeks researching compliance requirements.",
+    "solution": "Tezca indexes 11,696 Mexican laws and norms, making them searchable, cross-referenced, and actionable. AI-powered analysis helps you understand what applies to your business and how to comply.",
+    "features": {
+      "0": "11,696 Mexican laws and norms indexed",
+      "1": "AI-powered regulatory search",
+      "2": "Cross-reference analysis between laws",
+      "3": "Export in multiple formats (PDF, DOCX, JSON)",
+      "4": "Compliance checklists by industry"
+    },
+    "cta": {
+      "primary": "Get Early Access",
+      "secondary": "Request Demo"
+    },
+    "connections": {
+      "avala": "Regulatory requirements feed AVALA training curricula",
+      "pravara": "Compliance rules integrated into manufacturing workflows"
+    },
+    "techSpecs": {
+      "apis": "REST API with search, cross-reference, export",
+      "protocols": "HTTPS",
+      "sdks": "JavaScript, Python",
+      "license": "Proprietary (API access with Pro)"
+    },
+    "metrics": {
+      "laws": "11,696 laws",
+      "formats": "3 export formats",
+      "search": "AI-powered search"
+    }
+  },
+  "avala": {
+    "tagline": "Competency-Based Training Platform",
+    "valueProp": "Design, deliver, and verify competency-based training — with DC-3 certificate generation and regulatory compliance.",
+    "problem": "Training organizations in Mexico need to meet CONOCER/EC standards and generate DC-3 certificates. Current tools are fragmented, manual, and don't verify competency properly.",
+    "solution": "AVALA is a platform for designing competency-based training aligned with EC/CONOCER standards. Auto-generates DC-3 certificates and issues verifiable credentials using Open Badges 3.0.",
+    "features": {
+      "0": "EC/CONOCER aligned training design",
+      "1": "DC-3 certificate generation",
+      "2": "Verifiable credentials (Open Badges 3.0)",
+      "3": "Competency assessment tools"
+    },
+    "cta": {
+      "primary": "Join Waitlist",
+      "secondary": "Explore Ecosystem"
+    },
+    "connections": {
+      "tezca": "Regulatory requirements inform training curricula",
+      "pravara": "Operator certification tracked alongside production"
+    },
+    "metrics": {
+      "standards": "EC/CONOCER aligned",
+      "certificates": "DC-3 auto-generation",
+      "credentials": "Open Badges 3.0"
+    }
+  },
+  "yantra4d": {
+    "tagline": "Open Parametric Design Platform",
+    "valueProp": "Upload parametric OpenSCAD models, get instant 3D previews, export STL files. 40+ open-source designs in the commons.",
+    "problem": "Parametric design tools are either expensive (SolidWorks), locked-in (Fusion 360), or command-line only (OpenSCAD). Sharing parametric designs is fragmented across forums and repos.",
+    "solution": "Yantra4D is a web platform for parametric OpenSCAD models. Upload, preview in 3D, tweak parameters, and export STL — all in the browser. Powers a commons of 40+ open-source designs.",
+    "features": {
+      "0": "Parametric OpenSCAD model hosting",
+      "1": "Instant 3D preview in browser",
+      "2": "Parameter customization UI",
+      "3": "STL export for fabrication",
+      "4": "Open-source design commons"
+    },
+    "cta": {
+      "primary": "Open Yantra4D",
+      "secondary": "Contact Us"
+    },
+    "connections": {
+      "cotiza": "Export designs directly to Cotiza for instant quotes",
+      "pravara": "Send designs to Pravara-MES for fabrication"
+    },
+    "techSpecs": {
+      "apis": "REST API for model management and rendering",
+      "protocols": "HTTPS, WebSocket (live preview)",
+      "sdks": "JavaScript",
+      "license": "AGPL-3.0"
+    },
+    "metrics": {
+      "designs": "40+ open-source models",
+      "formats": "OpenSCAD → STL",
+      "preview": "Real-time 3D"
+    }
+  },
+  "cotizaStudio": {
+    "tagline": "Automated Quoting & Estimation",
+    "valueProp": "Upload a design, select materials and processes, get an instant fabrication quote. Integrated with Forge Sight pricing intelligence.",
+    "problem": "Getting a fabrication quote takes days. Upload a file, wait for someone to review it, negotiate back and forth. Pricing is inconsistent and opaque.",
+    "solution": "Cotiza Studio automates the entire quoting process. Upload your design, select materials and processes, and get an instant price powered by Forge Sight's real-time market data.",
+    "features": {
+      "0": "Instant price calculations for fabrication",
+      "1": "Multi-process support (3D print, CNC, laser)",
+      "2": "Material library with real-time pricing",
+      "3": "Integration with Forge Sight intelligence",
+      "4": "Quote sharing and collaboration"
+    },
+    "cta": {
+      "primary": "Open Cotiza Studio",
+      "secondary": "Contact Us"
+    },
+    "connections": {
+      "forgeSight": "Real-time pricing data from Forge Sight",
+      "yantra4d": "Direct import of parametric designs"
+    },
+    "metrics": {
+      "speed": "Instant quotes",
+      "processes": "3+ fabrication processes",
+      "pricing": "Real-time market data"
+    }
+  },
+  "pravaraMes": {
+    "tagline": "Manufacturing Execution System",
+    "valueProp": "Track jobs, manage queues, and monitor production in real-time. Multi-protocol support for modern and legacy machines.",
+    "problem": "Small to mid-size fabrication shops still track production on whiteboards and spreadsheets. Machine status is unknown until someone walks over. Scheduling is manual.",
+    "solution": "Pravara-MES brings real-time production monitoring, job tracking, and queue management to digital fabrication shops. Connects to machines via OPC-UA, MQTT, and REST.",
+    "features": {
+      "0": "Real-time production monitoring",
+      "1": "Job tracking and queue management",
+      "2": "Multi-protocol machine connectivity",
+      "3": "Production scheduling and optimization",
+      "4": "Quality metrics and reporting",
+      "5": "Integration with Yantra4D and Cotiza"
+    },
+    "cta": {
+      "primary": "Get Early Access",
+      "secondary": "Request Demo"
+    },
+    "connections": {
+      "yantra4d": "Receives designs for fabrication tracking",
+      "tezca": "Compliance rules applied to manufacturing workflows"
+    },
+    "techSpecs": {
+      "apis": "REST API with 20+ endpoints",
+      "protocols": "OPC-UA, MQTT, REST, WebSocket",
+      "sdks": "JavaScript, Python",
+      "license": "AGPL-3.0"
+    },
+    "metrics": {
+      "protocols": "4 machine protocols",
+      "monitoring": "Real-time dashboard",
+      "machines": "Unlimited connections"
+    }
+  },
+  "penny": {
+    "tagline": "AI Assistant for the MADFAM Ecosystem",
+    "valueProp": "An AI assistant that understands every MADFAM platform and helps you orchestrate workflows across the entire ecosystem.",
+    "problem": "As the MADFAM ecosystem grows, navigating between platforms becomes complex. Users need a unified interface to discover capabilities, automate workflows, and get help.",
+    "solution": "PENNY is an AI assistant that lives across the entire MADFAM ecosystem. Chat naturally to trigger workflows, query data from any platform, and get contextual help.",
+    "features": {
+      "0": "Natural language ecosystem commands",
+      "1": "Cross-platform workflow automation",
+      "2": "Contextual help and onboarding",
+      "3": "Smart notifications and insights"
+    },
+    "cta": {
+      "primary": "Get Notified",
+      "secondary": "View All Platforms"
+    },
+    "connections": {
+      "dhanam": "Financial queries and budget alerts",
+      "cotiza": "Quote generation via chat"
+    },
+    "metrics": {
+      "platforms": "10 platform integrations",
+      "interface": "Natural language",
+      "automation": "Cross-platform workflows"
+    }
+  }
+}

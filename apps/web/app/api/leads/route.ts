@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { LeadSource, LeadStatus } from '@prisma/client';
+import { LeadSource, LeadStatus, Prisma } from '@prisma/client';
 import { withRateLimit } from '@/lib/rate-limit';
 import { validateBearerToken } from '@/lib/security';
 
@@ -16,7 +16,7 @@ const leadSchema = z.object({
   phone: z.string().optional(),
   message: z.string().optional(),
   source: z.string().default('website'),
-  preferredLanguage: z.enum(['es', 'en']).default('es'),
+  preferredLanguage: z.enum(['es', 'en', 'pt']).default('es'),
   metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
@@ -98,7 +98,9 @@ async function handlePOST(request: NextRequest) {
         status: LeadStatus.NEW,
         userAgent,
         ipAddress,
-        // Store additional metadata
+        metadata: validatedData.metadata
+          ? (validatedData.metadata as Prisma.InputJsonValue)
+          : undefined,
         utmSource: (validatedData.metadata?.utm_source as string) || undefined,
         utmMedium: (validatedData.metadata?.utm_medium as string) || undefined,
         utmCampaign: (validatedData.metadata?.utm_campaign as string) || undefined,

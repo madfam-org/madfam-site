@@ -1,0 +1,399 @@
+{
+  "shared": {
+    "byMadfam": "by MADFAM",
+    "freePlusPro": "Grátis + Pro",
+    "viewDocs": "Ver Documentação",
+    "viewOnGithub": "Ver no GitHub",
+    "requestDemo": "Solicitar Demo",
+    "joinWaitlist": "Entrar na Lista de Espera",
+    "getNotified": "Receber Notificações",
+    "exploreEcosystem": "Explorar Ecossistema",
+    "viewAllPlatforms": "Ver Todas as Plataformas",
+    "startFree": "Começar Grátis",
+    "getEarlyAccess": "Obter Acesso Antecipado",
+    "contactUs": "Fale Conosco",
+    "status": {
+      "production": "Disponível",
+      "productionBeta": "Acesso Antecipado",
+      "comingSoon": "Em Breve",
+      "inDevelopment": "Em Desenvolvimento"
+    },
+    "sections": {
+      "problem": "O Desafio",
+      "solution": "Nossa Solução",
+      "features": "Recursos Principais",
+      "comparison": "Como Nos Comparamos",
+      "ecosystem": "Integração com o Ecossistema",
+      "techSpecs": "Especificações Técnicas",
+      "taste": "Veja em Ação"
+    },
+    "layers": {
+      "infrastructure": "Infraestrutura",
+      "intelligence": "Inteligência",
+      "standards": "Padrões e Conformidade",
+      "applications": "Aplicações"
+    },
+    "flow": {
+      "design": "Projetar",
+      "quote": "Cotar",
+      "price": "Precificar",
+      "finance": "Financiar",
+      "manufacture": "Fabricar",
+      "comply": "Conformar"
+    },
+    "cta": {
+      "membership": "Desbloqueie Pro em cada plataforma com uma assinatura",
+      "membershipLink": "Conheça a Assinatura do Ecossistema"
+    }
+  },
+  "enclii": {
+    "tagline": "PaaS em Nuvem Soberana",
+    "valueProp": "Implante onde quiser, por uma fração do custo. Kubernetes GitOps-nativo para equipes que recusam vendor lock-in.",
+    "problem": "Os custos de hospedagem em nuvem estão fora de controle. Vercel cobra $20/usuário/mês por recursos básicos. AWS é poderosa mas complexa. E nenhuma dá verdadeira soberania sobre sua infraestrutura.",
+    "solution": "Enclii é um PaaS soberano construído sobre Kubernetes. Implantações sem configuração, ambientes de preview, observabilidade integrada — tudo por $55/mês em vez de $2.000+. Seu código, seus servidores, suas regras.",
+    "features": {
+      "0": "Implantações sem configuração com ambientes de preview",
+      "1": "Orquestração Kubernetes GitOps-nativa",
+      "2": "Observabilidade e monitoramento integrados",
+      "3": "Gestão automática de SSL e domínios",
+      "4": "Auto-escalonamento horizontal",
+      "5": "Isolamento multi-tenant"
+    },
+    "cta": {
+      "primary": "Obter Acesso Antecipado",
+      "secondary": "Ver no GitHub"
+    },
+    "connections": {
+      "janua": "Camada de autenticação para todas as apps no Enclii",
+      "pravara": "Hospeda instâncias de produção do Pravara-MES"
+    },
+    "comparison": {
+      "title": "Enclii vs. Nuvem Tradicional",
+      "headers": ["Recurso", "Enclii", "Vercel", "AWS/GCP"],
+      "rows": {
+        "price": ["Preço Inicial", "$55/mês", "$20/usuário/mês", "$100+/mês"],
+        "deploys": ["Implantações Sem Config", "Sim", "Sim", "Não"],
+        "kubernetes": ["Kubernetes Nativo", "Sim", "Não", "Config manual"],
+        "sovereignty": ["Soberania de Dados", "Total", "Limitada", "Configurável"],
+        "observability": [
+          "Observabilidade Integrada",
+          "Sim",
+          "Complemento pago",
+          "Complemento pago"
+        ],
+        "scaling": ["Auto-escalonamento", "Integrado", "Integrado", "Config complexa"]
+      }
+    },
+    "techSpecs": {
+      "apis": "12 REST + 3 endpoints gRPC",
+      "protocols": "HTTPS, gRPC, WebSocket",
+      "sdks": "CLI, Node.js, Go",
+      "license": "AGPL-3.0"
+    },
+    "metrics": {
+      "cost": "$55/mês vs $2K+",
+      "uptime": "99.95% SLA",
+      "deploys": "< 90s tempo de implantação"
+    }
+  },
+  "janua": {
+    "tagline": "Plataforma de Identidade Auto-Hospedada",
+    "valueProp": "SSO empresarial, MFA e Passkeys — sem entregar os dados dos seus usuários. Código aberto e auto-hospedado.",
+    "problem": "Serviços de autenticação como Auth0 e Okta cobram por usuário, retêm seus dados e forçam você para a nuvem deles. Equipes conscientes de privacidade precisam de uma alternativa.",
+    "solution": "Janua é uma plataforma de identidade auto-hospedada com SSO empresarial, provisionamento SCIM, MFA e Passkeys. Código aberto (AGPL-3.0), implante na sua infraestrutura.",
+    "features": {
+      "0": "SSO Empresarial (SAML, OIDC)",
+      "1": "Provisionamento SCIM",
+      "2": "Suporte MFA e Passkey",
+      "3": "Auto-hospedado com soberania total de dados",
+      "4": "Controle de acesso baseado em funções",
+      "5": "Registro de auditoria e conformidade"
+    },
+    "cta": {
+      "primary": "Começar Grátis",
+      "secondary": "Ver no GitHub"
+    },
+    "connections": {
+      "enclii": "Implantado na infraestrutura Enclii",
+      "dhanam": "Provedor SSO para contas Dhanam"
+    },
+    "comparison": {
+      "title": "Janua vs. Provedores de Auth",
+      "headers": ["Recurso", "Janua", "Auth0", "Okta"],
+      "rows": {
+        "pricing": ["Preço", "Grátis / Auto-hospedado", "$23/1K usuários/mês", "$2/usuário/mês"],
+        "selfHosted": ["Auto-Hospedado", "Sim", "Não", "Não"],
+        "passkeys": ["Suporte Passkey", "Sim", "Sim", "Limitado"],
+        "scim": ["Provisionamento SCIM", "Sim", "Somente Enterprise", "Sim"],
+        "openSource": ["Código Aberto", "AGPL-3.0", "Não", "Não"],
+        "dataSovereignty": ["Soberania de Dados", "Total", "Nenhuma", "Nenhuma"]
+      }
+    },
+    "techSpecs": {
+      "apis": "OAuth 2.0, OIDC, SAML 2.0, SCIM 2.0",
+      "protocols": "HTTPS, LDAP",
+      "sdks": "JavaScript, Python, Go, Java",
+      "license": "AGPL-3.0"
+    },
+    "metrics": {
+      "users": "Ilimitados",
+      "protocols": "4 padrões de auth",
+      "latency": "< 50ms autenticação"
+    }
+  },
+  "forgeSight": {
+    "tagline": "Inteligência de Preços para Fabricação Digital",
+    "valueProp": "Descoberta de preços com IA de 1.000+ fornecedores. Saiba exatamente quanto a fabricação deveria custar antes de comprar.",
+    "problem": "Os preços de fabricação digital são opacos. Cada fornecedor cota diferente, não há preços padronizados, e equipes de compras desperdiçam horas comparando cotações manualmente.",
+    "solution": "Forge Sight coleta, normaliza e compara preços continuamente de 1.000+ fornecedores mundiais. Obtenha inteligência de mercado em tempo real para impressão 3D, CNC, corte a laser e mais.",
+    "features": {
+      "0": "Descoberta de preços com IA de 1.000+ fornecedores",
+      "1": "Benchmarking em tempo real com análise estatística",
+      "2": "Rastreamento de preços por material e processo",
+      "3": "Dashboards de comparação de fornecedores",
+      "4": "Alertas personalizados de mudanças de preço",
+      "5": "Acesso API para integração"
+    },
+    "cta": {
+      "primary": "Obter Acesso Antecipado",
+      "secondary": "Solicitar Demo"
+    },
+    "connections": {
+      "cotiza": "Alimenta o motor de preços do Cotiza Studio",
+      "dhanam": "Envia dados de custos para o planejamento financeiro do Dhanam"
+    },
+    "comparison": {
+      "title": "Forge Sight vs. Pesquisa Manual",
+      "headers": ["Capacidade", "Forge Sight", "Pesquisa Manual", "Ferramentas Genéricas"],
+      "rows": {
+        "vendors": ["Cobertura de Fornecedores", "1.000+", "10-20", "Variável"],
+        "realtime": ["Atualizações em Tempo Real", "Sim", "Não", "Limitado"],
+        "fabrication": ["Específico para Fabricação", "Sim", "N/A", "Não"],
+        "benchmarking": ["Benchmarking Estatístico", "Sim", "Não", "Básico"],
+        "api": ["Acesso API", "Sim", "Não", "Alguns"],
+        "alerts": ["Alertas de Preço", "Sim", "Não", "Alguns"]
+      }
+    },
+    "techSpecs": {
+      "apis": "API REST com 15 endpoints",
+      "protocols": "HTTPS, WebSocket (preços ao vivo)",
+      "sdks": "JavaScript, Python",
+      "license": "Proprietário (acesso API com Pro)"
+    },
+    "metrics": {
+      "vendors": "1.000+ fornecedores",
+      "materials": "200+ materiais",
+      "updates": "Preços em tempo real"
+    }
+  },
+  "dhanam": {
+    "tagline": "Finanças e Patrimônio para Fundadores da LATAM",
+    "valueProp": "Orçamento pessoal e empresarial unificado com visão ESG — projetado para as realidades da América Latina.",
+    "problem": "Fundadores na LATAM gerenciam finanças pessoais e empresariais em diferentes moedas com diferentes regimes fiscais. Ferramentas existentes ignoram necessidades regionais.",
+    "solution": "Dhanam unifica a gestão financeira pessoal e empresarial com suporte nativo multi-moeda, rastreamento ESG e ferramentas construídas para o panorama regulatório da LATAM.",
+    "features": {
+      "0": "Orçamento pessoal e empresarial unificado",
+      "1": "Multi-moeda com foco LATAM",
+      "2": "Visão e rastreamento ESG",
+      "3": "Projeções e previsões financeiras",
+      "4": "Design mobile-first"
+    },
+    "cta": {
+      "primary": "Abrir Dhanam",
+      "secondary": "Fale Conosco"
+    },
+    "connections": {
+      "forgeSight": "Recebe dados de custos de fabricação para planejamento financeiro",
+      "cotiza": "Importa cotações para rastreamento de despesas"
+    },
+    "comparison": {
+      "title": "Dhanam vs. Ferramentas Financeiras",
+      "headers": ["Recurso", "Dhanam", "Mint/YNAB", "QuickBooks"],
+      "rows": {
+        "personal": ["Pessoal + Empresarial", "Unificado", "Apenas pessoal", "Apenas empresarial"],
+        "multiCurrency": ["Multi-Moeda (LATAM)", "Nativo", "Limitado", "Complemento"],
+        "esg": ["Rastreamento ESG", "Integrado", "Não", "Não"],
+        "projections": ["Projeções Financeiras", "Sim", "Básico", "Sim"],
+        "latam": ["Conformidade Fiscal LATAM", "Sim", "Não", "Limitado"]
+      }
+    },
+    "metrics": {
+      "currencies": "15+ moedas LATAM",
+      "esg": "Rastreamento ESG integrado",
+      "mobile": "Mobile-first"
+    }
+  },
+  "tezca": {
+    "tagline": "Inteligência Regulatória Mexicana",
+    "valueProp": "Pesquise, entenda e cumpra a lei mexicana — com inteligência artificial. 11.696 leis indexadas e crescendo.",
+    "problem": "A conformidade regulatória mexicana é um labirinto. Milhares de leis, normas e padrões dispersos em sites governamentais. Empresas perdem semanas pesquisando requisitos.",
+    "solution": "Tezca indexa 11.696 leis e normas mexicanas, tornando-as pesquisáveis, referenciadas e acionáveis. Análise com IA ajuda você a entender o que se aplica ao seu negócio.",
+    "features": {
+      "0": "11.696 leis e normas mexicanas indexadas",
+      "1": "Pesquisa regulatória com IA",
+      "2": "Análise de referência cruzada entre leis",
+      "3": "Exportação em múltiplos formatos (PDF, DOCX, JSON)",
+      "4": "Listas de conformidade por indústria"
+    },
+    "cta": {
+      "primary": "Obter Acesso Antecipado",
+      "secondary": "Solicitar Demo"
+    },
+    "connections": {
+      "avala": "Requisitos regulatórios alimentam os currículos do AVALA",
+      "pravara": "Regras de conformidade integradas em fluxos de manufatura"
+    },
+    "techSpecs": {
+      "apis": "API REST com pesquisa, referência cruzada, exportação",
+      "protocols": "HTTPS",
+      "sdks": "JavaScript, Python",
+      "license": "Proprietário (acesso API com Pro)"
+    },
+    "metrics": {
+      "laws": "11.696 leis",
+      "formats": "3 formatos de exportação",
+      "search": "Pesquisa com IA"
+    }
+  },
+  "avala": {
+    "tagline": "Plataforma de Treinamento por Competências",
+    "valueProp": "Projete, entregue e verifique treinamento baseado em competências — com geração de certificados DC-3 e conformidade regulatória.",
+    "problem": "Organizações de treinamento no México precisam cumprir padrões CONOCER/EC e gerar certificados DC-3. Ferramentas atuais são fragmentadas e manuais.",
+    "solution": "AVALA é uma plataforma para projetar treinamento por competências alinhado com padrões EC/CONOCER. Gera certificados DC-3 automaticamente e emite credenciais verificáveis com Open Badges 3.0.",
+    "features": {
+      "0": "Design de treinamento alinhado a EC/CONOCER",
+      "1": "Geração de certificados DC-3",
+      "2": "Credenciais verificáveis (Open Badges 3.0)",
+      "3": "Ferramentas de avaliação por competências"
+    },
+    "cta": {
+      "primary": "Entrar na Lista de Espera",
+      "secondary": "Explorar Ecossistema"
+    },
+    "connections": {
+      "tezca": "Requisitos regulatórios informam os planos de treinamento",
+      "pravara": "Certificação de operadores vinculada à produção"
+    },
+    "metrics": {
+      "standards": "Alinhado a EC/CONOCER",
+      "certificates": "Geração automática DC-3",
+      "credentials": "Open Badges 3.0"
+    }
+  },
+  "yantra4d": {
+    "tagline": "Plataforma de Design Paramétrico Aberto",
+    "valueProp": "Envie modelos paramétricos OpenSCAD, obtenha visualizações 3D instantâneas, exporte arquivos STL. 40+ designs open-source nos comuns.",
+    "problem": "Ferramentas de design paramétrico são caras (SolidWorks), proprietárias (Fusion 360) ou apenas linha de comando (OpenSCAD). Compartilhar designs paramétricos é fragmentado.",
+    "solution": "Yantra4D é uma plataforma web para modelos OpenSCAD paramétricos. Envie, visualize em 3D, ajuste parâmetros e exporte STL — tudo no navegador.",
+    "features": {
+      "0": "Hospedagem de modelos OpenSCAD paramétricos",
+      "1": "Visualização 3D instantânea no navegador",
+      "2": "UI de personalização de parâmetros",
+      "3": "Exportação STL para fabricação",
+      "4": "Comuns de design open-source"
+    },
+    "cta": {
+      "primary": "Abrir Yantra4D",
+      "secondary": "Fale Conosco"
+    },
+    "connections": {
+      "cotiza": "Exporte designs direto para Cotiza para cotações instantâneas",
+      "pravara": "Envie designs para Pravara-MES para fabricação"
+    },
+    "techSpecs": {
+      "apis": "API REST para gestão e renderização de modelos",
+      "protocols": "HTTPS, WebSocket (visualização ao vivo)",
+      "sdks": "JavaScript",
+      "license": "AGPL-3.0"
+    },
+    "metrics": {
+      "designs": "40+ modelos open-source",
+      "formats": "OpenSCAD → STL",
+      "preview": "3D em tempo real"
+    }
+  },
+  "cotizaStudio": {
+    "tagline": "Cotação e Estimativa Automatizada",
+    "valueProp": "Envie um design, selecione materiais e processos, obtenha uma cotação de fabricação instantânea. Integrado com Forge Sight.",
+    "problem": "Obter uma cotação de fabricação leva dias. Envia um arquivo, espera revisão, negocia ida e volta. Os preços são inconsistentes e opacos.",
+    "solution": "Cotiza Studio automatiza todo o processo de cotação. Envie seu design, selecione materiais e processos, e obtenha um preço instantâneo com dados de mercado do Forge Sight.",
+    "features": {
+      "0": "Cálculos de preço instantâneos para fabricação",
+      "1": "Suporte multi-processo (3D, CNC, laser)",
+      "2": "Biblioteca de materiais com preços em tempo real",
+      "3": "Integração com inteligência Forge Sight",
+      "4": "Compartilhamento e colaboração em cotações"
+    },
+    "cta": {
+      "primary": "Abrir Cotiza Studio",
+      "secondary": "Fale Conosco"
+    },
+    "connections": {
+      "forgeSight": "Dados de preços em tempo real do Forge Sight",
+      "yantra4d": "Importação direta de designs paramétricos"
+    },
+    "metrics": {
+      "speed": "Cotações instantâneas",
+      "processes": "3+ processos de fabricação",
+      "pricing": "Dados de mercado em tempo real"
+    }
+  },
+  "pravaraMes": {
+    "tagline": "Sistema de Execução de Manufatura",
+    "valueProp": "Rastreie trabalhos, gerencie filas e monitore produção em tempo real. Suporte multi-protocolo para máquinas modernas e legadas.",
+    "problem": "Oficinas de fabricação pequenas e médias ainda rastreiam produção em quadros e planilhas. O status das máquinas é desconhecido. O agendamento é manual.",
+    "solution": "Pravara-MES traz monitoramento de produção em tempo real, rastreamento de trabalhos e gestão de filas para oficinas de fabricação digital. Conecta-se via OPC-UA, MQTT e REST.",
+    "features": {
+      "0": "Monitoramento de produção em tempo real",
+      "1": "Rastreamento de trabalhos e gestão de filas",
+      "2": "Conectividade multi-protocolo de máquinas",
+      "3": "Agendamento e otimização de produção",
+      "4": "Métricas de qualidade e relatórios",
+      "5": "Integração com Yantra4D e Cotiza"
+    },
+    "cta": {
+      "primary": "Obter Acesso Antecipado",
+      "secondary": "Solicitar Demo"
+    },
+    "connections": {
+      "yantra4d": "Recebe designs para rastreamento de fabricação",
+      "tezca": "Regras de conformidade aplicadas a fluxos de manufatura"
+    },
+    "techSpecs": {
+      "apis": "API REST com 20+ endpoints",
+      "protocols": "OPC-UA, MQTT, REST, WebSocket",
+      "sdks": "JavaScript, Python",
+      "license": "AGPL-3.0"
+    },
+    "metrics": {
+      "protocols": "4 protocolos de máquinas",
+      "monitoring": "Dashboard em tempo real",
+      "machines": "Conexões ilimitadas"
+    }
+  },
+  "penny": {
+    "tagline": "Assistente IA para o Ecossistema MADFAM",
+    "valueProp": "Um assistente de IA que entende cada plataforma MADFAM e ajuda você a orquestrar fluxos de trabalho em todo o ecossistema.",
+    "problem": "À medida que o ecossistema MADFAM cresce, navegar entre plataformas se torna complexo. Usuários precisam de uma interface unificada para descobrir capacidades e automatizar fluxos.",
+    "solution": "PENNY é um assistente de IA que vive em todo o ecossistema MADFAM. Converse naturalmente para ativar fluxos, consultar dados de qualquer plataforma e obter ajuda contextual.",
+    "features": {
+      "0": "Comandos do ecossistema em linguagem natural",
+      "1": "Automação de fluxos entre plataformas",
+      "2": "Ajuda contextual e onboarding",
+      "3": "Notificações e insights inteligentes"
+    },
+    "cta": {
+      "primary": "Receber Notificações",
+      "secondary": "Ver Todas as Plataformas"
+    },
+    "connections": {
+      "dhanam": "Consultas financeiras e alertas de orçamento",
+      "cotiza": "Geração de cotações por chat"
+    },
+    "metrics": {
+      "platforms": "10 integrações de plataformas",
+      "interface": "Linguagem natural",
+      "automation": "Fluxos entre plataformas"
+    }
+  }
+}

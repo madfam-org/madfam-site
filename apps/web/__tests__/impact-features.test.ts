@@ -135,19 +135,20 @@ describe('Impact & SDG Features', () => {
   });
 
   describe('Product Integration', () => {
-    it('should have SDG data in products page', () => {
-      const productsPath = path.join(__dirname, '../app/[locale]/products/page.tsx');
-      const content = fs.readFileSync(productsPath, 'utf-8');
-
-      // Check that products have SDG fields
-      expect(content).toContain('sdgs:');
-      expect(content).toContain('SDG');
-
-      // Check ProductCard imports SDGBadge
+    it('should have SDG support in ProductCard', () => {
+      // Check ProductCard imports SDGBadge and supports sdgs prop
       const cardPath = path.join(__dirname, '../components/corporate/ProductCard.tsx');
       const cardContent = fs.readFileSync(cardPath, 'utf-8');
       expect(cardContent).toContain('SDGInlineBadge');
       expect(cardContent).toContain('product.sdgs');
+    });
+
+    it('should have platform data registry', () => {
+      const registryPath = path.join(__dirname, '../lib/data/platforms.ts');
+      expect(fs.existsSync(registryPath)).toBe(true);
+      const content = fs.readFileSync(registryPath, 'utf-8');
+      expect(content).toContain('PLATFORMS');
+      expect(content).toContain('getPlatformBySlug');
     });
   });
 });
