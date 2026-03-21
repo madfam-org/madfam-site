@@ -20,9 +20,9 @@ pnpm typecheck
 ## Project Overview
 
 **Company**: MADFAM - AI consultancy and product studio  
-**Tech Stack**: Next.js 14, TypeScript, Tailwind CSS, Turborepo  
+**Tech Stack**: Next.js 15, TypeScript, Tailwind CSS, Turborepo
 **Architecture**: Monorepo with shared packages  
-**Languages**: Spanish (es), English (en), Portuguese (pt-br)
+**Languages**: Spanish (es), English (en), Portuguese (pt)
 
 ## Repository Structure
 
@@ -32,10 +32,11 @@ biz-site/
 │   ├── web/           # Main Next.js website
 │   └── cms/           # Payload CMS (optional)
 ├── packages/
-│   ├── ui/            # Component library
-│   ├── core/          # Business logic
-│   ├── i18n/          # Translations
-│   └── analytics/     # Tracking
+│   ├── ui/            # Shared themes/tokens (components dissolved to apps/web)
+│   ├── core/          # Business logic, feature flags, logger
+│   ├── i18n/          # Translations (es, en, pt)
+│   ├── analytics/     # Tracking (Plausible integration)
+│   └── email/         # Email templates and Resend sender
 ├── docs/              # All documentation
 ├── README.md          # Project README
 └── CLAUDE.md          # This file
@@ -120,8 +121,8 @@ export default async function NewPage() {
 ### Create Component
 
 ```tsx
-// packages/ui/src/components/NewComponent.tsx
-import { cn } from '../lib/utils';
+// apps/web/components/NewComponent.tsx
+import { cn } from '@/components/ui/utils';
 
 interface NewComponentProps {
   className?: string;
@@ -168,14 +169,20 @@ Required:
 
 ```env
 NEXT_PUBLIC_ENV=development|staging|production
-NEXT_PUBLIC_API_URL=
+DATABASE_URL=
 ```
 
-Optional:
+Optional (services activate when configured):
 
 ```env
-DATABASE_URL=
-N8N_WEBHOOK_URL=
+REDIS_URL=                        # Multi-pod rate limiting & CMS cache
+SENTRY_DSN=                       # Server-side error tracking
+NEXT_PUBLIC_SENTRY_DSN=           # Client-side error tracking
+NEXT_PUBLIC_PLAUSIBLE_DOMAIN=     # Plausible analytics
+RESEND_API_KEY=                   # Email sending via Resend
+RESEND_FROM_EMAIL=                # Sender address (default: hello@madfam.io)
+CMS_WEBHOOK_SECRET=               # CMS cache invalidation webhook auth
+N8N_WEBHOOK_URL=                  # n8n workflow automation
 ```
 
 ## Testing & Quality
@@ -210,8 +217,10 @@ pnpm test
 
 ## Security
 
+- Nonce-based CSP with `strict-dynamic` for script-src
 - Input validation with Zod
-- CSP headers configured
+- Redis-backed rate limiting (falls back to in-memory)
+- Sentry error tracking (guarded by env var)
 - No secrets in code
 - Sanitize user content
 - Use environment variables
@@ -257,8 +266,17 @@ All detailed documentation is in `/docs/`:
 - Brand guidelines: `docs/BRAND_IMPLEMENTATION_GUIDE.md`
 - Mobile guide: `docs/MOBILE_OPTIMIZATION_GUIDE.md`
 
+## Infrastructure
+
+- **K8s**: HPA with 2-5 replicas, 70% CPU target
+- **Rate limiting**: Redis-backed (multi-pod safe) with in-memory fallback
+- **CMS cache**: Write-through Redis cache with webhook invalidation
+- **Search**: Server-side search API at `/api/search`
+- **Analytics**: Plausible via `sendBeacon` (no cookie consent needed)
+- **Email**: Resend integration via email queue processor
+
 ---
 
 **Last Updated**: March 2026
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Maintained by**: MADFAM Development Team
