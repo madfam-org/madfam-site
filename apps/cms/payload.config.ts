@@ -14,7 +14,11 @@ import { Media } from './src/collections/Media.ts';
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3001',
-  secret: process.env.PAYLOAD_SECRET || 'your-secret-key',
+  secret: (() => {
+    if (!process.env.PAYLOAD_SECRET)
+      throw new Error('PAYLOAD_SECRET environment variable is required');
+    return process.env.PAYLOAD_SECRET;
+  })(),
   admin: {
     user: 'users',
   },
