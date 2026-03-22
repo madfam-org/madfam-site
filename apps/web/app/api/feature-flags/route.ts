@@ -54,10 +54,16 @@ export async function GET(request: NextRequest) {
       'anonymous';
 
     if (flag) {
-      // Get specific flag
-      const featureFlag = await prisma.featureFlag.findUnique({
-        where: { key: flag },
-      });
+      // Get specific flag — wrap in try-catch so we gracefully fall back
+      // when the database is unavailable (no DATABASE_URL configured)
+      let featureFlag = null;
+      try {
+        featureFlag = await prisma.featureFlag.findUnique({
+          where: { key: flag },
+        });
+      } catch {
+        // Database unavailable — fall through to provider
+      }
 
       if (!featureFlag) {
         // Fallback to core provider if not in database
@@ -107,10 +113,15 @@ export async function GET(request: NextRequest) {
         },
       });
     } else {
-      // Get all flags
-      const flags = await prisma.featureFlag.findMany({
-        where: { enabled: true },
-      });
+      // Get all flags — wrap in try-catch for database unavailability
+      let flags: Awaited<ReturnType<typeof prisma.featureFlag.findMany>> = [];
+      try {
+        flags = await prisma.featureFlag.findMany({
+          where: { enabled: true },
+        });
+      } catch {
+        // Database unavailable — continue with provider-only flags
+      }
 
       // Merge with provider flags
       const provider = new FeatureFlagProvider();

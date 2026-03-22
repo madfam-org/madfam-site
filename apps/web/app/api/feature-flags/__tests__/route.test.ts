@@ -7,12 +7,14 @@ import { NextRequest } from 'next/server';
 // ---------------------------------------------------------------------------
 
 const { mockIsEnabled, mockGetAllFlags, MockFeatureFlagProvider } = vi.hoisted(() => {
-  const isEnabled = vi.fn().mockReturnValue(false);
-  const getAllFlags = vi.fn().mockReturnValue({});
-  const Provider = vi.fn().mockImplementation(() => ({
-    isEnabled,
-    getAllFlags,
-  }));
+  const isEnabled = vi.fn(() => false);
+  const getAllFlags = vi.fn(() => ({}));
+  // Use a named function for the provider constructor to satisfy vitest v4's
+  // requirement that vi.fn() mocks use 'function' or 'class' implementations
+  function FeatureFlagProviderMock() {
+    return { isEnabled, getAllFlags };
+  }
+  const Provider = vi.fn(FeatureFlagProviderMock);
   return {
     mockIsEnabled: isEnabled,
     mockGetAllFlags: getAllFlags,
@@ -27,10 +29,10 @@ const { mockIsEnabled, mockGetAllFlags, MockFeatureFlagProvider } = vi.hoisted((
 vi.mock('@/lib/prisma', () => ({
   prisma: {
     featureFlag: {
-      findUnique: vi.fn(),
-      findMany: vi.fn(),
-      upsert: vi.fn(),
-      update: vi.fn(),
+      findUnique: vi.fn(() => Promise.resolve(null)),
+      findMany: vi.fn(() => Promise.resolve([])),
+      upsert: vi.fn(() => Promise.resolve(null)),
+      update: vi.fn(() => Promise.resolve(null)),
     },
   },
 }));
@@ -135,10 +137,14 @@ describe('Feature Flags API', () => {
     // Restore provider mock behavior after clearAllMocks wipes implementations
     mockIsEnabled.mockReturnValue(false);
     mockGetAllFlags.mockReturnValue({});
-    MockFeatureFlagProvider.mockImplementation(() => ({
-      isEnabled: mockIsEnabled,
-      getAllFlags: mockGetAllFlags,
-    }));
+    // Named function required: vitest v4 needs 'function' or 'class' for constructor mocks
+    // eslint-disable-next-line prefer-arrow-callback
+    MockFeatureFlagProvider.mockImplementation(function FeatureFlagProviderMock() {
+      return {
+        isEnabled: mockIsEnabled,
+        getAllFlags: mockGetAllFlags,
+      };
+    });
   });
 
   // =========================================================================
@@ -505,20 +511,40 @@ describe('Feature Flags API', () => {
     });
 
     // -----------------------------------------------------------------------
-    // Error handling
+    // Database unavailability fallback
     // -----------------------------------------------------------------------
 
-    it('returns 500 when an unexpected error occurs', async () => {
+    it('falls back to provider when DB throws on single flag lookup', async () => {
       vi.mocked(prisma.featureFlag.findUnique).mockRejectedValue(
         new Error('DB connection lost') as never
       );
+      mockIsEnabled.mockReturnValue(true);
 
       const req = makeRequest('http://localhost:3000/api/feature-flags?flag=BROKEN');
       const res = await GET(req);
       const body = await res.json();
 
-      expect(res.status).toBe(500);
-      expect(body.error).toBe('Failed to fetch feature flags');
+      expect(res.status).toBe(200);
+      expect(body.source).toBe('provider');
+      expect(body.enabled).toBe(true);
+      expect(mockIsEnabled).toHaveBeenCalledWith('BROKEN');
+    });
+
+    it('falls back to provider-only flags when DB throws on findMany', async () => {
+      vi.mocked(prisma.featureFlag.findMany).mockRejectedValue(
+        new Error('DB connection lost') as never
+      );
+      mockIsEnabled.mockReturnValue(false);
+
+      const req = makeRequest('http://localhost:3000/api/feature-flags?env=development');
+      const res = await GET(req);
+      const body = await res.json();
+
+      expect(res.status).toBe(200);
+      expect(body.flags).toBeDefined();
+      // Should still contain provider flags (all false since mockIsEnabled returns false)
+      expect(body.flags.NEW_LEAD_SCORING).toBe(false);
+      expect(body.flags.CHAT_SUPPORT).toBe(false);
     });
   });
 

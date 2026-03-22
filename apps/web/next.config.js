@@ -15,7 +15,12 @@ const nextConfig = {
   ],
 
   // Use static export for GitHub Pages, standalone for Docker/K8s
-  output: process.env.DEPLOY_TARGET === 'github-pages' ? 'export' : 'standalone',
+  output:
+    process.env.DEPLOY_TARGET === 'github-pages'
+      ? 'export'
+      : process.env.DEPLOY_TARGET === 'preview'
+        ? undefined
+        : 'standalone',
 
   // Configure base path only for GitHub Pages
   basePath: process.env.DEPLOY_TARGET === 'github-pages' ? '/biz-site' : '',

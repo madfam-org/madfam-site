@@ -9,6 +9,7 @@
     "build:staging": "./scripts/build-staging.sh",
     "build:production": "NEXT_PUBLIC_ENV=production next build",
     "start": "next start",
+    "preview": "DEPLOY_TARGET=preview next build && next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "export": "next export",
@@ -33,8 +34,8 @@
     "@janua/nextjs": "^0.1.6",
     "@janua/ui": "^0.1.4",
     "@prisma/client": "6.1.0",
-    "@sentry/nextjs": "^9.27.0",
     "@radix-ui/react-slot": "^1.2.4",
+    "@sentry/nextjs": "^9.27.0",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -67,8 +68,8 @@
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "@vitejs/plugin-react": "^5.1.1",
-    "critters": "^0.0.25",
     "autoprefixer": "^10.4.22",
+    "critters": "^0.0.25",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.5.2",
     "eslint-plugin-import": "^2.32.0",
@@ -78,6 +79,6 @@
     "tailwindcss": "4.1.17",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.8"
+    "vitest": "^4.1.0"
   }
 }
