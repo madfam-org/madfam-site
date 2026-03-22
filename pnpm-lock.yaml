@@ -139,8 +139,8 @@ importers:
         specifier: ^0.1.6
         version: 0.1.6(@types/react-dom@18.2.18)(@types/react@19.2.4)(graphql@16.12.0)(immer@9.0.21)(next@15.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
       '@janua/ui':
-        specifier: ^0.1.1
-        version: 0.1.1(@types/react-dom@18.2.18)(@types/react@19.2.4)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
+        specifier: ^0.1.4
+        version: 0.1.4(@types/react-dom@18.2.18)(@types/react@19.2.4)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
       '@prisma/client':
         specifier: 6.1.0
         version: 6.1.0(prisma@6.1.0)
@@ -1309,8 +1309,8 @@ packages:
       graphql-ws:
         optional: true
 
-  '@janua/ui@0.1.1':
-    resolution: {integrity: sha512-jqLeqEU+fSVZANdn2u4YTpAOWxRSAg5B3Dhou8/H8o36FF+8ShjkGk82gLI1PLcF2T20pu1pHJcjELMRHjV7Ew==}
+  '@janua/ui@0.1.4':
+    resolution: {integrity: sha512-UJUjanz8rW6X6bjyGPwBcALfQH5XrxMdLM3e5clG77Z09Uc1CRKSVCjDNp/8sjsW9+JFvdt22Ire8syNsM2BhQ==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -8642,7 +8642,7 @@ snapshots:
   '@janua/nextjs@0.1.6(@types/react-dom@18.2.18)(@types/react@19.2.4)(graphql@16.12.0)(immer@9.0.21)(next@15.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))':
     dependencies:
       '@janua/typescript-sdk': 0.1.3(graphql@16.12.0)
-      '@janua/ui': 0.1.1(@types/react-dom@18.2.18)(@types/react@19.2.4)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
+      '@janua/ui': 0.1.4(@types/react-dom@18.2.18)(@types/react@19.2.4)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))
       jose: 5.9.6
       next: 15.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.56.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
@@ -8662,7 +8662,7 @@ snapshots:
     optionalDependencies:
       graphql: 16.12.0
 
-  '@janua/ui@0.1.1(@types/react-dom@18.2.18)(@types/react@19.2.4)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))':
+  '@janua/ui@0.1.4(@types/react-dom@18.2.18)(@types/react@19.2.4)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@4.1.17)(use-sync-external-store@1.6.0(react@18.3.1))':
     dependencies:
       '@radix-ui/react-alert-dialog': 1.1.15(@types/react-dom@18.2.18)(@types/react@19.2.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@18.2.18)(@types/react@19.2.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
