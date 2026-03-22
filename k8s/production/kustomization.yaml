@@ -24,6 +24,6 @@ images:
 - digest: sha256:b9058991054557519832a1cc1895c31beab6a6a66470166dd178aea8b16c9fd5
   name: ghcr.io/madfam-org/madfam-site/cms
   newName: ghcr.io/madfam-org/madfam-site/cms
-- digest: sha256:0ed5aa877640c4119e8b270ad7c40e199314cf7d28f30e30570a57047ae0cbbd
+- digest: sha256:2764a947494d796a969910b42b6b4127c63725971cf4e9fcb72b064f3fe3fdf3
   name: ghcr.io/madfam-org/madfam-site/web
   newName: ghcr.io/madfam-org/madfam-site/web
