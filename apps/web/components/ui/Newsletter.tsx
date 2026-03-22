@@ -59,6 +59,9 @@ export function Newsletter({
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder={placeholder}
+          aria-label="Email address"
+          aria-invalid={status === 'error'}
+          aria-describedby={status !== 'idle' ? 'newsletter-status' : undefined}
           className={cn(
             'px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent',
             isInline ? 'flex-grow' : 'w-full'
@@ -77,10 +80,14 @@ export function Newsletter({
       </form>
 
       {status === 'success' && (
-        <p className="text-green-600 text-sm mt-2">Thanks for subscribing!</p>
+        <p id="newsletter-status" role="status" className="text-green-600 text-sm mt-2">
+          Thanks for subscribing!
+        </p>
       )}
       {status === 'error' && (
-        <p className="text-red-600 text-sm mt-2">Something went wrong. Please try again.</p>
+        <p id="newsletter-status" role="alert" className="text-red-600 text-sm mt-2">
+          Something went wrong. Please try again.
+        </p>
       )}
     </div>
   );

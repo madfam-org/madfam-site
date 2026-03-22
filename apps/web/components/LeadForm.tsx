@@ -175,10 +175,16 @@ export function LeadForm({ source = 'website', onSuccess }: LeadFormProps) {
             {...register('name')}
             type="text"
             id="name"
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'name-error' : undefined}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
             placeholder={t('placeholders.name')}
           />
-          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
+          {errors.name && (
+            <p id="name-error" role="alert" className="mt-1 text-sm text-red-600">
+              {errors.name.message}
+            </p>
+          )}
         </div>
 
         <div>
@@ -189,10 +195,16 @@ export function LeadForm({ source = 'website', onSuccess }: LeadFormProps) {
             {...register('email')}
             type="email"
             id="email"
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'email-error' : undefined}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
             placeholder={t('placeholders.email')}
           />
-          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+          {errors.email && (
+            <p id="email-error" role="alert" className="mt-1 text-sm text-red-600">
+              {errors.email.message}
+            </p>
+          )}
         </div>
       </div>
 
@@ -204,20 +216,30 @@ export function LeadForm({ source = 'website', onSuccess }: LeadFormProps) {
           {...register('message')}
           id="message"
           rows={5}
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? 'message-error' : undefined}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
           placeholder="Tell us about your project, challenges, or questions..."
         />
-        {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
+        {errors.message && (
+          <p id="message-error" role="alert" className="mt-1 text-sm text-red-600">
+            {errors.message.message}
+          </p>
+        )}
       </div>
 
       {submitStatus === 'success' && (
-        <div className="p-4 bg-leaf/10 border border-leaf/20 rounded-lg">
+        <div
+          role="status"
+          aria-live="polite"
+          className="p-4 bg-leaf/10 border border-leaf/20 rounded-lg"
+        >
           <p className="text-leaf font-medium">{t('messages.success')}</p>
         </div>
       )}
 
       {submitStatus === 'error' && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+        <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-lg">
           <p className="text-red-600 font-medium">{t('messages.error')}</p>
         </div>
       )}

@@ -63,17 +63,15 @@ jobs:
       - name: Run Tests
         run: pnpm run test --run
 
-      # Bundle Size Check (non-blocking until configured)
+      # Bundle Size Check
       - name: Bundle Size Analysis
-        run: npx bundlewatch || echo "Bundle size monitoring not yet configured"
-        continue-on-error: true
+        run: npx bundlewatch --config .bundlewatch.config.js
 
-      # Accessibility Tests (non-blocking until configured)
+      # Accessibility Tests
       - name: Accessibility Tests
         run: |
           cd apps/web
-          pnpm run test:a11y || echo "A11y tests not yet fully configured"
-        continue-on-error: true
+          pnpm run test:a11y
 
   security-scan:
     runs-on: ubuntu-latest
