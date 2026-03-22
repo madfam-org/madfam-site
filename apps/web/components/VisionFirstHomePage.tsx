@@ -1,7 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ArrowRightIcon, ArrowDownIcon, PlayIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowRight as ArrowRightIcon,
+  ArrowDown as ArrowDownIcon,
+  Play as PlayIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
 import { Button, Container, Heading } from '@/components/ui';

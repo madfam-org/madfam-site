@@ -1,11 +1,11 @@
 import {
-  ArrowUpRightIcon,
-  ArrowLeftIcon,
-  BeakerIcon,
-  AcademicCapIcon,
-  RocketLaunchIcon,
-  UsersIcon,
-} from '@heroicons/react/24/outline';
+  ArrowUpRight as ArrowUpRightIcon,
+  ArrowLeft as ArrowLeftIcon,
+  FlaskConical as BeakerIcon,
+  GraduationCap as AcademicCapIcon,
+  Rocket as RocketLaunchIcon,
+  Users as UsersIcon,
+} from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';

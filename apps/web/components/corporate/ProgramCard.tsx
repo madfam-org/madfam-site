@@ -1,11 +1,11 @@
 'use client';
 
 import {
-  CubeIcon,
-  CogIcon,
-  RocketLaunchIcon,
-  BuildingOffice2Icon,
-} from '@heroicons/react/24/outline';
+  Box as CubeIcon,
+  Settings as CogIcon,
+  Rocket as RocketLaunchIcon,
+  Building2 as BuildingOffice2Icon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Badge } from './Badge';

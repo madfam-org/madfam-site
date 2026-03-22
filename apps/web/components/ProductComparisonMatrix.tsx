@@ -4,12 +4,12 @@ import { useState, useMemo } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import {
-  ArrowRightIcon,
-  CheckIcon,
-  XMarkIcon,
-  ArrowDownTrayIcon,
-  SparklesIcon,
-} from '@heroicons/react/24/outline';
+  ArrowRight as ArrowRightIcon,
+  Check as CheckIcon,
+  X as XMarkIcon,
+  Download as ArrowDownTrayIcon,
+  Sparkles as SparklesIcon,
+} from 'lucide-react';
 import { Button, Container, Heading } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
 

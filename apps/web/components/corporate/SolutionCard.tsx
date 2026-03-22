@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
+import { ArrowUpRight as ArrowUpRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Badge } from './Badge';

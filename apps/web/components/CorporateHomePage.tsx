@@ -1,11 +1,11 @@
 'use client';
 
 import {
-  ArrowRightIcon,
-  CogIcon,
-  RocketLaunchIcon,
-  BuildingOffice2Icon,
-} from '@heroicons/react/24/outline';
+  ArrowRight as ArrowRightIcon,
+  Settings as CogIcon,
+  Rocket as RocketLaunchIcon,
+  Building2 as BuildingOffice2Icon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useState } from 'react';
