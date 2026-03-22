@@ -43,6 +43,7 @@ vi.mock('@madfam/core', () => ({
 // Imports (after mocks)
 // ---------------------------------------------------------------------------
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { rateLimit, withRateLimit } from '../rate-limit';
 
 // ---------------------------------------------------------------------------

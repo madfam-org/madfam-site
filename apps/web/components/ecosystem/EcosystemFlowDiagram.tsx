@@ -56,7 +56,7 @@ export function EcosystemFlowDiagram({
         if (!platform) return null;
 
         const isHighlighted = highlightSlug === step.slug;
-        const isMuted = highlightSlug != null && !isHighlighted;
+        const isMuted = highlightSlug !== null && !isHighlighted;
         const stepLabel = t(step.stepKey);
 
         // Determine styling based on highlight state

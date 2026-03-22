@@ -93,7 +93,7 @@ function PersonaCard({
 
   const platforms = persona.platformSlugs
     .map(slug => getPlatformBySlug(slug))
-    .filter((p): p is Platform => p != null);
+    .filter((p): p is Platform => p !== null);
 
   return (
     <div className="flex flex-col p-6 md:p-8 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">

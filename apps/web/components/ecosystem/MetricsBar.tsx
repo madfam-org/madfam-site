@@ -93,19 +93,19 @@ function AnimatedMetric({
   );
 
   useEffect(() => {
-    if (isVisible && metric.animate && metric.value != null) {
+    if (isVisible && metric.animate && metric.value !== null) {
       startTimeRef.current = null;
       animationRef.current = requestAnimationFrame(animateCount);
     }
 
     return () => {
-      if (animationRef.current != null) {
+      if (animationRef.current !== null) {
         cancelAnimationFrame(animationRef.current);
       }
     };
   }, [isVisible, metric.animate, metric.value, animateCount]);
 
-  if (!metric.animate || metric.value == null) {
+  if (!metric.animate || metric.value === null) {
     return (
       <span
         className={`text-3xl sm:text-4xl lg:text-5xl font-bold font-heading ${metric.accentClass}`}

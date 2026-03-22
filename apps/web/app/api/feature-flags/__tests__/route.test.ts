@@ -7,12 +7,17 @@ import { NextRequest } from 'next/server';
 // ---------------------------------------------------------------------------
 
 const { mockIsEnabled, mockGetAllFlags, MockFeatureFlagProvider } = vi.hoisted(() => {
-  const mockIsEnabled = vi.fn().mockReturnValue(false);
-  const mockGetAllFlags = vi.fn().mockReturnValue({});
-  const MockFeatureFlagProvider = vi.fn().mockImplementation(function (this: unknown) {
-    return { isEnabled: mockIsEnabled, getAllFlags: mockGetAllFlags };
-  });
-  return { mockIsEnabled, mockGetAllFlags, MockFeatureFlagProvider };
+  const isEnabled = vi.fn().mockReturnValue(false);
+  const getAllFlags = vi.fn().mockReturnValue({});
+  const Provider = vi.fn().mockImplementation(() => ({
+    isEnabled,
+    getAllFlags,
+  }));
+  return {
+    mockIsEnabled: isEnabled,
+    mockGetAllFlags: getAllFlags,
+    MockFeatureFlagProvider: Provider,
+  };
 });
 
 // ---------------------------------------------------------------------------
@@ -130,9 +135,10 @@ describe('Feature Flags API', () => {
     // Restore provider mock behavior after clearAllMocks wipes implementations
     mockIsEnabled.mockReturnValue(false);
     mockGetAllFlags.mockReturnValue({});
-    MockFeatureFlagProvider.mockImplementation(function (this: unknown) {
-      return { isEnabled: mockIsEnabled, getAllFlags: mockGetAllFlags };
-    });
+    MockFeatureFlagProvider.mockImplementation(() => ({
+      isEnabled: mockIsEnabled,
+      getAllFlags: mockGetAllFlags,
+    }));
   });
 
   // =========================================================================

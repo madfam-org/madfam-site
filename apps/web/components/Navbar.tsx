@@ -77,7 +77,7 @@ export function Navbar() {
     {
       name: t('platforms') || 'Platforms',
       dropdown: LAYERS.map(layer => ({
-        title: layer.icon + ' ' + layer.key.charAt(0).toUpperCase() + layer.key.slice(1),
+        title: `${layer.icon} ${layer.key.charAt(0).toUpperCase()}${layer.key.slice(1)}`,
         items: PLATFORMS.filter(p => p.layer === layer.key).map(p => ({
           name: p.name + (isComingSoon(p) ? ' *' : ''),
           href: isComingSoon(p)

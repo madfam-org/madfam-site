@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import type { Platform } from '@/lib/data/platforms';
-import { getPlatformBySlug } from '@/lib/data/platforms';
+import { getPlatformBySlug, type Platform } from '@/lib/data/platforms';
 import { cn } from '@/components/ui/utils';
 
 interface PlatformEcosystemProps {
