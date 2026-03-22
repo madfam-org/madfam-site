@@ -38,13 +38,13 @@
     "bundlewatch": "^0.4.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
-    "next": "15.1.6",
+    "next": "15.1.12",
     "nyc": "^17.1.0",
     "prettier": "^3.6.2",
     "turbo": "2.6.1"
   },
   "engines": {
-    "node": "22.x",
+    "node": ">=20.0.0",
     "pnpm": ">=8.0.0"
   },
   "packageManager": "pnpm@9.15.0",
