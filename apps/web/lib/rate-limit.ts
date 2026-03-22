@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getRedisClient } from './redis';
 import type Redis from 'ioredis';
+import { NextRequest, NextResponse } from 'next/server';
+
+import { getRedisClient } from './redis';
 
 interface RateLimitOptions {
   windowMs?: number;

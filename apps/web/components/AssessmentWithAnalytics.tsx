@@ -2,29 +2,8 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { Assessment, AssessmentProps, AssessmentResult } from '@/components/ui';
-
-// Stub analytics hooks - replace with actual implementation when available
-function useFeatureTracking() {
-  return {
-    trackAssessmentComplete: (data: { score: number; recommendation: string }) => {
-      console.log('[Analytics] Assessment complete:', data);
-    },
-    trackFeatureUsed: (feature: string, source: string) => {
-      console.log('[Analytics] Feature used:', feature, source);
-    },
-  };
-}
-
-function useConversionTracking() {
-  return {
-    trackServiceFunnelStep: (step: string, tier: string, metadata: Record<string, string>) => {
-      console.log('[Analytics] Funnel step:', step, tier, metadata);
-    },
-    trackPurchaseIntent: (tier: string) => {
-      console.log('[Analytics] Purchase intent:', tier);
-    },
-  };
-}
+import { useFeatureTracking, useConversionTracking } from '@madfam/analytics';
+import { logBusinessEvent } from '@/lib/logger';
 
 interface AssessmentWithAnalyticsProps extends AssessmentProps {
   source?: string;
@@ -35,13 +14,13 @@ export function AssessmentWithAnalytics({
   source = 'assessment',
   ...props
 }: AssessmentWithAnalyticsProps) {
-  const { trackAssessmentComplete, trackFeatureUsed } = useFeatureTracking();
+  const { trackFeatureUsage } = useFeatureTracking();
   const { trackServiceFunnelStep, trackPurchaseIntent } = useConversionTracking();
   const [startTime, setStartTime] = useState<number>();
 
   const trackFeature = useCallback(() => {
-    trackFeatureUsed('assessment', source);
-  }, [trackFeatureUsed, source]);
+    trackFeatureUsage('assessment', { source });
+  }, [trackFeatureUsage, source]);
 
   useEffect(() => {
     // Track assessment start
@@ -53,7 +32,7 @@ export function AssessmentWithAnalytics({
     const completionTime = startTime ? Date.now() - startTime : 0;
 
     // Track assessment completion
-    trackAssessmentComplete({
+    logBusinessEvent('assessment_complete', {
       score: result.percentage,
       recommendation: result.recommendedTier,
     });

@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
+
 import { isComingSoon, type Platform } from '@/lib/data/platforms';
 import { PlatformHero } from './PlatformHero';
 import { PlatformProblemSolution } from './PlatformProblemSolution';

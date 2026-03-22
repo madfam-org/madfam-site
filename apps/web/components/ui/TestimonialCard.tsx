@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { cn } from './utils';
 import { Card, CardContent } from './Card';
 
@@ -58,7 +59,13 @@ export function TestimonialCard({
         </blockquote>
         <div className="flex items-center gap-3 mt-auto">
           {avatar ? (
-            <img src={avatar} alt={authorName} className="w-10 h-10 rounded-full object-cover" />
+            <Image
+              src={avatar}
+              alt={authorName}
+              width={40}
+              height={40}
+              className="rounded-full object-cover"
+            />
           ) : (
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
               {authorName.charAt(0)}

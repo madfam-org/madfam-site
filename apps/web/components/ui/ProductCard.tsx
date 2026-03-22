@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from './utils';
 import { Card, CardContent } from './Card';
@@ -67,8 +68,8 @@ export function ProductCard({
       )}
     >
       {image && (
-        <div className="aspect-video bg-gray-100 overflow-hidden">
-          <img src={image} alt={title} className="w-full h-full object-cover" />
+        <div className="relative aspect-video bg-gray-100 overflow-hidden">
+          <Image src={image} alt={title || ''} fill className="object-cover" />
         </div>
       )}
       <CardContent className="p-6">
