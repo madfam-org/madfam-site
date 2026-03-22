@@ -1,5 +1,3 @@
-'use client';
-
 interface Message {
   role: 'user' | 'penny';
   text: string;

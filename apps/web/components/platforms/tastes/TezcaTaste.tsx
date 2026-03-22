@@ -1,5 +1,3 @@
-'use client';
-
 const RESULTS = [
   {
     id: 'NOM-001-STPS-2008',

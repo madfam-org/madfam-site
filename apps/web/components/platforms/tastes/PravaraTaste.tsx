@@ -1,5 +1,3 @@
-'use client';
-
 type MachineStatus = 'running' | 'idle' | 'maintenance';
 
 interface Machine {
