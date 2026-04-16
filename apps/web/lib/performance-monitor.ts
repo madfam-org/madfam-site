@@ -160,14 +160,7 @@ export class PerformanceMonitor {
       this.metrics = this.metrics.slice(-this.maxMetrics);
     }
 
-    // Log critical metrics in development
-    if (environment.isDevelopment && this.isCriticalMetric(metric)) {
-      // eslint-disable-next-line no-console
-      console.log(
-        `📊 Performance Metric: ${metric.name} = ${metric.value}${metric.unit}`,
-        metric.context
-      );
-    }
+    // Critical metrics are tracked but not logged to console
   }
 
   private isCriticalMetric(metric: PerformanceMetric): boolean {
@@ -421,15 +414,4 @@ export function recordCacheMiss(key: string) {
   });
 }
 
-// Initialize performance monitoring in development
-if (environment.isDevelopment) {
-  // eslint-disable-next-line no-console
-  console.log('📊 Performance Monitor initialized');
-
-  // Log performance summary every 60 seconds in development
-  setInterval(() => {
-    const summary = performanceMonitor.getPerformanceSummary();
-    // eslint-disable-next-line no-console
-    console.log('📈 Performance Summary:', summary);
-  }, 60000);
-}
+// Performance monitoring is initialized automatically via the singleton

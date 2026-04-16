@@ -141,7 +141,7 @@ async function sendToLoggingService(logData: any) {
     for (const error of errors) {
       // Send to Sentry
       // Sentry.captureException(new Error(error.message), { extra: error.metadata });
-      console.log('Error logged:', error.message);
+      // Sentry.captureException(new Error(error.message), { extra: error.metadata });
     }
   }
   

@@ -390,18 +390,9 @@ export function getFallbackTeamMembers(): TeamMember[] {
   return fallbackDataManager.getTeamMembers();
 }
 
-// Initialize fallback data validation in development
+// Validate fallback data in development
 if (environment.isDevelopment) {
   const validation = fallbackDataManager.validateData();
-  const dataInfo = fallbackDataManager.getDataSetInfo();
-
-  // eslint-disable-next-line no-console
-  console.log('📦 Fallback Data Manager:', {
-    version: dataInfo.version,
-    lastUpdated: dataInfo.lastUpdated,
-    counts: dataInfo.counts,
-    valid: validation.valid,
-  });
 
   if (!validation.valid) {
     // eslint-disable-next-line no-console

@@ -239,19 +239,8 @@ export function validateEnvironment(): { valid: boolean; errors: string[] } {
   };
 }
 
-// Debug information (only in development)
+// Validate environment on startup (development only)
 if (environment.isDevelopment) {
-  // eslint-disable-next-line no-console
-  console.log('🔧 Environment Configuration:', {
-    type: environment.type,
-    deployTarget: environment.deployTarget,
-    features: Object.entries(environment.features)
-      .filter(([, enabled]) => enabled)
-      .map(([feature]) => feature),
-    cms: environment.cms.enabled ? 'enabled' : 'disabled',
-    build: environment.build,
-  });
-
   const validation = validateEnvironment();
   if (!validation.valid) {
     // eslint-disable-next-line no-console
