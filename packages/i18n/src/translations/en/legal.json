@@ -284,5 +284,17 @@
       "phone": "Phone: +52 55 1234 5678",
       "address": "Address: Mexico City, Mexico"
     }
+  },
+  "unsubscribe": {
+    "title": "Unsubscribe",
+    "description": "If you no longer wish to receive marketing emails from MADFAM, enter your email address below.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "confirmButton": "Unsubscribe",
+    "processing": "Processing...",
+    "successTitle": "Done",
+    "successMessage": "Your request has been processed. You will no longer receive marketing emails from MADFAM.",
+    "errorMessage": "Something went wrong. Please try again or contact support@madfam.io.",
+    "footer": "Innovaciones MADFAM S.A.S. de C.V. · Cuernavaca, Morelos, Mexico · This only applies to marketing emails. Transactional emails (invoices, security alerts) are not affected."
   }
 }
