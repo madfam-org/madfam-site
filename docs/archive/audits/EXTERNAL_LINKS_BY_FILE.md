@@ -83,7 +83,7 @@
 **Links:**
 
 - All products: Penny, Dhanam, Cotiza, Forge Sight
-- Arms: Aureo Labs
+- Arms: Innovaciones MADFAM
 
 ### 9. Products Page
 
@@ -93,14 +93,14 @@
 
 - Penny, Cotiza Studio, Forge Sight, Dhanam, Factlas
 
-### 10. Aureo Labs Page
+### 10. Innovaciones MADFAM Page
 
-**File:** `/home/user/biz-site/apps/web/app/[locale]/arms/aureo-labs/page.tsx`
+**File:** `/home/user/biz-site/apps/web/app/[locale]/arms/madfam/page.tsx`
 **Link Count:** 6 product/resource URLs
 **Links:**
 
 - Products: Penny, Cotiza, Forge Sight, AVALA, Factlas
-- External: Aureo Labs website
+- External: Innovaciones MADFAM website
 
 ## Links by Category
 
@@ -119,7 +119,7 @@
 - Footer.tsx
 - CorporateHomePage.tsx
 - products/page.tsx (multiple locales)
-- arms/aureo-labs/page.tsx
+- arms/madfam/page.tsx
 - arms/page.tsx
 - redirects.ts
 - Guides and documentation
@@ -128,7 +128,7 @@
 
 - CorporateHomePage.tsx
 - arms/page.tsx
-- arms/aureo-labs/page.tsx
+- arms/madfam/page.tsx
 - arms/primavera3d/page.tsx
 - arms/colabs/page.tsx
 
@@ -155,7 +155,7 @@
 
 ### High Priority
 
-1. **arms/aureo-labs/page.tsx** - AVALA URL is `#` placeholder
+1. **arms/madfam/page.tsx** - AVALA URL is `#` placeholder
 2. **fallback-data.ts** - Team profiles may be outdated
 3. **environment.ts** - Verify all API endpoints are correct
 
