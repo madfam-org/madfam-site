@@ -38,24 +38,24 @@ Comprehensive audit of ALL external URLs/links across the MADFAM biz-site codeba
 
 ## 2. PRODUCT URLs (6 URLs)
 
-| Product           | URL                            | File Locations                                                                                                                                    | Status             | Notes                                                   |
-| ----------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------- |
-| **Penny**         | `https://www.penny.onl`        | Footer.tsx (L31), CorporateHomePage.tsx (L38), products/page.tsx (L45), arms/aureo-labs/page.tsx (L39), arms/page.tsx (L42)                       | ⏳ COMING SOON     | AI assistant - URL reserved but site NOT yet live       |
-| **Dhanam**        | `https://www.dhan.am`          | Footer.tsx (L32), CorporateHomePage.tsx (L39), products/page.tsx (L112), arms/aureo-labs/page.tsx (L94)                                           | ✅ LIVE & VERIFIED | Financial wellness platform                             |
-| **Cotiza Studio** | `https://www.cotiza.studio`    | Footer.tsx (L33), CorporateHomePage.tsx (L40), products/page.tsx (L65), arms/aureo-labs/page.tsx (L102), redirects.ts (L184)                      | ❓ UNVERIFIED      | Quoting/estimation tool - needs manual verification     |
-| **Forge Sight**   | `https://www.forgesight.quest` | Footer.tsx (L34), CorporateHomePage.tsx (L41), products/page.tsx (L89), arms/aureo-labs/page.tsx (L122), arms/page.tsx (L45), redirects.ts (L189) | ✅ LIVE & VERIFIED | Analytics platform for digital fabrication              |
-| **Factlas**       | `https://www.factl.as`         | products/page.tsx (L164), arms/aureo-labs/page.tsx (L81), redirects.ts (L204)                                                                     | ⏳ COMING SOON     | Geographic intelligence - URL reserved but NOT yet live |
-| **AVALA**         | `#`                            | arms/aureo-labs/page.tsx (L60)                                                                                                                    | ⏳ COMING SOON     | Training & certification - placeholder link only        |
+| Product           | URL                            | File Locations                                                                                                                                | Status             | Notes                                                   |
+| ----------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------- |
+| **Penny**         | `https://www.penny.onl`        | Footer.tsx (L31), CorporateHomePage.tsx (L38), products/page.tsx (L45), arms/madfam/page.tsx (L39), arms/page.tsx (L42)                       | ⏳ COMING SOON     | AI assistant - URL reserved but site NOT yet live       |
+| **Dhanam**        | `https://www.dhan.am`          | Footer.tsx (L32), CorporateHomePage.tsx (L39), products/page.tsx (L112), arms/madfam/page.tsx (L94)                                           | ✅ LIVE & VERIFIED | Financial wellness platform                             |
+| **Cotiza Studio** | `https://www.cotiza.studio`    | Footer.tsx (L33), CorporateHomePage.tsx (L40), products/page.tsx (L65), arms/madfam/page.tsx (L102), redirects.ts (L184)                      | ❓ UNVERIFIED      | Quoting/estimation tool - needs manual verification     |
+| **Forge Sight**   | `https://www.forgesight.quest` | Footer.tsx (L34), CorporateHomePage.tsx (L41), products/page.tsx (L89), arms/madfam/page.tsx (L122), arms/page.tsx (L45), redirects.ts (L189) | ✅ LIVE & VERIFIED | Analytics platform for digital fabrication              |
+| **Factlas**       | `https://www.factl.as`         | products/page.tsx (L164), arms/madfam/page.tsx (L81), redirects.ts (L204)                                                                     | ⏳ COMING SOON     | Geographic intelligence - URL reserved but NOT yet live |
+| **AVALA**         | `#`                            | arms/madfam/page.tsx (L60)                                                                                                                    | ⏳ COMING SOON     | Training & certification - placeholder link only        |
 
 ---
 
 ## 3. CORPORATE ARM/BUSINESS UNIT URLs (3 URLs)
 
-| Arm                                | URL                              | File Locations                                                                    | Status | Notes                           |
-| ---------------------------------- | -------------------------------- | --------------------------------------------------------------------------------- | ------ | ------------------------------- |
-| **Aureo Labs**                     | `https://www.aureolabs.dev`      | CorporateHomePage.tsx (L43), arms/page.tsx (L47), arms/aureo-labs/page.tsx (L197) | ACTIVE | Digital innovation lab          |
-| **Primavera3D**                    | `https://www.primavera3d.pro`    | arms/page.tsx (L68), arms/primavera3d/page.tsx (L93, L167)                        | ACTIVE | 3D design & fabrication studio  |
-| **La Ciencia del Juego (Partner)** | `https://lacienciadeljuego.com/` | arms/colabs/page.tsx (L69, L313)                                                  | ACTIVE | Partner organization for MADLAB |
+| Arm                                | URL                                  | File Locations                                                                | Status | Notes                           |
+| ---------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------- | ------ | ------------------------------- |
+| **Innovaciones MADFAM**            | `https://www.innovacionesmadfam.dev` | CorporateHomePage.tsx (L43), arms/page.tsx (L47), arms/madfam/page.tsx (L197) | ACTIVE | Digital innovation lab          |
+| **Primavera3D**                    | `https://www.primavera3d.pro`        | arms/page.tsx (L68), arms/primavera3d/page.tsx (L93, L167)                    | ACTIVE | 3D design & fabrication studio  |
+| **La Ciencia del Juego (Partner)** | `https://lacienciadeljuego.com/`     | arms/colabs/page.tsx (L69, L313)                                              | ACTIVE | Partner organization for MADLAB |
 
 ---
 
@@ -231,7 +231,7 @@ These are located in `/home/user/biz-site/apps/web/lib/fallback-data.ts` (Lines 
 
 **Severity:** LOW
 **Issue:** AVALA product uses `#` as placeholder
-**File:** `/home/user/biz-site/apps/web/app/[locale]/arms/aureo-labs/page.tsx` (L60)
+**File:** `/home/user/biz-site/apps/web/app/[locale]/arms/madfam/page.tsx` (L60)
 **Recommendation:** Update with actual URL when product launches or use `/products/avala`
 
 ### 4. HARDCODED TEAM PROFILES IN FALLBACK DATA

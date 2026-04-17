@@ -96,7 +96,7 @@ MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entr
 
 - Products/Platforms: "by MADFAM"
 - Co-Labs / Showtech: "a MADFAM Company"
-- No references to deprecated SPARK, Aureo Labs, or Primavera3D
+- No references to deprecated SPARK, Innovaciones MADFAM, or Primavera3D
 - Maker Node is "Primavera Maker Node" (formerly Primavera3D)
 
 ### Mobile Optimization

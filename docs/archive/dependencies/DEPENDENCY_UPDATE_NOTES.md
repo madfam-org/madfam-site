@@ -25,7 +25,7 @@ Consolidated 5 Dependabot PRs into a single update:
 
 - `app/[locale]/about/page.tsx`
 - `app/[locale]/api/page.tsx`
-- `app/[locale]/arms/aureo-labs/page.tsx`
+- `app/[locale]/arms/madfam/page.tsx`
 - `app/[locale]/arms/colabs/page.tsx`
 - `app/[locale]/arms/page.tsx`
 - `app/[locale]/arms/primavera3d/page.tsx`
