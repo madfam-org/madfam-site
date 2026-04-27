@@ -4,6 +4,19 @@ metadata:
   name: madfam-site
   project: madfam-site
 spec:
+  # status.madfam.io tracking — pre-existing entry was hand-added on the
+  # platform configmap before the zero-touch model. Declared here so
+  # `POST /v1/admin/status/regenerate` keeps it on the page. See Phase 2
+  # follow-up backfill 2026-04-27.
+  status:
+    enabled: true
+    entries:
+      - name: MADFAM Website
+        url: https://madfam.io
+        href: https://madfam.io
+        group: MADFAM Site
+        family: MADFAM Corporate
+        description: Corporate website
   runtime:
     port: 3000
   domains:
