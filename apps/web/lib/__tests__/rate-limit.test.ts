@@ -42,9 +42,9 @@ vi.mock('@madfam/core', () => ({
 // ---------------------------------------------------------------------------
 // Imports (after mocks)
 // ---------------------------------------------------------------------------
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { rateLimit, withRateLimit } from '../rate-limit';
+// NB: rateLimit / withRateLimit are imported dynamically inside each test
+// (see `await import('../rate-limit')`) so vi.resetModules() in beforeEach
+// produces a fresh in-memory store. No top-level import needed.
 
 // ---------------------------------------------------------------------------
 // Helpers

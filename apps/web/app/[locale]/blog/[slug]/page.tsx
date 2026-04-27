@@ -261,7 +261,16 @@ function renderRichText(content: RichTextDocument | undefined): string {
 
 function calculateReadTime(content: string): string {
   const wordsPerMinute = 200;
-  const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+  // Iterate tag stripping to a fixed point so adversarial inputs like
+  // `<scr<script>ipt>` cannot leave residual tags after one pass
+  // (CodeQL js/incomplete-multi-character-sanitization).
+  let stripped = content;
+  for (let i = 0; i < 5; i++) {
+    const next = stripped.replace(/<[^<>]*>/g, '');
+    if (next === stripped) break;
+    stripped = next;
+  }
+  const words = stripped.split(/\s+/).length;
   const minutes = Math.ceil(words / wordsPerMinute);
   return `${minutes} min read`;
 }

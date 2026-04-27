@@ -34,14 +34,23 @@ let fixedCount = 0;
 let errors = [];
 
 filesToFix.forEach(filePath => {
+  const fullPath = path.join(process.cwd(), filePath);
+  let content;
   try {
-    const fullPath = path.join(process.cwd(), filePath);
-    if (!fs.existsSync(fullPath)) {
+    // Read directly (no existsSync precheck) to avoid TOCTOU
+    // (CodeQL js/file-system-race) — handle ENOENT below.
+    content = fs.readFileSync(fullPath, 'utf8');
+  } catch (err) {
+    if (err && err.code === 'ENOENT') {
       console.log(`⏭️  Skipped (not found): ${filePath}`);
       return;
     }
+    console.error(`❌ Error reading ${filePath}:`, err.message);
+    errors.push({ file: filePath, error: err.message });
+    return;
+  }
 
-    let content = fs.readFileSync(fullPath, 'utf8');
+  try {
     const original = content;
     let modified = false;
 

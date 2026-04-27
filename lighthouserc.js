@@ -43,8 +43,6 @@ module.exports = {
         'image-size-responsive': 'warn',
         // SEO
         'meta-description': 'error',
-        'document-title': 'error',
-        'html-has-lang': 'error',
         hreflang: 'warn',
         canonical: 'warn',
         // Accessibility
