@@ -277,6 +277,11 @@ export function setQueryParam(key: string, value: string, url?: string): string 
 }
 
 // Deep merge utility
+// Keys that, if copied from an attacker-controlled source object, would
+// pollute the prototype chain or shadow built-in methods. We refuse to
+// copy these in deepMerge to mitigate CodeQL js/prototype-pollution-utility.
+const FORBIDDEN_PROTOTYPE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 export function deepMerge<T extends Record<string, unknown>>(
   target: T,
   ...sources: Partial<T>[]
@@ -287,6 +292,10 @@ export function deepMerge<T extends Record<string, unknown>>(
   if (!source) return target;
 
   for (const key in source) {
+    // Skip inherited properties and dangerous prototype keys.
+    if (!Object.prototype.hasOwnProperty.call(source, key)) continue;
+    if (FORBIDDEN_PROTOTYPE_KEYS.has(key)) continue;
+
     const sourceValue = source[key];
     const targetValue = target[key];
 

@@ -21,7 +21,17 @@ type CommonBlogPost = {
 
 function calculateReadTime(content: string, minReadLabel: string): string {
   const wordsPerMinute = 200;
-  const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+  // Strip HTML tags to a fixed point so adversarial inputs like
+  // `<scr<script>ipt>` cannot leave residual tags after a single pass
+  // (CodeQL js/incomplete-multi-character-sanitization). The regex is
+  // linear because `[^<>]*` cannot match `<` or `>` (no backtracking risk).
+  let stripped = content;
+  for (let i = 0; i < 5; i++) {
+    const next = stripped.replace(/<[^<>]*>/g, '');
+    if (next === stripped) break;
+    stripped = next;
+  }
+  const words = stripped.split(/\s+/).length;
   const minutes = Math.ceil(words / wordsPerMinute);
   return `${minutes} ${minReadLabel}`;
 }

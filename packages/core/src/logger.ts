@@ -50,21 +50,37 @@ export class Logger {
     };
 
     this.sessionId = this.generateSessionId();
-    
+
     if (this.config.enableRemote && this.config.flushInterval) {
       this.startFlushTimer();
     }
   }
 
   private generateSessionId(): string {
-    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    // Use crypto.randomUUID when available (Node 14.17+, all modern browsers).
+    // Falls back to non-crypto random only if both crypto APIs are unavailable —
+    // session IDs are non-security identifiers (no auth/authz decision uses them),
+    // but we still prefer crypto sources to satisfy CodeQL js/insecure-randomness.
+    const cryptoObj: Crypto | undefined =
+      typeof globalThis !== 'undefined' ? (globalThis as { crypto?: Crypto }).crypto : undefined;
+    if (cryptoObj && typeof cryptoObj.randomUUID === 'function') {
+      return `session_${Date.now()}_${cryptoObj.randomUUID()}`;
+    }
+    if (cryptoObj && typeof cryptoObj.getRandomValues === 'function') {
+      const bytes = new Uint8Array(9);
+      cryptoObj.getRandomValues(bytes);
+      const hex = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+      return `session_${Date.now()}_${hex}`;
+    }
+    // Last-resort fallback (should never trigger in supported runtimes).
+    return `session_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
   }
 
   private startFlushTimer(): void {
     if (this.flushTimer) {
       clearInterval(this.flushTimer);
     }
-    
+
     this.flushTimer = setInterval(() => {
       this.flush();
     }, this.config.flushInterval);
@@ -74,13 +90,33 @@ export class Logger {
     return level <= this.config.level;
   }
 
+  /**
+   * Strip CR/LF and other control characters from a value before it is rendered
+   * into a single log line. Prevents log-injection (CWE-117) where a caller could
+   * embed `\n` to forge additional log entries.
+   */
+  private sanitizeForLog(value: string): string {
+    // Replace ASCII control chars (0x00-0x1F, 0x7F) and Unicode line separators
+    // with a printable escape so they do not break log parsing.
+    return value.replace(/[\x00-\x1F\x7F\u2028\u2029]/g, ch => {
+      if (ch === '\n') return '\\n';
+      if (ch === '\r') return '\\r';
+      if (ch === '\t') return '\\t';
+      const code = ch.charCodeAt(0).toString(16).padStart(2, '0');
+      return `\\x${code}`;
+    });
+  }
+
   private formatMessage(entry: LogEntry): string {
     const timestamp = new Date(entry.timestamp).toISOString();
     const levelName = LogLevel[entry.level];
-    const context = entry.context ? `[${entry.context}]` : '';
-    const metadata = entry.metadata ? ` ${JSON.stringify(entry.metadata)}` : '';
-    
-    return `${timestamp} ${levelName} ${context} ${entry.message}${metadata}`;
+    const context = entry.context ? `[${this.sanitizeForLog(entry.context)}]` : '';
+    const safeMessage = this.sanitizeForLog(entry.message);
+    const metadata = entry.metadata
+      ? ` ${this.sanitizeForLog(JSON.stringify(entry.metadata))}`
+      : '';
+
+    return `${timestamp} ${levelName} ${context} ${safeMessage}${metadata}`;
   }
 
   private createLogEntry(
@@ -127,7 +163,7 @@ export class Logger {
     // Buffer for remote logging
     if (this.config.enableRemote) {
       this.buffer.push(entry);
-      
+
       if (this.buffer.length >= (this.config.bufferSize || 100)) {
         this.flush();
       }
@@ -135,23 +171,27 @@ export class Logger {
   }
 
   private logToConsole(entry: LogEntry): void {
+    // Use a fixed `%s` format string so that user-controlled data in the
+    // formatted message can never be interpreted as format directives
+    // (CodeQL js/tainted-format-string). The sanitised message is also
+    // already stripped of control chars (CodeQL js/log-injection).
     const formattedMessage = this.formatMessage(entry);
-    
+
     switch (entry.level) {
       case LogLevel.ERROR:
-        console.error(formattedMessage, entry.error);
+        console.error('%s', formattedMessage, entry.error);
         break;
       case LogLevel.WARN:
-        console.warn(formattedMessage);
+        console.warn('%s', formattedMessage);
         break;
       case LogLevel.INFO:
-        console.info(formattedMessage);
+        console.info('%s', formattedMessage);
         break;
       case LogLevel.DEBUG:
-        console.debug(formattedMessage);
+        console.debug('%s', formattedMessage);
         break;
       case LogLevel.TRACE:
-        console.trace(formattedMessage);
+        console.trace('%s', formattedMessage);
         break;
     }
   }
@@ -213,36 +253,46 @@ export class Logger {
     this.info(`User action: ${action}`, 'USER_ACTION', metadata);
   }
 
-  apiCall(endpoint: string, method: string, duration: number, status: number, metadata?: Record<string, any>): void {
-    this.info(
-      `API ${method} ${endpoint} - ${status} (${duration}ms)`,
-      'API_CALL',
-      { endpoint, method, duration, status, ...metadata }
-    );
+  apiCall(
+    endpoint: string,
+    method: string,
+    duration: number,
+    status: number,
+    metadata?: Record<string, any>
+  ): void {
+    this.info(`API ${method} ${endpoint} - ${status} (${duration}ms)`, 'API_CALL', {
+      endpoint,
+      method,
+      duration,
+      status,
+      ...metadata,
+    });
   }
 
-  performanceMetric(metric: string, value: number, unit: string, metadata?: Record<string, any>): void {
-    this.info(
-      `Performance: ${metric} = ${value}${unit}`,
-      'PERFORMANCE',
-      { metric, value, unit, ...metadata }
-    );
+  performanceMetric(
+    metric: string,
+    value: number,
+    unit: string,
+    metadata?: Record<string, any>
+  ): void {
+    this.info(`Performance: ${metric} = ${value}${unit}`, 'PERFORMANCE', {
+      metric,
+      value,
+      unit,
+      ...metadata,
+    });
   }
 
   featureFlag(flag: string, enabled: boolean, metadata?: Record<string, any>): void {
-    this.debug(
-      `Feature flag: ${flag} = ${enabled}`,
-      'FEATURE_FLAG',
-      { flag, enabled, ...metadata }
-    );
+    this.debug(`Feature flag: ${flag} = ${enabled}`, 'FEATURE_FLAG', {
+      flag,
+      enabled,
+      ...metadata,
+    });
   }
 
   businessEvent(event: string, metadata?: Record<string, any>): void {
-    this.info(
-      `Business event: ${event}`,
-      'BUSINESS',
-      metadata
-    );
+    this.info(`Business event: ${event}`, 'BUSINESS', metadata);
   }
 
   // Context methods
@@ -265,7 +315,10 @@ export class Logger {
 
 // Context-aware logger
 export class ContextLogger {
-  constructor(private logger: Logger, private context: string) {}
+  constructor(
+    private logger: Logger,
+    private context: string
+  ) {}
 
   error(message: string, error?: Error, metadata?: Record<string, any>): void {
     this.logger.error(message, error, this.context, metadata);
@@ -290,7 +343,10 @@ export class ContextLogger {
 
 // User-aware logger
 export class UserLogger {
-  constructor(private logger: Logger, private userId: string) {}
+  constructor(
+    private logger: Logger,
+    private userId: string
+  ) {}
 
   error(message: string, error?: Error, context?: string, metadata?: Record<string, any>): void {
     this.logger.error(message, error, context, { ...metadata, userId: this.userId });
@@ -340,23 +396,23 @@ export function withPerformanceLogging<T extends (...args: any[]) => any>(
     const start = performance.now();
     try {
       const result = fn(...args);
-      
+
       // Handle async functions
       if (result instanceof Promise) {
         return result
-          .then((value) => {
+          .then(value => {
             const duration = performance.now() - start;
             logger.performanceMetric(name, duration, 'ms', { context, success: true });
             return value;
           })
-          .catch((error) => {
+          .catch(error => {
             const duration = performance.now() - start;
             logger.performanceMetric(name, duration, 'ms', { context, success: false });
             logger.error(`Performance tracked function failed: ${name}`, error, context);
             throw error;
           });
       }
-      
+
       // Handle sync functions
       const duration = performance.now() - start;
       logger.performanceMetric(name, duration, 'ms', { context, success: true });
@@ -377,13 +433,8 @@ export function useLogger(context?: string) {
 
 // Error boundary logger
 export function logErrorBoundary(error: Error, errorInfo: any, context?: string): void {
-  logger.error(
-    'React Error Boundary caught an error',
-    error,
-    context || 'ERROR_BOUNDARY',
-    {
-      errorInfo,
-      componentStack: errorInfo.componentStack,
-    }
-  );
+  logger.error('React Error Boundary caught an error', error, context || 'ERROR_BOUNDARY', {
+    errorInfo,
+    componentStack: errorInfo.componentStack,
+  });
 }

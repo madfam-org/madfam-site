@@ -19,10 +19,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Valid email address is required' }, { status: 400 });
     }
 
-    // Log the unsubscribe (server-side, always succeeds)
-    console.info(
-      `[unsubscribe] Email opt-out recorded: ${email.slice(0, 3)}***@${email.split('@')[1]}`
-    );
+    // Log the unsubscribe (server-side, always succeeds).
+    // Strip CR/LF/control chars before logging to prevent log-injection (CWE-117).
+    // Use `%s` format directive so the value can never be parsed as a format string.
+    const sanitizeForLog = (s: string): string =>
+      // eslint-disable-next-line no-control-regex
+      s.replace(/[\x00-\x1F\x7F]/g, '');
+    const localPrefix = sanitizeForLog(email.slice(0, 3));
+    const domain = sanitizeForLog(email.split('@')[1] ?? '');
+    console.info('[unsubscribe] Email opt-out recorded: %s***@%s', localPrefix, domain);
 
     // Notify PhyneCRM to suppress future sends (best-effort)
     const crmUrl = process.env.PHYNE_CRM_URL;

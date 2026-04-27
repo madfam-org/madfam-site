@@ -120,18 +120,46 @@ export class EmailService {
     }
   }
 
+  /**
+   * Convert HTML to a plain-text representation suitable for email clients
+   * that fall back to text/plain. Used only on email bodies we ourselves
+   * render via @react-email/render — there is no untrusted HTML path here,
+   * but we still sanitise carefully to satisfy CodeQL:
+   *   - js/incomplete-multi-character-sanitization: tag-stripping is
+   *     iterated to a fixed point so injected `<scr<script>ipt>` patterns
+   *     cannot survive a single pass.
+   *   - js/double-escaping: entity decoding runs once, AFTER tag removal,
+   *     so the resulting `&` characters are not re-fed to a tag stripper.
+   *   - js/polynomial-redos: the tag regex is bounded (no nested
+   *     quantifiers / alternation backtracking) and we cap iterations.
+   */
   private htmlToText(html: string): string {
-    // Simple HTML to text conversion
-    return html
-      .replace(/<[^>]*>/g, '') // Remove HTML tags
-      .replace(/&nbsp;/g, ' ') // Replace non-breaking spaces
-      .replace(/&amp;/g, '&') // Replace HTML entities
+    // 1. Strip tags. Iterate up to a small bound so that constructs like
+    //    `<scr<script>ipt>` (where naive single-pass removal would leave
+    //    `<script>`) are fully cleaned. The regex is linear: `[^<>]*`
+    //    cannot backtrack catastrophically because `<` and `>` are
+    //    excluded character-class members.
+    let stripped = html;
+    for (let i = 0; i < 5; i++) {
+      const next = stripped.replace(/<[^<>]*>/g, '');
+      if (next === stripped) break;
+      stripped = next;
+    }
+    // Remove any stray angle brackets that remained after tag stripping
+    // (e.g. unbalanced `<` from malformed input).
+    stripped = stripped.replace(/[<>]/g, '');
+
+    // 2. Decode entities exactly once. Order matters: decode `&amp;` LAST
+    //    so that an input of `&amp;lt;` yields `&lt;` (text), not `<`.
+    const decoded = stripped
+      .replace(/&nbsp;/g, ' ')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"')
       .replace(/&#39;/g, "'")
-      .replace(/\s+/g, ' ') // Replace multiple spaces with single space
-      .trim();
+      .replace(/&amp;/g, '&');
+
+    return decoded.replace(/\s+/g, ' ').trim();
   }
 }
 
