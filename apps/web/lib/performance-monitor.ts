@@ -153,14 +153,22 @@ export class PerformanceMonitor {
 
   // Record a performance metric
   public recordMetric(metric: PerformanceMetric) {
+    // Tag critical metrics in context so downstream consumers (Sentry, RUM
+    // beacons) can filter on `context.critical === true`. Threshold logic
+    // lives in isCriticalMetric() so it stays trivially testable.
+    if (this.isCriticalMetric(metric)) {
+      metric = {
+        ...metric,
+        context: { ...(metric.context ?? {}), critical: true },
+      };
+    }
+
     this.metrics.push(metric);
 
     // Keep only the last N metrics to prevent memory leaks
     if (this.metrics.length > this.maxMetrics) {
       this.metrics = this.metrics.slice(-this.maxMetrics);
     }
-
-    // Critical metrics are tracked but not logged to console
   }
 
   private isCriticalMetric(metric: PerformanceMetric): boolean {
@@ -328,7 +336,7 @@ export class PerformanceMonitor {
   // Get latest metric value
   private getLatestMetricValue(name: string): number | null {
     const metrics = this.metrics.filter(m => m.name === name);
-    return metrics.length > 0 ? metrics[metrics.length - 1]?.value ?? null : null;
+    return metrics.length > 0 ? (metrics[metrics.length - 1]?.value ?? null) : null;
   }
 
   // Export metrics for analysis
