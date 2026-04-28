@@ -1,5 +1,5 @@
 # Base stage — shared tooling
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 RUN apk add --no-cache libc6-compat
 RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
@@ -27,7 +27,7 @@ RUN cd apps/cms && \
     node_modules/.bin/tsc --project tsconfig.build.json
 
 # Runner stage — minimal production image
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
