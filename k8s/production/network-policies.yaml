@@ -15,7 +15,9 @@ spec:
     - Ingress
     - Egress
 ---
-# Allow ingress from Cloudflare tunnel on port 80
+# Cloudflared is the trust boundary — explicit per-port allowlists
+# silently drop traffic on every containerPort change. See
+# status.enclii.dev incident 2026-05-04.
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -37,9 +39,6 @@ spec:
           podSelector:
             matchLabels:
               app: cloudflared
-      ports:
-        - protocol: TCP
-          port: 3000
 ---
 # Allow egress to data namespace (PostgreSQL + PgBouncer)
 apiVersion: networking.k8s.io/v1
