@@ -41,7 +41,7 @@
     "framer-motion": "^11.18.0",
     "ioredis": "^5.10.1",
     "jose": "^6.2.2",
-    "lucide-react": "^0.553.0",
+    "lucide-react": "^1.14.0",
     "next": "15.5.15",
     "next-intl": "^4.9.1",
     "react": "18.3.1",
