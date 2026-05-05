@@ -35,7 +35,7 @@
         "name": "Showtech",
         "tagline": "División de Innovación en Entretenimiento",
         "description": "Innovación en hardware y software para las industrias de la música y el entretenimiento en vivo.",
-        "badge": "una Empresa MADFAM",
+        "badge": "por MADFAM",
         "focus": "Hardware de audio, software de producción, experiencias inmersivas, tecnología de eventos",
         "status": "coming-soon"
       }
@@ -81,7 +81,7 @@
       }
     },
     "badges": {
-      "byMADFAM": "una Empresa MADFAM",
+      "byMADFAM": "por MADFAM",
       "poweredBy": "Powered by",
       "developedBy": "Desarrollado por",
       "inPartnershipWith": "en asociación con"
@@ -107,7 +107,7 @@
   "solutions": {
     "title": "Nuestras Soluciones",
     "subtitle": "Capacidades especializadas que entregan excelencia en fabricación digital, plataformas de IA y programas de innovación.",
-    "allByMadfam": "Todas las soluciones - Empresas MADFAM",
+    "allByMadfam": "Todas las soluciones MADFAM",
     "viewAll": "Ver todas las soluciones",
     "mainCapabilities": "Capacidades principales",
     "mainProducts": "Productos principales",
@@ -121,7 +121,7 @@
         "3": "Colaboraciones Estratégicas"
       },
       "page": {
-        "badge": "una Empresa MADFAM",
+        "badge": "por MADFAM",
         "startCollaboration": "Iniciar colaboración",
         "viewPrograms": "Ver programas",
         "capabilitiesTitle": "Nuestras Capacidades",
@@ -373,6 +373,23 @@
     "designExcellence": {
       "title": "Excelencia en diseño",
       "description": "Donde la IA encuentra la creatividad humana."
+    },
+    "subtitle": "Lo que obtienes cuando nos integras — tanto en productos self-service como en proyectos white-glove.",
+    "sovereign": {
+      "title": "Infraestructura soberana",
+      "description": "Nuestros productos corren sobre Kubernetes bare-metal que operamos nosotros mismos. Sin lock-in de proveedor, residencia total de datos, código bajo licencias MIT o AGPL."
+    },
+    "fullStack": {
+      "title": "Ecosistema full-stack",
+      "description": "Autenticación, facturación, agentes, compliance, inteligencia — construidos y operados en conjunto. Las mismas APIs que mueven nuestros productos mueven tu integración."
+    },
+    "mxGrounded": {
+      "title": "Anclado en México, escala LATAM",
+      "description": "Sede en Cuernavaca, fluidez con CFDI, RFC, SAT, IMSS. Lanzamos en español, inglés y portugués sin traducir después."
+    },
+    "humanCreativity": {
+      "title": "Donde la IA se encuentra con la creatividad humana",
+      "description": "Agentes autónomos llevan la operación; estrategas humanos toman las decisiones de dirección. En concreto: un vCTO te acompaña mientras Selva opera el back-office."
     }
   },
   "cta": {
@@ -382,7 +399,7 @@
     "contactNow": "Contactar ahora"
   },
   "badges": {
-    "byMadfam": "una empresa MADFAM"
+    "byMadfam": "por MADFAM"
   },
   "poweredBy": {
     "title": "Impulsado por Nuestro Propio Stack",
@@ -423,8 +440,24 @@
     "description": "Más allá de nuestros productos principales, MADFAM opera iniciativas de investigación en legal-tech, electroquímica, logística comunitaria y más. No todo proyecto se convierte en producto—pero cada proyecto nos enseña algo."
   },
   "trustedBy": {
-    "label": "Con la confianza de empresas líderes en LATAM",
-    "title": "Con la Confianza de Líderes de la Industria",
-    "subtitle": "Construyendo futuros regenerativos en América Latina"
+    "label": "Impulsado por el ecosistema MADFAM",
+    "title": "El ecosistema MADFAM",
+    "subtitle": "Plataformas en producción en uso en toda LATAM."
+  },
+  "engagementTracks": {
+    "title": "Dos formas de trabajar con nosotros",
+    "subtitle": "Elige el camino que te encaja — o usa ambos en paralelo.",
+    "selfServe": {
+      "label": "Self-service",
+      "title": "Prueba nuestras plataformas hoy",
+      "description": "Date de alta directamente en Karafiel, Dhanam, Forge Sight, Fortuna, Rondelio, Tezca. Capa gratuita o prueba en cada una. Sin agendar llamada.",
+      "cta": "Ver nuestras plataformas"
+    },
+    "whiteGlove": {
+      "label": "White-glove",
+      "title": "Habla con un estratega",
+      "description": "vCTO integrado, integración a medida de las plataformas MADFAM, programas de transformación. Agenda una sesión de trabajo con un socio senior.",
+      "cta": "Agendar consultoría"
+    }
   }
 }

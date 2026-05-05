@@ -55,6 +55,11 @@
     "cta": {
       "membership": "Unlock Pro on every platform with one membership",
       "membershipLink": "Learn about Ecosystem Membership"
+    },
+    "badges": {
+      "selfServe": "Self-serve",
+      "platform": "Platform service",
+      "ecosystem": "Ecosystem service"
     }
   },
   "enclii": {
@@ -400,6 +405,89 @@
       "platforms": "10 platform integrations",
       "interface": "Natural language",
       "automation": "Cross-platform workflows"
+    }
+  },
+  "karafiel": {
+    "tagline": "Mexican Tax & Compliance Intelligence",
+    "valueProp": "CFDI 4.0 issuance, RFC validation, and SAT integration for accountants and finance teams operating in Mexico.",
+    "problem": "Mexican fiscal compliance — CFDI, RFC validation, SAT downloads, addenda — fragments across spreadsheets and outdated portals. Errors compound at month-end.",
+    "solution": "Karafiel concentrates CFDI 4.0 generation, RFC verification, SAT downloads and addenda templates into one API and dashboard, priced in MXN.",
+    "features": {
+      "0": "CFDI 4.0 issuance and cancellation",
+      "1": "RFC validation against SAT records",
+      "2": "Bulk SAT downloads (issued and received)",
+      "3": "Addenda templates for major retailers",
+      "4": "Audit-ready ledger of every fiscal event"
+    },
+    "cta": {
+      "primary": "Open karafiel.mx",
+      "secondary": "Talk to sales"
+    },
+    "connections": {
+      "tezca": "Cross-references Tezca regulatory database",
+      "dhanam": "Feeds Dhanam business billing reconciliation"
+    }
+  },
+  "fortuna": {
+    "tagline": "Problem Intelligence API",
+    "valueProp": "NBI scoring, opportunity surfacing, and topic clustering API for product teams and researchers — built on real public-data signals.",
+    "problem": "Discovering which problems are worth solving is reduced to gut feel and outdated reports. Teams waste cycles validating opportunities one interview at a time.",
+    "solution": "Fortuna ingests public discussion data, scores opportunities with the NBI (Need-Breadth-Intensity) model, and exposes results as an API and dashboard.",
+    "features": {
+      "0": "NBI opportunity scoring",
+      "1": "HDBSCAN topic clustering",
+      "2": "Lexical novelty detection",
+      "3": "Coherence scoring across signals",
+      "4": "REST API and dashboard"
+    },
+    "cta": {
+      "primary": "Open fortuna.tube",
+      "secondary": "Talk to sales"
+    },
+    "connections": {
+      "selva": "Routes inference through Selva",
+      "dhanam": "Billing via Dhanam metering"
+    }
+  },
+  "rondelio": {
+    "tagline": "Game Intelligence Cloud",
+    "valueProp": "Analytics, deck stats, and meta-tracking APIs for trading-card and tabletop game communities.",
+    "problem": "TCG and tabletop publishers and creators need analytics over decks, plays, and meta shifts but lack a category-specific data backbone.",
+    "solution": "Rondelio is the analytics and rendering backbone for game data — deck ingestion, meta dashboards, R2-cached card art, and a public API.",
+    "features": {
+      "0": "Deck ingestion and normalization",
+      "1": "Meta dashboards over time",
+      "2": "Card art rendering with R2 caching",
+      "3": "Public read API",
+      "4": "Webhook events for collection changes"
+    },
+    "cta": {
+      "primary": "Open rondel.io",
+      "secondary": "Talk to sales"
+    },
+    "connections": {
+      "fortuna": "Surfaces community-trend signals via Fortuna"
+    }
+  },
+  "selva": {
+    "tagline": "Autonomous Agent Platform",
+    "valueProp": "Self-hosted multi-agent platform with 240+ tools and an A2A protocol — runs back-office workflows without per-seat SaaS sprawl.",
+    "problem": "Agent platforms are either toy chatbots or per-seat SaaS that lock data behind a vendor. Operators who need agents that touch real systems are underserved.",
+    "solution": "Selva is a self-hosted agent platform with 240+ tools, an agent-to-agent protocol, role-based permissions, and an audit-ready event ledger.",
+    "features": {
+      "0": "240+ first-party tools",
+      "1": "Agent-to-agent (A2A) protocol",
+      "2": "Tiered permission modes",
+      "3": "Audit-ready event ledger",
+      "4": "Self-hosted on Enclii or your own K8s"
+    },
+    "cta": {
+      "primary": "Open selva.town",
+      "secondary": "Talk to sales"
+    },
+    "connections": {
+      "enclii": "Default deployment target",
+      "janua": "SSO and audience-aware permissions"
     }
   }
 }

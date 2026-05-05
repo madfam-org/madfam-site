@@ -12,9 +12,7 @@
     "work": "Casos",
     "security": "Segurança",
     "impact": "Impacto",
-    "solutions": "Soluções",
     "tagline": "Onde a criatividade humana encontra a precisão da IA",
-    "businessSolutions": "Nossas Soluções",
     "businessSolutions": "Soluções de Negócio",
     "comingSoon": "Em Breve",
     "moreSolutionsDesc": "Mais soluções em desenvolvimento",
@@ -66,7 +64,11 @@
       "tezca": "Tezca",
       "pravaraMes": "Pravara-MES",
       "penny": "PENNY",
-      "avala": "AVALA"
+      "avala": "AVALA",
+      "karafiel": "Karafiel",
+      "fortuna": "Fortuna",
+      "rondelio": "Rondelio",
+      "selva": "Selva"
     },
     "services": {
       "makerNode": "Primavera Maker Node",
@@ -82,7 +84,8 @@
     "company": {
       "about": "Sobre Nós",
       "careers": "Carreiras",
-      "contact": "Contato"
+      "contact": "Contato",
+      "units": "Soluções"
     },
     "resources": {
       "assessment": "Avaliação de IA",
@@ -97,6 +100,11 @@
       "instagram": "Instagram",
       "facebook": "Facebook",
       "tiktok": "TikTok"
+    },
+    "trackHeadings": {
+      "selfServe": "Produtos self-service",
+      "platform": "Serviços de plataforma",
+      "ecosystem": "Serviços do ecossistema"
     }
   },
   "darkMode": {

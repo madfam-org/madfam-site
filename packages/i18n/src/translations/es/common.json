@@ -64,7 +64,11 @@
       "tezca": "Tezca",
       "pravaraMes": "Pravara-MES",
       "penny": "PENNY",
-      "avala": "AVALA"
+      "avala": "AVALA",
+      "karafiel": "Karafiel",
+      "fortuna": "Fortuna",
+      "rondelio": "Rondelio",
+      "selva": "Selva"
     },
     "services": {
       "makerNode": "Primavera Maker Node",
@@ -80,7 +84,8 @@
     "company": {
       "about": "Acerca de Nosotros",
       "careers": "Carreras",
-      "contact": "Contacto"
+      "contact": "Contacto",
+      "units": "Soluciones"
     },
     "resources": {
       "assessment": "Evaluación de IA",
@@ -95,6 +100,11 @@
       "instagram": "Instagram",
       "facebook": "Facebook",
       "tiktok": "TikTok"
+    },
+    "trackHeadings": {
+      "selfServe": "Productos self-service",
+      "platform": "Servicios de plataforma",
+      "ecosystem": "Servicios del ecosistema"
     }
   },
   "darkMode": {
