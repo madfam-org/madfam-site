@@ -15,7 +15,7 @@
     "cross-env": "^10.1.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "path-to-regexp": "0.1.13",
+    "path-to-regexp": "8.4.2",
     "payload": "^3.84.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
