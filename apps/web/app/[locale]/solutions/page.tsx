@@ -52,7 +52,7 @@ export default async function SolutionsPage({ params }: Props) {
       name: 'MADFAM Co-Labs',
       tagline: t('colabs.tagline'),
       description: t('colabs.description'),
-      badge: 'a MADFAM Company',
+      badge: 'by MADFAM',
       accent: 'blue' as const,
       capabilities: [
         t('colabs.capabilities.0'),
@@ -72,7 +72,7 @@ export default async function SolutionsPage({ params }: Props) {
       name: 'Showtech',
       tagline: t('showtech.tagline'),
       description: t('showtech.description'),
-      badge: 'a MADFAM Company',
+      badge: 'by MADFAM',
       accent: 'purple' as const,
       capabilities: [
         t('showtech.capabilities.0'),

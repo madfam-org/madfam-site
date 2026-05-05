@@ -10,6 +10,14 @@ export type PlatformStatus =
   | 'coming-soon' // Alpha / announced
   | 'in-development'; // Not yet announced publicly
 
+// Engagement track for the platform — drives self-serve vs white-glove CTA paths.
+//   self-serve : public sign-up, pricing page, free tier or trial.
+//   platform   : foundational service consumed by the rest of the ecosystem,
+//                also sold to enterprises (white-glove default).
+//   ecosystem  : building block consumed primarily by other MADFAM platforms;
+//                public detail page exists, but engagement is contact-led.
+export type EngagementTrack = 'self-serve' | 'platform' | 'ecosystem';
+
 export interface PlatformCTA {
   type: 'external' | 'contact' | 'waitlist';
   labelKey: string; // i18n key within platforms namespace
@@ -30,6 +38,8 @@ export interface Platform {
   statusPercent?: number;
   externalUrl?: string;
   githubUrl?: string;
+  /** Track that determines how this platform is sold/consumed. */
+  track: EngagementTrack;
   accentColor: {
     gradient: string; // Tailwind gradient classes
     border: string; // Tailwind border classes
@@ -42,6 +52,8 @@ export interface Platform {
   featureCount: number;
   hasComparison: boolean;
   hasTechSpecs: boolean;
+  /** True when a dedicated platform detail page exists at /platforms/[slug]. */
+  hasDetailPage: boolean;
   category: string; // Display category for products page grouping
 }
 
@@ -58,6 +70,7 @@ export const PLATFORMS: Platform[] = [
     statusPercent: 95,
     externalUrl: 'https://enclii.dev',
     githubUrl: 'https://github.com/madfam-org/enclii',
+    track: 'platform',
     accentColor: {
       gradient: 'from-blue-500/20 to-blue-600/10',
       border: 'border-blue-200 dark:border-blue-800',
@@ -81,6 +94,7 @@ export const PLATFORMS: Platform[] = [
     featureCount: 6,
     hasComparison: true,
     hasTechSpecs: true,
+    hasDetailPage: true,
     category: 'Infrastructure',
   },
   {
@@ -92,6 +106,7 @@ export const PLATFORMS: Platform[] = [
     statusPercent: 100,
     externalUrl: 'https://janua.dev',
     githubUrl: 'https://github.com/madfam-org/janua',
+    track: 'platform',
     accentColor: {
       gradient: 'from-indigo-500/20 to-indigo-600/10',
       border: 'border-indigo-200 dark:border-indigo-800',
@@ -115,6 +130,41 @@ export const PLATFORMS: Platform[] = [
     featureCount: 6,
     hasComparison: true,
     hasTechSpecs: true,
+    hasDetailPage: true,
+    category: 'Infrastructure',
+  },
+  {
+    slug: 'selva',
+    name: 'Selva',
+    icon: '🌳',
+    layer: 'infrastructure',
+    status: 'production-beta',
+    statusPercent: 90,
+    externalUrl: 'https://selva.town',
+    track: 'platform',
+    accentColor: {
+      gradient: 'from-green-500/20 to-green-600/10',
+      border: 'border-green-200 dark:border-green-800',
+      text: 'text-green-600 dark:text-green-400',
+      bg: 'bg-green-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'selva.cta.primary',
+      url: 'https://selva.town',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'selva.cta.secondary',
+    },
+    ecosystemConnections: [
+      { slug: 'enclii', relationKey: 'selva.connections.enclii' },
+      { slug: 'janua', relationKey: 'selva.connections.janua' },
+    ],
+    featureCount: 5,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
     category: 'Infrastructure',
   },
 
@@ -127,6 +177,7 @@ export const PLATFORMS: Platform[] = [
     status: 'production-beta',
     statusPercent: 95,
     externalUrl: 'https://forgesight.quest',
+    track: 'self-serve',
     accentColor: {
       gradient: 'from-amber-500/20 to-amber-600/10',
       border: 'border-amber-200 dark:border-amber-800',
@@ -149,6 +200,7 @@ export const PLATFORMS: Platform[] = [
     featureCount: 6,
     hasComparison: true,
     hasTechSpecs: true,
+    hasDetailPage: true,
     category: 'Intelligence',
   },
   {
@@ -159,6 +211,7 @@ export const PLATFORMS: Platform[] = [
     status: 'production',
     statusPercent: 100,
     externalUrl: 'https://dhan.am',
+    track: 'self-serve',
     accentColor: {
       gradient: 'from-emerald-500/20 to-emerald-600/10',
       border: 'border-emerald-200 dark:border-emerald-800',
@@ -181,10 +234,110 @@ export const PLATFORMS: Platform[] = [
     featureCount: 5,
     hasComparison: true,
     hasTechSpecs: false,
+    hasDetailPage: true,
+    category: 'Intelligence',
+  },
+  {
+    slug: 'fortuna',
+    name: 'Fortuna',
+    icon: '🔮',
+    layer: 'intelligence',
+    status: 'production-beta',
+    statusPercent: 85,
+    externalUrl: 'https://fortuna.tube',
+    track: 'self-serve',
+    accentColor: {
+      gradient: 'from-violet-500/20 to-violet-600/10',
+      border: 'border-violet-200 dark:border-violet-800',
+      text: 'text-violet-600 dark:text-violet-400',
+      bg: 'bg-violet-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'fortuna.cta.primary',
+      url: 'https://fortuna.tube',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'fortuna.cta.secondary',
+    },
+    ecosystemConnections: [
+      { slug: 'selva', relationKey: 'fortuna.connections.selva' },
+      { slug: 'dhanam', relationKey: 'fortuna.connections.dhanam' },
+    ],
+    featureCount: 5,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+    category: 'Intelligence',
+  },
+  {
+    slug: 'rondelio',
+    name: 'Rondelio',
+    icon: '🎲',
+    layer: 'intelligence',
+    status: 'production-beta',
+    statusPercent: 80,
+    externalUrl: 'https://rondel.io',
+    track: 'self-serve',
+    accentColor: {
+      gradient: 'from-fuchsia-500/20 to-fuchsia-600/10',
+      border: 'border-fuchsia-200 dark:border-fuchsia-800',
+      text: 'text-fuchsia-600 dark:text-fuchsia-400',
+      bg: 'bg-fuchsia-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'rondelio.cta.primary',
+      url: 'https://rondel.io',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'rondelio.cta.secondary',
+    },
+    ecosystemConnections: [{ slug: 'fortuna', relationKey: 'rondelio.connections.fortuna' }],
+    featureCount: 5,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
     category: 'Intelligence',
   },
 
   // ── Standards Layer ───────────────────────────────────────────────────────
+  {
+    slug: 'karafiel',
+    name: 'Karafiel',
+    icon: '📜',
+    layer: 'standards',
+    status: 'production-beta',
+    statusPercent: 90,
+    externalUrl: 'https://karafiel.mx',
+    track: 'self-serve',
+    accentColor: {
+      gradient: 'from-red-500/20 to-red-600/10',
+      border: 'border-red-200 dark:border-red-800',
+      text: 'text-red-600 dark:text-red-400',
+      bg: 'bg-red-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'karafiel.cta.primary',
+      url: 'https://karafiel.mx',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'karafiel.cta.secondary',
+    },
+    ecosystemConnections: [
+      { slug: 'tezca', relationKey: 'karafiel.connections.tezca' },
+      { slug: 'dhanam', relationKey: 'karafiel.connections.dhanam' },
+    ],
+    featureCount: 5,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+    category: 'Standards',
+  },
   {
     slug: 'tezca',
     name: 'Tezca',
@@ -193,6 +346,7 @@ export const PLATFORMS: Platform[] = [
     status: 'production-beta',
     statusPercent: 90,
     externalUrl: 'https://tezca.mx',
+    track: 'self-serve',
     accentColor: {
       gradient: 'from-rose-500/20 to-rose-600/10',
       border: 'border-rose-200 dark:border-rose-800',
@@ -215,6 +369,7 @@ export const PLATFORMS: Platform[] = [
     featureCount: 5,
     hasComparison: false,
     hasTechSpecs: true,
+    hasDetailPage: true,
     category: 'Standards',
   },
   {
@@ -223,6 +378,7 @@ export const PLATFORMS: Platform[] = [
     icon: '🎓',
     layer: 'standards',
     status: 'coming-soon',
+    track: 'ecosystem',
     accentColor: {
       gradient: 'from-teal-500/20 to-teal-600/10',
       border: 'border-teal-200 dark:border-teal-800',
@@ -244,6 +400,7 @@ export const PLATFORMS: Platform[] = [
     featureCount: 4,
     hasComparison: false,
     hasTechSpecs: false,
+    hasDetailPage: true,
     category: 'Standards',
   },
 
@@ -256,6 +413,7 @@ export const PLATFORMS: Platform[] = [
     status: 'production',
     statusPercent: 100,
     externalUrl: 'https://4d-app.madfam.io',
+    track: 'ecosystem',
     accentColor: {
       gradient: 'from-purple-500/20 to-purple-600/10',
       border: 'border-purple-200 dark:border-purple-800',
@@ -278,6 +436,7 @@ export const PLATFORMS: Platform[] = [
     featureCount: 5,
     hasComparison: false,
     hasTechSpecs: true,
+    hasDetailPage: true,
     category: 'Applications',
   },
   {
@@ -288,6 +447,7 @@ export const PLATFORMS: Platform[] = [
     status: 'production',
     statusPercent: 100,
     externalUrl: 'https://cotiza.studio',
+    track: 'ecosystem',
     accentColor: {
       gradient: 'from-cyan-500/20 to-cyan-600/10',
       border: 'border-cyan-200 dark:border-cyan-800',
@@ -310,6 +470,7 @@ export const PLATFORMS: Platform[] = [
     featureCount: 5,
     hasComparison: false,
     hasTechSpecs: false,
+    hasDetailPage: true,
     category: 'Applications',
   },
   {
@@ -320,6 +481,7 @@ export const PLATFORMS: Platform[] = [
     status: 'production-beta',
     statusPercent: 97,
     externalUrl: 'https://mes.madfam.io',
+    track: 'ecosystem',
     accentColor: {
       gradient: 'from-orange-500/20 to-orange-600/10',
       border: 'border-orange-200 dark:border-orange-800',
@@ -342,6 +504,7 @@ export const PLATFORMS: Platform[] = [
     featureCount: 6,
     hasComparison: false,
     hasTechSpecs: true,
+    hasDetailPage: true,
     category: 'Applications',
   },
   {
@@ -350,6 +513,7 @@ export const PLATFORMS: Platform[] = [
     icon: '🤖',
     layer: 'applications',
     status: 'in-development',
+    track: 'ecosystem',
     accentColor: {
       gradient: 'from-pink-500/20 to-pink-600/10',
       border: 'border-pink-200 dark:border-pink-800',
@@ -371,6 +535,7 @@ export const PLATFORMS: Platform[] = [
     featureCount: 4,
     hasComparison: false,
     hasTechSpecs: false,
+    hasDetailPage: true,
     category: 'Applications',
   },
 ];
@@ -395,6 +560,28 @@ export function getComingSoonPlatforms(): Platform[] {
 
 export function getAllPlatformSlugs(): string[] {
   return PLATFORMS.map(p => p.slug);
+}
+
+/**
+ * Returns slugs for which a /platforms/[slug] detail page is built. Used by
+ * generateStaticParams so that adding registry entries that don't (yet) have
+ * a dedicated detail page does not 404 the new platform on the products list.
+ */
+export function getPlatformsWithDetailPages(): Platform[] {
+  return PLATFORMS.filter(p => p.hasDetailPage);
+}
+
+export function getPlatformsByTrack(track: EngagementTrack): Platform[] {
+  return PLATFORMS.filter(p => p.track === track);
+}
+
+/**
+ * Self-serve flagships: production-ready, public sign-up, sit on top of an
+ * obvious product domain. These are the headline self-serve stories featured
+ * on the homepage and in the products grid's "self-serve" rail.
+ */
+export function getSelfServeFlagships(): Platform[] {
+  return PLATFORMS.filter(p => p.track === 'self-serve' && !isComingSoon(p));
 }
 
 export function isComingSoon(platform: Platform): boolean {

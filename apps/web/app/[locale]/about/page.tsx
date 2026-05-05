@@ -145,53 +145,47 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     },
   ];
 
+  // Milestones reflect verifiable ecosystem build-out (no unsupported
+  // customer-count claims). Update this list when there is dated evidence.
   const milestones: Milestone[] = [
     {
       year: '2019',
       event: {
-        es: 'Fundación de MADFAM',
-        en: 'MADFAM Founded',
-        pt: 'Fundação da MADFAM',
-      },
-    },
-    {
-      year: '2020',
-      event: {
-        es: 'Lanzamiento de primeras plataformas de IA',
-        en: 'Launch of first AI platforms',
-        pt: 'Lançamento das primeiras plataformas de IA',
-      },
-    },
-    {
-      year: '2021',
-      event: {
-        es: '100+ proyectos completados',
-        en: '100+ projects completed',
-        pt: '100+ projetos concluídos',
-      },
-    },
-    {
-      year: '2022',
-      event: {
-        es: 'Expansión internacional',
-        en: 'International expansion',
-        pt: 'Expansão internacional',
+        es: 'Fundación de MADFAM en Cuernavaca',
+        en: 'MADFAM founded in Cuernavaca',
+        pt: 'Fundação da MADFAM em Cuernavaca',
       },
     },
     {
       year: '2023',
       event: {
-        es: 'Lanzamiento de Penny',
-        en: 'Penny launch',
-        pt: 'Lançamento do Penny',
+        es: 'Plataformas de fabricación digital y diseño paramétrico en producción',
+        en: 'Digital fabrication and parametric design platforms in production',
+        pt: 'Plataformas de fabricação digital e design paramétrico em produção',
       },
     },
     {
       year: '2024',
       event: {
-        es: '50+ empresas transformadas',
-        en: '50+ companies transformed',
-        pt: '50+ empresas transformadas',
+        es: 'Enclii (PaaS sobre bare-metal) y Janua (identidad self-hosted) en producción',
+        en: 'Enclii (bare-metal PaaS) and Janua (self-hosted identity) in production',
+        pt: 'Enclii (PaaS bare-metal) e Janua (identidade self-hosted) em produção',
+      },
+    },
+    {
+      year: '2025',
+      event: {
+        es: 'Dhanam (finanzas), Forge Sight (precios) y Tezca (regulación) en producción',
+        en: 'Dhanam (finance), Forge Sight (pricing) and Tezca (regulation) in production',
+        pt: 'Dhanam (finanças), Forge Sight (preços) e Tezca (regulação) em produção',
+      },
+    },
+    {
+      year: '2026',
+      event: {
+        es: 'Selva (agentes), Karafiel (CFDI), Fortuna y Rondelio en early access',
+        en: 'Selva (agents), Karafiel (CFDI), Fortuna and Rondelio in early access',
+        pt: 'Selva (agentes), Karafiel (CFDI), Fortuna e Rondelio em early access',
       },
     },
   ];

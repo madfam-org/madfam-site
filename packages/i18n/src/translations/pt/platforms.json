@@ -55,6 +55,11 @@
     "cta": {
       "membership": "Desbloqueie Pro em cada plataforma com uma assinatura",
       "membershipLink": "Conheça a Assinatura do Ecossistema"
+    },
+    "badges": {
+      "selfServe": "Self-service",
+      "platform": "Serviço de plataforma",
+      "ecosystem": "Serviço do ecossistema"
     }
   },
   "enclii": {
@@ -405,6 +410,89 @@
       "platforms": "10 integrações de plataformas",
       "interface": "Linguagem natural",
       "automation": "Fluxos entre plataformas"
+    }
+  },
+  "karafiel": {
+    "tagline": "Inteligência fiscal e de compliance no México",
+    "valueProp": "Emissão de CFDI 4.0, validação de RFC e integração com o SAT para contadores e equipes financeiras que operam no México.",
+    "problem": "O compliance fiscal mexicano — CFDI, validação de RFC, downloads do SAT, addendas — vive espalhado entre planilhas e portais obsoletos. Os erros se acumulam no fechamento.",
+    "solution": "A Karafiel concentra a emissão de CFDI 4.0, a verificação de RFC, os downloads do SAT e as templates de addendas em uma única API e painel, com preços em MXN.",
+    "features": {
+      "0": "Emissão e cancelamento de CFDI 4.0",
+      "1": "Validação de RFC contra registros do SAT",
+      "2": "Downloads em massa do SAT (emitidos e recebidos)",
+      "3": "Templates de addendas para grandes redes",
+      "4": "Registro auditável de cada evento fiscal"
+    },
+    "cta": {
+      "primary": "Abrir karafiel.mx",
+      "secondary": "Falar com vendas"
+    },
+    "connections": {
+      "tezca": "Cruza com a base regulatória da Tezca",
+      "dhanam": "Alimenta a conciliação de cobrança da Dhanam"
+    }
+  },
+  "fortuna": {
+    "tagline": "API de inteligência de problemas",
+    "valueProp": "API de pontuação NBI, descoberta de oportunidades e clustering temático para times de produto e pesquisa, baseada em sinais públicos reais.",
+    "problem": "Descobrir quais problemas vale a pena resolver se reduz a intuição e relatórios desatualizados. Os times perdem ciclos validando oportunidades uma entrevista por vez.",
+    "solution": "A Fortuna ingere dados públicos de discussão, pontua oportunidades com o modelo NBI (Necessidade-Amplitude-Intensidade) e expõe os resultados como API e painel.",
+    "features": {
+      "0": "Pontuação de oportunidades NBI",
+      "1": "Clustering temático com HDBSCAN",
+      "2": "Detecção de novidade léxica",
+      "3": "Pontuação de coerência entre sinais",
+      "4": "API REST e painel"
+    },
+    "cta": {
+      "primary": "Abrir fortuna.tube",
+      "secondary": "Falar com vendas"
+    },
+    "connections": {
+      "selva": "Roteia inferência via Selva",
+      "dhanam": "Cobrança via medição da Dhanam"
+    }
+  },
+  "rondelio": {
+    "tagline": "Game Intelligence Cloud",
+    "valueProp": "APIs de analytics, estatísticas de decks e acompanhamento de meta para comunidades de jogos de cartas e tabuleiro.",
+    "problem": "Editoras e criadores de TCG e jogos de tabuleiro precisam de analytics sobre decks, partidas e mudanças de meta, mas não têm um backend de dados específico da categoria.",
+    "solution": "A Rondelio é o backend de analytics e renderização para dados de jogo — ingestão de decks, painéis de meta, render de arte com cache R2 e uma API pública.",
+    "features": {
+      "0": "Ingestão e normalização de decks",
+      "1": "Painéis de meta ao longo do tempo",
+      "2": "Render de arte de cartas com cache R2",
+      "3": "API pública de leitura",
+      "4": "Eventos webhook em mudanças de coleção"
+    },
+    "cta": {
+      "primary": "Abrir rondel.io",
+      "secondary": "Falar com vendas"
+    },
+    "connections": {
+      "fortuna": "Aflora sinais de tendência de comunidade via Fortuna"
+    }
+  },
+  "selva": {
+    "tagline": "Plataforma de agentes autônomos",
+    "valueProp": "Plataforma multi-agente self-hosted com 240+ ferramentas e protocolo A2A — executa fluxos de back-office sem SaaS por usuário.",
+    "problem": "As plataformas de agentes são chatbots brinquedos ou SaaS por usuário que prendem os dados no fornecedor. Operadores que precisam de agentes que toquem sistemas reais ficam de fora.",
+    "solution": "A Selva é uma plataforma de agentes self-hosted com 240+ ferramentas, protocolo agente-a-agente, permissões por papel e registro auditável.",
+    "features": {
+      "0": "240+ ferramentas de primeira parte",
+      "1": "Protocolo agente-a-agente (A2A)",
+      "2": "Modos de permissões em camadas",
+      "3": "Registro auditável de eventos",
+      "4": "Self-hosted no Enclii ou no seu K8s"
+    },
+    "cta": {
+      "primary": "Abrir selva.town",
+      "secondary": "Falar com vendas"
+    },
+    "connections": {
+      "enclii": "Destino padrão de deploy",
+      "janua": "SSO e permissões sensíveis à audiência"
     }
   }
 }

@@ -24,6 +24,8 @@ const MAKER_SERVICES = [
 export function EcosystemHomePage() {
   const t = useTranslations('ecosystem.homepage');
   const tEco = useTranslations('ecosystem');
+  const tEng = useTranslations('corporate.engagementTracks');
+  const tWhy = useTranslations('corporate.whyMadfam');
   const locale = useLocale() as Locale;
   const layerGridRef = useRef<HTMLElement>(null);
 
@@ -77,25 +79,26 @@ export function EcosystemHomePage() {
               <p className="text-xl md:text-2xl text-white/70">{t('hero.subtitle')}</p>
             </div>
 
+            {/* Dual-track CTA: self-serve (try platforms) vs white-glove (book) */}
             <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <Button
-                size="lg"
-                onClick={scrollToLayerGrid}
-                aria-label={t('hero.exploreCta')}
-                className="bg-gradient-to-r from-leaf to-lavender hover:from-leaf/90 hover:to-lavender/90 text-white font-semibold px-8 py-3 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-              >
-                {t('hero.exploreCta')}
-              </Button>
-
-              <Link href={getLocalizedUrl('ecosystem', locale)}>
+              <Link href={getLocalizedUrl('contact', locale)}>
                 <Button
-                  variant="outline"
                   size="lg"
-                  className="border-2 border-lavender text-white hover:bg-lavender/10 px-8 py-3 text-lg font-semibold transition-all duration-300"
+                  className="bg-gradient-to-r from-leaf to-lavender hover:from-leaf/90 hover:to-lavender/90 text-white font-semibold px-8 py-3 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                 >
-                  {t('hero.memberCta')}
+                  {tEng('whiteGlove.cta')}
                 </Button>
               </Link>
+
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={scrollToLayerGrid}
+                aria-label={tEng('selfServe.cta')}
+                className="border-2 border-lavender text-white hover:bg-lavender/10 px-8 py-3 text-lg font-semibold transition-all duration-300"
+              >
+                {tEng('selfServe.cta')}
+              </Button>
             </div>
           </div>
         </Container>
@@ -164,6 +167,99 @@ export function EcosystemHomePage() {
 
       {/* ── 4. Persona Cards ─────────────────────────────────────────────── */}
       <PersonaCards locale={locale} />
+
+      {/* ── 4b. Dual-track engagement (self-serve vs white-glove) ────────── */}
+      <section
+        data-section="engagement-tracks"
+        aria-labelledby="tracks-heading"
+        className="py-24 bg-white dark:bg-gray-950"
+      >
+        <Container>
+          <div className="text-center mb-12 max-w-3xl mx-auto">
+            <h2
+              id="tracks-heading"
+              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+            >
+              {tEng('title')}
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400">{tEng('subtitle')}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-8 flex flex-col">
+              <Badge
+                variant="program"
+                className="self-start mb-4 bg-leaf/10 text-leaf border-leaf/20"
+              >
+                {tEng('selfServe.label')}
+              </Badge>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                {tEng('selfServe.title')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-1">
+                {tEng('selfServe.description')}
+              </p>
+              <Link href={getLocalizedUrl('products', locale)}>
+                <Button size="lg" className="w-full bg-leaf hover:bg-leaf/90 text-white">
+                  {tEng('selfServe.cta')}
+                </Button>
+              </Link>
+            </div>
+            <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-8 flex flex-col">
+              <Badge
+                variant="program"
+                className="self-start mb-4 bg-lavender/10 text-lavender border-lavender/20"
+              >
+                {tEng('whiteGlove.label')}
+              </Badge>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                {tEng('whiteGlove.title')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-1">
+                {tEng('whiteGlove.description')}
+              </p>
+              <Link href={getLocalizedUrl('contact', locale)}>
+                <Button size="lg" className="w-full bg-lavender hover:bg-lavender/90 text-white">
+                  {tEng('whiteGlove.cta')}
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── 4c. Why MADFAM? (specific embodiment, not slogans) ───────────── */}
+      <section
+        data-section="why-madfam"
+        aria-labelledby="why-heading"
+        className="py-24 bg-gray-50 dark:bg-gray-900"
+      >
+        <Container>
+          <div className="text-center mb-12 max-w-3xl mx-auto">
+            <h2
+              id="why-heading"
+              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+            >
+              {tWhy('title')}
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400">{tWhy('subtitle')}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {(['sovereign', 'fullStack', 'mxGrounded', 'humanCreativity'] as const).map(key => (
+              <div
+                key={key}
+                className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-6"
+              >
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {tWhy(`${key}.title`)}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {tWhy(`${key}.description`)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       {/* ── 5. Primavera Maker Node Highlight ────────────────────────────── */}
       <section

@@ -35,7 +35,7 @@
         "name": "Showtech",
         "tagline": "Entertainment Innovation Division",
         "description": "Hardware and software innovation for the music and live entertainment industries.",
-        "badge": "a MADFAM Company",
+        "badge": "by MADFAM",
         "focus": "Audio hardware, production software, immersive experiences, event technology",
         "status": "coming-soon"
       }
@@ -81,7 +81,7 @@
       }
     },
     "badges": {
-      "byMADFAM": "a MADFAM Company",
+      "byMADFAM": "by MADFAM",
       "poweredBy": "Powered by",
       "developedBy": "Developed by",
       "inPartnershipWith": "in partnership with"
@@ -107,7 +107,7 @@
   "solutions": {
     "title": "Our Solutions",
     "subtitle": "Specialized capabilities delivering excellence in digital fabrication, AI platforms, and innovation programs.",
-    "allByMadfam": "All solutions - MADFAM Companies",
+    "allByMadfam": "All MADFAM solutions",
     "viewAll": "View all solutions",
     "mainCapabilities": "Core Capabilities",
     "mainProducts": "Main products",
@@ -121,7 +121,7 @@
         "3": "Strategic Collaborations"
       },
       "page": {
-        "badge": "a MADFAM Company",
+        "badge": "by MADFAM",
         "startCollaboration": "Start Collaboration",
         "viewPrograms": "View Programs",
         "capabilitiesTitle": "Our Capabilities",
@@ -373,6 +373,23 @@
     "designExcellence": {
       "title": "Design Excellence",
       "description": "Where AI meets human creativity."
+    },
+    "subtitle": "What you get when you bring us in — across self-serve products and white-glove engagements.",
+    "sovereign": {
+      "title": "Sovereign infrastructure",
+      "description": "Our products run on bare-metal Kubernetes that we operate ourselves. No vendor lock-in, full data residency, sources licensed under MIT or AGPL."
+    },
+    "fullStack": {
+      "title": "Full-stack ecosystem",
+      "description": "Auth, billing, agents, compliance, intelligence — built and operated together. The same APIs that power our products power your integration."
+    },
+    "mxGrounded": {
+      "title": "MX-grounded, LATAM-scale",
+      "description": "Headquartered in Cuernavaca, fluent in CFDI, RFC, SAT, IMSS. We ship in Spanish, English and Portuguese without translating later."
+    },
+    "humanCreativity": {
+      "title": "Where AI meets human creativity",
+      "description": "Autonomous agents drive ops; human strategists own the call on direction. Concretely: a vCTO partners with you while Selva runs the back-office."
     }
   },
   "cta": {
@@ -382,7 +399,7 @@
     "contactNow": "Contact Now"
   },
   "badges": {
-    "byMadfam": "a MADFAM Company"
+    "byMadfam": "by MADFAM"
   },
   "poweredBy": {
     "title": "Powered by Our Own Stack",
@@ -423,8 +440,24 @@
     "description": "Beyond our core products, MADFAM operates research initiatives in legal-tech, electrochemistry, community logistics, and more. Not every project becomes a product—but every project teaches us something."
   },
   "trustedBy": {
-    "label": "Trusted by leading LATAM enterprises",
-    "title": "Trusted by Industry Leaders",
-    "subtitle": "Building regenerative futures across Latin America"
+    "label": "Powered by the MADFAM ecosystem",
+    "title": "The MADFAM ecosystem",
+    "subtitle": "Production platforms in use across LATAM."
+  },
+  "engagementTracks": {
+    "title": "Two ways to work with us",
+    "subtitle": "Pick the path that fits — or run both in parallel.",
+    "selfServe": {
+      "label": "Self-serve",
+      "title": "Try our platforms today",
+      "description": "Sign up directly on Karafiel, Dhanam, Forge Sight, Fortuna, Rondelio, Tezca. Free tier or trial on each. No call required.",
+      "cta": "See our platforms"
+    },
+    "whiteGlove": {
+      "label": "White-glove",
+      "title": "Talk to a strategist",
+      "description": "Embedded vCTO, custom integration of MADFAM platforms, transformation programs. Book a working session with a senior partner.",
+      "cta": "Book a consultation"
+    }
   }
 }
