@@ -54,14 +54,26 @@ MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entr
 
 ### Digital Platforms (by MADFAM)
 
-- **Enclii**: Sovereign cloud PaaS
-- **Janua**: Self-hosted identity platform
-- **Dhanam**: Wealth & finance for LATAM founders (https://www.dhan.am)
-- **Forge Sight**: Pricing intelligence for digital fabrication
+Self-serve flagships (public sign-up, pricing, free tier or trial):
+
+- **Karafiel** (https://karafiel.mx): Mexican CFDI / RFC / SAT compliance
+- **Dhanam** (https://dhan.am): Financial wellness + ecosystem billing backbone
+- **Forge Sight** (https://forgesight.quest): Digital fabrication pricing intelligence
+- **Tezca** (https://tezca.mx): LATAM regulatory intelligence
+- **Fortuna** (https://fortuna.tube): Problem intelligence / NBI scoring API
+- **Rondelio** (https://rondel.io): Game intelligence cloud (TCG / tabletop)
+
+Platform / infrastructure (B2B, white-glove default):
+
+- **Enclii** (https://enclii.dev): Sovereign cloud PaaS on bare-metal K8s
+- **Janua** (https://janua.dev): Self-hosted identity platform
+- **Selva** (https://selva.town): Autonomous agent platform (240+ tools, A2A protocol)
+
+Ecosystem services (consumed by other platforms):
+
 - **Cotiza Studio**: Automated quoting and estimation
 - **Yantra4D**: Parametric design platform
 - **Pravara-MES**: Manufacturing execution system
-- **Tezca**: Mexican regulatory intelligence (https://tezca.mx)
 - **AVALA**: Competency-based training (Coming Soon)
 - **PENNY**: AI assistant (In Development)
 

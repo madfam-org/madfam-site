@@ -45,8 +45,13 @@ const messages = {
     platforms: {
       enclii: 'Enclii',
       janua: 'Janua',
+      selva: 'Selva',
       dhanam: 'Dhanam',
       forgeSight: 'Forge Sight',
+      fortuna: 'Fortuna',
+      rondelio: 'Rondelio',
+      karafiel: 'Karafiel',
+      tezca: 'Tezca',
       cotizaStudio: 'Cotiza Studio',
       yantra4d: 'Yantra4D',
       pravaraMes: 'Pravara-MES',
@@ -65,6 +70,7 @@ const messages = {
     },
     company: {
       about: 'About Us',
+      units: 'Solutions',
       careers: 'Careers',
       contact: 'Contact',
     },

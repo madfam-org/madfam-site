@@ -10,15 +10,37 @@ export function Footer() {
 
   const navigation = {
     platforms: [
-      { name: t('footer.platforms.enclii'), href: `/${locale}/platforms/enclii`, external: false },
-      { name: t('footer.platforms.janua'), href: `/${locale}/platforms/janua`, external: false },
+      // Self-serve products first — these are what most visitors should
+      // sign up for directly. New flagships (Karafiel, Fortuna, Rondelio)
+      // link to their public domain since the in-site detail page does not
+      // yet exist; this avoids 404s while keeping the catalog truthful.
+      {
+        name: t('footer.platforms.karafiel'),
+        href: 'https://karafiel.mx',
+        external: true,
+      },
       { name: t('footer.platforms.dhanam'), href: `/${locale}/platforms/dhanam`, external: false },
       {
         name: t('footer.platforms.forgeSight'),
         href: `/${locale}/platforms/forge-sight`,
         external: false,
       },
+      {
+        name: t('footer.platforms.fortuna'),
+        href: 'https://fortuna.tube',
+        external: true,
+      },
+      {
+        name: t('footer.platforms.rondelio'),
+        href: 'https://rondel.io',
+        external: true,
+      },
       { name: t('footer.platforms.tezca'), href: `/${locale}/platforms/tezca`, external: false },
+      // Platform / infrastructure services
+      { name: t('footer.platforms.enclii'), href: `/${locale}/platforms/enclii`, external: false },
+      { name: t('footer.platforms.janua'), href: `/${locale}/platforms/janua`, external: false },
+      { name: t('footer.platforms.selva'), href: 'https://selva.town', external: true },
+      // Ecosystem services
       {
         name: t('footer.platforms.cotizaStudio'),
         href: `/${locale}/platforms/cotiza-studio`,
@@ -32,11 +54,6 @@ export function Footer() {
       {
         name: t('footer.platforms.pravaraMes'),
         href: `/${locale}/platforms/pravara-mes`,
-        external: false,
-      },
-      {
-        name: t('footer.platforms.penny'),
-        href: getLocalizedUrl('products', locale),
         external: false,
       },
       {
@@ -81,6 +98,11 @@ export function Footer() {
     ],
     company: [
       { name: t('footer.company.about'), href: getLocalizedUrl('about', locale), external: false },
+      {
+        name: t('footer.company.units'),
+        href: getLocalizedUrl('solutions', locale),
+        external: false,
+      },
       {
         name: t('footer.company.careers'),
         href: getLocalizedUrl('careers', locale),

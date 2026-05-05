@@ -43,25 +43,44 @@ export default async function ProductsPage({ params }: Props) {
     return map[slug] || slug;
   }
 
+  function trackBadge(track: 'self-serve' | 'platform' | 'ecosystem'): string {
+    // Track-specific labels replace the previous hardcoded "by MADFAM /
+    // Free + Pro" which under-represented the catalog and was untrue for
+    // platforms without a public free tier.
+    switch (track) {
+      case 'self-serve':
+        return platformsT('shared.badges.selfServe');
+      case 'platform':
+        return platformsT('shared.badges.platform');
+      case 'ecosystem':
+      default:
+        return platformsT('shared.badges.ecosystem');
+    }
+  }
+
   // Derive products from platform registry (single source of truth)
   const products = PLATFORMS.map(p => {
     const key = slugToKey(p.slug);
+    const detailHref = p.hasDetailPage ? `/${locale}/platforms/${p.slug}` : (p.externalUrl ?? '#');
     return {
       name: p.name,
       description: platformsT(`${key}.valueProp`),
       audience: platformsT(`${key}.tagline`),
-      badge: 'by MADFAM',
-      tiers: 'Free + Pro',
+      badge: trackBadge(p.track),
+      // Empty string — tiers belong on the actual product domain, not the
+      // catalog. This avoids stating "Free + Pro" universally when platforms
+      // have heterogeneous pricing models.
+      tiers: '',
       comingSoon: isComingSoon(p),
       primaryCta: {
         label: platformsT(`${key}.cta.primary`),
-        url: isComingSoon(p) ? '#' : p.externalUrl || `/${locale}/platforms/${p.slug}`,
+        url: isComingSoon(p) ? '#' : (p.externalUrl ?? detailHref),
         external: !isComingSoon(p) && !!p.externalUrl,
         comingSoon: isComingSoon(p),
       },
       secondaryCta: {
         label: commonT('nav.contact'),
-        url: `/${locale}/platforms/${p.slug}`,
+        url: detailHref,
       },
       features: Array.from({ length: Math.min(p.featureCount, 3) }, (_, i) =>
         platformsT(`${key}.features.${i}`)
