@@ -585,12 +585,18 @@ export class SEOService {
         changeFrequency: 'weekly' as const,
         priority: 0.9,
       },
-      ...getProductionPlatforms().map(p => ({
-        url: `/platforms/${p.slug}`,
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      })),
+      // Only emit sitemap entries for production platforms that have an
+      // in-site detail page. Platforms whose canonical landing is an
+      // external domain (Karafiel, Fortuna, Rondelio, Selva) are not part of
+      // madfam.io's sitemap.
+      ...getProductionPlatforms()
+        .filter(p => p.hasDetailPage)
+        .map(p => ({
+          url: `/platforms/${p.slug}`,
+          lastModified: now,
+          changeFrequency: 'monthly' as const,
+          priority: 0.8,
+        })),
     ];
 
     return [...staticEntries, ...platformEntries];

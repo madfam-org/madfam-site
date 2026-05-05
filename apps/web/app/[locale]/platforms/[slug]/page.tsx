@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { getAllPlatformSlugs, getPlatformBySlug } from '@/lib/data/platforms';
+import { getPlatformBySlug, getPlatformsWithDetailPages } from '@/lib/data/platforms';
 import { PlatformShowcase } from '@/components/platforms/PlatformShowcase';
 
 export const revalidate = 3600;
@@ -25,7 +25,11 @@ function slugToI18nKey(slug: string): string {
 }
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  return getAllPlatformSlugs().map(slug => ({ slug }));
+  // Only generate detail pages for platforms that have full PlatformShowcase
+  // content authored in platforms.json. New registry entries (Karafiel,
+  // Fortuna, Rondelio, Selva, etc.) use their external domain as the canonical
+  // landing page until a detail page is authored.
+  return getPlatformsWithDetailPages().map(p => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PlatformPageProps): Promise<Metadata> {

@@ -8,8 +8,12 @@ import { LAYERS, getPlatformsByLayer, isComingSoon, type Platform } from '@/lib/
 const SLUG_TO_I18N_KEY: Record<string, string> = {
   enclii: 'enclii',
   janua: 'janua',
+  selva: 'selva',
   'forge-sight': 'forgeSight',
   dhanam: 'dhanam',
+  fortuna: 'fortuna',
+  rondelio: 'rondelio',
+  karafiel: 'karafiel',
   tezca: 'tezca',
   avala: 'avala',
   yantra4d: 'yantra4d',
@@ -74,9 +78,18 @@ function PlatformCard({
     return <div>{cardContent}</div>;
   }
 
+  // Link to the in-site detail page when authored, otherwise to the live
+  // product domain (registry entries without detail pages, e.g. Karafiel).
+  const href = platform.hasDetailPage
+    ? `/${locale}/platforms/${platform.slug}`
+    : (platform.externalUrl ?? `/${locale}/platforms/${platform.slug}`);
+  const isExternal = !platform.hasDetailPage && !!platform.externalUrl;
+
   return (
     <Link
-      href={`/${locale}/platforms/${platform.slug}`}
+      href={href}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
       className="block min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-leaf focus-visible:ring-offset-2 rounded-xl"
     >
       {cardContent}
