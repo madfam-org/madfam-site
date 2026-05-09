@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
  * POST /api/unsubscribe
  *
  * Processes email unsubscribe requests. Records the opt-out and
- * optionally notifies PhyneCRM to suppress future marketing sends.
+ * optionally notifies PhyndCRM to suppress future marketing sends.
  *
  * CAN-SPAM / LFPDPPP compliant: accepts email, logs the preference,
  * returns success. The actual suppression is enforced at send-time
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const domain = sanitizeForLog(email.split('@')[1] ?? '');
     console.info('[unsubscribe] Email opt-out recorded: %s***@%s', localPrefix, domain);
 
-    // Notify PhyneCRM to suppress future sends (best-effort)
+    // Notify PhyndCRM to suppress future sends (best-effort)
     const crmUrl = process.env.PHYNE_CRM_URL;
     const crmToken = process.env.PHYNE_CRM_TOKEN;
     if (crmUrl && crmToken) {
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
         });
       } catch {
         // CRM notification is best-effort — unsubscribe succeeds regardless
-        console.warn('[unsubscribe] PhyneCRM notification failed (non-blocking)');
+        console.warn('[unsubscribe] PhyndCRM notification failed (non-blocking)');
       }
     }
 
