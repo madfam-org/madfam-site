@@ -38,10 +38,10 @@
     "bundlewatch": "^0.4.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
-    "next": "15.5.15",
+    "next": "15.5.18",
     "nyc": "^17.1.0",
     "prettier": "^3.8.3",
-    "turbo": "2.9.9"
+    "turbo": "2.9.14"
   },
   "engines": {
     "node": ">=20.0.0",
