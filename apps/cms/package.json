@@ -26,6 +26,6 @@
     "css-minimizer-webpack-plugin": "^5.0.1",
     "mini-css-extract-plugin": "^2.10.2",
     "nodemon": "^3.1.14",
-    "webpack": "^5.106.2"
+    "webpack": "^5.107.1"
   }
 }
