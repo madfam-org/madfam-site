@@ -21,8 +21,10 @@ The MADFAM website uses a comprehensive multi-environment deployment strategy op
 
 - Node.js 20+ and pnpm 8+
 - Git and GitHub account
-- Docker and kubectl (for production K8s deployments via Enclii)
-- Vercel account (for preview/fallback deployments)
+- Enclii CLI access for production/staging operations
+- Docker for local image work
+- kubectl only for platform bootstrap or documented break-glass when Enclii is unavailable
+- Vercel account only for preview/fallback deployments
 - Environment variables configured
 
 ## Environment Configuration
@@ -72,22 +74,22 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io
 # API
 NEXT_PUBLIC_API_URL=https://madfam.io/api
 
-# Database (Vercel)
-DATABASE_URL=postgresql://...
+# Database
+DATABASE_URL=replace-with-secret-store-value
 
 # CMS Integration (Kubernetes via Enclii)
 NEXT_PUBLIC_CMS_URL=https://cms.madfam.io
-CMS_API_KEY=...
+CMS_API_KEY=replace-with-secret-store-value
 
 # Feature Flags
 NEXT_PUBLIC_FEATURE_FLAGS=stable
 
 # Secrets
-API_SECRET=your-api-secret
-N8N_WEBHOOK_URL=https://n8n.madfam.io/webhook/xxx
+API_SECRET=replace-with-secret-store-value
+N8N_WEBHOOK_URL=replace-with-secret-store-value
 
 # Email Service
-RESEND_API_KEY=re_...
+RESEND_API_KEY=replace-with-secret-store-value
 ```
 
 ## Deployment Workflows
@@ -141,19 +143,19 @@ k8s/production/
 
 #### Deploying Manually
 
-```bash
-# Create namespace and secrets first
-kubectl apply -f k8s/production/namespace.yaml
-kubectl create secret generic madfam-site-secrets \
-  --namespace=madfam-site \
-  --from-literal=DATABASE_URL='postgresql://...' \
-  --from-literal=JANUA_CLIENT_ID='...' \
-  --from-literal=JANUA_SECRET='...' \
-  --from-literal=PAYLOAD_SECRET='...'
+Preferred path: use Enclii secrets so values flow through Lockbox/Vault/ESO and
+remain auditable.
 
-# Apply all manifests
-kubectl apply -k k8s/production/
+```bash
+enclii secrets set madfam-web DATABASE_URL
+enclii secrets set madfam-web JANUA_CLIENT_ID
+enclii secrets set madfam-web JANUA_SECRET
+enclii secrets set madfam-cms PAYLOAD_SECRET
 ```
+
+Raw Kubernetes apply is bootstrap/break-glass only when Enclii is unavailable or
+missing an adapter. Record the reason, use placeholders in docs, and reconcile
+any emergency value back into the secret store afterward.
 
 ### 2. Staging Deployment (GitHub Pages)
 

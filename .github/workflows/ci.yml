@@ -77,7 +77,7 @@ jobs:
         continue-on-error: true
 
       - name: Run tests
-        run: pnpm test --run
+        run: pnpm test -- -- --run
         env:
           NODE_ENV: test
 
