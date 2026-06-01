@@ -17,7 +17,7 @@ services:
       - COTIZA_API_URL=http://cotiza-api:8200
       # Janua Auth Integration
       - JANUA_ENABLED=true
-      - JANUA_JWT_SECRET=dev-shared-janua-secret-32chars!!
+      - JANUA_JWT_SECRET=replace-with-local-dev-janua-secret-if-required
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:3000/api/health']
       interval: 30s
@@ -45,7 +45,7 @@ services:
       - COTIZA_API_URL=http://cotiza-api:8200
       # Janua Auth Integration
       - JANUA_ENABLED=true
-      - JANUA_JWT_SECRET=dev-shared-janua-secret-32chars!!
+      - JANUA_JWT_SECRET=replace-with-local-dev-janua-secret-if-required
     networks:
       - madfam-shared-network
     restart: unless-stopped
