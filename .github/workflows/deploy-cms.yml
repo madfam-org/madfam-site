@@ -9,6 +9,10 @@ on:
       - "packages/**"
       - "!k8s/production/kustomization.yaml"
 
+concurrency:
+  group: madfam-site-kustomization-main
+  cancel-in-progress: false
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: madfam-org/madfam-site/cms
