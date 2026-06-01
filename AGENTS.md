@@ -27,6 +27,9 @@ redirect and should not become the source of truth again.
   emergencies when Enclii is unavailable or lacks an implemented adapter.
 - Record any missing Enclii adapter gap instead of normalizing raw production
   access in docs or runbooks.
+- Keep environment examples placeholder-only. Do not add live credentials,
+  base64-encoded secrets, token-shaped examples, or production webhook URLs to
+  docs, templates, workflow logs, issues, PRs, or LLM chat.
 
 ## Repo entrypoints
 

@@ -1,7 +1,7 @@
 # MADFAM Corporate Website
 
 ![MADFAM](https://img.shields.io/badge/MADFAM-AI%20%2B%20Creativity-9B59B6)
-![Next.js](https://img.shields.io/badge/Next.js-14.2.33-black)
+![Next.js](https://img.shields.io/badge/Next.js-15.5.15-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue)
 ![React](https://img.shields.io/badge/React-19.2.0-61dafb)
 ![Node.js](https://img.shields.io/badge/Node.js-20.x-green)
@@ -18,14 +18,14 @@
 - 📊 Privacy-first analytics with enterprise-grade security
 - 🎨 Modern design system with Tailwind CSS 4 and dark/light mode
 
-**📅 Last Updated:** March 2026
+**📅 Last Updated:** May 2026
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
 - Node.js 20.x or higher
-- pnpm 8.0.0 or higher (recommended: 8.14.1)
+- pnpm 9.15.0 via Corepack (package manager is pinned in `package.json`)
 
 ```bash
 # Install dependencies
@@ -83,7 +83,7 @@ pnpm analyze          # Analyze bundle size
 ## 📁 Project Structure
 
 ```
-biz-site/
+madfam-site/
 ├── apps/
 │   ├── web/              # Next.js 14 corporate website
 │   └── cms/              # Payload CMS v3 (headless content management)
@@ -96,7 +96,8 @@ biz-site/
 ├── docs/                 # Comprehensive documentation
 ├── scripts/              # Build, validation & deployment scripts
 ├── .github/              # GitHub Actions CI/CD workflows
-├── CLAUDE.md             # AI assistant context & guidelines
+├── AGENTS.md             # Canonical AI assistant context & guidelines
+├── CLAUDE.md             # Compatibility redirect for Claude
 └── README.md             # This file
 ```
 
@@ -200,7 +201,7 @@ All routes support internationalization with Spanish (es), English (en), and Por
 
 | Category       | Technology            | Version | Purpose                         |
 | -------------- | --------------------- | ------- | ------------------------------- |
-| **Frontend**   | Next.js               | 14.2.33 | React framework with App Router |
+| **Frontend**   | Next.js               | 15.5.15 | React framework with App Router |
 | **Language**   | TypeScript            | 5.9.3   | Type-safe development           |
 | **UI**         | React                 | 19.2.0  | Modern UI library               |
 | **Styling**    | Tailwind CSS          | 4.1.17  | Utility-first CSS framework     |
