@@ -1,5 +1,12 @@
 # Infrastructure Requirements
 
+> [!IMPORTANT]
+> MADFAM-ENCLII-FIRST-LEGACY-RAW v1: This document contains legacy raw infrastructure command examples.
+> Routine production operations must use Enclii web, API, or CLI. Treat raw
+> `kubectl`, `helm`, SSH, provider CLI/API, `docker exec`, and direct container
+> access as platform bootstrap or documented break-glass only, and record any
+> missing Enclii adapter gap.
+
 ## Executive Summary
 
 The MADFAM corporate website runs on **Enclii/Kubernetes** for production deployments. Vercel serves as a preview/fallback option for serverless deployments, and **Cloudflare R2** provides scalable media storage.

@@ -33,6 +33,10 @@ docker-logs: ## View Docker logs
 	docker-compose logs -f
 
 clean: ## Clean build artifacts and dependencies
+	@if [ "$$LOCAL_DESTRUCTIVE" != "yes" ]; then \
+		echo "Refusing destructive clean. Re-run with LOCAL_DESTRUCTIVE=yes."; \
+		exit 1; \
+	fi
 	rm -rf node_modules
 	rm -rf apps/*/node_modules
 	rm -rf packages/*/node_modules

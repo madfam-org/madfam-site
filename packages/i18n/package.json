@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "next-intl": "^4.11.0"
+    "next-intl": "^4.11.2"
   },
   "devDependencies": {
     "tsup": "^8.5.1",
