@@ -5,6 +5,11 @@
       "email": "E-mail corporativo",
       "company": "Empresa",
       "phone": "Telefone",
+      "intent": "O que traz você aqui?",
+      "timeline": "Prazo",
+      "budget": "Orçamento ou escala comercial esperada",
+      "region": "Região",
+      "followUp": "Acompanhamento preferido",
       "program": "Programa de interesse",
       "message": "Como podemos ajudar?"
     },
@@ -13,7 +18,35 @@
       "email": "joao@empresa.com",
       "company": "Nome da sua empresa",
       "phone": "+55 11 9876 5432",
+      "region": "Cidade do México, LATAM, EUA, remoto...",
       "message": "Conte-nos sobre seu projeto ou necessidades..."
+    },
+    "options": {
+      "select": "Selecione uma opção"
+    },
+    "intents": {
+      "platform": "Quero usar uma plataforma MADFAM",
+      "build-with-madfam": "Quero que a MADFAM construa ou lance algo conosco",
+      "ecosystem-membership": "Quero entrar no ecossistema",
+      "partner-invest": "Quero fazer parceria, integrar ou investir",
+      "support": "Preciso de suporte ou tenho outra pergunta"
+    },
+    "timelines": {
+      "now": "Agora / urgente",
+      "30-days": "Dentro de 30 dias",
+      "quarter": "Este trimestre",
+      "exploring": "Explorando opções"
+    },
+    "budgets": {
+      "not-sure": "Ainda não sei",
+      "under-100k-mxn": "Menos de MXN$100k",
+      "100k-500k-mxn": "MXN$100k-MXN$500k",
+      "500k-plus-mxn": "MXN$500k+"
+    },
+    "followUp": {
+      "email": "E-mail",
+      "whatsapp": "WhatsApp",
+      "call": "Ligação"
     },
     "programs": {
       "select": "Selecione um programa",
@@ -24,7 +57,12 @@
     },
     "errors": {
       "nameMin": "Nome deve ter pelo menos 2 caracteres",
-      "emailInvalid": "E-mail inválido"
+      "emailInvalid": "E-mail inválido",
+      "intentRequired": "Selecione o caminho que melhor descreve sua intenção",
+      "timelineRequired": "Selecione um prazo",
+      "regionRequired": "Informe sua região",
+      "followUpRequired": "Selecione um canal de acompanhamento",
+      "messageMin": "A mensagem deve ter pelo menos 10 caracteres"
     },
     "messages": {
       "success": "Obrigado pelo seu interesse! Entraremos em contato em breve.",

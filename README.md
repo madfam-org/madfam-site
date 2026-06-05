@@ -11,8 +11,8 @@
 
 **🌟 Key Highlights:**
 
-- 🌱 Solarpunk ecosystem with 9 digital platforms + physical fabrication
-- 🔓 Each platform has Free + Pro tiers; Ecosystem Membership bundles Pro everywhere
+- 🌱 Solarpunk ecosystem with digital platforms + physical fabrication
+- 🔓 Access models are product-specific; Ecosystem Membership unlocks eligible platform capabilities and coordinated support
 - 🏭 Primavera Maker Node: 3D printing, CNC machining, and laser cutting
 - 🌐 Full internationalization (Spanish, English, Portuguese)
 - 📊 Privacy-first analytics with enterprise-grade security
@@ -107,9 +107,9 @@ madfam-site/
 
 Three conversion paths into the MADFAM ecosystem:
 
-1. **Use a MADFAM Platform** — 9 digital platforms, each with Free + Pro tiers
+1. **Use a MADFAM Platform** — MADFAM digital platforms with access models matched to each product
 2. **Use Primavera Maker Node** — Physical fabrication (3D printing, CNC, laser cutting)
-3. **Become an Ecosystem Member** — One membership unlocks Pro everywhere + discounted fabrication
+3. **Become an Ecosystem Member** — One coordinated membership unlocks eligible platform capabilities, ecosystem support, and maker-node advantages
 
 ### Digital Platforms (by MADFAM)
 

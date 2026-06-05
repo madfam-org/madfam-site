@@ -17,6 +17,9 @@
     "products": {
       "title": "Nossos produtos",
       "subtitle": "Plataformas e ferramentas desenvolvidas por nossas unidades especializadas",
+      "spark": {
+        "description": "Experimentos de produtividade e automações com IA para fluxos de trabalho iniciais."
+      },
       "penny": {
         "description": "Plataforma assistente de IA atualmente em desenvolvimento. Aprenderá, se adaptará e melhorará continuamente seu fluxo de trabalho."
       }
@@ -503,6 +506,28 @@
       "subtitle": "Não encontrou o que procura? Nossa equipe de suporte está aqui para ajudar.",
       "contactSupport": "Contatar suporte",
       "viewFaq": "Ver perguntas frequentes"
+    }
+  },
+  "services": {
+    "level1": {
+      "title": "Sprint estratégico",
+      "quickDescription": "Um programa inicial focado em descoberta, prontidão para IA e planejamento de implementação."
+    },
+    "level2": {
+      "title": "Construir e lançar",
+      "quickDescription": "Construção de produtos, plataformas e fluxos de trabalho que vão do protótipo à produção."
+    },
+    "level3": {
+      "title": "Parceria estratégica",
+      "quickDescription": "Suporte vCTO e transformação de longo prazo para equipes escalando operações com IA."
+    }
+  },
+  "hero": {
+    "title": "Onde a criatividade humana encontra precisão com IA",
+    "subtitle": "A MADFAM constrói produtos, fluxos de trabalho e programas impulsionados por IA para equipes prontas para passar da experimentação ao impacto.",
+    "cta": {
+      "primary": "Iniciar avaliação",
+      "secondary": "Ver estudos de caso"
     }
   },
   "search": {

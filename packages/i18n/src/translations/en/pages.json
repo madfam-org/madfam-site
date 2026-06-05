@@ -17,6 +17,9 @@
     "products": {
       "title": "Our products",
       "subtitle": "Platforms and tools built by our specialized units",
+      "spark": {
+        "description": "AI-powered productivity experiments and automations for early-stage workflows."
+      },
       "penny": {
         "description": "AI assistant platform currently in development. Will learn, adapt, and continuously improve your workflow."
       }
@@ -491,6 +494,28 @@
       "subtitle": "Can't find what you're looking for? Our support team is here to help.",
       "contactSupport": "Contact support",
       "viewFaq": "View FAQ"
+    }
+  },
+  "services": {
+    "level1": {
+      "title": "Strategic Sprint",
+      "quickDescription": "A focused entry program for discovery, AI readiness, and implementation planning."
+    },
+    "level2": {
+      "title": "Build & Launch",
+      "quickDescription": "Product, platform, and workflow builds that move from prototype to production."
+    },
+    "level3": {
+      "title": "Strategic Partnership",
+      "quickDescription": "Long-term vCTO and transformation support for teams scaling AI operations."
+    }
+  },
+  "hero": {
+    "title": "Where human creativity meets AI precision",
+    "subtitle": "MADFAM builds AI-powered products, workflows, and programs for teams ready to move from experimentation to impact.",
+    "cta": {
+      "primary": "Start assessment",
+      "secondary": "View case studies"
     }
   },
   "search": {

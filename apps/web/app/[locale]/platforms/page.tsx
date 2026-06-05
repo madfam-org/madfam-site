@@ -89,7 +89,11 @@ export default async function PlatformsPage({ params }: Props) {
                       return (
                         <Link
                           key={platform.slug}
-                          href={`/${locale}/platforms/${platform.slug}`}
+                          href={
+                            platform.hasDetailPage
+                              ? `/${locale}/platforms/${platform.slug}`
+                              : platform.externalUrl || getLocalizedUrl('products', validLocale)
+                          }
                           className="group flex flex-col p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-leaf/50 dark:hover:border-leaf/50 hover:shadow-md transition-all duration-300"
                         >
                           <div className="flex items-center gap-3 mb-3">
@@ -113,7 +117,9 @@ export default async function PlatformsPage({ params }: Props) {
                           </p>
                           <div className="flex items-center gap-2">
                             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
-                              {platformsT('shared.freePlusPro')}
+                              {platform.track === 'self-serve'
+                                ? platformsT('shared.freePlusPro')
+                                : platformsT(`shared.access.${platform.track}`)}
                             </span>
                             <Badge variant="program" className="text-[10px]">
                               {platformsT(

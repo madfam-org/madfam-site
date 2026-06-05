@@ -953,3 +953,32 @@ Investment payback: < 3 months
 **Document Version**: 1.0
 **Next Review**: December 15, 2025
 **Owner**: Product Team
+
+## 2026-06-04 strategic reset: business-site conversion architecture
+
+The current UX roadmap is superseded for `madfam-site` corporate-site decisions by [MADFAM_SITE_STRATEGIC_REDESIGN_AUDIT_2026-06-04.md](./MADFAM_SITE_STRATEGIC_REDESIGN_AUDIT_2026-06-04.md).
+
+Immediate priorities:
+
+1. Correct stale public claims around platform counts, universal Free/Pro access, and “Pro everywhere” membership language.
+2. Make all platform cards detail-page-aware, using external product URLs or product-map fallback when a MADFAM detail page does not exist.
+3. Rebuild the homepage around visitor offer paths rather than platform inventory.
+4. Add segmented lead capture with intent, offer path, platform interest, timeline, budget/commercial scale, region, and preferred follow-up channel.
+5. Consolidate overlapping IA across products, platforms, ecosystem, solutions, and programs after the new conversion router is implemented.
+
+Implemented in the first remediation pass:
+
+1. Public offer-path router data model added for `Use a platform`, `Build with MADFAM`, `Join the ecosystem`, and `Partner or invest`.
+2. Homepage now surfaces the offer-path router immediately after the hero and before the platform inventory.
+3. Contact-led paths now carry stable `intent` query parameters for the upcoming segmented lead-capture pass.
+4. Contact lead capture now consumes the offer-path intent and submits timeline, budget/commercial scale, region, and preferred follow-up metadata without requiring a database migration.
+5. Lead scoring now accounts for intent, urgency, and budget metadata; timeline and budget are also copied into existing CRM-ready lead fields.
+
+Validation completed for the first remediation pass:
+
+1. `corepack pnpm --filter @madfam/web test -- --run` passed: `19` files, `238` tests.
+2. `corepack pnpm typecheck` passed across the workspace.
+3. `corepack pnpm --filter @madfam/web lint` passed with existing warnings outside the touched files.
+4. `corepack pnpm validate:translations` passed across all modular locale files.
+5. `corepack pnpm find:missing-translations` passed after restoring source-key coverage for legacy homepage components.
+6. Changed translation JSON for `ecosystem`, `forms`, and `platforms` parsed successfully across `en`, `es`, and `pt`.

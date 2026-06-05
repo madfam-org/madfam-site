@@ -1,35 +1,35 @@
 #!/usr/bin/env node
 
 /**
- * Translation Validation Script
- * Validates that all translation keys exist across all locales
+ * Translation validation script.
+ *
+ * The repo uses modular translation directories:
+ * packages/i18n/src/translations/{en,es,pt}/*.json
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const TRANSLATIONS_DIR = path.join(__dirname, '../packages/i18n/src/translations');
-const LOCALES = ['es', 'en', 'pt-br'];
+const LOCALES = ['es', 'en', 'pt'];
 
-// Load all translation files
-const translations = {};
-let allKeys = new Set();
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
 
-console.log('🔍 Loading translation files...\n');
+function loadLocale(locale) {
+  const localeDir = path.join(TRANSLATIONS_DIR, locale);
+  const modules = {};
 
-LOCALES.forEach(locale => {
-  const filePath = path.join(TRANSLATIONS_DIR, `${locale}.json`);
-  try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    translations[locale] = JSON.parse(content);
-    console.log(`✅ Loaded ${locale}.json`);
-  } catch (error) {
-    console.error(`❌ Error loading ${locale}.json:`, error.message);
-    process.exit(1);
+  for (const entry of fs.readdirSync(localeDir).sort()) {
+    if (!entry.endsWith('.json')) continue;
+    const moduleName = path.basename(entry, '.json');
+    modules[moduleName] = readJson(path.join(localeDir, entry));
   }
-});
 
-// Extract all keys from all locales
+  return modules;
+}
+
 function extractKeys(obj, prefix = '') {
   const keys = [];
 
@@ -46,95 +46,70 @@ function extractKeys(obj, prefix = '') {
   return keys;
 }
 
-// Get all unique keys from all locales
-LOCALES.forEach(locale => {
-  const keys = extractKeys(translations[locale]);
-  keys.forEach(key => allKeys.add(key));
-});
+const translations = {};
+const allKeys = new Set();
 
-console.log(`\n📊 Total unique keys found: ${allKeys.size}\n`);
+console.log('Loading modular translation files...\n');
 
-// Check for missing keys in each locale
+for (const locale of LOCALES) {
+  try {
+    translations[locale] = loadLocale(locale);
+    const moduleCount = Object.keys(translations[locale]).length;
+    console.log(`Loaded ${locale}: ${moduleCount} module(s)`);
+  } catch (error) {
+    console.error(`Error loading ${locale} translations:`, error.message);
+    process.exit(1);
+  }
+}
+
+for (const locale of LOCALES) {
+  for (const key of extractKeys(translations[locale])) {
+    allKeys.add(key);
+  }
+}
+
 let hasErrors = false;
 const missingKeys = {};
 
-LOCALES.forEach(locale => {
+for (const locale of LOCALES) {
   missingKeys[locale] = [];
   const localeKeys = new Set(extractKeys(translations[locale]));
 
-  allKeys.forEach(key => {
+  for (const key of allKeys) {
     if (!localeKeys.has(key)) {
       missingKeys[locale].push(key);
       hasErrors = true;
     }
-  });
-});
+  }
+}
 
-// Report results
-console.log('🔍 Validation Results:\n');
+console.log(`\nTotal unique module keys: ${allKeys.size}\n`);
+console.log('Validation results:\n');
 
-LOCALES.forEach(locale => {
+for (const locale of LOCALES) {
   const missing = missingKeys[locale];
-  const total = allKeys.size;
-  const coverage = (((total - missing.length) / total) * 100).toFixed(1);
+  const coverage = (((allKeys.size - missing.length) / allKeys.size) * 100).toFixed(1);
 
   if (missing.length === 0) {
-    console.log(`✅ ${locale}: Complete (${total} keys, 100% coverage)`);
+    console.log(`${locale}: complete (${allKeys.size} keys, 100% coverage)`);
   } else {
-    console.log(`❌ ${locale}: Missing ${missing.length} keys (${coverage}% coverage)`);
+    console.log(`${locale}: missing ${missing.length} key(s), ${coverage}% coverage`);
 
     if (process.env.VERBOSE === 'true') {
-      console.log('   Missing keys:');
-      missing.slice(0, 10).forEach(key => {
-        console.log(`   - ${key}`);
-      });
-      if (missing.length > 10) {
-        console.log(`   ... and ${missing.length - 10} more`);
+      for (const key of missing.slice(0, 25)) {
+        console.log(`  - ${key}`);
+      }
+      if (missing.length > 25) {
+        console.log(`  ... and ${missing.length - 25} more`);
       }
     }
   }
-});
-
-// Check for keys that exist in only one locale (potential typos)
-console.log('\n🔍 Checking for potential typos (keys in only one locale):\n');
-
-const keyLocaleCount = {};
-allKeys.forEach(key => {
-  keyLocaleCount[key] = 0;
-  LOCALES.forEach(locale => {
-    const localeKeys = new Set(extractKeys(translations[locale]));
-    if (localeKeys.has(key)) {
-      keyLocaleCount[key]++;
-    }
-  });
-});
-
-const orphanKeys = Object.entries(keyLocaleCount)
-  .filter(([key, count]) => count === 1)
-  .map(([key]) => key);
-
-if (orphanKeys.length > 0) {
-  console.log(`⚠️  Found ${orphanKeys.length} keys that exist in only one locale:`);
-  orphanKeys.slice(0, 5).forEach(key => {
-    const locale = LOCALES.find(l => new Set(extractKeys(translations[l])).has(key));
-    console.log(`   - ${key} (only in ${locale})`);
-  });
-  if (orphanKeys.length > 5) {
-    console.log(`   ... and ${orphanKeys.length - 5} more`);
-  }
-} else {
-  console.log('✅ No orphan keys found');
 }
 
-// Summary
-console.log('\n📋 Summary:');
-console.log(`   Total locales: ${LOCALES.length}`);
-console.log(`   Total unique keys: ${allKeys.size}`);
-console.log(`   Validation: ${hasErrors ? '❌ Failed' : '✅ Passed'}`);
+console.log(`\nValidation: ${hasErrors ? 'failed' : 'passed'}`);
 
 if (hasErrors) {
-  console.log('\n💡 Run with VERBOSE=true to see all missing keys:');
-  console.log('   VERBOSE=true node scripts/validate-translations.js');
+  console.log('Run with VERBOSE=true to see missing keys.');
 }
 
 process.exit(hasErrors ? 1 : 0);

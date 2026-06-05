@@ -9,6 +9,7 @@ import { Badge } from '@/components/corporate/Badge';
 import { EcosystemLayerGrid } from '@/components/ecosystem/EcosystemLayerGrid';
 import { EcosystemFlowDiagram } from '@/components/ecosystem/EcosystemFlowDiagram';
 import { PersonaCards } from '@/components/ecosystem/PersonaCards';
+import { OfferPathRouter } from '@/components/ecosystem/OfferPathRouter';
 import { MetricsBar } from '@/components/ecosystem/MetricsBar';
 
 // ─── Maker Node Services ──────────────────────────────────────────────────────
@@ -123,7 +124,10 @@ export function EcosystemHomePage() {
         </button>
       </section>
 
-      {/* ── 2. Ecosystem Layer Grid (all 10 platforms) ───────────────────── */}
+      {/* ── 2. Offer Path Router ─────────────────────────────────────────── */}
+      <OfferPathRouter />
+
+      {/* ── 3. Ecosystem Layer Grid ──────────────────────────────────────── */}
       <section
         ref={layerGridRef}
         data-section="layer-grid"

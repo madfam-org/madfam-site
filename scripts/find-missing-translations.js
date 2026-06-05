@@ -1,45 +1,69 @@
 #!/usr/bin/env node
 
 /**
- * Find Missing Translations Script
- * Scans codebase for translation key usage and identifies missing keys
+ * Find missing translations by scanning source files for common next-intl usage.
  */
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
-const TRANSLATIONS_DIR = path.join(__dirname, '../packages/i18n/src/translations');
-const APPS_DIR = path.join(__dirname, '../apps/web');
-const PACKAGES_DIR = path.join(__dirname, '../packages');
+const ROOT = path.join(__dirname, '..');
+const TRANSLATIONS_DIR = path.join(ROOT, 'packages/i18n/src/translations');
+const SCAN_DIRS = [path.join(ROOT, 'apps/web'), path.join(ROOT, 'packages')];
+const LOCALES = ['es', 'en', 'pt'];
 
-// Load translation files
-const translations = {};
-const LOCALES = ['es', 'en', 'pt-br'];
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
 
-console.log('🔍 Loading translation files...\n');
+function mergeRuntimeMessages(modules) {
+  const common = modules.common || {};
+  const pages = modules.pages || {};
+  const forms = modules.forms || {};
+  const system = modules.system || {};
 
-LOCALES.forEach(locale => {
-  const filePath = path.join(TRANSLATIONS_DIR, `${locale}.json`);
-  try {
-    translations[locale] = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    console.log(`✅ Loaded ${locale}.json`);
-  } catch (error) {
-    console.error(`❌ Error loading ${locale}.json:`, error.message);
-    process.exit(1);
+  return {
+    common,
+    ...common,
+    assessment: modules.assessment || {},
+    calculator: modules.calculator || {},
+    compare: modules.compare || {},
+    estimator: modules.estimator || {},
+    products: modules.products || {},
+    corporate: modules.corporate || {},
+    ...pages,
+    ...forms,
+    ...system,
+    legal: modules.legal || {},
+    cookies: modules.cookies || {},
+    impact: modules.impact || {},
+    ecosystem: modules.ecosystem || {},
+    platforms: modules.platforms || {},
+  };
+}
+
+function loadLocale(locale) {
+  const localeDir = path.join(TRANSLATIONS_DIR, locale);
+  const modules = {};
+
+  for (const entry of fs.readdirSync(localeDir).sort()) {
+    if (!entry.endsWith('.json')) continue;
+    modules[path.basename(entry, '.json')] = readJson(path.join(localeDir, entry));
   }
-});
 
-// Extract all translation keys from files
-function getAllTranslationKeys(obj, prefix = '') {
+  return mergeRuntimeMessages(modules);
+}
+
+function extractKeys(obj, prefix = '') {
   const keys = new Set();
 
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
 
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      const subKeys = getAllTranslationKeys(value, fullKey);
-      subKeys.forEach(k => keys.add(k));
+      for (const childKey of extractKeys(value, fullKey)) {
+        keys.add(childKey);
+      }
     } else {
       keys.add(fullKey);
     }
@@ -48,194 +72,115 @@ function getAllTranslationKeys(obj, prefix = '') {
   return keys;
 }
 
-// Get all available translation keys
+function walkFiles(dir, files = []) {
+  if (!fs.existsSync(dir)) return files;
+
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      if (['node_modules', 'dist', '.next', 'coverage', '__tests__', 'e2e'].includes(entry.name))
+        continue;
+      walkFiles(fullPath, files);
+      continue;
+    }
+
+    if (/\.(test|spec)\.(ts|tsx|js|jsx)$/.test(entry.name)) continue;
+
+    if (/\.(ts|tsx|js|jsx)$/.test(entry.name)) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
+function isStaticTranslationKey(key) {
+  return (
+    key.length > 0 &&
+    !key.includes('${') &&
+    !/[{}\n/@]/.test(key) &&
+    !key.includes(' ') &&
+    key !== ':'
+  );
+}
+
+const translations = {};
 const availableKeys = new Set();
-LOCALES.forEach(locale => {
-  const keys = getAllTranslationKeys(translations[locale]);
-  keys.forEach(key => availableKeys.add(key));
-});
 
-console.log(`\n📊 Total available translation keys: ${availableKeys.size}\n`);
+console.log('Loading modular translation files...\n');
 
-// Find all TypeScript/JavaScript files
-console.log('🔍 Scanning codebase for translation usage...\n');
+for (const locale of LOCALES) {
+  translations[locale] = loadLocale(locale);
+  for (const key of extractKeys(translations[locale])) {
+    availableKeys.add(key);
+  }
+  console.log(`Loaded ${locale}`);
+}
 
-const patterns = [`${APPS_DIR}/**/*.{ts,tsx,js,jsx}`, `${PACKAGES_DIR}/**/*.{ts,tsx,js,jsx}`];
+const files = SCAN_DIRS.flatMap(dir => walkFiles(dir));
+console.log(`\nScanning ${files.length} source file(s) for translation usage...\n`);
 
-const files = [];
-patterns.forEach(pattern => {
-  const matches = glob.sync(pattern, {
-    ignore: ['**/node_modules/**', '**/dist/**', '**/.next/**'],
-  });
-  files.push(...matches);
-});
-
-console.log(`📁 Found ${files.length} files to scan\n`);
-
-// Regular expressions to find translation usage
 const translationPatterns = [
-  /t\(['"`]([^'"`]+)['"`]\)/g, // t('key')
-  /t\(['"`]([^'"`]+)['"`],/g, // t('key', ...)
-  /useTranslations\(['"`]([^'"`]+)['"`]\)/g, // useTranslations('namespace')
-  /getTranslations\(['"`]([^'"`]+)['"`]\)/g, // getTranslations('namespace')
-  /\$t\(['"`]([^'"`]+)['"`]\)/g, // $t('key')
+  /(?<![A-Za-z0-9_$])t\(['"`]([^'"`]+)['"`]\)/g,
+  /(?<![A-Za-z0-9_$])t\(['"`]([^'"`]+)['"`],/g,
+  /useTranslations\(['"`]([^'"`]+)['"`]\)/g,
+  /getTranslations\(['"`]([^'"`]+)['"`]\)/g,
+  /\$t\(['"`]([^'"`]+)['"`]\)/g,
 ];
 
 const usedKeys = new Set();
 const keyUsage = {};
 
-// Scan files for translation keys
-files.forEach(file => {
+for (const file of files) {
   const content = fs.readFileSync(file, 'utf8');
 
-  translationPatterns.forEach(pattern => {
+  for (const pattern of translationPatterns) {
     let match;
     while ((match = pattern.exec(content)) !== null) {
       const key = match[1];
+      if (!isStaticTranslationKey(key)) continue;
+
       usedKeys.add(key);
 
       if (!keyUsage[key]) {
         keyUsage[key] = [];
       }
-      keyUsage[key].push(file.replace(path.join(__dirname, '..'), ''));
+      keyUsage[key].push(path.relative(ROOT, file));
     }
-  });
-});
+  }
+}
 
-console.log(`📊 Found ${usedKeys.size} translation keys used in code\n`);
-
-// Find missing keys (used but not defined)
 const missingKeys = [];
-usedKeys.forEach(key => {
-  if (!availableKeys.has(key)) {
-    // Check if it's a partial key that might be completed with namespace
-    const possibleKeys = Array.from(availableKeys).filter(k => k.endsWith(`.${key}`));
-    if (possibleKeys.length === 0) {
-      missingKeys.push(key);
-    }
+
+for (const key of usedKeys) {
+  if (availableKeys.has(key)) continue;
+
+  const possibleNamespaceMatches = Array.from(availableKeys).filter(
+    availableKey => availableKey.endsWith(`.${key}`) || availableKey.startsWith(`${key}.`)
+  );
+
+  if (possibleNamespaceMatches.length === 0) {
+    missingKeys.push(key);
   }
-});
+}
 
-// Find unused keys (defined but not used)
-const unusedKeys = [];
-availableKeys.forEach(key => {
-  let isUsed = false;
-
-  // Check direct usage
-  if (usedKeys.has(key)) {
-    isUsed = true;
-  }
-
-  // Check partial usage (namespace.key pattern)
-  const keyParts = key.split('.');
-  for (let i = 0; i < keyParts.length; i++) {
-    const partialKey = keyParts.slice(i).join('.');
-    if (usedKeys.has(partialKey)) {
-      isUsed = true;
-      break;
-    }
-  }
-
-  if (!isUsed) {
-    unusedKeys.push(key);
-  }
-});
-
-// Report results
-console.log('📋 Analysis Results:\n');
+console.log(`Translation keys used in code: ${usedKeys.size}`);
+console.log(`Available runtime translation keys: ${availableKeys.size}\n`);
 
 if (missingKeys.length > 0) {
-  console.log(`❌ Missing Keys (used in code but not in translations): ${missingKeys.length}`);
-  missingKeys.slice(0, 10).forEach(key => {
-    console.log(`   - ${key}`);
-    if (keyUsage[key] && keyUsage[key].length > 0) {
-      console.log(`     Used in: ${keyUsage[key][0]}`);
+  console.log(`Missing keys: ${missingKeys.length}`);
+  for (const key of missingKeys.slice(0, 25)) {
+    console.log(`  - ${key}`);
+    if (keyUsage[key]?.[0]) {
+      console.log(`    used in: ${keyUsage[key][0]}`);
     }
-  });
-  if (missingKeys.length > 10) {
-    console.log(`   ... and ${missingKeys.length - 10} more`);
+  }
+  if (missingKeys.length > 25) {
+    console.log(`  ... and ${missingKeys.length - 25} more`);
   }
 } else {
-  console.log('✅ No missing keys found');
+  console.log('No missing keys found');
 }
-
-console.log('');
-
-if (unusedKeys.length > 0) {
-  console.log(`⚠️  Potentially Unused Keys: ${unusedKeys.length}`);
-  if (process.env.SHOW_UNUSED === 'true') {
-    unusedKeys.slice(0, 20).forEach(key => {
-      console.log(`   - ${key}`);
-    });
-    if (unusedKeys.length > 20) {
-      console.log(`   ... and ${unusedKeys.length - 20} more`);
-    }
-  } else {
-    console.log('   Run with SHOW_UNUSED=true to see unused keys');
-  }
-} else {
-  console.log('✅ No unused keys found');
-}
-
-// Check for hardcoded strings
-console.log('\n🔍 Checking for potential hardcoded strings...\n');
-
-const hardcodedPatterns = [
-  /aria-label=["']([^"']+)["']/g,
-  /title=["']([^"']+)["']/g,
-  /placeholder=["']([^"']+)["']/g,
-  /alt=["']([^"']+)["']/g,
-];
-
-const hardcodedStrings = new Map();
-
-files.forEach(file => {
-  const content = fs.readFileSync(file, 'utf8');
-
-  hardcodedPatterns.forEach(pattern => {
-    let match;
-    while ((match = pattern.exec(content)) !== null) {
-      const text = match[1];
-      // Filter out dynamic values and common patterns
-      if (
-        text.length > 3 &&
-        !text.includes('{') &&
-        !text.includes('$') &&
-        !text.match(/^[a-z-]+$/) && // Skip kebab-case identifiers
-        !text.match(/^[A-Z_]+$/)
-      ) {
-        // Skip constants
-
-        if (!hardcodedStrings.has(text)) {
-          hardcodedStrings.set(text, []);
-        }
-        hardcodedStrings.get(text).push(file.replace(path.join(__dirname, '..'), ''));
-      }
-    }
-  });
-});
-
-if (hardcodedStrings.size > 0) {
-  console.log(`⚠️  Found ${hardcodedStrings.size} potential hardcoded strings:`);
-  const entries = Array.from(hardcodedStrings.entries()).slice(0, 10);
-  entries.forEach(([text, files]) => {
-    console.log(`   - "${text}"`);
-    console.log(`     Found in: ${files[0]}`);
-  });
-  if (hardcodedStrings.size > 10) {
-    console.log(`   ... and ${hardcodedStrings.size - 10} more`);
-  }
-} else {
-  console.log('✅ No obvious hardcoded strings found');
-}
-
-// Summary
-console.log('\n📊 Summary:');
-console.log(`   Files scanned: ${files.length}`);
-console.log(`   Translation keys in use: ${usedKeys.size}`);
-console.log(`   Available translation keys: ${availableKeys.size}`);
-console.log(`   Missing keys: ${missingKeys.length}`);
-console.log(`   Potentially unused keys: ${unusedKeys.length}`);
-console.log(`   Hardcoded strings: ${hardcodedStrings.size}`);
 
 process.exit(missingKeys.length > 0 ? 1 : 0);

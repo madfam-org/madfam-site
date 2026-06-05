@@ -5,6 +5,11 @@
       "email": "Corporate email",
       "company": "Company",
       "phone": "Phone",
+      "intent": "What brings you here?",
+      "timeline": "Timeline",
+      "budget": "Expected budget or commercial scale",
+      "region": "Region",
+      "followUp": "Preferred follow-up",
       "program": "Program of interest",
       "message": "How can we help you?"
     },
@@ -13,7 +18,35 @@
       "email": "john@company.com",
       "company": "Your company name",
       "phone": "+1 555 123 4567",
+      "region": "Mexico City, LATAM, US, remote...",
       "message": "Tell us about your project or needs..."
+    },
+    "options": {
+      "select": "Select an option"
+    },
+    "intents": {
+      "platform": "I want to use a MADFAM platform",
+      "build-with-madfam": "I want MADFAM to build or launch something with us",
+      "ecosystem-membership": "I want to join the ecosystem",
+      "partner-invest": "I want to partner, integrate, or invest",
+      "support": "I need support or have another question"
+    },
+    "timelines": {
+      "now": "Now / urgent",
+      "30-days": "Within 30 days",
+      "quarter": "This quarter",
+      "exploring": "Exploring options"
+    },
+    "budgets": {
+      "not-sure": "Not sure yet",
+      "under-100k-mxn": "Under MXN$100k",
+      "100k-500k-mxn": "MXN$100k-MXN$500k",
+      "500k-plus-mxn": "MXN$500k+"
+    },
+    "followUp": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "call": "Call"
     },
     "programs": {
       "select": "Select a program",
@@ -24,7 +57,12 @@
     },
     "errors": {
       "nameMin": "Name must be at least 2 characters",
-      "emailInvalid": "Invalid email"
+      "emailInvalid": "Invalid email",
+      "intentRequired": "Select the path that best matches your intent",
+      "timelineRequired": "Select a timeline",
+      "regionRequired": "Tell us your region",
+      "followUpRequired": "Select a follow-up channel",
+      "messageMin": "Message must be at least 10 characters"
     },
     "messages": {
       "success": "Thank you for your interest! We'll contact you soon.",

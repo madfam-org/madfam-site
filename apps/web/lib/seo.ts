@@ -271,7 +271,7 @@ export class SEOService {
       es: {
         title: 'MADFAM | Plataformas Abiertas para Creadores, Makers y Emprendedores',
         description:
-          'Ecosistema de 9 plataformas digitales + fabricación física para creadores, makers y emprendedores en LATAM. Una membresía, todas las plataformas.',
+          'Ecosistema de plataformas digitales y fabricación física para creadores, makers y emprendedores en LATAM. Una membresía, acceso coordinado.',
         keywords: [
           'ecosistema digital LATAM',
           'plataformas abiertas',
@@ -288,7 +288,7 @@ export class SEOService {
       en: {
         title: 'MADFAM | Open Platforms for Creators, Makers, and Entrepreneurs',
         description:
-          'Ecosystem of 9 digital platforms + physical fabrication for creators, makers, and entrepreneurs building the future of LATAM. One membership, every platform.',
+          'Ecosystem of digital platforms and physical fabrication for creators, makers, and entrepreneurs building the future of LATAM. One membership, coordinated access.',
         keywords: [
           'digital ecosystem LATAM',
           'open platforms',
@@ -305,7 +305,7 @@ export class SEOService {
       pt: {
         title: 'MADFAM | Plataformas Abertas para Criadores, Makers e Empreendedores',
         description:
-          'Ecossistema de 9 plataformas digitais + fabricação física para criadores, makers e empreendedores construindo o futuro da LATAM. Uma assinatura, todas as plataformas.',
+          'Ecossistema de plataformas digitais e fabricação física para criadores, makers e empreendedores construindo o futuro da LATAM. Uma assinatura, acesso coordenado.',
         keywords: [
           'ecossistema digital LATAM',
           'plataformas abertas',

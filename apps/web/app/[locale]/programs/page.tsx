@@ -120,13 +120,13 @@ export default async function ProgramsPage({ params }: Props) {
             {/* Assessment CTA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/assessment"
+                href={`/${locale}/assessment`}
                 className="inline-flex items-center justify-center px-8 py-3 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors font-medium"
               >
                 {t('hero.assessmentCta')}
               </Link>
               <Link
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="inline-flex items-center justify-center px-8 py-3 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors font-medium"
               >
                 {commonT('nav.contact')}
@@ -231,7 +231,7 @@ export default async function ProgramsPage({ params }: Props) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Link
-                href="/assessment"
+                href={`/${locale}/assessment`}
                 className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl hover:border-blue-300 transition-colors group"
               >
                 <h3 className="font-semibold text-blue-900 mb-2 group-hover:text-blue-700">
@@ -241,7 +241,7 @@ export default async function ProgramsPage({ params }: Props) {
               </Link>
 
               <Link
-                href="/calculator"
+                href={`/${locale}/calculator`}
                 className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl hover:border-green-300 transition-colors group"
               >
                 <h3 className="font-semibold text-green-900 mb-2 group-hover:text-green-700">

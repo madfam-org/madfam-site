@@ -36,6 +36,7 @@
 ### 📋 Planning
 
 - [UX Roadmap](./planning/UX_ROADMAP.md) - User experience planning and roadmap
+- [MADFAM Site Strategic Redesign Audit](./planning/MADFAM_SITE_STRATEGIC_REDESIGN_AUDIT_2026-06-04.md) - Public positioning, IA, conversion, and UI/UX remediation plan
 
 ## 🗂️ Structure
 

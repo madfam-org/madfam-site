@@ -59,12 +59,20 @@ export function PlatformGrid({ title }: PlatformGridProps = {}) {
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{platform.category}</p>
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
-                    {t('freeTier')}
-                  </span>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-leaf/10 text-leaf border border-leaf/20">
-                    {t('proTier')}
-                  </span>
+                  {platform.track === 'self-serve' ? (
+                    <>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                        {t('freeTier')}
+                      </span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-leaf/10 text-leaf border border-leaf/20">
+                        {t('proTier')}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                      {platform.track === 'platform' ? t('platformAccess') : t('ecosystemAccess')}
+                    </span>
+                  )}
                   {comingSoon && (
                     <span className="text-[10px] text-gray-400 italic">
                       {t('includedOnLaunch')}
@@ -78,7 +86,14 @@ export function PlatformGrid({ title }: PlatformGridProps = {}) {
           return comingSoon ? (
             <div key={platform.name}>{cardContent}</div>
           ) : (
-            <Link key={platform.name} href={`/${locale}/platforms/${platform.slug}`}>
+            <Link
+              key={platform.name}
+              href={
+                platform.hasDetailPage
+                  ? `/${locale}/platforms/${platform.slug}`
+                  : platform.externalUrl || `/${locale}/products`
+              }
+            >
               {cardContent}
             </Link>
           );

@@ -5,6 +5,11 @@
       "email": "Email corporativo",
       "company": "Empresa",
       "phone": "Teléfono",
+      "intent": "¿Qué te trae aquí?",
+      "timeline": "Tiempo estimado",
+      "budget": "Presupuesto o escala comercial esperada",
+      "region": "Región",
+      "followUp": "Seguimiento preferido",
       "program": "Programa de interés",
       "message": "¿Cómo podemos ayudarte?"
     },
@@ -13,7 +18,35 @@
       "email": "juan@empresa.com",
       "company": "Nombre de tu empresa",
       "phone": "+52 55 1234 5678",
+      "region": "CDMX, LATAM, EE.UU., remoto...",
       "message": "Cuéntanos sobre tu proyecto o necesidades..."
+    },
+    "options": {
+      "select": "Selecciona una opción"
+    },
+    "intents": {
+      "platform": "Quiero usar una plataforma MADFAM",
+      "build-with-madfam": "Quiero que MADFAM construya o lance algo con nosotros",
+      "ecosystem-membership": "Quiero unirme al ecosistema",
+      "partner-invest": "Quiero aliarme, integrar o invertir",
+      "support": "Necesito soporte o tengo otra pregunta"
+    },
+    "timelines": {
+      "now": "Ahora / urgente",
+      "30-days": "En los próximos 30 días",
+      "quarter": "Este trimestre",
+      "exploring": "Explorando opciones"
+    },
+    "budgets": {
+      "not-sure": "Aún no estoy seguro",
+      "under-100k-mxn": "Menos de MXN$100k",
+      "100k-500k-mxn": "MXN$100k-MXN$500k",
+      "500k-plus-mxn": "MXN$500k+"
+    },
+    "followUp": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "call": "Llamada"
     },
     "programs": {
       "select": "Selecciona un programa",
@@ -24,7 +57,12 @@
     },
     "errors": {
       "nameMin": "Nombre debe tener al menos 2 caracteres",
-      "emailInvalid": "Email inválido"
+      "emailInvalid": "Email inválido",
+      "intentRequired": "Selecciona la ruta que mejor describe tu intención",
+      "timelineRequired": "Selecciona un tiempo estimado",
+      "regionRequired": "Indica tu región",
+      "followUpRequired": "Selecciona un canal de seguimiento",
+      "messageMin": "El mensaje debe tener al menos 10 caracteres"
     },
     "messages": {
       "success": "¡Gracias por tu interés! Nos pondremos en contacto contigo pronto.",

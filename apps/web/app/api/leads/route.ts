@@ -1,10 +1,10 @@
 import { analytics } from '@madfam/analytics';
+import { LeadSource, LeadStatus, Prisma } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { LeadSource, LeadStatus, Prisma } from '@prisma/client';
 import { withRateLimit } from '@/lib/rate-limit';
 import { validateBearerToken } from '@/lib/security';
 
@@ -59,6 +59,18 @@ function calculateLeadScore(lead: LeadData): number {
     score += 15;
   }
 
+  if (lead.metadata?.intent) {
+    score += 10;
+  }
+
+  if (lead.metadata?.timeline === 'now' || lead.metadata?.timeline === '30-days') {
+    score += 10;
+  }
+
+  if (lead.metadata?.budget === '100k-500k-mxn' || lead.metadata?.budget === '500k-plus-mxn') {
+    score += 10;
+  }
+
   return Math.min(score, 100); // Cap at 100
 }
 
@@ -101,6 +113,14 @@ async function handlePOST(request: NextRequest) {
         metadata: validatedData.metadata
           ? (validatedData.metadata as Prisma.InputJsonValue)
           : undefined,
+        budget:
+          typeof validatedData.metadata?.budget === 'string'
+            ? validatedData.metadata.budget
+            : undefined,
+        timeframe:
+          typeof validatedData.metadata?.timeline === 'string'
+            ? validatedData.metadata.timeline
+            : undefined,
         utmSource: (validatedData.metadata?.utm_source as string) || undefined,
         utmMedium: (validatedData.metadata?.utm_medium as string) || undefined,
         utmCampaign: (validatedData.metadata?.utm_campaign as string) || undefined,
@@ -165,6 +185,7 @@ async function handlePOST(request: NextRequest) {
             company: lead.company,
             score: lead.score,
             source: lead.source,
+            metadata: validatedData.metadata,
           },
         }),
       }).catch(error => {

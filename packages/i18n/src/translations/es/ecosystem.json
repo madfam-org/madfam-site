@@ -1,11 +1,11 @@
 {
   "meta": {
     "title": "Ecosistema MADFAM | Una Membresía. Todas las Plataformas.",
-    "description": "Únete al Ecosistema MADFAM — desbloquea acceso Pro en las 9 plataformas más fabricación física con descuento."
+    "description": "Únete al Ecosistema MADFAM — desbloquea capacidades elegibles de la plataforma, soporte coordinado y ventajas del maker node."
   },
   "hero": {
     "title": "Una Membresía. Todas las Plataformas.",
-    "subtitle": "Desbloquea acceso Pro en todas las plataformas MADFAM, más fabricación física con descuento — todo con una sola membresía.",
+    "subtitle": "Desbloquea capacidades elegibles de las plataformas MADFAM, fabricación física con descuento y soporte coordinado con una sola membresía.",
     "badge": "Ecosistema",
     "cta": "Únete al Ecosistema",
     "secondaryCta": "Explorar Plataformas",
@@ -14,11 +14,13 @@
   },
   "platformGrid": {
     "title": "Todo Lo Que Obtienes",
-    "subtitle": "9 plataformas digitales + fabricación física, cada una con niveles Free y Pro.",
+    "subtitle": "Plataformas digitales + fabricación física, con modelos de acceso adecuados para cada producto.",
     "freeTier": "Gratis",
     "proTier": "Pro",
     "includedOnLaunch": "Incluido al lanzamiento",
-    "comingSoon": "Próximamente"
+    "comingSoon": "Próximamente",
+    "platformAccess": "Plataforma gestionada",
+    "ecosystemAccess": "Acceso de ecosistema"
   },
   "comparison": {
     "title": "Compara Tus Opciones",
@@ -31,7 +33,7 @@
       "pro": "Pro Individual",
       "proNote": "Precio por plataforma",
       "member": "Miembro del Ecosistema",
-      "memberNote": "Una membresía, todas las plataformas"
+      "memberNote": "Una membresía, acceso coordinado"
     },
     "features": {
       "platformAccess": "Acceso a Plataformas",
@@ -55,7 +57,7 @@
   },
   "pricing": {
     "title": "Precios Simples y Transparentes",
-    "subtitle": "Una membresía, todas las plataformas — sin sorpresas.",
+    "subtitle": "Una membresía, acceso coordinado — sin sorpresas.",
     "monthly": "Mensual",
     "yearly": "Anual",
     "yearlyDiscount": "Ahorra ~2 meses",
@@ -67,7 +69,7 @@
     "savingsNote": "Pro Individual combinado: ~${individual}/mes | Ecosistema: ${ecosystem}/mes — Ahorra {percent}%",
     "membershipTitle": "Membresía del Ecosistema",
     "features": {
-      "0": "Acceso Pro en las 9 plataformas",
+      "0": "Capacidades elegibles de la plataforma",
       "1": "Hasta 20% de descuento en pedidos Maker Node",
       "2": "Soporte prioritario",
       "3": "Acceso anticipado a PENNY y AVALA",
@@ -107,7 +109,7 @@
       },
       "q2": {
         "question": "¿Hay prueba gratuita?",
-        "answer": "Cada plataforma tiene un nivel gratuito que puedes usar indefinidamente. La Membresía del Ecosistema desbloquea funciones Pro en todas las plataformas."
+        "answer": "El acceso público varía por plataforma. La Membresía del Ecosistema desbloquea capacidades elegibles, soporte coordinado y ventajas del maker node cuando aplican."
       },
       "q3": {
         "question": "¿Qué pasa cuando lancen PENNY y AVALA?",
@@ -143,7 +145,7 @@
       "title": "Tres Caminos al Ecosistema",
       "platforms": {
         "title": "Usa Nuestras Plataformas",
-        "description": "9 plataformas abiertas para diseño, fabricación, finanzas, identidad e inteligencia.",
+        "description": "Plataformas abiertas para diseño, fabricación, finanzas, identidad e inteligencia.",
         "cta": "Explorar Plataformas"
       },
       "maker": {
@@ -159,7 +161,7 @@
     },
     "platformShowcase": {
       "title": "Plataformas Abiertas para Creadores",
-      "subtitle": "Cada plataforma tiene un nivel gratuito. Los Miembros desbloquean Pro en todas."
+      "subtitle": "El acceso varía por plataforma. Los miembros desbloquean capacidades elegibles y soporte coordinado."
     },
     "makerHighlight": {
       "title": "Primavera Maker Node",
@@ -175,7 +177,7 @@
     },
     "membershipValue": {
       "title": "Una Membresía. Todas las Plataformas.",
-      "subtitle": "Acceso Pro en las 9 plataformas, fabricación con descuento, soporte prioritario y acceso anticipado.",
+      "subtitle": "Capacidades elegibles de la plataforma, fabricación con descuento, soporte prioritario y acceso anticipado.",
       "cta": "Conocer la Membresía"
     },
     "whyMadfam": {

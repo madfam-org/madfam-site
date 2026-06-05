@@ -12,19 +12,19 @@ export async function generateMetadata({
 
   const content = {
     es: {
-      title: 'Ecosistema MADFAM | Una Membresía. Todas las Plataformas.',
+      title: 'Ecosistema MADFAM | Una Membresía. Acceso Coordinado.',
       description:
-        'Únete al Ecosistema MADFAM — desbloquea acceso Pro en las 9 plataformas más fabricación física con descuento.',
+        'Únete al Ecosistema MADFAM — desbloquea capacidades elegibles de la plataforma, soporte coordinado y ventajas del maker node.',
     },
     en: {
-      title: 'MADFAM Ecosystem | One Membership. Every Platform.',
+      title: 'MADFAM Ecosystem | One Membership. Coordinated Access.',
       description:
-        'Join the MADFAM Ecosystem — unlock Pro access across all 9 platforms plus discounted physical fabrication.',
+        'Join the MADFAM Ecosystem — unlock eligible platform capabilities, coordinated support, and maker-node advantages.',
     },
     pt: {
-      title: 'Ecossistema MADFAM | Uma Assinatura. Todas as Plataformas.',
+      title: 'Ecossistema MADFAM | Uma Assinatura. Acesso Coordenado.',
       description:
-        'Junte-se ao Ecossistema MADFAM — desbloqueie acesso Pro em todas as 9 plataformas mais fabricação física com desconto.',
+        'Junte-se ao Ecossistema MADFAM — desbloqueie capacidades elegíveis da plataforma, suporte coordenado e vantagens do maker node.',
     },
   };
 

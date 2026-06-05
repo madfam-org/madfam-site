@@ -53,17 +53,44 @@ describe('LeadForm Component', () => {
     vi.clearAllMocks();
   });
 
+  async function fillRequiredFields({
+    message = 'Estamos interesados en servicios de consultoria de IA',
+    intent = 'platform',
+    timeline = '30-days',
+    budget = '100k-500k-mxn',
+    region = 'CDMX',
+    followUp = 'email',
+  } = {}) {
+    await user.type(screen.getByLabelText(/nombre/i), 'Juan Perez');
+    await user.type(screen.getByLabelText(/correo electr/i), 'juan@empresa.com');
+    await user.selectOptions(screen.getByLabelText(/qué te trae/i), intent);
+    await user.selectOptions(screen.getByLabelText(/tiempo estimado/i), timeline);
+    await user.selectOptions(screen.getByLabelText(/presupuesto/i), budget);
+    await user.type(screen.getByLabelText(/región/i), region);
+    await user.selectOptions(screen.getByLabelText(/seguimiento preferido/i), followUp);
+    await user.type(screen.getByLabelText(/cómo podemos ayudarte/i), message);
+  }
+
   it('should render all form fields', () => {
     render(<LeadForm />);
 
-    // Name label is "Nombre *" (from t('fields.name'))
     expect(screen.getByLabelText(/nombre/i)).toBeInTheDocument();
-    // Email label is "Correo electrónico *" (from t('fields.email'))
     expect(screen.getByLabelText(/correo electr/i)).toBeInTheDocument();
-    // Message label is hardcoded "What do you need help with? *"
-    expect(screen.getByLabelText(/what do you need help with/i)).toBeInTheDocument();
-    // Submit button text from t('submit') = "Enviar consulta"
+    expect(screen.getByLabelText(/empresa/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/teléfono/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/qué te trae/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/tiempo estimado/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/presupuesto/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/región/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/seguimiento preferido/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/cómo podemos ayudarte/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /enviar consulta/i })).toBeInTheDocument();
+  });
+
+  it('should initialize intent from a valid offer-path query value', () => {
+    render(<LeadForm initialIntent="partner-invest" />);
+
+    expect(screen.getByLabelText(/qué te trae/i)).toHaveValue('partner-invest');
   });
 
   it('should show validation errors for required fields', async () => {
@@ -73,11 +100,10 @@ describe('LeadForm Component', () => {
     await user.click(submitButton);
 
     await waitFor(() => {
-      // name min 2 chars -> "El nombre es requerido"
       expect(screen.getByText(/el nombre es requerido/i)).toBeInTheDocument();
-      // email empty string fails .email() -> "Email inválido"
       expect(screen.getByText(/email inv/i)).toBeInTheDocument();
-      // message min 10 chars -> "El mensaje es requerido"
+      expect(screen.getByText(/selecciona un tiempo estimado/i)).toBeInTheDocument();
+      expect(screen.getByText(/indica tu región/i)).toBeInTheDocument();
       expect(screen.getByText(/el mensaje es requerido/i)).toBeInTheDocument();
     });
   });
@@ -88,8 +114,10 @@ describe('LeadForm Component', () => {
     // Fill name and message with valid data so only email error remains
     await user.type(screen.getByLabelText(/nombre/i), 'Test User');
     await user.type(screen.getByLabelText(/correo electr/i), 'invalid-email');
+    await user.selectOptions(screen.getByLabelText(/tiempo estimado/i), 'quarter');
+    await user.type(screen.getByLabelText(/región/i), 'CDMX');
     await user.type(
-      screen.getByLabelText(/what do you need help with/i),
+      screen.getByLabelText(/cómo podemos ayudarte/i),
       'This is a long enough test message'
     );
 
@@ -97,8 +125,9 @@ describe('LeadForm Component', () => {
     // type="email" inputs. Native form submission via button click is blocked
     // by jsdom when the email input value fails HTML5 email pattern validation,
     // preventing react-hook-form from running its own zod-based validation.
-    const form = document.querySelector('form')!;
-    fireEvent.submit(form);
+    const form = document.querySelector('form');
+    expect(form).not.toBeNull();
+    fireEvent.submit(form as HTMLFormElement);
 
     await waitFor(() => {
       expect(screen.getByText(/email inv/i)).toBeInTheDocument();
@@ -117,13 +146,7 @@ describe('LeadForm Component', () => {
 
     render(<LeadForm />);
 
-    // Fill in the 3 form fields
-    await user.type(screen.getByLabelText(/nombre/i), 'Juan Perez');
-    await user.type(screen.getByLabelText(/correo electr/i), 'juan@empresa.com');
-    await user.type(
-      screen.getByLabelText(/what do you need help with/i),
-      'Estamos interesados en servicios de consultoria de IA'
-    );
+    await fillRequiredFields();
 
     // Submit the form
     const submitButton = screen.getByRole('button', { name: /enviar consulta/i });
@@ -137,7 +160,17 @@ describe('LeadForm Component', () => {
         body: JSON.stringify({
           name: 'Juan Perez',
           email: 'juan@empresa.com',
+          company: '',
+          phone: '',
           message: 'Estamos interesados en servicios de consultoria de IA',
+          metadata: {
+            intent: 'platform',
+            offerPath: 'platform',
+            timeline: '30-days',
+            budget: '100k-500k-mxn',
+            region: 'CDMX',
+            followUp: 'email',
+          },
           source: 'website',
           preferredLanguage: 'es',
         }),
@@ -167,13 +200,7 @@ describe('LeadForm Component', () => {
 
     render(<LeadForm />);
 
-    // Fill all required fields (message needs >= 10 chars)
-    await user.type(screen.getByLabelText(/nombre/i), 'Test User');
-    await user.type(screen.getByLabelText(/correo electr/i), 'test@example.com');
-    await user.type(
-      screen.getByLabelText(/what do you need help with/i),
-      'This is a test message for the form'
-    );
+    await fillRequiredFields({ message: 'This is a test message for the form' });
 
     const submitButton = screen.getByRole('button', { name: /enviar consulta/i });
     await user.click(submitButton);
@@ -192,13 +219,7 @@ describe('LeadForm Component', () => {
 
     render(<LeadForm />);
 
-    // Fill all required fields
-    await user.type(screen.getByLabelText(/nombre/i), 'Test User');
-    await user.type(screen.getByLabelText(/correo electr/i), 'test@example.com');
-    await user.type(
-      screen.getByLabelText(/what do you need help with/i),
-      'This is a test message for the form'
-    );
+    await fillRequiredFields({ message: 'This is a test message for the form' });
 
     const submitButton = screen.getByRole('button', { name: /enviar consulta/i });
     await user.click(submitButton);
@@ -216,12 +237,7 @@ describe('LeadForm Component', () => {
 
     render(<LeadForm />);
 
-    await user.type(screen.getByLabelText(/nombre/i), 'Test User');
-    await user.type(screen.getByLabelText(/correo electr/i), 'test@example.com');
-    await user.type(
-      screen.getByLabelText(/what do you need help with/i),
-      'This is a test message for the form'
-    );
+    await fillRequiredFields({ message: 'This is a test message for the form' });
 
     await user.click(screen.getByRole('button', { name: /enviar consulta/i }));
 
@@ -244,13 +260,9 @@ describe('LeadForm Component', () => {
 
     const nameInput = screen.getByLabelText(/nombre/i) as HTMLInputElement;
     const emailInput = screen.getByLabelText(/correo electr/i) as HTMLInputElement;
-    const messageInput = screen.getByLabelText(
-      /what do you need help with/i
-    ) as HTMLTextAreaElement;
+    const messageInput = screen.getByLabelText(/cómo podemos ayudarte/i) as HTMLTextAreaElement;
 
-    await user.type(nameInput, 'Test User');
-    await user.type(emailInput, 'test@example.com');
-    await user.type(messageInput, 'This is a test message for the form');
+    await fillRequiredFields({ message: 'This is a test message for the form' });
 
     await user.click(screen.getByRole('button', { name: /enviar consulta/i }));
 
@@ -270,12 +282,7 @@ describe('LeadForm Component', () => {
 
     render(<LeadForm onSuccess={onSuccess} />);
 
-    await user.type(screen.getByLabelText(/nombre/i), 'Test User');
-    await user.type(screen.getByLabelText(/correo electr/i), 'test@example.com');
-    await user.type(
-      screen.getByLabelText(/what do you need help with/i),
-      'This is a test message for the form'
-    );
+    await fillRequiredFields({ message: 'This is a test message for the form' });
 
     await user.click(screen.getByRole('button', { name: /enviar consulta/i }));
 
@@ -291,12 +298,7 @@ describe('LeadForm Component', () => {
 
     render(<LeadForm source="landing-page" />);
 
-    await user.type(screen.getByLabelText(/nombre/i), 'Test User');
-    await user.type(screen.getByLabelText(/correo electr/i), 'test@example.com');
-    await user.type(
-      screen.getByLabelText(/what do you need help with/i),
-      'This is a test message for the form'
-    );
+    await fillRequiredFields({ message: 'This is a test message for the form' });
 
     await user.click(screen.getByRole('button', { name: /enviar consulta/i }));
 

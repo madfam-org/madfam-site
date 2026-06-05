@@ -82,7 +82,9 @@ export function Navbar() {
           name: p.name + (isComingSoon(p) ? ' *' : ''),
           href: isComingSoon(p)
             ? getLocalizedUrl('products', locale)
-            : `/${locale}/platforms/${p.slug}`,
+            : p.hasDetailPage
+              ? `/${locale}/platforms/${p.slug}`
+              : p.externalUrl || getLocalizedUrl('products', locale),
           icon: p.icon,
         })),
       })),

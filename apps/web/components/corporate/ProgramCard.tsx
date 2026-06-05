@@ -7,7 +7,7 @@ import {
   Building2 as BuildingOffice2Icon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Badge } from './Badge';
 import { cn } from '@/lib/utils';
 
@@ -63,6 +63,7 @@ const iconMap = {
 };
 
 export function ProgramCard({ program }: ProgramCardProps) {
+  const locale = useLocale();
   const t = useTranslations();
   const colors = colorClasses[program.color];
   const IconComponent = iconMap[program.icon as keyof typeof iconMap] || CubeIcon;
@@ -160,13 +161,13 @@ export function ProgramCard({ program }: ProgramCardProps) {
       {/* Actions */}
       <div className="flex gap-3">
         <Link
-          href="/contact"
+          href={`/${locale}/contact`}
           className="flex-1 px-4 py-2 bg-neutral-900 text-white rounded-lg text-center text-sm font-medium hover:bg-neutral-800 transition-colors"
         >
           {t('corporate.programs.requestInfo')}
         </Link>
         <Link
-          href="/assessment"
+          href={`/${locale}/assessment`}
           className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg text-sm font-medium hover:bg-neutral-50 transition-colors"
         >
           {t('corporate.programs.evaluate')}

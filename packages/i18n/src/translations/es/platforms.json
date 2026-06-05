@@ -5,14 +5,18 @@
       "description": "Plataformas abiertas para creadores, makers y emprendedores — desde nube soberana hasta diseño paramétrico."
     },
     "heroTitle": "Plataformas Abiertas para Todos",
-    "heroSubtitle": "10 plataformas abiertas que cubren infraestructura, inteligencia, estándares y aplicaciones — cada una con niveles Free y Pro.",
+    "heroSubtitle": "Un ecosistema integrado de plataformas que cubre infraestructura, inteligencia, estándares y aplicaciones — con modelos de acceso adecuados para cada producto.",
     "ctaTitle": "Desbloquea Pro en Todas",
-    "ctaSubtitle": "Una membresía te da acceso Pro en todas las plataformas, fabricación con descuento y soporte prioritario.",
+    "ctaSubtitle": "Una membresía desbloquea capacidades elegibles de la plataforma, fabricación con descuento y soporte prioritario.",
     "ctaButton": "Explorar Membresía"
   },
   "shared": {
     "byMadfam": "by MADFAM",
     "freePlusPro": "Gratis + Pro",
+    "access": {
+      "platform": "Plataforma gestionada",
+      "ecosystem": "Acceso de ecosistema"
+    },
     "viewDocs": "Ver Documentación",
     "viewOnGithub": "Ver en GitHub",
     "requestDemo": "Solicitar Demo",

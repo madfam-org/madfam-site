@@ -17,6 +17,9 @@
     "viewSolutions": "Ver soluções",
     "ctaButton": "Junte-se ao Ecossistema"
   },
+  "spark": {
+    "name": "SPARK"
+  },
   "penny": {
     "name": "PENNY",
     "title": "PENNY",
@@ -46,6 +49,7 @@
     }
   },
   "cotizaStudio": {
+    "name": "Cotiza Studio",
     "title": "Cotiza Studio",
     "tagline": "Cotações instantâneas com IA",
     "shortDescription": "Gerador de cotações e propostas alimentado por IA para fechar negócios mais rápido.",
@@ -57,6 +61,7 @@
     }
   },
   "forgeSight": {
+    "name": "Forge Sight",
     "title": "Forge Sight",
     "tagline": "Previsão e análise preditiva",
     "shortDescription": "Análise preditiva avançada para tomada de decisões baseada em dados.",

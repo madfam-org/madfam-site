@@ -17,6 +17,9 @@
     "products": {
       "title": "Nuestros productos",
       "subtitle": "Plataformas y herramientas desarrolladas por nuestras unidades especializadas",
+      "spark": {
+        "description": "Experimentos de productividad y automatizaciones con IA para flujos de trabajo iniciales."
+      },
       "penny": {
         "description": "Plataforma de asistente IA actualmente en desarrollo. Aprenderá, se adaptará y mejorará continuamente tu flujo de trabajo."
       }
@@ -499,6 +502,28 @@
       "subtitle": "¿No encuentras lo que buscas? Nuestro equipo de soporte está aquí para ayudar.",
       "contactSupport": "Contactar soporte",
       "viewFaq": "Ver preguntas frecuentes"
+    }
+  },
+  "services": {
+    "level1": {
+      "title": "Sprint estratégico",
+      "quickDescription": "Un programa de entrada enfocado en descubrimiento, preparación de IA y planificación de implementación."
+    },
+    "level2": {
+      "title": "Construir y lanzar",
+      "quickDescription": "Construcción de productos, plataformas y flujos de trabajo que pasan de prototipo a producción."
+    },
+    "level3": {
+      "title": "Alianza estratégica",
+      "quickDescription": "Soporte vCTO y de transformación a largo plazo para equipos que escalan operaciones con IA."
+    }
+  },
+  "hero": {
+    "title": "Donde la creatividad humana encuentra precisión con IA",
+    "subtitle": "MADFAM construye productos, flujos de trabajo y programas impulsados por IA para equipos listos para pasar de la experimentación al impacto.",
+    "cta": {
+      "primary": "Iniciar evaluación",
+      "secondary": "Ver casos de éxito"
     }
   },
   "search": {

@@ -2,8 +2,15 @@ import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card, CardContent } from '@/components/ui';
 import { LeadForm } from '@/components/LeadForm';
 
-export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function ContactPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ intent?: string }>;
+}) {
   await params; // Validate params exist
+  const { intent } = await searchParams;
   const t = await getTranslations();
 
   return (
@@ -30,7 +37,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               <Card variant="elevated">
                 <CardContent className="p-8">
                   <h2 className="font-heading text-2xl mb-6">{t('contact.form.title')}</h2>
-                  <LeadForm source="contact-page" />
+                  <LeadForm source="contact-page" initialIntent={intent} />
                 </CardContent>
               </Card>
             </div>

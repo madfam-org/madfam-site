@@ -5,14 +5,18 @@
       "description": "Open platforms for creators, makers, and entrepreneurs — from sovereign cloud to parametric design."
     },
     "heroTitle": "Open Platforms for Everyone",
-    "heroSubtitle": "10 open platforms covering infrastructure, intelligence, standards, and applications — each with Free and Pro tiers.",
-    "ctaTitle": "Unlock Pro Everywhere",
-    "ctaSubtitle": "One membership gives you Pro access across all platforms, discounted fabrication, and priority support.",
+    "heroSubtitle": "An integrated platform ecosystem covering infrastructure, intelligence, standards, and applications — with access models matched to each product.",
+    "ctaTitle": "Unlock Ecosystem Advantages",
+    "ctaSubtitle": "One membership unlocks eligible platform capabilities, discounted fabrication, and priority support.",
     "ctaButton": "Explore Membership"
   },
   "shared": {
     "byMadfam": "by MADFAM",
     "freePlusPro": "Free + Pro",
+    "access": {
+      "platform": "Managed platform",
+      "ecosystem": "Ecosystem access"
+    },
     "viewDocs": "View Docs",
     "viewOnGithub": "View on GitHub",
     "requestDemo": "Request Demo",
@@ -53,7 +57,7 @@
       "comply": "Comply"
     },
     "cta": {
-      "membership": "Unlock Pro on every platform with one membership",
+      "membership": "Unlock eligible platform capabilities with one membership",
       "membershipLink": "Learn about Ecosystem Membership"
     },
     "badges": {

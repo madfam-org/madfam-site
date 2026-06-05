@@ -129,6 +129,14 @@ function validLeadPayload(overrides: Record<string, unknown> = {}): Record<strin
     message: 'I would like to learn more about your AI consulting services for our company.',
     source: 'website',
     preferredLanguage: 'es',
+    metadata: {
+      intent: 'build-with-madfam',
+      offerPath: 'build-with-madfam',
+      timeline: '30-days',
+      budget: '100k-500k-mxn',
+      region: 'CDMX',
+      followUp: 'email',
+    },
     ...overrides,
   };
 }
@@ -189,8 +197,15 @@ describe('Leads API', () => {
             firstName: 'Maria',
             lastName: 'Garcia',
             company: 'ACME Corp',
+            budget: '100k-500k-mxn',
+            timeframe: '30-days',
             source: 'WEBSITE',
             status: 'NEW',
+            metadata: expect.objectContaining({
+              intent: 'build-with-madfam',
+              offerPath: 'build-with-madfam',
+              timeline: '30-days',
+            }),
           }),
         })
       );
@@ -372,9 +387,10 @@ describe('Leads API', () => {
       await POST(req);
 
       // business email (+20) + company (+15) + phone (+10)
-      // + message > 20 chars (+25) + message > 50 chars (+15) = 85
+      // + message > 20 chars (+25) + message > 50 chars (+15)
+      // + intent (+10) + urgent timeline (+10) + budget (+10), capped at 100
       const createCall = vi.mocked(prisma.lead.create).mock.calls[0][0];
-      expect(createCall.data.score).toBe(85);
+      expect(createCall.data.score).toBe(100);
     });
 
     it('assigns lower score for free email provider', async () => {
@@ -396,9 +412,55 @@ describe('Leads API', () => {
       await POST(req);
 
       // No business email bonus: company (+15) + phone (+10)
-      // + message > 20 chars (+25) + message > 50 chars (+15) = 65
+      // + message > 20 chars (+25) + message > 50 chars (+15)
+      // + intent (+10) + urgent timeline (+10) + budget (+10) = 95
       const createCall = vi.mocked(prisma.lead.create).mock.calls[0][0];
-      expect(createCall.data.score).toBe(65);
+      expect(createCall.data.score).toBe(95);
+    });
+
+    it('copies qualification metadata into CRM-ready lead fields', async () => {
+      vi.mocked(prisma.lead.create).mockResolvedValue({
+        id: 'lead-metadata',
+        email: 'test@company.com',
+        score: 0,
+        source: 'WEBSITE',
+      } as never);
+      vi.mocked(prisma.analyticsEvent.create).mockResolvedValue({} as never);
+      vi.mocked(prisma.emailQueue.create).mockResolvedValue({} as never);
+
+      const req = makeRequest('http://localhost:3000/api/leads', {
+        method: 'POST',
+        body: JSON.stringify(
+          validLeadPayload({
+            metadata: {
+              intent: 'partner-invest',
+              offerPath: 'partner-invest',
+              timeline: 'now',
+              budget: '500k-plus-mxn',
+              region: 'LATAM',
+              followUp: 'call',
+            },
+          })
+        ),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      await POST(req);
+
+      expect(prisma.lead.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: expect.objectContaining({
+            budget: '500k-plus-mxn',
+            timeframe: 'now',
+            metadata: expect.objectContaining({
+              intent: 'partner-invest',
+              offerPath: 'partner-invest',
+              region: 'LATAM',
+              followUp: 'call',
+            }),
+          }),
+        })
+      );
     });
 
     it('caps lead score at 100', async () => {
