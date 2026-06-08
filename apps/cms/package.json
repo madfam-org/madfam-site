@@ -10,13 +10,13 @@
     "generate:schema": "payload generate:graphQLSchema"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.84.1",
-    "@payloadcms/richtext-slate": "^3.84.1",
+    "@payloadcms/db-postgres": "^3.85.0",
+    "@payloadcms/richtext-slate": "^3.85.0",
     "cross-env": "^10.1.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "path-to-regexp": "0.1.13",
-    "payload": "^3.84.1",
+    "payload": "^3.85.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
@@ -26,6 +26,6 @@
     "css-minimizer-webpack-plugin": "^5.0.1",
     "mini-css-extract-plugin": "^2.10.2",
     "nodemon": "^3.1.14",
-    "webpack": "^5.107.1"
+    "webpack": "^5.107.2"
   }
 }
