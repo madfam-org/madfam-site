@@ -59,9 +59,9 @@ jobs:
         run: pnpm audit --audit-level=high || true
         continue-on-error: true
 
-      # Testing
+      # Testing ("--" is required so pnpm/turbo pass --run through to vitest)
       - name: Run Tests
-        run: pnpm run test --run
+        run: pnpm run test -- --run
 
       # Bundle Size Check
       - name: Bundle Size Analysis
