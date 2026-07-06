@@ -219,7 +219,7 @@ const fallbackCaseStudies: CaseStudy[] = [
           'Year-over-year revenue increase attributed to improved forecasting and faster export cycles',
       },
     ],
-    technologies: [{ technology: 'Penny AI' }, { technology: 'Enclii' }, { technology: 'Dhanam' }],
+    technologies: [{ technology: 'Selva' }, { technology: 'Enclii' }, { technology: 'Dhanam' }],
     status: 'published',
     publishedDate: '2024-01-15T10:00:00.000Z',
     createdAt: '2024-01-15T10:00:00.000Z',

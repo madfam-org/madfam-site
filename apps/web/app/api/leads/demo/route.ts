@@ -9,7 +9,7 @@ import { withRateLimit } from '@/lib/rate-limit';
 
 // Demo prep lead schema
 const demoLeadSchema = z.object({
-  product: z.enum(['dhanam', 'forge-sight', 'penny', 'cotiza']),
+  product: z.enum(['dhanam', 'forge-sight', 'cotiza']),
   email: z.string().email('Invalid email'),
   name: z.string().min(2, 'Name must be at least 2 characters').optional(),
   company: z.string().optional(),
@@ -115,9 +115,6 @@ function getProductTags(product: string, useCase: string): string[] {
       break;
     case 'forge-sight':
       tags.push('manufacturing', 'pricing-intelligence', 'quoting');
-      break;
-    case 'penny':
-      tags.push('ai-assistant', 'customer-service');
       break;
     case 'cotiza':
       tags.push('quoting', 'estimation', 'saas');
@@ -302,11 +299,6 @@ function getEmailSubject(product: string, lang: string): string {
       es: '¡Bienvenido a Forge Sight! Tu demo está lista',
       en: 'Welcome to Forge Sight! Your demo is ready',
       pt: 'Bem-vindo ao Forge Sight! Sua demo está pronta',
-    },
-    penny: {
-      es: '¡Bienvenido a PENNY! Tu demo está lista',
-      en: 'Welcome to PENNY! Your demo is ready',
-      pt: 'Bem-vindo ao PENNY! Sua demo está pronta',
     },
     cotiza: {
       es: '¡Bienvenido a Cotiza! Tu demo está lista',

@@ -386,31 +386,6 @@
       "machines": "Unlimited connections"
     }
   },
-  "penny": {
-    "tagline": "AI Assistant for the MADFAM Ecosystem",
-    "valueProp": "An AI assistant that understands every MADFAM platform and helps you orchestrate workflows across the entire ecosystem.",
-    "problem": "As the MADFAM ecosystem grows, navigating between platforms becomes complex. Users need a unified interface to discover capabilities, automate workflows, and get help.",
-    "solution": "PENNY is an AI assistant that lives across the entire MADFAM ecosystem. Chat naturally to trigger workflows, query data from any platform, and get contextual help.",
-    "features": {
-      "0": "Natural language ecosystem commands",
-      "1": "Cross-platform workflow automation",
-      "2": "Contextual help and onboarding",
-      "3": "Smart notifications and insights"
-    },
-    "cta": {
-      "primary": "Get Notified",
-      "secondary": "View All Platforms"
-    },
-    "connections": {
-      "dhanam": "Financial queries and budget alerts",
-      "cotiza": "Quote generation via chat"
-    },
-    "metrics": {
-      "platforms": "10 platform integrations",
-      "interface": "Natural language",
-      "automation": "Cross-platform workflows"
-    }
-  },
   "karafiel": {
     "tagline": "Mexican Tax & Compliance Intelligence",
     "valueProp": "CFDI 4.0 issuance, RFC validation, and SAT integration for accountants and finance teams operating in Mexico.",
@@ -493,5 +468,56 @@
       "enclii": "Default deployment target",
       "janua": "SSO and audience-aware permissions"
     }
+  },
+  "voxa": {
+    "tagline": "Augmentative & alternative communication",
+    "valueProp": "A modern communication board that turns taps, switches, or gaze into spoken language — at home, in therapy, and in class.",
+    "problem": "When speech is not enough, non-speaking individuals and their families need a shared, accessible, evidence-based tool.",
+    "solution": "Voxa combines motor planning, CVI-friendly themes, AI-assisted predictions, switch scanning, and secure sync — free for families to start, ready for institutions to scale.",
+    "features": {
+      "0": "Consistent motor planning",
+      "1": "CVI-accessible themes",
+      "2": "Switch scanning and gaze access",
+      "3": "Secure sync across devices"
+    },
+    "cta": {
+      "primary": "Open Voxa",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "routecraft": {
+    "tagline": "Intelligent trip planning",
+    "valueProp": "Scores city-date opportunities across business, culture, and aesthetic dimensions to turn business travel into strategy.",
+    "problem": "Business travel gets planned around logistics, not opportunity.",
+    "solution": "RouteCraft evaluates every city-date option with a multi-dimensional scoring engine, with self-serve onboarding and a free trial.",
+    "features": {
+      "0": "Multi-dimensional opportunity scoring",
+      "1": "Business, culture, and aesthetic fit",
+      "2": "Self-serve onboarding with free trial"
+    },
+    "cta": {
+      "primary": "Start at routecraft.app",
+      "secondary": "Contact us"
+    },
+    "connections": {
+      "dhanam": "Settles payments through Dhanam"
+    }
+  },
+  "coformaStudio": {
+    "tagline": "Advisory-as-a-Service",
+    "valueProp": "A platform for planning and running customer advisory boards (CABs).",
+    "problem": "Advisory programs live in slide decks and spreadsheets, so boards are hard to run consistently.",
+    "solution": "Coforma Studio structures the full advisory cycle — membership, sessions, and follow-through — in one place.",
+    "features": {
+      "0": "Board and membership management",
+      "1": "Session planning and facilitation",
+      "2": "Follow-through tracking"
+    },
+    "cta": {
+      "primary": "Contact the team",
+      "secondary": "Visit coforma.studio"
+    },
+    "connections": {}
   }
 }

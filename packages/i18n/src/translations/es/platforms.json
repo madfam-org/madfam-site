@@ -386,31 +386,6 @@
       "machines": "Conexiones ilimitadas"
     }
   },
-  "penny": {
-    "tagline": "Asistente IA para el Ecosistema MADFAM",
-    "valueProp": "Un asistente de IA que entiende cada plataforma MADFAM y te ayuda a orquestar flujos de trabajo en todo el ecosistema.",
-    "problem": "A medida que crece el ecosistema MADFAM, navegar entre plataformas se vuelve complejo. Los usuarios necesitan una interfaz unificada para descubrir capacidades y automatizar flujos.",
-    "solution": "PENNY es un asistente de IA que vive en todo el ecosistema MADFAM. Chatea naturalmente para activar flujos, consultar datos de cualquier plataforma y obtener ayuda contextual.",
-    "features": {
-      "0": "Comandos del ecosistema en lenguaje natural",
-      "1": "Automatización de flujos entre plataformas",
-      "2": "Ayuda contextual y onboarding",
-      "3": "Notificaciones e insights inteligentes"
-    },
-    "cta": {
-      "primary": "Recibir Notificaciones",
-      "secondary": "Ver Todas las Plataformas"
-    },
-    "connections": {
-      "dhanam": "Consultas financieras y alertas de presupuesto",
-      "cotiza": "Generación de cotizaciones por chat"
-    },
-    "metrics": {
-      "platforms": "10 integraciones de plataformas",
-      "interface": "Lenguaje natural",
-      "automation": "Flujos entre plataformas"
-    }
-  },
   "karafiel": {
     "tagline": "Inteligencia fiscal y de cumplimiento en México",
     "valueProp": "Emisión de CFDI 4.0, validación de RFC e integración con el SAT para contadores y equipos financieros que operan en México.",
@@ -493,5 +468,56 @@
       "enclii": "Destino de despliegue por defecto",
       "janua": "SSO y permisos sensibles a la audiencia"
     }
+  },
+  "voxa": {
+    "tagline": "Comunicación aumentativa y alternativa",
+    "valueProp": "Un tablero de comunicación moderno que convierte toques, interruptores o mirada en lenguaje hablado — en casa, en terapia y en clase.",
+    "problem": "Cuando el habla no basta, las personas no hablantes y sus familias necesitan una herramienta compartida, accesible y basada en evidencia.",
+    "solution": "Voxa combina planificación motora, temas accesibles para CVI, predicciones con IA, escaneo por interruptor y sincronización segura — gratis para empezar en familia, listo para escalar en instituciones.",
+    "features": {
+      "0": "Planificación motora consistente",
+      "1": "Temas accesibles para CVI",
+      "2": "Escaneo por interruptor y acceso por mirada",
+      "3": "Sincronización segura entre dispositivos"
+    },
+    "cta": {
+      "primary": "Abrir Voxa",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "routecraft": {
+    "tagline": "Planeación inteligente de viajes",
+    "valueProp": "Califica oportunidades ciudad-fecha en dimensiones de negocio, cultura y estética para convertir los viajes de trabajo en estrategia.",
+    "problem": "Los viajes de negocio se planean alrededor de la logística, no de la oportunidad.",
+    "solution": "RouteCraft evalúa cada opción ciudad-fecha con un motor de calificación multidimensional, con onboarding self-serve y prueba gratuita.",
+    "features": {
+      "0": "Calificación multidimensional de oportunidades",
+      "1": "Ajuste de negocio, cultura y estética",
+      "2": "Onboarding self-serve con prueba gratuita"
+    },
+    "cta": {
+      "primary": "Empezar en routecraft.app",
+      "secondary": "Contactar"
+    },
+    "connections": {
+      "dhanam": "Liquida pagos a través de Dhanam"
+    }
+  },
+  "coformaStudio": {
+    "tagline": "Advisory-as-a-Service",
+    "valueProp": "Plataforma para planear y operar consejos consultivos de clientes (CABs).",
+    "problem": "Los programas de advisory viven en presentaciones y hojas de cálculo, y los consejos son difíciles de operar con consistencia.",
+    "solution": "Coforma Studio estructura el ciclo completo de advisory — membresía, sesiones y seguimiento — en un solo lugar.",
+    "features": {
+      "0": "Gestión de consejo y membresías",
+      "1": "Planeación y facilitación de sesiones",
+      "2": "Seguimiento de acuerdos"
+    },
+    "cta": {
+      "primary": "Contactar al equipo",
+      "secondary": "Visitar coforma.studio"
+    },
+    "connections": {}
   }
 }

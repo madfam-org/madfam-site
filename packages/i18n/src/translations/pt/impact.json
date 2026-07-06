@@ -13,14 +13,6 @@
     "disclaimer": "O alinhamento indica caminhos de contribuição; não é uma certificação. Publicamos evidências e métricas na página de Impacto conforme os projetos evoluem."
   },
   "sdgMap": {
-    "penny": {
-      "summary": "Orientação financeira pessoal e apoio à decisão para melhorar a resiliência familiar e inclusão financeira.",
-      "sdgs": [
-        "ODS8 Trabalho decente e crescimento econômico",
-        "ODS10 Redução das desigualdades",
-        "ODS12 Consumo e produção responsáveis"
-      ]
-    },
     "dhanam": {
       "summary": "Agregação financeira segura e trilhos de pagamento que expandem acesso e reduzem atrito na economia digital.",
       "sdgs": [

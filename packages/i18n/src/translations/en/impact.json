@@ -13,14 +13,6 @@
     "disclaimer": "Alignment indicates contribution pathways; it is not a certification. We publish evidence and metrics on the Impact page as projects evolve."
   },
   "sdgMap": {
-    "penny": {
-      "summary": "Personal finance guidance and decision support to improve household resilience and financial inclusion.",
-      "sdgs": [
-        "SDG8 Decent Work & Economic Growth",
-        "SDG10 Reduced Inequalities",
-        "SDG12 Responsible Consumption & Production"
-      ]
-    },
     "dhanam": {
       "summary": "Secure financial aggregation and payments rails that expand access and reduce friction in the digital economy.",
       "sdgs": [

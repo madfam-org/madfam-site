@@ -13,14 +13,6 @@
     "disclaimer": "La alineación indica rutas de contribución; no es una certificación. Publicamos evidencias y métricas en la página de Impacto conforme evolucionan los proyectos."
   },
   "sdgMap": {
-    "penny": {
-      "summary": "Asesoría financiera personal y apoyo a decisiones para mejorar la resiliencia del hogar e inclusión financiera.",
-      "sdgs": [
-        "ODS8 Trabajo decente y crecimiento económico",
-        "ODS10 Reducción de las desigualdades",
-        "ODS12 Producción y consumo responsables"
-      ]
-    },
     "dhanam": {
       "summary": "Agregación financiera y rieles de pago seguros que amplían el acceso y reducen fricción en la economía digital.",
       "sdgs": [

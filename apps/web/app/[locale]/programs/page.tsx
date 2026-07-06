@@ -84,7 +84,7 @@ export default async function ProgramsPage({ params }: Props) {
       ],
       investment: t('platformPilots.investment'),
       color: 'blue' as const,
-      platforms: ['Penny', 'Dhanam'],
+      platforms: ['Selva', 'Dhanam'],
     },
     {
       id: 'partner-program',

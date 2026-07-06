@@ -98,7 +98,9 @@ const messages = {
       cotizaStudio: 'Cotiza Studio',
       yantra4d: 'Yantra4D',
       pravaraMes: 'Pravara-MES',
-      penny: 'PENNY',
+      voxa: 'Voxa',
+      routecraft: 'RouteCraft',
+      coformaStudio: 'Coforma Studio',
       avala: 'AVALA',
     },
     services: {
