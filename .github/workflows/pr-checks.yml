@@ -192,6 +192,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [pr-validation, lighthouse, size-limit]
     if: always()
+    permissions:
+      pull-requests: write
+      issues: write
 
     steps:
       - name: Comment PR
