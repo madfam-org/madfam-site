@@ -1,46 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { Locale } from '@madfam/i18n';
 import { Container } from '@/components/ui';
 import { getOfferPaths } from '@/lib/data/offer-paths';
 
-const SECTION_COPY: Record<
-  Locale,
-  {
-    eyebrow: string;
-    title: string;
-    subtitle: string;
-    bestFor: string;
-  }
-> = {
-  en: {
-    eyebrow: 'Choose your path',
-    title: 'MADFAM is not one offer. It is an operating environment.',
-    subtitle:
-      'Start where your intent is clearest. The site should route you to the right product, build track, membership surface, or strategic conversation without forcing you to decode the whole ecosystem first.',
-    bestFor: 'Best for',
-  },
-  es: {
-    eyebrow: 'Elige tu ruta',
-    title: 'MADFAM no es una sola oferta. Es un entorno operativo.',
-    subtitle:
-      'Empieza donde tu intención sea más clara. El sitio debe llevarte al producto, build track, membresía o conversación estratégica correcta sin obligarte a decodificar todo el ecosistema primero.',
-    bestFor: 'Ideal para',
-  },
-  pt: {
-    eyebrow: 'Escolha seu caminho',
-    title: 'MADFAM não é uma única oferta. É um ambiente operacional.',
-    subtitle:
-      'Comece onde sua intenção está mais clara. O site deve levar você ao produto, build track, assinatura ou conversa estratégica correta sem exigir que decodifique todo o ecossistema primeiro.',
-    bestFor: 'Ideal para',
-  },
-};
-
 export function OfferPathRouter(): React.ReactElement {
   const locale = useLocale() as Locale;
-  const copy = SECTION_COPY[locale] ?? SECTION_COPY.en;
+  const t = useTranslations('ecosystem.offerPaths');
   const paths = getOfferPaths(locale);
 
   return (
@@ -61,15 +29,17 @@ export function OfferPathRouter(): React.ReactElement {
       <Container className="relative z-10">
         <div className="mx-auto mb-14 max-w-3xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-sun">
-            {copy.eyebrow}
+            {t('section.eyebrow')}
           </p>
           <h2
             id="offer-path-router-heading"
             className="text-3xl font-bold leading-tight md:text-5xl"
           >
-            {copy.title}
+            {t('section.title')}
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-white/70 md:text-lg">{copy.subtitle}</p>
+          <p className="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
+            {t('section.subtitle')}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-4">
@@ -88,39 +58,43 @@ export function OfferPathRouter(): React.ReactElement {
                   <span
                     className={`text-sm font-semibold uppercase tracking-[0.24em] ${path.accent.text}`}
                   >
-                    {path.eyebrow}
+                    {t(`${path.id}.eyebrow`)}
                   </span>
                   <span className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/60">
                     0{index + 1}
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-bold leading-tight text-white">{path.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-white/70">{path.description}</p>
+                <h3 className="text-2xl font-bold leading-tight text-white">
+                  {t(`${path.id}.title`)}
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-white/70">
+                  {t(`${path.id}.description`)}
+                </p>
 
                 <div className="mt-6 rounded-2xl border border-white/10 bg-black/15 p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
-                    {copy.bestFor}
+                    {t('section.bestFor')}
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-white/75">
-                    {path.recommendedFor}
+                    {t(`${path.id}.recommendedFor`)}
                   </p>
                 </div>
 
-                <ul className="mt-6 space-y-2" aria-label={`${path.title} proof points`}>
-                  {path.proofPoints.map(point => (
-                    <li key={point} className="flex items-start gap-2 text-sm text-white/70">
+                <ul className="mt-6 space-y-2" aria-label={`${t(`${path.id}.title`)} proof points`}>
+                  {(['proof1', 'proof2', 'proof3'] as const).map(proofKey => (
+                    <li key={proofKey} className="flex items-start gap-2 text-sm text-white/70">
                       <span
                         aria-hidden="true"
                         className={`mt-1.5 h-1.5 w-1.5 rounded-full ${path.accent.dot}`}
                       />
-                      <span>{point}</span>
+                      <span>{t(`${path.id}.${proofKey}`)}</span>
                     </li>
                   ))}
                 </ul>
 
                 <span className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-white">
-                  {path.primaryCta}
+                  {t(`${path.id}.cta`)}
                   <span
                     aria-hidden="true"
                     className="transition-transform group-hover:translate-x-1"

@@ -20,34 +20,6 @@
   "spark": {
     "name": "SPARK"
   },
-  "penny": {
-    "name": "PENNY",
-    "title": "PENNY",
-    "tagline": "Tu Asistente Personal de IA",
-    "shortDescription": "Automatización inteligente que aprende y mejora continuamente tus procesos.",
-    "description": "Automatización inteligente que aprende de tus procesos y mejora continuamente, haciendo a tu equipo más productivo.",
-    "features": {
-      "0": "Aprendizaje continuo",
-      "1": "Procesamiento de lenguaje natural",
-      "2": "Sugerencias proactivas",
-      "3": "Seguridad empresarial",
-      "title": "Características principales",
-      "learning": "Aprendizaje continuo",
-      "natural": "Procesamiento de lenguaje natural",
-      "proactive": "Sugerencias proactivas",
-      "secure": "Seguridad empresarial"
-    },
-    "benefits": {
-      "title": "Beneficios",
-      "productivity": "3x productividad",
-      "satisfaction": "95% satisfacción de usuarios",
-      "onboarding": "Implementación en 24h",
-      "roi": "ROI en 30 días"
-    },
-    "cta": {
-      "demo": "Solicitar demo"
-    }
-  },
   "comparison": {
     "title": "Compara nuestras plataformas",
     "feature": "Característica",

@@ -169,21 +169,6 @@ export function ShowcaseContent() {
                 }}
                 logo={<CloudIcon />}
               />
-              <ProductCard
-                name="Penny"
-                tagline={t('products.penny.tagline')}
-                description={t('products.penny.shortDescription')}
-                features={[
-                  { text: t('products.penny.features.0') },
-                  { text: t('products.penny.features.1') },
-                ]}
-                badge={{ text: 'BETA', variant: 'beta' }}
-                cta={{
-                  primary: { text: t('common.tryFree'), href: '#' },
-                }}
-                gradient="from-sun/10 to-leaf/10"
-                logo={<CubeIcon />}
-              />
             </div>
           </Container>
         </section>

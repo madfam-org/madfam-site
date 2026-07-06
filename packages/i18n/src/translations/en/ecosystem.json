@@ -91,10 +91,22 @@
     "cta": "Explore Maker Node",
     "servicesLabel": "Available services",
     "services": {
-      "printing": { "name": "3D Printing", "detail": "FDM, SLA, SLS" },
-      "cnc": { "name": "CNC Machining", "detail": "Metals, woods, plastics" },
-      "laser": { "name": "Laser Cutting", "detail": "Wood, acrylic, leather" },
-      "assembly": { "name": "Assembly", "detail": "Custom builds" }
+      "printing": {
+        "name": "3D Printing",
+        "detail": "FDM, SLA, SLS"
+      },
+      "cnc": {
+        "name": "CNC Machining",
+        "detail": "Metals, woods, plastics"
+      },
+      "laser": {
+        "name": "Laser Cutting",
+        "detail": "Wood, acrylic, leather"
+      },
+      "assembly": {
+        "name": "Assembly",
+        "detail": "Custom builds"
+      }
     }
   },
   "faq": {
@@ -137,15 +149,13 @@
   "homepage": {
     "hero": {
       "title": "Technology that gives back more than it takes",
-      "subtitle": "Open platforms for creators, makers, and entrepreneurs building the future of LATAM.",
-      "exploreCta": "Explore the Ecosystem",
-      "memberCta": "Become a Member"
+      "subtitle": "Open platforms for creators, makers, and entrepreneurs building the future of LATAM."
     },
     "threePaths": {
       "title": "Three Paths Into the Ecosystem",
       "platforms": {
         "title": "Use Our Platforms",
-        "description": "9 open platforms for design, fabrication, finance, identity, and intelligence.",
+        "description": "Open platforms for design, fabrication, finance, identity, and intelligence.",
         "cta": "Explore Platforms"
       },
       "maker": {
@@ -179,25 +189,6 @@
       "title": "One Membership. Coordinated Access.",
       "subtitle": "Eligible platform capabilities, discounted fabrication, priority support, and early access to new launches.",
       "cta": "Learn About Membership"
-    },
-    "whyMadfam": {
-      "title": "Why MADFAM?",
-      "openSource": {
-        "title": "Open Source First",
-        "description": "60+ public repositories. Our code is our resume."
-      },
-      "latam": {
-        "title": "Built in LATAM",
-        "description": "Designed for the needs and realities of Latin America."
-      },
-      "privacy": {
-        "title": "Privacy First",
-        "description": "Your data stays yours. Secure-by-default, minimal collection."
-      },
-      "solarpunk": {
-        "title": "Solarpunk Ethos",
-        "description": "Technology that regenerates rather than extracts."
-      }
     },
     "finalCta": {
       "title": "Ready to build something that matters?",
@@ -285,6 +276,54 @@
       "subtitle": "Get a quote for your next fabrication project.",
       "primary": "Get a Quote",
       "secondary": "Start a Project"
+    }
+  },
+  "offerPaths": {
+    "section": {
+      "eyebrow": "Choose your path",
+      "title": "MADFAM is not one offer. It is an operating environment.",
+      "subtitle": "Start where your intent is clearest. The site should route you to the right product, build track, membership surface, or strategic conversation without forcing you to decode the whole ecosystem first.",
+      "bestFor": "Best for"
+    },
+    "platform": {
+      "eyebrow": "Use a platform",
+      "title": "Start with the product that solves today.",
+      "description": "Find the MADFAM product that fits your workflow, then move into the broader ecosystem when the work expands.",
+      "recommendedFor": "Creators, operators, founders, and teams with a specific product need.",
+      "proof1": "Self-serve where ready",
+      "proof2": "External app routes respected",
+      "proof3": "Product-specific access",
+      "cta": "Explore products"
+    },
+    "build": {
+      "eyebrow": "Build with MADFAM",
+      "title": "Turn an idea, process, or dataset into a launchable system.",
+      "description": "Use MADFAM as a product, AI, data, commerce, and fabrication partner when execution quality matters.",
+      "recommendedFor": "Companies and founders who need strategic delivery, not just software access.",
+      "proof1": "Product strategy",
+      "proof2": "AI and data systems",
+      "proof3": "Bits-to-atoms delivery",
+      "cta": "Scope a build"
+    },
+    "ecosystem": {
+      "eyebrow": "Join the ecosystem",
+      "title": "Coordinate eligible platform access, support, and maker-node advantages.",
+      "description": "Membership is for people and organizations that benefit from MADFAM as an integrated operating environment.",
+      "recommendedFor": "Makers, entrepreneurs, studios, and teams building across multiple MADFAM surfaces.",
+      "proof1": "Coordinated access",
+      "proof2": "Priority support",
+      "proof3": "Fabrication advantages",
+      "cta": "Explore membership"
+    },
+    "partner": {
+      "eyebrow": "Partner or invest",
+      "title": "Connect your institution, capital, or infrastructure to the ecosystem.",
+      "description": "Create distribution, integration, investment, or ecosystem partnerships with a public-safe entry path.",
+      "recommendedFor": "Enterprises, institutions, investors, accelerators, and strategic ecosystem partners.",
+      "proof1": "Strategic alignment",
+      "proof2": "Integration paths",
+      "proof3": "Ecosystem leverage",
+      "cta": "Start a partnership conversation"
     }
   }
 }

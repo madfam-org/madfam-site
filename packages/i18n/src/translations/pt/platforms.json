@@ -391,31 +391,6 @@
       "machines": "Conexões ilimitadas"
     }
   },
-  "penny": {
-    "tagline": "Assistente IA para o Ecossistema MADFAM",
-    "valueProp": "Um assistente de IA que entende cada plataforma MADFAM e ajuda você a orquestrar fluxos de trabalho em todo o ecossistema.",
-    "problem": "À medida que o ecossistema MADFAM cresce, navegar entre plataformas se torna complexo. Usuários precisam de uma interface unificada para descobrir capacidades e automatizar fluxos.",
-    "solution": "PENNY é um assistente de IA que vive em todo o ecossistema MADFAM. Converse naturalmente para ativar fluxos, consultar dados de qualquer plataforma e obter ajuda contextual.",
-    "features": {
-      "0": "Comandos do ecossistema em linguagem natural",
-      "1": "Automação de fluxos entre plataformas",
-      "2": "Ajuda contextual e onboarding",
-      "3": "Notificações e insights inteligentes"
-    },
-    "cta": {
-      "primary": "Receber Notificações",
-      "secondary": "Ver Todas as Plataformas"
-    },
-    "connections": {
-      "dhanam": "Consultas financeiras e alertas de orçamento",
-      "cotiza": "Geração de cotações por chat"
-    },
-    "metrics": {
-      "platforms": "10 integrações de plataformas",
-      "interface": "Linguagem natural",
-      "automation": "Fluxos entre plataformas"
-    }
-  },
   "karafiel": {
     "tagline": "Inteligência fiscal e de compliance no México",
     "valueProp": "Emissão de CFDI 4.0, validação de RFC e integração com o SAT para contadores e equipes financeiras que operam no México.",
@@ -498,5 +473,56 @@
       "enclii": "Destino padrão de deploy",
       "janua": "SSO e permissões sensíveis à audiência"
     }
+  },
+  "voxa": {
+    "tagline": "Comunicação aumentativa e alternativa",
+    "valueProp": "Uma prancha de comunicação moderna que transforma toques, acionadores ou olhar em linguagem falada — em casa, na terapia e na aula.",
+    "problem": "Quando a fala não basta, pessoas não falantes e suas famílias precisam de uma ferramenta compartilhada, acessível e baseada em evidências.",
+    "solution": "Voxa combina planejamento motor, temas acessíveis para CVI, predições com IA, varredura por acionador e sincronização segura — grátis para famílias começarem, pronto para instituições escalarem.",
+    "features": {
+      "0": "Planejamento motor consistente",
+      "1": "Temas acessíveis para CVI",
+      "2": "Varredura por acionador e acesso por olhar",
+      "3": "Sincronização segura entre dispositivos"
+    },
+    "cta": {
+      "primary": "Abrir Voxa",
+      "secondary": "Fale conosco"
+    },
+    "connections": {}
+  },
+  "routecraft": {
+    "tagline": "Planejamento inteligente de viagens",
+    "valueProp": "Pontua oportunidades cidade-data em dimensões de negócio, cultura e estética para transformar viagens de trabalho em estratégia.",
+    "problem": "Viagens de negócio são planejadas em torno da logística, não da oportunidade.",
+    "solution": "RouteCraft avalia cada opção cidade-data com um motor de pontuação multidimensional, com onboarding self-serve e teste grátis.",
+    "features": {
+      "0": "Pontuação multidimensional de oportunidades",
+      "1": "Ajuste de negócio, cultura e estética",
+      "2": "Onboarding self-serve com teste grátis"
+    },
+    "cta": {
+      "primary": "Começar em routecraft.app",
+      "secondary": "Fale conosco"
+    },
+    "connections": {
+      "dhanam": "Liquida pagamentos através do Dhanam"
+    }
+  },
+  "coformaStudio": {
+    "tagline": "Advisory-as-a-Service",
+    "valueProp": "Plataforma para planejar e operar conselhos consultivos de clientes (CABs).",
+    "problem": "Programas de advisory vivem em apresentações e planilhas, e os conselhos são difíceis de operar com consistência.",
+    "solution": "Coforma Studio estrutura o ciclo completo de advisory — membros, sessões e acompanhamento — em um só lugar.",
+    "features": {
+      "0": "Gestão de conselho e membros",
+      "1": "Planejamento e facilitação de sessões",
+      "2": "Acompanhamento de acordos"
+    },
+    "cta": {
+      "primary": "Falar com a equipe",
+      "secondary": "Visitar coforma.studio"
+    },
+    "connections": {}
   }
 }

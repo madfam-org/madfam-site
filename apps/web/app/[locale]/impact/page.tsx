@@ -27,12 +27,6 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
   // SDG mappings with translations
   const sdgMappings: SDGMapping[] = [
     {
-      product: 'Penny',
-      summary: t('sdgMap.penny.summary'),
-      sdgs: t.raw('sdgMap.penny.sdgs') as string[],
-      icon: '💰',
-    },
-    {
       product: 'Dhanam',
       summary: t('sdgMap.dhanam.summary'),
       sdgs: t.raw('sdgMap.dhanam.sdgs') as string[],

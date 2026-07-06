@@ -104,16 +104,40 @@ function getStaticContent(locale: Locale): Omit<SearchResult, 'score'>[] {
       url: `/${l}/${l === 'es' ? 'productos' : l === 'pt' ? 'produtos' : 'products'}#pravara-mes`,
     },
     {
-      id: 'penny',
-      title: 'PENNY',
+      id: 'voxa',
+      title: 'Voxa',
       description:
         l === 'en'
-          ? 'AI-powered process automation assistant'
+          ? 'Augmentative & alternative communication platform'
           : l === 'pt'
-            ? 'Assistente de automação de processos com IA'
-            : 'Asistente de automatización de procesos con IA',
+            ? 'Plataforma de comunicação aumentativa e alternativa'
+            : 'Plataforma de comunicación aumentativa y alternativa',
       type: 'product',
-      url: `/${l}/${l === 'es' ? 'productos' : l === 'pt' ? 'produtos' : 'products'}#penny`,
+      url: `/${l}/${l === 'es' ? 'productos' : l === 'pt' ? 'produtos' : 'products'}#voxa`,
+    },
+    {
+      id: 'routecraft',
+      title: 'RouteCraft',
+      description:
+        l === 'en'
+          ? 'Intelligent trip planning'
+          : l === 'pt'
+            ? 'Planejamento inteligente de viagens'
+            : 'Planeación inteligente de viajes',
+      type: 'product',
+      url: `/${l}/${l === 'es' ? 'productos' : l === 'pt' ? 'produtos' : 'products'}#routecraft`,
+    },
+    {
+      id: 'coforma-studio',
+      title: 'Coforma Studio',
+      description:
+        l === 'en'
+          ? 'Customer advisory board platform'
+          : l === 'pt'
+            ? 'Plataforma de conselhos consultivos de clientes'
+            : 'Plataforma de consejos consultivos de clientes',
+      type: 'product',
+      url: `/${l}/${l === 'es' ? 'productos' : l === 'pt' ? 'produtos' : 'products'}#coforma-studio`,
     },
     // Pages
     {

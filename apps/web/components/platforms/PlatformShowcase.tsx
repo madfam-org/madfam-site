@@ -44,9 +44,6 @@ const TASTE_COMPONENTS: Record<string, ReturnType<typeof dynamic>> = {
   avala: dynamic(() => import('./tastes/AvalaTaste').then(m => ({ default: m.AvalaTaste })), {
     ssr: false,
   }),
-  penny: dynamic(() => import('./tastes/PennyTaste').then(m => ({ default: m.PennyTaste })), {
-    ssr: false,
-  }),
 };
 
 // Map slugs to i18n keys (camelCase)

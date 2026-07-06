@@ -20,34 +20,6 @@
   "spark": {
     "name": "SPARK"
   },
-  "penny": {
-    "name": "PENNY",
-    "title": "PENNY",
-    "tagline": "Automação Inteligente de Processos",
-    "shortDescription": "Automação inteligente que aprende e melhora continuamente seus processos.",
-    "description": "Automação inteligente que aprende com seus processos e melhora continuamente, tornando sua equipe mais produtiva.",
-    "features": {
-      "0": "Aprendizado contínuo",
-      "1": "Processamento de linguagem natural",
-      "2": "Sugestões proativas",
-      "3": "Segurança enterprise",
-      "title": "Características principais",
-      "learning": "Aprendizado contínuo",
-      "natural": "Processamento de linguagem natural",
-      "proactive": "Sugestões proativas",
-      "secure": "Segurança enterprise"
-    },
-    "benefits": {
-      "title": "Benefícios",
-      "productivity": "3x mais produtividade",
-      "satisfaction": "95% satisfação dos usuários",
-      "onboarding": "Implementação em 24h",
-      "roi": "ROI em 30 dias"
-    },
-    "cta": {
-      "demo": "Solicitar demonstração"
-    }
-  },
   "cotizaStudio": {
     "name": "Cotiza Studio",
     "title": "Cotiza Studio",
