@@ -15,6 +15,9 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
+  # Exposed as env because the secrets context is not permitted in step-level
+  # `if:` expressions (the workflow fails to parse otherwise).
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   IMAGE_NAME: madfam-org/madfam-site/cms
 
 jobs:
@@ -48,7 +51,7 @@ jobs:
 
       - name: Log in to Docker Hub
         # Rate-limit mitigation only — skip when credentials are not configured
-        if: ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_TOKEN != '' }}
+        if: ${{ env.DOCKERHUB_USERNAME != '' }}
         uses: docker/login-action@v4
         with:
           registry: docker.io
