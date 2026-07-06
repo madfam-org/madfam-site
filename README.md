@@ -1,13 +1,13 @@
 # MADFAM Corporate Website
 
 ![MADFAM](https://img.shields.io/badge/MADFAM-AI%20%2B%20Creativity-9B59B6)
-![Next.js](https://img.shields.io/badge/Next.js-15.5.15-black)
+![Next.js](https://img.shields.io/badge/Next.js-15.x-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue)
-![React](https://img.shields.io/badge/React-19.2.0-61dafb)
+![React](https://img.shields.io/badge/React-18.x-61dafb)
 ![Node.js](https://img.shields.io/badge/Node.js-20.x-green)
 ![License](https://img.shields.io/badge/License-Proprietary-red)
 
-> **The official website for MADFAM** — open platforms for creators, makers, and entrepreneurs building the future of LATAM. Built with Next.js 14, TypeScript, and a modern monorepo architecture.
+> **The official website for MADFAM** — open platforms for creators, makers, and entrepreneurs building the future of LATAM. Built with Next.js 15 (App Router), TypeScript, and a modern monorepo architecture.
 
 **🌟 Key Highlights:**
 
@@ -18,7 +18,7 @@
 - 📊 Privacy-first analytics with enterprise-grade security
 - 🎨 Modern design system with Tailwind CSS 4 and dark/light mode
 
-**📅 Last Updated:** May 2026
+**📅 Last Updated:** 2026-07-06
 
 ## 🚀 Quick Start
 
@@ -85,7 +85,7 @@ pnpm analyze          # Analyze bundle size
 ```
 madfam-site/
 ├── apps/
-│   ├── web/              # Next.js 14 corporate website
+│   ├── web/              # Next.js 15 corporate website
 │   └── cms/              # Payload CMS v3 (headless content management)
 ├── packages/
 │   ├── ui/               # Shared UI components (@madfam/ui)
@@ -201,21 +201,21 @@ All routes support internationalization with Spanish (es), English (en), and Por
 
 | Category       | Technology            | Version | Purpose                         |
 | -------------- | --------------------- | ------- | ------------------------------- |
-| **Frontend**   | Next.js               | 15.5.15 | React framework with App Router |
+| **Frontend**   | Next.js               | 15.5.x  | React framework with App Router |
 | **Language**   | TypeScript            | 5.9.3   | Type-safe development           |
-| **UI**         | React                 | 19.2.0  | Modern UI library               |
-| **Styling**    | Tailwind CSS          | 4.1.17  | Utility-first CSS framework     |
+| **UI**         | React                 | 18.3.x  | Modern UI library               |
+| **Styling**    | Tailwind CSS          | 4.3.x   | Utility-first CSS framework     |
 | **Animation**  | Framer Motion         | 11.18.0 | Smooth animations & transitions |
-| **Forms**      | React Hook Form + Zod | 7.66.0  | Form handling and validation    |
-| **i18n**       | next-intl             | 4.5.3   | Internationalization            |
-| **Database**   | Prisma + PostgreSQL   | 6.19.0  | Type-safe database ORM          |
+| **Forms**      | React Hook Form + Zod | 7.76.x  | Form handling and validation    |
+| **i18n**       | next-intl             | 4.12.x  | Internationalization            |
+| **Database**   | Prisma + PostgreSQL   | 6.1.x   | Type-safe database ORM          |
 | **Auth**       | Janua (@janua/nextjs) | Latest  | Sovereign authentication        |
 | **Analytics**  | Plausible             | Latest  | Privacy-first analytics         |
-| **CMS**        | Payload CMS           | 3.54.0  | Headless content management     |
-| **Testing**    | Vitest + Playwright   | 4.0.8   | Unit and E2E testing            |
+| **CMS**        | Payload CMS           | 3.84.x  | Headless content management     |
+| **Testing**    | Vitest + Playwright   | 4.1.x   | Unit and E2E testing            |
 | **Deployment** | Enclii (K8s)          | Latest  | Production via sovereign PaaS   |
 | **CI/CD**      | GitHub Actions        | Latest  | Automated workflows             |
-| **Monorepo**   | Turborepo + pnpm      | 2.6.1   | Workspace management            |
+| **Monorepo**   | Turborepo + pnpm      | 2.9.x   | Workspace management            |
 
 ## 🚢 Deployment
 
