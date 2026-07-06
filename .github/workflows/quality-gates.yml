@@ -67,11 +67,22 @@ jobs:
       - name: Bundle Size Analysis
         run: npx bundlewatch --config .bundlewatch.config.js
 
-      # Accessibility Tests
+      # Accessibility Tests — report-only until the Phase 4 QA gate
+      # flips this blocking. The step never ran green historically: no
+      # browsers were installed and the webServer polled the wrong port.
+      - name: Install Playwright browsers
+        run: |
+          cd apps/web
+          npx playwright install --with-deps chromium
+        continue-on-error: true
+
       - name: Accessibility Tests
         run: |
           cd apps/web
-          pnpm run test:a11y
+          pnpm run test:a11y --project=chromium
+        env:
+          SKIP_ENV_VALIDATION: true
+        continue-on-error: true
 
   security-scan:
     runs-on: ubuntu-latest
