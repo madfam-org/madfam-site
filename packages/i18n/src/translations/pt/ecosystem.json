@@ -91,10 +91,22 @@
     "cta": "Explorar Maker Node",
     "servicesLabel": "Serviços disponíveis",
     "services": {
-      "printing": { "name": "Impressão 3D", "detail": "FDM, SLA, SLS" },
-      "cnc": { "name": "Usinagem CNC", "detail": "Metais, madeiras, plásticos" },
-      "laser": { "name": "Corte a Laser", "detail": "Madeira, acrílico, couro" },
-      "assembly": { "name": "Montagem", "detail": "Construções personalizadas" }
+      "printing": {
+        "name": "Impressão 3D",
+        "detail": "FDM, SLA, SLS"
+      },
+      "cnc": {
+        "name": "Usinagem CNC",
+        "detail": "Metais, madeiras, plásticos"
+      },
+      "laser": {
+        "name": "Corte a Laser",
+        "detail": "Madeira, acrílico, couro"
+      },
+      "assembly": {
+        "name": "Montagem",
+        "detail": "Construções personalizadas"
+      }
     }
   },
   "faq": {
@@ -137,9 +149,7 @@
   "homepage": {
     "hero": {
       "title": "Tecnologia que devolve mais do que toma",
-      "subtitle": "Plataformas abertas para criadores, makers e empreendedores construindo o futuro da LATAM.",
-      "exploreCta": "Explorar o Ecossistema",
-      "memberCta": "Ser Membro"
+      "subtitle": "Plataformas abertas para criadores, makers e empreendedores construindo o futuro da LATAM."
     },
     "threePaths": {
       "title": "Três Caminhos para o Ecossistema",
@@ -179,25 +189,6 @@
       "title": "Uma Assinatura. Todas as Plataformas.",
       "subtitle": "Capacidades elegíveis da plataforma, fabricação com desconto, suporte prioritário e acesso antecipado.",
       "cta": "Conhecer a Assinatura"
-    },
-    "whyMadfam": {
-      "title": "Por Que MADFAM?",
-      "openSource": {
-        "title": "Open Source Primeiro",
-        "description": "60+ repositórios públicos. Nosso código é nosso currículo."
-      },
-      "latam": {
-        "title": "Feito na LATAM",
-        "description": "Projetado para as necessidades e realidades da América Latina."
-      },
-      "privacy": {
-        "title": "Privacidade Primeiro",
-        "description": "Seus dados são seus. Seguro por padrão, coleta mínima."
-      },
-      "solarpunk": {
-        "title": "Ética Solarpunk",
-        "description": "Tecnologia que regenera em vez de extrair."
-      }
     },
     "finalCta": {
       "title": "Pronto para construir algo que importa?",
@@ -285,6 +276,54 @@
       "subtitle": "Obtenha uma cotação para seu próximo projeto.",
       "primary": "Obter Cotação",
       "secondary": "Iniciar um Projeto"
+    }
+  },
+  "offerPaths": {
+    "section": {
+      "eyebrow": "Escolha seu caminho",
+      "title": "MADFAM não é uma única oferta. É um ambiente operacional.",
+      "subtitle": "Comece onde sua intenção está mais clara. O site deve levar você ao produto, build track, assinatura ou conversa estratégica correta sem exigir que decodifique todo o ecossistema primeiro.",
+      "bestFor": "Ideal para"
+    },
+    "platform": {
+      "eyebrow": "Use uma plataforma",
+      "title": "Comece com o produto que resolve o problema de hoje.",
+      "description": "Encontre o produto MADFAM adequado ao seu fluxo de trabalho e avance para o ecossistema quando o trabalho crescer.",
+      "recommendedFor": "Criadores, operadores, founders e equipes com uma necessidade específica de produto.",
+      "proof1": "Self-serve quando pronto",
+      "proof2": "Rotas externas respeitadas",
+      "proof3": "Acesso específico por produto",
+      "cta": "Explorar produtos"
+    },
+    "build": {
+      "eyebrow": "Construa com MADFAM",
+      "title": "Transforme uma ideia, processo ou dataset em um sistema lançável.",
+      "description": "Use a MADFAM como parceira de produto, IA, dados, comércio e fabricação quando a execução importa.",
+      "recommendedFor": "Empresas e founders que precisam de entrega estratégica, não só acesso a software.",
+      "proof1": "Estratégia de produto",
+      "proof2": "Sistemas de IA e dados",
+      "proof3": "Entrega bits-to-atoms",
+      "cta": "Definir um build"
+    },
+    "ecosystem": {
+      "eyebrow": "Entre no ecossistema",
+      "title": "Coordene acesso elegível, suporte e vantagens do maker node.",
+      "description": "A assinatura é para pessoas e organizações que usam a MADFAM como ambiente operacional integrado.",
+      "recommendedFor": "Makers, empreendedores, estúdios e equipes construindo em várias superfícies MADFAM.",
+      "proof1": "Acesso coordenado",
+      "proof2": "Suporte prioritário",
+      "proof3": "Vantagens de fabricação",
+      "cta": "Explorar assinatura"
+    },
+    "partner": {
+      "eyebrow": "Parceria ou investimento",
+      "title": "Conecte sua instituição, capital ou infraestrutura ao ecossistema.",
+      "description": "Crie parcerias de distribuição, integração, investimento ou ecossistema com uma entrada pública segura.",
+      "recommendedFor": "Empresas, instituições, investidores, aceleradoras e parceiros estratégicos.",
+      "proof1": "Alinhamento estratégico",
+      "proof2": "Rotas de integração",
+      "proof3": "Alavancagem do ecossistema",
+      "cta": "Iniciar conversa"
     }
   }
 }
