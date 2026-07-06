@@ -61,3 +61,7 @@ Thumbs.db
 # Payload CMS
 media/
 *.sqlite
+
+# Generated security scan artifact (scripts/security-check.js) — do not commit
+security-report.json
+

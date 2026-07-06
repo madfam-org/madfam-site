@@ -61,9 +61,13 @@ export default defineConfig({
     },
   ],
 
-  /* Run your local dev server before starting the tests */
+  /* Run your local dev server before starting the tests.
+   * CI runs the production server (a build exists from the pipeline's
+   * earlier Build step); locally we boot `next dev`. Note `pnpm dev`
+   * listens on 3001 (see package.json), so the dev command pins 3000
+   * to match the url/baseURL above. */
   webServer: {
-    command: 'pnpm dev',
+    command: process.env.CI ? 'pnpm start' : 'pnpm exec next dev -p 3000',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
