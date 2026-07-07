@@ -37,6 +37,7 @@ export default async function ProductsPage({ params }: Props) {
   function slugToKey(slug: string): string {
     const map: Record<string, string> = {
       'cotiza-studio': 'cotizaStudio',
+      'coforma-studio': 'coformaStudio',
       'forge-sight': 'forgeSight',
       'pravara-mes': 'pravaraMes',
     };
