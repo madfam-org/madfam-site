@@ -1,9 +1,43 @@
 # Production Serving Diagnosis — 2026-07-07
 
-Status: **DIAGNOSED — fixes require owner/operator console actions (documented below)**
+Status: **PARTIALLY RESOLVED (2026-07-08)** — image pipeline fixed and cluster
+serves current `main`; DNS repoint + Vercel retirement remain (see
+[Status update — 2026-07-08](#status-update--2026-07-08)).
+Original status: **DIAGNOSED — fixes require owner/operator console actions (documented below)**
 Scope: why `https://www.madfam.io` serves a build that no longer matches `main`.
 Related: [DEPLOYMENT.md](./DEPLOYMENT.md) · [DEPLOYMENT_TROUBLESHOOTING.md](./DEPLOYMENT_TROUBLESHOOTING.md) ·
 [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) · `.github/workflows/deploy-web.yml` · `k8s/production/`
+
+---
+
+## Status update — 2026-07-08
+
+The image-pipeline break (break #2 below) is **resolved**; the serving-path
+break (break #1 — DNS still points at Vercel) **remains**, pending two owner
+console actions. The cluster origin now runs current `main`, but
+`madfam.io` / `www.madfam.io` still serve the stale Vercel deployment until
+DNS is repointed.
+
+**DONE (verified 2026-07-08):**
+
+- **GHCR package ACL granted** by the owner on `madfam-site/web` and
+  `madfam-site/cms`. The `403 Forbidden` on image push is gone.
+- **`deploy-web.yml` + `deploy-cms.yml` ran successfully on `main`** — GHCR
+  push now works.
+- **Fresh digests pinned on `main`**, replacing the stale 2026-04 pins:
+  - web `sha256:c5b4eefda5981...`
+  - cms `sha256:e88581cee3a6...`
+- **Cluster origin now serves current `main`** — including the i18n
+  coforma-slug fix (PR #254).
+
+**REMAINS (owner console actions):**
+
+- **Repoint Cloudflare DNS** for `madfam.io` and `www.madfam.io` from the
+  Vercel origin to the cluster ingress. Until this happens, live responses
+  still carry `x-vercel-id` and serve the stale Nov-2025 build.
+- **Retire the Vercel project** once the repoint is verified (decision D5).
+
+The original 2026-07-07 diagnosis is preserved unchanged below for reference.
 
 ---
 
@@ -144,6 +178,9 @@ hero" was incomplete.
 
 ### 4.1 Owner action — unblock GHCR pushes (~2 min, console)
 
+**✅ DONE (2026-07-08):** the ACL was granted on both packages; GHCR pushes
+now succeed (no more `403 Forbidden`). Original instructions retained below.
+
 On both GHCR packages (`madfam-site/web`, `madfam-site/cms`):
 package settings → _Manage Actions access_ → add repository
 `madfam-org/madfam-site` with role **Write** (or enable "Inherit access from
@@ -159,6 +196,12 @@ picks up the manifest change only after the digest commit. Prefer the ACL fix.
 
 ### 4.2 Deploy and verify the cluster (dispatch + Enclii)
 
+**✅ DONE (2026-07-08):** `deploy-web.yml` and `deploy-cms.yml` ran green on
+`main`; fresh digests are pinned in `k8s/production/kustomization.yaml`
+(web `sha256:c5b4eefda5981...`, cms `sha256:e88581cee3a6...`), and the cluster
+origin now serves current `main` (includes the i18n coforma-slug fix, PR #254).
+Original steps retained below.
+
 1. Dispatch `Deploy Web` and `Deploy CMS` on `main` (workflow_dispatch).
 2. Green run = image pushed + cosign-signed + `deploy(web): update digest…`
    commit lands on `k8s/production/kustomization.yaml`.
@@ -168,6 +211,10 @@ picks up the manifest change only after the digest commit. Prefer the ACL fix.
    rollout.
 
 ### 4.3 Operator action — repoint production traffic (Cloudflare)
+
+**⏳ REMAINING (as of 2026-07-08):** 4.2 is now green, so this step is
+unblocked but not yet done — `madfam.io` / `www.madfam.io` still serve Vercel
+(`x-vercel-id` present) until the repoint below.
 
 Only after 4.2 is green:
 
