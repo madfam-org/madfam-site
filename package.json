@@ -30,19 +30,19 @@
     "check:translations": "npm run validate:translations && npm run find:missing-translations"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.11.3",
+    "@axe-core/playwright": "^4.12.1",
     "@lhci/cli": "^0.15.1",
     "@types/node": "^24.10.1",
     "audit-ci": "^7.1.0",
-    "axe-core": "4.11.4",
+    "axe-core": "4.12.1",
     "bundlewatch": "^0.4.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
-    "next": "15.5.18",
+    "next": "15.5.20",
     "nyc": "^17.1.0",
-    "prettier": "^3.8.3",
-    "shadcn": "^4.11.0",
-    "turbo": "2.9.14"
+    "prettier": "^3.9.5",
+    "shadcn": "^4.13.0",
+    "turbo": "2.10.4"
   },
   "engines": {
     "node": ">=20.0.0",
