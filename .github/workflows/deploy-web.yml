@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           # MADFAM_BOT_PAT went invalid ~2026-04-27 and broke every deploy since
           # (checkout 128: "could not read Username"). The built-in token is
