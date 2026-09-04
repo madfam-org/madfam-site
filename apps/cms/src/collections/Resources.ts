@@ -1,13 +1,21 @@
 import type { CollectionConfig } from 'payload';
 
+import { authenticated, publishedOrAuthenticated } from '../access/index.ts';
+
 export const Resources: CollectionConfig = {
   slug: 'resources',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'type', 'status', 'updatedAt'],
+    defaultColumns: ['title', 'type', '_status', 'updatedAt'],
   },
   access: {
-    read: () => true,
+    read: publishedOrAuthenticated,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {

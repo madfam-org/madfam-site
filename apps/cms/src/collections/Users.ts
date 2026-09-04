@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload';
 
+import { adminOnly, authenticated } from '../access/index.ts';
+
 export const Users: CollectionConfig = {
   slug: 'users',
   auth: true,
@@ -8,10 +10,11 @@ export const Users: CollectionConfig = {
     defaultColumns: ['email', 'role', 'createdAt'],
   },
   access: {
-    read: () => true,
-    create: ({ req: { user } }) => user?.role === 'admin',
-    update: ({ req: { user } }) => user?.role === 'admin',
-    delete: ({ req: { user } }) => user?.role === 'admin',
+    // The user list is not public. Wave 0 baseline: authenticated reads only.
+    read: authenticated,
+    create: adminOnly,
+    update: adminOnly,
+    delete: adminOnly,
   },
   fields: [
     {

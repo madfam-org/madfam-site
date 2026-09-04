@@ -1,13 +1,25 @@
 import type { CollectionConfig } from 'payload';
 
+import { authenticated, publishedOrAuthenticated } from '../access/index.ts';
+import { mirrorDraftStatus } from '../hooks/mirrorDraftStatus.ts';
+
 export const BlogPosts: CollectionConfig = {
   slug: 'blog-posts',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'author', 'status', 'publishedDate'],
+    defaultColumns: ['title', 'author', '_status', 'publishedDate'],
   },
   access: {
-    read: () => true,
+    read: publishedOrAuthenticated,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
+  },
+  versions: {
+    drafts: true,
+  },
+  hooks: {
+    beforeChange: [mirrorDraftStatus],
   },
   fields: [
     {
@@ -29,10 +41,16 @@ export const BlogPosts: CollectionConfig = {
       required: true,
     },
     {
+      // Mirror of `_status`, maintained by the beforeChange hook. Kept only for
+      // the existing site query `where[status][equals]=published`.
       name: 'status',
       type: 'select',
-      required: true,
       defaultValue: 'draft',
+      index: true,
+      enumName: 'enum_blog_posts_content_status',
+      admin: {
+        hidden: true,
+      },
       options: [
         { label: 'Draft', value: 'draft' },
         { label: 'Published', value: 'published' },
