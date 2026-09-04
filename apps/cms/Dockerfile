@@ -1,66 +1,68 @@
-# Base stage — shared tooling
-FROM node:22-alpine AS base
-RUN apk add --no-cache libc6-compat
-RUN corepack enable && corepack prepare pnpm@latest --activate
-WORKDIR /app
+# syntax=docker/dockerfile:1
+#
+# Payload v3 runs as a Next.js app: the admin panel and the REST/GraphQL API are
+# route handlers, so this image is a standard Next standalone image.
+#
+# Constraints it has to satisfy (k8s/production/madfam-cms-deployment.yaml):
+#   - runs as UID/GID 1001, non-root
+#   - readOnlyRootFilesystem: true, with /tmp as the only writable mount
+#   - probes hit GET /api/health on port 3000
+#   - no TypeScript source and no ts-node in the runtime image
 
-# Dependencies stage — install all deps needed for the build
+# Base stage — shared tooling
+FROM node:20-alpine AS base
+RUN apk add --no-cache libc6-compat
+# Pinned to the repo's packageManager (root package.json), never `latest`.
+RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
+WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Dependencies stage — install everything the build needs
 FROM base AS deps
-# Copy workspace manifests for dependency resolution
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/cms/package.json ./apps/cms/package.json
-# Install all (including devDeps) for the build step
 RUN pnpm install --frozen-lockfile --filter=@madfam/cms...
 
-# Builder stage — transpile TypeScript with ts-node
+# Builder stage — next build (standalone output)
 FROM base AS builder
-WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps/cms/node_modules ./apps/cms/node_modules
-# Copy root tsconfig (extended by apps/cms/tsconfig.json)
-COPY tsconfig.json ./tsconfig.json
-# Copy CMS source
-COPY apps/cms/ ./apps/cms/
-# Transpile src/ only — payload.config.ts is runtime-loaded by Payload, not compiled
-# Uses tsconfig.build.json which excludes payload.config.ts (rootDir conflict)
-RUN cd apps/cms && \
-    node_modules/.bin/tsc --project tsconfig.build.json
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/cms ./apps/cms
+# No PAYLOAD_SECRET here on purpose: payload.config.ts skips the secret check
+# during `next build` (NEXT_PHASE=phase-production-build) and enforces it at
+# runtime, so no placeholder secret is ever baked into a layer.
+RUN cd apps/cms && pnpm exec next build
 
-# Runner stage — minimal production image
-FROM node:22-alpine AS runner
+# Runner stage — no package manager, no source, no compiler
+FROM node:20-alpine AS runner
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV TS_NODE_SKIP_PROJECT=true
-ENV TS_NODE_TRANSPILE_ONLY=true
-ENV TS_NODE_COMPILER_OPTIONS="{\"module\":\"commonjs\",\"moduleResolution\":\"node\",\"esModuleInterop\":true,\"allowImportingTsExtensions\":true,\"noEmit\":true}"
+ENV HOSTNAME=0.0.0.0
+ENV NEXT_TELEMETRY_DISABLED=1
+# Nothing outside /tmp is writable in the cluster.
+ENV HOME=/tmp
 ENV NODE_OPTIONS="--max-old-space-size=384"
 
-# Create non-root user matching K8s securityContext (UID 1001 / GID 1001)
+# Matches the pod securityContext (runAsUser 1001 / runAsGroup 1001).
 RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 payload
+    adduser --system --uid 1001 --ingroup nodejs payload
 
-# Copy workspace manifests for pnpm production install
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY apps/cms/package.json ./apps/cms/package.json
-RUN corepack enable && corepack prepare pnpm@latest --activate && \
-    pnpm install --prod --frozen-lockfile --filter=@madfam/cms... --ignore-scripts
+COPY --from=builder --chown=1001:1001 /app/apps/cms/.next/standalone ./
+COPY --from=builder --chown=1001:1001 /app/apps/cms/.next/static ./apps/cms/.next/static
 
-# Copy transpiled output from builder
-COPY --from=builder /app/apps/cms/dist ./apps/cms/dist
+# Next writes its incremental cache under .next/cache; redirect it to the /tmp
+# emptyDir so the image runs with readOnlyRootFilesystem: true.
+RUN ln -s /tmp/next-cache /app/apps/cms/.next/cache && \
+    chown -h 1001:1001 /app/apps/cms/.next/cache
 
-# Copy payload.config.ts and src for Payload runtime introspection
-# Payload v3 reads config at startup; ts-node is available via devDeps baked in
-COPY --from=builder /app/apps/cms/payload.config.ts ./apps/cms/payload.config.ts
-COPY --from=builder /app/apps/cms/src ./apps/cms/src
-# tsconfig.json intentionally NOT copied — ts-node uses TS_NODE_SKIP_PROJECT=true
-
-# /tmp is mounted as an emptyDir by K8s for readOnlyRootFilesystem compliance
-USER payload
+USER 1001
 
 EXPOSE 3000
 
-WORKDIR /app/apps/cms
-CMD ["node", "--require", "ts-node/register", "dist/server.js"]
+# Database migrations are applied on boot (postgresAdapter prodMigrations), so
+# the runtime needs neither the Payload CLI nor a writable filesystem.
+CMD ["node", "apps/cms/server.js"]

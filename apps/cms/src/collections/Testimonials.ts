@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload';
 
+import { anyone, authenticated } from '../access/index.ts';
+
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
   admin: {
@@ -7,7 +9,10 @@ export const Testimonials: CollectionConfig = {
     defaultColumns: ['author', 'company', 'featured'],
   },
   access: {
-    read: () => true,
+    read: anyone,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
   },
   fields: [
     {

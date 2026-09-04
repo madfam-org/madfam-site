@@ -1,164 +1,134 @@
 # MADFAM CMS
 
-Content Management System powered by Payload CMS v2 for the MADFAM corporate website.
+Payload CMS v3 for MADFAM content, deployed as `madfam-cms` in the production
+cluster. Wave 0 of the multi-tenant CMS track: this app serves MADFAM's own
+content. Tenancy is not implemented yet — see [Roadmap](#roadmap).
 
-## Features
+## Shape
 
-- **Content Collections**:
-  - Transformation Programs
-  - Products (Enclii, Janua, Dhanam, Forge Sight, etc.)
-  - Case Studies
-  - Blog Posts
-  - Resources
-  - Team Members
-  - Testimonials
-  - Media
+Payload v3 is a Next.js app, not an Express server. There is no `src/server.ts`
+and no `payload.init({ express })`; the admin panel and the REST/GraphQL API are
+Next route handlers mounted from `@payloadcms/next`:
 
-- **Multilingual Support**: Spanish (es-MX) and English (en-US)
-- **User Management**: Admin and Editor roles
-- **SEO Optimization**: Meta tags and structured data
-- **Media Management**: Upload and organize images/documents
+```
+apps/cms
+├── payload.config.ts             # buildConfig: collections, localization, db, storage, CORS
+├── next.config.mjs               # withPayload + output: 'standalone'
+├── src/
+│   ├── app/(payload)/
+│   │   ├── layout.tsx            # Payload RootLayout + server functions
+│   │   ├── admin/[[...segments]] # /admin
+│   │   ├── api/[...slug]         # Payload REST API
+│   │   ├── api/graphql           # GraphQL endpoint + playground
+│   │   ├── api/health            # GET /api/health — k8s probes
+│   │   └── health                # GET /health — external monitors
+│   ├── access/                   # shared access-control functions
+│   ├── collections/              # 8 collections
+│   ├── hooks/                    # rebuild webhook, draft-status mirror
+│   └── migrations/               # generated SQL migrations
+└── scripts/smoke-health.mjs      # probe-surface smoke test
+```
 
-## Setup
-
-1. Copy `.env.example` to `.env`:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-2. Configure environment variables:
-   - `PAYLOAD_SECRET`: Generate a secure random string
-   - `DATABASE_URL`: Use the same PostgreSQL database as the web app
-   - `PAYLOAD_PUBLIC_SERVER_URL`: Set to your CMS URL
-
-3. Install dependencies:
-
-   ```bash
-   pnpm install
-   ```
-
-4. Run database migrations (from web app):
-
-   ```bash
-   cd ../web && pnpm prisma:migrate
-   ```
-
-5. Start the development server:
-   ```bash
-   pnpm dev
-   ```
-
-## Development
-
-- **Dev Server**: `pnpm dev` - Starts on port 3001 with auto-reload
-- **Build**: `pnpm build` - Creates production build
-- **Start**: `pnpm start` - Runs production server
-- **Lint**: `pnpm lint` - Check code quality
-- **Type Check**: `pnpm typecheck` - Verify TypeScript types
-
-## Access
-
-- Admin Panel: http://localhost:3001/admin
-- API: http://localhost:3001/api
-
-## Authentication
-
-The CMS uses the same user database as the main web application. Users with `ADMIN` role have full access, while `EDITOR` role has limited permissions.
+Port **3000** and the probe path **`/api/health`** are contract with the
+deployment manifests; do not move them. `/api/health` never touches the
+database, because the startup probe has to pass before migrations finish.
 
 ## Collections
 
-### Services
+`products`, `case-studies`, `blog-posts`, `resources`, `team-members`,
+`testimonials`, `media`, `users`.
 
-- Manage transformation programs
-- Multilingual content
-- Feature lists and pricing
+- **Localization**: `es` (default), `en`, `pt`, with fallback on. The ~20
+  `localized: true` fields resolve against this; `?locale=en` works on the REST
+  API.
+- **Drafts**: `versions: { drafts: true }` on `products`, `case-studies`,
+  `blog-posts`, `resources`. Unauthenticated reads see published documents only.
+  `blog-posts` and `case-studies` keep a hidden `status` field mirrored from
+  `_status` so the site's existing `where[status][equals]=published` query keeps
+  working; new consumers should filter on `_status`.
+- **Access**: `users` is authenticated-read (it used to be world-readable);
+  creates/updates/deletes require a logged-in user everywhere, and admin role for
+  `users`.
+- **Rebuild webhook**: every content collection POSTs
+  `{ collection, operation, id }` with an `x-webhook-secret` header to
+  `CMS_REBUILD_WEBHOOK_URL` on change and delete. Failures are logged and never
+  block an editor's save.
 
-### Products
+## Environment variables
 
-- Enclii, Janua, Dhanam, Forge Sight, and other products
-- Features, pricing, and benefits
-- Related case studies
+Names only — values come from the cluster secret. See `.env.example`.
 
-### Case Studies
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `PAYLOAD_SECRET` | yes | Payload signing secret |
+| `DATABASE_URL` | yes | Postgres connection string |
+| `PAYLOAD_PUBLIC_SERVER_URL` | recommended | Absolute URL of this CMS |
+| `PORT` | no (3000) | HTTP port |
+| `CMS_ALLOWED_ORIGINS` | no | Comma-separated CORS/CSRF allow-list; defaults to `http://localhost:3000,https://madfam.io,https://staging.madfam.io` |
+| `CMS_REBUILD_WEBHOOK_URL` | no | Consumer cache-invalidation endpoint; the webhook is skipped when unset |
+| `CMS_WEBHOOK_SECRET` | with the above | Shared secret sent as `x-webhook-secret` |
+| `R2_BUCKET` | for uploads | S3-compatible bucket name |
+| `R2_ENDPOINT` | for uploads | S3 API endpoint for the bucket |
+| `R2_ACCESS_KEY_ID` | for uploads | Access key |
+| `R2_SECRET_ACCESS_KEY` | for uploads | Secret key |
 
-- Client success stories
-- Project details and outcomes
-- Related services and products
+All four `R2_*` variables must be present or the storage adapter stays off and
+uploads fall back to local disk — which cannot work in the cluster, where the
+root filesystem is read-only.
 
-### Blog Posts
+## Local development
 
-- Articles and insights
-- Categories and tags
-- Author attribution
-
-### Resources
-
-- Whitepapers, guides, templates
-- Downloadable content
-- Access control
-
-### Team Members
-
-- Staff profiles
-- Roles and expertise
-- Social links
-
-### Testimonials
-
-- Client feedback
-- Featured testimonials
-- Service associations
-
-## API Usage
-
-The CMS provides REST and GraphQL APIs:
-
-```typescript
-// REST API
-fetch('http://localhost:3001/api/services')
-  .then(res => res.json())
-  .then(data => console.log(data));
-
-// GraphQL
-const query = `
-  query {
-    Services {
-      docs {
-        title
-        tier
-        features
-      }
-    }
-  }
-`;
+```bash
+pnpm install
+cp apps/cms/.env.example apps/cms/.env   # then fill it in locally
+pnpm --filter @madfam/cms dev            # http://localhost:3000/admin
 ```
 
-## Deployment
+The first user is created from the admin panel's first-run screen.
 
-1. Build the application:
+## Migrations
 
-   ```bash
-   pnpm build
-   ```
+The Postgres adapter runs with `push: false`: schema changes ship as reviewed
+migrations in `src/migrations`, never as a dev-time push.
 
-2. Set production environment variables
+```bash
+pnpm --filter @madfam/cms migrate:create <name>   # generate from config changes
+pnpm --filter @madfam/cms migrate                 # apply
+pnpm --filter @madfam/cms migrate:status          # inspect
+```
 
-3. Start the production server:
-   ```bash
-   pnpm start
-   ```
+Two things to know when generating a migration:
 
-## Security
+- `migrate:create` rewrites `src/migrations/index.ts` with an extensionless
+  import. Add the `.ts` extension back — the Payload CLI loads the config through
+  an ESM loader that requires it.
+- Change the generated `import { MigrateUpArgs, MigrateDownArgs, sql }` to a
+  type-only import for the two `Migrate*Args` types, for the same reason.
 
-- Enable CORS for specific origins only
-- Use strong `PAYLOAD_SECRET`
-- Implement rate limiting in production
-- Regular security updates
+In production, migrations are applied automatically on boot
+(`postgresAdapter.prodMigrations`), so the runtime image needs neither the CLI
+nor a writable filesystem.
 
-## Troubleshooting
+## Build, image, checks
 
-- **Build errors**: Ensure all dependencies are installed
-- **Database connection**: Verify DATABASE_URL is correct
-- **Port conflicts**: Change PORT in .env if 3001 is in use
-- **TypeScript errors**: Run `pnpm typecheck` to identify issues
+```bash
+pnpm --filter @madfam/cms build       # next build; no DB or secret needed
+pnpm --filter @madfam/cms typecheck
+pnpm --filter @madfam/cms smoke [url] # asserts /api/health, the REST API and /admin
+docker build -f apps/cms/Dockerfile . # from the repo root
+```
+
+The image is `node:20-alpine`, pnpm pinned to the repo's `packageManager`,
+multi-stage with Next standalone output, non-root (UID 1001), no TypeScript
+source and no `ts-node` in the runner, and `.next/cache` symlinked into `/tmp`
+so it runs with `readOnlyRootFilesystem: true`.
+
+## Roadmap
+
+Wave 0 (this app) is single-tenant: MADFAM content only. Multi-tenancy —
+a `tenants` collection, a `tenant` field on every content collection,
+tenant-scoped access with **Postgres row-level security underneath it**, dynamic
+CORS from tenant domains, a dedicated database, Janua OIDC on the admin, and a
+tenant-scoped export — is Wave 2+ of the plan *"Multi-tenant CMS — implementation
+and integration plan"* (MADFAM internal strategy record). Do not assume tenant
+isolation from this app: there is none yet.

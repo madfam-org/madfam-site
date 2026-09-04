@@ -1,13 +1,21 @@
 import type { CollectionConfig } from 'payload';
 
+import { authenticated, publishedOrAuthenticated } from '../access/index.ts';
+
 export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'category', 'status', 'updatedAt'],
+    defaultColumns: ['name', 'category', 'status', '_status', 'updatedAt'],
   },
   access: {
-    read: () => true,
+    read: publishedOrAuthenticated,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {
@@ -41,6 +49,9 @@ export const Products: CollectionConfig = {
       type: 'select',
       required: true,
       defaultValue: 'development',
+      // Product lifecycle, not the draft state. Explicit enum name so it cannot
+      // collide with the `_status` column that `versions.drafts` adds.
+      enumName: 'enum_products_lifecycle',
       options: [
         { label: 'Development', value: 'development' },
         { label: 'Beta', value: 'beta' },

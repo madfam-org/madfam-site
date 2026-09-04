@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload';
 
+import { anyone, authenticated } from '../access/index.ts';
+
 export const TeamMembers: CollectionConfig = {
   slug: 'team-members',
   admin: {
@@ -7,7 +9,10 @@ export const TeamMembers: CollectionConfig = {
     defaultColumns: ['name', 'role', 'order'],
   },
   access: {
-    read: () => true,
+    read: anyone,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
   },
   fields: [
     {

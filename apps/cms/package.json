@@ -3,29 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon",
-    "build": "echo 'Payload v3 does not require a separate build step'",
-    "start": "cross-env NODE_ENV=production node dist/server.js",
-    "generate:types": "payload generate:types",
-    "generate:schema": "payload generate:graphQLSchema"
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev -p 3000",
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start -p 3000",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node ./scripts/smoke-health.mjs",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "generate:schema": "cross-env NODE_OPTIONS=--no-deprecation payload generate:graphQLSchema",
+    "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
+    "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
+    "migrate:status": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:status"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.87.1",
-    "@payloadcms/richtext-slate": "^3.87.1",
+    "@payloadcms/db-postgres": "3.87.1",
+    "@payloadcms/next": "3.87.1",
+    "@payloadcms/richtext-slate": "3.87.1",
+    "@payloadcms/storage-s3": "3.87.1",
     "cross-env": "^10.1.0",
-    "dotenv": "^16.4.5",
-    "express": "^5.2.1",
-    "path-to-regexp": "0.1.13",
-    "payload": "^3.87.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "graphql": "^16.12.0",
+    "next": "15.5.23",
+    "payload": "3.87.1",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6",
     "@types/node": "^26.1.2",
-    "css-minimizer-webpack-plugin": "^5.0.1",
-    "mini-css-extract-plugin": "^2.10.2",
-    "nodemon": "^3.1.14",
-    "webpack": "^5.109.2"
+    "@types/react": "^19.2.4",
+    "@types/react-dom": "^19.2.4",
+    "typescript": "^5.9.3"
   }
 }
