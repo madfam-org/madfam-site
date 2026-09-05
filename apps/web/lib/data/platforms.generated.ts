@@ -42,6 +42,34 @@ export interface RegistryProduct {
   githubUrl?: string;
   /** Registry-owned catalog order. */
   order: number;
+  /** Tier vocabulary and prices. Absent when the registry sells no tiers. */
+  commerce?: RegistryCommerce;
+}
+
+/**
+ * What a tier costs, as the registry states it.
+ *
+ * `pending` is not "unknown" and it is certainly not `TBD` — it is the
+ * registry saying, on the record, that no list price is ratified for this tier
+ * yet. Surfaces render the pending wording from the `valueLadder` i18n
+ * namespace; they never render a number, an approximation or a placeholder.
+ */
+export type TierPricing =
+  { state: 'listed'; amount: number; currency: string; unit: string } | { state: 'pending' };
+
+export interface RegistryTier {
+  /** The registry's tier id. */
+  id: string;
+  /** The registry's label for the tier, falling back to the tier id. */
+  label: string;
+  pricing: TierPricing;
+}
+
+export interface RegistryCommerce {
+  /** Tier vocabulary, in the registry's own order. */
+  tiers: RegistryTier[];
+  /** Present only when the registry declares a checkout slug for the product. */
+  checkoutSlug?: string;
 }
 
 export interface RetiredProduct {
@@ -68,6 +96,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 1,
     externalUrl: 'https://enclii.dev',
     githubUrl: 'https://github.com/madfam-org/enclii',
+    commerce: {
+      tiers: [
+        {
+          id: 'community',
+          label: 'community',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   janua: {
     slug: 'janua',
@@ -83,6 +136,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 2,
     externalUrl: 'https://janua.dev',
     githubUrl: 'https://github.com/madfam-org/janua',
+    commerce: {
+      tiers: [
+        {
+          id: 'community',
+          label: 'community',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'enterprise',
+          label: 'enterprise',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   selva: {
     slug: 'selva',
@@ -98,6 +176,32 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 3,
     externalUrl: 'https://selva.town',
     githubUrl: 'https://github.com/madfam-org/selva-office',
+    commerce: {
+      tiers: [
+        {
+          id: 'maker',
+          label: 'maker',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'studio',
+          label: 'studio',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'enterprise',
+          label: 'enterprise',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'selva',
+    },
   },
   'forge-sight': {
     slug: 'forge-sight',
@@ -113,6 +217,32 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 4,
     externalUrl: 'https://forgesight.quest',
     dataLicense: 'DATA_LICENSE',
+    commerce: {
+      tiers: [
+        {
+          id: 'essentials',
+          label: 'essentials',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'forgesight',
+    },
   },
   dhanam: {
     slug: 'dhanam',
@@ -127,6 +257,39 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'AGPL-3.0',
     order: 5,
     externalUrl: 'https://dhan.am',
+    commerce: {
+      tiers: [
+        {
+          id: 'community',
+          label: 'community',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'essentials',
+          label: 'essentials',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'dhanam',
+    },
   },
   fortuna: {
     slug: 'fortuna',
@@ -141,6 +304,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'Proprietary',
     order: 6,
     externalUrl: 'https://fortuna.tube',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   rondelio: {
     slug: 'rondelio',
@@ -155,6 +343,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'Proprietary',
     order: 7,
     externalUrl: 'https://rondel.io',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   karafiel: {
     slug: 'karafiel',
@@ -169,6 +382,39 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'AGPL-3.0',
     order: 8,
     externalUrl: 'https://karafiel.mx',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'contador',
+          label: 'contador',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'despacho',
+          label: 'despacho',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'firma',
+          label: 'firma',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'karafiel',
+    },
   },
   tezca: {
     slug: 'tezca',
@@ -184,6 +430,32 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 9,
     externalUrl: 'https://tezca.mx',
     githubUrl: 'https://github.com/madfam-org/tezca',
+    commerce: {
+      tiers: [
+        {
+          id: 'community',
+          label: 'community',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'essentials',
+          label: 'essentials',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'institutional',
+          label: 'institutional',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'tezca',
+    },
   },
   avala: {
     slug: 'avala',
@@ -198,6 +470,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'AGPL-3.0',
     order: 10,
     externalUrl: 'https://avala.studio',
+    commerce: {
+      tiers: [
+        {
+          id: 'institution',
+          label: 'institution',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'issuer',
+          label: 'issuer',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'enterprise',
+          label: 'enterprise',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   yantra4d: {
     slug: 'yantra4d',
@@ -213,6 +510,39 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 11,
     externalUrl: 'https://yantra4d.com',
     githubUrl: 'https://github.com/madfam-org/yantra4d',
+    commerce: {
+      tiers: [
+        {
+          id: 'guest',
+          label: 'guest',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'essentials',
+          label: 'essentials',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'yantra4d',
+    },
   },
   'cotiza-studio': {
     slug: 'cotiza-studio',
@@ -228,6 +558,39 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 12,
     externalUrl: 'https://cotiza.studio',
     githubUrl: 'https://github.com/madfam-org/digifab-quoting',
+    commerce: {
+      tiers: [
+        {
+          id: 'maker',
+          label: 'maker',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'creator-pro',
+          label: 'creator-pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'business',
+          label: 'business',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'enterprise',
+          label: 'enterprise',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'cotiza',
+    },
   },
   'pravara-mes': {
     slug: 'pravara-mes',
@@ -243,6 +606,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 13,
     externalUrl: 'https://mes.madfam.io',
     githubUrl: 'https://github.com/madfam-org/pravara-mes',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   voxa: {
     slug: 'voxa',
@@ -258,6 +646,32 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 14,
     externalUrl: 'https://voxa.madfam.io',
     githubUrl: 'https://github.com/madfam-org/voxa',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'family',
+          label: 'family',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'clinic',
+          label: 'clinic',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'voxa',
+    },
   },
   'phynd-crm': {
     slug: 'phynd-crm',
@@ -273,6 +687,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 15,
     externalUrl: 'https://phynd.app',
     githubUrl: 'https://github.com/madfam-org/phynd-crm',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   ceq: {
     slug: 'ceq',
@@ -288,6 +727,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 16,
     externalUrl: 'https://ceq.lol',
     githubUrl: 'https://github.com/madfam-org/ceq',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'madfam',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   acervo: {
     slug: 'acervo',
@@ -302,11 +766,14 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'UNLICENSED',
     order: 17,
     externalUrl: 'https://acervo.madfam.io',
+    commerce: {
+      tiers: [],
+    },
   },
   kalya: {
     slug: 'kalya',
     registrySlug: 'kalya',
-    name: 'kalya',
+    name: 'Kalya',
     icon: '📅',
     category: 'Applications',
     layer: 'applications',
@@ -316,6 +783,39 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'UNLICENSED',
     order: 18,
     externalUrl: 'https://kalya.app',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'Gratis',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'solo',
+          label: 'Solo',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'team',
+          label: 'Equipo',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'biz',
+          label: 'Negocio',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'kalya',
+    },
   },
   symbiosis: {
     slug: 'symbiosis',
@@ -330,6 +830,32 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'AGPL-3.0',
     order: 19,
     externalUrl: 'https://hcm.madfam.io',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'Gratis',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'team',
+          label: 'Equipo',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'biz',
+          label: 'Negocio',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'symbiosis',
+    },
   },
   'crea-map': {
     slug: 'crea-map',
@@ -344,6 +870,18 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'UNLICENSED',
     order: 20,
     externalUrl: 'https://crea-map.madfam.io',
+    commerce: {
+      tiers: [
+        {
+          id: 'membership',
+          label: 'Acceso de equipo',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+      checkoutSlug: 'crea-map',
+    },
   },
   nauta: {
     slug: 'nauta',
@@ -357,7 +895,25 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     lifecycle: 'live',
     license: 'UNLICENSED',
     order: 21,
-    externalUrl: 'https://cto.madfam.io',
+    externalUrl: 'https://app.nauta.quest',
+    commerce: {
+      tiers: [
+        {
+          id: 'erp',
+          label: 'ERP',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'vcto',
+          label: 'vCTO',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   meridian: {
     slug: 'meridian',
@@ -373,6 +929,9 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 22,
     externalUrl: 'https://meridian.madfam.io',
     githubUrl: 'https://github.com/madfam-org/meridian',
+    commerce: {
+      tiers: [],
+    },
   },
   'fashion-cabinet': {
     slug: 'fashion-cabinet',
@@ -387,6 +946,9 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'AGPL-3.0',
     order: 23,
     externalUrl: 'https://fashioncabi.net',
+    commerce: {
+      tiers: [],
+    },
   },
   factlas: {
     slug: 'factlas',
@@ -401,6 +963,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'Proprietary',
     order: 24,
     externalUrl: 'https://factl.as',
+    commerce: {
+      tiers: [
+        {
+          id: 'pilot',
+          label: 'pilot',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'analyst',
+          label: 'analyst',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'institutional',
+          label: 'institutional',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   periplo: {
     slug: 'periplo',
@@ -414,6 +1001,31 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     lifecycle: 'incubating',
     license: 'UNLICENSED',
     order: 25,
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'essentials',
+          label: 'essentials',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'pro',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   'geom-core': {
     slug: 'geom-core',
@@ -428,6 +1040,9 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'Apache-2.0',
     order: 26,
     githubUrl: 'https://github.com/madfam-org/geom-core',
+    commerce: {
+      tiers: [],
+    },
   },
   fragua: {
     slug: 'fragua',
@@ -442,6 +1057,38 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'AGPL-3.0',
     order: 27,
     githubUrl: 'https://github.com/madfam-org/enclii',
+    commerce: {
+      tiers: [
+        {
+          id: 'arranque',
+          label: 'Arranque',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'equipo',
+          label: 'Equipo',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'escala',
+          label: 'Escala',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'dedicada',
+          label: 'Dedicada',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
   enclii_depot: {
     slug: 'enclii_depot',
@@ -456,6 +1103,77 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'AGPL-3.0',
     order: 28,
     githubUrl: 'https://github.com/madfam-org/enclii',
+    commerce: {
+      tiers: [
+        {
+          id: 'community',
+          label: 'Comunidad',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'pro',
+          label: 'Estándar',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'premium',
+          label: 'Alta disponibilidad',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'madfam',
+          label: 'Dedicado',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
+  },
+  routecraft: {
+    slug: 'routecraft',
+    registrySlug: 'routecraft',
+    name: 'RouteCraft',
+    icon: '🗺️',
+    category: 'Applications',
+    layer: 'applications',
+    track: 'self-serve',
+    status: 'production',
+    lifecycle: 'live',
+    license: 'Proprietary',
+    order: 30,
+    externalUrl: 'https://routecraft.app',
+    commerce: {
+      tiers: [
+        {
+          id: 'discovery',
+          label: 'Discovery',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'professional',
+          label: 'Professional',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'enterprise',
+          label: 'Enterprise',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
   },
 };
 
@@ -489,6 +1207,7 @@ export const REGISTRY_PRODUCT_ORDER: string[] = [
   'geom-core',
   'fragua',
   'enclii_depot',
+  'routecraft',
 ];
 
 /**
@@ -518,13 +1237,709 @@ export const RETIRED_PRODUCTS: RetiredProduct[] = [
   },
 ];
 
+/**
+ * Commerce facts only, keyed by site slug — the single source of tier
+ * vocabulary and of every price the site is allowed to publish (ruling R9).
+ * A surface that wants a tier label or a price reads it from here; a surface
+ * that types one is a bug, and `scripts/__tests__/no-hand-typed-prices.test.mjs`
+ * fails on it.
+ */
+export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = {
+  enclii: {
+    tiers: [
+      {
+        id: 'community',
+        label: 'community',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  janua: {
+    tiers: [
+      {
+        id: 'community',
+        label: 'community',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'enterprise',
+        label: 'enterprise',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  selva: {
+    tiers: [
+      {
+        id: 'maker',
+        label: 'maker',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'studio',
+        label: 'studio',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'enterprise',
+        label: 'enterprise',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'selva',
+  },
+  'forge-sight': {
+    tiers: [
+      {
+        id: 'essentials',
+        label: 'essentials',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'forgesight',
+  },
+  dhanam: {
+    tiers: [
+      {
+        id: 'community',
+        label: 'community',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'essentials',
+        label: 'essentials',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'dhanam',
+  },
+  fortuna: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  rondelio: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  karafiel: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'contador',
+        label: 'contador',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'despacho',
+        label: 'despacho',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'firma',
+        label: 'firma',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'karafiel',
+  },
+  tezca: {
+    tiers: [
+      {
+        id: 'community',
+        label: 'community',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'essentials',
+        label: 'essentials',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'institutional',
+        label: 'institutional',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'tezca',
+  },
+  avala: {
+    tiers: [
+      {
+        id: 'institution',
+        label: 'institution',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'issuer',
+        label: 'issuer',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'enterprise',
+        label: 'enterprise',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  yantra4d: {
+    tiers: [
+      {
+        id: 'guest',
+        label: 'guest',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'essentials',
+        label: 'essentials',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'yantra4d',
+  },
+  'cotiza-studio': {
+    tiers: [
+      {
+        id: 'maker',
+        label: 'maker',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'creator-pro',
+        label: 'creator-pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'business',
+        label: 'business',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'enterprise',
+        label: 'enterprise',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'cotiza',
+  },
+  'pravara-mes': {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  voxa: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'family',
+        label: 'family',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'clinic',
+        label: 'clinic',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'voxa',
+  },
+  'phynd-crm': {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  ceq: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'madfam',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  acervo: {
+    tiers: [],
+  },
+  kalya: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'Gratis',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'solo',
+        label: 'Solo',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'team',
+        label: 'Equipo',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'biz',
+        label: 'Negocio',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'kalya',
+  },
+  symbiosis: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'Gratis',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'team',
+        label: 'Equipo',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'biz',
+        label: 'Negocio',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'symbiosis',
+  },
+  'crea-map': {
+    tiers: [
+      {
+        id: 'membership',
+        label: 'Acceso de equipo',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+    checkoutSlug: 'crea-map',
+  },
+  nauta: {
+    tiers: [
+      {
+        id: 'erp',
+        label: 'ERP',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'vcto',
+        label: 'vCTO',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  meridian: {
+    tiers: [],
+  },
+  'fashion-cabinet': {
+    tiers: [],
+  },
+  factlas: {
+    tiers: [
+      {
+        id: 'pilot',
+        label: 'pilot',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'analyst',
+        label: 'analyst',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'institutional',
+        label: 'institutional',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  periplo: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'essentials',
+        label: 'essentials',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'pro',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  'geom-core': {
+    tiers: [],
+  },
+  fragua: {
+    tiers: [
+      {
+        id: 'arranque',
+        label: 'Arranque',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'equipo',
+        label: 'Equipo',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'escala',
+        label: 'Escala',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'dedicada',
+        label: 'Dedicada',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  enclii_depot: {
+    tiers: [
+      {
+        id: 'community',
+        label: 'Comunidad',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'pro',
+        label: 'Estándar',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'premium',
+        label: 'Alta disponibilidad',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'madfam',
+        label: 'Dedicado',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+  routecraft: {
+    tiers: [
+      {
+        id: 'discovery',
+        label: 'Discovery',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'professional',
+        label: 'Professional',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'enterprise',
+        label: 'Enterprise',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
+};
+
+/**
+ * How many tiers the registry currently prices, and how many it does not.
+ * `listed` is 0 for as long as the registry ratifies no price, and that is the
+ * whole reason the site shows pending wording instead of numbers.
+ */
+export const REGISTRY_PRICING_STATE = {
+  listed: 0,
+  pending: 79,
+} as const;
+
 /** Provenance of the vendored projection. The hash is the freshness check. */
 export const REGISTRY_SOURCE = {
   schema: 'madfam-product-projection/v1',
   registryVersion: 4,
   lastUpdated: '2026-09-05',
   generatedFrom: 'internal-devops/ecosystem/registry/products.yaml',
-  sha256: 'b9a1a315eedcb1c3c3cf13fc7c8c17a0fa12048f51750488885192594091cb6e',
-  productCount: 28,
+  sha256: 'b2a80ca57dd6fdf20905771855cc264e6d6362c4d40c1297a04ba3c250951fe1',
+  productCount: 29,
   retiredCount: 3,
 } as const;
