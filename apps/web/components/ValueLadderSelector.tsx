@@ -4,8 +4,12 @@
 // Mirrors the AssessmentClient pattern (question ids + mapped options → a scored
 // recommendation → CTAs). Two questions map a visitor to a band + a size, then
 // the pure `recommendRung` engine (lib/data/value-ladder) returns the smallest
-// rung that does the job, its price, and the two CTAs. Honesty rule (§3.4): the
+// rung that does the job, its price STATE, and the two CTAs. Honesty rule: the
 // rung above is offered as an option, never a default.
+//
+// The price shown here is whatever the registry states (ruling R9). Today the
+// registry ratifies no price for any tier, so this renders the pending sentence.
+// It never renders a number this component made up, and never «TBD».
 
 import { useState } from 'react';
 import { Button, Card, CardContent } from '@/components/ui';
@@ -18,7 +22,7 @@ import {
   type NeedId,
   type SizeId,
   type BandId,
-  type RungPrice,
+  type TierPricing,
 } from '@/lib/data/value-ladder';
 
 export interface ValueLadderSelectorStrings {
@@ -32,10 +36,8 @@ export interface ValueLadderSelectorStrings {
   sizes: Record<SizeId, string>;
   bands: Record<BandId, string>;
   bandTaglines: Record<BandId, string>;
-  priceTbd: string;
-  priceFrom: string;
-  perSeatMonth: string;
-  perMonth: string;
+  /** Wording for a tier the registry has not priced. */
+  pricePending: string;
   resultHeading: string;
   resultRecommended: string; // "Te recomendamos"
   grantsLabel: string;
@@ -63,13 +65,6 @@ export function ValueLadderSelector({ strings, ladderAnchor }: ValueLadderSelect
 
   const formatStep = (current: number) =>
     strings.step.replace('{current}', String(current)).replace('{total}', '2');
-
-  const formatPrice = (price: RungPrice): string => {
-    if (price.kind === 'tbd') return strings.priceTbd;
-    const unit = price.unitKey === 'perSeatMonth' ? strings.perSeatMonth : strings.perMonth;
-    const amount = new Intl.NumberFormat('es-MX').format(price.amount);
-    return `MX$${amount} ${unit}`;
-  };
 
   const reset = () => {
     setStage('need');
@@ -160,7 +155,7 @@ export function ValueLadderSelector({ strings, ladderAnchor }: ValueLadderSelect
 
             <div className="flex items-baseline gap-2 mb-6">
               <span className="text-3xl font-bold text-neutral-900 dark:text-white">
-                {rec.price.kind === 'tbd' ? strings.priceFrom : formatPrice(rec.price)}
+                {renderPricing(rec.pricing, strings.pricePending)}
               </span>
             </div>
 
@@ -232,6 +227,19 @@ export function ValueLadderSelector({ strings, ladderAnchor }: ValueLadderSelect
   }
 
   return null;
+}
+
+/**
+ * A price the registry states, or the pending sentence. There is no third
+ * branch: this component has no number of its own to fall back to.
+ */
+function renderPricing(pricing: TierPricing, pending: string): string {
+  if (pricing.state === 'pending') return pending;
+  return `${new Intl.NumberFormat(undefined, {
+    style: 'currency',
+    currency: pricing.currency,
+    maximumFractionDigits: 0,
+  }).format(pricing.amount)}`;
 }
 
 function SelectorProgress({ label, percent }: { label: string; percent: number }) {

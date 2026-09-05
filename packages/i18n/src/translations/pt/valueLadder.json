@@ -38,7 +38,7 @@
       "tagline": "Seus serviços atrás de uma porta, marca e fatura.",
       "oneLine": "Quando você já usa várias ferramentas e quer unificá-las sob a sua marca.",
       "grants": "Todos os seus serviços contratados atrás de uma porta, uma identidade e uma fatura, com a sua marca.",
-      "valueVs": "Frente a Zoho ou Odoo: substitui o console de administração pelo melhor da categoria, nativo do fisco mexicano, ~20% abaixo do titular.",
+      "valueVs": "Frente a Zoho ou Odoo: substitui o console de administração pelo melhor da categoria, nativo do fisco mexicano e abaixo do titular.",
       "priceNote": ""
     },
     "vcto": {
@@ -48,15 +48,6 @@
       "grants": "Um CTO fracionado mais a cabine que opera toda a sua operação por meio do ecossistema. O topo da escada.",
       "valueVs": "Frente a uma contratação em tempo integral: uma fração do custo de um CTO, para operar um ecossistema inteiro.",
       "priceNote": ""
-    }
-  },
-  "slices": {
-    "extra": {
-      "crea-map": { "name": "Crea MAP" },
-      "kalya": { "name": "Kalya" },
-      "selva": { "name": "Selva" },
-      "symbiosis": { "name": "Symbiosis" },
-      "acervo": { "name": "Acervo" }
     }
   },
   "bundles": {
@@ -69,36 +60,12 @@
       "description": "Da ideia à venda: design paramétrico com Yantra4D, preço com Forgesight e cotação com Cotiza."
     }
   },
-  "rungs": {
-    "erp-self-serve": {
-      "name": "Autosserviço",
-      "description": "Para equipes pequenas que unificam suas ferramentas atrás de uma porta."
-    },
-    "erp-team": {
-      "name": "Equipe",
-      "description": "Para equipes em crescimento que precisam de mais assentos e controle."
-    },
-    "erp-biz": {
-      "name": "Negócio",
-      "description": "Para negócios que operam várias plataformas sob a sua marca."
-    },
-    "vcto-esencial": {
-      "name": "Essencial",
-      "description": "O ponto de entrada do vCTO: liderança técnica fracionada para a sua operação."
-    },
-    "vcto-ecosistema": {
-      "name": "Ecossistema",
-      "description": "O degrau validado pelo mercado: liderança técnica que exercita todo o ecossistema."
-    },
-    "vcto-escala": {
-      "name": "Escala",
-      "description": "Para operações em grande escala, cotado por escopo."
-    }
-  },
   "price": {
-    "from": "A partir de / sob medida",
-    "perSeatMonth": "/ assento / mês",
-    "perMonth": "/ mês"
+    "pending": "Preço a definir — publicamos aqui assim que for ratificado.",
+    "unit": {
+      "perMonth": "/ mês",
+      "perSeatMonth": "/ assento / mês"
+    }
   },
   "ladder": {
     "title": "A escada, degrau por degrau",

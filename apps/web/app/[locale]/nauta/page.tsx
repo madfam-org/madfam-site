@@ -11,7 +11,7 @@ import {
   nautaErpCheckoutUrl,
   KALYA_DISCOVERY_CALL_URL,
   type NautaRung,
-  type RungPrice,
+  type TierPricing,
 } from '@/lib/data/nauta-product';
 
 type Props = {
@@ -39,13 +39,16 @@ export default async function NautaPage({ params }: Props) {
   const validLocale = locale as Locale;
   const t = await getTranslations({ locale, namespace: 'nauta' });
 
-  // Format a real MXN price; TBD prices render the «desde» label.
-  const formatPrice = (price: RungPrice): string => {
-    if (price.kind === 'tbd') return t('product.priceFrom');
-    const unit =
-      price.unitKey === 'perSeatMonth' ? t('product.perSeatMonth') : t('product.perMonth');
-    const amount = new Intl.NumberFormat('es-MX').format(price.amount);
-    return `MX$${amount} ${unit}`;
+  // Render a price the REGISTRY states. A tier the registry has not priced
+  // renders the pending sentence — never a number, never «TBD» (ruling R9).
+  const formatPrice = (pricing: TierPricing): string => {
+    if (pricing.state === 'pending') return t('product.pricePending');
+    const amount = new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: pricing.currency,
+      maximumFractionDigits: 0,
+    }).format(pricing.amount);
+    return `${amount} ${t(`product.unit.${pricing.unit}`)}`;
   };
 
   const registrySlices = getNautaCatalogRegistrySlices();
@@ -160,7 +163,7 @@ export default async function NautaPage({ params }: Props) {
 
                 {/* Rung tiers */}
                 <div className="p-6">
-                  <div className="grid sm:grid-cols-3 gap-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
                     {rung.tiers.map(tier => {
                       const selfServe = rung.motion === 'self-serve';
                       return (
@@ -169,13 +172,13 @@ export default async function NautaPage({ params }: Props) {
                           className="rounded-xl border border-neutral-200 dark:border-gray-800 p-5 flex flex-col"
                         >
                           <h4 className="font-bold text-neutral-900 dark:text-white mb-1">
-                            {t(`rungs.${tier.id}.name`)}
+                            {tier.label}
                           </h4>
                           <p className="text-2xl font-bold text-neutral-900 dark:text-white mb-1">
-                            {formatPrice(tier.price)}
+                            {formatPrice(tier.pricing)}
                           </p>
                           <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 flex-1">
-                            {t(`rungs.${tier.id}.description`)}
+                            {t(`product.rungs.${rung.id}.oneLine`)}
                           </p>
                           {selfServe ? (
                             <a
@@ -234,7 +237,7 @@ export default async function NautaPage({ params }: Props) {
                 className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-neutral-200 dark:border-gray-700 text-sm text-neutral-800 dark:text-neutral-200"
               >
                 <span aria-hidden="true">{s.icon}</span>
-                {t(`catalog.extra.${s.id}.name`)}
+                {s.name}
               </span>
             ))}
           </div>

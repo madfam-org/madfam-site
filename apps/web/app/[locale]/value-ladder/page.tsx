@@ -9,16 +9,15 @@ import {
 } from '@/components/ValueLadderSelector';
 import {
   BANDS_DESC,
-  ERP_RUNGS,
-  VCTO_RUNGS,
   BUNDLES,
-  EXTRA_SLICES,
+  getBandRungs,
+  getExtraSlices,
   getRegistrySlices,
   dhanamCheckoutUrl,
   KALYA_DISCOVERY_CALL_URL,
   type BandId,
   type LadderRung,
-  type RungPrice,
+  type TierPricing,
 } from '@/lib/data/value-ladder';
 
 type Props = {
@@ -47,12 +46,19 @@ export default async function ValueLadderPage({ params }: Props) {
   const validLocale = locale as Locale;
   const t = await getTranslations({ locale, namespace: 'valueLadder' });
 
-  // Format a real price into an es-MX string; TBD prices render the «desde» label.
-  const formatPrice = (price: RungPrice): string => {
-    if (price.kind === 'tbd') return t('price.from');
-    const unit = price.unitKey === 'perSeatMonth' ? t('price.perSeatMonth') : t('price.perMonth');
-    const amount = new Intl.NumberFormat('es-MX').format(price.amount);
-    return `MX$${amount} ${unit}`;
+  // Render a price the REGISTRY states. A tier the registry has not priced
+  // renders the pending sentence — never a number, never «TBD» (ruling R9).
+  // The amount, currency and unit all come from the registry; only the wording
+  // around them is copy, because the projection deliberately carries no
+  // localized strings.
+  const formatPrice = (pricing: TierPricing): string => {
+    if (pricing.state === 'pending') return t('price.pending');
+    const amount = new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: pricing.currency,
+      maximumFractionDigits: 0,
+    }).format(pricing.amount);
+    return `${amount} ${t(`price.unit.${pricing.unit}`)}`;
   };
 
   const registrySlices = getRegistrySlices();
@@ -91,10 +97,7 @@ export default async function ValueLadderPage({ params }: Props) {
       erp: t('bands.erp.tagline'),
       vcto: t('bands.vcto.tagline'),
     },
-    priceTbd: t('price.from'),
-    priceFrom: t('price.from'),
-    perSeatMonth: t('price.perSeatMonth'),
-    perMonth: t('price.perMonth'),
+    pricePending: t('price.pending'),
     resultHeading: t('selector.resultHeading'),
     resultRecommended: t('selector.resultRecommended'),
     grantsLabel: t('selector.grantsLabel'),
@@ -115,9 +118,11 @@ export default async function ValueLadderPage({ params }: Props) {
   const bandRungs: Record<BandId, LadderRung[]> = {
     slice: [],
     bundle: [],
-    erp: ERP_RUNGS,
-    vcto: VCTO_RUNGS,
+    erp: getBandRungs('erp'),
+    vcto: getBandRungs('vcto'),
   };
+
+  const extraSlices = getExtraSlices();
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-neutral-50 to-white dark:from-gray-950 dark:to-gray-900">
@@ -276,7 +281,7 @@ export default async function ValueLadderPage({ params }: Props) {
                             {p.name}
                           </a>
                         ))}
-                        {EXTRA_SLICES.map(s => (
+                        {extraSlices.map(s => (
                           <a
                             key={s.slug}
                             href={dhanamCheckoutUrl(s.checkoutSlug)}
@@ -285,7 +290,7 @@ export default async function ValueLadderPage({ params }: Props) {
                             className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-neutral-200 dark:border-gray-700 text-sm text-neutral-800 dark:text-neutral-200 hover:border-lavender/50 hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                           >
                             <span aria-hidden="true">{s.icon}</span>
-                            {t(`slices.extra.${s.id}.name`)}
+                            {s.name}
                           </a>
                         ))}
                       </div>
@@ -310,7 +315,7 @@ export default async function ValueLadderPage({ params }: Props) {
                             {t(`bundles.${bundle.id}.description`)}
                           </p>
                           <p className="text-lg font-bold text-neutral-900 dark:text-white mb-4">
-                            {t('price.from')}
+                            {formatPrice(bundle.pricing)}
                           </p>
                           <a
                             href={dhanamCheckoutUrl(bundle.checkoutSlug)}
@@ -325,9 +330,9 @@ export default async function ValueLadderPage({ params }: Props) {
                     </div>
                   )}
 
-                  {/* Bands 3 & 4 — priced tiers */}
+                  {/* Bands 3 & 4 — the registry's Nauta tiers */}
                   {(band.id === 'erp' || band.id === 'vcto') && (
-                    <div className="grid sm:grid-cols-3 gap-4">
+                    <div className="grid sm:grid-cols-2 gap-4">
                       {bandRungs[band.id].map(rung => {
                         const selfServe = rung.motion === 'self-serve' && rung.checkoutSlug;
                         return (
@@ -336,13 +341,13 @@ export default async function ValueLadderPage({ params }: Props) {
                             className="rounded-xl border border-neutral-200 dark:border-gray-800 p-5 flex flex-col"
                           >
                             <h4 className="font-bold text-neutral-900 dark:text-white mb-1">
-                              {t(`rungs.${rung.id}.name`)}
+                              {rung.label}
                             </h4>
                             <p className="text-2xl font-bold text-neutral-900 dark:text-white mb-1">
-                              {formatPrice(rung.price)}
+                              {formatPrice(rung.pricing)}
                             </p>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 flex-1">
-                              {t(`rungs.${rung.id}.description`)}
+                              {t(`bands.${band.id}.grants`)}
                             </p>
                             {selfServe && rung.checkoutSlug ? (
                               <a
