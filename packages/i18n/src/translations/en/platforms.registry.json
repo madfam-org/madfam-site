@@ -70,7 +70,7 @@
     "license": "UNLICENSED"
   },
   "kalya": {
-    "name": "kalya",
+    "name": "Kalya",
     "license": "UNLICENSED"
   },
   "symbiosis": {
@@ -112,5 +112,9 @@
   "enclii_depot": {
     "name": "Enclii Depot",
     "license": "AGPL-3.0"
+  },
+  "routecraft": {
+    "name": "RouteCraft",
+    "license": "Proprietary"
   }
 }

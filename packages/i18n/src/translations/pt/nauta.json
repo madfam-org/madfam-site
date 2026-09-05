@@ -34,9 +34,6 @@
   "product": {
     "title": "Duas formas de usar a Nauta",
     "subtitle": "Comece no self-service com o ERP. Quando quiser que operemos por você, suba para o vCTO. O mesmo negócio, o mesmo acesso —nada se perde ao mudar de nível.",
-    "priceFrom": "a partir de",
-    "perSeatMonth": "por assento/mês",
-    "perMonth": "por mês",
     "rungs": {
       "erp": {
         "name": "Nauta ERP",
@@ -50,45 +47,17 @@
         "oneLine": "Um CTO fracionado e sua equipe operam seu stack: decidem, integram e executam por você. Com escopo sob medida.",
         "valueVs": "Um diretor de tecnologia em tempo integral custa milhões por ano. O vCTO entrega essa capacidade de operação por uma fração, e só quando você precisa."
       }
-    }
-  },
-  "rungs": {
-    "erp-self-serve": {
-      "name": "Self-service",
-      "description": "Para operar sozinho ou em equipe pequena. Um acesso, seus serviços, pronto hoje."
     },
-    "erp-team": {
-      "name": "Equipe",
-      "description": "Para equipes em crescimento. Papéis, permissões e a cabine completa para vários assentos."
-    },
-    "erp-biz": {
-      "name": "Negócio",
-      "description": "Para uma operação estabelecida. Todo o catálogo, governança e suporte prioritário."
-    },
-    "vcto-esencial": {
-      "name": "Essencial",
-      "description": "Um operador técnico fracionado que conduz seu stack, num ritmo de trabalho definido."
-    },
-    "vcto-ecosistema": {
-      "name": "Ecossistema",
-      "description": "Operação técnica de maior alcance por todo o ecossistema MADFAM."
-    },
-    "vcto-escala": {
-      "name": "Escala",
-      "description": "Uma equipe técnica dedicada para operar e escalar toda a sua tecnologia."
+    "pricePending": "Preço a definir — publicamos aqui assim que for ratificado.",
+    "unit": {
+      "perMonth": "/ mês",
+      "perSeatMonth": "/ assento / mês"
     }
   },
   "catalog": {
     "title": "O que a Nauta reúne",
     "subtitle": "Cada um destes serviços vive sob um mesmo acesso no seu ERP. Comece com um; some os demais quando precisar.",
-    "note": "O preço de cada serviço vive na sua própria página. O ERP os reúne sob um único acesso.",
-    "extra": {
-      "crea-map": { "name": "Crea MAP" },
-      "kalya": { "name": "Kalya" },
-      "selva": { "name": "Selva" },
-      "symbiosis": { "name": "Symbiosis" },
-      "acervo": { "name": "Acervo" }
-    }
+    "note": "O preço de cada serviço vive na sua própria página. O ERP os reúne sob um único acesso."
   },
   "cta": {
     "selfServe": "Começar no self-service",

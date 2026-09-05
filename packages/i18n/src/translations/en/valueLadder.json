@@ -38,7 +38,7 @@
       "tagline": "Your services behind one door, brand, and bill.",
       "oneLine": "When you already run several tools and want to unify them under your brand.",
       "grants": "All your entitled services behind one door, one identity, and one bill, under your brand.",
-      "valueVs": "Versus Zoho or Odoo: replaces the admin console with best-of-breed, MX-fiscal-native, ~20% below the incumbent.",
+      "valueVs": "Against Zoho or Odoo: it replaces the admin console with best-of-breed pieces, native to Mexican tax rules, and below the incumbent.",
       "priceNote": ""
     },
     "vcto": {
@@ -48,15 +48,6 @@
       "grants": "A fractional CTO plus the cockpit that runs your whole operation across the ecosystem. The top of the ladder.",
       "valueVs": "Versus a full-time hire: a fraction of a CTO's cost, to operate an entire ecosystem.",
       "priceNote": ""
-    }
-  },
-  "slices": {
-    "extra": {
-      "crea-map": { "name": "Crea MAP" },
-      "kalya": { "name": "Kalya" },
-      "selva": { "name": "Selva" },
-      "symbiosis": { "name": "Symbiosis" },
-      "acervo": { "name": "Acervo" }
     }
   },
   "bundles": {
@@ -69,36 +60,12 @@
       "description": "From idea to sale: parametric design with Yantra4D, pricing with Forgesight, and quoting with Cotiza."
     }
   },
-  "rungs": {
-    "erp-self-serve": {
-      "name": "Self-serve",
-      "description": "For small teams unifying their tools behind one door."
-    },
-    "erp-team": {
-      "name": "Team",
-      "description": "For growing teams that need more seats and control."
-    },
-    "erp-biz": {
-      "name": "Business",
-      "description": "For businesses running several platforms under their brand."
-    },
-    "vcto-esencial": {
-      "name": "Essential",
-      "description": "The entry point to the vCTO: fractional technical leadership for your operation."
-    },
-    "vcto-ecosistema": {
-      "name": "Ecosystem",
-      "description": "The market-validated rung: technical leadership that exercises the whole ecosystem."
-    },
-    "vcto-escala": {
-      "name": "Scale",
-      "description": "For large-scale operations, quoted by scope."
-    }
-  },
   "price": {
-    "from": "From / tailored",
-    "perSeatMonth": "/ seat / mo",
-    "perMonth": "/ mo"
+    "pending": "Price not yet set — it appears here the moment it is ratified.",
+    "unit": {
+      "perMonth": "/ month",
+      "perSeatMonth": "/ seat / month"
+    }
   },
   "ladder": {
     "title": "The ladder, rung by rung",

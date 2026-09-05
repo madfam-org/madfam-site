@@ -417,6 +417,7 @@
         "track": "ecosystem",
         "order": 10,
         "icon": "🎓",
+        "banner_keyword": "COMPETENCY TRAINING",
         "show_in_banner": true
       },
       "commerce": {
@@ -575,6 +576,7 @@
         "track": "self-serve",
         "order": 14,
         "icon": "🗣️",
+        "banner_keyword": "ASSISTIVE COMMUNICATION",
         "show_in_banner": true
       },
       "commerce": {
@@ -685,6 +687,7 @@
         "track": "self-serve",
         "order": 17,
         "icon": "📚",
+        "banner_keyword": "RECORDS ENGINE",
         "show_in_banner": true
       },
       "commerce": {
@@ -694,7 +697,7 @@
     },
     {
       "slug": "kalya",
-      "display_name": "kalya",
+      "display_name": "Kalya",
       "lifecycle": "live",
       "lifecycle_verified": "2026-08-24",
       "license": "UNLICENSED",
@@ -718,6 +721,7 @@
         "track": "self-serve",
         "order": 18,
         "icon": "📅",
+        "banner_keyword": "BOOKING & SCHEDULING",
         "show_in_banner": true
       },
       "commerce": {
@@ -821,7 +825,7 @@
       "slug": "nauta",
       "display_name": "Nauta",
       "lifecycle": "live",
-      "lifecycle_verified": "2026-08-24",
+      "lifecycle_verified": "2026-09-05",
       "license": "UNLICENSED",
       "layer": "fruit",
       "repo": {
@@ -831,9 +835,13 @@
         "language": "TypeScript"
       },
       "domains": {
-        "primary": "cto.madfam.io",
+        "primary": "app.nauta.quest",
         "hosts": [
-          "crea.madfam.io"
+          "nauta.quest",
+          "www.nauta.quest",
+          "crea.madfam.io",
+          "crea-erp.madfam.io",
+          "ensayo.madfam.io"
         ],
         "infra_hosts": []
       },
@@ -842,6 +850,7 @@
         "track": "platform",
         "order": 21,
         "icon": "🧭",
+        "banner_keyword": "FRACTIONAL CTO",
         "show_in_banner": true
       },
       "commerce": {
@@ -916,6 +925,7 @@
         "track": "ecosystem",
         "order": 23,
         "icon": "👗",
+        "banner_keyword": "PARAMETRIC FASHION",
         "show_in_banner": true
       },
       "commerce": {
@@ -948,6 +958,7 @@
         "track": "ecosystem",
         "order": 24,
         "icon": "🌎",
+        "banner_keyword": "GEOSPATIAL FACTS",
         "show_in_banner": true
       },
       "commerce": {
@@ -1100,6 +1111,46 @@
           "pro": "Estándar",
           "premium": "Alta disponibilidad",
           "madfam": "Dedicado"
+        }
+      }
+    },
+    {
+      "slug": "routecraft",
+      "display_name": "RouteCraft",
+      "lifecycle": "live",
+      "lifecycle_verified": "2026-09-05",
+      "license": "Proprietary",
+      "layer": "fruit",
+      "repo": {
+        "name": "routecraft",
+        "github_org": "madfam-org",
+        "visibility": "private",
+        "language": "TypeScript + Python"
+      },
+      "domains": {
+        "primary": "routecraft.app",
+        "hosts": [],
+        "infra_hosts": []
+      },
+      "site": {
+        "category": "Applications",
+        "track": "self-serve",
+        "order": 30,
+        "icon": "🗺️",
+        "banner_keyword": "TRIP PLANNING",
+        "show_in_banner": true
+      },
+      "commerce": {
+        "tiers": [
+          "discovery",
+          "professional",
+          "enterprise"
+        ],
+        "admin_tier": "admin",
+        "tier_labels": {
+          "discovery": "Discovery",
+          "professional": "Professional",
+          "enterprise": "Enterprise"
         }
       }
     }

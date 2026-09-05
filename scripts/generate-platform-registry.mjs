@@ -115,6 +115,16 @@ const STATUS_BY_LIFECYCLE = {
 
 const TRACKS = ['self-serve', 'platform', 'ecosystem'];
 
+// The registry's `commerce` block, key by key. It is an ALLOW-LIST on purpose:
+// a key the registry starts carrying and this generator does not know about
+// must fail loudly here rather than be dropped on the floor. That matters most
+// for prices — ruling R9 amended D6 to "prices appear only on the value-ladder
+// surface, sourced from the registry's `commerce` block, never hand-typed,
+// never TBD", and ruling R11 is "publish no number that is not rendered from
+// the registry". A silently-ignored price field would put the site back to
+// publishing hand-typed numbers without anyone noticing.
+const COMMERCE_KEYS = ['tiers', 'admin_tier', 'tier_labels', 'checkout_slug', 'prices'];
+
 // ─── Derivation ──────────────────────────────────────────────────────────────
 
 function fail(message) {
@@ -124,6 +134,62 @@ function fail(message) {
 /** The slug this site uses in URLs and i18n keys. */
 function siteSlug(product) {
   return product.site_slug ?? product.slug;
+}
+
+/**
+ * The public commerce facts for one product: its tier vocabulary, the label the
+ * registry gives each tier, whether that tier carries a ratified list price, and
+ * the checkout slug.
+ *
+ * `pricing` is the load-bearing part. A tier is `listed` only when the
+ * projection carries a price for it, and `pending` otherwise — there is no
+ * third state and no place for the site to put a number of its own. As of
+ * registry v4 the projection carries no price for any tier of any product, so
+ * every tier here is `pending` and the site publishes no price at all. The day
+ * the registry ratifies one, it renders; until then the surface says so in
+ * words. That is R9 and R11 expressed as data instead of as a review comment.
+ */
+function deriveCommerce(slug, commerce) {
+  if (!commerce) return undefined;
+
+  for (const key of Object.keys(commerce)) {
+    if (!COMMERCE_KEYS.includes(key)) {
+      fail(
+        `${slug}: unknown registry commerce key ${JSON.stringify(key)}. ` +
+          `Teach scripts/generate-platform-registry.mjs what it means before vendoring it — ` +
+          `a dropped price field is how hand-typed prices come back.`
+      );
+    }
+  }
+
+  const labels = commerce.tier_labels ?? {};
+  const prices = commerce.prices ?? {};
+
+  const tiers = (commerce.tiers ?? []).map(id => {
+    const price = prices[id];
+    if (!price) return { id, label: labels[id] ?? id, pricing: { state: 'pending' } };
+
+    for (const field of ['amount', 'currency', 'unit']) {
+      if (price[field] === undefined) {
+        fail(`${slug}/${id}: registry price is missing ${field}`);
+      }
+    }
+    return {
+      id,
+      label: labels[id] ?? id,
+      pricing: {
+        state: 'listed',
+        amount: price.amount,
+        currency: price.currency,
+        unit: price.unit,
+      },
+    };
+  });
+
+  return {
+    tiers,
+    ...(commerce.checkout_slug ? { checkoutSlug: commerce.checkout_slug } : {}),
+  };
 }
 
 function deriveProduct(product) {
@@ -167,6 +233,9 @@ function deriveProduct(product) {
   }
 
   if (product.data_license) derived.dataLicense = product.data_license;
+
+  const commerce = deriveCommerce(slug, product.commerce);
+  if (commerce) derived.commerce = commerce;
 
   return derived;
 }
@@ -289,6 +358,34 @@ export interface RegistryProduct {
   githubUrl?: string;
   /** Registry-owned catalog order. */
   order: number;
+  /** Tier vocabulary and prices. Absent when the registry sells no tiers. */
+  commerce?: RegistryCommerce;
+}
+
+/**
+ * What a tier costs, as the registry states it.
+ *
+ * \`pending\` is not "unknown" and it is certainly not \`TBD\` — it is the
+ * registry saying, on the record, that no list price is ratified for this tier
+ * yet. Surfaces render the pending wording from the \`valueLadder\` i18n
+ * namespace; they never render a number, an approximation or a placeholder.
+ */
+export type TierPricing =
+  { state: 'listed'; amount: number; currency: string; unit: string } | { state: 'pending' };
+
+export interface RegistryTier {
+  /** The registry's tier id. */
+  id: string;
+  /** The registry's label for the tier, falling back to the tier id. */
+  label: string;
+  pricing: TierPricing;
+}
+
+export interface RegistryCommerce {
+  /** Tier vocabulary, in the registry's own order. */
+  tiers: RegistryTier[];
+  /** Present only when the registry declares a checkout slug for the product. */
+  checkoutSlug?: string;
 }
 
 export interface RetiredProduct {
@@ -314,6 +411,40 @@ export const REGISTRY_PRODUCT_ORDER: string[] = ${tsValue(
  * which is how one of them survived in eleven files.
  */
 export const RETIRED_PRODUCTS: RetiredProduct[] = ${tsValue(retired, '')};
+
+/**
+ * Commerce facts only, keyed by site slug — the single source of tier
+ * vocabulary and of every price the site is allowed to publish (ruling R9).
+ * A surface that wants a tier label or a price reads it from here; a surface
+ * that types one is a bug, and \`scripts/__tests__/no-hand-typed-prices.test.mjs\`
+ * fails on it.
+ */
+export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = ${tsValue(
+    Object.fromEntries(
+      products.filter(product => product.commerce).map(product => [product.slug, product.commerce])
+    ),
+    ''
+  )};
+
+/**
+ * How many tiers the registry currently prices, and how many it does not.
+ * \`listed\` is 0 for as long as the registry ratifies no price, and that is the
+ * whole reason the site shows pending wording instead of numbers.
+ */
+export const REGISTRY_PRICING_STATE = ${tsValue(
+    (() => {
+      let listed = 0;
+      let pending = 0;
+      for (const product of products) {
+        for (const tier of product.commerce?.tiers ?? []) {
+          if (tier.pricing.state === 'listed') listed += 1;
+          else pending += 1;
+        }
+      }
+      return { listed, pending };
+    })(),
+    ''
+  )} as const;
 
 /** Provenance of the vendored projection. The hash is the freshness check. */
 export const REGISTRY_SOURCE = ${tsValue(stamp, '')} as const;
