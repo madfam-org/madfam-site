@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 export default function UnsubscribePage() {
   const t = useTranslations('legal.unsubscribe');
+  const tEntity = useTranslations('legal.entity');
   const searchParams = useSearchParams();
   const emailParam = searchParams.get('email') || '';
 
@@ -69,7 +70,9 @@ export default function UnsubscribePage() {
               </button>
               {status === 'error' && <p className="text-sm text-red-600">{t('errorMessage')}</p>}
             </form>
-            <p className="mt-6 text-xs text-obsidian/50 text-center">{t('footer')}</p>
+            <p className="mt-6 text-xs text-obsidian/50 text-center">
+              {t('footer', { entity: tEntity('line') })}
+            </p>
           </>
         )}
       </div>
