@@ -191,7 +191,7 @@ export function Footer() {
             <div className="mt-8 pt-8 border-t border-white/10">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
                 <p>
-                  © {currentYear} MADFAM. {t('common.footer.rights')}
+                  © {currentYear} {t('legal.entity.line')}. {t('common.footer.rights')}
                 </p>
                 <div className="flex gap-6">
                   <Link

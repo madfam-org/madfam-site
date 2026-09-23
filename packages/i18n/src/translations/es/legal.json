@@ -1,11 +1,15 @@
 {
+  "entity": {
+    "legalName": "Innovaciones MADFAM S.A.S. de C.V.",
+    "line": "Innovaciones MADFAM S.A.S. de C.V. · Cuernavaca, Morelos, México"
+  },
   "privacy": {
     "title": "Política de Privacidad",
     "lastUpdated": "Última actualización: {date}",
-    "lastUpdatedDate": "Enero 2024",
+    "lastUpdatedDate": "23 de septiembre de 2026",
     "intro": {
       "title": "1. Introducción",
-      "content": "En MADFAM (\"nosotros\", \"nuestro\" o \"la empresa\"), valoramos y respetamos tu privacidad. Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos tu información personal cuando utilizas nuestro sitio web y servicios."
+      "content": "Innovaciones MADFAM S.A.S. de C.V. («MADFAM», «nosotros»), con domicilio en Cuernavaca, Morelos, México, es la responsable del tratamiento de los datos personales que recabamos a través de madfam.io. Esta política describe qué datos recabamos, para qué los usamos, cómo los protegemos y cómo puedes ejercer tus derechos."
     },
     "dataCollection": {
       "title": "2. Información que Recopilamos",
@@ -96,33 +100,34 @@
     },
     "contact": {
       "title": "11. Contacto",
-      "description": "Si tienes preguntas sobre esta Política de Privacidad o sobre cómo manejamos tu información, contáctanos:",
-      "email": "Email: privacidad@madfam.io",
-      "phone": "Teléfono: +52 55 1234 5678",
-      "address": "Dirección: Ciudad de México, México"
+      "description": "Para preguntas sobre esta política o para ejercer tus derechos de acceso, rectificación, cancelación u oposición (derechos ARCO), escríbenos por el canal indicado. Indica tu nombre, el derecho que quieres ejercer y un medio para responderte.",
+      "responsible": "Responsable: Innovaciones MADFAM S.A.S. de C.V.",
+      "address": "Domicilio: Cuernavaca, Morelos, México",
+      "channel": "Canal: el formulario de contacto de madfam.io (madfam.io/es/contact)"
     },
     "authority": {
       "title": "12. Autoridad de Protección de Datos",
-      "content": "Si no estás satisfecho con nuestra respuesta a tus inquietudes, tienes derecho a presentar una queja ante el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)."
-    }
+      "content": "Si consideras que tu derecho a la protección de datos personales ha sido vulnerado, puedes acudir ante la autoridad federal competente en materia de protección de datos personales en posesión de particulares."
+    },
+    "reviewNote": "Este texto está en revisión legal; la versión revisada sustituirá a esta cuando se publique."
   },
   "terms": {
     "title": "Términos y Condiciones",
     "lastUpdated": "Última actualización: {date}",
-    "lastUpdatedDate": "Enero 2024",
-    "disclaimer": "Este documento ha sido simplificado para demostrar la internacionalización. La versión completa estará disponible próximamente.",
+    "lastUpdatedDate": "23 de septiembre de 2026",
+    "disclaimer": "Versión resumida. El texto completo está en revisión legal y sustituirá a esta versión cuando se publique.",
     "acceptance": {
       "title": "1. Aceptación de los Términos",
-      "content": "Al acceder y utilizar los servicios de MADFAM (\"nosotros\", \"nuestro\" o \"la empresa\"), aceptas estar sujeto a estos Términos y Condiciones. Si no estás de acuerdo con alguna parte de estos términos, no debes usar nuestros servicios."
+      "content": "Al acceder y utilizar madfam.io, operado por Innovaciones MADFAM S.A.S. de C.V. («MADFAM», «nosotros»), con domicilio en Cuernavaca, Morelos, México, aceptas estos Términos y Condiciones. Si no estás de acuerdo con alguna parte, no uses el sitio."
     },
     "services": {
       "title": "2. Descripción de los Servicios",
-      "description": "MADFAM proporciona servicios de consultoría tecnológica, diseño 3D, desarrollo de software, implementación de plataformas y servicios estratégicos de transformación digital, incluyendo pero no limitado a:",
+      "description": "MADFAM construye y opera un ecosistema de plataformas de software y ofrece servicios relacionados, entre ellos:",
       "items": [
-        "Servicios de diseño y fabricación digital (Diseño y Fabricación)",
-        "Consultoría de IA, workshops y habilitación estratégica (Estrategia y Habilitación)",
-        "Pilotos de implementación de plataformas de IA y automatización (Pilotos de Plataforma)",
-        "Asociaciones vCTO y transformación digital integral (Alianzas Estratégicas)"
+        "Plataformas digitales del ecosistema MADFAM, cada una con sus propios términos en su dominio",
+        "Diseño y fabricación digital (Primavera Maker Node)",
+        "Implementación de plataformas y liderazgo técnico (vCTO) por proyecto",
+        "Programas de colaboración educativa (Co-Labs)"
       ]
     },
     "websiteUse": {
@@ -218,7 +223,7 @@
       },
       "venue": {
         "title": "9.2 Jurisdicción",
-        "content": "Cualquier disputa estará sujeta a la jurisdicción exclusiva de los tribunales de la Ciudad de México, México."
+        "content": "Para cualquier disputa, las partes se someten a la jurisdicción de los tribunales competentes de Cuernavaca, Morelos, México."
       }
     },
     "disputeResolution": {
@@ -279,10 +284,10 @@
     },
     "contact": {
       "title": "14. Contacto",
-      "description": "Para preguntas sobre estos Términos y Condiciones, contáctanos:",
-      "email": "Email: legal@madfam.io",
-      "phone": "Teléfono: +52 55 1234 5678",
-      "address": "Dirección: Ciudad de México, México"
+      "description": "Para preguntas sobre estos Términos y Condiciones, escríbenos:",
+      "responsible": "Responsable: Innovaciones MADFAM S.A.S. de C.V.",
+      "address": "Domicilio: Cuernavaca, Morelos, México",
+      "channel": "Canal: el formulario de contacto de madfam.io (madfam.io/es/contact)"
     }
   },
   "unsubscribe": {
@@ -294,7 +299,7 @@
     "processing": "Procesando...",
     "successTitle": "Listo",
     "successMessage": "Tu solicitud ha sido procesada. Ya no recibirás correos de marketing de MADFAM.",
-    "errorMessage": "Ocurrió un error. Intenta de nuevo o contacta a soporte@madfam.io.",
-    "footer": "Innovaciones MADFAM S.A.S. de C.V. · Cuernavaca, Morelos, México · Esta acción solo aplica a correos de marketing. Los correos transaccionales (facturas, alertas de seguridad) no se verán afectados."
+    "errorMessage": "Ocurrió un error. Intenta de nuevo o escríbenos desde el formulario de contacto de madfam.io.",
+    "footer": "{entity} · Esta acción solo aplica a correos de marketing. Los correos transaccionales (facturas, alertas de seguridad) no se verán afectados."
   }
 }
