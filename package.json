@@ -34,19 +34,19 @@
     "test:scripts": "node --test scripts/__tests__/format-check.test.mjs scripts/__tests__/lint-staged-config.test.mjs scripts/__tests__/no-hand-typed-prices.test.mjs scripts/__tests__/platform-registry.test.mjs scripts/__tests__/security-check.test.mjs"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.12.1",
+    "@axe-core/playwright": "^4.13.0",
     "@lhci/cli": "^0.15.1",
-    "@types/node": "^26.1.2",
+    "@types/node": "^26.6.1",
     "audit-ci": "^7.1.0",
     "axe-core": "4.13.0",
     "bundlewatch": "^0.4.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
-    "next": "15.5.23",
+    "next": "15.5.25",
     "nyc": "^17.1.0",
-    "prettier": "^3.9.6",
-    "shadcn": "^4.16.2",
-    "turbo": "2.10.8"
+    "prettier": "^3.9.8",
+    "shadcn": "^4.21.0",
+    "turbo": "2.10.13"
   },
   "engines": {
     "node": ">=20.0.0",
@@ -55,8 +55,8 @@
   "packageManager": "pnpm@9.15.0",
   "lint-staged": {
     "apps/web/**/*.{ts,tsx,js,jsx}": [
-      "pnpm --filter @madfam/web lint --fix",
-      "pnpm --filter @madfam/web typecheck"
+      "pnpm --filter @madfam/web lint:staged",
+      "pnpm --filter @madfam/web typecheck:staged"
     ],
     "packages/i18n/src/translations/**/*.json": [
       "pnpm check:translations"

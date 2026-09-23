@@ -81,6 +81,53 @@ test('lint-staged does not shell npm inside a pnpm workspace', () => {
   }
 });
 
+/**
+ * lint-staged appends the staged file paths to every command it runs. A script
+ * that treats a positional argument as the PROJECT DIRECTORY therefore receives
+ * a file path where it expects a directory and dies. That is exactly what
+ * `next lint` does (`next lint [directory]` → findPagesDir), and it is why
+ * every commit touching apps/web died on
+ * "Couldn't find any `pages` or `app` directory". `tsc --noEmit <file>` has the
+ * same shape of bug from the other side: given file arguments it ignores
+ * tsconfig.json entirely and reports TS17004 on every line of JSX.
+ *
+ * So: a lint-staged command must resolve to a script whose body either accepts
+ * file paths as positional arguments (eslint, prettier) or discards them.
+ */
+const POSITIONAL_HOSTILE = [
+  {
+    // `next lint [dir]` — the first positional is the project root.
+    pattern: /^next\s+lint\b/,
+    why: '`next lint` reads its first positional argument as the project directory',
+  },
+  {
+    // `tsc [files]` — file arguments make tsc ignore tsconfig.json.
+    pattern: /^tsc\b/,
+    why: '`tsc <file>` ignores tsconfig.json; wrap it so the appended paths are discarded',
+  },
+];
+
+test('no lint-staged command resolves to a script that mis-reads the staged paths', () => {
+  const dirs = packageDirs();
+
+  for (const command of Object.values(rootPkg['lint-staged']).flat()) {
+    const target = targetOf(command, dirs);
+    if (!target) continue;
+
+    const scripts = JSON.parse(fs.readFileSync(target.manifest, 'utf8')).scripts || {};
+    const body = scripts[target.script];
+    if (typeof body !== 'string') continue;
+
+    for (const { pattern, why } of POSITIONAL_HOSTILE) {
+      assert.ok(
+        !pattern.test(body.trim()),
+        `lint-staged runs "${command}" → "${body}", but ${why}. ` +
+          'lint-staged appends the staged file paths to the command.'
+      );
+    }
+  }
+});
+
 test('translation parity runs when a locale bundle is staged', () => {
   const entry = rootPkg['lint-staged']['packages/i18n/src/translations/**/*.json'];
   assert.deepEqual(entry, ['pnpm check:translations']);
