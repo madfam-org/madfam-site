@@ -95,8 +95,11 @@ describe('SEO Service', () => {
       expect(data['@context']).toBe('https://schema.org');
       expect(data['@type']).toBe('Organization');
       expect(data).toHaveProperty('name', 'MADFAM');
-      expect(data).toHaveProperty('contactPoint');
-      expect(data).toHaveProperty('address');
+      expect(data).toHaveProperty('legalName', 'Innovaciones MADFAM S.A.S. de C.V.');
+      // R47: no public phone line on the entity.
+      expect(data).not.toHaveProperty('contactPoint');
+      expect(data).toHaveProperty('address.addressLocality', 'Cuernavaca');
+      expect(data).toHaveProperty('address.addressRegion', 'Morelos');
     });
 
     it('should generate Service structured data', () => {

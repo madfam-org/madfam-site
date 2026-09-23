@@ -118,9 +118,9 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
             <h2>{t('terms.contact.title')}</h2>
             <p>{t('terms.contact.description')}</p>
             <ul>
-              <li>{t('terms.contact.email')}</li>
-              <li>{t('terms.contact.phone')}</li>
+              <li>{t('terms.contact.responsible')}</li>
               <li>{t('terms.contact.address')}</li>
+              <li>{t('terms.contact.channel')}</li>
             </ul>
 
             <div className="mt-8 p-4 bg-gray-50 rounded-lg">
