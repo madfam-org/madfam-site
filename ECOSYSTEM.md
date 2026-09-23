@@ -41,20 +41,20 @@ content.
 
 **Pillar**: Brand / Corporate
 **Type**: site
-**Status**: production for `madfam.io`; see the CMS caveat below.
+**Status**: production for `madfam.io`; the CMS is retired (see below).
 
 ### Deployed services
 
-| Service      | Public domain | Container port | Status                                                                                    |
-| ------------ | ------------- | -------------- | ----------------------------------------------------------------------------------------- |
-| `madfam-web` | madfam.io     | 3000           | live                                                                                      |
-| `madfam-cms` | cms.madfam.io | 3000           | **served a 404 error page at the 2026-08-24 probe**, not CMS content; needs an owner look |
+| Service      | Public domain | Container port | Status                                                                                                               |
+| ------------ | ------------- | -------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `madfam-web` | madfam.io     | 3000           | live                                                                                                                 |
+| `madfam-cms` | cms.madfam.io | —              | **retired 2026-09-23 (ruling R52)**: no longer deployed; the multi-tenant CMS (Publica) moves to its own public repo |
 
-The CMS container port is **3000** (`internal-devops/ecosystem/domain-map.md`, 2026-08-24 —
-earlier editions of this file said 3001, which was wrong). The site degrades gracefully when
-the CMS is unreachable: `apps/web/lib/environment.ts` enables the CMS integration only when
-`NEXT_PUBLIC_CMS_URL` is set, and the blog and case-study routes fall back to shipped i18n
-content.
+The `madfam-cms` workload (Payload, `apps/cms`) is no longer deployed: ruling R52
+(2026-09-23) moves the multi-tenant CMS (Publica) to its own public repo. The site does not
+depend on it: `apps/web/lib/environment.ts` enables the CMS integration only when
+`NEXT_PUBLIC_CMS_URL` is set (production does not set it), and the blog and case-study routes
+render shipped i18n content.
 
 **Kubernetes namespace**: `madfam-site`
 **Cluster**: bare-metal k3s — shape only, in §3 below.
