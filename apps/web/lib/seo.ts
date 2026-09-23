@@ -357,18 +357,16 @@ export class SEOService {
 
     switch (type) {
       case 'Organization':
+        // Entity facts per ruling R37/R47: legal name and Cuernavaca, Morelos
+        // domicile; no public phone line.
         return {
           ...baseData,
           name: 'MADFAM',
-          description: 'Transformación digital e inteligencia artificial en México y LATAM',
+          legalName: 'Innovaciones MADFAM S.A.S. de C.V.',
+          description:
+            'Estudio mexicano con sede en Cuernavaca, Morelos, que construye y opera un ecosistema de plataformas abiertas e interconectadas para creadores, makers y negocios de América Latina.',
           url: this.baseUrl,
           logo: `${this.baseUrl}/assets/brand/madfam-logo.svg`,
-          contactPoint: {
-            '@type': 'ContactPoint',
-            telephone: '+52-55-3410-6519',
-            contactType: 'Customer Service',
-            availableLanguage: ['Spanish', 'English'],
-          },
           sameAs: [
             'https://x.com/madfam_io',
             'https://linkedin.com/company/madfam',
@@ -381,7 +379,8 @@ export class SEOService {
           address: {
             '@type': 'PostalAddress',
             addressCountry: 'MX',
-            addressLocality: 'Mexico City',
+            addressRegion: 'Morelos',
+            addressLocality: 'Cuernavaca',
           },
         };
 

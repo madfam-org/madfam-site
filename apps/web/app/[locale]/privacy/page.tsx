@@ -20,6 +20,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
             <p className="text-lg text-obsidian/70">
               {t('privacy.lastUpdated', { date: t('privacy.lastUpdatedDate') })}
             </p>
+            <p className="mt-2 text-sm text-obsidian/60">{t('privacy.reviewNote')}</p>
           </div>
         </Container>
       </section>
@@ -70,11 +71,13 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
             <h2>{t('privacy.contact.title')}</h2>
             <p>{t('privacy.contact.description')}</p>
             <ul>
-              <li>{t('privacy.contact.email')}</li>
-              <li>{t('privacy.contact.phone')}</li>
+              <li>{t('privacy.contact.responsible')}</li>
               <li>{t('privacy.contact.address')}</li>
+              <li>{t('privacy.contact.channel')}</li>
             </ul>
 
+            {/* Authority wording is deliberately generic (INAI was extinguished by the
+                2024-2025 reform). Pending counsel/Tezca review per ruling R47. */}
             <h2>{t('privacy.authority.title')}</h2>
             <p>{t('privacy.authority.content')}</p>
           </div>
