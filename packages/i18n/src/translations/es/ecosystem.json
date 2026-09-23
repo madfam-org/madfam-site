@@ -58,15 +58,8 @@
   "pricing": {
     "title": "Precios Simples y Transparentes",
     "subtitle": "Una membresía, acceso coordinado — sin sorpresas.",
-    "monthly": "Mensual",
-    "yearly": "Anual",
-    "yearlyDiscount": "Ahorra ~2 meses",
-    "monthlyPrice": "TBD",
-    "yearlyPrice": "TBD",
-    "perMonth": "/mes",
-    "perYear": "/año",
+    "pricePending": "Precio por definir — lo publicamos aquí en cuanto quede ratificado.",
     "includedPlatforms": "Incluye Pro en las {count} plataformas",
-    "savingsNote": "Pro Individual combinado: ~${individual}/mes | Ecosistema: ${ecosystem}/mes — Ahorra {percent}%",
     "membershipTitle": "Membresía del Ecosistema",
     "features": {
       "0": "Capacidades elegibles de la plataforma",

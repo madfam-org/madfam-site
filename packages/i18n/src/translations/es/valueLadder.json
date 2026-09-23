@@ -38,7 +38,7 @@
       "tagline": "Tus servicios bajo una sola puerta, marca y factura.",
       "oneLine": "Cuando ya usas varias herramientas y quieres unificarlas bajo tu marca.",
       "grants": "Todos tus servicios contratados detrás de una puerta, una identidad y una factura, con tu marca.",
-      "valueVs": "Frente a Zoho u Odoo: reemplaza la consola de administración con lo mejor de su clase, nativo del fisco mexicano, ~20% por debajo del titular.",
+      "valueVs": "Frente a Zoho u Odoo: reemplaza la consola de administración con lo mejor de su clase, nativo del fisco mexicano y por debajo del titular.",
       "priceNote": ""
     },
     "vcto": {
@@ -48,15 +48,6 @@
       "grants": "Un CTO fraccional más la cabina que opera toda tu operación a través del ecosistema. El escalón más alto.",
       "valueVs": "Frente a una contratación de tiempo completo: una fracción del costo de un CTO, para operar un ecosistema entero.",
       "priceNote": ""
-    }
-  },
-  "slices": {
-    "extra": {
-      "crea-map": { "name": "Crea MAP" },
-      "kalya": { "name": "Kalya" },
-      "selva": { "name": "Selva" },
-      "symbiosis": { "name": "Symbiosis" },
-      "acervo": { "name": "Acervo" }
     }
   },
   "bundles": {
@@ -69,36 +60,12 @@
       "description": "De la idea a la venta: diseño paramétrico con Yantra4D, precio con Forgesight y cotización con Cotiza."
     }
   },
-  "rungs": {
-    "erp-self-serve": {
-      "name": "Autoservicio",
-      "description": "Para equipos pequeños que unifican sus herramientas bajo una sola puerta."
-    },
-    "erp-team": {
-      "name": "Equipo",
-      "description": "Para equipos en crecimiento que necesitan más asientos y control."
-    },
-    "erp-biz": {
-      "name": "Negocio",
-      "description": "Para negocios que operan varias plataformas bajo su marca."
-    },
-    "vcto-esencial": {
-      "name": "Esencial",
-      "description": "El punto de entrada al vCTO: dirección técnica fraccional para tu operación."
-    },
-    "vcto-ecosistema": {
-      "name": "Ecosistema",
-      "description": "El escalón validado por el mercado: dirección técnica que ejercita todo el ecosistema."
-    },
-    "vcto-escala": {
-      "name": "Escala",
-      "description": "Para operaciones a gran escala, cotizado por alcance."
-    }
-  },
   "price": {
-    "from": "Desde / a la medida",
-    "perSeatMonth": "/ asiento / mes",
-    "perMonth": "/ mes"
+    "pending": "Precio por definir — lo publicamos aquí en cuanto quede ratificado.",
+    "unit": {
+      "perMonth": "/ mes",
+      "perSeatMonth": "/ asiento / mes"
+    }
   },
   "ladder": {
     "title": "La escalera, escalón por escalón",

@@ -1,45 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+// The Ecosystem Membership card.
+//
+// It carries NO price. Ruling R9 amended D6 to "prices appear only on the
+// value-ladder surface, sourced from the registry's `commerce` block, never
+// hand-typed, never `TBD`" — and this card is not that surface. It used to
+// render a literal «TBD» behind a monthly/yearly toggle, which is the exact
+// string the ruling names; the toggle went with it, because it existed only to
+// switch between two «TBD»s.
+//
+// "Ecosystem Membership" stays as the cross-product label it is: the membership
+// is a construct that spans products, not a tier of one of them, so it has no
+// registry `commerce` entry to read a price from.
+
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
 import { Button } from '@/components/ui';
+import { PLATFORMS } from '@/lib/data/platforms';
 
 export function PricingCards() {
   const t = useTranslations('ecosystem.pricing');
   const locale = useLocale() as Locale;
-  const [period, setPeriod] = useState<'monthly' | 'yearly'>('monthly');
 
   return (
     <div>
-      {/* Period toggle */}
-      <div className="flex items-center justify-center gap-3 mb-10">
-        <button
-          onClick={() => setPeriod('monthly')}
-          className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-            period === 'monthly'
-              ? 'bg-leaf text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-          }`}
-        >
-          {t('monthly')}
-        </button>
-        <button
-          onClick={() => setPeriod('yearly')}
-          className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 relative ${
-            period === 'yearly'
-              ? 'bg-leaf text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-          }`}
-        >
-          {t('yearly')}
-          <span className="absolute -top-2 -right-2 bg-sun text-obsidian text-[10px] font-bold px-1.5 py-0.5 rounded-full">
-            {t('yearlyDiscount')}
-          </span>
-        </button>
-      </div>
-
       {/* Pricing card */}
       <div className="max-w-md mx-auto">
         <div className="relative p-px rounded-2xl bg-gradient-to-br from-leaf via-lavender to-sun">
@@ -48,16 +33,11 @@ export function PricingCards() {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                 {t('membershipTitle')}
               </h3>
-              <div className="mb-2">
-                <span className="text-4xl font-bold bg-gradient-to-r from-leaf to-lavender bg-clip-text text-transparent">
-                  {t(`${period}Price`)}
-                </span>
-                <span className="text-gray-500 dark:text-gray-400 ml-1">
-                  {period === 'monthly' ? t('perMonth') : t('perYear')}
-                </span>
-              </div>
+              <p className="mb-2 text-base font-medium text-gray-700 dark:text-gray-300">
+                {t('pricePending')}
+              </p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {t('includedPlatforms', { count: 9 })}
+                {t('includedPlatforms', { count: PLATFORMS.length })}
               </p>
             </div>
 

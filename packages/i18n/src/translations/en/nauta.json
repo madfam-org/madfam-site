@@ -34,9 +34,6 @@
   "product": {
     "title": "Two ways to use Nauta",
     "subtitle": "Start self-serve with the ERP. When you want us to run it for you, step up to the vCTO. Same business, same login —nothing is lost moving between tiers.",
-    "priceFrom": "from",
-    "perSeatMonth": "per seat/mo",
-    "perMonth": "per month",
     "rungs": {
       "erp": {
         "name": "Nauta ERP",
@@ -50,45 +47,17 @@
         "oneLine": "A fractional CTO and team run your stack: they decide, integrate and execute for you. Scoped to fit.",
         "valueVs": "A full-time head of technology costs millions a year. The vCTO gives you that operating capacity for a fraction, and only when you need it."
       }
-    }
-  },
-  "rungs": {
-    "erp-self-serve": {
-      "name": "Self-serve",
-      "description": "For running solo or as a small team. One login, your services, live today."
     },
-    "erp-team": {
-      "name": "Team",
-      "description": "For growing teams. Roles, permissions and the full cockpit across several seats."
-    },
-    "erp-biz": {
-      "name": "Business",
-      "description": "For an established operation. The full catalog, governance and priority support."
-    },
-    "vcto-esencial": {
-      "name": "Essential",
-      "description": "A fractional technical operator carrying your stack, at a defined cadence."
-    },
-    "vcto-ecosistema": {
-      "name": "Ecosystem",
-      "description": "Wider technical operation across the whole MADFAM ecosystem."
-    },
-    "vcto-escala": {
-      "name": "Scale",
-      "description": "A dedicated technical team to operate and scale all of your technology."
+    "pricePending": "Price not yet set — it appears here the moment it is ratified.",
+    "unit": {
+      "perMonth": "/ month",
+      "perSeatMonth": "/ seat / month"
     }
   },
   "catalog": {
     "title": "What Nauta brings together",
     "subtitle": "Each of these services lives under one login in your ERP. Start with one; add the rest as you need them.",
-    "note": "Each service's price lives on its own page. The ERP brings them together under one login.",
-    "extra": {
-      "crea-map": { "name": "Crea MAP" },
-      "kalya": { "name": "Kalya" },
-      "selva": { "name": "Selva" },
-      "symbiosis": { "name": "Symbiosis" },
-      "acervo": { "name": "Acervo" }
-    }
+    "note": "Each service's price lives on its own page. The ERP brings them together under one login."
   },
   "cta": {
     "selfServe": "Start self-serve",
