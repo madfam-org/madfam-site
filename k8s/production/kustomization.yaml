@@ -7,8 +7,6 @@ resources:
 - namespace.yaml
 - madfam-web-deployment.yaml
 - madfam-web-service.yaml
-- madfam-cms-deployment.yaml
-- madfam-cms-service.yaml
 - network-policies.yaml
 - resource-quota.yaml
 - madfam-web-hpa.yaml
@@ -21,9 +19,6 @@ labels:
     enclii.dev/managed-by: switchyard
 
 images:
-- digest: sha256:8e20c757fa4f6700de4c035f81f4ecb72498286a314e2250563236816fc03a66
-  name: ghcr.io/madfam-org/madfam-site/cms
-  newName: ghcr.io/madfam-org/madfam-site/cms
 - digest: sha256:32b8603c61fafe22a82d0ac5044b9f423883efaa6364fa241253584a6a5c106c
   name: ghcr.io/madfam-org/madfam-site/web
   newName: ghcr.io/madfam-org/madfam-site/web
