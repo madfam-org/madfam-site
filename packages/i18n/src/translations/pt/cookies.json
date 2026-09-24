@@ -1,6 +1,7 @@
 {
   "title": "Política de Cookies",
-  "lastUpdated": "Última atualização: 15 de março, 2024",
+  "lastUpdated": "Última atualização: {date}",
+  "lastUpdatedDate": "23 de setembro de 2026",
   "sections": {
     "whatAreCookies": {
       "title": "O que são cookies?",
@@ -12,18 +13,56 @@
       "essential": "Cookies Essenciais",
       "analytics": "Cookies de Análise",
       "preference": "Cookies de Preferência",
-      "marketing": "Cookies de Marketing"
+      "marketing": "Cookies de Marketing",
+      "essentialDescription": "Fazem o site funcionar: navegação entre páginas, o idioma escolhido e proteção contra tráfego automatizado.",
+      "analyticsDescription": "Hoje não usamos cookies analíticos: a análise do site (Plausible, hospedado por nós) funciona sem cookies nem identificadores persistentes.",
+      "preferenceDescription": "Lembram suas preferências, como o idioma.",
+      "marketingDescription": "Hoje não usamos cookies de marketing nem de publicidade."
+    },
+    "types": {
+      "title": "Cookies que usamos",
+      "necessaryTitle": "Estritamente necessários",
+      "columns": {
+        "name": "Cookie",
+        "purpose": "Finalidade",
+        "duration": "Duração"
+      },
+      "localeCookie": "Lembra o idioma que você escolheu",
+      "session": "Sessão",
+      "cloudflareCookie": "Proteção contra bots (Cloudflare)",
+      "thirtyMinutes": "30 minutos",
+      "localStorage": "Sua escolha sobre cookies e o tema claro/escuro ficam no armazenamento local do seu navegador; não são enviados aos nossos servidores."
+    },
+    "thirdParty": {
+      "title": "Cookies de terceiros",
+      "description": "Algumas páginas podem incluir conteúdo de serviços de terceiros (por exemplo, vídeos ou publicações incorporadas). Esses serviços podem definir seus próprios cookies, que não controlamos; recomendamos revisar suas políticas."
     },
     "managing": {
       "title": "Gerenciamento de cookies",
-      "description": "Você pode controlar e gerenciar cookies nas configurações do seu navegador. Observe que remover ou bloquear cookies pode afetar sua experiência do usuário e partes do nosso site podem não ser mais totalmente acessíveis."
+      "description": "Você pode controlar e gerenciar cookies nas configurações do seu navegador. Observe que remover ou bloquear cookies pode afetar sua experiência do usuário e partes do nosso site podem não ser mais totalmente acessíveis.",
+      "browserIntro": "A maioria dos navegadores permite:",
+      "browserItems": [
+        "Ver os cookies armazenados e excluí-los um a um",
+        "Bloquear todos os cookies",
+        "Bloquear cookies de terceiros",
+        "Apagar todos os cookies ao fechar o navegador",
+        "Abrir uma sessão de navegação privada ou anônima"
+      ]
+    },
+    "preferences": {
+      "title": "Suas preferências",
+      "description": "Você pode mudar sua escolha a qualquer momento apagando os dados deste site no navegador; o aviso de cookies aparecerá novamente na sua próxima visita."
+    },
+    "changes": {
+      "title": "Alterações nesta política",
+      "description": "Podemos atualizar esta política para refletir mudanças em nossas práticas ou por razões legais ou operacionais. Publicaremos a nova versão nesta página com a data de atualização."
     },
     "contact": {
       "title": "Contato",
-      "description": "Se você tiver dúvidas sobre esta Política de Cookies, entre em contato conosco:",
-      "email": "Email: privacy@madfam.io",
-      "phone": "Telefone: +52 55 1234 5678",
-      "address": "Endereço: Cidade do México, México"
+      "description": "Se você tiver dúvidas sobre esta Política de Cookies, escreva-nos:",
+      "responsible": "Controlador: Innovaciones MADFAM S.A.S. de C.V.",
+      "address": "Endereço: Cuernavaca, Morelos, México",
+      "channel": "Canal: o formulário de contato de madfam.io (madfam.io/pt/contact)"
     }
   },
   "banner": {
