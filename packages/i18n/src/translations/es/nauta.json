@@ -1,15 +1,12 @@
 {
   "meta": {
-    "title": "Nauta — tu negocio, unificado",
-    "description": "Nauta reúne cada herramienta que ya usas en una sola cabina de operaciones, con un CTO fraccional listo para operarla cuando lo necesites. ERP autoservicio por asiento; vCTO cuando quieras que alguien lo maneje por ti."
+    "title": "Nauta — por MADFAM",
+    "description": "Nauta es el sistema operativo de CTO fraccional de MADFAM: una sola cabina para la tecnología, las operaciones y las decisiones de tu empresa. Conócelo en nauta.quest."
   },
   "hero": {
     "eyebrow": "Nauta · por MADFAM",
     "title": "Tu negocio, unificado.",
-    "subtitle": "Un solo acceso reúne cada servicio MADFAM al que tu empresa tiene derecho —facturación, agenda, dinero, cumplimiento— en una sola cabina de operaciones. Y cuando quieras que alguien lo opere por ti, súbete al vCTO.",
-    "ctaSelfServe": "Empieza en autoservicio",
-    "ctaDiscoveryCall": "Agenda una llamada",
-    "ctaExplore": "Ver cómo funciona"
+    "subtitle": "Nauta es el sistema operativo de CTO fraccional de MADFAM: un solo acceso reúne cada servicio MADFAM al que tu empresa tiene derecho —facturación, agenda, dinero, cumplimiento— en una cabina de operaciones, con un operador técnico cuando lo necesitas. Su casa es nauta.quest."
   },
   "pillars": {
     "title": "Por qué Nauta",
@@ -31,42 +28,12 @@
       "description": "¿Prefieres que alguien lo opere? Súbete al vCTO y un operador técnico maneja el stack por ti. Subes o bajas de nivel sin perder nada."
     }
   },
-  "product": {
-    "title": "Dos formas de usar Nauta",
-    "subtitle": "Empieza en autoservicio con el ERP. Cuando quieras que lo operemos por ti, sube al vCTO. El mismo negocio, el mismo acceso —nada se pierde al cambiar de nivel.",
-    "rungs": {
-      "erp": {
-        "name": "Nauta ERP",
-        "tagline": "La cabina de operaciones",
-        "oneLine": "Reúne cada servicio al que tienes derecho en un solo lugar, y opéralo tú mismo. Autoservicio, por asiento.",
-        "valueVs": "Reemplaza la maraña de suscripciones sueltas y hojas de cálculo por una sola cabina —a una fracción de lo que cuesta un ERP tradicional."
-      },
-      "vcto": {
-        "name": "Nauta vCTO",
-        "tagline": "Que lo operen por ti",
-        "oneLine": "Un CTO fraccional y su equipo operan tu stack: deciden, integran y ejecutan por ti. Con alcance a la medida.",
-        "valueVs": "Un director de tecnología de tiempo completo cuesta millones al año. El vCTO te da esa capacidad de operación por una fracción, y solo cuando la necesitas."
-      }
-    },
-    "pricePending": "Precio por definir — lo publicamos aquí en cuanto quede ratificado.",
-    "unit": {
-      "perMonth": "/ mes",
-      "perSeatMonth": "/ asiento / mes"
-    }
-  },
-  "catalog": {
-    "title": "Lo que Nauta reúne",
-    "subtitle": "Cada uno de estos servicios vive bajo un mismo acceso en tu ERP. Empieza con uno; súmalos cuando los necesites.",
-    "note": "El precio de cada servicio vive en su propia página. El ERP los reúne bajo un solo acceso."
-  },
   "cta": {
-    "selfServe": "Empezar en autoservicio",
     "discoveryCall": "Agendar una llamada"
   },
   "closing": {
     "title": "Empieza donde tenga sentido para ti.",
-    "subtitle": "Prueba el ERP hoy en autoservicio, o agenda una llamada y diseñamos juntos cómo el vCTO opera tu tecnología.",
-    "visitSite": "Ir a nauta.quest →",
-    "exploreLadder": "Ver todo lo que hace MADFAM"
+    "subtitle": "Planes, precios y todo el detalle viven en nauta.quest. Si prefieres hablarlo primero, agenda una llamada de descubrimiento.",
+    "visitSite": "Ir a nauta.quest →"
   }
 }
