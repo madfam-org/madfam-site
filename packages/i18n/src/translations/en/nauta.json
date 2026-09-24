@@ -1,15 +1,12 @@
 {
   "meta": {
-    "title": "Nauta — your business, unified",
-    "description": "Nauta gathers every tool you already use into one operations cockpit, with a fractional CTO ready to run it when you need one. Self-serve ERP per seat; vCTO when you want someone to run it for you."
+    "title": "Nauta — by MADFAM",
+    "description": "Nauta is MADFAM's fractional-CTO operating system: one cockpit for your company's technology, operations and decisions. Learn more at nauta.quest."
   },
   "hero": {
     "eyebrow": "Nauta · by MADFAM",
     "title": "Your business, unified.",
-    "subtitle": "One login gathers every MADFAM service your company is entitled to —invoicing, scheduling, money, compliance— into a single operations cockpit. And when you want someone to run it for you, step up to the vCTO.",
-    "ctaSelfServe": "Start self-serve",
-    "ctaDiscoveryCall": "Book a call",
-    "ctaExplore": "See how it works"
+    "subtitle": "Nauta is MADFAM's fractional-CTO operating system: one login gathers every MADFAM service your company is entitled to —invoicing, scheduling, money, compliance— into one operations cockpit, with a technical operator when you need one. Its home is nauta.quest."
   },
   "pillars": {
     "title": "Why Nauta",
@@ -31,42 +28,12 @@
       "description": "Rather have someone run it? Step up to the vCTO and a technical operator runs the stack for you. Move up or down a tier without losing anything."
     }
   },
-  "product": {
-    "title": "Two ways to use Nauta",
-    "subtitle": "Start self-serve with the ERP. When you want us to run it for you, step up to the vCTO. Same business, same login —nothing is lost moving between tiers.",
-    "rungs": {
-      "erp": {
-        "name": "Nauta ERP",
-        "tagline": "The operations cockpit",
-        "oneLine": "Gathers every service you're entitled to in one place, and you run it yourself. Self-serve, per seat.",
-        "valueVs": "Replaces the tangle of scattered subscriptions and spreadsheets with a single cockpit —at a fraction of what a traditional ERP costs."
-      },
-      "vcto": {
-        "name": "Nauta vCTO",
-        "tagline": "Have it run for you",
-        "oneLine": "A fractional CTO and team run your stack: they decide, integrate and execute for you. Scoped to fit.",
-        "valueVs": "A full-time head of technology costs millions a year. The vCTO gives you that operating capacity for a fraction, and only when you need it."
-      }
-    },
-    "pricePending": "Price not yet set — it appears here the moment it is ratified.",
-    "unit": {
-      "perMonth": "/ month",
-      "perSeatMonth": "/ seat / month"
-    }
-  },
-  "catalog": {
-    "title": "What Nauta brings together",
-    "subtitle": "Each of these services lives under one login in your ERP. Start with one; add the rest as you need them.",
-    "note": "Each service's price lives on its own page. The ERP brings them together under one login."
-  },
   "cta": {
-    "selfServe": "Start self-serve",
     "discoveryCall": "Book a call"
   },
   "closing": {
     "title": "Start wherever it makes sense for you.",
-    "subtitle": "Try the ERP self-serve today, or book a call and we'll design together how the vCTO runs your technology.",
-    "visitSite": "Go to nauta.quest →",
-    "exploreLadder": "See everything MADFAM does"
+    "subtitle": "Plans, pricing and the full detail live at nauta.quest. If you would rather talk first, book a discovery call.",
+    "visitSite": "Go to nauta.quest →"
   }
 }
