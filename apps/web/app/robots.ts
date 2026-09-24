@@ -1,30 +1,40 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/seo';
+
+// The ONE robots source for madfam.io (finding C-019; public/robots.txt was
+// deleted because it shadowed this file). Ruling R40: AI crawlers are allowed on
+// public landing hosts; app, API and admin paths are disallowed for everyone.
+// The Cloudflare zone's bot policy must match (operator item O48).
+
+/** R40 allow-list, named explicitly so the intent is reviewable. */
+export const AI_CRAWLERS = [
+  'ClaudeBot',
+  'anthropic-ai',
+  'GPTBot',
+  'OAI-SearchBot',
+  'ChatGPT-User',
+  'PerplexityBot',
+  'Google-Extended',
+  'CCBot',
+  'Applebot-Extended',
+] as const;
+
+/** App/API/admin paths, at the root and under every locale prefix. */
+export const DISALLOWED_PATHS = [
+  '/api/',
+  '/auth/',
+  '/dashboard/',
+  '/*/auth/',
+  '/*/dashboard/',
+] as const;
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://madfam.io';
-
+  const disallow = [...DISALLOWED_PATHS];
   return {
     rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/api/', '/dashboard/', '/auth/', '/_next/', '/admin/', '/private/'],
-      },
-      {
-        userAgent: 'GPTBot',
-        disallow: '/',
-      },
-      {
-        userAgent: 'ChatGPT-User',
-        disallow: '/',
-      },
-      {
-        userAgent: 'GoogleBot',
-        allow: '/',
-        disallow: ['/api/', '/dashboard/', '/auth/', '/_next/', '/admin/', '/private/'],
-      },
+      { userAgent: '*', allow: '/', disallow },
+      { userAgent: [...AI_CRAWLERS], allow: '/', disallow },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

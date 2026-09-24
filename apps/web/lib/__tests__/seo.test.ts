@@ -130,48 +130,30 @@ describe('SEO Service', () => {
   });
 
   describe('generateSitemapData', () => {
-    it('should generate sitemap entries for all main pages', () => {
+    it('lists locale-less routes with no fragments and no off-site canonicals', () => {
       const sitemap = seoService.generateSitemapData();
+      const urls = sitemap.map(entry => entry.url);
 
-      expect(sitemap).toHaveLength(30);
-      expect(sitemap[0].url).toBe('/');
+      expect(urls[0]).toBe('/');
       expect(sitemap[0].priority).toBe(1.0);
+      // C-024: fragments are not sitemap URLs; /value-ladder was missing;
+      // /nauta canonicalizes to nauta.quest (R30) so it is not listed.
+      expect(urls.some(url => url.includes('#'))).toBe(false);
+      expect(urls).toContain('/value-ladder');
+      expect(urls).not.toContain('/nauta');
+      expect(new Set(urls).size).toBe(urls.length);
 
-      // Avala is live at avala.studio and keeps an in-site detail page, so it
-      // is part of madfam.io's sitemap (audit 01 #6).
-      expect(sitemap.some(entry => entry.url === '/platforms/avala')).toBe(true);
-
-      const programPages = sitemap.filter(entry => entry.url.includes('/programs#'));
-      expect(programPages).toHaveLength(4);
-
-      const expectedPrograms = [
-        'design-fabrication',
-        'strategy-enablement',
-        'platform-pilots',
-        'strategic-partnerships',
-      ];
-      const hasAllPrograms = expectedPrograms.every(program =>
-        programPages.some(page => page.url.includes(program))
-      );
-      expect(hasAllPrograms).toBe(true);
-
-      // Platform entries
-      const platformPages = sitemap.filter(entry => entry.url.includes('/platforms/'));
-      expect(platformPages).toHaveLength(9);
-
+      // Avala keeps an in-site detail page, so it is part of the sitemap.
+      expect(urls).toContain('/platforms/avala');
       const platformsIndex = sitemap.find(entry => entry.url === '/platforms');
-      expect(platformsIndex).toBeDefined();
       expect(platformsIndex?.priority).toBe(0.9);
     });
 
-    it('should set appropriate change frequencies', () => {
+    it('sets change frequencies and no build-time lastModified', () => {
       const sitemap = seoService.generateSitemapData();
-
-      const homepage = sitemap.find(entry => entry.url === '/');
-      expect(homepage?.changeFrequency).toBe('weekly');
-
-      const programPage = sitemap.find(entry => entry.url.includes('/programs#'));
-      expect(programPage?.changeFrequency).toBe('monthly');
+      expect(sitemap.find(entry => entry.url === '/')?.changeFrequency).toBe('weekly');
+      expect(sitemap.find(entry => entry.url === '/privacy')?.changeFrequency).toBe('yearly');
+      expect(sitemap.every(entry => !('lastModified' in entry))).toBe(true);
     });
   });
 });

@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card } from '@/components/ui';
+import { routeMetadata } from '@/lib/page-metadata';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return routeMetadata(locale, 'docs', '/docs');
+}
 
 export default async function DocsPage({ params }: { params: Promise<{ locale: string }> }) {
   await params; // Validate params exist
