@@ -6,13 +6,13 @@
     },
     "heroTitle": "Plataformas Abiertas para Todos",
     "heroSubtitle": "Un ecosistema integrado de plataformas que cubre infraestructura, inteligencia, estándares y aplicaciones — con modelos de acceso adecuados para cada producto.",
-    "ctaTitle": "Desbloquea Pro en Todas",
-    "ctaSubtitle": "Una membresía desbloquea capacidades elegibles de la plataforma, fabricación con descuento y soporte prioritario.",
-    "ctaButton": "Explorar Membresía"
+    "ctaTitle": "Una membresía, acceso coordinado",
+    "ctaSubtitle": "La membresía del ecosistema desbloqueará capacidades elegibles, beneficios del Maker Node (próximamente) y soporte prioritario. Lista de espera abierta.",
+    "ctaButton": "Unirme a la lista de espera"
   },
   "shared": {
     "byMadfam": "by MADFAM",
-    "freePlusPro": "Gratis + Pro",
+    "freeTier": "Capa gratuita disponible",
     "access": {
       "platform": "Plataforma gestionada",
       "ecosystem": "Acceso de ecosistema"
@@ -26,6 +26,7 @@
     "viewAllPlatforms": "Ver Todas las Plataformas",
     "startFree": "Comenzar Gratis",
     "getEarlyAccess": "Obtener Acceso Anticipado",
+    "visitPlatform": "Ir a la plataforma",
     "contactUs": "Contáctanos",
     "status": {
       "production": "Disponible",
@@ -57,8 +58,8 @@
       "comply": "Cumplir"
     },
     "cta": {
-      "membership": "Desbloquea Pro en cada plataforma con una membresía",
-      "membershipLink": "Conoce la Membresía del Ecosistema"
+      "membership": "Membresía del ecosistema: lista de espera abierta",
+      "membershipLink": "Unirme a la lista de espera"
     },
     "badges": {
       "selfServe": "Self-service",
@@ -69,8 +70,8 @@
   "enclii": {
     "tagline": "PaaS en la Nube Soberana",
     "valueProp": "Despliega donde quieras, a una fracción del costo. Kubernetes GitOps-nativo para equipos que rechazan el vendor lock-in.",
-    "problem": "Los costos de hosting en la nube están fuera de control. Vercel cobra $20/usuario/mes por funciones básicas. AWS es poderoso pero complejo. Y ninguno te da verdadera soberanía sobre tu infraestructura.",
-    "solution": "Enclii es un PaaS soberano construido sobre Kubernetes. Deploys sin configuración, ambientes de preview, observabilidad integrada — todo por $55/mes en lugar de $2,000+. Tu código, tus servidores, tus reglas.",
+    "problem": "Los costos de hosting en la nube crecen sin control. Las plataformas administradas cobran por usuario y por función. AWS es poderoso pero complejo. Y ninguno te da verdadera soberanía sobre tu infraestructura.",
+    "solution": "Enclii es un PaaS soberano construido sobre Kubernetes. Deploys sin configuración, ambientes de preview, observabilidad integrada. Tu código, tus servidores, tus reglas.",
     "features": {
       "0": "Deploys sin configuración con ambientes de preview",
       "1": "Orquestación Kubernetes GitOps-nativa",
@@ -91,7 +92,6 @@
       "title": "Enclii vs. Nube Tradicional",
       "headers": ["Característica", "Enclii", "Vercel", "AWS/GCP"],
       "rows": {
-        "price": ["Precio Inicial", "$55/mes", "$20/usuario/mes", "$100+/mes"],
         "deploys": ["Deploys Sin Config", "Sí", "Sí", "No"],
         "kubernetes": ["Kubernetes Nativo", "Sí", "No", "Config manual"],
         "sovereignty": ["Soberanía de Datos", "Total", "Limitada", "Configurable"],
@@ -105,7 +105,6 @@
       "sdks": "CLI, Node.js, Go"
     },
     "metrics": {
-      "cost": "$55/mes vs $2K+",
       "uptime": "99.95% SLA",
       "deploys": "< 90s tiempo de deploy"
     }
@@ -135,7 +134,6 @@
       "title": "Janua vs. Proveedores de Auth",
       "headers": ["Característica", "Janua", "Auth0", "Okta"],
       "rows": {
-        "pricing": ["Precio", "Gratis / Auto-hospedado", "$23/1K usuarios/mes", "$2/usuario/mes"],
         "selfHosted": ["Auto-Hospedado", "Sí", "No", "No"],
         "passkeys": ["Soporte Passkey", "Sí", "Sí", "Limitado"],
         "scim": ["Provisionamiento SCIM", "Sí", "Solo Enterprise", "Sí"],

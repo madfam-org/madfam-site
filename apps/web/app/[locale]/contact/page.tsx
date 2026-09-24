@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card, CardContent } from '@/components/ui';
 import { LeadForm } from '@/components/LeadForm';
+import { KALYA_DISCOVERY_CALL_URL } from '@/lib/data/value-ladder';
 
 export default async function ContactPage({
   params,
@@ -126,7 +127,9 @@ export default async function ContactPage({
                   {t('contact.immediateHelp.subtitle')}
                 </p>
                 <a
-                  href="https://calendly.com/madfam/quick-call"
+                  href={KALYA_DISCOVERY_CALL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center text-lavender font-medium hover:underline"
                 >
                   {t('contact.immediateHelp.scheduleCall')}

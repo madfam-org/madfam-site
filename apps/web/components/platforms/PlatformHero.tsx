@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
-import type { Platform } from '@/lib/data/platforms';
+import { primaryCtaLabelKey, type Platform } from '@/lib/data/platforms';
 import { Badge } from '@/components/corporate/Badge';
 import { Newsletter } from '@/components/ui/Newsletter';
 import { cn } from '@/components/ui/utils';
@@ -189,7 +189,12 @@ export function PlatformHero({ platform, i18nKey, locale }: PlatformHeroProps) {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <CTAButton cta={platform.primaryCTA} locale={locale} t={t} variant="primary" />
+          <CTAButton
+            cta={{ ...platform.primaryCTA, labelKey: primaryCtaLabelKey(platform) }}
+            locale={locale}
+            t={t}
+            variant="primary"
+          />
           <CTAButton cta={platform.secondaryCTA} locale={locale} t={t} variant="secondary" />
         </div>
       </div>
