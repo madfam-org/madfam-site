@@ -1,11 +1,70 @@
 import { NextResponse } from 'next/server';
-import { getServerAuth } from './auth';
 import { apiLogger } from './logger';
-import { validateCsrfToken } from './security';
+
+/**
+ * CSRF protection for state-changing API requests — a stateless same-origin
+ * check.
+ *
+ * WHY (2026-09-23). The previous design compared an `X-CSRF-Token` header with
+ * a token stored in the visitor's Janua session. The people who submit the
+ * contact, lead and assessment forms are anonymous visitors with no session,
+ * so the session token was always null; no client ever sent the header either.
+ * Every protected POST — including the contact form (`/api/leads`) — was
+ * therefore rejected with 403.
+ *
+ * A browser always sends `Origin` on a cross-site POST, so rejecting a POST
+ * whose `Origin` (or, failing that, `Referer`) is not this site stops
+ * cross-site request forgery without any session state. A request with
+ * neither header is not a browser-driven cross-site request, so it is allowed
+ * (and still rate limited by the route).
+ */
+
+const SITE_HOSTS = new Set(['madfam.io', 'www.madfam.io']);
+
+function sourceOrigin(request: Request): string | null {
+  const origin = request.headers.get('origin');
+  if (origin && origin !== 'null') return origin;
+  if (origin === 'null') return 'null';
+  const referer = request.headers.get('referer');
+  if (!referer) return null;
+  try {
+    return new URL(referer).origin;
+  } catch {
+    return 'null';
+  }
+}
+
+function allowedHosts(request: Request): Set<string> {
+  const hosts = new Set(SITE_HOSTS);
+  const forwarded = request.headers.get('x-forwarded-host');
+  const host = forwarded?.split(',')[0]?.trim() || request.headers.get('host');
+  if (host) hosts.add(host.toLowerCase());
+  const configured = process.env.NEXT_PUBLIC_BASE_URL;
+  if (configured) {
+    try {
+      hosts.add(new URL(configured).host.toLowerCase());
+    } catch {
+      // ignore a malformed base URL; the static hosts still apply
+    }
+  }
+  return hosts;
+}
+
+/** True when the request is not a cross-site browser request. */
+export function isSameOriginRequest(request: Request): boolean {
+  const origin = sourceOrigin(request);
+  if (origin === null) return true;
+  if (origin === 'null') return false;
+  try {
+    return allowedHosts(request).has(new URL(origin).host.toLowerCase());
+  } catch {
+    return false;
+  }
+}
 
 /**
  * CSRF Protection Middleware
- * Validates CSRF tokens for state-changing requests (POST, PUT, PATCH, DELETE)
+ * Validates the request origin for state-changing requests (POST, PUT, PATCH, DELETE)
  */
 export async function withCsrfProtection(
   request: Request,
@@ -18,32 +77,22 @@ export async function withCsrfProtection(
     return handler();
   }
 
-  // Get session to retrieve CSRF token
-  const session = await getServerAuth();
-
-  // Get CSRF token from session
-  const sessionCsrfToken = session?.csrfToken;
-
-  // Validate CSRF token
-  const isValid = validateCsrfToken(request, sessionCsrfToken || null);
-
-  if (!isValid) {
+  if (!isSameOriginRequest(request)) {
     apiLogger.warn('CSRF validation failed', {
       method,
       path: new URL(request.url).pathname,
-      ip: request.headers.get('x-forwarded-for') || 'unknown',
+      origin: request.headers.get('origin') || request.headers.get('referer') || 'none',
     });
 
     return NextResponse.json(
       {
-        error: 'Invalid CSRF token',
+        error: 'Invalid request origin',
         code: 'CSRF_VALIDATION_FAILED',
       },
       { status: 403 }
     );
   }
 
-  // CSRF token is valid, proceed with the handler
   return handler();
 }
 
