@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { getPlatformBySlug, getPlatformsWithDetailPages } from '@/lib/data/platforms';
+import { JsonLd } from '@/components/JsonLd';
 import { PlatformShowcase } from '@/components/platforms/PlatformShowcase';
+import { breadcrumbLd, softwareApplicationLd } from '@/lib/structured-data';
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -64,5 +66,24 @@ export default async function PlatformPage({ params }: PlatformPageProps) {
     notFound();
   }
 
-  return <PlatformShowcase platform={platform} locale={locale} />;
+  // JSON-LD (finding C-025): SoftwareApplication from registry facts + the
+  // page's own value prop, and a Home > Platforms > <name> breadcrumb.
+  const t = await getTranslations({ locale, namespace: 'platforms' });
+  const nav = await getTranslations({ locale, namespace: 'common.nav' });
+  const base = process.env.NEXT_PUBLIC_BASE_URL || 'https://madfam.io';
+  const structuredData = [
+    softwareApplicationLd(platform, { description: t(`${slugToI18nKey(slug)}.valueProp`) }, locale),
+    breadcrumbLd([
+      { name: nav('home'), url: `${base}/${locale}` },
+      { name: nav('platforms'), url: `${base}/${locale}/platforms` },
+      { name: platform.name, url: `${base}/${locale}/platforms/${platform.slug}` },
+    ]),
+  ];
+
+  return (
+    <>
+      <JsonLd data={structuredData} />
+      <PlatformShowcase platform={platform} locale={locale} />
+    </>
+  );
 }
