@@ -1,10 +1,10 @@
 # MADFAM Corporate Website
 
-![MADFAM](https://img.shields.io/badge/MADFAM-AI%20%2B%20Creativity-9B59B6)
-![Next.js](https://img.shields.io/badge/Next.js-15.x-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue)
-![React](https://img.shields.io/badge/React-18.x-61dafb)
-![Node.js](https://img.shields.io/badge/Node.js-20.x-green)
+![MADFAM](https://img.shields.io/badge/MADFAM-open%20platforms-9B59B6)
+![Next.js](https://img.shields.io/badge/Next.js-15.5-black)
+![TypeScript](<https://img.shields.io/badge/TypeScript-5.9%20(web)-blue>)
+![React](<https://img.shields.io/badge/React-18.3%20(web)-61dafb>)
+![Node.js](https://img.shields.io/badge/Node.js-22.x-green)
 ![License](https://img.shields.io/badge/License-Proprietary-red)
 
 > **The official website for MADFAM** — open platforms for creators, makers, and entrepreneurs building the future of LATAM. Built with Next.js 15 (App Router), TypeScript, and a modern monorepo architecture.
@@ -18,7 +18,7 @@
 - 📊 Privacy-first analytics with enterprise-grade security
 - 🎨 Modern design system with Tailwind CSS 4 and dark/light mode
 
-**📅 Last Updated:** 2026-07-06
+**📅 Last Updated:** 2026-09-23
 
 > **Boundary checkpoint (2026-09-04, madfam-site).** This is a public repository (Lane C, public
 > corporate site). Setup steps, ports and variable _names_ are public-safe; node hostnames, IP
@@ -30,7 +30,7 @@
 
 ### Prerequisites
 
-- Node.js 20.x or higher
+- Node.js 22.x (see `.nvmrc`)
 - pnpm 9.15.0 via Corepack (package manager is pinned in `package.json`)
 
 ```bash
