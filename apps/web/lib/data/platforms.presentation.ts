@@ -406,4 +406,250 @@ export const PLATFORM_PRESENTATION: Record<string, PlatformPresentation> = {
     hasTechSpecs: false,
     hasDetailPage: false,
   },
+  // R32 (coherence audit 2026-09-23): every customer-facing registry product
+  // whose lifecycle is live, beta or degraded is in the catalog. Incubating
+  // products stay out until they carry "coming soon" copy. Copy for these
+  // entries lives in the `platforms` namespace under the registry slug.
+  'phynd-crm': {
+    accentColor: {
+      gradient: 'from-rose-500/20 to-rose-600/10',
+      border: 'border-rose-200 dark:border-rose-800',
+      text: 'text-rose-600 dark:text-rose-400',
+      bg: 'bg-rose-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'phynd-crm.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'phynd-crm.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 4,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  ceq: {
+    accentColor: {
+      gradient: 'from-fuchsia-500/20 to-fuchsia-600/10',
+      border: 'border-fuchsia-200 dark:border-fuchsia-800',
+      text: 'text-fuchsia-600 dark:text-fuchsia-400',
+      bg: 'bg-fuchsia-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'ceq.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'ceq.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 3,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  acervo: {
+    accentColor: {
+      gradient: 'from-stone-500/20 to-stone-600/10',
+      border: 'border-stone-200 dark:border-stone-800',
+      text: 'text-stone-600 dark:text-stone-400',
+      bg: 'bg-stone-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'acervo.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'acervo.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 4,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  kalya: {
+    accentColor: {
+      gradient: 'from-teal-500/20 to-teal-600/10',
+      border: 'border-teal-200 dark:border-teal-800',
+      text: 'text-teal-600 dark:text-teal-400',
+      bg: 'bg-teal-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'kalya.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'kalya.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 3,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  symbiosis: {
+    accentColor: {
+      gradient: 'from-lime-500/20 to-lime-600/10',
+      border: 'border-lime-200 dark:border-lime-800',
+      text: 'text-lime-600 dark:text-lime-400',
+      bg: 'bg-lime-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'symbiosis.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'symbiosis.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 4,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  nauta: {
+    accentColor: {
+      gradient: 'from-indigo-500/20 to-indigo-600/10',
+      border: 'border-indigo-200 dark:border-indigo-800',
+      text: 'text-indigo-600 dark:text-indigo-400',
+      bg: 'bg-indigo-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'nauta.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'nauta.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 3,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  meridian: {
+    accentColor: {
+      gradient: 'from-cyan-500/20 to-cyan-600/10',
+      border: 'border-cyan-200 dark:border-cyan-800',
+      text: 'text-cyan-600 dark:text-cyan-400',
+      bg: 'bg-cyan-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'meridian.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'meridian.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 4,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  'fashion-cabinet': {
+    accentColor: {
+      gradient: 'from-pink-500/20 to-pink-600/10',
+      border: 'border-pink-200 dark:border-pink-800',
+      text: 'text-pink-600 dark:text-pink-400',
+      bg: 'bg-pink-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'fashion-cabinet.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'fashion-cabinet.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 4,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  factlas: {
+    accentColor: {
+      gradient: 'from-emerald-500/20 to-emerald-600/10',
+      border: 'border-emerald-200 dark:border-emerald-800',
+      text: 'text-emerald-600 dark:text-emerald-400',
+      bg: 'bg-emerald-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'factlas.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'factlas.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 3,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  routecraft: {
+    accentColor: {
+      gradient: 'from-orange-500/20 to-orange-600/10',
+      border: 'border-orange-200 dark:border-orange-800',
+      text: 'text-orange-600 dark:text-orange-400',
+      bg: 'bg-orange-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'routecraft.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'routecraft.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 3,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
+  tlacuilo: {
+    accentColor: {
+      gradient: 'from-amber-500/20 to-amber-600/10',
+      border: 'border-amber-200 dark:border-amber-800',
+      text: 'text-amber-600 dark:text-amber-400',
+      bg: 'bg-amber-500/10',
+    },
+    primaryCTA: {
+      type: 'external',
+      labelKey: 'tlacuilo.cta.primary',
+      urlFrom: 'external',
+    },
+    secondaryCTA: {
+      type: 'contact',
+      labelKey: 'tlacuilo.cta.secondary',
+    },
+    ecosystemConnections: [],
+    featureCount: 3,
+    hasComparison: false,
+    hasTechSpecs: false,
+    hasDetailPage: false,
+  },
 };

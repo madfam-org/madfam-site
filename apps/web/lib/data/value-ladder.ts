@@ -194,7 +194,7 @@ const REGISTRY_SLICE_SLUGS = [
  * registry facts: the registry's display name, the registry's icon, the
  * registry's checkout slug. Nothing about them is typed here.
  */
-const EXTRA_SLICE_SLUGS = ['crea-map', 'kalya', 'selva', 'symbiosis', 'acervo'] as const;
+const EXTRA_SLICE_SLUGS = ['kalya', 'selva', 'symbiosis', 'acervo'] as const;
 
 export interface ExtraSlice {
   slug: string;

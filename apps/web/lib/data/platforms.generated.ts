@@ -215,7 +215,7 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     lifecycle: 'live',
     license: 'AGPL-3.0',
     order: 4,
-    externalUrl: 'https://forgesight.quest',
+    externalUrl: 'https://forgesight.app',
     dataLicense: 'DATA_LICENSE',
     commerce: {
       tiers: [
@@ -299,8 +299,8 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     category: 'Intelligence',
     layer: 'intelligence',
     track: 'self-serve',
-    status: 'production-beta',
-    lifecycle: 'degraded',
+    status: 'production',
+    lifecycle: 'live',
     license: 'Proprietary',
     order: 6,
     externalUrl: 'https://fortuna.tube',
@@ -857,32 +857,6 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
       checkoutSlug: 'symbiosis',
     },
   },
-  'crea-map': {
-    slug: 'crea-map',
-    registrySlug: 'crea-map',
-    name: 'MAP — Modelo de Acompañamiento Personalizado',
-    icon: '🗺️',
-    category: 'Applications',
-    layer: 'applications',
-    track: 'ecosystem',
-    status: 'production',
-    lifecycle: 'live',
-    license: 'UNLICENSED',
-    order: 20,
-    externalUrl: 'https://crea-map.madfam.io',
-    commerce: {
-      tiers: [
-        {
-          id: 'membership',
-          label: 'Acceso de equipo',
-          pricing: {
-            state: 'pending',
-          },
-        },
-      ],
-      checkoutSlug: 'crea-map',
-    },
-  },
   nauta: {
     slug: 'nauta',
     registrySlug: 'nauta',
@@ -895,7 +869,7 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     lifecycle: 'live',
     license: 'UNLICENSED',
     order: 21,
-    externalUrl: 'https://app.nauta.quest',
+    externalUrl: 'https://nauta.quest',
     commerce: {
       tiers: [
         {
@@ -1175,6 +1149,84 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
       ],
     },
   },
+  tlacuilo: {
+    slug: 'tlacuilo',
+    registrySlug: 'tlacuilo',
+    name: 'Tlacuilo',
+    icon: '🖋️',
+    category: 'Intelligence',
+    layer: 'intelligence',
+    track: 'ecosystem',
+    status: 'production-beta',
+    lifecycle: 'beta',
+    license: 'AGPL-3.0',
+    order: 31,
+    externalUrl: 'https://tlacuilo.madfam.io',
+    githubUrl: 'https://github.com/madfam-org/tlacuilo',
+    commerce: {
+      tiers: [],
+    },
+  },
+  telesia: {
+    slug: 'telesia',
+    registrySlug: 'telesia',
+    name: 'Telesia',
+    icon: '🏆',
+    category: 'Applications',
+    layer: 'applications',
+    track: 'self-serve',
+    status: 'coming-soon',
+    lifecycle: 'incubating',
+    license: 'Proprietary',
+    order: 32,
+    externalUrl: 'https://telesia.quest',
+    commerce: {
+      tiers: [
+        {
+          id: 'free',
+          label: 'free',
+          pricing: {
+            state: 'pending',
+          },
+        },
+        {
+          id: 'premium',
+          label: 'premium',
+          pricing: {
+            state: 'pending',
+          },
+        },
+      ],
+    },
+  },
+  marca: {
+    slug: 'marca',
+    registrySlug: 'marca',
+    name: 'Marca',
+    icon: '🔗',
+    category: 'Applications',
+    layer: 'applications',
+    track: 'platform',
+    status: 'coming-soon',
+    lifecycle: 'incubating',
+    license: 'UNLICENSED',
+    order: 33,
+    externalUrl: 'https://madf.am',
+  },
+  lexidrop: {
+    slug: 'lexidrop',
+    registrySlug: 'lexidrop',
+    name: 'LexiDrop',
+    icon: '🌐',
+    category: 'Intelligence',
+    layer: 'intelligence',
+    track: 'self-serve',
+    status: 'coming-soon',
+    lifecycle: 'incubating',
+    license: 'Proprietary',
+    order: 34,
+    externalUrl: 'https://ld.madfam.io',
+  },
 };
 
 /** Catalog order, as the registry declares it. */
@@ -1198,7 +1250,6 @@ export const REGISTRY_PRODUCT_ORDER: string[] = [
   'acervo',
   'kalya',
   'symbiosis',
-  'crea-map',
   'nauta',
   'meridian',
   'fashion-cabinet',
@@ -1208,6 +1259,10 @@ export const REGISTRY_PRODUCT_ORDER: string[] = [
   'fragua',
   'enclii_depot',
   'routecraft',
+  'tlacuilo',
+  'telesia',
+  'marca',
+  'lexidrop',
 ];
 
 /**
@@ -1221,14 +1276,12 @@ export const RETIRED_PRODUCTS: RetiredProduct[] = [
     name: 'PENNY',
     retiredOn: '2026-07-25',
     successorSlug: 'selva',
-    redirectTo: 'https://selva.town',
   },
   {
     slug: 'sim4d',
     name: 'Sim4D',
     retiredOn: '2026-08-30',
     successorSlug: 'yantra4d',
-    redirectTo: 'https://yantra4d.com',
   },
   {
     slug: 'spark',
@@ -1743,18 +1796,6 @@ export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = {
     ],
     checkoutSlug: 'symbiosis',
   },
-  'crea-map': {
-    tiers: [
-      {
-        id: 'membership',
-        label: 'Acceso de equipo',
-        pricing: {
-          state: 'pending',
-        },
-      },
-    ],
-    checkoutSlug: 'crea-map',
-  },
   nauta: {
     tiers: [
       {
@@ -1921,6 +1962,27 @@ export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = {
       },
     ],
   },
+  tlacuilo: {
+    tiers: [],
+  },
+  telesia: {
+    tiers: [
+      {
+        id: 'free',
+        label: 'free',
+        pricing: {
+          state: 'pending',
+        },
+      },
+      {
+        id: 'premium',
+        label: 'premium',
+        pricing: {
+          state: 'pending',
+        },
+      },
+    ],
+  },
 };
 
 /**
@@ -1930,16 +1992,16 @@ export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = {
  */
 export const REGISTRY_PRICING_STATE = {
   listed: 0,
-  pending: 79,
+  pending: 80,
 } as const;
 
 /** Provenance of the vendored projection. The hash is the freshness check. */
 export const REGISTRY_SOURCE = {
   schema: 'madfam-product-projection/v1',
   registryVersion: 4,
-  lastUpdated: '2026-09-05',
+  lastUpdated: '2026-09-23',
   generatedFrom: 'internal-devops/ecosystem/registry/products.yaml',
-  sha256: 'b2a80ca57dd6fdf20905771855cc264e6d6362c4d40c1297a04ba3c250951fe1',
-  productCount: 29,
+  sha256: '2700b6ea3dfa0c1ff03c294b0e63c309acc937d4dbdd8ecc44d1984ba7615906',
+  productCount: 32,
   retiredCount: 3,
 } as const;

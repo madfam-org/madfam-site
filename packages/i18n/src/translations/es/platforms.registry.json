@@ -77,10 +77,6 @@
     "name": "Symbiosis HCM",
     "license": "AGPL-3.0"
   },
-  "crea-map": {
-    "name": "MAP — Modelo de Acompañamiento Personalizado",
-    "license": "UNLICENSED"
-  },
   "nauta": {
     "name": "Nauta",
     "license": "UNLICENSED"
@@ -115,6 +111,22 @@
   },
   "routecraft": {
     "name": "RouteCraft",
+    "license": "Proprietary"
+  },
+  "tlacuilo": {
+    "name": "Tlacuilo",
+    "license": "AGPL-3.0"
+  },
+  "telesia": {
+    "name": "Telesia",
+    "license": "Proprietary"
+  },
+  "marca": {
+    "name": "Marca",
+    "license": "UNLICENSED"
+  },
+  "lexidrop": {
+    "name": "LexiDrop",
     "license": "Proprietary"
   }
 }
