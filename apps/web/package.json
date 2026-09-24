@@ -32,8 +32,6 @@
   "dependencies": {
     "@headlessui/react": "^2.2.10",
     "@hookform/resolvers": "^3.3.4",
-    "@janua/nextjs": "^0.2.0",
-    "@janua/ui": "^0.1.4",
     "@madfam-site/analytics": "workspace:*",
     "@madfam-site/core": "workspace:*",
     "@madfam-site/i18n": "workspace:*",

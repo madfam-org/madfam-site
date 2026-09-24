@@ -25,13 +25,6 @@ vi.mock('next/navigation', () => ({
   },
 }));
 
-// Mock Janua auth
-vi.mock('@janua/nextjs', () => ({
-  useJanua: () => ({ client: { getAccessToken: () => null } }),
-  useUser: () => ({ user: null }),
-  useAuth: () => ({ isAuthenticated: false, isLoading: false, signOut: vi.fn() }),
-}));
-
 // Mock @madfam-site/analytics — aligned with packages/analytics/src/index.ts exports
 vi.mock('@madfam-site/analytics', () => ({
   analytics: {

@@ -32,10 +32,6 @@ vi.mock('@/lib/security', () => ({
   generateCsrfToken: vi.fn().mockReturnValue('csrf-test-token'),
 }));
 
-vi.mock('@/lib/auth', () => ({
-  getServerAuth: vi.fn(),
-}));
-
 // Force in-memory rate limit store by returning null from Redis.
 vi.mock('@/lib/redis', () => ({
   getRedisClient: vi.fn().mockReturnValue(null),
