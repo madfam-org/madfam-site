@@ -19,29 +19,29 @@ The MADFAM corporate website uses a comprehensive testing strategy with unit tes
 pnpm test
 
 # Run tests in watch mode
-pnpm --filter @madfam/web test
+pnpm --filter @madfam-site/web test
 
 # Run tests with UI
-pnpm --filter @madfam/web test:ui
+pnpm --filter @madfam-site/web test:ui
 
 # Run tests with coverage
-pnpm --filter @madfam/web test:coverage
+pnpm --filter @madfam-site/web test:coverage
 ```
 
 ### E2E Tests
 
 ```bash
 # Install Playwright browsers (first time only)
-pnpm --filter @madfam/web exec playwright install
+pnpm --filter @madfam-site/web exec playwright install
 
 # Run all E2E tests
-pnpm --filter @madfam/web test:e2e
+pnpm --filter @madfam-site/web test:e2e
 
 # Run E2E tests with UI
-pnpm --filter @madfam/web test:e2e:ui
+pnpm --filter @madfam-site/web test:e2e:ui
 
 # Run E2E tests in headed mode (see browser)
-pnpm --filter @madfam/web test:e2e:headed
+pnpm --filter @madfam-site/web test:e2e:headed
 ```
 
 ## Test Structure
@@ -128,23 +128,23 @@ The CI pipeline will fail if:
 
 ```bash
 # Run specific test file
-pnpm --filter @madfam/web test lib/__tests__/seo.test.ts
+pnpm --filter @madfam-site/web test lib/__tests__/seo.test.ts
 
 # Run tests matching pattern
-pnpm --filter @madfam/web test -t "should calculate"
+pnpm --filter @madfam-site/web test -t "should calculate"
 ```
 
 ### Debug E2E Tests
 
 ```bash
 # Run with debug mode
-PWDEBUG=1 pnpm --filter @madfam/web test:e2e
+PWDEBUG=1 pnpm --filter @madfam-site/web test:e2e
 
 # Run specific test file
-pnpm --filter @madfam/web test:e2e homepage.spec.ts
+pnpm --filter @madfam-site/web test:e2e homepage.spec.ts
 
 # Save trace on failure
-pnpm --filter @madfam/web test:e2e --trace on
+pnpm --filter @madfam-site/web test:e2e --trace on
 ```
 
 ## Performance Testing

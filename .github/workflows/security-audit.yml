@@ -78,7 +78,7 @@ jobs:
           fi
           
       - name: Application security check
-        run: pnpm --filter @madfam/web test:security
+        run: pnpm --filter @madfam-site/web test:security
 
       - name: Upload audit results
         if: always()
