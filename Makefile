@@ -12,7 +12,7 @@ dev: ## Run development server locally
 	cd apps/web && pnpm dev
 
 build: ## Build the web app
-	pnpm turbo build --filter=@madfam/web
+	pnpm turbo build --filter=@madfam-site/web
 
 start: ## Start production server locally
 	cd apps/web && pnpm start

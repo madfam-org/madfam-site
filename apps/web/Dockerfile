@@ -38,7 +38,7 @@ ENV NEXT_PUBLIC_PLAUSIBLE_DOMAIN=${NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
 ARG NEXT_PUBLIC_PLAUSIBLE_HOST=https://plausible.madfam.io
 ENV NEXT_PUBLIC_PLAUSIBLE_HOST=${NEXT_PUBLIC_PLAUSIBLE_HOST}
 # Build the web app
-RUN pnpm turbo build --filter=@madfam/web
+RUN pnpm turbo build --filter=@madfam-site/web
 
 # Runner stage
 FROM node:20-alpine AS runner
