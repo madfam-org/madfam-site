@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card } from '@/components/ui';
 import { getPublishedCaseStudies, type CaseStudy } from '@/lib/cms';
 import { environment } from '@/lib/environment';
+import { routeMetadata } from '@/lib/page-metadata';
 
 // Common case study interface for consistency
 type CommonCaseStudy = {
@@ -25,6 +26,11 @@ type CommonCaseStudy = {
     alt?: string;
   };
 };
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return routeMetadata(locale, 'caseStudies', '/case-studies');
+}
 
 export default async function CaseStudiesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

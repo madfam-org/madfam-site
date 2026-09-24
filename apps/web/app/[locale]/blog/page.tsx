@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { Container, Heading } from '@/components/ui';
 import { getPublishedBlogPosts, type BlogPost } from '@/lib/cms';
 import { environment } from '@/lib/environment';
+import { routeMetadata } from '@/lib/page-metadata';
 
 // Common blog post interface for consistency
 type CommonBlogPost = {
@@ -34,6 +35,11 @@ function calculateReadTime(content: string, minReadLabel: string): string {
   const words = stripped.split(/\s+/).length;
   const minutes = Math.ceil(words / wordsPerMinute);
   return `${minutes} ${minReadLabel}`;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return routeMetadata(locale, 'blog', '/blog');
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
