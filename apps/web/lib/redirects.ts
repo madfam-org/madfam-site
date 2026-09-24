@@ -171,7 +171,7 @@ export const productOwnership = {
   'forge-sight': {
     arm: 'madfam',
     badge: 'por MADFAM',
-    url: 'https://www.forgesight.quest',
+    url: 'https://forgesight.app',
   },
   dhanam: {
     arm: 'madfam',

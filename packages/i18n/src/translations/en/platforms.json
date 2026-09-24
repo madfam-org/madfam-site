@@ -477,5 +477,164 @@
       "secondary": "Talk to us"
     },
     "connections": {}
+  },
+  "phynd-crm": {
+    "tagline": "CRM — consent, campaigns and attribution",
+    "valueProp": "A CRM that brings your customers and what happens with them across MADFAM platforms into one view, without duplicating data, with consent as the starting point.",
+    "features": {
+      "0": "Single customer view",
+      "1": "Consent and contact preferences",
+      "2": "Campaigns and attribution",
+      "3": "Open-source core"
+    },
+    "cta": {
+      "primary": "Go to PhyndCRM",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "ceq": {
+    "tagline": "Generative media studio",
+    "valueProp": "A working interface on top of ComfyUI for generative images and media: full node power when you need it, a clean experience when you do not.",
+    "features": {
+      "0": "ComfyUI workflows with a simplified interface",
+      "1": "Image and media generation",
+      "2": "Open source (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Go to CEQ",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "acervo": {
+    "tagline": "Professional records engine",
+    "valueProp": "Immutable versioned records, append-only observations and derived reports, with data exit built in from day one.",
+    "features": {
+      "0": "Immutable versioned records",
+      "1": "Append-only observations",
+      "2": "Derived reports",
+      "3": "Multi-tenant with data exit"
+    },
+    "cta": {
+      "primary": "Go to Acervo",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "kalya": {
+    "tagline": "Scheduling and booking",
+    "valueProp": "The ecosystem availability and booking engine: your clients pick a slot and you get the appointment, without email back-and-forth.",
+    "features": {
+      "0": "A booking page for your business",
+      "1": "Availability and calendars",
+      "2": "Part of the MADFAM ecosystem"
+    },
+    "cta": {
+      "primary": "Go to Kalya",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "symbiosis": {
+    "tagline": "Human capital management for Mexico",
+    "valueProp": "People, positions and your organisation structure in one place, designed for Mexican labour operations.",
+    "features": {
+      "0": "People and position records",
+      "1": "Organisation structure",
+      "2": "Mexican labour operations",
+      "3": "Open source (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Go to Symbiosis HCM",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "nauta": {
+    "tagline": "Fractional-CTO operating system",
+    "valueProp": "One cockpit for your company's technology, operations and decisions, with a technical operator when you need one.",
+    "features": {
+      "0": "One login for your ecosystem services",
+      "1": "Roadmap, decisions and technical debt in one place",
+      "2": "A fractional CTO (vCTO) when you want one"
+    },
+    "cta": {
+      "primary": "Go to nauta.quest",
+      "secondary": "Book a call"
+    },
+    "connections": {}
+  },
+  "meridian": {
+    "tagline": "Migration law and logistics",
+    "valueProp": "Eligibility assessment against a versioned catalog of immigration pathways, document assembly and cross-border presence tracking.",
+    "features": {
+      "0": "Immigration eligibility assessment",
+      "1": "Document assembly and translations",
+      "2": "Travel-document validation",
+      "3": "Open source (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Go to Meridian",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "fashion-cabinet": {
+    "tagline": "Parametric fashion, in the open",
+    "valueProp": "A commons of parametric garments and accessories —from a button to a tailored garment— configurable to real body measurements and ready to become fabrication patterns.",
+    "features": {
+      "0": "Garments configurable to real measurements",
+      "1": "From model to fabrication pattern",
+      "2": "Yantra4D’s sibling for soft goods",
+      "3": "Open source (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Go to Fashion Cabinet",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "factlas": {
+    "tagline": "Facts with coordinates",
+    "valueProp": "Geospatial data —observations, facts and layers— organised to be queried and exported by location.",
+    "features": {
+      "0": "Georeferenced observations and facts",
+      "1": "Layers and exports",
+      "2": "Query by location"
+    },
+    "cta": {
+      "primary": "Go to Factlas",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "routecraft": {
+    "tagline": "Trip planning as a service",
+    "valueProp": "Scores cities and dates across business, culture and aesthetics to turn every trip into an advantage.",
+    "features": {
+      "0": "Opportunity scores by city and date",
+      "1": "Business, culture and aesthetics in one plan",
+      "2": "Payments through Dhanam"
+    },
+    "cta": {
+      "primary": "Go to RouteCraft",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
+  },
+  "tlacuilo": {
+    "tagline": "Document intelligence: OCR and extraction",
+    "valueProp": "Reads the documents the ecosystem needs to understand —bank statements, receipts, SAT documents— and turns them into typed data.",
+    "features": {
+      "0": "OCR and typed extraction",
+      "1": "Bank statements, receipts and tax documents",
+      "2": "Open source (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Go to Tlacuilo",
+      "secondary": "Talk to us"
+    },
+    "connections": {}
   }
 }

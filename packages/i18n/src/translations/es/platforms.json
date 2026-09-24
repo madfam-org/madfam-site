@@ -477,5 +477,164 @@
       "secondary": "Hablar con nosotros"
     },
     "connections": {}
+  },
+  "phynd-crm": {
+    "tagline": "CRM — consentimiento, campañas y atribución",
+    "valueProp": "Un CRM que reúne en una sola vista a tus clientes y lo que pasa con ellos en las plataformas MADFAM, sin duplicar datos, con el consentimiento como punto de partida.",
+    "features": {
+      "0": "Vista única del cliente",
+      "1": "Consentimiento y preferencias de contacto",
+      "2": "Campañas y atribución",
+      "3": "Núcleo open source"
+    },
+    "cta": {
+      "primary": "Ir a PhyndCRM",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "ceq": {
+    "tagline": "Estudio de generación de medios con IA",
+    "valueProp": "Una interfaz de trabajo sobre ComfyUI para crear imágenes y medios generativos: todo el poder de los nodos cuando lo necesitas, una experiencia limpia cuando no.",
+    "features": {
+      "0": "Flujos de ComfyUI con interfaz simplificada",
+      "1": "Generación de imagen y medios",
+      "2": "Código abierto (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Ir a CEQ",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "acervo": {
+    "tagline": "Motor de expedientes profesionales",
+    "valueProp": "Expedientes versionados e inmutables, observaciones que solo se agregan y reportes derivados, con salida de tus datos desde el primer día.",
+    "features": {
+      "0": "Registros versionados e inmutables",
+      "1": "Observaciones de solo agregado",
+      "2": "Reportes derivados",
+      "3": "Multi-tenant con salida de datos"
+    },
+    "cta": {
+      "primary": "Ir a Acervo",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "kalya": {
+    "tagline": "Agenda y reservas",
+    "valueProp": "El motor de disponibilidad y reservas del ecosistema: tus clientes eligen horario y tú recibes la cita, sin ir y venir de correos.",
+    "features": {
+      "0": "Página de reservas para tu negocio",
+      "1": "Disponibilidad y calendarios",
+      "2": "Parte del ecosistema MADFAM"
+    },
+    "cta": {
+      "primary": "Ir a Kalya",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "symbiosis": {
+    "tagline": "Gestión de capital humano para México",
+    "valueProp": "Personas, puestos y estructura de tu organización en un solo lugar, pensado para la operación laboral mexicana.",
+    "features": {
+      "0": "Expediente de personas y puestos",
+      "1": "Estructura organizacional",
+      "2": "Operación laboral mexicana",
+      "3": "Código abierto (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Ir a Symbiosis HCM",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "nauta": {
+    "tagline": "Sistema operativo de CTO fraccional",
+    "valueProp": "Una sola cabina para la tecnología, las operaciones y las decisiones de tu empresa, con un operador técnico cuando lo necesitas.",
+    "features": {
+      "0": "Un solo acceso a los servicios del ecosistema",
+      "1": "Hoja de ruta, decisiones y deuda técnica en un lugar",
+      "2": "CTO fraccional (vCTO) cuando lo quieras"
+    },
+    "cta": {
+      "primary": "Ir a nauta.quest",
+      "secondary": "Agendar una llamada"
+    },
+    "connections": {}
+  },
+  "meridian": {
+    "tagline": "Derecho migratorio y logística",
+    "valueProp": "Evaluación de elegibilidad contra un catálogo versionado de vías migratorias, armado de expedientes y seguimiento de estancia entre países.",
+    "features": {
+      "0": "Evaluación de elegibilidad migratoria",
+      "1": "Armado de expedientes y traducciones",
+      "2": "Validación de documentos de viaje",
+      "3": "Código abierto (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Ir a Meridian",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "fashion-cabinet": {
+    "tagline": "Moda paramétrica, en abierto",
+    "valueProp": "Un acervo común de prendas y accesorios paramétricos —de un botón a una prenda a medida— configurables a medidas reales y listos para convertirse en patrones de fabricación.",
+    "features": {
+      "0": "Prendas configurables a medidas reales",
+      "1": "Del modelo al patrón de fabricación",
+      "2": "Hermano de Yantra4D para textiles",
+      "3": "Código abierto (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Ir a Fashion Cabinet",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "factlas": {
+    "tagline": "Hechos con coordenadas",
+    "valueProp": "Datos geoespaciales —observaciones, hechos y capas— organizados para consultarse y exportarse por ubicación.",
+    "features": {
+      "0": "Observaciones y hechos georreferenciados",
+      "1": "Capas y exportaciones",
+      "2": "Consulta por ubicación"
+    },
+    "cta": {
+      "primary": "Ir a Factlas",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "routecraft": {
+    "tagline": "Planeación de viajes como servicio",
+    "valueProp": "Evalúa ciudades y fechas en negocio, cultura y estética para convertir cada viaje en una ventaja.",
+    "features": {
+      "0": "Puntaje de oportunidades por ciudad y fecha",
+      "1": "Negocio, cultura y estética en un solo plan",
+      "2": "Cobros a través de Dhanam"
+    },
+    "cta": {
+      "primary": "Ir a RouteCraft",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
+  },
+  "tlacuilo": {
+    "tagline": "Inteligencia documental: OCR y extracción",
+    "valueProp": "Lee los documentos que el ecosistema necesita entender —estados de cuenta, recibos, documentos del SAT— y los convierte en datos tipados.",
+    "features": {
+      "0": "OCR y extracción tipada",
+      "1": "Estados de cuenta, recibos y documentos fiscales",
+      "2": "Código abierto (AGPL-3.0)"
+    },
+    "cta": {
+      "primary": "Ir a Tlacuilo",
+      "secondary": "Hablar con nosotros"
+    },
+    "connections": {}
   }
 }
