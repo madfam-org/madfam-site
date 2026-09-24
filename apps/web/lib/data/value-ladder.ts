@@ -238,9 +238,9 @@ export function dhanamCheckoutUrl(productSlug: string): string {
 }
 
 // Kalya discovery-call booking (Band 4, or anyone who wants help). Canonical
-// host is kalya.app. TODO(handle): confirm the MADFAM booking handle — the site
-// has no existing "book a call" CTA to reuse, so `/madfam` is a placeholder
-// pending the real Kalya event-type slug for the discovery call.
+// host is kalya.app; `/madfam` is MADFAM's live booking page (tenant live since
+// 2026-08-30, verified 2026-09-23). Ruling R27 routes every "talk to us" CTA
+// here.
 export const KALYA_DISCOVERY_CALL_URL = 'https://kalya.app/madfam';
 
 // ─── Self-selector ("Encuentra tu escalón") ─────────────────────────────────
