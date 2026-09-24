@@ -28,7 +28,7 @@ jobs:
     name: DocGuard
     runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Run DocGuard
         # v1 @ solarpunk-foundry main, resolved 2026-09-04.

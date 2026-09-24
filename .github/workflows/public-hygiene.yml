@@ -23,7 +23,7 @@ jobs:
   public-hygiene:
     runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # Full history: boundary-checkpoint-check.sh diffs against origin/main,
           # and a shallow checkout makes it fall back to a narrower comparison.
@@ -37,3 +37,8 @@ jobs:
 
       - name: Public hygiene guard self-test
         run: bash ./scripts/tests/test-public-hygiene.sh
+
+      # Supply chain (finding C-031): every action must be pinned to a 40-hex
+      # commit SHA with a version comment; Dependabot keeps both current.
+      - name: Check GitHub Action pins
+        run: bash ./scripts/check-action-pins.sh
