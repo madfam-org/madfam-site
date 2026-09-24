@@ -5,7 +5,7 @@ import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
 import { Container } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
 import { ProductCard } from '@/components/corporate/ProductCard';
-import { PLATFORMS, LAYERS, isComingSoon } from '@/lib/data/platforms';
+import { PLATFORMS, LAYERS, isComingSoon, primaryCtaLabelKey } from '@/lib/data/platforms';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -73,7 +73,7 @@ export default async function ProductsPage({ params }: Props) {
       tiers: '',
       comingSoon: isComingSoon(p),
       primaryCta: {
-        label: platformsT(`${key}.cta.primary`),
+        label: platformsT(primaryCtaLabelKey(p)),
         url: isComingSoon(p) ? '#' : (p.externalUrl ?? detailHref),
         external: !isComingSoon(p) && !!p.externalUrl,
         comingSoon: isComingSoon(p),

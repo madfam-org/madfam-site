@@ -11,6 +11,7 @@ import { EcosystemFlowDiagram } from '@/components/ecosystem/EcosystemFlowDiagra
 import { PersonaCards } from '@/components/ecosystem/PersonaCards';
 import { OfferPathRouter } from '@/components/ecosystem/OfferPathRouter';
 import { MetricsBar } from '@/components/ecosystem/MetricsBar';
+import { getLicenseSummary, getSelfServeNames } from '@/lib/data/platforms';
 
 // ─── Maker Node Services ──────────────────────────────────────────────────────
 
@@ -28,6 +29,10 @@ export function EcosystemHomePage() {
   const tEng = useTranslations('corporate.engagementTracks');
   const tWhy = useTranslations('corporate.whyMadfam');
   const locale = useLocale() as Locale;
+  // Registry-derived facts for copy (C-010): which products are self-serve,
+  // and how many catalog products are AGPL-3.0. Never hand-typed.
+  const selfServeProducts = getSelfServeNames().join(', ');
+  const licenseSummary = getLicenseSummary();
   const layerGridRef = useRef<HTMLElement>(null);
 
   function scrollToLayerGrid() {
@@ -200,7 +205,7 @@ export function EcosystemHomePage() {
                 {tEng('selfServe.title')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-1">
-                {tEng('selfServe.description')}
+                {tEng('selfServe.description', { products: selfServeProducts })}
               </p>
               <Link href={getLocalizedUrl('products', locale)}>
                 <Button size="lg" className="w-full bg-leaf hover:bg-leaf/90 text-white">
@@ -257,7 +262,7 @@ export function EcosystemHomePage() {
                   {tWhy(`${key}.title`)}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {tWhy(`${key}.description`)}
+                  {tWhy(`${key}.description`, licenseSummary)}
                 </p>
               </div>
             ))}
