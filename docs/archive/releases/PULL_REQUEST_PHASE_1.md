@@ -1,3 +1,9 @@
+> **ARCHIVED — historical record, not current guidance** (banner added 2026-09-23).
+> Names, hosts, products and procedures below may be retired — e.g. PENNY, SPARK,
+> penny.onl, forgesight.quest, and Vercel / Railway / GitHub Pages hosting. Current
+> sources: [`AGENTS.md`](/AGENTS.md), [`ECOSYSTEM.md`](/ECOSYSTEM.md) and
+> [`docs/deployment/DEPLOYMENT.md`](/docs/deployment/DEPLOYMENT.md).
+
 <!-- Boundary checkpoint (public-safe): archived release note. Revenue and cost projections were removed on 2026-09-04 and are tracked in the private sink (internal-devops). Policy: internal-devops/docs/repo-boundary-contract.md -->
 
 # Phase 1 UX Improvements: Brand Positioning, Personalization & Lead Capture

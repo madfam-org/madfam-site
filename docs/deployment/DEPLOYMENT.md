@@ -1,473 +1,114 @@
 # Deployment Guide
 
 > [!IMPORTANT]
-> MADFAM-ENCLII-FIRST-LEGACY-RAW v1: This document contains legacy raw infrastructure command examples.
 > Routine production operations must use Enclii web, API, or CLI. Treat raw
 > `kubectl`, `helm`, SSH, provider CLI/API, `docker exec`, and direct container
 > access as platform bootstrap or documented break-glass only, and record any
 > missing Enclii adapter gap.
 
+> **Boundary checkpoint (2026-09-23, madfam-site).** Public-safe: pipeline shape, file paths
+> and variable _names_ only. Node identity, IPs, credentials, tunnel identifiers, costs and
+> incident evidence live only in the private `internal-devops` repo (private sink). Policy:
+> `internal-devops/docs/repo-boundary-contract.md`.
+
+_Rewritten 2026-09-23 (coherence audit finding C-014). The previous edition described Vercel as
+a "preview/fallback" and GitHub Pages as staging; both are retired (owner confirmation
+2026-09-04) and their guides now live in [`docs/archive/`](../archive/)._
+
 ## Overview
 
-The MADFAM website uses a comprehensive multi-environment deployment strategy optimized for AI consultancy business operations:
+| Environment | How it runs                                                                                            |
+| ----------- | ------------------------------------------------------------------------------------------------------ |
+| Development | `pnpm dev` on your machine (Next.js dev server, hot reload)                                            |
+| Production  | `madfam.io` — container image on the MADFAM k3s cluster, deployed by **Enclii** with **ArgoCD** GitOps |
 
-- **Development**: Local development with SQLite and hot reload
-- **Staging**: GitHub Pages (static export for design/content review)
-- **Production**: Kubernetes via Enclii (containerized deployment with GitOps CI/CD)
-
-> **Note**: Vercel is available as a preview/fallback deployment option. See [Infrastructure Requirements](../infrastructure/INFRASTRUCTURE_REQUIREMENTS.md) for details.
+There is no Vercel deployment, no Railway service and no GitHub Pages staging site. Enclii is the
+only deployment path.
 
 ## Prerequisites
 
-- Node.js 20+ and pnpm 8+
-- Git and GitHub account
-- Enclii CLI access for production/staging operations
-- Docker for local image work
-- kubectl only for platform bootstrap or documented break-glass when Enclii is unavailable
-- Vercel account only for preview/fallback deployments
-- Environment variables configured
+- Node.js 22 (see `.nvmrc`) and pnpm 9.15.0 (`packageManager` in `package.json`)
+- Enclii CLI access for any production operation
+- Docker, only if you want to build the image locally
 
-## Environment Configuration
+## How a change reaches production
 
-### Development (.env.local)
+1. A pull request merges to `main`.
+2. If it touches `apps/web/**` or `packages/**`, the **Deploy Web** workflow
+   (`.github/workflows/deploy-web.yml`) runs:
+   - builds the multi-stage `apps/web/Dockerfile` image,
+   - pushes it to `ghcr.io/madfam-org/madfam-site/web`,
+   - signs it with cosign (keyless OIDC),
+   - commits the new image **digest** into `k8s/production/kustomization.yaml`
+     (`deploy(web): update digest to <sha>`),
+   - reports the lifecycle event to Enclii.
+3. ArgoCD watches `k8s/production` (see `infra/argocd/config.json`) with automated sync, prune and
+   self-heal, and rolls the Deployment to the new digest.
 
-```env
-# Environment
-NEXT_PUBLIC_ENV=development
+Changes that touch only `k8s/production/**` deploy through step 3 alone (no image build). Changes
+that touch only docs or non-deploy workflows do not deploy.
 
-# Analytics (optional in dev)
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=localhost
+One deploying merge at a time: wait for Deploy Web **and** its digest commit before merging the
+next change that deploys.
 
-# API
-NEXT_PUBLIC_API_URL=http://localhost:3002/api
-DATABASE_URL=file:./dev.db
-
-# Feature Flags
-NEXT_PUBLIC_FEATURE_FLAGS=all
-```
-
-### Staging
-
-```env
-# Environment
-NEXT_PUBLIC_ENV=staging
-
-# Analytics
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=staging.madfam.io
-
-# API
-NEXT_PUBLIC_API_URL=https://staging.madfam.io/api
-
-# Feature Flags
-NEXT_PUBLIC_FEATURE_FLAGS=staging
-```
-
-### Production
-
-```env
-# Environment
-NEXT_PUBLIC_ENV=production
-
-# Analytics
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io
-
-# API
-NEXT_PUBLIC_API_URL=https://madfam.io/api
-
-# Database
-DATABASE_URL=replace-with-secret-store-value
-
-# CMS Integration (Kubernetes via Enclii)
-NEXT_PUBLIC_CMS_URL=https://cms.madfam.io
-CMS_API_KEY=replace-with-secret-store-value
-
-# Feature Flags
-NEXT_PUBLIC_FEATURE_FLAGS=stable
-
-# Secrets
-API_SECRET=replace-with-secret-store-value
-N8N_WEBHOOK_URL=replace-with-secret-store-value
-
-# Email Service
-RESEND_API_KEY=replace-with-secret-store-value
-```
-
-## Deployment Workflows
-
-### Production Deployment Options
-
-The project supports two production deployment strategies:
-
-| Strategy       | When to Use               | Details                                                         |
-| -------------- | ------------------------- | --------------------------------------------------------------- |
-| **Vercel**     | Serverless, zero-ops      | Push to `main` triggers Vercel auto-deploy                      |
-| **Kubernetes** | Self-hosted, full control | Push to `main` triggers Docker build → GHCR → K8s via Kustomize |
-
-See below for details on each strategy.
-
-### 1. Kubernetes Deployment (Self-Hosted)
-
-The project includes full Kubernetes manifests under `k8s/production/` and two GitHub Actions workflows (`deploy-web.yml`, `deploy-cms.yml`) that implement a GitOps-style deployment pipeline.
-
-#### How It Works
-
-1. Push to `main` (with changes in `apps/web/` or `apps/cms/`) triggers the respective workflow
-2. Docker image is built and pushed to `ghcr.io/madfam-org/madfam-site/{web,cms}`
-3. Image is signed with [cosign](https://github.com/sigstore/cosign) for supply-chain security
-4. The workflow updates `k8s/production/kustomization.yaml` with the new image digest
-5. A GitOps operator (e.g., Flux, ArgoCD) or manual `kubectl apply -k` picks up the change
-
-#### K8s Manifests
+## Manifests (`k8s/production/`)
 
 ```
-k8s/production/
-├── kustomization.yaml          # Kustomize entrypoint with image references
-├── namespace.yaml              # madfam-site namespace
-├── madfam-web-deployment.yaml  # Web app (Next.js) deployment
-├── madfam-web-service.yaml     # Web ClusterIP service (port 80 → 3000)
-├── madfam-cms-deployment.yaml  # CMS (Payload) deployment
-├── madfam-cms-service.yaml     # CMS ClusterIP service (port 80 → 3000)
-├── network-policies.yaml       # Default-deny + allow Cloudflare, DB, DNS, HTTPS
-├── resource-quota.yaml         # CPU/memory limits and LimitRange
-└── secrets-template.yaml       # Template for kubectl create secret
+kustomization.yaml          # Kustomize entrypoint; image digests are written here by CI
+namespace.yaml              # madfam-site namespace
+madfam-web-deployment.yaml  # Next.js web app
+madfam-web-service.yaml     # ClusterIP service (80 -> 3000)
+madfam-web-hpa.yaml         # Horizontal Pod Autoscaler
+network-policies.yaml       # default-deny + explicit allow rules
+resource-quota.yaml         # ResourceQuota + LimitRange
+secrets-template.yaml       # key NAMES for reference; not applied by ArgoCD
 ```
 
-#### Security Hardening
+The `madfam-cms` workload (Payload) is retired (ruling R52, 2026-09-23); the multi-tenant CMS
+moves to its own repository.
 
-- Non-root containers (UID 1001)
-- Read-only root filesystem with `/tmp` emptyDir
-- `seccompProfile: RuntimeDefault`
-- All capabilities dropped
-- Network policies: default-deny with explicit allow rules
-- Image signing with cosign (keyless, OIDC-based)
+Hardening in the manifests: non-root user, read-only root filesystem with an `/tmp` emptyDir,
+`seccompProfile: RuntimeDefault`, all capabilities dropped, default-deny network policies, signed
+images.
 
-#### Deploying Manually
+## Configuration and secrets
 
-Preferred path: use Enclii secrets so values flow through Lockbox/Vault/ESO and
-remain auditable.
+- Variable names and placeholder values: [`apps/web/.env.example`](../../apps/web/.env.example).
+  Keep examples placeholder-only.
+- The app validates `DATABASE_URL`, `ENCRYPTION_KEY` and `API_SECRET` at start
+  (`apps/web/lib/env.ts`); everything else is optional and switches a service on when set.
+- Values are managed with Enclii (backed by the secret store), never committed and never pasted
+  into chat, issues or PRs:
+
+  ```bash
+  enclii secrets set madfam-web <KEY>
+  ```
+
+- Retired keys (no code reads them): `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, `JANUA_CLIENT_ID`,
+  `JANUA_SECRET` (ruling R42 — madfam.io has no sign-in of its own), `PAYLOAD_SECRET` (R52).
+
+## Verifying a deploy
+
+- The Deploy Web run is green and the `deploy(web): update digest to <sha>` commit is on `main`.
+- `https://madfam.io/api/health` answers, and the page you changed shows the change.
+- Enclii shows the new revision healthy.
+
+## Rolling back
+
+Roll back through Enclii. In GitOps terms a rollback is restoring the previous image digest in
+`k8s/production/kustomization.yaml` on `main` (revert the digest commit); ArgoCD then converges the
+cluster to it. Do not `kubectl set image` in production — self-heal reverts it.
+
+## Local production build
 
 ```bash
-enclii secrets set madfam-web DATABASE_URL
-enclii secrets set madfam-web JANUA_CLIENT_ID
-enclii secrets set madfam-web JANUA_SECRET
-enclii secrets set madfam-cms PAYLOAD_SECRET
+pnpm install --frozen-lockfile
+NODE_ENV=production SKIP_ENV_VALIDATION=true pnpm build
+pnpm --filter @madfam/web start
 ```
 
-Raw Kubernetes apply is bootstrap/break-glass only when Enclii is unavailable or
-missing an adapter. Record the reason, use placeholders in docs, and reconcile
-any emergency value back into the secret store afterward.
-
-### 2. Staging Deployment (GitHub Pages)
-
-Staging is automatically deployed when pushing to the `staging` branch.
-
-#### Manual Deployment
-
-```bash
-# Switch to staging branch
-git checkout staging
-
-# Merge latest changes from main
-git merge main
-
-# Push to trigger deployment
-git push origin staging
-```
-
-#### Build Process
-
-The GitHub Action will:
-
-1. Install dependencies
-2. Run tests
-3. Build static export with staging config
-4. Deploy to GitHub Pages
-
-#### Access Staging
-
-- URL: `https://madfam-org.github.io/biz-site`
-- Or with custom domain: `https://staging.madfam.io`
-
-**Important Limitations:**
-
-- No API functionality (forms don't save data)
-- No authentication (login disabled)
-- No database operations
-- Static content only
-
-### 3. Production Deployment (Vercel)
-
-Production is deployed when creating a new release tag.
-
-#### Deployment Steps
-
-```bash
-# Ensure main branch is up to date
-git checkout main
-git pull origin main
-
-# Create a new version tag
-npm version patch  # or minor/major
-# This creates a commit and tag
-
-# Push tag to trigger deployment
-git push origin main --tags
-```
-
-#### Alternative: Direct Deployment
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy to production
-vercel --prod
-```
-
-### 4. Preview Deployments
-
-Vercel automatically creates preview deployments for pull requests.
-
-1. Create a pull request
-2. Vercel bot comments with preview URL
-3. Test changes in isolation
-4. Merge when ready
-
-## CI/CD Pipeline
-
-### GitHub Actions Workflows
-
-#### Main Workflow (.github/workflows/main.yml)
-
-Runs on every push:
-
-- Dependency installation with pnpm
-- TypeScript compilation and linting
-- Unit tests with Vitest
-- E2E tests with Playwright
-- Build verification for all packages
-- Security dependency scanning
-
-#### Staging Deployment (.github/workflows/deploy-staging.yml)
-
-Triggers on push to `staging`:
-
-- Builds static export
-- Deploys to GitHub Pages
-- Posts deployment URL
-
-#### Production Deployment (Vercel)
-
-Triggers on release creation:
-
-- Builds optimized production build
-- Deploys to Vercel
-- Runs smoke tests
-
-#### Container Deployment (.github/workflows/deploy-web.yml, deploy-cms.yml)
-
-Triggers on push to `main` (path-filtered):
-
-- Builds Docker image with multi-stage Dockerfile
-- Pushes to GitHub Container Registry (GHCR)
-- Signs image with cosign (keyless OIDC)
-- Updates `k8s/production/kustomization.yaml` with new digest
-- Reports lifecycle event to Enclii callback API
-
-## Build Commands
-
-### Development
-
-```bash
-# Start dev server
-pnpm dev
-
-# Run with staging config
-NEXT_PUBLIC_ENV=staging pnpm dev
-```
-
-### Staging Build
-
-```bash
-# Build for GitHub Pages
-pnpm build:staging
-
-# Test static export locally
-cd apps/web
-pnpm export
-npx serve out
-```
-
-### Production Build
-
-```bash
-# Build for production
-pnpm build:production
-
-# Test production build
-pnpm start
-```
-
-## Feature Flags
-
-Control feature availability per environment:
-
-```typescript
-// Feature flag configuration
-{
-  NEW_LEAD_SCORING: {
-    development: true,
-    staging: true,
-    production: false
-  }
-}
-```
-
-### Enabling Features
-
-```bash
-# Enable in staging
-NEXT_PUBLIC_FEATURE_NEW_LEAD_SCORING=true
-
-# Enable in production (via Vercel dashboard)
-# Add environment variable
-```
-
-## Rollback Procedures
-
-### Staging Rollback
-
-```bash
-# Revert to previous commit
-git checkout staging
-git reset --hard HEAD~1
-git push --force-with-lease origin staging
-```
-
-### Production Rollback (Vercel)
-
-Option 1: Via Vercel Dashboard
-
-1. Go to Vercel dashboard
-2. Click "Instant Rollback"
-3. Select previous deployment
-
-Option 2: Via CLI
-
-```bash
-vercel rollback
-```
-
-Option 3: Git Revert
-
-```bash
-git revert HEAD
-git push origin main
-# Create new release tag
-```
-
-## Monitoring
-
-### Health Checks
-
-- Staging: `https://staging.madfam.io/api/health`
-- Production: `https://madfam.io/api/health`
-
-### Monitoring Services
-
-1. **Vercel Analytics** (Production)
-   - Real User Metrics
-   - Web Vitals
-   - Error tracking
-
-2. **Plausible Analytics**
-   - Page views
-   - User journeys
-   - Conversion tracking
-
-3. **Sentry** (Coming soon)
-   - Error monitoring
-   - Performance tracking
-
-## Troubleshooting
-
-### Common Issues
-
-#### Build Fails on Vercel
-
-1. Check build logs in Vercel dashboard
-2. Verify environment variables
-3. Ensure all dependencies are in package.json
-4. Check for TypeScript errors: `pnpm typecheck`
-
-#### GitHub Pages 404
-
-1. Ensure `.nojekyll` file exists
-2. Check `basePath` in next.config.js
-3. Verify GitHub Pages is enabled in repo settings
-
-#### Static Export Issues
-
-```bash
-# Debug static export
-cd apps/web
-NEXT_PUBLIC_ENV=staging pnpm build
-pnpm export
-
-# Check for dynamic routes without getStaticPaths
-# Check for server-only features
-```
-
-### Debug Commands
-
-```bash
-# Check environment
-echo $NEXT_PUBLIC_ENV
-
-# Verify build output
-ls -la apps/web/.next
-ls -la apps/web/out
-
-# Test production build locally
-pnpm build:production
-pnpm start
-```
-
-## Security Checklist
-
-Before deploying to production:
-
-- [ ] Environment variables set correctly
-- [ ] API endpoints protected
-- [ ] CORS configured properly
-- [ ] CSP headers enabled
-- [ ] Secrets not exposed in code
-- [ ] Dependencies updated
-- [ ] Security headers configured
-
-## Performance Checklist
-
-- [ ] Images optimized
-- [ ] Fonts loaded efficiently
-- [ ] JavaScript bundles < 200KB
-- [ ] Lighthouse score > 90
-- [ ] Core Web Vitals passing
-
-## Deployment Notifications
-
-Configure notifications in GitHub/Vercel:
-
-1. **Slack Integration**
-   - GitHub Actions: Add Slack webhook
-   - Vercel: Connect Slack in settings
-
-2. **Email Notifications**
-   - GitHub: Watch repository
-   - Vercel: Team notifications
-
-## Useful Links
-
-- [Vercel Dashboard](https://vercel.com/dashboard)
-- [GitHub Actions](https://github.com/madfam-org/biz-site/actions)
-- [Deployment Status](https://github.com/madfam-org/biz-site/deployments)
-- [Analytics Dashboard](https://plausible.io/madfam.io)
+## Related
+
+- [`AGENTS.md`](../../AGENTS.md) — agent operating guide (Enclii-first doctrine)
+- [`ECOSYSTEM.md`](../../ECOSYSTEM.md) — where this repo sits in the ecosystem
+- [`docs/PUBLIC_REPO_BOUNDARY.md`](../PUBLIC_REPO_BOUNDARY.md) — what may be published here
