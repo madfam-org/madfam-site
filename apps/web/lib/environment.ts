@@ -23,7 +23,6 @@ interface EnvironmentConfig {
   // Features configuration
   features: {
     database: boolean;
-    authentication: boolean;
     emailQueue: boolean;
     webhooks: boolean;
     analytics: boolean;
@@ -124,7 +123,6 @@ function createEnvironmentConfig(): EnvironmentConfig {
     // Features configuration based on environment
     features: {
       database: !isStaticExport && process.env.DATABASE_URL !== undefined,
-      authentication: !isStaticExport,
       emailQueue: !isStaticExport,
       webhooks: !isStaticExport,
       analytics: true, // Always enabled
@@ -228,10 +226,6 @@ export function validateEnvironment(): { valid: boolean; errors: string[] } {
   if (environment.isProduction) {
     if (!process.env.DATABASE_URL && environment.features.database) {
       errors.push('DATABASE_URL is required in production when database feature is enabled');
-    }
-
-    if (!process.env.JANUA_SECRET && environment.features.authentication) {
-      errors.push('JANUA_SECRET is required in production when authentication is enabled');
     }
 
     if (!environment.services.sentry.dsn && environment.services.sentry.enabled) {
