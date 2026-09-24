@@ -1,11 +1,10 @@
 import { analytics } from '@madfam-site/analytics';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getServerAuth } from '@/lib/auth';
+import { AssessmentStatus } from '@prisma/client';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { AssessmentStatus } from '@prisma/client';
 import { withRateLimit } from '@/lib/rate-limit';
 
 // Assessment question types
@@ -177,58 +176,15 @@ export async function GET(request: NextRequest) {
     const assessmentId = searchParams.get('assessmentId');
 
     if (assessmentId) {
-      // Get session for authorization
-      const session = await getServerAuth();
-
-      // Fetch existing assessment results
-      const assessment = await prisma.assessment.findUnique({
-        where: { id: assessmentId },
-        include: {
-          lead: {
-            select: {
-              email: true,
-              firstName: true,
-              lastName: true,
-              company: true,
-            },
-          },
-        },
+      // Stored assessments were readable only by their signed-in owner or an
+      // admin. madfam.io no longer has sign-in (finding C-003 / R42: no path
+      // may verify a Janua token with a shared HS256 secret), so this branch
+      // fails closed without touching the database — which also stops it from
+      // revealing whether an id exists.
+      apiLogger.warn('Stored assessment requested without an auth surface', {
+        ip: request.headers.get('x-forwarded-for')?.split(',')[0],
       });
-
-      if (!assessment) {
-        return NextResponse.json({ error: 'Assessment not found' }, { status: 404 });
-      }
-
-      // Authorization: Verify user owns this assessment or is an admin
-      if (!session) {
-        apiLogger.warn('Unauthorized assessment access attempt', {
-          assessmentId,
-          ip: request.headers.get('x-forwarded-for')?.split(',')[0],
-        });
-        return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
-      }
-
-      // Check if user owns this assessment (via lead email) or is admin
-      const userEmail = session.user?.email;
-      const isAdmin = session.user?.role === 'ADMIN';
-      const ownsAssessment = assessment.lead?.email === userEmail;
-
-      if (!ownsAssessment && !isAdmin) {
-        apiLogger.warn('Forbidden assessment access attempt', {
-          assessmentId,
-          userEmail,
-          leadEmail: assessment.lead?.email,
-        });
-        return NextResponse.json(
-          { error: 'You do not have permission to access this assessment' },
-          { status: 403 }
-        );
-      }
-
-      return NextResponse.json({
-        assessment,
-        questions: assessmentQuestions,
-      });
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
     // Return assessment questions for new assessment

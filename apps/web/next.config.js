@@ -10,8 +10,6 @@ const nextConfig = {
     '@madfam-site/core',
     '@madfam-site/analytics',
     '@madfam-site/i18n',
-    '@janua/nextjs',
-    '@janua/ui',
   ],
 
   // Use static export for GitHub Pages, standalone for Docker/K8s
@@ -82,6 +80,36 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Retired surfaces (finding C-003, ruling R42 — 2026-09-23). madfam.io
+      // has no sign-in of its own: the ecosystem login is Janua. Admin
+      // dashboard and the component showcase are gone; product demos hand off
+      // to the products themselves. Temporary (307) so the targets can move.
+      {
+        source: '/:locale(es|en|pt)/auth/:path*',
+        destination: 'https://auth.madfam.io',
+        permanent: false,
+      },
+      {
+        source: '/:locale(es|en|pt)/dashboard/:path*',
+        destination: '/:locale',
+        permanent: false,
+      },
+      {
+        source: '/:locale(es|en|pt)/showcase',
+        destination: '/:locale/platforms',
+        permanent: false,
+      },
+      {
+        source: '/:locale(es|en|pt)/demo/dhanam',
+        destination: 'https://dhan.am',
+        permanent: false,
+      },
+      {
+        source: '/:locale(es|en|pt)/demo/forge-sight',
+        destination: 'https://forgesight.app',
+        permanent: false,
+      },
+
       // Services to Programs mapping (permanent)
       {
         source: '/services',
