@@ -254,6 +254,7 @@
         "track": "self-serve",
         "order": 6,
         "icon": "🔮",
+        "banner_keyword": "PROBLEM INTELLIGENCE",
         "show_in_banner": true
       },
       "commerce": {
@@ -615,7 +616,7 @@
         "track": "self-serve",
         "order": 15,
         "icon": "🤝",
-        "banner_keyword": "CLIENT PORTAL & CRM",
+        "banner_keyword": "CRM & CAMPAIGNS",
         "show_in_banner": true
       },
       "commerce": {
