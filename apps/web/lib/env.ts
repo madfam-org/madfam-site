@@ -10,9 +10,8 @@ const serverEnvSchema = z.object({
   // Database
   DATABASE_URL: z.string().url().min(1),
 
-  // Authentication (Janua)
-  JANUA_URL: z.string().url().optional(),
-  JANUA_SECRET: z.string().min(32),
+  // No authentication secret: madfam.io has no sign-in surface, and ruling R42
+  // bans verifying Janua tokens with a shared HS256 secret (finding C-003).
 
   // Encryption
   ENCRYPTION_KEY: z.string().min(32, 'Encryption key must be at least 32 characters'),
@@ -162,7 +161,6 @@ export const env = {
   ...process.env,
   ENCRYPTION_KEY: process.env.ENCRYPTION_KEY || '',
   API_SECRET: process.env.API_SECRET || '',
-  JANUA_SECRET: process.env.JANUA_SECRET || '',
 } as ServerEnv;
 
 // Validate environment variables at module load time (server-side only)

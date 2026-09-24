@@ -1,3 +1,5 @@
+// CommonJS config file: require() is the module system here.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const createNextIntlPlugin = require('next-intl/plugin');
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
@@ -10,8 +12,6 @@ const nextConfig = {
     '@madfam-site/core',
     '@madfam-site/analytics',
     '@madfam-site/i18n',
-    '@janua/nextjs',
-    '@janua/ui',
   ],
 
   // Use static export for GitHub Pages, standalone for Docker/K8s
@@ -39,7 +39,7 @@ const nextConfig = {
   },
 
   // Webpack optimizations for production
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) => {
+  webpack: (config, { dev, nextRuntime }) => {
     // Suppress Edge Runtime warnings for React 19 compatibility
     // These warnings are non-breaking - React uses process.emit internally but
     // it's not actually called in our Edge Runtime middleware
@@ -82,6 +82,36 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Retired surfaces (finding C-003, ruling R42 — 2026-09-23). madfam.io
+      // has no sign-in of its own: the ecosystem login is Janua. Admin
+      // dashboard and the component showcase are gone; product demos hand off
+      // to the products themselves. Temporary (307) so the targets can move.
+      {
+        source: '/:locale(es|en|pt)/auth/:path*',
+        destination: 'https://auth.madfam.io',
+        permanent: false,
+      },
+      {
+        source: '/:locale(es|en|pt)/dashboard/:path*',
+        destination: '/:locale',
+        permanent: false,
+      },
+      {
+        source: '/:locale(es|en|pt)/showcase',
+        destination: '/:locale/platforms',
+        permanent: false,
+      },
+      {
+        source: '/:locale(es|en|pt)/demo/dhanam',
+        destination: 'https://dhan.am',
+        permanent: false,
+      },
+      {
+        source: '/:locale(es|en|pt)/demo/forge-sight',
+        destination: 'https://forgesight.app',
+        permanent: false,
+      },
+
       // Services to Programs mapping (permanent)
       {
         source: '/services',
@@ -259,7 +289,8 @@ const nextConfig = {
 // Sentry integration (only when DSN is configured)
 const { withSentryConfig } =
   process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
-    ? require('@sentry/nextjs')
+    ? // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require('@sentry/nextjs')
     : { withSentryConfig: config => config };
 
 module.exports = withSentryConfig(withNextIntl(nextConfig), {
