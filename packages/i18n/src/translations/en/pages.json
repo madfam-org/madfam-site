@@ -29,7 +29,7 @@
   },
   "about": {
     "title": "We are MADFAM",
-    "subtitle": "A family of creatives and technologists obsessed with transforming the future of business through artificial intelligence and innovative design.",
+    "subtitle": "Innovaciones MADFAM is a Mexican studio that builds and operates an ecosystem of open, interconnected platforms — on its own infrastructure — for creators, makers and businesses in Latin America.",
     "mission": {
       "title": "Our Mission",
       "description": "To democratize access to cutting-edge technology, enabling companies of all sizes to compete in the digital era with creative and accessible solutions."
@@ -48,20 +48,16 @@
       "impact": "Positive impact"
     },
     "team": {
-      "title": "Meet the Family",
-      "subtitle": "The brilliant minds behind MADFAM's magic"
-    },
-    "history": {
-      "title": "Our Story",
-      "subtitle": "A journey of innovation, growth, and transformation"
+      "title": "The team",
+      "subtitle": "A small, multidisciplinary team spanning software, manufacturing and design."
     },
     "cta": {
       "title": "Ready to be part of the family?",
       "subtitle": "Join us in our mission to transform the future of business",
       "scheduleCall": "Work together",
       "viewOpportunities": "View opportunities",
-      "seeWork": "See our work",
-      "joinTeam": "Join the team"
+      "seeWork": "See the platforms",
+      "joinTeam": "Work with us"
     }
   },
   "contact": {
@@ -551,6 +547,52 @@
         "phone": "Phone",
         "address": "Address"
       }
+    }
+  },
+  "seo": {
+    "about": {
+      "title": "Company — Innovaciones MADFAM",
+      "description": "Who we are: a polyglot Mexican house that builds and operates an ecosystem of open platforms from Cuernavaca, Morelos."
+    },
+    "contact": {
+      "title": "Contact — MADFAM",
+      "description": "Write to us: platforms, projects, community, partnerships or press. A person answers."
+    },
+    "careers": {
+      "title": "Careers — MADFAM",
+      "description": "Work at a Mexican studio that builds and operates an ecosystem of open platforms."
+    },
+    "blog": {
+      "title": "Blog — MADFAM",
+      "description": "Workshop notes: technical decisions, operating lessons and guides from the MADFAM ecosystem."
+    },
+    "caseStudies": {
+      "title": "Case studies — MADFAM",
+      "description": "Real stories, with permission and with numbers we can stand behind."
+    },
+    "guides": {
+      "title": "Guides — MADFAM",
+      "description": "How to get concrete things done with the MADFAM ecosystem: issue your first CFDI, quote a part, run your own identity."
+    },
+    "docs": {
+      "title": "Documentation — MADFAM",
+      "description": "Documentation for the platforms and services of the MADFAM ecosystem."
+    },
+    "privacy": {
+      "title": "Privacy policy — MADFAM",
+      "description": "How Innovaciones MADFAM S.A.S. de C.V. handles the personal data it collects on madfam.io and how to exercise your rights."
+    },
+    "terms": {
+      "title": "Terms and conditions — MADFAM",
+      "description": "Terms of use for madfam.io, operated by Innovaciones MADFAM S.A.S. de C.V."
+    },
+    "cookies": {
+      "title": "Cookie policy — MADFAM",
+      "description": "Which cookies madfam.io uses and how to manage them."
+    },
+    "unsubscribe": {
+      "title": "Unsubscribe — MADFAM",
+      "description": "Stop receiving marketing emails from MADFAM."
     }
   }
 }
