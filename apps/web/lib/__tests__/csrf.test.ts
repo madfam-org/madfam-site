@@ -1,48 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NextResponse } from 'next/server';
 
-// ---------------------------------------------------------------------------
-// Mocks
-// ---------------------------------------------------------------------------
-
-vi.mock('../auth', () => ({
-  getServerAuth: vi.fn(),
-}));
-
-vi.mock('../security', () => ({
-  validateCsrfToken: vi.fn(),
-}));
-
-vi.mock('@madfam-site/core', () => ({
-  logger: {
-    info: vi.fn(),
-    warn: vi.fn(),
-    error: vi.fn(),
-    debug: vi.fn(),
-    trace: vi.fn(),
-    withContext: vi.fn(() => ({
-      info: vi.fn(),
-      warn: vi.fn(),
-      error: vi.fn(),
-      debug: vi.fn(),
-    })),
-  },
-  createLogger: vi.fn(() => ({
-    info: vi.fn(),
-    warn: vi.fn(),
-    error: vi.fn(),
-    debug: vi.fn(),
-    trace: vi.fn(),
-    withContext: vi.fn(() => ({
-      info: vi.fn(),
-      warn: vi.fn(),
-      error: vi.fn(),
-      debug: vi.fn(),
-    })),
-  })),
-  LogLevel: { DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3 },
-}));
-
 vi.mock('@/lib/logger', () => ({
   apiLogger: {
     info: vi.fn(),
@@ -52,151 +10,106 @@ vi.mock('@/lib/logger', () => ({
   },
 }));
 
-// ---------------------------------------------------------------------------
-// Imports (after mocks)
-// ---------------------------------------------------------------------------
+import { withCsrfProtection, requiresCsrfProtection, isSameOriginRequest } from '../csrf';
 
-import { withCsrfProtection, requiresCsrfProtection } from '../csrf';
-import { getServerAuth } from '../auth';
-import { validateCsrfToken } from '../security';
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-const mockedGetServerAuth = vi.mocked(getServerAuth);
-const mockedValidateCsrfToken = vi.mocked(validateCsrfToken);
-
-function makeRequest(method: string, path: string = '/api/test'): Request {
-  return new Request(`http://localhost:3000${path}`, { method });
+function makeRequest(
+  method: string,
+  path: string = '/api/test',
+  headers: Record<string, string> = {}
+): Request {
+  return new Request(`https://madfam.io${path}`, {
+    method,
+    headers: { host: 'madfam.io', ...headers },
+  });
 }
 
 function successHandler(): Promise<NextResponse> {
   return Promise.resolve(NextResponse.json({ ok: true }));
 }
 
-// ---------------------------------------------------------------------------
-// Tests
-// ---------------------------------------------------------------------------
-
-describe('CSRF Protection', () => {
+describe('CSRF Protection (same-origin check)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  // =========================================================================
-  // withCsrfProtection
-  // =========================================================================
-
   describe('withCsrfProtection()', () => {
-    it('bypasses CSRF validation for GET requests and calls handler directly', async () => {
+    it('bypasses the check for GET requests', async () => {
       const handler = vi.fn(successHandler);
-      const req = makeRequest('GET');
-
-      const res = await withCsrfProtection(req, handler);
-      const body = await res.json();
-
+      const res = await withCsrfProtection(
+        makeRequest('GET', '/api/test', { origin: 'https://evil.example' }),
+        handler
+      );
+      expect(handler).toHaveBeenCalledOnce();
       expect(res.status).toBe(200);
-      expect(body.ok).toBe(true);
-      expect(handler).toHaveBeenCalledTimes(1);
-      expect(mockedGetServerAuth).not.toHaveBeenCalled();
-      expect(mockedValidateCsrfToken).not.toHaveBeenCalled();
     });
 
-    it('calls handler when POST request has a valid CSRF token', async () => {
-      mockedGetServerAuth.mockResolvedValue({
-        csrfToken: 'valid-token',
-      } as ReturnType<typeof getServerAuth> extends Promise<infer T> ? T : never);
-      mockedValidateCsrfToken.mockReturnValue(true);
-
+    it('lets a same-origin browser POST through (the contact form case)', async () => {
       const handler = vi.fn(successHandler);
-      const req = makeRequest('POST');
-
-      const res = await withCsrfProtection(req, handler);
-      const body = await res.json();
-
+      const res = await withCsrfProtection(
+        makeRequest('POST', '/api/leads', { origin: 'https://madfam.io' }),
+        handler
+      );
+      expect(handler).toHaveBeenCalledOnce();
       expect(res.status).toBe(200);
-      expect(body.ok).toBe(true);
-      expect(handler).toHaveBeenCalledTimes(1);
-      expect(mockedGetServerAuth).toHaveBeenCalledTimes(1);
-      expect(mockedValidateCsrfToken).toHaveBeenCalledWith(req, 'valid-token');
     });
 
-    it('returns 403 when POST request has an invalid CSRF token', async () => {
-      mockedGetServerAuth.mockResolvedValue({
-        csrfToken: 'session-token',
-      } as ReturnType<typeof getServerAuth> extends Promise<infer T> ? T : never);
-      mockedValidateCsrfToken.mockReturnValue(false);
+    it('accepts www and the forwarded host behind the tunnel', async () => {
+      expect(
+        isSameOriginRequest(makeRequest('POST', '/', { origin: 'https://www.madfam.io' }))
+      ).toBe(true);
+      expect(
+        isSameOriginRequest(
+          new Request('http://10.0.0.1:3000/api/leads', {
+            method: 'POST',
+            headers: { 'x-forwarded-host': 'madfam.io', origin: 'https://madfam.io' },
+          })
+        )
+      ).toBe(true);
+    });
 
+    it('rejects a cross-site POST with 403', async () => {
       const handler = vi.fn(successHandler);
-      const req = makeRequest('POST');
-
-      const res = await withCsrfProtection(req, handler);
-      const body = await res.json();
-
-      expect(res.status).toBe(403);
-      expect(body.error).toBe('Invalid CSRF token');
-      expect(body.code).toBe('CSRF_VALIDATION_FAILED');
+      const res = await withCsrfProtection(
+        makeRequest('POST', '/api/leads', { origin: 'https://evil.example' }),
+        handler
+      );
       expect(handler).not.toHaveBeenCalled();
-    });
-
-    it('returns 403 when session is null (no CSRF token available)', async () => {
-      mockedGetServerAuth.mockResolvedValue(null as Awaited<ReturnType<typeof getServerAuth>>);
-      mockedValidateCsrfToken.mockReturnValue(false);
-
-      const handler = vi.fn(successHandler);
-      const req = makeRequest('POST');
-
-      const res = await withCsrfProtection(req, handler);
-      const body = await res.json();
-
       expect(res.status).toBe(403);
-      expect(body.error).toBe('Invalid CSRF token');
-      expect(body.code).toBe('CSRF_VALIDATION_FAILED');
-      expect(handler).not.toHaveBeenCalled();
-      expect(mockedValidateCsrfToken).toHaveBeenCalledWith(req, null);
+      await expect(res.json()).resolves.toMatchObject({ code: 'CSRF_VALIDATION_FAILED' });
     });
 
-    it('validates CSRF token for PUT requests', async () => {
-      mockedGetServerAuth.mockResolvedValue({
-        csrfToken: 'put-token',
-      } as ReturnType<typeof getServerAuth> extends Promise<infer T> ? T : never);
-      mockedValidateCsrfToken.mockReturnValue(true);
+    it('falls back to Referer when Origin is absent', async () => {
+      expect(
+        isSameOriginRequest(makeRequest('POST', '/', { referer: 'https://madfam.io/es/contact' }))
+      ).toBe(true);
+      expect(
+        isSameOriginRequest(makeRequest('POST', '/', { referer: 'https://evil.example/x' }))
+      ).toBe(false);
+    });
 
+    it('rejects an opaque "null" origin', () => {
+      expect(isSameOriginRequest(makeRequest('POST', '/', { origin: 'null' }))).toBe(false);
+    });
+
+    it('allows a request with neither Origin nor Referer (not a browser cross-site request)', async () => {
       const handler = vi.fn(successHandler);
-      const req = makeRequest('PUT');
-
-      const res = await withCsrfProtection(req, handler);
-      const body = await res.json();
-
+      const res = await withCsrfProtection(makeRequest('PUT', '/api/test'), handler);
+      expect(handler).toHaveBeenCalledOnce();
       expect(res.status).toBe(200);
-      expect(body.ok).toBe(true);
-      expect(mockedGetServerAuth).toHaveBeenCalledTimes(1);
-      expect(mockedValidateCsrfToken).toHaveBeenCalledWith(req, 'put-token');
     });
   });
 
-  // =========================================================================
-  // requiresCsrfProtection
-  // =========================================================================
-
   describe('requiresCsrfProtection()', () => {
     it('returns false for GET requests', () => {
-      const req = makeRequest('GET', '/api/test');
-
-      expect(requiresCsrfProtection(req)).toBe(false);
+      expect(requiresCsrfProtection(makeRequest('GET', '/api/test'))).toBe(false);
     });
 
     it('returns true for POST requests to non-exempt paths', () => {
-      const req = makeRequest('POST', '/api/test');
-
-      expect(requiresCsrfProtection(req)).toBe(true);
+      expect(requiresCsrfProtection(makeRequest('POST', '/api/test'))).toBe(true);
     });
 
     it('returns false for POST requests to webhook endpoints', () => {
-      const req = makeRequest('POST', '/api/webhook/cms');
-
-      expect(requiresCsrfProtection(req)).toBe(false);
+      expect(requiresCsrfProtection(makeRequest('POST', '/api/webhook/cms'))).toBe(false);
     });
   });
 });
