@@ -6,11 +6,11 @@ import { apiLogger } from './logger';
  * check.
  *
  * WHY (2026-09-23). The previous design compared an `X-CSRF-Token` header with
- * a token stored in the visitor's Janua session. madfam.io visitors are
- * anonymous (there is no sign-in; the /auth and /dashboard surfaces were
- * removed under finding C-003 / ruling R42), so the session was always null,
- * no client ever sent the header, and every protected POST — including the
- * contact form (`/api/leads`) — was rejected with 403.
+ * a token stored in the visitor's Janua session. The people who submit the
+ * contact, lead and assessment forms are anonymous visitors with no session,
+ * so the session token was always null; no client ever sent the header either.
+ * Every protected POST — including the contact form (`/api/leads`) — was
+ * therefore rejected with 403.
  *
  * A browser always sends `Origin` on a cross-site POST, so rejecting a POST
  * whose `Origin` (or, failing that, `Referer`) is not this site stops
