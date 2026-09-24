@@ -2001,7 +2001,7 @@ export const REGISTRY_SOURCE = {
   registryVersion: 4,
   lastUpdated: '2026-09-23',
   generatedFrom: 'internal-devops/ecosystem/registry/products.yaml',
-  sha256: '8620a26656aeee0eede5baa15f14d9f06c54306224eac39c90955f1695336d30',
+  sha256: 'db2c4ed38fac5dbe86e860929d271d9ca3d7fa85bf2ffba63672ba0e1998d5b0',
   productCount: 32,
   retiredCount: 3,
 } as const;
