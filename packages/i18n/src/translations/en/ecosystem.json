@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "MADFAM Ecosystem | One Membership. Coordinated Access.",
-    "description": "Join the MADFAM Ecosystem — unlock eligible platform capabilities, coordinated support, and maker-node advantages. Built for creators, makers, and entrepreneurs."
+    "title": "The MADFAM ecosystem — How it all connects",
+    "description": "How the MADFAM platforms connect, what is open source, how to take part in the community and what Co-Labs is."
   },
   "hero": {
-    "title": "One Membership. Coordinated Access.",
-    "subtitle": "Unlock eligible MADFAM platform capabilities, discounted physical fabrication, and coordinated support with a single ecosystem membership.",
+    "title": "How it all connects",
+    "subtitle": "MADFAM platforms share identity, billing and infrastructure — that is why they feel like one system. This is the map of those connections, and the doors in.",
     "badge": "Ecosystem",
     "cta": "Join the Ecosystem",
     "secondaryCta": "Explore Platforms",
@@ -22,54 +22,18 @@
     "platformAccess": "Managed platform",
     "ecosystemAccess": "Ecosystem access"
   },
-  "comparison": {
-    "title": "Compare Your Options",
-    "subtitle": "See exactly what you get at each level.",
-    "featureLabel": "Feature",
-    "bestValue": "Best Value",
-    "tiers": {
-      "free": "Free",
-      "freeNote": "Always available",
-      "pro": "Individual Pro",
-      "proNote": "Per platform pricing",
-      "member": "Ecosystem Member",
-      "memberNote": "One membership, coordinated access"
-    },
-    "features": {
-      "platformAccess": "Platform Access",
-      "proFeatures": "Pro Features",
-      "makerNodeDiscount": "Maker Node Discount",
-      "prioritySupport": "Priority Support",
-      "earlyAccess": "Early Access to New Platforms",
-      "communityAccess": "Community Access"
-    },
-    "values": {
-      "free": "Free tier only",
-      "individual": "One platform",
-      "all": "All platforms",
-      "none": "—",
-      "single": "Full (one platform)",
-      "discount": "Special discounts coming soon",
-      "standard": "Email support",
-      "priority": "Priority support",
-      "yes": "Yes"
-    }
-  },
   "pricing": {
-    "title": "Simple, Transparent Pricing",
-    "subtitle": "One membership, coordinated ecosystem access — no surprises.",
-    "pricePending": "Price not yet set — it appears here the moment it is ratified.",
-    "includedPlatforms": "Includes Pro on all {count} platforms",
+    "title": "One membership, coordinated access",
+    "subtitle": "The ecosystem membership will unlock eligible capabilities across the platforms, Maker Node order benefits (coming soon) and coordinated support — one account, one relationship.",
     "membershipTitle": "Ecosystem Membership",
     "features": {
-      "0": "Eligible platform capabilities",
-      "1": "Special discounts and benefits on Maker Node orders — coming soon",
+      "0": "Eligible capabilities per platform",
+      "1": "Physical fabrication benefits — coming soon",
       "2": "Priority support",
-      "3": "Early access to new Selva and Avala capabilities",
-      "4": "Members-only community"
+      "3": "Member community"
     },
-    "cta": "Join the Ecosystem",
-    "waitlistNote": "Join the waitlist — launching soon"
+    "cta": "Join the waitlist",
+    "waitlistNote": "No card needed. We will let you know when it opens."
   },
   "makerNode": {
     "title": "Primavera Maker Node",
@@ -109,30 +73,26 @@
     "contactLink": "Get in touch",
     "items": {
       "q1": {
-        "question": "Can I switch from Individual Pro to Ecosystem Membership?",
-        "answer": "Yes. When you join the Ecosystem, your Individual Pro subscription is automatically credited towards your membership. No double-charging."
+        "question": "Is the ecosystem membership available yet?",
+        "answer": "Not yet. Join the waitlist and we will let you know when it opens. We publish no price or final benefits until they are ratified."
       },
       "q2": {
         "question": "Is there a free trial?",
-        "answer": "Public access varies by platform. Ecosystem Membership unlocks eligible capabilities, coordinated support, and maker-node advantages where applicable."
+        "answer": "It depends on each platform: its page says whether it offers a free tier or a trial. You can start with a platform today without waiting for the membership."
       },
       "q3": {
-        "question": "How do Selva and Avala fit into the membership?",
-        "answer": "Both are included in your Ecosystem Membership at no extra cost — Selva at https://selva.town and Avala at https://avala.studio."
+        "question": "How do the platforms connect?",
+        "answer": "Janua provides identity; Enclii, deployment; Dhanam takes payments for the others; Selva coordinates the agents. On that base the applications hand work to each other: a Yantra4D design is quoted in Cotiza, compared in Forgesight, charged in Dhanam, made with Pravara and invoiced with Karafiel."
       },
       "q4": {
         "question": "How does the Maker Node discount work?",
         "answer": "Ecosystem Members will receive special discounts and benefits on physical fabrication orders through Primavera Maker Node — 3D printing, CNC machining, and laser cutting. Details coming soon."
-      },
-      "q5": {
-        "question": "Can I cancel anytime?",
-        "answer": "Yes. Monthly memberships can be cancelled anytime. Yearly memberships are refundable within the first 30 days."
       }
     }
   },
   "cta": {
     "title": "Ready to build something that matters?",
-    "subtitle": "Join the MADFAM Ecosystem and unlock the full potential of the MADFAM ecosystem.",
+    "subtitle": "Start with a platform today or join the membership waitlist.",
     "primary": "Join the Ecosystem",
     "secondary": "Explore Platforms",
     "primaryButton": "Join the Ecosystem",
@@ -158,8 +118,8 @@
       },
       "membership": {
         "title": "Join the Ecosystem",
-        "description": "One membership unlocks eligible capabilities, coordinated support, and maker-node advantages.",
-        "cta": "View Membership"
+        "description": "Eligible capabilities, coordinated support and Maker Node benefits (coming soon). Waitlist open.",
+        "cta": "Join the waitlist"
       }
     },
     "platformShowcase": {
@@ -174,12 +134,11 @@
     },
     "metrics": {
       "vendors": "vendors tracked",
-      "cost": "vs $2K+ cloud hosting",
       "designs": "open-source designs"
     },
     "membershipValue": {
-      "title": "One Membership. Coordinated Access.",
-      "subtitle": "Eligible platform capabilities, discounted fabrication, priority support, and early access to new launches.",
+      "title": "One membership, coordinated access",
+      "subtitle": "Eligible capabilities per platform, priority support and Maker Node benefits (coming soon). Waitlist open; no price is published until it is ratified.",
       "cta": "Learn About Membership"
     },
     "finalCta": {

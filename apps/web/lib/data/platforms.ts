@@ -21,6 +21,7 @@
 // PlatformGrid, search index, sitemap.
 
 import {
+  REGISTRY_COMMERCE,
   REGISTRY_PRODUCTS,
   REGISTRY_PRODUCT_ORDER,
   RETIRED_PRODUCTS,
@@ -207,6 +208,50 @@ export function getSelfServeFlagships(): Platform[] {
 
 export function isComingSoon(platform: Platform): boolean {
   return platform.status === 'coming-soon' || platform.status === 'in-development';
+}
+
+/**
+ * Whether the registry's tier vocabulary for this product includes a `free`
+ * tier. This is the ONLY source for a "free tier" claim on the site (finding
+ * C-010: the catalog used to badge every self-serve product "Free + Pro",
+ * which the registry does not back — e.g. Forgesight's tiers are
+ * essentials/pro/madfam).
+ */
+export function hasFreeTier(slug: string): boolean {
+  return REGISTRY_COMMERCE[slug]?.tiers.some(tier => tier.id === 'free') ?? false;
+}
+
+/**
+ * The i18n key (platforms namespace) for a platform's primary call to action,
+ * driven by lifecycle (finding C-011): a product the registry marks live and
+ * that has its own domain gets a plain "go to the platform" CTA; anything else
+ * keeps the overlay's label (early access, waitlist, contact). Live products
+ * used to say "Get early access".
+ */
+export function primaryCtaLabelKey(platform: Platform): string {
+  if (platform.status === 'production' && platform.primaryCTA.type === 'external') {
+    return 'shared.visitPlatform';
+  }
+  return platform.primaryCTA.labelKey;
+}
+
+/** Display names of the live self-serve products, in registry order. */
+export function getSelfServeNames(): string[] {
+  return getSelfServeFlagships()
+    .filter(p => p.status === 'production')
+    .map(p => p.name);
+}
+
+/**
+ * Licence facts for copy that talks about "our code": how many catalog
+ * products the registry lists as AGPL-3.0, out of how many (finding C-010:
+ * the site used to claim every product was "MIT or AGPL").
+ */
+export function getLicenseSummary(): { agpl: number; total: number } {
+  return {
+    agpl: PLATFORMS.filter(p => p.license === 'AGPL-3.0').length,
+    total: PLATFORMS.length,
+  };
 }
 
 export interface FooterPlatformLink {

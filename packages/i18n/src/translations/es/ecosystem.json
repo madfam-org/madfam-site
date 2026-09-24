@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "Ecosistema MADFAM | Una Membresía. Todas las Plataformas.",
-    "description": "Únete al Ecosistema MADFAM — desbloquea capacidades elegibles de la plataforma, soporte coordinado y ventajas del maker node."
+    "title": "El ecosistema MADFAM — Cómo se conecta todo",
+    "description": "Cómo se conectan las plataformas MADFAM, qué es open source, cómo participar en la comunidad y qué es Co-Labs."
   },
   "hero": {
-    "title": "Una Membresía. Todas las Plataformas.",
-    "subtitle": "Desbloquea capacidades elegibles de las plataformas MADFAM, fabricación física con descuento y soporte coordinado con una sola membresía.",
+    "title": "Cómo se conecta todo",
+    "subtitle": "Las plataformas MADFAM comparten identidad, facturación e infraestructura — por eso se sienten como un solo sistema. Este es el mapa de esas conexiones, y las puertas para entrar.",
     "badge": "Ecosistema",
     "cta": "Únete al Ecosistema",
     "secondaryCta": "Explorar Plataformas",
@@ -22,54 +22,18 @@
     "platformAccess": "Plataforma gestionada",
     "ecosystemAccess": "Acceso de ecosistema"
   },
-  "comparison": {
-    "title": "Compara Tus Opciones",
-    "subtitle": "Mira exactamente lo que obtienes en cada nivel.",
-    "featureLabel": "Característica",
-    "bestValue": "Mejor Valor",
-    "tiers": {
-      "free": "Gratis",
-      "freeNote": "Siempre disponible",
-      "pro": "Pro Individual",
-      "proNote": "Precio por plataforma",
-      "member": "Miembro del Ecosistema",
-      "memberNote": "Una membresía, acceso coordinado"
-    },
-    "features": {
-      "platformAccess": "Acceso a Plataformas",
-      "proFeatures": "Funciones Pro",
-      "makerNodeDiscount": "Descuento Maker Node",
-      "prioritySupport": "Soporte Prioritario",
-      "earlyAccess": "Acceso Anticipado",
-      "communityAccess": "Acceso a Comunidad"
-    },
-    "values": {
-      "free": "Solo nivel gratuito",
-      "individual": "Una plataforma",
-      "all": "Todas las plataformas",
-      "none": "—",
-      "single": "Completo (una plataforma)",
-      "discount": "Descuentos especiales próximamente",
-      "standard": "Soporte por email",
-      "priority": "Soporte prioritario",
-      "yes": "Sí"
-    }
-  },
   "pricing": {
-    "title": "Precios Simples y Transparentes",
-    "subtitle": "Una membresía, acceso coordinado — sin sorpresas.",
-    "pricePending": "Precio por definir — lo publicamos aquí en cuanto quede ratificado.",
-    "includedPlatforms": "Incluye Pro en las {count} plataformas",
+    "title": "Una membresía, acceso coordinado",
+    "subtitle": "La membresía del ecosistema desbloqueará capacidades elegibles en las plataformas, beneficios en pedidos del Maker Node (próximamente) y soporte coordinado — una sola cuenta, un solo trato.",
     "membershipTitle": "Membresía del Ecosistema",
     "features": {
-      "0": "Capacidades elegibles de la plataforma",
-      "1": "Descuentos y beneficios especiales en pedidos Maker Node — próximamente",
+      "0": "Capacidades elegibles por plataforma",
+      "1": "Beneficios en fabricación física — próximamente",
       "2": "Soporte prioritario",
-      "3": "Acceso anticipado a nuevas capacidades de Selva y Avala",
-      "4": "Comunidad exclusiva para miembros"
+      "3": "Comunidad de miembros"
     },
-    "cta": "Únete al Ecosistema",
-    "waitlistNote": "Únete a la lista de espera — lanzamiento próximo"
+    "cta": "Unirme a la lista de espera",
+    "waitlistNote": "Sin tarjeta. Te avisamos cuando abra."
   },
   "makerNode": {
     "title": "Primavera Maker Node",
@@ -109,30 +73,26 @@
     "contactLink": "Contáctanos",
     "items": {
       "q1": {
-        "question": "¿Puedo cambiar de Pro Individual a Membresía del Ecosistema?",
-        "answer": "Sí. Cuando te unes al Ecosistema, tu suscripción Pro Individual se acredita automáticamente a tu membresía. Sin doble cobro."
+        "question": "¿La membresía del ecosistema ya está disponible?",
+        "answer": "Todavía no. Únete a la lista de espera y te avisamos cuando abra. No publicamos precio ni beneficios definitivos hasta que estén ratificados."
       },
       "q2": {
         "question": "¿Hay prueba gratuita?",
-        "answer": "El acceso público varía por plataforma. La Membresía del Ecosistema desbloquea capacidades elegibles, soporte coordinado y ventajas del maker node cuando aplican."
+        "answer": "Depende de cada plataforma: su página indica si ofrece capa gratuita o prueba. Puedes empezar hoy con una plataforma, sin esperar a la membresía."
       },
       "q3": {
-        "question": "¿Cómo entran Selva y Avala en la membresía?",
-        "answer": "Ambas están incluidas en tu Membresía del Ecosistema sin costo extra — Selva en https://selva.town y Avala en https://avala.studio."
+        "question": "¿Cómo se conectan las plataformas?",
+        "answer": "Janua da la identidad; Enclii el despliegue; Dhanam recibe los cobros de las demás; Selva coordina a los agentes. Encima de esa base, las aplicaciones se pasan trabajo entre sí: un diseño de Yantra4D se cotiza en Cotiza, se compara en Forgesight, se cobra en Dhanam, se fabrica con Pravara y se factura con Karafiel."
       },
       "q4": {
         "question": "¿Cómo funciona el descuento en Maker Node?",
         "answer": "Los Miembros del Ecosistema recibirán descuentos y beneficios especiales en los pedidos de fabricación física a través de Primavera Maker Node — impresión 3D, maquinado CNC y corte láser. Detalles próximamente."
-      },
-      "q5": {
-        "question": "¿Puedo cancelar en cualquier momento?",
-        "answer": "Sí. Las membresías mensuales se pueden cancelar en cualquier momento. Las anuales son reembolsables dentro de los primeros 30 días."
       }
     }
   },
   "cta": {
     "title": "¿Listo para construir algo que importa?",
-    "subtitle": "Únete al Ecosistema MADFAM y desbloquea el potencial completo de cada plataforma.",
+    "subtitle": "Empieza hoy con una plataforma o únete a la lista de espera de la membresía.",
     "primary": "Únete al Ecosistema",
     "secondary": "Explorar Plataformas",
     "primaryButton": "Únete al Ecosistema",
@@ -158,8 +118,8 @@
       },
       "membership": {
         "title": "Únete al Ecosistema",
-        "description": "Una membresía desbloquea Pro en todas partes — más fabricación con descuento.",
-        "cta": "Ver Membresía"
+        "description": "Capacidades elegibles, soporte coordinado y beneficios del Maker Node (próximamente). Lista de espera abierta.",
+        "cta": "Unirme a la lista de espera"
       }
     },
     "platformShowcase": {
@@ -174,12 +134,11 @@
     },
     "metrics": {
       "vendors": "proveedores rastreados",
-      "cost": "vs $2K+ hosting en la nube",
       "designs": "diseños open-source"
     },
     "membershipValue": {
-      "title": "Una Membresía. Todas las Plataformas.",
-      "subtitle": "Capacidades elegibles de la plataforma, fabricación con descuento, soporte prioritario y acceso anticipado.",
+      "title": "Una membresía, acceso coordinado",
+      "subtitle": "Capacidades elegibles por plataforma, soporte prioritario y beneficios del Maker Node (próximamente). Lista de espera abierta, sin precio publicado hasta su ratificación.",
       "cta": "Conocer la Membresía"
     },
     "finalCta": {

@@ -16,7 +16,10 @@ interface Metric {
 
 // R11 (2026-09-04 coherence programme): publish no number the ecosystem
 // registry does not carry. The Tezca corpus counter that used to sit here was
-// hand-set, and wrong — it is omitted until the registry owns it.
+// hand-set, and wrong — it is omitted until the registry owns it. R13/R9
+// (C-005): the "$55/mo vs $2K+" hosting-cost tile is gone too — no
+// infrastructure cost line on public surfaces, and prices only on the
+// value-ladder surface from the registry.
 const METRICS: Metric[] = [
   {
     id: 'vendors',
@@ -26,14 +29,6 @@ const METRICS: Metric[] = [
     accentClass: 'text-amber-400',
     suffix: '+',
     animate: true,
-  },
-  {
-    id: 'cost',
-    value: null,
-    displayValue: '$55/mo',
-    descriptionKey: 'cost',
-    accentClass: 'text-blue-400',
-    animate: false,
   },
   {
     id: 'designs',

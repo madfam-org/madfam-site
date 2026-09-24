@@ -6,13 +6,13 @@
     },
     "heroTitle": "Open Platforms for Everyone",
     "heroSubtitle": "An integrated platform ecosystem covering infrastructure, intelligence, standards, and applications — with access models matched to each product.",
-    "ctaTitle": "Unlock Ecosystem Advantages",
-    "ctaSubtitle": "One membership unlocks eligible platform capabilities, discounted fabrication, and priority support.",
-    "ctaButton": "Explore Membership"
+    "ctaTitle": "One membership, coordinated access",
+    "ctaSubtitle": "The ecosystem membership will unlock eligible platform capabilities, Maker Node benefits (coming soon) and priority support. Waitlist open.",
+    "ctaButton": "Join the waitlist"
   },
   "shared": {
     "byMadfam": "by MADFAM",
-    "freePlusPro": "Free + Pro",
+    "freeTier": "Free tier available",
     "access": {
       "platform": "Managed platform",
       "ecosystem": "Ecosystem access"
@@ -26,6 +26,7 @@
     "viewAllPlatforms": "View All Platforms",
     "startFree": "Start Free",
     "getEarlyAccess": "Get Early Access",
+    "visitPlatform": "Go to the platform",
     "contactUs": "Contact Us",
     "status": {
       "production": "Live",
@@ -57,8 +58,8 @@
       "comply": "Comply"
     },
     "cta": {
-      "membership": "Unlock eligible platform capabilities with one membership",
-      "membershipLink": "Learn about Ecosystem Membership"
+      "membership": "Ecosystem membership: waitlist open",
+      "membershipLink": "Join the waitlist"
     },
     "badges": {
       "selfServe": "Self-serve",
@@ -69,8 +70,8 @@
   "enclii": {
     "tagline": "Sovereign Cloud PaaS",
     "valueProp": "Deploy anywhere you want, at a fraction of the cost. GitOps-native Kubernetes for teams that refuse vendor lock-in.",
-    "problem": "Cloud hosting costs are spiraling out of control. Vercel charges $20/user/month for basic features. AWS is powerful but complex. And none of them give you true sovereignty over your infrastructure.",
-    "solution": "Enclii is a sovereign cloud PaaS built on Kubernetes. Zero-config deploys, preview environments, built-in observability — all for $55/month instead of $2,000+. Your code, your servers, your rules.",
+    "problem": "Cloud hosting costs keep climbing. Managed platforms charge per user and per feature. AWS is powerful but complex. And none of them give you true sovereignty over your infrastructure.",
+    "solution": "Enclii is a sovereign cloud PaaS built on Kubernetes. Zero-config deploys, preview environments, built-in observability. Your code, your servers, your rules.",
     "features": {
       "0": "Zero-config deploys with preview environments",
       "1": "GitOps-native Kubernetes orchestration",
@@ -91,7 +92,6 @@
       "title": "Enclii vs. Traditional Cloud",
       "headers": ["Feature", "Enclii", "Vercel", "AWS/GCP"],
       "rows": {
-        "price": ["Starting Price", "$55/mo", "$20/user/mo", "$100+/mo"],
         "deploys": ["Zero-Config Deploys", "Yes", "Yes", "No"],
         "kubernetes": ["Native Kubernetes", "Yes", "No", "Manual setup"],
         "sovereignty": ["Data Sovereignty", "Full", "Limited", "Configurable"],
@@ -105,7 +105,6 @@
       "sdks": "CLI, Node.js, Go"
     },
     "metrics": {
-      "cost": "$55/mo vs $2K+",
       "uptime": "99.95% SLA",
       "deploys": "< 90s deploy time"
     }
@@ -135,7 +134,6 @@
       "title": "Janua vs. Auth Providers",
       "headers": ["Feature", "Janua", "Auth0", "Okta"],
       "rows": {
-        "pricing": ["Pricing", "Free / Self-hosted", "$23/1K users/mo", "$2/user/mo"],
         "selfHosted": ["Self-Hosted", "Yes", "No", "No"],
         "passkeys": ["Passkey Support", "Yes", "Yes", "Limited"],
         "scim": ["SCIM Provisioning", "Yes", "Enterprise only", "Yes"],
