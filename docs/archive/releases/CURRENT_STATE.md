@@ -1,3 +1,9 @@
+> **ARCHIVED — historical record, not current guidance** (banner added 2026-09-23).
+> Names, hosts, products and procedures below may be retired — e.g. PENNY, SPARK,
+> penny.onl, forgesight.quest, and Vercel / Railway / GitHub Pages hosting. Current
+> sources: [`AGENTS.md`](/AGENTS.md), [`ECOSYSTEM.md`](/ECOSYSTEM.md) and
+> [`docs/deployment/DEPLOYMENT.md`](/docs/deployment/DEPLOYMENT.md).
+
 # MADFAM Codebase - Current State
 
 > **ARCHIVED**: This document references the deprecated L1-L5 service tier model. The current service model uses 4 transformation programs. See `/CLAUDE.md` for current context.

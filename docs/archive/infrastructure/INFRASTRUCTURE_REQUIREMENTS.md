@@ -1,3 +1,9 @@
+> **ARCHIVED — historical record, not current guidance** (banner added 2026-09-23).
+> Names, hosts, products and procedures below may be retired — e.g. PENNY, SPARK,
+> penny.onl, forgesight.quest, and Vercel / Railway / GitHub Pages hosting. Current
+> sources: [`AGENTS.md`](/AGENTS.md), [`ECOSYSTEM.md`](/ECOSYSTEM.md) and
+> [`docs/deployment/DEPLOYMENT.md`](/docs/deployment/DEPLOYMENT.md).
+
 # Infrastructure Requirements
 
 > [!IMPORTANT]
@@ -119,7 +125,7 @@ Infrastructure Split:
     - Backup storage
 ```
 
-**Monthly Cost**: Variable based on cluster size + $5-15/month (Cloudflare R2, usage-based)
+_[Cost figures removed 2026-09-23: costs are private under the repo-boundary contract.]_
 
 ## Component-Specific Requirements
 
@@ -389,8 +395,7 @@ See `k8s/production/secrets-template.yaml` for the full list of required secrets
 ### Current Estimated Costs
 
 - Kubernetes (via Enclii): Variable based on cluster size
-- Vercel (preview/fallback): $0-20/month
-- Cloudflare R2: $5-15/month
+  _[Cost figures removed 2026-09-23: costs are private under the repo-boundary contract.]_
 - **Total**: Variable
 
 ### Cost Saving Opportunities

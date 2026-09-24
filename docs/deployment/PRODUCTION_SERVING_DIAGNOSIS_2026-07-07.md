@@ -5,7 +5,7 @@
 Status: **RESOLVED.** Production is served from the cluster via Enclii.
 Scope: why `https://www.madfam.io` served a build that no longer matched `main`.
 Related: [DEPLOYMENT.md](./DEPLOYMENT.md) · [DEPLOYMENT_TROUBLESHOOTING.md](./DEPLOYMENT_TROUBLESHOOTING.md) ·
-[VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) · `.github/workflows/deploy-web.yml` · `k8s/production/`
+[VERCEL_DEPLOYMENT.md](../archive/deployment/VERCEL_DEPLOYMENT.md) · `.github/workflows/deploy-web.yml` · `k8s/production/`
 
 ---
 
