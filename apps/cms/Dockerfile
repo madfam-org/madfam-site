@@ -10,7 +10,7 @@ FROM base AS deps
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/cms/package.json ./apps/cms/package.json
 # Install all (including devDeps) for the build step
-RUN pnpm install --frozen-lockfile --filter=@madfam/cms...
+RUN pnpm install --frozen-lockfile --filter=@madfam-site/cms...
 
 # Builder stage — transpile TypeScript with ts-node
 FROM base AS builder
@@ -46,7 +46,7 @@ RUN addgroup --system --gid 1001 nodejs && \
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/cms/package.json ./apps/cms/package.json
 RUN corepack enable && corepack prepare pnpm@latest --activate && \
-    pnpm install --prod --frozen-lockfile --filter=@madfam/cms... --ignore-scripts
+    pnpm install --prod --frozen-lockfile --filter=@madfam-site/cms... --ignore-scripts
 
 # Copy transpiled output from builder
 COPY --from=builder /app/apps/cms/dist ./apps/cms/dist
