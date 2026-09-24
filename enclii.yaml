@@ -21,7 +21,7 @@ spec:
     port: 3000
   # domains: intentionally NOT declared here — REMOVED 2026-08-27.
   # This doc's metadata.name is `madfam-site`, but no cluster Service of that
-  # name exists (the real ones are madfam-web and madfam-cms). Declaring
+  # name exists (the real one is madfam-web; madfam-cms was retired 2026-09-23, R52). Declaring
   # domains here invites the platform's domain reconciler to derive tunnel
   # routes to `madfam-site.madfam-site.svc` — a dead backend — exactly the
   # mechanism of the 2026-08-27 janua identity outage (that repo's block
@@ -34,7 +34,3 @@ spec:
         port: 3000
         ingress: [cloudflare-tunnel]
         egress: [dns, https]
-      - name: madfam-cms
-        port: 3000
-        ingress: [cloudflare-tunnel]
-        egress: [dns, https, postgres]

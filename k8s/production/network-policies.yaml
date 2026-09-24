@@ -1,3 +1,6 @@
+# Boundary checkpoint (2026-09-23, madfam-site): public-safe manifest shape only; no node
+# identity, IPs or secret values belong here (public sink). Policy:
+# internal-devops/docs/repo-boundary-contract.md
 ---
 # Default deny all ingress and egress
 apiVersion: networking.k8s.io/v1
@@ -109,7 +112,7 @@ spec:
         - protocol: TCP
           port: 443
 ---
-# Allow intra-namespace traffic (web <-> cms)
+# Allow intra-namespace traffic between madfam-platform pods
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
