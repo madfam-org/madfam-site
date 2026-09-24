@@ -1,3 +1,9 @@
+> **ARCHIVED — historical record, not current guidance** (banner added 2026-09-23).
+> Names, hosts, products and procedures below may be retired — e.g. PENNY, SPARK,
+> penny.onl, forgesight.quest, and Vercel / Railway / GitHub Pages hosting. Current
+> sources: [`AGENTS.md`](/AGENTS.md), [`ECOSYSTEM.md`](/ECOSYSTEM.md) and
+> [`docs/deployment/DEPLOYMENT.md`](/docs/deployment/DEPLOYMENT.md).
+
 # ARCHIVED: This document is historical. Production now runs on Enclii/K8s.
 
 > **Warning**: The Vercel deployment configuration described below is no longer the active deployment strategy. MADFAM has completely migrated off Vercel onto Enclii (owner confirmation, 2026-09-04); `vercel.json`, `vercel-minimal.json` and `.vercelignore` were deleted from this repository on that date. This document is retained for historical reference only. See `docs/deployment/DEPLOYMENT.md` and `docs/infrastructure/INFRASTRUCTURE_REQUIREMENTS.md` for current deployment information.

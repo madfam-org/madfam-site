@@ -208,9 +208,8 @@ flowchart TD
 ### Multi-Environment Strategy
 
 ```
-Development → Staging → Production
-   Local      GitHub     Kubernetes (self-hosted) or Vercel (serverless)
-              Pages
+Development → Production
+   Local      Kubernetes via Enclii (container image + ArgoCD GitOps)
 ```
 
 ### Containerized Deployment (Kubernetes)
@@ -222,7 +221,7 @@ The project includes a full K8s deployment stack:
 - **CI/CD**: GitHub Actions build → GHCR → cosign signing → digest commit (GitOps)
 - **Security**: Non-root containers, read-only rootfs, seccomp, default-deny NetworkPolicy
 
-See `docs/deployment/DEPLOYMENT.md` and `docs/infrastructure/INFRASTRUCTURE_REQUIREMENTS.md` for details.
+See `docs/deployment/DEPLOYMENT.md` and `docs/infrastructure/README.md` for details.
 
 ### Feature Flags
 
@@ -247,7 +246,7 @@ const features = {
 
 ### Horizontal Scaling
 
-- **Vercel**: Automatic scaling with serverless functions
+- **Kubernetes HPA**: 2–5 web replicas on CPU
 - **CDN**: Global edge caching
 - **Database**: Connection pooling with Prisma
 
@@ -275,8 +274,8 @@ const features = {
 ### Phase 3 (In Progress)
 
 - AI-powered content and personalization
-- Advanced analytics with Forge Sight
-- Product platform launches (PENNY, Dhanam, Enclii, Janua)
+- Advanced analytics with Forgesight
+- Product platform launches (Dhanam, Enclii, Janua, Selva)
 
 ### Phase 4 (Planned)
 
@@ -293,7 +292,7 @@ const features = {
 | Tailwind CSS | Utility-first, performance                               | 2024-01 |
 | Plausible    | Privacy-first analytics                                  | 2024-01 |
 | TypeScript   | Type safety, DX                                          | 2024-01 |
-| Vercel       | Next.js optimization                                     | 2024-01 |
+| Vercel       | Next.js hosting — retired 2026-09-04 (Enclii only)       | 2024-01 |
 | Kubernetes   | Self-hosted production, full control, security hardening | 2025-03 |
 | Cosign       | Supply-chain security for container images               | 2025-03 |
 | Kustomize    | GitOps-friendly K8s manifest management                  | 2025-03 |

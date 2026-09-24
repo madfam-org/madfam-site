@@ -1,3 +1,9 @@
+> **ARCHIVED — historical record, not current guidance** (banner added 2026-09-23).
+> Names, hosts, products and procedures below may be retired — e.g. PENNY, SPARK,
+> penny.onl, forgesight.quest, and Vercel / Railway / GitHub Pages hosting. Current
+> sources: [`AGENTS.md`](/AGENTS.md), [`ECOSYSTEM.md`](/ECOSYSTEM.md) and
+> [`docs/deployment/DEPLOYMENT.md`](/docs/deployment/DEPLOYMENT.md).
+
 # ARCHIVED: This document is historical. Production now runs on Enclii/K8s.
 
 > **Warning**: The Vercel + Railway migration described below is no longer the active deployment strategy. Production infrastructure has moved to Kubernetes via Enclii. This document is retained for historical reference only. See `docs/deployment/DEPLOYMENT.md` and `docs/infrastructure/INFRASTRUCTURE_REQUIREMENTS.md` for current deployment information.
@@ -431,12 +437,9 @@ railway run node -e "console.log(process.env.DATABASE_URL)"
 
 ### Track Monthly Costs
 
-| Service       | Expected | Alert Threshold |
-| ------------- | -------- | --------------- |
-| Vercel        | $20      | $30             |
-| Railway       | $15      | $25             |
-| Cloudflare R2 | $10      | $20             |
-| **Total**     | **$45**  | **$75**         |
+| Service                                                                                  | Expected | Alert Threshold |
+| ---------------------------------------------------------------------------------------- | -------- | --------------- |
+| _[Cost figures removed 2026-09-23: costs are private under the repo-boundary contract.]_ |
 
 ### Cost Optimization Tips
 

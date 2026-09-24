@@ -2,14 +2,21 @@
 
 ## Product Links
 
-| Product       | URL                          | Status         |
-| ------------- | ---------------------------- | -------------- |
-| Penny         | https://www.penny.onl        | ⏳ COMING SOON |
-| Dhanam        | https://www.dhan.am          | ✅ LIVE        |
-| Cotiza Studio | https://www.cotiza.studio    | ❓ UNVERIFIED  |
-| Forge Sight   | https://www.forgesight.quest | ✅ LIVE        |
-| Factlas       | https://www.factl.as         | ⏳ COMING SOON |
-| AVALA         | # (placeholder)              | ⏳ COMING SOON |
+The authoritative product list, hosts and lifecycle live in the ecosystem registry; this site
+renders them from `apps/web/lib/data/projection.public.json` (generated catalog:
+`apps/web/lib/data/platforms.generated.ts`). Do not keep a second list here. A few front doors
+for quick reference (2026-09-23):
+
+| Product    | URL                    |
+| ---------- | ---------------------- |
+| Dhanam     | https://dhan.am        |
+| Cotiza     | https://cotiza.studio  |
+| Forgesight | https://forgesight.app |
+| Factlas    | https://factl.as       |
+| Avala      | https://avala.studio   |
+
+Retired — do not link: PENNY / penny.onl (absorbed by Selva, https://selva.town), SPARK,
+forgesight.quest (parked domain).
 
 ## Partners
 
@@ -37,7 +44,6 @@
 | https://staging.madfam.io     | Staging     | Staging website |
 | https://api.madfam.io         | Production  | API             |
 | https://staging-api.madfam.io | Staging     | API             |
-| https://cms.madfam.io         | Production  | CMS             |
 
 ## External Services
 

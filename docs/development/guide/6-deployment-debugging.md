@@ -75,32 +75,20 @@ try {
    - SQLite database
    - All feature flags enabled
 
-2. **Staging** (`staging.madfam.io`)
-   - GitHub Pages deployment
-   - Production-like environment
-   - PostgreSQL database
-   - Selected feature flags
-
-3. **Production** (`madfam.io`)
-   - Vercel deployment
+2. **Production** (`madfam.io`)
+   - Container on the MADFAM k3s cluster, deployed by Enclii with ArgoCD GitOps
    - PostgreSQL with backups
    - Conservative feature flags
    - Full monitoring
 
+   There is no separate staging site: the GitHub Pages staging target and Vercel were retired
+   (2026-09-04). See `docs/deployment/DEPLOYMENT.md`.
+
 ### **Deploy Commands**
 
-```bash
-# Staging deployment
-git checkout staging
-git merge develop
-git push origin staging  # Auto-deploys via GitHub Actions
-
-# Production deployment
-git checkout main
-git merge staging
-git tag v1.2.0
-git push origin main --tags  # Auto-deploys to Vercel
-```
+A pull request merged to `main` that touches `apps/web/**` or `packages/**` runs the Deploy Web
+workflow (build → GHCR → cosign → digest commit), and ArgoCD rolls it out. There is no manual
+deploy command; see `docs/deployment/DEPLOYMENT.md`.
 
 ### **Environment Variables**
 

@@ -23,9 +23,9 @@ to `AGENTS.md`. It carries no policy, and neither should any file that is not
 
 ## What this repository is
 
-The MADFAM corporate website — `madfam.io` — plus the Payload CMS that editors
-use for blog posts, case studies and team members. It is a pnpm + Turborepo
-monorepo on Next.js, shipping Spanish, English and Portuguese.
+The MADFAM corporate website — `madfam.io`. It is a pnpm + Turborepo monorepo
+on Next.js, shipping Spanish, English and Portuguese. (A Payload CMS app,
+`apps/cms`, is retired — ruling R52, 2026-09-23 — and no longer deployed.)
 
 It is **Lane C: a public corporate-site repository**.
 
@@ -64,10 +64,9 @@ run by `.github/workflows/public-hygiene.yml`. Read their `classes_skipped=` and
   middleware handles locale detection. Shared server logic is in
   `apps/web/lib/` (`environment.ts`, `seo.ts`, `rate-limit.ts`, `redis.ts`,
   `security.ts`, `cms/`, `data/`).
-- **`apps/cms`** — Payload CMS with Postgres. Optional by construction: the CMS
-  integration is enabled only when `NEXT_PUBLIC_CMS_URL` is set, and the blog
-  and case-study routes ship i18n fallback content, so a dead CMS degrades
-  silently rather than breaking the site.
+- **`apps/cms`** — retired Payload app (R52): not deployed. The web app enables
+  its CMS client only when `NEXT_PUBLIC_CMS_URL` is set (production does not
+  set it); blog and case-study routes render shipped i18n content.
 
 ## Packages
 
@@ -82,9 +81,16 @@ run by `.github/workflows/public-hygiene.yml`. Read their `classes_skipped=` and
 
 ## Key data files
 
-- `apps/web/lib/data/platforms.ts` — the platform registry and the source of
-  truth for which platforms exist. It declares 16 slugs as of 2026-09-04; read
-  the file rather than trusting a number quoted in prose.
+- `apps/web/lib/data/projection.public.json` — the vendored public projection
+  of the ecosystem product registry, and the source of truth for which products
+  exist (hosts, licences, lifecycle, commerce tiers). Never hand-edit it;
+  re-vendor it byte-identical from the registry (AGENTS.md, "Re-vendoring the
+  registry projection").
+- `apps/web/lib/data/platforms.generated.ts` — generated from the projection by
+  `pnpm generate:platforms` (`pnpm check:platforms` guards freshness);
+  `platforms.presentation.ts` is the hand-kept overlay that decides which
+  registry products the site surfaces; `platforms.ts` merges them into
+  `PLATFORMS`. Count the catalog there rather than trusting a number in prose.
 - `apps/web/lib/data/value-ladder.ts` — the public value-ladder structure.
 - `packages/i18n/src/translations/{en,es,pt}/*.json` — every user-visible
   string, including the platform copy.

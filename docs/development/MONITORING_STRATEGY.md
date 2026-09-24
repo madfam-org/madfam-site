@@ -68,7 +68,7 @@ export function trackWebVitals() {
 }
 
 function sendToAnalytics(metric: any) {
-  // Send to Vercel Analytics or custom endpoint
+  // Send to Plausible (self-hosted) or a custom endpoint
   if (process.env.NODE_ENV === 'production') {
     fetch('/api/analytics/vitals', {
       method: 'POST',
@@ -249,7 +249,7 @@ export class BusinessMetrics {
 ## Tools Stack
 
 - **Error Tracking**: Sentry
-- **Performance**: Vercel Analytics + Custom Web Vitals
+- **Performance**: Plausible + custom Web Vitals
 - **Uptime**: Better Uptime or Pingdom
 - **Logs**: Structured logging with Pino
 - **Dashboard**: Custom dashboard + Grafana (optional)
