@@ -1,3 +1,9 @@
+> **ARCHIVED — historical record, not current guidance** (banner added 2026-09-23).
+> Names, hosts, products and procedures below may be retired — e.g. PENNY, SPARK,
+> penny.onl, forgesight.quest, and Vercel / Railway / GitHub Pages hosting. Current
+> sources: [`AGENTS.md`](/AGENTS.md), [`ECOSYSTEM.md`](/ECOSYSTEM.md) and
+> [`docs/deployment/DEPLOYMENT.md`](/docs/deployment/DEPLOYMENT.md).
+
 # AI Assistant Context Documentation
 
 > **ARCHIVED**: This document is superseded by [`AGENTS.md`](../../AGENTS.md) at the repository root, which is the canonical instruction file for every LLM agent. The root `CLAUDE.md` is only a compatibility redirect to it and carries no policy. The L1-L5 service tier model described here has been replaced by 4 transformation programs: Design & Fabrication, Strategy & Enablement, Platform Pilots, and Strategic Partnerships. See `AGENTS.md` for current context.

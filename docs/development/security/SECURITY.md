@@ -106,7 +106,7 @@ We use the following security tools:
 
 - **Static Analysis**: ESLint security rules, CodeQL
 - **Dependency Scanning**: GitHub Dependabot, npm audit
-- **Runtime Protection**: Vercel security features
+- **Runtime Protection**: Cloudflare edge + Kubernetes network policies and pod hardening
 - **Monitoring**: Plausible Analytics (privacy-first)
 - **Secrets Detection**: GitHub secret scanning
 - **Vulnerability Management**: GitHub Security Advisories

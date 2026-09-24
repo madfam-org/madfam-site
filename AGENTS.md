@@ -8,7 +8,7 @@
 
 <!-- MADFAM-AGENTS-CANONICAL v1 -->
 
-> Last Updated: 2026-09-05
+> Last Updated: 2026-09-23
 
 This is the canonical instruction file for Claude, Codex, and any other LLM
 agent working in this repository. `CLAUDE.md` is kept only as a compatibility
@@ -89,6 +89,67 @@ Two CI guards enforce part of it — `scripts/public-hygiene-check.sh` and
 `source=` lines: a green run is not proof a change is boundary-clean, and the
 node-identity class is deliberately not expressed in a public script.
 
+## Canonical sources and standing rulings (2026-09-23)
+
+> Boundary checkpoint (2026-09-23, madfam-site): rulings are named by id only;
+> their rationale and evidence live in the private `internal-devops` repo.
+
+- **Product facts come from the registry, never from prose.** The vendored
+  public projection (`apps/web/lib/data/projection.public.json`) is the source
+  of truth for which products exist, their front doors, licences, lifecycle and
+  commerce tiers. `platforms.generated.ts` is generated from it; the catalog is
+  every customer-facing product whose lifecycle is live, beta or degraded (R32).
+- **Prices** appear only on the value-ladder surface and only when the
+  registry ratifies them (R9/R25). Never hand-type a price, never `TBD`, no
+  infrastructure cost lines (R13). The ecosystem membership has no price or
+  entitlement until it exists in the registry and Dhanam (R29) — waitlist only.
+- **Nauta's front door is nauta.quest** (R30/R31). `/[locale]/nauta` is a short
+  corporate summary whose canonical URL is `https://nauta.quest/`.
+- **Legal entity:** Innovaciones MADFAM S.A.S. de C.V., Cuernavaca, Morelos
+  (R37/R47). No public phone line; mailboxes only once provisioned; legal text
+  is reviewed by counsel before it changes substantively.
+- **No sign-in on madfam.io.** The ecosystem login is Janua; nothing here may
+  verify a Janua token with a shared HS256 secret (R42).
+- **AI crawlers** are allowed on this public landing (R40); `app/robots.ts` is
+  the only robots source. **Analytics** is self-hosted Plausible at
+  `plausible.madfam.io`, never Plausible Cloud (R41).
+- **Retired names never render:** PENNY (→ Selva), SPARK, Primavera3D (→
+  Primavera Maker Node), penny.onl, forgesight.quest (Forgesight is
+  `forgesight.app`), Showtech, the "business units" / "AI consultancy" framing.
+
+## Re-vendoring the registry projection
+
+1. Take `ecosystem/registry/projection.public.json` from `internal-devops` at a
+   merged commit and copy it **byte-identical** to
+   `apps/web/lib/data/projection.public.json` (it is in `.prettierignore`; the
+   freshness hash depends on the exact bytes).
+2. `pnpm generate:platforms` (rewrites `platforms.generated.ts` and the three
+   `platforms.registry.json` bundles), then `pnpm check:platforms` and
+   `pnpm test:scripts`.
+3. For a new live/beta/degraded product, add an overlay entry in
+   `platforms.presentation.ts` and its copy (tagline, value prop, features,
+   CTAs) under the registry slug in `platforms.json` ×3 — no prices, no counts.
+4. Open a PR that names the registry sha and the projection sha256.
+
+The weekly **Registry Freshness** workflow compares this copy with the
+foundry's public copy and opens an issue when this site falls behind.
+
+## SEO / GEO checklist (P2)
+
+- `<html lang>` follows the request locale; every page under `[locale]` gets a
+  self canonical `https://madfam.io/{locale}{path}` plus es/en/pt/x-default
+  alternates (the `[locale]` layout default; a page may override, as `/nauta`
+  does). Links use real route segments (`getLocalizedUrl`).
+- Every indexable page has a title and description (`routeMetadata()` + the
+  `seo.*` block of the pages bundle, or its own `generateMetadata`).
+- The sitemap is generated (`generateSitemapData` × locales): no `#fragment`
+  URLs, no redirecting URLs, no page whose canonical lives elsewhere.
+- `/llms.txt` and `/llms-full.txt` are generated from the registry projection.
+- JSON-LD comes from `lib/structured-data.ts` and is validated in CI; it never
+  carries offers or prices.
+- Above the fold, say what it is, who it is for and how to start; put prices
+  only where the ruling allows.
+
 ## Maintenance
 
 Regenerate or repair these files with
@@ -121,7 +182,7 @@ pnpm typecheck
 
 ## Project Overview
 
-**Company**: MADFAM - AI consultancy and product studio  
+**Company**: Innovaciones MADFAM S.A.S. de C.V. (MADFAM) — builds and operates an ecosystem of open platforms, Cuernavaca, Morelos  
 **Tech Stack**: Next.js 15, TypeScript, Tailwind CSS, Turborepo
 **Architecture**: Monorepo with shared packages  
 **Languages**: Spanish (es), English (en), Portuguese (pt)
@@ -132,7 +193,7 @@ pnpm typecheck
 madfam-site/
 ├── apps/
 │   ├── web/           # Main Next.js website
-│   └── cms/           # Payload CMS (optional)
+│   └── cms/           # Retired Payload app (R52) — not deployed
 ├── packages/
 │   ├── ui/            # Themes/tokens only. UI components are app-owned:
 │   │                  # solarpunk-foundry/docs/architecture/SELF_CONTAINED_SERVICES.md
@@ -153,7 +214,7 @@ madfam-site/
 
 MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entrepreneurs in LATAM. Three conversion paths:
 
-1. **Use a MADFAM Platform** — the digital platforms (each with Free + Pro tiers).
+1. **Use a MADFAM Platform** — the digital platforms (tiers per product, from the registry).
    The catalog is **generated**, not hand-kept: `apps/web/lib/data/platforms.generated.ts`
    is derived from the vendored ecosystem registry projection
    (`apps/web/lib/data/projection.public.json`), and
@@ -162,7 +223,7 @@ MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entr
    including here. The lists below are illustrative, not exhaustive, and a
    product that is not in the registry does not render on the site at all.
 2. **Use Primavera Maker Node** — Physical fabrication (3D printing, CNC, laser cutting)
-3. **Become an Ecosystem Member** — One membership unlocks Pro across all platforms + discounted fabrication
+3. **Ecosystem Membership** — waitlist only; no price or entitlement until it exists in the registry and Dhanam (R29)
 
 ### Digital Platforms (by MADFAM)
 
@@ -170,7 +231,7 @@ Self-serve flagships (public sign-up, pricing, free tier or trial):
 
 - **Karafiel** (https://karafiel.mx): Mexican CFDI / RFC / SAT compliance
 - **Dhanam** (https://dhan.am): Financial wellness + ecosystem billing backbone
-- **Forgesight** (https://forgesight.quest): Digital fabrication pricing intelligence
+- **Forgesight** (https://forgesight.app): Digital fabrication pricing intelligence
 - **Tezca** (https://tezca.mx): Mexican regulatory intelligence
 - **Fortuna** (https://fortuna.tube): Problem intelligence / NBI scoring API
 - **Rondelio** (https://rondel.io): Game intelligence cloud (TCG / tabletop)
@@ -179,7 +240,7 @@ Platform / infrastructure (B2B, white-glove default):
 
 - **Enclii** (https://enclii.dev): Sovereign cloud PaaS on bare-metal K8s
 - **Janua** (https://janua.dev): Self-hosted identity platform
-- **Selva** (https://selva.town): Autonomous agent platform (240+ tools, A2A protocol)
+- **Selva** (https://selva.town): Autonomous agent platform (A2A protocol)
 
 Ecosystem services (consumed by other platforms):
 
@@ -195,8 +256,7 @@ otherwise delete. SPARK and Primavera3D are likewise retired brands.
 ### Solutions
 
 - **Primavera Maker Node**: Physical fabrication hub (3D printing, CNC, laser cutting)
-- **MADFAM Co-Labs**: Collaborations & co-creations (a MADFAM Company)
-- **Showtech**: Technology showcase & events (Coming Soon)
+- **MADFAM Co-Labs**: educational collaboration program (a program, not a company)
 
 ### Programs
 
@@ -222,8 +282,7 @@ otherwise delete. SPARK and Primavera3D are likewise retired brands.
 ### Branding
 
 - Products/Platforms: "by MADFAM"
-- Co-Labs / Showtech: "a MADFAM Company"
-- No references to the retired SPARK or Primavera3D brands
+- No references to the retired SPARK, Primavera3D or Showtech brands
 - "Innovaciones MADFAM S.A.S. de C.V." is the **legal entity** and is not a
   retired brand: it belongs on legal and footer surfaces
 - Maker Node is "Primavera Maker Node" (formerly Primavera3D)

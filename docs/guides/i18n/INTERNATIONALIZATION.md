@@ -107,15 +107,15 @@ Service tier translations maintain consistency across all content:
     }
   },
   "products": {
-    "SPARK": {
-      "name": "SPARK",
-      "tagline": "Orquestación de IA",
-      "description": "Plataforma completa para automatización inteligente"
+    "DHANAM": {
+      "name": "Dhanam",
+      "tagline": "Finanzas y cobros",
+      "description": "Presupuesto, cobros y pagos en MXN"
     },
-    "PENNY": {
-      "name": "PENNY",
-      "tagline": "Automatización de procesos",
-      "description": "Herramienta especializada en optimización de flujos"
+    "SELVA": {
+      "name": "Selva",
+      "tagline": "Agentes de IA",
+      "description": "Agentes que se pasan trabajo entre sí"
     }
   }
 }
@@ -176,10 +176,10 @@ export const routeTranslations = {
     'en-US': '/programs',
     'pt-BR': '/programas',
   },
-  '/products/spark': {
-    'es-MX': '/productos/spark',
-    'en-US': '/products/spark',
-    'pt-BR': '/produtos/spark',
+  '/platforms/dhanam': {
+    'es-MX': '/platforms/dhanam',
+    'en-US': '/platforms/dhanam',
+    'pt-BR': '/platforms/dhanam',
   },
 };
 ```

@@ -64,7 +64,7 @@ biz-site/
 - **Authentication**: NextAuth.js
 - **CMS**: Payload CMS
 - **Testing**: Vitest + Playwright
-- **Deployment**: Vercel
+- **Deployment**: Enclii (container image + ArgoCD GitOps)
 
 ## Development Workflow
 
@@ -333,7 +333,7 @@ export async function GET() {
 - 📚 **Documentation**: `/docs` folder
 - 🔧 **Component Library**: `pnpm run storybook`
 - 🎯 **Design System**: Figma link (ask PM)
-- 📊 **Analytics**: Vercel dashboard
+- 📊 **Analytics**: Plausible (self-hosted)
 
 ### Team Communication
 

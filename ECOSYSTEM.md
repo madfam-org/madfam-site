@@ -88,21 +88,21 @@ the public ecosystem-contract repo, `madfam-org/solarpunk-foundry` (`ECOSYSTEM.m
 This corporate-site repo deliberately carries only the product-level view below: role and
 public surface, no repository topology.
 
-| Platform        | Role                                                               | Public surface   |
-| --------------- | ------------------------------------------------------------------ | ---------------- |
-| **Enclii**      | PaaS control plane — every deploy goes through it                  | enclii.dev       |
-| **Janua**       | OIDC / OAuth 2.0 provider — RS256 JWKS                             | janua.dev        |
-| **Dhanam**      | Billing, entitlements and payment gateways                         | dhan.am          |
-| **Selva**       | LLM inference routing + agent orchestration                        | selva.town       |
-| **Karafiel**    | Operational compliance — CFDI, NOM-151, e.firma, SAT-adjacent      | karafiel.mx      |
-| **Tezca**       | Mexican regulatory intelligence (informational; feeds Karafiel)    | tezca.mx         |
-| **Cotiza**      | Quoting engine (fabrication + services)                            | cotiza.studio    |
-| **Forgesight**  | Digital-fabrication industry intelligence (pricing feed to Cotiza) | forgesight.quest |
-| **Pravara MES** | Fabrication-node routing and dispatch (physical jobs)              | —                |
-| **PhyndCRM**    | Client-facing deliverables portal                                  | —                |
-| **Fortuna**     | Problem intelligence / zeitgeist analysis                          | fortuna.tube     |
-| **Avala**       | Learning and competency verification                               | avala.studio     |
-| **Yantra4D**    | Parametric design platform                                         | yantra4d.com     |
+| Platform        | Role                                                               | Public surface |
+| --------------- | ------------------------------------------------------------------ | -------------- |
+| **Enclii**      | PaaS control plane — every deploy goes through it                  | enclii.dev     |
+| **Janua**       | OIDC / OAuth 2.0 provider — RS256 JWKS                             | janua.dev      |
+| **Dhanam**      | Billing, entitlements and payment gateways                         | dhan.am        |
+| **Selva**       | LLM inference routing + agent orchestration                        | selva.town     |
+| **Karafiel**    | Operational compliance — CFDI, NOM-151, e.firma, SAT-adjacent      | karafiel.mx    |
+| **Tezca**       | Mexican regulatory intelligence (informational; feeds Karafiel)    | tezca.mx       |
+| **Cotiza**      | Quoting engine (fabrication + services)                            | cotiza.studio  |
+| **Forgesight**  | Digital-fabrication industry intelligence (pricing feed to Cotiza) | forgesight.app |
+| **Pravara MES** | Fabrication-node routing and dispatch (physical jobs)              | mes.madfam.io  |
+| **PhyndCRM**    | CRM — consent, campaigns, attribution                              | phynd.app      |
+| **Fortuna**     | Problem intelligence / zeitgeist analysis                          | fortuna.tube   |
+| **Avala**       | Learning and competency verification                               | avala.studio   |
+| **Yantra4D**    | Parametric design platform                                         | yantra4d.com   |
 
 Names and roles follow `internal-devops/ecosystem/repo-registry.md` (_Last Verified
 2026-08-24_). A dash in the last column means the product has no public self-serve surface —

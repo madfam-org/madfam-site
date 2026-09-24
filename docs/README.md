@@ -20,9 +20,8 @@
 ### 🚀 Deployment
 
 - [Deployment Guide](./deployment/DEPLOYMENT.md)
-- [Vercel Deployment](./deployment/VERCEL_DEPLOYMENT.md)
-- [Staging Setup](./deployment/STAGING_DEPLOYMENT.md)
-- [Troubleshooting](./deployment/DEPLOYMENT_TROUBLESHOOTING.md)
+- [Infrastructure](./infrastructure/README.md)
+- Retired Vercel / GitHub Pages / Railway guides: [archive](./archive/)
 
 ### 📖 Guides
 
@@ -30,12 +29,10 @@
 - [Internationalization](./guides/i18n/) - i18n and translation management
 - [Mobile Optimization](./guides/MOBILE_OPTIMIZATION_GUIDE.md)
 - [UI Components](./guides/ui/) - UI component documentation
-- [User Guide](./guides/USER_GUIDE.md)
 - [External Links Reference](./guides/EXTERNAL_LINKS_QUICK_REFERENCE.md)
 
 ### 📋 Planning
 
-- [UX Roadmap](./planning/UX_ROADMAP.md) - User experience planning and roadmap
 - [MADFAM Site Strategic Redesign Audit](./planning/MADFAM_SITE_STRATEGIC_REDESIGN_AUDIT_2026-06-04.md) - Public positioning, IA, conversion, and UI/UX remediation plan
 
 ## 🗂️ Structure
