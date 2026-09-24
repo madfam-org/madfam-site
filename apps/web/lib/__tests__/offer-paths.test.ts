@@ -19,9 +19,9 @@ describe('offer path routing', () => {
   it('localizes internal contact and ecosystem routes', () => {
     const paths = getOfferPaths('es');
 
-    expect(paths.find(path => path.id === 'ecosystem')?.href).toBe('/es/ecosistema');
+    expect(paths.find(path => path.id === 'ecosystem')?.href).toBe('/es/ecosystem');
     expect(paths.find(path => path.id === 'build')?.href).toBe(
-      '/es/contacto?intent=build-with-madfam'
+      '/es/contact?intent=build-with-madfam'
     );
   });
 });

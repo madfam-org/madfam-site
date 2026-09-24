@@ -4,6 +4,7 @@ import { Inter, Poppins, Space_Mono } from 'next/font/google';
 import { DarkModeScript } from './dark-mode-script';
 import { BrandThemeProvider } from '@/components/ui';
 import { PLAUSIBLE_HOST } from '@/lib/plausible';
+import { LOCALE_HEADER, SEO_DEFAULT_LOCALE, SEO_LOCALES, type SeoLocale } from '@/lib/seo-urls';
 import './globals.css';
 
 const inter = Inter({
@@ -44,10 +45,17 @@ export const viewport = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const headersList = await headers();
   const nonce = headersList.get('x-nonce') ?? undefined;
+  // <html lang> from the locale next-intl resolved for this request (finding
+  // C-021); routes outside [locale] (e.g. the root 404) fall back to es.
+  const requestLocale = headersList.get(LOCALE_HEADER);
+  const lang: SeoLocale = SEO_LOCALES.includes(requestLocale as SeoLocale)
+    ? (requestLocale as SeoLocale)
+    : SEO_DEFAULT_LOCALE;
   const plausibleHost = PLAUSIBLE_HOST;
 
   return (
     <html
+      lang={lang}
       suppressHydrationWarning
       className={`${inter.variable} ${poppins.variable} ${spaceMono.variable}`}
     >

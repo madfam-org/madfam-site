@@ -24,7 +24,16 @@ export type RouteKey =
   | 'terms'
   | 'cookies';
 
-// Define localized slugs for each route (Updated for normalized locales)
+// Public path for each route, per locale.
+//
+// Every locale uses the app's real route segment (the [locale]/<segment> folder).
+// Localized slugs used to live here ('/plataformas', '/ecosistema', '/nosotros',
+// '/carreras', '/impacto', '/privacidad', '/terminos', '/soluciones/maker-node'…)
+// but only some of them had a rewrite in next.config.js, so the navbar, footer
+// and CTAs linked to 404s in es/pt; and the ones that did resolve were
+// duplicate URLs of the canonical page (findings C-021/C-024, 2026-09-23). The
+// legacy rewrites stay in next.config.js so old inbound links keep working; the
+// canonical tag on those pages points at the path below.
 const routes: Record<RouteKey, Record<Locale, string>> = {
   home: {
     en: '/',
@@ -34,29 +43,29 @@ const routes: Record<RouteKey, Record<Locale, string>> = {
   // NEW: Corporate structure routes
   solutions: {
     en: '/solutions',
-    es: '/soluciones',
-    pt: '/solucoes',
+    es: '/solutions',
+    pt: '/solutions',
   },
   'solutions.colabs': {
     en: '/solutions/colabs',
-    es: '/soluciones/colabs',
-    pt: '/solucoes/colabs',
+    es: '/solutions/colabs',
+    pt: '/solutions/colabs',
   },
   'solutions.maker-node': {
     en: '/solutions/maker-node',
-    es: '/soluciones/maker-node',
-    pt: '/solucoes/maker-node',
+    es: '/solutions/maker-node',
+    pt: '/solutions/maker-node',
   },
   ecosystem: {
     en: '/ecosystem',
-    es: '/ecosistema',
-    pt: '/ecossistema',
+    es: '/ecosystem',
+    pt: '/ecosystem',
   },
 
   programs: {
     en: '/programs',
-    es: '/programas',
-    pt: '/programas',
+    es: '/programs',
+    pt: '/programs',
   },
   'case-studies': {
     en: '/case-studies',
@@ -65,23 +74,23 @@ const routes: Record<RouteKey, Record<Locale, string>> = {
   },
   impact: {
     en: '/impact',
-    es: '/impacto',
-    pt: '/impacto',
+    es: '/impact',
+    pt: '/impact',
   },
   showcase: {
     en: '/showcase',
-    es: '/casos',
-    pt: '/casos',
+    es: '/showcase',
+    pt: '/showcase',
   },
   platforms: {
     en: '/platforms',
-    es: '/plataformas',
-    pt: '/plataformas',
+    es: '/platforms',
+    pt: '/platforms',
   },
   products: {
     en: '/products',
-    es: '/productos',
-    pt: '/produtos',
+    es: '/products',
+    pt: '/products',
   },
   'value-ladder': {
     en: '/value-ladder',
@@ -95,13 +104,13 @@ const routes: Record<RouteKey, Record<Locale, string>> = {
   },
   about: {
     en: '/about',
-    es: '/nosotros',
-    pt: '/sobre',
+    es: '/about',
+    pt: '/about',
   },
   contact: {
     en: '/contact',
-    es: '/contacto',
-    pt: '/contato',
+    es: '/contact',
+    pt: '/contact',
   },
   blog: {
     en: '/blog',
@@ -110,18 +119,18 @@ const routes: Record<RouteKey, Record<Locale, string>> = {
   },
   careers: {
     en: '/careers',
-    es: '/carreras',
-    pt: '/carreiras',
+    es: '/careers',
+    pt: '/careers',
   },
   privacy: {
     en: '/privacy',
-    es: '/privacidad',
-    pt: '/privacidade',
+    es: '/privacy',
+    pt: '/privacy',
   },
   terms: {
     en: '/terms',
-    es: '/terminos',
-    pt: '/termos',
+    es: '/terms',
+    pt: '/terms',
   },
   cookies: {
     en: '/cookies',

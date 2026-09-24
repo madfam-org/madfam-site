@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
-import { getProductionPlatforms } from '@/lib/data/platforms';
+import { SITE_URL, localizedAlternates, localizedUrl } from './seo-urls';
+import { getPlatformsWithDetailPages, isComingSoon } from '@/lib/data/platforms';
+
+export * from './seo-urls';
 
 export interface SEOConfig {
   title: string;
@@ -9,7 +12,6 @@ export interface SEOConfig {
   url?: string;
   type?: 'website' | 'article' | 'product' | 'service';
   locale?: 'es' | 'en' | 'pt';
-  alternateLocales?: string[];
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
@@ -27,7 +29,7 @@ export class SEOService {
   private twitterHandle: string;
 
   constructor() {
-    this.baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://madfam.io';
+    this.baseUrl = SITE_URL;
     this.defaultImage = `${this.baseUrl}/images/og-default.jpg`;
     this.defaultLocale = 'es';
     this.siteName = 'MADFAM';
@@ -43,7 +45,6 @@ export class SEOService {
       url = this.baseUrl,
       type = 'website',
       locale = this.defaultLocale,
-      alternateLocales = [],
       publishedTime,
       modifiedTime,
       author,
@@ -54,7 +55,7 @@ export class SEOService {
     } = config;
 
     const fullTitle = title.includes('MADFAM') ? title : `${title} | MADFAM`;
-    const fullUrl = url.startsWith('http') ? url : `${this.baseUrl}${url}`;
+    const fullUrl = url.startsWith('http') ? url : localizedUrl(locale, url);
     const fullImage = image.startsWith('http') ? image : `${this.baseUrl}${image}`;
 
     const metadata: Metadata = {
@@ -70,10 +71,9 @@ export class SEOService {
           follow: !noFollow,
         },
       },
-      alternates: {
-        canonical: fullUrl,
-        languages: this.generateLanguageAlternates(url, alternateLocales),
-      },
+      alternates: url.startsWith('http')
+        ? { canonical: fullUrl }
+        : localizedAlternates(locale, url),
       openGraph: {
         type: type as 'website' | 'article',
         title: fullTitle,
@@ -336,19 +336,6 @@ export class SEOService {
     });
   }
 
-  private generateLanguageAlternates(
-    url: string,
-    alternateLocales: string[]
-  ): Record<string, string> {
-    const alternates: Record<string, string> = {};
-
-    alternateLocales.forEach(locale => {
-      alternates[locale] = `${this.baseUrl}/${locale}${url}`;
-    });
-
-    return alternates;
-  }
-
   generateStructuredData(type: string, data: Record<string, unknown>): object {
     const baseData = {
       '@context': 'https://schema.org',
@@ -445,158 +432,55 @@ export class SEOService {
     }
   }
 
+  /**
+   * Locale-less routes for the sitemap (finding C-024). `app/sitemap.ts`
+   * expands each into one entry per locale with hreflang alternates. No
+   * `#fragment` URLs, no redirecting unprefixed URLs, and no page whose
+   * canonical lives elsewhere (`/nauta` canonicalizes to nauta.quest, R30).
+   * No `lastModified`: the site has no per-page modification date, and a
+   * build timestamp on every URL is a false signal.
+   */
   generateSitemapData(): Array<{
     url: string;
-    lastModified: Date;
     changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
     priority: number;
   }> {
-    const now = new Date();
+    const route = (
+      url: string,
+      priority: number,
+      changeFrequency: 'weekly' | 'monthly' | 'yearly' = 'monthly'
+    ) => ({ url, priority, changeFrequency });
 
     const staticEntries = [
-      {
-        url: '/',
-        lastModified: now,
-        changeFrequency: 'weekly' as const,
-        priority: 1.0,
-      },
-      {
-        url: '/programs',
-        lastModified: now,
-        changeFrequency: 'weekly' as const,
-        priority: 0.9,
-      },
-      {
-        url: '/products',
-        lastModified: now,
-        changeFrequency: 'weekly' as const,
-        priority: 0.9,
-      },
-      {
-        url: '/about',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-      },
-      {
-        url: '/contact',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      },
-      {
-        url: '/solutions',
-        lastModified: now,
-        changeFrequency: 'weekly' as const,
-        priority: 0.9,
-      },
-      {
-        url: '/solutions/colabs',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      },
-      {
-        url: '/impact',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-      },
-      {
-        url: '/blog',
-        lastModified: now,
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-      },
-      {
-        url: '/careers',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-      },
-      {
-        url: '/case-studies',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-      },
-      {
-        url: '/calculator',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-      },
-      {
-        url: '/assessment',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-      },
-      {
-        url: '/estimator',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-      },
-      {
-        url: '/ecosystem',
-        lastModified: now,
-        changeFrequency: 'weekly' as const,
-        priority: 0.9,
-      },
-      {
-        url: '/solutions/maker-node',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      },
-      {
-        url: '/programs#design-fabrication',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      },
-      {
-        url: '/programs#strategy-enablement',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      },
-      {
-        url: '/programs#platform-pilots',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      },
-      {
-        url: '/programs#strategic-partnerships',
-        lastModified: now,
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      },
+      route('/', 1.0, 'weekly'),
+      route('/platforms', 0.9, 'weekly'),
+      route('/ecosystem', 0.9, 'weekly'),
+      route('/value-ladder', 0.9, 'weekly'),
+      route('/products', 0.8, 'weekly'),
+      route('/solutions', 0.8),
+      route('/solutions/maker-node', 0.8),
+      route('/solutions/colabs', 0.7),
+      route('/programs', 0.8),
+      route('/impact', 0.7),
+      route('/about', 0.7),
+      route('/contact', 0.8),
+      route('/blog', 0.6, 'weekly'),
+      route('/careers', 0.5),
+      route('/case-studies', 0.5),
+      route('/guides', 0.5),
+      route('/calculator', 0.5),
+      route('/estimator', 0.5),
+      route('/assessment', 0.5),
+      route('/privacy', 0.3, 'yearly'),
+      route('/terms', 0.3, 'yearly'),
+      route('/cookies', 0.3, 'yearly'),
     ];
 
-    // Platform pages
-    const platformEntries = [
-      {
-        url: '/platforms',
-        lastModified: now,
-        changeFrequency: 'weekly' as const,
-        priority: 0.9,
-      },
-      // Only emit sitemap entries for production platforms that have an
-      // in-site detail page. Platforms whose canonical landing is an
-      // external domain (Karafiel, Fortuna, Rondelio, Selva) are not part of
-      // madfam.io's sitemap.
-      ...getProductionPlatforms()
-        .filter(p => p.hasDetailPage)
-        .map(p => ({
-          url: `/platforms/${p.slug}`,
-          lastModified: now,
-          changeFrequency: 'monthly' as const,
-          priority: 0.8,
-        })),
-    ];
+    // Every catalog platform with an in-site detail page. Platforms whose
+    // canonical landing is their own domain are not madfam.io URLs.
+    const platformEntries = getPlatformsWithDetailPages()
+      .filter(p => !isComingSoon(p))
+      .map(p => route(`/platforms/${p.slug}`, 0.8));
 
     return [...staticEntries, ...platformEntries];
   }

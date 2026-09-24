@@ -1,36 +1,21 @@
-import { getLocalizedContent, type Locale } from '@madfam-site/i18n';
-import Image from 'next/image';
+import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Button } from '@/components/ui';
+import { routeMetadata } from '@/lib/page-metadata';
 
-interface TeamMember {
-  name: string;
-  role: {
-    es: string;
-    en: string;
-    pt: string;
-  };
-  bio: {
-    es: string;
-    en: string;
-    pt: string;
-  };
-  expertise: {
-    es: string[];
-    en: string[];
-    pt: string[];
-  };
-  image: string;
-}
+// The /about server render failed in production (finding C-022): the team grid
+// passed an `onError` handler to next/image from this Server Component, which
+// React refuses to serialise, so every render ended in an error digest and an
+// empty page. The grid also showed four people with invented bios and photos
+// that do not exist. Per the signed-off copy deck (§6.5: real profiles only,
+// with consent) the grid is replaced by the team paragraph, and the timeline
+// goes too: its founding year contradicts the entity record (ruling R37,
+// foundedYear: null) and none of its dates were sourced.
 
-interface Milestone {
-  year: string;
-  event: {
-    es: string;
-    en: string;
-    pt: string;
-  };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return routeMetadata(locale, 'about', '/about');
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -38,85 +23,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const t = await getTranslations('about');
   const corporateT = await getTranslations('corporate');
   const currentLocale = locale as Locale;
-
-  const team: TeamMember[] = [
-    {
-      name: 'Aldo Ruiz Luna',
-      role: {
-        es: 'CEO & Fundador',
-        en: 'CEO & Founder',
-        pt: 'CEO & Fundador',
-      },
-      bio: {
-        es: 'Visionario tecnológico con más de 15 años transformando empresas con IA y creatividad.',
-        en: 'Technology visionary with over 15 years transforming companies with AI and creativity.',
-        pt: 'Visionário tecnológico com mais de 15 anos transformando empresas com IA e criatividade.',
-      },
-      expertise: {
-        es: ['Estrategia IA', 'Innovación', 'Liderazgo'],
-        en: ['AI Strategy', 'Innovation', 'Leadership'],
-        pt: ['Estratégia IA', 'Inovação', 'Liderança'],
-      },
-      image: '/team/aldo.jpg',
-    },
-    {
-      name: 'Daniela Martínez',
-      role: {
-        es: 'Directora Creativa',
-        en: 'Creative Director',
-        pt: 'Diretora Criativa',
-      },
-      bio: {
-        es: 'Experta en diseño 3D y experiencias digitales que conectan marcas con audiencias.',
-        en: 'Expert in 3D design and digital experiences that connect brands with audiences.',
-        pt: 'Especialista em design 3D e experiências digitais que conectam marcas com audiências.',
-      },
-      expertise: {
-        es: ['Diseño 3D', 'UX/UI', 'Branding'],
-        en: ['3D Design', 'UX/UI', 'Branding'],
-        pt: ['Design 3D', 'UX/UI', 'Branding'],
-      },
-      image: '/team/daniela.jpg',
-    },
-    {
-      name: 'Carlos Mendoza',
-      role: {
-        es: 'CTO',
-        en: 'CTO',
-        pt: 'CTO',
-      },
-      bio: {
-        es: 'Arquitecto de soluciones que lidera la implementación de plataformas empresariales.',
-        en: 'Solutions architect leading enterprise platform implementations.',
-        pt: 'Arquiteto de soluções que lidera a implementação de plataformas empresariais.',
-      },
-      expertise: {
-        es: ['Arquitectura', 'DevOps', 'Cloud'],
-        en: ['Architecture', 'DevOps', 'Cloud'],
-        pt: ['Arquitetura', 'DevOps', 'Cloud'],
-      },
-      image: '/team/carlos.jpg',
-    },
-    {
-      name: 'Ana López',
-      role: {
-        es: 'Directora de IA',
-        en: 'AI Director',
-        pt: 'Diretora de IA',
-      },
-      bio: {
-        es: 'Pionera en automatización inteligente y machine learning aplicado a negocios.',
-        en: 'Pioneer in intelligent automation and machine learning applied to business.',
-        pt: 'Pioneira em automação inteligente e machine learning aplicado a negócios.',
-      },
-      expertise: {
-        es: ['Machine Learning', 'Automatización', 'Data Science'],
-        en: ['Machine Learning', 'Automation', 'Data Science'],
-        pt: ['Machine Learning', 'Automação', 'Data Science'],
-      },
-      image: '/team/ana.jpg',
-    },
-  ];
 
   const pillars = [
     {
@@ -145,51 +51,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     },
   ];
 
-  // Milestones reflect verifiable ecosystem build-out (no unsupported
-  // customer-count claims). Update this list when there is dated evidence.
-  const milestones: Milestone[] = [
-    {
-      year: '2019',
-      event: {
-        es: 'Fundación de MADFAM en Cuernavaca',
-        en: 'MADFAM founded in Cuernavaca',
-        pt: 'Fundação da MADFAM em Cuernavaca',
-      },
-    },
-    {
-      year: '2023',
-      event: {
-        es: 'Plataformas de fabricación digital y diseño paramétrico en producción',
-        en: 'Digital fabrication and parametric design platforms in production',
-        pt: 'Plataformas de fabricação digital e design paramétrico em produção',
-      },
-    },
-    {
-      year: '2024',
-      event: {
-        es: 'Enclii (PaaS sobre bare-metal) y Janua (identidad self-hosted) en producción',
-        en: 'Enclii (bare-metal PaaS) and Janua (self-hosted identity) in production',
-        pt: 'Enclii (PaaS bare-metal) e Janua (identidade self-hosted) em produção',
-      },
-    },
-    {
-      year: '2025',
-      event: {
-        es: 'Dhanam (finanzas), Forgesight (precios) y Tezca (regulación) en producción',
-        en: 'Dhanam (finance), Forgesight (pricing) and Tezca (regulation) in production',
-        pt: 'Dhanam (finanças), Forgesight (preços) e Tezca (regulação) em produção',
-      },
-    },
-    {
-      year: '2026',
-      event: {
-        es: 'Selva (agentes), Karafiel (CFDI), Fortuna y Rondelio en early access',
-        en: 'Selva (agents), Karafiel (CFDI), Fortuna and Rondelio in early access',
-        pt: 'Selva (agentes), Karafiel (CFDI), Fortuna e Rondelio em early access',
-      },
-    },
-  ];
-
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -211,16 +72,20 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               {t('subtitle')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center animate-fade-up animation-delay-400">
-              <Button variant="secondary" size="lg">
-                {t('cta.seeWork')}
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-obsidian"
-              >
-                {t('cta.joinTeam')}
-              </Button>
+              <Link href={getLocalizedUrl('platforms', currentLocale)}>
+                <Button variant="secondary" size="lg">
+                  {t('cta.seeWork')}
+                </Button>
+              </Link>
+              <Link href={getLocalizedUrl('careers', currentLocale)}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-obsidian"
+                >
+                  {t('cta.joinTeam')}
+                </Button>
+              </Link>
             </div>
           </div>
         </Container>
@@ -280,103 +145,16 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       {/* Team */}
       <section className="section">
         <Container>
-          <div className="text-center mb-12">
+          <div className="text-center max-w-3xl mx-auto">
             <Heading level={2} className="mb-4">
               {t('team.title')}
             </Heading>
-            <p className="text-lg text-obsidian/70 max-w-3xl mx-auto">{t('team.subtitle')}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-1"
-              >
-                <div className="relative bg-white rounded-[14px] p-6 h-full">
-                  {/* Team member photo with emoji fallback */}
-                  <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-lavender/20 to-sun/20">
-                    <div className="absolute inset-0 flex items-center justify-center text-4xl opacity-50">
-                      👤
-                    </div>
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      sizes="128px"
-                      className="object-cover relative z-10"
-                      onError={e => {
-                        (e.target as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
-                  </div>
-
-                  <h3 className="font-heading text-xl font-semibold text-center mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-lavender text-center mb-4">
-                    {getLocalizedContent(member.role, currentLocale)}
-                  </p>
-                  <p className="text-sm text-obsidian/70 text-center mb-4">
-                    {getLocalizedContent(member.bio, currentLocale)}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {getLocalizedContent(member.expertise, currentLocale).map((skill, idx) => (
-                      <span
-                        key={idx}
-                        className="text-xs px-3 py-1 rounded-full bg-obsidian/5 text-obsidian/70"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Timeline */}
-      <section className="section bg-gradient-to-br from-obsidian/5 to-lavender/5">
-        <Container>
-          <div className="text-center mb-12">
-            <Heading level={2} className="mb-4">
-              {t('history.title')}
-            </Heading>
-            <p className="text-lg text-obsidian/70 max-w-3xl mx-auto">{t('history.subtitle')}</p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-lavender to-sun" />
-
-              {/* Timeline items */}
-              {milestones.map((milestone, index) => (
-                <div
-                  key={index}
-                  className={`relative flex items-center mb-12 ${
-                    index % 2 === 0 ? 'justify-start' : 'justify-end'
-                  }`}
-                >
-                  <div
-                    className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}
-                  >
-                    <div className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-lavender to-sun text-white font-semibold mb-2">
-                      {milestone.year}
-                    </div>
-                    <h3 className="font-heading text-lg font-semibold">
-                      {getLocalizedContent(milestone.event, currentLocale)}
-                    </h3>
-                  </div>
-
-                  {/* Timeline dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white border-4 border-lavender" />
-                </div>
-              ))}
-            </div>
+            <p className="text-lg text-obsidian/70 mb-8">{t('team.subtitle')}</p>
+            <Link href={getLocalizedUrl('careers', currentLocale)}>
+              <Button variant="outline" size="lg">
+                {t('cta.joinTeam')}
+              </Button>
+            </Link>
           </div>
         </Container>
       </section>
@@ -390,18 +168,20 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             </Heading>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">{t('cta.subtitle')}</p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="/contact">
+              <Link href={getLocalizedUrl('contact', currentLocale)}>
                 <Button variant="secondary" size="lg">
                   {t('cta.scheduleCall')}
                 </Button>
               </Link>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-lavender"
-              >
-                {t('cta.viewOpportunities')}
-              </Button>
+              <Link href={getLocalizedUrl('careers', currentLocale)}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-lavender"
+                >
+                  {t('cta.viewOpportunities')}
+                </Button>
+              </Link>
             </div>
           </div>
         </Container>
