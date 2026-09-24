@@ -76,7 +76,7 @@ export default function ForgeSightDemoPage() {
       volume: formData.monthlyVolume,
     });
 
-    window.location.href = `https://www.forgesight.quest?${trackingParams.toString()}`;
+    window.location.href = `https://forgesight.app/?${trackingParams.toString()}`;
   };
 
   return (
