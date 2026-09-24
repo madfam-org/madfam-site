@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
 import { Container } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
-import { PLATFORMS, LAYERS, isComingSoon } from '@/lib/data/platforms';
+import { PLATFORMS, LAYERS, isComingSoon, hasFreeTier } from '@/lib/data/platforms';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -118,7 +118,11 @@ export default async function PlatformsPage({ params }: Props) {
                           <div className="flex items-center gap-2">
                             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
                               {platform.track === 'self-serve'
-                                ? platformsT('shared.freePlusPro')
+                                ? platformsT(
+                                    hasFreeTier(platform.slug)
+                                      ? 'shared.freeTier'
+                                      : 'shared.badges.selfServe'
+                                  )
                                 : platformsT(`shared.access.${platform.track}`)}
                             </span>
                             <Badge variant="program" className="text-[10px]">

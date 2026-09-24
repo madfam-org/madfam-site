@@ -22,27 +22,19 @@
   },
   "structure": {
     "title": "Corporate Structure",
-    "subtitle": "Expert units for real problems",
+    "subtitle": "An ecosystem of open platforms",
     "parentCompany": {
       "name": "MADFAM",
       "tagline": "Advanced manufacturing and digital innovation",
-      "description": "Parent company that coordinates and directs all specialized business units"
+      "description": "The company that builds and operates the MADFAM platform ecosystem"
     },
     "solutions": {
       "title": "Our Solutions",
-      "subtitle": "Each solution specialized in solving specific problems",
-      "showtech": {
-        "name": "Showtech",
-        "tagline": "Entertainment Innovation Division",
-        "description": "Hardware and software innovation for the music and live entertainment industries.",
-        "badge": "by MADFAM",
-        "focus": "Audio hardware, production software, immersive experiences, event technology",
-        "status": "coming-soon"
-      }
+      "subtitle": "Each solution specialized in solving specific problems"
     },
     "products": {
       "title": "Main Products",
-      "subtitle": "Solutions developed by our specialized units"
+      "subtitle": "Platforms and tools of the MADFAM ecosystem"
     },
     "programs": {
       "title": "Strategic Programs",
@@ -68,7 +60,7 @@
       "strategicPartnerships": {
         "name": "Strategic Partnerships",
         "description": "Long-term vCTO partnerships and complete transformation",
-        "units": ["All Units"],
+        "units": ["The whole ecosystem"],
         "focus": "Strategic leadership, complete digital transformation"
       }
     },
@@ -79,10 +71,10 @@
       "inPartnershipWith": "in partnership with"
     },
     "messaging": {
-      "tagline": "Expert units for real problems",
+      "tagline": "Technology that gives back more than it takes",
       "corporateVision": "Advanced manufacturing and digital innovation",
-      "missionStatement": "We transform companies through specialized units that combine deep technical expertise with advanced digital innovation",
-      "valueProposition": "Every MADFAM unit is designed to solve specific industry problems with maximum specialization and efficiency"
+      "missionStatement": "An ecosystem of open platforms — built, operated and connected from Mexico — to create, make, comply and grow.",
+      "valueProposition": "Each platform does one concrete job and connects to the others through shared identity, billing and infrastructure."
     }
   },
   "hero": {
@@ -159,17 +151,6 @@
         "3": "Custom Assembly"
       }
     },
-    "showtech": {
-      "tagline": "Entertainment Innovation Division",
-      "description": "Hardware and software innovation for the music and live entertainment industries.",
-      "status": "coming-soon",
-      "capabilities": {
-        "0": "Professional Audio Hardware",
-        "1": "Music Production Software",
-        "2": "Intelligent Lighting Systems",
-        "3": "Live Streaming Platforms"
-      }
-    },
     "hero": {
       "title": "Our Solutions",
       "subtitle": "Physical fabrication, collaborative innovation, and entertainment technology — powered by the MADFAM ecosystem",
@@ -177,11 +158,11 @@
     },
     "meta": {
       "title": "Solutions - MADFAM",
-      "description": "Discover our specialized solutions delivering impact in advanced manufacturing, AI automation, and collaborative innovation."
+      "description": "Primavera Maker Node, Co-Labs and programs to build with MADFAM."
     },
     "structure": {
       "title": "Solution Architecture",
-      "description": "MADFAM coordinates specialized capabilities—each laser-focused on solving specific operational challenges with measurable outcomes.",
+      "description": "MADFAM builds and operates an ecosystem of open platforms; these are the ways to work with us beyond the software.",
       "solutionsLabel": "Solutions",
       "productsLabel": "Products"
     }
@@ -189,16 +170,16 @@
   "products": {
     "title": "Our products",
     "featuredTitle": "Featured Products",
-    "featuredSubtitle": "Platforms and tools developed by our specialized units.",
+    "featuredSubtitle": "Platforms and tools of the MADFAM ecosystem.",
     "viewAll": "View all products",
     "idealFor": "Ideal for:",
     "mainFeatures": "Main features",
     "meta": {
       "title": "Our Products | MADFAM",
-      "description": "Platforms and tools developed by our specialized units to solve real problems."
+      "description": "Platforms and tools of the MADFAM ecosystem, built and operated from Mexico."
     },
     "hero": {
-      "subtitle": "Platforms and tools developed by our specialized units to solve real problems."
+      "subtitle": "Platforms and tools of the MADFAM ecosystem, built and operated from Mexico."
     },
     "categories": {
       "platforms": "Platforms",
@@ -207,7 +188,7 @@
     },
     "availableProducts": "Available products",
     "availableProductsSubtitle": "Platforms and tools ready to deploy in your organization.",
-    "upcomingSubtitle": "Products and platforms in development by our units.",
+    "upcomingSubtitle": "Ecosystem platforms in development.",
     "structure": {
       "title": "Product structure",
       "madfamDirect": {
@@ -217,7 +198,7 @@
     },
     "cta": {
       "title": "Interested in our products?",
-      "subtitle": "Contact the solution team or schedule a personalized demo.",
+      "subtitle": "Write to us or book a discovery call.",
       "contactNow": "Contact now",
       "viewSolutions": "Explore solutions"
     },
@@ -236,7 +217,7 @@
     "title": "Transformation Programs",
     "processDescription": "Strategic 3-phase process: Strategy → Pilot → Scale",
     "updateLabel": "Update:",
-    "migrationNotice": "Our services are now specialized transformation programs by unit.",
+    "migrationNotice": "Our services are now programs to build with MADFAM.",
     "viewAll": "View all programs",
     "before": "Before:",
     "scheduleMarket": "Timeline and market",
@@ -254,7 +235,7 @@
       "description": "Strategic consulting and enablement for startups and founders entering the MADFAM ecosystem",
       "timeline": "3-6 months",
       "targetMarket": "Startups and founders",
-      "investment": "From $200,000 MXN",
+      "investment": "Priced per scope, on request",
       "deliverables": {
         "0": "Platform onboarding roadmap",
         "1": "Strategic workshops",
@@ -267,7 +248,7 @@
       "description": "Grow your project with MADFAM platforms — integrate tools, automate workflows, and expand your reach",
       "timeline": "3-12 months",
       "targetMarket": "Growing projects and teams",
-      "investment": "From $500,000 MXN",
+      "investment": "Priced per scope, on request",
       "deliverables": {
         "0": "Platform integration",
         "1": "Workflow automation",
@@ -297,7 +278,7 @@
       "description": "End-to-end design and digital fabrication services",
       "timeline": "2-8 weeks",
       "targetMarket": "Startups and mid-sized companies",
-      "investment": "From $50,000 MXN",
+      "investment": "Priced per scope, on request",
       "deliverables": {
         "0": "Professional 3D modeling",
         "1": "Parametric design",
@@ -359,7 +340,7 @@
     "subtitle": "What you get when you bring us in — across self-serve products and white-glove engagements.",
     "sovereign": {
       "title": "Sovereign infrastructure",
-      "description": "Our products run on bare-metal Kubernetes that we operate ourselves. No vendor lock-in, full data residency, sources licensed under MIT or AGPL."
+      "description": "Our products run on bare-metal Kubernetes that we operate ourselves. No vendor lock-in and full data residency. {agpl} of the {total} catalog platforms publish their code under AGPL-3.0; each page states its licence."
     },
     "fullStack": {
       "title": "Full-stack ecosystem",
@@ -376,7 +357,7 @@
   },
   "cta": {
     "title": "Ready to transform your organization?",
-    "subtitle": "Discover which unit and program are perfect for your project.",
+    "subtitle": "Find the platform or program that fits your project.",
     "takeAssessment": "Take AI Assessment",
     "contactNow": "Contact Now"
   },
@@ -427,14 +408,14 @@
     "selfServe": {
       "label": "Self-serve",
       "title": "Try our platforms today",
-      "description": "Sign up directly on Karafiel, Dhanam, Forgesight, Fortuna, Rondelio, Tezca. Free tier or trial on each. No call required.",
+      "description": "Sign up directly on {products}. Each page says whether the platform offers a free tier or a trial. No call to book.",
       "cta": "See our platforms"
     },
     "whiteGlove": {
       "label": "White-glove",
       "title": "Talk to a strategist",
       "description": "Embedded vCTO, custom integration of MADFAM platforms, transformation programs. Book a working session with a senior partner.",
-      "cta": "Book a consultation"
+      "cta": "Book a discovery call"
     }
   }
 }

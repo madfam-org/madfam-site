@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
+// R13/R9 (C-005): the "monthly cost for a 12-developer team" price comparison
+// that sat beside this terminal is gone — no hand-typed prices off the
+// value-ladder surface, and no infrastructure cost line on public pages.
 const DEPLOY_STEPS = [
   { text: '$ enclii deploy --prod', color: 'text-gray-400' },
   { text: 'Building container...', color: 'text-blue-400' },
@@ -9,12 +12,6 @@ const DEPLOY_STEPS = [
   { text: 'Deploying to production...', color: 'text-yellow-400' },
   { text: 'Health check passed', color: 'text-green-400' },
   { text: 'Live at https://app.example.com', color: 'text-green-400' },
-];
-
-const PRICING = [
-  { name: 'Enclii', price: '$55', detail: '/mo for 12 devs', accent: 'bg-green-500' },
-  { name: 'Vercel', price: '~$240', detail: '/mo for 12 devs', accent: 'bg-gray-500' },
-  { name: 'AWS', price: '$2K+', detail: '/mo managed', accent: 'bg-orange-500' },
 ];
 
 export function EncliiTaste() {
@@ -28,7 +25,7 @@ export function EncliiTaste() {
   }, [visibleLines]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <div className="max-w-2xl mx-auto">
       {/* Terminal */}
       <div
         className="rounded-xl overflow-hidden shadow-2xl border border-gray-800"
@@ -69,37 +66,6 @@ export function EncliiTaste() {
             <div className="mt-3 text-gray-500 animate-pulse">_</div>
           )}
         </div>
-      </div>
-
-      {/* Pricing comparison */}
-      <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          Monthly cost for a 12-developer team
-        </h3>
-        <div className="space-y-4">
-          {PRICING.map(item => (
-            <div key={item.name} className="space-y-1">
-              <div className="flex justify-between text-sm text-gray-700 dark:text-gray-300">
-                <span className="font-medium">{item.name}</span>
-                <span>
-                  <span className="font-bold text-gray-900 dark:text-white">{item.price}</span>
-                  <span className="text-gray-500">{item.detail}</span>
-                </span>
-              </div>
-              <div className="h-3 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                <div
-                  className={`h-full rounded-full ${item.accent} transition-all duration-1000 ease-out`}
-                  style={{
-                    width: item.name === 'Enclii' ? '23%' : item.name === 'Vercel' ? '48%' : '100%',
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-        <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
-          Based on typical production workloads. Your costs may vary.
-        </p>
       </div>
     </div>
   );
