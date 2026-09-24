@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
-import { AuthProvider } from '@/components/AuthProvider';
 import { CookieConsent } from '@/components/CookieConsent';
 import { Footer } from '@/components/Footer';
 import { GlobalAnalytics } from '@/components/GlobalAnalytics';
@@ -52,24 +51,22 @@ export default async function LocaleLayout({
 
   return (
     <LoggerProvider>
-      <AuthProvider>
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <OrganizationStructuredData />
-          <GlobalAnalytics />
+      <NextIntlClientProvider messages={messages} locale={locale}>
+        <OrganizationStructuredData />
+        <GlobalAnalytics />
 
-          {/* Skip Navigation Link for Accessibility */}
-          <a href="#main-content" className="skip-link sr-only-focusable">
-            Skip to main content
-          </a>
+        {/* Skip Navigation Link for Accessibility */}
+        <a href="#main-content" className="skip-link sr-only-focusable">
+          Skip to main content
+        </a>
 
-          <Navbar />
-          <main id="main-content" tabIndex={-1}>
-            {children}
-          </main>
-          <Footer />
-          <CookieConsent />
-        </NextIntlClientProvider>
-      </AuthProvider>
+        <Navbar />
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
+        <Footer />
+        <CookieConsent />
+      </NextIntlClientProvider>
     </LoggerProvider>
   );
 }
