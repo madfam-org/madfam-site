@@ -7,62 +7,18 @@ import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
 import { Container, Button, BrandParticles } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
 import { PlatformGrid } from '@/components/ecosystem/PlatformGrid';
-import { PricingCards } from '@/components/ecosystem/PricingCards';
+import { MembershipWaitlist } from '@/components/ecosystem/MembershipWaitlist';
 
-// ─── Comparison Data ──────────────────────────────────────────────────────────
-
-const COMPARISON_ROWS = [
-  'platformAccess',
-  'proFeatures',
-  'makerNodeDiscount',
-  'prioritySupport',
-  'earlyAccess',
-  'communityAccess',
-] as const;
-
-type ComparisonRow = (typeof COMPARISON_ROWS)[number];
-
-const COMPARISON_VALUES: Record<ComparisonRow, { free: string; pro: string; member: string }> = {
-  platformAccess: { free: 'free', pro: 'individual', member: 'all' },
-  proFeatures: { free: 'none', pro: 'single', member: 'all' },
-  makerNodeDiscount: { free: 'none', pro: 'none', member: 'discount' },
-  prioritySupport: { free: 'none', pro: 'standard', member: 'priority' },
-  earlyAccess: { free: 'none', pro: 'none', member: 'yes' },
-  communityAccess: { free: 'none', pro: 'none', member: 'yes' },
-};
+// R29 (coherence audit 2026-09-23): the Free / Pro / Member comparison matrix
+// that sat here advertised a membership that "unlocks Pro on all platforms".
+// The membership has no registry or Dhanam entry, so the matrix, its values and
+// the price card are gone; the page keeps a waitlist block.
 
 // ─── FAQ Data ─────────────────────────────────────────────────────────────────
 
-const FAQ_KEYS = ['q1', 'q2', 'q3', 'q4', 'q5'] as const;
+const FAQ_KEYS = ['q1', 'q2', 'q3', 'q4'] as const;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-      <path
-        fillRule="evenodd"
-        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
-
-function DashIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
-    </svg>
-  );
-}
 
 function ChevronDownIcon({ className }: { className?: string }) {
   return (
@@ -91,35 +47,8 @@ export function EcosystemPage() {
     setOpenFaq(prev => (prev === key ? null : key));
   }
 
-  // Render a value cell for the comparison matrix
-  function renderComparisonCell(valueKey: string, isHighlighted: boolean) {
-    const isNone = valueKey === 'none';
-    const baseText = t(`comparison.values.${valueKey}`);
-
-    if (isNone) {
-      return (
-        <td
-          className={`px-4 py-3.5 text-center ${isHighlighted ? 'bg-leaf/5 dark:bg-leaf/10' : ''}`}
-        >
-          <DashIcon className="w-5 h-5 text-gray-300 dark:text-gray-700 mx-auto" />
-        </td>
-      );
-    }
-
-    return (
-      <td className={`px-4 py-3.5 text-center ${isHighlighted ? 'bg-leaf/5 dark:bg-leaf/10' : ''}`}>
-        <span
-          className={`inline-flex items-center justify-center gap-1.5 ${isHighlighted ? 'text-leaf font-medium' : 'text-gray-600 dark:text-gray-400'} text-sm`}
-        >
-          {isHighlighted && <CheckIcon className="w-4 h-4 text-leaf flex-shrink-0" />}
-          {baseText}
-        </span>
-      </td>
-    );
-  }
-
   return (
-    <main className="min-h-screen" aria-label="MADFAM Ecosystem Membership">
+    <main className="min-h-screen" aria-label="MADFAM Ecosystem">
       {/* ── 1. Hero ───────────────────────────────────────────────────────── */}
       <section
         data-section="hero"
@@ -216,110 +145,7 @@ export function EcosystemPage() {
         </Container>
       </section>
 
-      {/* ── 3. Comparison Matrix ──────────────────────────────────────────── */}
-      <section
-        data-section="comparison"
-        aria-labelledby="comparison-heading"
-        className="py-24 bg-white dark:bg-gray-950"
-      >
-        <Container>
-          <div className="text-center mb-14">
-            <h2
-              id="comparison-heading"
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
-            >
-              {t('comparison.title')}
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {t('comparison.subtitle')}
-            </p>
-          </div>
-
-          {/* Table */}
-          <div className="max-w-4xl mx-auto overflow-x-auto">
-            <table className="w-full border-collapse rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-800">
-              <thead>
-                <tr>
-                  {/* Feature label column */}
-                  <th
-                    scope="col"
-                    className="px-4 py-4 text-left text-sm font-semibold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900 w-1/3 md:w-2/5"
-                  >
-                    {t('comparison.featureLabel')}
-                  </th>
-
-                  {/* Free */}
-                  <th scope="col" className="px-4 py-4 text-center bg-gray-50 dark:bg-gray-900">
-                    <span className="block text-sm font-bold text-gray-700 dark:text-gray-300">
-                      {t('comparison.tiers.free')}
-                    </span>
-                    <span className="block text-xs text-gray-400 dark:text-gray-500 mt-0.5">
-                      {t('comparison.tiers.freeNote')}
-                    </span>
-                  </th>
-
-                  {/* Individual Pro */}
-                  <th scope="col" className="px-4 py-4 text-center bg-gray-50 dark:bg-gray-900">
-                    <span className="block text-sm font-bold text-gray-700 dark:text-gray-300">
-                      {t('comparison.tiers.pro')}
-                    </span>
-                    <span className="block text-xs text-gray-400 dark:text-gray-500 mt-0.5">
-                      {t('comparison.tiers.proNote')}
-                    </span>
-                  </th>
-
-                  {/* Ecosystem Member — highlighted column with gradient top border */}
-                  <th
-                    scope="col"
-                    className="px-4 py-4 text-center bg-leaf/5 dark:bg-leaf/10 relative"
-                  >
-                    {/* Gradient top border accent */}
-                    <div
-                      aria-hidden="true"
-                      className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-leaf via-lavender to-sun rounded-t"
-                    />
-                    <span className="block text-sm font-bold text-leaf">
-                      {t('comparison.tiers.member')}
-                    </span>
-                    <span className="mt-1 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-sun/20 text-sun border border-sun/30">
-                      {t('comparison.bestValue')}
-                    </span>
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                {COMPARISON_ROWS.map((rowKey, index) => (
-                  <tr
-                    key={rowKey}
-                    className={
-                      index % 2 === 0
-                        ? 'bg-white dark:bg-gray-950'
-                        : 'bg-gray-50/50 dark:bg-gray-900/50'
-                    }
-                  >
-                    {/* Feature name */}
-                    <td className="px-4 py-3.5 text-sm font-medium text-gray-700 dark:text-gray-300">
-                      {t(`comparison.features.${rowKey}`)}
-                    </td>
-
-                    {/* Free column */}
-                    {renderComparisonCell(COMPARISON_VALUES[rowKey].free, false)}
-
-                    {/* Pro column */}
-                    {renderComparisonCell(COMPARISON_VALUES[rowKey].pro, false)}
-
-                    {/* Member column */}
-                    {renderComparisonCell(COMPARISON_VALUES[rowKey].member, true)}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── 4. Pricing Cards ──────────────────────────────────────────────── */}
+      {/* ── 3. Membership waitlist ──────────────────────────────────────────────── */}
       <section
         data-section="pricing"
         aria-labelledby="pricing-heading"
@@ -338,7 +164,7 @@ export function EcosystemPage() {
             </p>
           </div>
 
-          <PricingCards />
+          <MembershipWaitlist />
         </Container>
       </section>
 

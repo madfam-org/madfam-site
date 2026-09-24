@@ -54,7 +54,7 @@ export const GUARDED_FILES = [
   { file: 'apps/web/lib/data/value-ladder.ts' },
   { file: 'apps/web/app/[locale]/value-ladder/page.tsx' },
   { file: 'apps/web/components/ValueLadderSelector.tsx' },
-  { file: 'apps/web/components/ecosystem/PricingCards.tsx' },
+  { file: 'apps/web/components/ecosystem/MembershipWaitlist.tsx' },
   { file: 'apps/web/lib/data/nauta-product.ts' },
   { file: 'apps/web/app/[locale]/nauta/page.tsx' },
   ...['es', 'en', 'pt'].flatMap(locale => [

@@ -67,22 +67,6 @@ export default async function SolutionsPage({ params }: Props) {
       ],
       internalUrl: '/solutions/colabs',
     },
-    {
-      id: 'showtech',
-      name: 'Showtech',
-      tagline: t('showtech.tagline'),
-      description: t('showtech.description'),
-      badge: 'by MADFAM',
-      accent: 'purple' as const,
-      capabilities: [
-        t('showtech.capabilities.0'),
-        t('showtech.capabilities.1'),
-        t('showtech.capabilities.2'),
-        t('showtech.capabilities.3'),
-      ],
-      products: [],
-      comingSoon: true,
-    },
   ];
 
   return (
