@@ -27,8 +27,8 @@
       "@madfam-site/core": ["../../packages/core/src"],
       "@madfam-site/analytics": ["../../packages/analytics/src"],
       "@madfam-site/i18n": ["../../packages/i18n/src"],
-      "@madfam/email": ["../../packages/email/src"],
-      "@madfam/email/*": ["../../packages/email/src/*"]
+      "@madfam-site/email": ["../../packages/email/src"],
+      "@madfam-site/email/*": ["../../packages/email/src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

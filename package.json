@@ -11,11 +11,11 @@
   ],
   "scripts": {
     "dev": "turbo dev",
-    "dev:web": "pnpm --filter @madfam/web dev",
+    "dev:web": "pnpm --filter @madfam-site/web dev",
     "build": "turbo build",
-    "build:web": "pnpm --filter @madfam/web build",
+    "build:web": "pnpm --filter @madfam-site/web build",
     "build:production": "turbo build --env-mode=production",
-    "start:web": "pnpm --filter @madfam/web start",
+    "start:web": "pnpm --filter @madfam-site/web start",
     "test": "turbo test",
     "lint": "turbo lint",
     "clean": "turbo clean && rm -rf node_modules",
@@ -55,8 +55,8 @@
   "packageManager": "pnpm@9.15.0",
   "lint-staged": {
     "apps/web/**/*.{ts,tsx,js,jsx}": [
-      "pnpm --filter @madfam/web lint:staged",
-      "pnpm --filter @madfam/web typecheck:staged"
+      "pnpm --filter @madfam-site/web lint:staged",
+      "pnpm --filter @madfam-site/web typecheck:staged"
     ],
     "packages/i18n/src/translations/**/*.json": [
       "pnpm check:translations"
