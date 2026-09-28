@@ -32,7 +32,7 @@ jobs:
 
       - name: Run DocGuard
         # v1 @ solarpunk-foundry main, resolved 2026-09-04.
-        uses: madfam-org/solarpunk-foundry/.github/actions/doc-guard@26515eedc226585c19a69e64110ddb6ba54e2548
+        uses: madfam-org/solarpunk-foundry/.github/actions/doc-guard@c000eed9a0872be59687dadda0b2ee7a994889cb
         with:
           doc-path: './docs'
           # strict: false means DocGuard WARNINGS NEVER FAIL THIS JOB. A green
