@@ -46,8 +46,8 @@
     "ioredis": "^5.10.1",
     "jose": "^6.2.12",
     "lucide-react": "^0.553.0",
-    "next": "15.5.25",
-    "next-intl": "^4.14.5",
+    "next": "15.5.26",
+    "next-intl": "^4.14.7",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "^7.88.0",
@@ -65,11 +65,11 @@
     "@testing-library/user-event": "^14.6.7",
     "@types/bcryptjs": "^3.0.0",
     "@types/ioredis": "^5.0.0",
-    "@types/node": "^26.6.1",
+    "@types/node": "^26.6.2",
     "@types/react": "^19.2.4",
     "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "^8.70.0",
-    "@typescript-eslint/parser": "^8.70.0",
+    "@typescript-eslint/eslint-plugin": "^8.70.1",
+    "@typescript-eslint/parser": "^8.70.1",
     "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.6.1",
     "critters": "^0.0.25",
@@ -80,10 +80,10 @@
     "postcss": "^8.5.28",
     "prisma": "6.1.0",
     "tailwindcss": "4.3.3",
-    "tsx": "^4.23.13",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vite": "^7.3.5",
     "vitest": "^4.1.10",
-    "webpack": "^5.111.0"
+    "webpack": "^5.111.1"
   }
 }
