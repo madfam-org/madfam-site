@@ -82,15 +82,17 @@ export default function middleware(request: NextRequest) {
  * - No Vercel or Google origins (R0a/R41: no Vercel, Plausible only). The
  *   Plausible origin is allowed only when this build renders Plausible
  *   (NEXT_PUBLIC_PLAUSIBLE_DOMAIN set at build time).
+ * - Fonts are 'self' only: next/font self-hosts them at build time, so no page
+ *   requests fonts.googleapis.com or fonts.gstatic.com.
  */
 export function buildContentSecurityPolicy(nonce: string): string {
   const analytics = PLAUSIBLE_DOMAIN ? ` ${PLAUSIBLE_HOST}` : '';
   return `
     default-src 'self';
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline'${analytics};
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https:;
-    font-src 'self' https://fonts.gstatic.com;
+    font-src 'self';
     connect-src 'self'${analytics};
     media-src 'self';
     object-src 'none';
