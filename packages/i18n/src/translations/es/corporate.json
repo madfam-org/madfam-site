@@ -340,7 +340,7 @@
     "subtitle": "Lo que obtienes cuando nos integras — tanto en productos self-service como en proyectos white-glove.",
     "sovereign": {
       "title": "Infraestructura soberana",
-      "description": "Nuestros productos corren sobre Kubernetes bare-metal que operamos nosotros mismos. Sin lock-in de proveedor y con residencia total de datos. {agpl} de las {total} plataformas del catálogo publican su código bajo AGPL-3.0; cada página indica su licencia."
+      "description": "Nuestros productos corren sobre Kubernetes bare-metal que operamos nosotros mismos, sin lock-in de proveedor. Datos alojados en infraestructura que operamos. {agpl} de las {total} plataformas del catálogo publican su código bajo AGPL-3.0; cada página indica su licencia."
     },
     "fullStack": {
       "title": "Ecosistema full-stack",
