@@ -57,12 +57,8 @@ forgesight.quest (parked domain).
 
 ## Google Services
 
-| Service            | URL                              |
-| ------------------ | -------------------------------- |
-| Google Fonts       | https://fonts.googleapis.com     |
-| Google Tag Manager | https://www.googletagmanager.com |
-| Google Analytics   | https://www.google-analytics.com |
-| Google Analytics 4 | https://analytics.google.com     |
+None. Fonts are self-hosted by `next/font`, analytics is self-hosted Plausible (R41), and the
+Content-Security-Policy allows no Google origin (batch S5, 2026-10-02).
 
 ## Contact Methods
 
