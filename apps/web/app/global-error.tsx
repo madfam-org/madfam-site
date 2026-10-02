@@ -1,6 +1,5 @@
 'use client';
 
-import * as Sentry from '@sentry/nextjs';
 import { useEffect } from 'react';
 
 export default function GlobalError({
@@ -11,9 +10,8 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    if (Sentry.isInitialized()) {
-      Sentry.captureException(error);
-    }
+    // No error reporter is wired (Sentry removed, ruling PL-2): keep it visible.
+    console.error('Global application error:', error);
   }, [error]);
 
   return (
