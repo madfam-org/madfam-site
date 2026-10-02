@@ -1,4 +1,5 @@
 {
+  "_boundary": "Boundary checkpoint (2026-10-01, madfam-site): synthetic pnpm audit fixture; no real package, host or credential. Policy: internal-devops/docs/repo-boundary-contract.md",
   "actions": [],
   "advisories": {
     "1000002": {
