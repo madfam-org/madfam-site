@@ -1,106 +1,95 @@
 import { NextResponse } from 'next/server';
 
-export const runtime = 'edge';
+// Readiness + informational health (finding S1-008).
+//
+// - The HTTP status is always 200 while the process can answer: madfam.io
+//   renders its pages without any of the services listed below, so their
+//   state must not take pods out of rotation (or, as a liveness target,
+//   restart them). Liveness/startup use /api/health/live.
+// - A service whose URL is not configured is reported as `unknown`, never as
+//   `ok`: the previous handler claimed every unset service was healthy.
+// - A configured service is probed with a short budget (below the readiness
+//   probe's 3 s timeout) and its result is informational only.
+// - No fabricated `version`/`uptime`: the deployed commit is served by
+//   /api/version.
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-interface ServiceHealth {
-  status: 'ok' | 'degraded' | 'error';
+const DOWNSTREAM_TIMEOUT_MS = 1500;
+
+type ServiceStatus = 'ok' | 'degraded' | 'error' | 'unknown';
+
+export interface ServiceHealth {
+  status: ServiceStatus;
+  configured: boolean;
   responseTime?: number;
-  lastChecked: string;
   error?: string;
 }
 
-interface HealthResponse {
-  status: 'ok' | 'degraded' | 'error';
+export interface HealthResponse {
+  status: 'ok';
   timestamp: string;
-  version: string;
   environment: string;
-  uptime: number;
+  dependencies: ServiceStatus;
   services: {
     janua: ServiceHealth;
-    forgesight: ServiceHealth;
     cotiza: ServiceHealth;
   };
 }
 
-async function checkServiceHealth(_name: string, url: string | undefined): Promise<ServiceHealth> {
+async function checkService(url: string | undefined): Promise<ServiceHealth> {
   if (!url) {
-    return {
-      status: 'ok',
-      lastChecked: new Date().toISOString(),
-    };
+    return { status: 'unknown', configured: false };
   }
 
   const start = Date.now();
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), DOWNSTREAM_TIMEOUT_MS);
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
-
     const response = await fetch(`${url}/health`, {
       signal: controller.signal,
       cache: 'no-store',
     });
-
-    clearTimeout(timeoutId);
-    const responseTime = Date.now() - start;
-
     return {
       status: response.ok ? 'ok' : 'degraded',
-      responseTime,
-      lastChecked: new Date().toISOString(),
+      configured: true,
+      responseTime: Date.now() - start,
     };
   } catch (error) {
     return {
       status: 'error',
+      configured: true,
       responseTime: Date.now() - start,
-      lastChecked: new Date().toISOString(),
       error: error instanceof Error ? error.message : 'Unknown error',
     };
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
-export async function GET() {
-  const startTime = Date.now();
+function rollUp(statuses: ServiceStatus[]): ServiceStatus {
+  const known = statuses.filter(s => s !== 'unknown');
+  if (known.length === 0) return 'unknown';
+  if (known.every(s => s === 'ok')) return 'ok';
+  return 'degraded';
+}
 
-  // Check ecosystem services in parallel
-  const [januaHealth, forgesightHealth, cotizaHealth] = await Promise.all([
-    checkServiceHealth('janua', process.env.JANUA_API_URL),
-    checkServiceHealth('forgesight', process.env.FORGESIGHT_API_URL),
-    checkServiceHealth('cotiza', process.env.COTIZA_API_URL),
+export async function GET() {
+  const [janua, cotiza] = await Promise.all([
+    checkService(process.env.JANUA_API_URL),
+    checkService(process.env.COTIZA_API_URL),
   ]);
 
-  const services = {
-    janua: januaHealth,
-    forgesight: forgesightHealth,
-    cotiza: cotizaHealth,
-  };
-
-  // Determine overall status
-  const serviceStatuses = Object.values(services).map(s => s.status);
-  let overallStatus: 'ok' | 'degraded' | 'error' = 'ok';
-
-  if (serviceStatuses.some(s => s === 'error')) {
-    overallStatus = 'degraded';
-  }
-  if (serviceStatuses.every(s => s === 'error')) {
-    overallStatus = 'error';
-  }
-
-  const healthResponse: HealthResponse = {
-    status: overallStatus,
+  const body: HealthResponse = {
+    status: 'ok',
     timestamp: new Date().toISOString(),
-    version: process.env.npm_package_version ?? '1.0.0',
-    environment: process.env.NODE_ENV ?? 'development',
-    uptime: Date.now() - startTime,
-    services,
+    environment: process.env.NEXT_PUBLIC_ENV || process.env.NODE_ENV || 'development',
+    dependencies: rollUp([janua.status, cotiza.status]),
+    services: { janua, cotiza },
   };
 
-  const statusCode = overallStatus === 'error' ? 503 : 200;
-
-  return NextResponse.json(healthResponse, {
-    status: statusCode,
-    headers: {
-      'Cache-Control': 'no-store, no-cache, must-revalidate',
-    },
+  return NextResponse.json(body, {
+    status: 200,
+    headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' },
   });
 }
