@@ -14,6 +14,8 @@ import {
   Text,
 } from '@react-email/components';
 
+import { ENTITY_LINE, emailLanguage, localizedSiteUrl, logoUrl, siteUrl } from '../brand';
+
 interface ROIResultsEmailProps {
   calculationId: string;
   results: {
@@ -31,65 +33,86 @@ interface ROIResultsEmailProps {
       costReduction: string;
     };
   };
-  language?: 'es-MX' | 'en-US';
+  /** Any language tag (`es`, `es-MX`, `en`, `pt-BR`, …); normalised to es/en/pt. */
+  language?: string;
 }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+const CONTENT = {
+  es: {
+    preview: 'Resultados de tu análisis de ROI — MADFAM',
+    title: 'Resultados de tu análisis de ROI',
+    roiTitle: 'Retorno de inversión:',
+    paybackTitle: 'Tiempo de recuperación:',
+    savingsTitle: 'Ahorro anual estimado:',
+    fiveYearTitle: 'Ahorro a 5 años:',
+    benefitsTitle: 'Beneficios adicionales:',
+    productivityLabel: 'Ganancia de productividad:',
+    hoursLabel: 'Horas recuperadas al mes:',
+    costReductionLabel: 'Reducción de costos:',
+    months: 'meses',
+    cta: 'Escríbenos',
+    footer:
+      'Estos resultados son estimaciones basadas solo en la información que nos diste. Si quieres conversarlos, escríbenos.',
+    signature: 'Equipo MADFAM',
+  },
+  en: {
+    preview: 'Your ROI analysis results — MADFAM',
+    title: 'Your ROI analysis results',
+    roiTitle: 'Return on investment:',
+    paybackTitle: 'Payback period:',
+    savingsTitle: 'Estimated annual savings:',
+    fiveYearTitle: '5-year savings:',
+    benefitsTitle: 'Additional benefits:',
+    productivityLabel: 'Productivity gain:',
+    hoursLabel: 'Hours recovered per month:',
+    costReductionLabel: 'Cost reduction:',
+    months: 'months',
+    cta: 'Write to us',
+    footer:
+      'These results are estimates based only on the information you gave us. If you want to talk them through, write to us.',
+    signature: 'The MADFAM team',
+  },
+  pt: {
+    preview: 'Resultados da sua análise de ROI — MADFAM',
+    title: 'Resultados da sua análise de ROI',
+    roiTitle: 'Retorno sobre o investimento:',
+    paybackTitle: 'Tempo de retorno:',
+    savingsTitle: 'Economia anual estimada:',
+    fiveYearTitle: 'Economia em 5 anos:',
+    benefitsTitle: 'Benefícios adicionais:',
+    productivityLabel: 'Ganho de produtividade:',
+    hoursLabel: 'Horas recuperadas por mês:',
+    costReductionLabel: 'Redução de custos:',
+    months: 'meses',
+    cta: 'Escreva para nós',
+    footer:
+      'Estes resultados são estimativas baseadas apenas nas informações que você nos deu. Se quiser conversar sobre eles, escreva para nós.',
+    signature: 'Equipe MADFAM',
+  },
+} as const;
+
+const NUMBER_LOCALE = { es: 'es-MX', en: 'en-US', pt: 'pt-BR' } as const;
 
 export const ROIResultsEmail: React.FC<ROIResultsEmailProps> = ({
   calculationId,
   results,
-  language = 'es-MX',
+  language,
 }) => {
-  const content = {
-    'es-MX': {
-      preview: 'Resultados de tu análisis de ROI - MADFAM',
-      title: 'Resultados de tu Análisis de ROI',
-      roiTitle: 'Retorno de Inversión:',
-      paybackTitle: 'Tiempo de recuperación:',
-      savingsTitle: 'Ahorro anual estimado:',
-      fiveYearTitle: 'Ahorro a 5 años:',
-      benefitsTitle: 'Beneficios adicionales:',
-      productivityLabel: 'Ganancia de productividad:',
-      hoursLabel: 'Horas recuperadas mensualmente:',
-      costReductionLabel: 'Reducción de costos:',
-      months: 'meses',
-      cta: 'Agendar consulta para implementación',
-      footer:
-        'Estos resultados son estimaciones basadas en la información proporcionada. Nuestro equipo puede ayudarte a desarrollar un plan de implementación detallado.',
-      signature: 'Equipo MADFAM',
-    },
-    'en-US': {
-      preview: 'Your ROI Analysis Results - MADFAM',
-      title: 'Your ROI Analysis Results',
-      roiTitle: 'Return on Investment:',
-      paybackTitle: 'Payback period:',
-      savingsTitle: 'Estimated annual savings:',
-      fiveYearTitle: '5-year savings:',
-      benefitsTitle: 'Additional benefits:',
-      productivityLabel: 'Productivity gain:',
-      hoursLabel: 'Hours recovered monthly:',
-      costReductionLabel: 'Cost reduction:',
-      months: 'months',
-      cta: 'Schedule implementation consultation',
-      footer:
-        'These results are estimates based on the information provided. Our team can help you develop a detailed implementation plan.',
-      signature: 'MADFAM Team',
-    },
-  };
+  const lang = emailLanguage(language);
+  const t = CONTENT[lang];
 
-  const t = content[language];
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat(language === 'es-MX' ? 'es-MX' : 'en-US', {
+  // The calculator's inputs and outputs are MXN amounts. They used to be
+  // formatted as USD on English emails with no conversion (the same defect as
+  // finding M1-021); the currency is MXN in every language.
+  const formatCurrency = (amount: number) =>
+    new Intl.NumberFormat(NUMBER_LOCALE[lang], {
       style: 'currency',
-      currency: language === 'es-MX' ? 'MXN' : 'USD',
+      currency: 'MXN',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
-  };
+
+  const contactUrl = `${localizedSiteUrl(lang, '/contact')}?ref=roi&id=${encodeURIComponent(calculationId)}`;
 
   const getROIColor = (roi: number) => {
     if (roi >= 100) return '#10B981'; // Green
@@ -99,12 +122,12 @@ export const ROIResultsEmail: React.FC<ROIResultsEmailProps> = ({
   };
 
   return (
-    <Html>
+    <Html lang={lang}>
       <Head />
       <Preview>{t.preview}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Img src={`${baseUrl}/logo.png`} width="170" height="50" alt="MADFAM" style={logo} />
+          <Img src={logoUrl()} width="56" height="57" alt="MADFAM" style={logo} />
           <Heading style={h1}>{t.title}</Heading>
 
           <Section style={roiContainer}>
@@ -149,7 +172,7 @@ export const ROIResultsEmail: React.FC<ROIResultsEmailProps> = ({
           </Section>
 
           <Section style={buttonContainer}>
-            <Button style={button} href={`${baseUrl}/contact?ref=roi&id=${calculationId}`}>
+            <Button style={button} href={contactUrl}>
               {t.cta}
             </Button>
           </Section>
@@ -160,9 +183,11 @@ export const ROIResultsEmail: React.FC<ROIResultsEmailProps> = ({
 
           <Hr style={hr} />
           <Text style={footer}>
-            <Link href={`${baseUrl}`} style={link}>
+            <Link href={siteUrl()} style={link}>
               madfam.io
             </Link>
+            <br />
+            {ENTITY_LINE}
           </Text>
         </Container>
       </Body>
