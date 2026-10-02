@@ -377,8 +377,6 @@ Optional (services activate when configured):
 
 ```env
 REDIS_URL=                        # Multi-pod rate limiting & CMS cache
-SENTRY_DSN=                       # Server-side error tracking
-NEXT_PUBLIC_SENTRY_DSN=           # Client-side error tracking
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=     # Plausible analytics
 RESEND_API_KEY=                   # Email sending via Resend
 RESEND_FROM_EMAIL=                # Sender address (default: hello@madfam.io)
