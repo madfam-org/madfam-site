@@ -16,13 +16,7 @@ export type TranslationNamespace =
   | 'careers'
   | 'blog'
   | 'caseStudies'
-  | 'docs'
-  | 'api'
-  | 'guides'
   | 'cookies'
-  | 'assessment'
-  | 'calculator'
-  | 'estimator'
   | 'privacy'
   | 'terms';
 

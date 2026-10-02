@@ -43,7 +43,9 @@ export default async function ContactPage({
               </Card>
             </div>
 
-            {/* Contact Info */}
+            {/* Contact Info. No phone, opening hours or response-time promise:
+                no staffed line exists and no SLA is confirmed (ruling R47,
+                default K2). The mailbox canon is settled separately. */}
             <div className="space-y-8">
               <div>
                 <h3 className="font-heading text-xl mb-4">
@@ -63,21 +65,6 @@ export default async function ContactPage({
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-leaf/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-xl">📱</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">{t('common.metadata.whatsapp')}</p>
-                      <a
-                        href="https://api.whatsapp.com/send?phone=525534106519"
-                        className="text-leaf hover:underline"
-                      >
-                        +52 55 3410 6519
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-sun/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span className="text-xl">📍</span>
                     </div>
@@ -90,35 +77,6 @@ export default async function ContactPage({
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div>
-                <h3 className="font-heading text-xl mb-4">
-                  {t('contact.alternativeContact.businessHours')}
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-obsidian/70">
-                      {t('contact.alternativeContact.weekdays')}
-                    </span>
-                    <span className="font-medium">9:00 - 18:00 CST</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-obsidian/70">
-                      {t('contact.alternativeContact.saturday')}
-                    </span>
-                    <span className="font-medium">10:00 - 14:00 CST</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-obsidian/70">
-                      {t('contact.alternativeContact.sunday')}
-                    </span>
-                    <span className="font-medium">{t('contact.alternativeContact.closed')}</span>
-                  </div>
-                </div>
-                <p className="text-sm text-obsidian/60 mt-4">
-                  {t('contact.alternativeContact.responseTime')}
-                </p>
               </div>
 
               <div className="bg-gradient-to-br from-lavender/10 to-sun/10 rounded-xl p-6">
