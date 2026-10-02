@@ -30,7 +30,7 @@
       "tagline": "Várias ferramentas curadas para um trabalho completo.",
       "oneLine": "Quando você tem um fluxo de trabalho inteiro, não uma única tarefa.",
       "grants": "Um conjunto de plataformas que já trabalham juntas, contratadas de uma vez.",
-      "valueVs": "Frente a uma suíte genérica: só as peças que o seu fluxo precisa, integradas e a um preço menor que a soma das partes.",
+      "valueVs": "Frente a uma suíte genérica: só as peças que o seu fluxo precisa, integradas.",
       "priceNote": ""
     },
     "erp": {
@@ -38,7 +38,7 @@
       "tagline": "Seus serviços atrás de uma porta, marca e fatura.",
       "oneLine": "Quando você já usa várias ferramentas e quer unificá-las sob a sua marca.",
       "grants": "Todos os seus serviços contratados atrás de uma porta, uma identidade e uma fatura, com a sua marca.",
-      "valueVs": "Frente a Zoho ou Odoo: substitui o console de administração pelo melhor da categoria, nativo do fisco mexicano e abaixo do titular.",
+      "valueVs": "Frente a Zoho ou Odoo: substitui o console de administração pelo melhor da categoria, nativo do fisco mexicano.",
       "priceNote": ""
     },
     "vcto": {
@@ -117,7 +117,7 @@
         "description": "Seus dados e acessos são seus. Exporte e desça um degrau sem perder nada."
       },
       "vctoInBox": {
-        "title": "vCTO incluído",
+        "title": "vCTO disponível",
         "description": "Quando quiser, um CTO fracionado opera tudo por você. O degrau mais alto está sempre disponível."
       },
       "bestOfBreed": {
