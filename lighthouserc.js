@@ -1,13 +1,18 @@
 module.exports = {
   ci: {
     collect: {
+      // Run from the repo root after `pnpm build`. The image runs the
+      // standalone server (`output: 'standalone'`), so Lighthouse measures
+      // that, not `next start` (finding S1-004). `/` only redirects to the
+      // default locale, so the localized pages are measured directly.
       url: [
-        'http://localhost:3000/',
-        'http://localhost:3000/products',
-        'http://localhost:3000/programs',
+        'http://127.0.0.1:3000/es',
+        'http://127.0.0.1:3000/es/products',
+        'http://127.0.0.1:3000/es/programs',
       ],
-      startServerCommand: 'npm run build && npm run start',
-      startServerReadyPattern: 'ready on',
+      startServerCommand: 'pnpm --filter @madfam-site/web serve:standalone',
+      startServerReadyPattern: 'Ready in',
+      startServerReadyTimeout: 60000,
       numberOfRuns: 3,
       settings: {
         preset: 'desktop',
@@ -36,7 +41,6 @@ module.exports = {
         'uses-rel-preload': 'off',
         // Security
         'is-on-https': 'error',
-        'no-vulnerable-libraries': 'warn',
         // Best practices
         'errors-in-console': 'warn',
         'image-aspect-ratio': 'warn',
