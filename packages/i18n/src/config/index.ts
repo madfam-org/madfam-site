@@ -36,9 +36,7 @@ export const i18nConfig = {
       // PRESERVE: Existing routes
       '/assessment': '/evaluacion',
       '/calculator': '/calculadora',
-      '/blog': '/blog',
       '/careers': '/carreras',
-      '/case-studies': '/casos-de-estudio',
       '/docs': '/documentacion',
       '/privacy': '/privacidad',
       '/terms': '/terminos',
@@ -56,7 +54,6 @@ export const i18nConfig = {
       '/about': '/sobre',
       '/contact': '/contato',
       '/careers': '/carreiras',
-      '/case-studies': '/casos-de-sucesso',
       '/docs': '/documentacao',
       '/guides': '/guias',
       '/assessment': '/avaliacao',
