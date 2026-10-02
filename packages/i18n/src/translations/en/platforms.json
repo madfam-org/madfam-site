@@ -6,8 +6,8 @@
     },
     "heroTitle": "Open Platforms for Everyone",
     "heroSubtitle": "An integrated platform ecosystem covering infrastructure, intelligence, standards, and applications — with access models matched to each product.",
-    "ctaTitle": "One membership, coordinated access",
-    "ctaSubtitle": "The ecosystem membership will unlock eligible platform capabilities, Maker Node benefits (coming soon) and priority support. Waitlist open.",
+    "ctaTitle": "Ecosystem waitlist",
+    "ctaSubtitle": "The ecosystem membership is not available yet; join the waitlist and we'll let you know when it opens.",
     "ctaButton": "Join the waitlist"
   },
   "shared": {
@@ -25,12 +25,9 @@
     "exploreEcosystem": "Explore Ecosystem",
     "viewAllPlatforms": "View All Platforms",
     "startFree": "Start Free",
-    "getEarlyAccess": "Get Early Access",
     "visitPlatform": "Go to the platform",
     "contactUs": "Contact Us",
     "status": {
-      "production": "Live",
-      "productionBeta": "Early Access",
       "comingSoon": "Coming Soon",
       "inDevelopment": "In Development"
     },
@@ -65,6 +62,12 @@
       "selfServe": "Self-serve",
       "platform": "Platform service",
       "ecosystem": "Ecosystem service"
+    },
+    "lifecycle": {
+      "live": "In production",
+      "degraded": "Available — degraded service",
+      "beta": "Beta",
+      "incubating": "Coming soon"
     }
   },
   "enclii": {
@@ -81,7 +84,7 @@
       "5": "Multi-tenant isolation"
     },
     "cta": {
-      "primary": "Get Early Access",
+      "primary": "Go to the platform",
       "secondary": "View on GitHub"
     },
     "connections": {
@@ -100,14 +103,11 @@
       }
     },
     "techSpecs": {
-      "apis": "12 REST + 3 gRPC endpoints",
+      "apis": "REST and gRPC APIs",
       "protocols": "HTTPS, gRPC, WebSocket",
       "sdks": "CLI, Node.js, Go"
     },
-    "metrics": {
-      "uptime": "99.95% SLA",
-      "deploys": "< 90s deploy time"
-    }
+    "metrics": {}
   },
   "janua": {
     "tagline": "Self-Hosted Identity Platform",
@@ -148,8 +148,7 @@
     },
     "metrics": {
       "users": "Unlimited",
-      "protocols": "4 auth standards",
-      "latency": "< 50ms auth"
+      "protocols": "4 auth standards"
     }
   },
   "forgeSight": {
@@ -166,7 +165,7 @@
       "5": "API access for integration"
     },
     "cta": {
-      "primary": "Get Early Access",
+      "primary": "Go to the platform",
       "secondary": "Request Demo"
     },
     "connections": {
@@ -186,13 +185,12 @@
       }
     },
     "techSpecs": {
-      "apis": "REST API with 15 endpoints",
+      "apis": "REST API",
       "protocols": "HTTPS, WebSocket (live pricing)",
       "sdks": "JavaScript, Python"
     },
     "metrics": {
       "vendors": "1,000+ vendors",
-      "materials": "200+ materials",
       "updates": "Real-time pricing"
     }
   },
@@ -228,7 +226,6 @@
       }
     },
     "metrics": {
-      "currencies": "15+ LATAM currencies",
       "esg": "ESG tracking built-in",
       "mobile": "Mobile-first"
     }
@@ -246,7 +243,7 @@
       "4": "Compliance checklists by industry"
     },
     "cta": {
-      "primary": "Get Early Access",
+      "primary": "Go to the platform",
       "secondary": "Request Demo"
     },
     "connections": {
@@ -260,7 +257,6 @@
     },
     "metrics": {
       "laws": "Mexican laws indexed",
-      "formats": "3 export formats",
       "search": "AI-powered search"
     }
   },
@@ -342,7 +338,6 @@
     },
     "metrics": {
       "speed": "Instant quotes",
-      "processes": "3+ fabrication processes",
       "pricing": "Real-time market data"
     }
   },
@@ -360,7 +355,7 @@
       "5": "Integration with Yantra4D and Cotiza"
     },
     "cta": {
-      "primary": "Get Early Access",
+      "primary": "Go to the platform",
       "secondary": "Request Demo"
     },
     "connections": {
@@ -368,12 +363,11 @@
       "tezca": "Compliance rules applied to manufacturing workflows"
     },
     "techSpecs": {
-      "apis": "REST API with 20+ endpoints",
+      "apis": "REST API",
       "protocols": "OPC-UA, MQTT, REST, WebSocket",
       "sdks": "JavaScript, Python"
     },
     "metrics": {
-      "protocols": "4 machine protocols",
       "monitoring": "Real-time dashboard",
       "machines": "Unlimited connections"
     }
@@ -442,11 +436,11 @@
   },
   "selva": {
     "tagline": "Autonomous Agent Platform",
-    "valueProp": "Self-hosted multi-agent platform with 236 tools and an A2A protocol — runs back-office workflows without per-seat SaaS sprawl.",
+    "valueProp": "Self-hosted multi-agent platform with 240+ tools and an A2A protocol — runs back-office workflows without per-seat SaaS sprawl.",
     "problem": "Agent platforms are either toy chatbots or per-seat SaaS that lock data behind a vendor. Operators who need agents that touch real systems are underserved.",
-    "solution": "Selva is a self-hosted agent platform with 236 tools, an agent-to-agent protocol, role-based permissions, and an audit-ready event ledger.",
+    "solution": "Selva is a self-hosted agent platform with first-party tools, an agent-to-agent protocol, role-based permissions, and an audit-ready event ledger.",
     "features": {
-      "0": "236 first-party tools",
+      "0": "First-party tools",
       "1": "Agent-to-agent (A2A) protocol",
       "2": "Tiered permission modes",
       "3": "Audit-ready event ledger",

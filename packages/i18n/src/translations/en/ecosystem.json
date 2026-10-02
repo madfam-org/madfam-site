@@ -23,27 +23,21 @@
     "ecosystemAccess": "Ecosystem access"
   },
   "pricing": {
-    "title": "One membership, coordinated access",
-    "subtitle": "The ecosystem membership will unlock eligible capabilities across the platforms, Maker Node order benefits (coming soon) and coordinated support — one account, one relationship.",
-    "membershipTitle": "Ecosystem Membership",
-    "features": {
-      "0": "Eligible capabilities per platform",
-      "1": "Physical fabrication benefits — coming soon",
-      "2": "Priority support",
-      "3": "Member community"
-    },
+    "title": "Ecosystem waitlist",
+    "subtitle": "The ecosystem membership is not available yet; join the waitlist and we'll let you know when it opens.",
+    "membershipTitle": "Ecosystem waitlist",
     "cta": "Join the waitlist",
     "waitlistNote": "No card needed. We will let you know when it opens."
   },
   "makerNode": {
     "title": "Primavera Maker Node",
     "badge": "Physical Fabrication",
-    "subtitle": "From digital design to physical reality — ecosystem members get discounted fabrication.",
+    "subtitle": "From digital design to physical reality — special discounts coming soon.",
     "description": "3D printing, CNC machining, and laser cutting — integrated with Yantra4D for design and Cotiza for quoting.",
-    "description2": "Special discounts and benefits for ecosystem members are coming soon.",
-    "discount": "Special discounts coming soon for members",
-    "discountCalloutLabel": "Ecosystem member discount",
-    "discountHeadline": "Ecosystem Member Benefit",
+    "description2": "Special discounts and benefits, coming soon.",
+    "discount": "Special discounts coming soon",
+    "discountCalloutLabel": "Special discounts coming soon",
+    "discountHeadline": "Coming soon",
     "discountBody": "Special discounts and benefits on physical fabrication orders — 3D printing, CNC machining, and laser cutting — coming soon.",
     "cta": "Explore Maker Node",
     "servicesLabel": "Available services",
@@ -85,8 +79,8 @@
         "answer": "Janua provides identity; Enclii, deployment; Dhanam takes payments for the others; Selva coordinates the agents. On that base the applications hand work to each other: a Yantra4D design is quoted in Cotiza, compared in Forgesight, charged in Dhanam, made with Pravara and invoiced with Karafiel."
       },
       "q4": {
-        "question": "How does the Maker Node discount work?",
-        "answer": "Ecosystem Members will receive special discounts and benefits on physical fabrication orders through Primavera Maker Node — 3D printing, CNC machining, and laser cutting. Details coming soon."
+        "question": "Will there be Maker Node discounts?",
+        "answer": "Coming soon. Once special discounts and benefits on physical fabrication orders — 3D printing, CNC machining and laser cutting — are defined, we will publish them here."
       }
     }
   },
@@ -118,13 +112,13 @@
       },
       "membership": {
         "title": "Join the Ecosystem",
-        "description": "Eligible capabilities, coordinated support and Maker Node benefits (coming soon). Waitlist open.",
+        "description": "The ecosystem membership is not available yet; join the waitlist and we'll let you know when it opens.",
         "cta": "Join the waitlist"
       }
     },
     "platformShowcase": {
       "title": "Open Platforms for Creators",
-      "subtitle": "Access varies by platform. Ecosystem Members unlock eligible capabilities and coordinated support."
+      "subtitle": "Access varies by platform."
     },
     "makerHighlight": {
       "title": "Primavera Maker Node",
@@ -132,14 +126,10 @@
       "description": "3D printing, CNC machining, and laser cutting — integrated with Yantra4D for design and Cotiza for quoting.",
       "memberDiscount": "Special discounts and benefits coming soon"
     },
-    "metrics": {
-      "vendors": "vendors tracked",
-      "designs": "open-source designs"
-    },
     "membershipValue": {
-      "title": "One membership, coordinated access",
-      "subtitle": "Eligible capabilities per platform, priority support and Maker Node benefits (coming soon). Waitlist open; no price is published until it is ratified.",
-      "cta": "Learn About Membership"
+      "title": "Ecosystem waitlist",
+      "subtitle": "The ecosystem membership is not available yet; join the waitlist and we'll let you know when it opens.",
+      "cta": "Join the waitlist"
     },
     "finalCta": {
       "title": "Ready to build something that matters?",
@@ -220,7 +210,7 @@
     "ecosystem": {
       "title": "Part of the MADFAM Ecosystem",
       "subtitle": "Maker Node connects seamlessly with every MADFAM platform.",
-      "memberBenefit": "Special discounts and benefits for members — coming soon"
+      "memberBenefit": "Special discounts and benefits — coming soon"
     },
     "cta": {
       "title": "Ready to Make It Real?",
@@ -258,13 +248,10 @@
     },
     "ecosystem": {
       "eyebrow": "Join the ecosystem",
-      "title": "Coordinate eligible platform access, support, and maker-node advantages.",
-      "description": "Membership is for people and organizations that benefit from MADFAM as an integrated operating environment.",
+      "title": "Ecosystem waitlist",
+      "description": "The ecosystem membership is not available yet; join the waitlist and we'll let you know when it opens.",
       "recommendedFor": "Makers, entrepreneurs, studios, and teams building across multiple MADFAM surfaces.",
-      "proof1": "Coordinated access",
-      "proof2": "Priority support",
-      "proof3": "Fabrication advantages",
-      "cta": "Explore membership"
+      "cta": "Join the waitlist"
     },
     "partner": {
       "eyebrow": "Partner or invest",

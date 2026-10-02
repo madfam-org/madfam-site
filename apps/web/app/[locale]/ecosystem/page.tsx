@@ -13,25 +13,11 @@ export async function generateMetadata({
   const { locale } = await params;
   const validLocale = (['es', 'en', 'pt'].includes(locale) ? locale : 'es') as 'es' | 'en' | 'pt';
 
-  const content = {
-    es: {
-      title: 'Ecosistema MADFAM | Una Membresía. Acceso Coordinado.',
-      description:
-        'Únete al Ecosistema MADFAM — desbloquea capacidades elegibles de la plataforma, soporte coordinado y ventajas del maker node.',
-    },
-    en: {
-      title: 'MADFAM Ecosystem | One Membership. Coordinated Access.',
-      description:
-        'Join the MADFAM Ecosystem — unlock eligible platform capabilities, coordinated support, and maker-node advantages.',
-    },
-    pt: {
-      title: 'Ecossistema MADFAM | Uma Assinatura. Acesso Coordenado.',
-      description:
-        'Junte-se ao Ecossistema MADFAM — desbloqueie capacidades elegíveis da plataforma, suporte coordenado e vantagens do maker node.',
-    },
-  };
-
-  const t = content[validLocale];
+  // The deck-approved `ecosystem.meta.*` keys (R14), not a hand-typed
+  // membership slogan: R29/MH-10 allow the membership no title, no meta and
+  // no benefits beyond one waitlist sentence (findings L1-006 / M1-008).
+  const meta = await getTranslations({ locale: validLocale, namespace: 'ecosystem.meta' });
+  const t = { title: meta('title'), description: meta('description') };
 
   return seoService.generateMetadata({
     title: t.title,
@@ -39,13 +25,7 @@ export async function generateMetadata({
     type: 'website',
     locale: validLocale,
     url: '/ecosystem',
-    keywords: [
-      'MADFAM ecosystem',
-      'platform membership',
-      'maker node',
-      'digital platforms',
-      'LATAM',
-    ],
+    keywords: ['MADFAM ecosystem', 'maker node', 'digital platforms', 'LATAM'],
   });
 }
 
