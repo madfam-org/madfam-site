@@ -6,8 +6,8 @@
     },
     "heroTitle": "Plataformas Abiertas para Todos",
     "heroSubtitle": "Un ecosistema integrado de plataformas que cubre infraestructura, inteligencia, estándares y aplicaciones — con modelos de acceso adecuados para cada producto.",
-    "ctaTitle": "Una membresía, acceso coordinado",
-    "ctaSubtitle": "La membresía del ecosistema desbloqueará capacidades elegibles, beneficios del Maker Node (próximamente) y soporte prioritario. Lista de espera abierta.",
+    "ctaTitle": "Lista de espera del ecosistema",
+    "ctaSubtitle": "La membresía del ecosistema aún no está disponible; únete a la lista de espera y te avisamos cuando abra.",
     "ctaButton": "Unirme a la lista de espera"
   },
   "shared": {
@@ -25,12 +25,9 @@
     "exploreEcosystem": "Explorar Ecosistema",
     "viewAllPlatforms": "Ver Todas las Plataformas",
     "startFree": "Comenzar Gratis",
-    "getEarlyAccess": "Obtener Acceso Anticipado",
     "visitPlatform": "Ir a la plataforma",
     "contactUs": "Contáctanos",
     "status": {
-      "production": "Disponible",
-      "productionBeta": "Acceso Anticipado",
       "comingSoon": "Próximamente",
       "inDevelopment": "En Desarrollo"
     },
@@ -65,6 +62,12 @@
       "selfServe": "Self-service",
       "platform": "Servicio de plataforma",
       "ecosystem": "Servicio del ecosistema"
+    },
+    "lifecycle": {
+      "live": "En producción",
+      "degraded": "Disponible — servicio degradado",
+      "beta": "Beta",
+      "incubating": "Próximamente"
     }
   },
   "enclii": {
@@ -81,7 +84,7 @@
       "5": "Aislamiento multi-tenant"
     },
     "cta": {
-      "primary": "Obtener Acceso Anticipado",
+      "primary": "Ir a la plataforma",
       "secondary": "Ver en GitHub"
     },
     "connections": {
@@ -100,14 +103,11 @@
       }
     },
     "techSpecs": {
-      "apis": "12 REST + 3 endpoints gRPC",
+      "apis": "API REST y gRPC",
       "protocols": "HTTPS, gRPC, WebSocket",
       "sdks": "CLI, Node.js, Go"
     },
-    "metrics": {
-      "uptime": "99.95% SLA",
-      "deploys": "< 90s tiempo de deploy"
-    }
+    "metrics": {}
   },
   "janua": {
     "tagline": "Plataforma de Identidad Auto-Hospedada",
@@ -148,8 +148,7 @@
     },
     "metrics": {
       "users": "Ilimitados",
-      "protocols": "4 estándares de auth",
-      "latency": "< 50ms autenticación"
+      "protocols": "4 estándares de auth"
     }
   },
   "forgeSight": {
@@ -166,7 +165,7 @@
       "5": "Acceso API para integración"
     },
     "cta": {
-      "primary": "Obtener Acceso Anticipado",
+      "primary": "Ir a la plataforma",
       "secondary": "Solicitar Demo"
     },
     "connections": {
@@ -186,13 +185,12 @@
       }
     },
     "techSpecs": {
-      "apis": "API REST con 15 endpoints",
+      "apis": "API REST",
       "protocols": "HTTPS, WebSocket (precios en vivo)",
       "sdks": "JavaScript, Python"
     },
     "metrics": {
       "vendors": "1,000+ proveedores",
-      "materials": "200+ materiales",
       "updates": "Precios en tiempo real"
     }
   },
@@ -228,7 +226,6 @@
       }
     },
     "metrics": {
-      "currencies": "15+ monedas LATAM",
       "esg": "Seguimiento ESG integrado",
       "mobile": "Mobile-first"
     }
@@ -246,7 +243,7 @@
       "4": "Listas de cumplimiento por industria"
     },
     "cta": {
-      "primary": "Obtener Acceso Anticipado",
+      "primary": "Ir a la plataforma",
       "secondary": "Solicitar Demo"
     },
     "connections": {
@@ -260,7 +257,6 @@
     },
     "metrics": {
       "laws": "Leyes mexicanas indexadas",
-      "formats": "3 formatos de exportación",
       "search": "Búsqueda con IA"
     }
   },
@@ -342,7 +338,6 @@
     },
     "metrics": {
       "speed": "Cotizaciones instantáneas",
-      "processes": "3+ procesos de fabricación",
       "pricing": "Datos de mercado en tiempo real"
     }
   },
@@ -360,7 +355,7 @@
       "5": "Integración con Yantra4D y Cotiza"
     },
     "cta": {
-      "primary": "Obtener Acceso Anticipado",
+      "primary": "Ir a la plataforma",
       "secondary": "Solicitar Demo"
     },
     "connections": {
@@ -368,12 +363,11 @@
       "tezca": "Reglas de cumplimiento aplicadas a flujos de manufactura"
     },
     "techSpecs": {
-      "apis": "API REST con 20+ endpoints",
+      "apis": "API REST",
       "protocols": "OPC-UA, MQTT, REST, WebSocket",
       "sdks": "JavaScript, Python"
     },
     "metrics": {
-      "protocols": "4 protocolos de máquinas",
       "monitoring": "Dashboard en tiempo real",
       "machines": "Conexiones ilimitadas"
     }
@@ -442,11 +436,11 @@
   },
   "selva": {
     "tagline": "Plataforma de agentes autónomos",
-    "valueProp": "Plataforma multi-agente self-hosted con 236 herramientas y protocolo A2A — ejecuta flujos de back-office sin suscripciones SaaS por usuario.",
+    "valueProp": "Plataforma multi-agente self-hosted con 240+ herramientas y protocolo A2A — ejecuta flujos de back-office sin suscripciones SaaS por usuario.",
     "problem": "Las plataformas de agentes son juguetes conversacionales o SaaS por usuario que encierran los datos en el proveedor. Los operadores que necesitan agentes que toquen sistemas reales quedan desatendidos.",
-    "solution": "Selva es una plataforma de agentes self-hosted con 236 herramientas, protocolo agente-a-agente, permisos por rol y bitácora auditable.",
+    "solution": "Selva es una plataforma de agentes self-hosted con herramientas propias, protocolo agente-a-agente, permisos por rol y bitácora auditable.",
     "features": {
-      "0": "236 herramientas de primera mano",
+      "0": "Herramientas de primera mano",
       "1": "Protocolo agente-a-agente (A2A)",
       "2": "Modos de permisos por niveles",
       "3": "Bitácora auditable de eventos",

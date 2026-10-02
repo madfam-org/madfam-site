@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
-import type { Platform } from '@/lib/data/platforms';
+import { primaryCtaLabelKey, type Platform } from '@/lib/data/platforms';
 import { Newsletter } from '@/components/ui/Newsletter';
 import { cn } from '@/components/ui/utils';
 
@@ -108,7 +108,7 @@ export function PlatformCTA({ platform, i18nKey, locale, comingSoon }: PlatformC
                     'focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-obsidian'
                   )}
                 >
-                  {t(platform.primaryCTA.labelKey)}
+                  {t(primaryCtaLabelKey(platform))}
                   <svg
                     className="ml-2 h-4 w-4"
                     fill="none"
@@ -134,7 +134,7 @@ export function PlatformCTA({ platform, i18nKey, locale, comingSoon }: PlatformC
                     'focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-obsidian'
                   )}
                 >
-                  {t(platform.primaryCTA.labelKey)}
+                  {t(primaryCtaLabelKey(platform))}
                 </Link>
               )}
             </div>
