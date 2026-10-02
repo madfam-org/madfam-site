@@ -114,48 +114,6 @@ function getStaticContent(locale: Locale): Omit<SearchResult, 'score'>[] {
       type: 'page',
       url: `/${l}/${l === 'es' ? 'contacto' : l === 'pt' ? 'contato' : 'contact'}`,
     },
-    {
-      id: 'assessment',
-      title: l === 'en' ? 'AI Assessment' : l === 'pt' ? 'Avaliação de IA' : 'Evaluación de IA',
-      description:
-        l === 'en'
-          ? 'Discover the AI potential for your business'
-          : l === 'pt'
-            ? 'Descubra o potencial de IA para seu negócio'
-            : 'Descubre el potencial de IA para tu negocio',
-      type: 'page',
-      url: `/${l}/${l === 'es' ? 'evaluacion' : l === 'pt' ? 'avaliacao' : 'assessment'}`,
-    },
-    {
-      id: 'calculator',
-      title:
-        l === 'en' ? 'ROI Calculator' : l === 'pt' ? 'Calculadora de ROI' : 'Calculadora de ROI',
-      description:
-        l === 'en'
-          ? 'Calculate the return on investment of our services'
-          : l === 'pt'
-            ? 'Calcule o retorno do investimento de nossos serviços'
-            : 'Calcula el retorno de inversión de nuestros servicios',
-      type: 'page',
-      url: `/${l}/${l === 'es' ? 'calculadora' : l === 'pt' ? 'calculadora' : 'calculator'}`,
-    },
-    {
-      id: 'estimator',
-      title:
-        l === 'en'
-          ? 'Project Estimator'
-          : l === 'pt'
-            ? 'Estimador de Projetos'
-            : 'Estimador de Proyectos',
-      description:
-        l === 'en'
-          ? 'Get an instant quote for your project'
-          : l === 'pt'
-            ? 'Obtenha uma cotação instantânea para seu projeto'
-            : 'Obtén una cotización instantánea para tu proyecto',
-      type: 'page',
-      url: `/${l}/${l === 'es' ? 'estimador' : l === 'pt' ? 'estimador' : 'estimator'}`,
-    },
   ];
 }
 

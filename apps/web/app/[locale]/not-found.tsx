@@ -62,12 +62,6 @@ export default function NotFound() {
                 >
                   Contact
                 </Link>
-                <Link
-                  href="/assessment"
-                  className="text-blue-600 hover:text-blue-800 transition-colors"
-                >
-                  AI Assessment
-                </Link>
               </div>
             </div>
           </div>
