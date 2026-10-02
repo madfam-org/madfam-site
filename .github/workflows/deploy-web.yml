@@ -66,8 +66,14 @@ jobs:
           push: true
           # NEXT_PUBLIC_* are inlined by Next at build time, so analytics config
           # has to arrive here, not in the runtime Secret.
+          #
+          # NEXT_PUBLIC_PLAUSIBLE_DOMAIN is deliberately NOT passed (S1-017,
+          # C-026): plausible.madfam.io does not resolve yet (operator item
+          # O49), so the tag only produced failing requests. With the domain
+          # unset the layout renders no Plausible script and the CSP drops the
+          # origin. Re-add `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io` here once
+          # O49 is done; the code path is unchanged.
           build-args: |
-            NEXT_PUBLIC_PLAUSIBLE_DOMAIN=${{ vars.PLAUSIBLE_DOMAIN || 'madfam.io' }}
             NEXT_PUBLIC_PLAUSIBLE_HOST=${{ vars.PLAUSIBLE_HOST || 'https://plausible.madfam.io' }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
