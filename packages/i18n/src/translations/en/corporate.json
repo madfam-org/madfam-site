@@ -288,7 +288,7 @@
     "subtitle": "What you get when you bring us in — across self-serve products and white-glove engagements.",
     "sovereign": {
       "title": "Sovereign infrastructure",
-      "description": "Our products run on bare-metal Kubernetes that we operate ourselves. No vendor lock-in and full data residency. {agpl} of the {total} catalog platforms publish their code under AGPL-3.0; each page states its licence."
+      "description": "Our products run on bare-metal Kubernetes that we operate ourselves, with no vendor lock-in. Data hosted on infrastructure we operate. {agpl} of the {total} catalog platforms publish their code under AGPL-3.0; each page states its licence."
     },
     "fullStack": {
       "title": "Full-stack ecosystem",

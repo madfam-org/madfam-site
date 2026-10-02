@@ -23,27 +23,21 @@
     "ecosystemAccess": "Acesso de ecossistema"
   },
   "pricing": {
-    "title": "Uma assinatura, acesso coordenado",
-    "subtitle": "A assinatura do ecossistema vai liberar capacidades elegíveis nas plataformas, benefícios em pedidos do Maker Node (em breve) e suporte coordenado — uma só conta, uma só relação.",
-    "membershipTitle": "Assinatura do Ecossistema",
-    "features": {
-      "0": "Capacidades elegíveis por plataforma",
-      "1": "Benefícios em fabricação física — em breve",
-      "2": "Suporte prioritário",
-      "3": "Comunidade de membros"
-    },
+    "title": "Lista de espera do ecossistema",
+    "subtitle": "A associação ao ecossistema ainda não está disponível; entre na lista de espera e avisamos quando abrir.",
+    "membershipTitle": "Lista de espera do ecossistema",
     "cta": "Entrar na lista de espera",
     "waitlistNote": "Sem cartão. Avisamos quando abrir."
   },
   "makerNode": {
     "title": "Primavera Maker Node",
     "badge": "Fabricação Física",
-    "subtitle": "Do design digital à realidade física — membros recebem fabricação com desconto.",
+    "subtitle": "Do design digital à realidade física — descontos especiais em breve.",
     "description": "Impressão 3D, usinagem CNC e corte a laser — integrado com Yantra4D para design e Cotiza para cotação.",
-    "description2": "Descontos e benefícios especiais para membros do ecossistema, em breve.",
-    "discount": "Descontos especiais em breve para membros",
-    "discountCalloutLabel": "Desconto para membros do ecossistema",
-    "discountHeadline": "Benefício de Membro",
+    "description2": "Descontos e benefícios especiais, em breve.",
+    "discount": "Descontos especiais em breve",
+    "discountCalloutLabel": "Descontos especiais em breve",
+    "discountHeadline": "Em breve",
     "discountBody": "Descontos e benefícios especiais em pedidos de fabricação física — impressão 3D, usinagem CNC e corte a laser — em breve.",
     "cta": "Explorar Maker Node",
     "servicesLabel": "Serviços disponíveis",
@@ -73,26 +67,26 @@
     "contactLink": "Entre em contato",
     "items": {
       "q1": {
-        "question": "A assinatura do ecossistema já está disponível?",
+        "question": "A associação ao ecossistema já está disponível?",
         "answer": "Ainda não. Entre na lista de espera e avisamos quando abrir. Não publicamos preço nem benefícios definitivos até que sejam ratificados."
       },
       "q2": {
         "question": "Existe teste gratuito?",
-        "answer": "Depende de cada plataforma: a página dela indica se oferece plano gratuito ou teste. Você pode começar hoje com uma plataforma, sem esperar pela assinatura."
+        "answer": "Depende de cada plataforma: a página dela indica se oferece plano gratuito ou teste. Você pode começar hoje com uma plataforma, sem esperar pela associação."
       },
       "q3": {
         "question": "Como as plataformas se conectam?",
         "answer": "Janua fornece a identidade; Enclii, a implantação; Dhanam recebe os pagamentos das demais; Selva coordena os agentes. Sobre essa base, as aplicações passam trabalho entre si: um design do Yantra4D é cotado no Cotiza, comparado no Forgesight, cobrado no Dhanam, fabricado com o Pravara e faturado com o Karafiel."
       },
       "q4": {
-        "question": "Como funciona o desconto no Maker Node?",
-        "answer": "Os Membros do Ecossistema receberão descontos e benefícios especiais nos pedidos de fabricação física através do Primavera Maker Node — impressão 3D, usinagem CNC e corte a laser. Detalhes em breve."
+        "question": "Haverá descontos no Maker Node?",
+        "answer": "Em breve. Quando os descontos e benefícios especiais em pedidos de fabricação física — impressão 3D, usinagem CNC e corte a laser — estiverem definidos, vamos publicá-los aqui."
       }
     }
   },
   "cta": {
     "title": "Pronto para construir algo que importa?",
-    "subtitle": "Comece hoje com uma plataforma ou entre na lista de espera da assinatura.",
+    "subtitle": "Comece hoje com uma plataforma ou entre na lista de espera da associação.",
     "primary": "Junte-se ao Ecossistema",
     "secondary": "Explorar Plataformas",
     "primaryButton": "Junte-se ao Ecossistema",
@@ -118,13 +112,13 @@
       },
       "membership": {
         "title": "Junte-se ao Ecossistema",
-        "description": "Capacidades elegíveis, suporte coordenado e benefícios do Maker Node (em breve). Lista de espera aberta.",
+        "description": "A associação ao ecossistema ainda não está disponível; entre na lista de espera e avisamos quando abrir.",
         "cta": "Entrar na lista de espera"
       }
     },
     "platformShowcase": {
       "title": "Plataformas Abertas para Criadores",
-      "subtitle": "O acesso varia por plataforma. Membros desbloqueiam capacidades elegíveis e suporte coordenado."
+      "subtitle": "O acesso varia por plataforma."
     },
     "makerHighlight": {
       "title": "Primavera Maker Node",
@@ -132,14 +126,10 @@
       "description": "Impressão 3D, usinagem CNC e corte a laser — integrado com Yantra4D e Cotiza.",
       "memberDiscount": "Descontos e benefícios especiais em breve"
     },
-    "metrics": {
-      "vendors": "fornecedores rastreados",
-      "designs": "designs open-source"
-    },
     "membershipValue": {
-      "title": "Uma assinatura, acesso coordenado",
-      "subtitle": "Capacidades elegíveis por plataforma, suporte prioritário e benefícios do Maker Node (em breve). Lista de espera aberta; nenhum preço é publicado até ser ratificado.",
-      "cta": "Conhecer a Assinatura"
+      "title": "Lista de espera do ecossistema",
+      "subtitle": "A associação ao ecossistema ainda não está disponível; entre na lista de espera e avisamos quando abrir.",
+      "cta": "Entrar na lista de espera"
     },
     "finalCta": {
       "title": "Pronto para construir algo que importa?",
@@ -220,7 +210,7 @@
     "ecosystem": {
       "title": "Parte do Ecossistema MADFAM",
       "subtitle": "Maker Node se conecta com cada plataforma MADFAM.",
-      "memberBenefit": "Descontos e benefícios especiais para membros — em breve"
+      "memberBenefit": "Descontos e benefícios especiais — em breve"
     },
     "cta": {
       "title": "Pronto Para Tornar Real?",
@@ -233,7 +223,7 @@
     "section": {
       "eyebrow": "Escolha seu caminho",
       "title": "MADFAM não é uma única oferta. É um ambiente operacional.",
-      "subtitle": "Comece onde sua intenção está mais clara. O site deve levar você ao produto, build track, assinatura ou conversa estratégica correta sem exigir que decodifique todo o ecossistema primeiro.",
+      "subtitle": "Comece onde sua intenção está mais clara. O site deve levar você ao produto, build track, associação ou conversa estratégica correta sem exigir que decodifique todo o ecossistema primeiro.",
       "bestFor": "Ideal para"
     },
     "platform": {
@@ -258,13 +248,10 @@
     },
     "ecosystem": {
       "eyebrow": "Entre no ecossistema",
-      "title": "Coordene acesso elegível, suporte e vantagens do maker node.",
-      "description": "A assinatura é para pessoas e organizações que usam a MADFAM como ambiente operacional integrado.",
+      "title": "Lista de espera do ecossistema",
+      "description": "A associação ao ecossistema ainda não está disponível; entre na lista de espera e avisamos quando abrir.",
       "recommendedFor": "Makers, empreendedores, estúdios e equipes construindo em várias superfícies MADFAM.",
-      "proof1": "Acesso coordenado",
-      "proof2": "Suporte prioritário",
-      "proof3": "Vantagens de fabricação",
-      "cta": "Explorar assinatura"
+      "cta": "Entrar na lista de espera"
     },
     "partner": {
       "eyebrow": "Parceria ou investimento",
