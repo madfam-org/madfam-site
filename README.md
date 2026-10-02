@@ -342,7 +342,6 @@ RESEND_API_KEY=re_xxxxxxxxxxxx
 
 # Optional Integrations
 N8N_WEBHOOK_URL=https://n8n.madfam.io/webhook/xxx
-SENTRY_DSN=https://xxxx@sentry.io/xxxx
 ```
 
 See `.env.example` for a complete list of environment variables.
