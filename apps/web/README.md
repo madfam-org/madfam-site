@@ -85,18 +85,17 @@ API_SECRET=your-secret-key
 
 ### Public Pages
 
-- `/` - Homepage
-- `/services` - Transformation programs overview
-- `/products` - Product portfolio (Enclii, Janua, Dhanam, Forgesight, etc.)
-- `/assessment` - AI readiness assessment
-- `/contact` - Contact form
-- `/about` - About MADFAM (coming soon)
+Locale-prefixed under `app/[locale]/`: `/`, `/ecosystem`, `/value-ladder`, `/platforms` and
+`/platforms/[slug]`, `/products`, `/solutions` (plus `/solutions/maker-node`, `/solutions/colabs`),
+`/programs`, `/nauta`, `/impact`, `/about`, `/careers`, `/contact`, `/privacy`, `/terms`, `/cookies`
+and `/unsubscribe`. Removed routes (`/assessment`, `/calculator`, `/estimator`, `/blog`,
+`/case-studies`, `/showcase`, `/services` and others) redirect; see `next.config.js`.
 
 ### API Routes
 
-- `/api/leads` - Lead capture and management
-- `/api/assessment` - Assessment processing (coming soon)
-- `/api/calculator` - ROI calculations (coming soon)
+- `/api/leads` - Lead capture (`/api/leads/demo` is no longer called by the site)
+- `/api/search`, `/api/unsubscribe`, `/api/feature-flags`, `/api/logs`
+- `/api/webhook/n8n`, `/api/webhook/cms` - Webhook receivers
 - `/api/health` - Readiness/health (downstream services informational, `unknown` when unset)
 - `/api/health/live` - Liveness (process only)
 - `/api/version` - Deployed commit SHA and build time
@@ -111,7 +110,6 @@ API_SECRET=your-secret-key
 ### Form Components
 
 - `LeadForm` - Lead capture form
-- `AIAssessment` - Interactive assessment
 
 ### UI Components
 
