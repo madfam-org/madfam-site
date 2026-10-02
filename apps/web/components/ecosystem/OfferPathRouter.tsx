@@ -81,16 +81,20 @@ export function OfferPathRouter(): React.ReactElement {
                   </p>
                 </div>
 
+                {/* Proof chips only where the copy has them: the ecosystem card is
+                    a waitlist sentence with no benefit claims (ruling MH-10). */}
                 <ul className="mt-6 space-y-2" aria-label={`${t(`${path.id}.title`)} proof points`}>
-                  {(['proof1', 'proof2', 'proof3'] as const).map(proofKey => (
-                    <li key={proofKey} className="flex items-start gap-2 text-sm text-white/70">
-                      <span
-                        aria-hidden="true"
-                        className={`mt-1.5 h-1.5 w-1.5 rounded-full ${path.accent.dot}`}
-                      />
-                      <span>{t(`${path.id}.${proofKey}`)}</span>
-                    </li>
-                  ))}
+                  {(['proof1', 'proof2', 'proof3'] as const)
+                    .filter(proofKey => t.has(`${path.id}.${proofKey}`))
+                    .map(proofKey => (
+                      <li key={proofKey} className="flex items-start gap-2 text-sm text-white/70">
+                        <span
+                          aria-hidden="true"
+                          className={`mt-1.5 h-1.5 w-1.5 rounded-full ${path.accent.dot}`}
+                        />
+                        <span>{t(`${path.id}.${proofKey}`)}</span>
+                      </li>
+                    ))}
                 </ul>
 
                 <span className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-white">

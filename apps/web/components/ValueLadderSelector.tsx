@@ -15,7 +15,6 @@ import { useState } from 'react';
 import { Button, Card, CardContent } from '@/components/ui';
 import {
   recommendRung,
-  dhanamCheckoutUrl,
   KALYA_DISCOVERY_CALL_URL,
   NEED_OPTIONS,
   SIZE_OPTIONS,
@@ -138,8 +137,10 @@ export function ValueLadderSelector({ strings, ladderAnchor }: ValueLadderSelect
   // ── Stage: result ──────────────────────────────────────────────────────────
   if (stage === 'result' && need && size) {
     const rec = recommendRung(need, size);
-    const selfServeHref = rec.checkoutSlug ? dhanamCheckoutUrl(rec.checkoutSlug) : undefined;
-    const showSelfServe = rec.motion === 'self-serve' && Boolean(selfServeHref);
+    // `rec.href` is the product's own front door on a self-serve rung (ruling
+    // CX-1); on every other rung it is the discovery call rendered below.
+    const showSelfServe = rec.motion === 'self-serve';
+    const selfServeHref = showSelfServe ? rec.href : undefined;
 
     return (
       <div className="max-w-2xl mx-auto">

@@ -31,15 +31,27 @@
  * It is asserted to be generated instead (its header says DO NOT EDIT, and
  * `platform-registry.test.mjs` re-derives it from the vendored projection).
  *
- * Surfaces outside the value ladder that still carry currency amounts —
- * competitor comparison tables, budget-range form options, case-study figures —
- * are a separate cleanup and are deliberately out of this guard's scope. Naming
- * that here is the point: a green run of this test is not a claim that the repo
- * publishes no hand-typed number anywhere.
+ * Copy bundles outside the value ladder that still carry currency amounts —
+ * competitor comparison tables, budget-range form options — are a separate
+ * cleanup and are deliberately out of this guard's scope. Naming that here is
+ * the point: a green run of this test is not a claim that the repo publishes no
+ * hand-typed number anywhere.
+ *
+ * WIDENED SCOPE (finding M1-018, 2026-10-01)
+ * ==========================================
+ * A dead module under `apps/web/lib/data/` hand-typed a vCTO price list
+ * ("Desde $8,000/mes") one import away from rendering, and nothing failed. So
+ * the guard now also walks every source file under `apps/web/lib/**` and
+ * `apps/web/components/**` (tests excluded: they never reach a reader, and the
+ * planted-amount test below needs to write one). `DEMO_SAMPLE_FILES` lists the
+ * only exemptions — interactive product demos whose figures are sample data,
+ * not a MADFAM price — and each exemption must still match, so a stale one
+ * fails too.
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -67,6 +79,71 @@ export const GUARDED_FILES = [
 /** The one module allowed to hold a price, because it is generated from the registry. */
 const GENERATED_MODULE = 'apps/web/lib/data/platforms.generated.ts';
 
+/** Source trees walked in full (finding M1-018). */
+export const GUARDED_TREES = ['apps/web/lib', 'apps/web/components'];
+
+/**
+ * Product demos ("tastes") that show sample figures in an interactive widget:
+ * a sample material price range, a sample quote, a sample account balance.
+ * They are illustrations of what the product does, not prices MADFAM charges.
+ * Labelling them as examples is tracked separately (finding M1-023). Adding a
+ * file here is a reviewable act; nothing else under the guarded trees may hold
+ * a currency amount.
+ */
+export const DEMO_SAMPLE_FILES = [
+  'apps/web/components/platforms/tastes/CotizaTaste.tsx',
+  'apps/web/components/platforms/tastes/DhanamTaste.tsx',
+  'apps/web/components/platforms/tastes/ForgeSightTaste.tsx',
+];
+
+const SOURCE_FILE = /\.(?:[cm]?[jt]sx?)$/;
+/** A path inside a `__tests__` directory (anywhere in the path). */
+const TEST_DIRECTORY = /(?:^|\/)__tests__\//;
+/** A `*.test.*` / `*.spec.*` source file name (anchored at the end). */
+const TEST_SUFFIX = /\.(?:test|spec)\.[cm]?[jt]sx?$/;
+
+function isTestFile(relative) {
+  return TEST_DIRECTORY.test(relative) || TEST_SUFFIX.test(relative);
+}
+
+/**
+ * Every source file under the guarded trees, relative to `root`, minus the
+ * generated module, tests and the demo exemptions.
+ */
+export function treeEntries(root = repoRoot) {
+  const entries = [];
+  const walk = relative => {
+    const absolute = path.join(root, relative);
+    if (!fs.existsSync(absolute)) return;
+    for (const dirent of fs.readdirSync(absolute, { withFileTypes: true })) {
+      const child = path.posix.join(relative, dirent.name);
+      if (dirent.isDirectory()) {
+        if (dirent.name !== 'node_modules') walk(child);
+      } else if (
+        SOURCE_FILE.test(child) &&
+        !isTestFile(child) &&
+        child !== GENERATED_MODULE &&
+        !DEMO_SAMPLE_FILES.includes(child)
+      ) {
+        entries.push({ file: child });
+      }
+    }
+  };
+  for (const tree of GUARDED_TREES) walk(tree);
+  return entries;
+}
+
+/** Currency-amount hits for a set of entries under `root`. */
+export function currencyHits(entries, root = repoRoot) {
+  const hits = [];
+  for (const entry of entries) {
+    for (const { name, re } of CURRENCY_PATTERNS) {
+      for (const line of offendingLines(entry, re, root)) hits.push(`[${name}] ${line}`);
+    }
+  }
+  return hits;
+}
+
 /**
  * A currency amount, in the shapes this repo actually writes them:
  * `$99`, `$1,200`, `MX$405`, `R$3.600`, `US$ 55`, `99 MXN`, `1,200 USD`.
@@ -79,8 +156,8 @@ const CURRENCY_PATTERNS = [
 /** `TBD` as a price, which R9 names explicitly. */
 const TBD = /(?<![A-Za-z])TBD(?![A-Za-z])/;
 
-function read(relative) {
-  return fs.readFileSync(path.join(repoRoot, relative), 'utf8');
+function read(relative, root = repoRoot) {
+  return fs.readFileSync(path.join(root, relative), 'utf8');
 }
 
 /**
@@ -89,9 +166,9 @@ function read(relative) {
  * removed. Comments are excluded deliberately — this very file, and the modules
  * it guards, have to be able to spell out the rule they enforce.
  */
-function scannable({ file, scope }) {
+function scannable({ file, scope }, root = repoRoot) {
   if (file.endsWith('.json')) {
-    let node = JSON.parse(read(file));
+    let node = JSON.parse(read(file, root));
     for (const key of scope ?? []) node = node?.[key];
     const strings = [];
     const walk = value => {
@@ -102,15 +179,15 @@ function scannable({ file, scope }) {
     return strings;
   }
 
-  return read(file)
+  return read(file, root)
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .split('\n')
     .map(line => line.replace(/(^|\s)\/\/.*$/, '$1'))
     .filter(line => line.trim() !== '');
 }
 
-function offendingLines(entry, pattern) {
-  return scannable(entry)
+function offendingLines(entry, pattern, root = repoRoot) {
+  return scannable(entry, root)
     .map((line, index) => [index + 1, line])
     .filter(([, line]) => pattern.test(line))
     .map(([number, line]) => `${entry.file} (scanned line ${number}): ${line.trim()}`);
@@ -124,12 +201,7 @@ test('the guarded file list points at files that exist', () => {
 });
 
 test('no currency amount is hand-typed on the value-ladder surface', () => {
-  const hits = [];
-  for (const entry of GUARDED_FILES) {
-    for (const { name, re } of CURRENCY_PATTERNS) {
-      for (const line of offendingLines(entry, re)) hits.push(`[${name}] ${line}`);
-    }
-  }
+  const hits = currencyHits(GUARDED_FILES);
 
   assert.deepEqual(
     hits,
@@ -162,4 +234,49 @@ test('the generated module is the only place a price may live, and it is generat
     /export const REGISTRY_COMMERCE/,
     `${GENERATED_MODULE} must export REGISTRY_COMMERCE — it is where every price is read from.`
   );
+});
+
+test('no currency amount is hand-typed anywhere under apps/web/lib or apps/web/components', () => {
+  const entries = treeEntries();
+  assert.ok(entries.length >= 50, `the tree walk found too few files (${entries.length})`);
+  const hits = currencyHits(entries);
+  assert.deepEqual(
+    hits,
+    [],
+    'A currency amount is written by hand in site source. Ruling R25/R9: prices come from ' +
+      `the registry via ${GENERATED_MODULE}. Offending lines:\n${hits.join('\n')}`
+  );
+});
+
+test('every demo exemption exists and still carries the sample figures it is exempted for', () => {
+  for (const file of DEMO_SAMPLE_FILES) {
+    assert.ok(fs.existsSync(path.join(repoRoot, file)), `stale exemption: ${file} is gone`);
+    assert.ok(
+      currencyHits([{ file }]).length > 0,
+      `stale exemption: ${file} no longer holds a currency amount — remove it from DEMO_SAMPLE_FILES`
+    );
+  }
+});
+
+test('the guard fails on a planted $8,000 under lib/ and components/', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'no-hand-typed-prices-'));
+  try {
+    const planted = [
+      ['apps/web/lib/data/engagement-models/planted.ts', "export const price = 'Desde $8,000/mes';\n"],
+      ['apps/web/components/Planted.tsx', 'export const P = () => <span>8,000 MXN</span>;\n'],
+      // Comments and tests are not scanned; these must NOT be reported.
+      ['apps/web/lib/commented.ts', '// Desde $8,000/mes\nexport const ok = 1;\n'],
+      ['apps/web/lib/__tests__/fixture.test.ts', "const amount = '$8,000';\n"],
+    ];
+    for (const [file, body] of planted) {
+      fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+      fs.writeFileSync(path.join(root, file), body);
+    }
+    const hits = currencyHits(treeEntries(root), root);
+    assert.equal(hits.length, 2, `expected exactly the two planted amounts, got:\n${hits.join('\n')}`);
+    assert.ok(hits.some(hit => hit.includes('engagement-models/planted.ts') && hit.includes('$8,000')));
+    assert.ok(hits.some(hit => hit.includes('components/Planted.tsx') && hit.includes('8,000 MXN')));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });

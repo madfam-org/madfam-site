@@ -84,23 +84,13 @@
     "info": {
       "title": "Outras formas de contato",
       "email": "E-mail",
-      "phone": "Telefone",
-      "address": "Endereço",
-      "hours": "Horário de atendimento",
-      "monday": "Segunda a sexta",
-      "time": "9:00 - 18:00 CST"
+      "address": "Endereço"
     },
     "alternativeContact": {
       "title": "Outras formas de nos contatar",
       "location": "Localização",
       "city": "Cuernavaca, Morelos, México",
-      "remoteService": "Atendimento remoto global",
-      "businessHours": "Horário de atendimento",
-      "weekdays": "Segunda - Sexta",
-      "saturday": "Sábado",
-      "sunday": "Domingo",
-      "closed": "Fechado",
-      "responseTime": "Respondemos em até 24 horas úteis"
+      "remoteService": "Atendimento remoto global"
     },
     "immediateHelp": {
       "title": "Precisa de ajuda imediata?",
@@ -109,225 +99,34 @@
     }
   },
   "careers": {
-    "title": "Junte-se ao time MADFAM",
-    "subtitle": "Estamos construindo o futuro da transformação empresarial. Junte-se a nós para criar soluções inovadoras que ajudam empresas a prosperar na era digital.",
-    "culture": {
-      "title": "Nossa cultura",
-      "innovation": {
-        "title": "Inovação em primeiro lugar",
-        "description": "Adotamos novas tecnologias e soluções criativas para resolver problemas complexos."
-      },
-      "collaboration": {
-        "title": "Espírito colaborativo",
-        "description": "Acreditamos no poder do trabalho em equipe e valorizamos perspectivas diversas."
-      },
-      "growth": {
-        "title": "Mentalidade de crescimento",
-        "description": "Estamos comprometidos com o aprendizado contínuo e desenvolvimento pessoal."
-      }
-    },
-    "benefits": {
-      "title": "Benefícios e vantagens",
-      "list": {
-        "health": "Plano de saúde completo",
-        "pto": "Política flexível de folgas",
-        "remote": "Cultura remota primeiro",
-        "learning": "Orçamento para aprendizado e desenvolvimento",
-        "bonus": "Bônus por desempenho",
-        "home": "Auxílio home office"
+    "title": "Trabalhe na casa poliglota",
+    "subtitle": "Construímos em aberto, operamos o que construímos e damos nome às coisas com carinho. Se isso soa como um lar, vamos conversar.",
+    "howWeWork": {
+      "title": "O que te espera",
+      "items": {
+        "realProducts": {
+          "title": "Produtos reais em produção",
+          "description": "O que você fizer vai para produção, e alguém usa."
+        },
+        "ecosystem": {
+          "title": "Ecossistema, não silos",
+          "description": "Seu código toca identidade, pagamentos, fabricação e lei; aqui se aprende em largura."
+        },
+        "openByDefault": {
+          "title": "Aberto por padrão",
+          "description": "Boa parte do seu trabalho será pública; seu GitHub cresce com você."
+        },
+        "mexico": {
+          "title": "O México como vantagem",
+          "description": "Resolvemos problemas de verdade (CFDI, SAT, manufatura) para um mercado que as big techs tratam como tradução."
+        }
       }
     },
     "positions": {
-      "title": "Posições abertas",
-      "department": "Departamento",
-      "location": "Localização",
-      "type": "Tipo",
-      "applyNow": "Candidatar-se agora",
-      "list": {
-        "seniorFullStack": {
-          "title": "Engenheiro Full-Stack Sênior",
-          "department": "Engenharia",
-          "location": "Remoto / Cidade do México",
-          "type": "Tempo integral",
-          "description": "Estamos procurando um engenheiro experiente para ajudar a construir soluções escaláveis para nossos clientes empresariais."
-        },
-        "aiMl": {
-          "title": "Engenheiro IA/ML",
-          "department": "Laboratório de Inovação",
-          "location": "Remoto",
-          "type": "Tempo integral",
-          "description": "Junte-se à nossa equipe para desenvolver soluções de IA de ponta que transformam empresas."
-        },
-        "productDesigner": {
-          "title": "Designer de Produto",
-          "department": "Design",
-          "location": "Cidade do México",
-          "type": "Tempo integral",
-          "description": "Crie experiências bonitas e intuitivas para nossos produtos e plataformas digitais."
-        },
-        "bizDev": {
-          "title": "Gerente de Desenvolvimento de Negócios",
-          "department": "Vendas",
-          "location": "Cidade do México / Remoto",
-          "type": "Tempo integral",
-          "description": "Ajude-nos a expandir nosso alcance e construir relacionamentos com clientes empresariais."
-        }
-      }
-    },
-    "cta": {
-      "title": "Não vê a posição certa?",
-      "subtitle": "Estamos sempre procurando pessoas talentosas. Envie seu currículo e vamos conversar!",
-      "sendResume": "Enviar seu currículo"
-    }
-  },
-  "guides": {
-    "title": "Guias e tutoriais",
-    "subtitle": "Guias passo a passo para ajudá-lo a aproveitar ao máximo os serviços da MADFAM e criar soluções incríveis.",
-    "featured": {
-      "badge": "Guia em destaque",
-      "title": "Tutorial completo de integração",
-      "description": "Aprenda a integrar os serviços da MADFAM do início ao fim com nosso tutorial completo.",
-      "startTutorial": "Começar tutorial"
-    },
-    "difficulty": {
-      "beginner": "Iniciante",
-      "intermediate": "Intermediário",
-      "advanced": "Avançado"
-    },
-    "categories": {
-      "gettingStarted": "Começando",
-      "integration": "Guias de Integração",
-      "bestPractices": "Melhores Práticas",
-      "useCases": "Casos de Uso"
-    },
-    "items": {
-      "quickStart": {
-        "title": "Guia de Início Rápido",
-        "description": "Comece a usar os serviços da MADFAM em menos de 10 minutos",
-        "duration": "10 min"
-      },
-      "platformOverview": {
-        "title": "Visão Geral da Plataforma",
-        "description": "Entenda a arquitetura e capacidades dos serviços da MADFAM",
-        "duration": "15 min"
-      },
-      "authSetup": {
-        "title": "Configuração de Autenticação",
-        "description": "Configure a autenticação para suas aplicações",
-        "duration": "20 min"
-      },
-      "restApi": {
-        "title": "Integração com API REST",
-        "description": "Guia completo para integração com nossas APIs REST",
-        "duration": "30 min"
-      },
-      "webhookConfig": {
-        "title": "Configuração de Webhooks",
-        "description": "Configure webhooks para notificações de eventos em tempo real",
-        "duration": "25 min"
-      },
-      "sdkImpl": {
-        "title": "Implementação de SDK",
-        "description": "Usando nossos SDKs para JavaScript, Python e Java",
-        "duration": "45 min"
-      },
-      "securityBest": {
-        "title": "Melhores Práticas de Segurança",
-        "description": "Garanta que sua integração siga os padrões de segurança",
-        "duration": "30 min"
-      },
-      "perfOptimization": {
-        "title": "Otimização de Desempenho",
-        "description": "Otimize suas chamadas API e reduza a latência",
-        "duration": "40 min"
-      },
-      "errorHandling": {
-        "title": "Estratégias de Tratamento de Erros",
-        "description": "Construa aplicações resilientes com tratamento adequado de erros",
-        "duration": "35 min"
-      },
-      "aiChatbot": {
-        "title": "Construindo um Chatbot IA",
-        "description": "Guia passo a passo para criar um chatbot inteligente",
-        "duration": "60 min"
-      },
-      "processAutomation": {
-        "title": "Automação de Processos",
-        "description": "Automatize processos empresariais com nosso motor de fluxos de trabalho",
-        "duration": "45 min"
-      },
-      "analyticsDashboard": {
-        "title": "Dashboard de Análise de Dados",
-        "description": "Crie dashboards de análise em tempo real",
-        "duration": "50 min"
-      }
-    },
-    "videoTutorials": {
-      "title": "Tutoriais em vídeo",
-      "description": "Prefere aprender através de vídeos? Visite nosso canal do YouTube para tutoriais e demos em vídeo.",
-      "watchYoutube": "Assistir no YouTube"
-    }
-  },
-  "docs": {
-    "title": "Documentação",
-    "subtitle": "Tudo o que você precisa saber para trabalhar com os serviços e plataformas da MADFAM.",
-    "searchPlaceholder": "Buscar documentação...",
-    "categories": {
-      "gettingStarted": {
-        "title": "Começando",
-        "description": "Guias de início rápido e visão geral dos nossos serviços",
-        "items": {
-          "intro": "Introdução ao MADFAM",
-          "services": "Visão Geral dos Serviços",
-          "architecture": "Arquitetura da Plataforma",
-          "security": "Segurança e Conformidade"
-        }
-      },
-      "api": {
-        "title": "Documentação API",
-        "description": "Documentação técnica para nossas APIs e integrações",
-        "items": {
-          "reference": "Referência API",
-          "authentication": "Autenticação",
-          "rateLimiting": "Limitação de Taxa",
-          "webhooks": "Webhooks"
-        }
-      },
-      "guides": {
-        "title": "Guias e tutoriais",
-        "description": "Guias passo a passo para casos de uso comuns",
-        "items": {
-          "integrationGuides": "Guias de Integração",
-          "bestPractices": "Melhores Práticas",
-          "migration": "Guia de Migração",
-          "troubleshooting": "Solução de Problemas"
-        }
-      },
-      "resources": {
-        "title": "Recursos",
-        "description": "Recursos adicionais e materiais de suporte",
-        "items": {
-          "support": "Centro de Suporte",
-          "community": "Fórum da Comunidade"
-        }
-      }
-    },
-    "popularTopics": "Tópicos populares",
-    "popularTopicLabels": {
-      "authentication": "Autenticação",
-      "apiKeys": "Chaves API",
-      "webhooks": "Webhooks",
-      "rateLimits": "Limites de Taxa",
-      "errorHandling": "Tratamento de Erros",
-      "dataSecurity": "Segurança de Dados",
-      "integration": "Integração",
-      "migration": "Migração"
-    },
-    "needHelp": {
-      "title": "Precisa de ajuda?",
-      "subtitle": "Não encontrou o que procura? Nossa equipe de suporte está aqui para ajudar.",
-      "contactSupport": "Contatar suporte",
-      "viewFaq": "Ver perguntas frequentes"
+      "title": "Vagas abertas",
+      "empty": "No momento não temos vagas publicadas — mas uma pessoa lê cada mensagem que chega pelo nosso formulário de contato, e boas cartas não caducam.",
+      "cta": "Escreva para nós",
+      "microcopy": "Conte o que você constrói, não só onde trabalhou. Links > adjetivos."
     }
   },
   "services": {
@@ -405,14 +204,6 @@
     "careers": {
       "title": "Carreiras — MADFAM",
       "description": "Trabalhe em um estúdio mexicano que constrói e opera um ecossistema de plataformas abertas."
-    },
-    "guides": {
-      "title": "Guias — MADFAM",
-      "description": "Como resolver coisas concretas com o ecossistema MADFAM: emitir seu primeiro CFDI, cotar uma peça, montar sua própria identidade."
-    },
-    "docs": {
-      "title": "Documentação — MADFAM",
-      "description": "Documentação das plataformas e serviços do ecossistema MADFAM."
     },
     "privacy": {
       "title": "Política de privacidade — MADFAM",

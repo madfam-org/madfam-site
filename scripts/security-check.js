@@ -28,8 +28,66 @@ class SecurityAuditor {
     // finding with the audit metadata — two visible ❌ lines still summarised
     // as "Critical: 0 ... Status: PASS", exit 0.
     this.depCritical = 0;
+    this.depHigh = 0;
     this.depModerate = 0;
     this.depLow = 0;
+    // Lowest dependency severity that fails the run. `critical` by default;
+    // SECURITY_FAIL_ON=high tightens it once the high backlog is cleared.
+    this.failOn = SecurityAuditor.normalizeFailOn(process.env.SECURITY_FAIL_ON);
+  }
+
+  static normalizeFailOn(value) {
+    return value === 'high' ? 'high' : 'critical';
+  }
+
+  /**
+   * Parses `pnpm audit --json` output into severity counts. Throws when the
+   * output is not an audit report, so a broken audit can never read as clean.
+   */
+  static parseAuditOutput(output) {
+    if (typeof output !== 'string' || output.trim() === '') {
+      throw new Error('pnpm audit produced no output');
+    }
+    let audit;
+    try {
+      audit = JSON.parse(output);
+    } catch {
+      throw new Error('pnpm audit output is not JSON');
+    }
+    const vulns = audit && audit.metadata && audit.metadata.vulnerabilities;
+    if (!vulns || typeof vulns !== 'object') {
+      throw new Error('pnpm audit JSON has no metadata.vulnerabilities');
+    }
+    const count = key => (Number.isFinite(vulns[key]) ? vulns[key] : 0);
+    return {
+      critical: count('critical'),
+      high: count('high'),
+      moderate: count('moderate'),
+      low: count('low'),
+    };
+  }
+
+  /**
+   * Runs `pnpm audit --json`. pnpm exits non-zero whenever it finds anything,
+   * so the report is read from `error.stdout` in that case: the old handler
+   * swallowed the error and left every count at 0 (finding S1-005).
+   */
+  static runPnpmAudit(exec = execSync) {
+    let output;
+    try {
+      output = exec('pnpm audit --json', {
+        encoding: 'utf-8',
+        stdio: ['pipe', 'pipe', 'pipe'],
+        maxBuffer: 64 * 1024 * 1024,
+      });
+    } catch (error) {
+      output = error && error.stdout ? String(error.stdout) : '';
+      if (!output) {
+        const reason = error && error.message ? error.message : String(error);
+        throw new Error(`pnpm audit failed without a report: ${reason}`);
+      }
+    }
+    return SecurityAuditor.parseAuditOutput(output);
   }
 
   log(message, level = 'info') {
@@ -48,62 +106,17 @@ class SecurityAuditor {
     this.log('Starting comprehensive security audit...', 'info');
 
     try {
-      // 1. Check for critical vulnerabilities
-      await this.checkCriticalVulnerabilities();
-
-      // 2. Validate security configurations
+      // 1. Validate security configurations
       await this.checkSecurityConfigurations();
 
-      // 3. Check dependencies
+      // 2. Check dependencies (pnpm audit; fails closed)
       await this.checkDependencies();
 
-      // 4. Generate report
+      // 3. Generate report
       await this.generateReport();
     } catch (error) {
       this.log(`Security audit failed: ${error.message}`, 'error');
       process.exit(1);
-    }
-  }
-
-  async checkCriticalVulnerabilities() {
-    this.log('Checking for critical vulnerabilities...', 'info');
-
-    try {
-      // First, try a simple critical audit
-      const result = execSync(
-        'pnpm audit --audit-level critical 2>/dev/null || echo "no-critical"',
-        {
-          encoding: 'utf-8',
-        }
-      );
-
-      if (result.includes('0 vulnerabilities') || result.includes('no-critical')) {
-        this.log('No critical vulnerabilities found', 'success');
-        return true;
-      }
-
-      // If we have critical vulnerabilities, parse them
-      if (result.includes('critical')) {
-        const lines = result.split('\n');
-        const criticalLines = lines.filter(line => line.includes('critical'));
-
-        this.criticalCount = criticalLines.length;
-        this.issues.push({
-          level: 'critical',
-          message: `${this.criticalCount} critical vulnerabilities detected`,
-          details: criticalLines,
-        });
-
-        this.log(`${this.criticalCount} CRITICAL vulnerabilities found!`, 'error');
-        return false;
-      }
-
-      this.log('No critical vulnerabilities found', 'success');
-      return true;
-    } catch (error) {
-      // If command fails, assume no critical issues for now
-      this.log('Critical vulnerability check completed (no issues detected)', 'success');
-      return true;
     }
   }
 
@@ -154,38 +167,86 @@ class SecurityAuditor {
           });
         }
       } catch (error) {
-        this.log(`${check.name}: Check failed - ${error.message}`, 'warn');
+        // Fail closed: a check that cannot run proves nothing. It used to be
+        // logged as a warning and the run still passed.
+        this.log(`${check.name}: Check failed - ${error.message}`, 'error');
+        this.issues.push({
+          level: check.critical ? 'critical' : 'moderate',
+          message: `${check.name}: check could not run (${error.message})`,
+          details: {},
+        });
       }
     }
   }
 
+  /**
+   * Security headers are declared in two places (finding S1-017): the static
+   * set in `headers()` of apps/web/next.config.js (every path), and the
+   * per-request nonce CSP in apps/web/middleware.ts. A header counts only when
+   * it is actually declared — a `key: '<Name>'` entry in next.config.js or a
+   * `headers.set('<Name>', …)` call in middleware.ts — not when its name merely
+   * appears in a comment.
+   */
   checkSecurityHeaders() {
-    const middlewareFiles = ['apps/web/middleware.ts', 'apps/web/app/middleware.ts'];
-
-    const requiredHeaders = ['X-Frame-Options', 'X-Content-Type-Options', 'Referrer-Policy'];
-
-    for (const file of middlewareFiles) {
-      if (fs.existsSync(file)) {
-        const content = fs.readFileSync(file, 'utf-8');
-        const missingHeaders = requiredHeaders.filter(header => !content.includes(header));
-
-        if (missingHeaders.length === 0) {
-          return { passed: true };
-        } else {
-          return {
-            passed: false,
-            message: `Missing security headers: ${missingHeaders.join(', ')}`,
-            details: { file, missingHeaders },
-          };
-        }
-      }
+    const sources = {
+      nextConfig: 'apps/web/next.config.js',
+      middleware: 'apps/web/middleware.ts',
+    };
+    const missingFiles = Object.values(sources).filter(file => !fs.existsSync(file));
+    if (missingFiles.length > 0) {
+      return {
+        passed: false,
+        message: `Security header sources not found: ${missingFiles.join(', ')}`,
+        details: { expectedFiles: Object.values(sources) },
+      };
     }
 
+    const missingHeaders = SecurityAuditor.missingSecurityHeaders({
+      nextConfig: fs.readFileSync(sources.nextConfig, 'utf-8'),
+      middleware: fs.readFileSync(sources.middleware, 'utf-8'),
+    });
+
+    if (missingHeaders.length === 0) {
+      return { passed: true };
+    }
     return {
       passed: false,
-      message: 'No security middleware found',
-      details: { expectedFiles: middlewareFiles },
+      message: `Missing security headers: ${missingHeaders.join(', ')}`,
+      details: { sources, missingHeaders },
     };
+  }
+
+  /**
+   * A getter, not a property assigned after the class: the CLI entry point
+   * starts the audit before the end of this module has run.
+   */
+  static get REQUIRED_SECURITY_HEADERS() {
+    return [
+      'Content-Security-Policy',
+      'X-Frame-Options',
+      'X-Content-Type-Options',
+      'Referrer-Policy',
+      'Strict-Transport-Security',
+    ];
+  }
+
+  static missingSecurityHeaders({ nextConfig = '', middleware = '' }) {
+    const stripComments = text =>
+      text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    const declared = new Set();
+    const collect = (text, pattern) => {
+      for (const match of stripComments(text).matchAll(pattern)) {
+        declared.add(match[1].toLowerCase());
+      }
+    };
+    collect(nextConfig, /\bkey:\s*['"]([\w-]+)['"]/g);
+    collect(middleware, /headers\.set\(\s*['"]([\w-]+)['"]/g);
+    collect(nextConfig, /headers\.set\(\s*['"]([\w-]+)['"]/g);
+    collect(middleware, /\bkey:\s*['"]([\w-]+)['"]/g);
+
+    return SecurityAuditor.REQUIRED_SECURITY_HEADERS.filter(
+      header => !declared.has(header.toLowerCase())
+    );
   }
 
   checkInputValidation() {
@@ -404,30 +465,33 @@ class SecurityAuditor {
     }
   }
 
-  async checkDependencies() {
+  async checkDependencies(exec = execSync) {
     this.log('Analyzing dependency security...', 'info');
 
+    let counts;
     try {
-      const auditResult = execSync('pnpm audit --json', {
-        encoding: 'utf-8',
-        stdio: ['pipe', 'pipe', 'pipe'],
-      });
-
-      const audit = JSON.parse(auditResult);
-      const metadata = audit.metadata?.vulnerabilities || {};
-
-      this.depCritical = metadata.critical || 0;
-      this.depModerate = metadata.moderate || 0;
-      this.depLow = metadata.low || 0;
-
-      this.log(
-        `Dependencies: ${metadata.critical || 0} critical, ${metadata.moderate || 0} moderate, ${metadata.low || 0} low`,
-        'info'
-      );
+      counts = SecurityAuditor.runPnpmAudit(exec);
     } catch (error) {
-      // Audit command returns non-zero when vulnerabilities found
-      this.log('Dependency audit completed with findings', 'info');
+      // Fail closed: an audit that cannot run is not a clean audit.
+      this.issues.push({
+        level: 'critical',
+        message: `Dependency audit could not run: ${error.message}`,
+        details: {},
+      });
+      this.log(`Dependency audit could not run: ${error.message}`, 'error');
+      return;
     }
+
+    this.depCritical = counts.critical;
+    this.depHigh = counts.high;
+    this.depModerate = counts.moderate;
+    this.depLow = counts.low;
+
+    const level = counts.critical > 0 ? 'error' : counts.high > 0 ? 'warn' : 'info';
+    this.log(
+      `Dependencies: ${counts.critical} critical, ${counts.high} high, ${counts.moderate} moderate, ${counts.low} low`,
+      level
+    );
   }
 
   /**
@@ -443,7 +507,8 @@ class SecurityAuditor {
       { critical: 0, moderate: 0, low: 0 }
     );
 
-    const failing = bySeverity.critical + this.depCritical;
+    const failing =
+      bySeverity.critical + this.depCritical + (this.failOn === 'high' ? this.depHigh : 0);
 
     return {
       timestamp: new Date().toISOString(),
@@ -456,9 +521,11 @@ class SecurityAuditor {
         },
         dependencies: {
           critical: this.depCritical,
+          high: this.depHigh,
           moderate: this.depModerate,
           low: this.depLow,
         },
+        failOn: this.failOn,
         failing,
       },
       issues: this.issues,
@@ -485,7 +552,7 @@ class SecurityAuditor {
       `Findings:     ${findings.critical} critical, ${findings.moderate} moderate, ${findings.low} low (${findings.total} total)`
     );
     console.log(
-      `Dependencies: ${dependencies.critical} critical, ${dependencies.moderate} moderate, ${dependencies.low} low`
+      `Dependencies: ${dependencies.critical} critical, ${dependencies.high} high, ${dependencies.moderate} moderate, ${dependencies.low} low (fails on: ${report.summary.failOn})`
     );
     console.log('='.repeat(60));
 
@@ -494,8 +561,14 @@ class SecurityAuditor {
     }
 
     if (failing > 0) {
-      console.log(`\n❌ ${failing} CRITICAL ISSUE(S) FOUND - Security audit FAILED`);
+      console.log(`\n❌ ${failing} FAILING ISSUE(S) FOUND - Security audit FAILED`);
       process.exit(1);
+    }
+
+    if (dependencies.high > 0) {
+      console.log(
+        `\n⚠️ ${dependencies.high} high-severity dependency advisories (reported, not failing; set SECURITY_FAIL_ON=high to enforce)`
+      );
     }
 
     console.log('\n✅ No critical security issues found');

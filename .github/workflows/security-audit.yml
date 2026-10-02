@@ -12,7 +12,8 @@ on:
 jobs:
   security-audit:
     name: Security Vulnerability Audit
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
+    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    timeout-minutes: 15
     
     steps:
       - name: Checkout code
@@ -57,7 +58,7 @@ jobs:
           echo "🛡️ Checking security configuration..."
           
           # Check for security headers in middleware
-          if grep -r "X-Frame-Options\|X-Content-Type-Options\|Referrer-Policy" apps/web/middleware.ts > /dev/null; then
+          if grep -r "X-Frame-Options\|X-Content-Type-Options\|Referrer-Policy" apps/web/next.config.js apps/web/middleware.ts > /dev/null; then
             echo "✅ Security headers configured"
           else
             echo "⚠️ Security headers might be missing"
@@ -89,3 +90,31 @@ jobs:
             audit-*.json
             security-report.json
           retention-days: 30
+
+  # A scheduled run has no PR and no pusher to notice it failing; scheduled
+  # failures used to reach nobody (finding S1-029). Same open-or-update
+  # pattern as registry-freshness.yml.
+  notify-on-scheduled-failure:
+    name: Open or update an issue (scheduled run failed)
+    needs: [security-audit]
+    if: ${{ failure() && github.event_name == 'schedule' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Open or update the failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          title="Scheduled Security Audit failed"
+          body="The scheduled run failed: ${RUN_URL}"
+          existing=$(gh issue list --state open --search "\"${title}\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "${existing}" ]; then
+            gh issue comment "${existing}" --body "${body}"
+          else
+            gh issue create --title "${title}" --body "${body}"
+          fi

@@ -30,7 +30,7 @@
       "tagline": "Varias herramientas curadas para un trabajo completo.",
       "oneLine": "Cuando tienes un flujo de trabajo entero, no una sola tarea.",
       "grants": "Un conjunto de plataformas que ya trabajan juntas, contratadas de una vez.",
-      "valueVs": "Frente a una suite genérica: solo las piezas que tu flujo necesita, integradas y a un precio menor que la suma de las partes.",
+      "valueVs": "Frente a una suite genérica: solo las piezas que tu flujo necesita, integradas.",
       "priceNote": ""
     },
     "erp": {
@@ -38,7 +38,7 @@
       "tagline": "Tus servicios bajo una sola puerta, marca y factura.",
       "oneLine": "Cuando ya usas varias herramientas y quieres unificarlas bajo tu marca.",
       "grants": "Todos tus servicios contratados detrás de una puerta, una identidad y una factura, con tu marca.",
-      "valueVs": "Frente a Zoho u Odoo: reemplaza la consola de administración con lo mejor de su clase, nativo del fisco mexicano y por debajo del titular.",
+      "valueVs": "Frente a Zoho u Odoo: reemplaza la consola de administración con lo mejor de su clase, nativo del fisco mexicano.",
       "priceNote": ""
     },
     "vcto": {
@@ -117,7 +117,7 @@
         "description": "Tus datos y accesos son tuyos. Puedes exportar y bajar de escalón sin perder nada."
       },
       "vctoInBox": {
-        "title": "vCTO incluido",
+        "title": "vCTO disponible",
         "description": "Cuando quieras, un CTO fraccional opera todo por ti. El escalón más alto siempre está disponible."
       },
       "bestOfBreed": {

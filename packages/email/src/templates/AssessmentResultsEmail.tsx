@@ -14,88 +14,87 @@ import {
   Text,
 } from '@react-email/components';
 
+import { ENTITY_LINE, emailLanguage, localizedSiteUrl, logoUrl, siteUrl } from '../brand';
+
 interface AssessmentResultsEmailProps {
   assessmentId: string;
   score: number;
-  tier: string;
+  /**
+   * Accepted for backwards compatibility with queued payloads and not
+   * rendered: the consultancy-era tier labels it mapped to are retired.
+   */
+  tier?: string;
   strengths: string[];
   recommendations: string[];
-  language?: 'es-MX' | 'en-US';
+  /** Any language tag (`es`, `es-MX`, `en`, `pt-BR`, …); normalised to es/en/pt. */
+  language?: string;
 }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+const CONTENT = {
+  es: {
+    preview: 'Resultados de tu evaluación — MADFAM',
+    title: 'Resultados de tu evaluación',
+    scoreTitle: 'Tu puntuación:',
+    scoreOf: 'de 100',
+    strengthsTitle: 'Fortalezas identificadas:',
+    recommendationsTitle: 'Recomendaciones:',
+    cta: 'Escríbenos',
+    footer:
+      'Estos resultados son orientativos y se basan solo en tus respuestas. Si quieres conversarlos, escríbenos.',
+    signature: 'Equipo MADFAM',
+  },
+  en: {
+    preview: 'Your assessment results — MADFAM',
+    title: 'Your assessment results',
+    scoreTitle: 'Your score:',
+    scoreOf: 'out of 100',
+    strengthsTitle: 'Identified strengths:',
+    recommendationsTitle: 'Recommendations:',
+    cta: 'Write to us',
+    footer:
+      'These results are indicative and based only on your answers. If you want to talk them through, write to us.',
+    signature: 'The MADFAM team',
+  },
+  pt: {
+    preview: 'Resultados da sua avaliação — MADFAM',
+    title: 'Resultados da sua avaliação',
+    scoreTitle: 'Sua pontuação:',
+    scoreOf: 'de 100',
+    strengthsTitle: 'Pontos fortes identificados:',
+    recommendationsTitle: 'Recomendações:',
+    cta: 'Escreva para nós',
+    footer:
+      'Estes resultados são indicativos e se baseiam apenas nas suas respostas. Se quiser conversar sobre eles, escreva para nós.',
+    signature: 'Equipe MADFAM',
+  },
+} as const;
 
 export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
   assessmentId,
   score,
-  tier,
   strengths,
   recommendations,
-  language = 'es-MX',
+  language,
 }) => {
-  const content = {
-    'es-MX': {
-      preview: 'Resultados de tu evaluación de preparación para IA',
-      title: 'Resultados de tu Evaluación de Preparación para IA',
-      scoreTitle: 'Tu puntuación:',
-      scoreOf: 'de 100',
-      tierTitle: 'Nivel recomendado:',
-      strengthsTitle: 'Fortalezas identificadas:',
-      recommendationsTitle: 'Recomendaciones:',
-      nextSteps: 'Próximos pasos recomendados:',
-      cta: 'Agendar consulta personalizada',
-      footer:
-        'Nuestro equipo revisará estos resultados y te contactará para discutir cómo podemos ayudarte.',
-      signature: 'Equipo MADFAM',
-    },
-    'en-US': {
-      preview: 'Your AI Readiness Assessment Results',
-      title: 'Your AI Readiness Assessment Results',
-      scoreTitle: 'Your score:',
-      scoreOf: 'out of 100',
-      tierTitle: 'Recommended level:',
-      strengthsTitle: 'Identified strengths:',
-      recommendationsTitle: 'Recommendations:',
-      nextSteps: 'Recommended next steps:',
-      cta: 'Schedule personalized consultation',
-      footer: 'Our team will review these results and contact you to discuss how we can help.',
-      signature: 'MADFAM Team',
-    },
-  };
+  const lang = emailLanguage(language);
+  const t = CONTENT[lang];
 
-  const t = content[language];
-
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return '#10B981'; // Green
-    if (score >= 60) return '#F59E0B'; // Yellow
-    if (score >= 40) return '#EF4444'; // Red
+  const getScoreColor = (value: number) => {
+    if (value >= 80) return '#10B981'; // Green
+    if (value >= 60) return '#F59E0B'; // Yellow
+    if (value >= 40) return '#EF4444'; // Red
     return '#6B7280'; // Gray
   };
 
-  const tierLabels = {
-    'es-MX': {
-      DESIGN_FABRICATION: 'Diseño y Fabricación',
-      STRATEGY_ENABLEMENT: 'Estrategia y Habilitación',
-      PLATFORM_PILOTS: 'Pilotos de Plataforma',
-      STRATEGIC_PARTNERSHIPS: 'Alianzas Estratégicas',
-    },
-    'en-US': {
-      DESIGN_FABRICATION: 'Design & Fabrication',
-      STRATEGY_ENABLEMENT: 'Strategy & Enablement',
-      PLATFORM_PILOTS: 'Platform Pilots',
-      STRATEGIC_PARTNERSHIPS: 'Strategic Partnerships',
-    },
-  };
+  const contactUrl = `${localizedSiteUrl(lang, '/contact')}?ref=assessment&id=${encodeURIComponent(assessmentId)}`;
 
   return (
-    <Html>
+    <Html lang={lang}>
       <Head />
       <Preview>{t.preview}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Img src={`${baseUrl}/logo.png`} width="170" height="50" alt="MADFAM" style={logo} />
+          <Img src={logoUrl()} width="56" height="57" alt="MADFAM" style={logo} />
           <Heading style={h1}>{t.title}</Heading>
 
           <Section style={scoreContainer}>
@@ -104,13 +103,6 @@ export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
               <Text style={{ ...scoreNumber, color: getScoreColor(score) }}>{score}</Text>
               <Text style={scoreLabel}>{t.scoreOf}</Text>
             </div>
-          </Section>
-
-          <Section style={tierContainer}>
-            <Text style={tierLabel}>{t.tierTitle}</Text>
-            <Text style={tierValue}>
-              {tierLabels[language][tier as keyof (typeof tierLabels)[typeof language]] || tier}
-            </Text>
           </Section>
 
           {strengths.length > 0 && (
@@ -136,7 +128,7 @@ export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
           )}
 
           <Section style={buttonContainer}>
-            <Button style={button} href={`${baseUrl}/contact?ref=assessment&id=${assessmentId}`}>
+            <Button style={button} href={contactUrl}>
               {t.cta}
             </Button>
           </Section>
@@ -147,9 +139,11 @@ export const AssessmentResultsEmail: React.FC<AssessmentResultsEmailProps> = ({
 
           <Hr style={hr} />
           <Text style={footer}>
-            <Link href={`${baseUrl}`} style={link}>
+            <Link href={siteUrl()} style={link}>
               madfam.io
             </Link>
+            <br />
+            {ENTITY_LINE}
           </Text>
         </Container>
       </Body>
@@ -220,28 +214,6 @@ const scoreNumber = {
   fontWeight: '700',
   lineHeight: '1',
   margin: '8px 0',
-};
-
-const tierContainer = {
-  textAlign: 'center' as const,
-  margin: '32px 0',
-  padding: '20px',
-  backgroundColor: '#f0f9ff',
-  borderRadius: '8px',
-};
-
-const tierLabel = {
-  color: '#6B7280',
-  fontSize: '14px',
-  fontWeight: '500',
-  margin: '0 0 8px 0',
-};
-
-const tierValue = {
-  color: '#0A0E27',
-  fontSize: '20px',
-  fontWeight: '600',
-  margin: '0',
 };
 
 const section = {

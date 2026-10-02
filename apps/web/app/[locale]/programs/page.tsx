@@ -117,17 +117,10 @@ export default async function ProgramsPage({ params }: Props) {
             </h1>
             <p className="text-xl text-neutral-600 mb-8 leading-relaxed">{t('hero.subtitle')}</p>
 
-            {/* Assessment CTA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href={`/${locale}/assessment`}
-                className="inline-flex items-center justify-center px-8 py-3 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors font-medium"
-              >
-                {t('hero.assessmentCta')}
-              </Link>
-              <Link
                 href={`/${locale}/contact`}
-                className="inline-flex items-center justify-center px-8 py-3 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors font-medium"
+                className="inline-flex items-center justify-center px-8 py-3 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors font-medium"
               >
                 {commonT('nav.contact')}
               </Link>
@@ -217,38 +210,6 @@ export default async function ProgramsPage({ params }: Props) {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Tools Integration */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-neutral-900 mb-8">{t('tools.title')}</h2>
-            <p className="text-xl text-neutral-600 mb-12">{t('tools.description')}</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Link
-                href={`/${locale}/assessment`}
-                className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl hover:border-blue-300 transition-colors group"
-              >
-                <h3 className="font-semibold text-blue-900 mb-2 group-hover:text-blue-700">
-                  {t('tools.assessment.title')}
-                </h3>
-                <p className="text-blue-700 text-sm">{t('tools.assessment.description')}</p>
-              </Link>
-
-              <Link
-                href={`/${locale}/calculator`}
-                className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl hover:border-green-300 transition-colors group"
-              >
-                <h3 className="font-semibold text-green-900 mb-2 group-hover:text-green-700">
-                  {t('tools.calculator.title')}
-                </h3>
-                <p className="text-green-700 text-sm">{t('tools.calculator.description')}</p>
-              </Link>
             </div>
           </div>
         </div>

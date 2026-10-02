@@ -90,6 +90,98 @@ test('a real-looking secret assignment is still reported', () => {
   assert.deepEqual(SecurityAuditor.findSecretAssignments(content), ['API_SECRET']);
 });
 
+// --- Dependency audit (finding S1-005): fail closed, read error.stdout ------
+
+const FIXTURES = path.join(path.dirname(new URL(import.meta.url).pathname), 'fixtures');
+const fixture = name => fs.readFileSync(path.join(FIXTURES, name), 'utf-8');
+
+/** An execSync stand-in that behaves like `pnpm audit` finding something: exit 1, JSON on stdout. */
+function auditExitsNonZeroWith(stdout) {
+  return () => {
+    const error = new Error('Command failed: pnpm audit --json');
+    error.status = 1;
+    error.stdout = stdout;
+    throw error;
+  };
+}
+
+test('non-zero pnpm audit exit: counts come from error.stdout, not zeros', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(auditExitsNonZeroWith(fixture('pnpm-audit-high.json')));
+
+  assert.equal(a.depHigh, 1);
+  assert.equal(a.depModerate, 2);
+  assert.equal(a.depLow, 1);
+  assert.equal(a.depCritical, 0);
+  assert.equal(a.issues.length, 0);
+  const report = a.buildReport();
+  assert.equal(report.summary.dependencies.high, 1);
+});
+
+test('a high-severity fixture fails the run when SECURITY_FAIL_ON=high', async () => {
+  const a = auditor();
+  a.log = () => {};
+  a.failOn = SecurityAuditor.normalizeFailOn('high');
+  await a.checkDependencies(auditExitsNonZeroWith(fixture('pnpm-audit-high.json')));
+
+  assert.equal(a.buildReport().status, 'FAIL');
+  assert.equal(await exitCodeOf(a), 1);
+});
+
+test('a high-severity fixture is reported but passes under the default (critical) threshold', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(auditExitsNonZeroWith(fixture('pnpm-audit-high.json')));
+
+  const report = a.buildReport();
+  assert.equal(report.summary.failOn, 'critical');
+  assert.equal(report.summary.dependencies.high, 1);
+  assert.equal(report.status, 'PASS');
+});
+
+test('a critical-severity fixture fails the run', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(auditExitsNonZeroWith(fixture('pnpm-audit-critical.json')));
+
+  assert.equal(a.depCritical, 1);
+  assert.equal(a.buildReport().status, 'FAIL');
+  assert.equal(await exitCodeOf(a), 1);
+});
+
+test('an audit that cannot run fails closed', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(() => {
+    throw new Error('spawn pnpm ENOENT');
+  });
+
+  assert.equal(a.issues.length, 1);
+  assert.match(a.issues[0].message, /could not run/);
+  assert.equal(a.buildReport().status, 'FAIL');
+});
+
+test('unparseable audit output fails closed', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(auditExitsNonZeroWith('ERR_PNPM_AUDIT_BAD_RESPONSE 503'));
+
+  assert.equal(a.buildReport().status, 'FAIL');
+});
+
+test('a clean audit (exit 0) parses to zeros and passes', async () => {
+  const clean = JSON.stringify({
+    metadata: { vulnerabilities: { info: 0, low: 0, moderate: 0, high: 0, critical: 0 } },
+  });
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(() => clean);
+
+  assert.equal(a.issues.length, 0);
+  assert.equal(a.buildReport().status, 'PASS');
+});
+
 /** Runs generateReport() in a temp cwd with process.exit stubbed, and returns the code. */
 async function exitCodeOf(a) {
   const cwd = process.cwd();
@@ -118,3 +210,89 @@ async function exitCodeOf(a) {
 
   return code;
 }
+
+// --- Security header detection (finding S1-017): next.config.js + middleware --
+
+const NEXT_CONFIG_FIXTURE = `
+const SECURITY_HEADERS = [
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
+];
+`;
+const MIDDLEWARE_FIXTURE = `
+  const response = intlMiddleware(request);
+  response.headers.set('Content-Security-Policy', csp);
+`;
+
+test('headers declared in next.config.js + CSP in middleware pass', () => {
+  assert.deepEqual(
+    SecurityAuditor.missingSecurityHeaders({
+      nextConfig: NEXT_CONFIG_FIXTURE,
+      middleware: MIDDLEWARE_FIXTURE,
+    }),
+    []
+  );
+});
+
+test('headers set in middleware (the old layout) still count', () => {
+  const middleware = `
+    response.headers.set('X-Frame-Options', 'DENY');
+    response.headers.set('X-Content-Type-Options', 'nosniff');
+    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    response.headers.set('Strict-Transport-Security', 'max-age=31536000');
+    response.headers.set('Content-Security-Policy', csp);
+  `;
+  assert.deepEqual(SecurityAuditor.missingSecurityHeaders({ nextConfig: '', middleware }), []);
+});
+
+test('a header that is genuinely absent is reported', () => {
+  const nextConfig = NEXT_CONFIG_FIXTURE.replace(/.*X-Frame-Options.*\n/, '');
+  assert.deepEqual(
+    SecurityAuditor.missingSecurityHeaders({ nextConfig, middleware: MIDDLEWARE_FIXTURE }),
+    ['X-Frame-Options']
+  );
+});
+
+test('a missing CSP is reported', () => {
+  assert.deepEqual(
+    SecurityAuditor.missingSecurityHeaders({ nextConfig: NEXT_CONFIG_FIXTURE, middleware: '' }),
+    ['Content-Security-Policy']
+  );
+});
+
+test('a header named only in a comment does not count', () => {
+  const nextConfig = `${NEXT_CONFIG_FIXTURE.replace(/.*Referrer-Policy.*\n/, '')}
+  // { key: 'Referrer-Policy', value: 'no-referrer' }
+  /* response.headers.set('Referrer-Policy', 'x') */
+  `;
+  assert.deepEqual(
+    SecurityAuditor.missingSecurityHeaders({ nextConfig, middleware: MIDDLEWARE_FIXTURE }),
+    ['Referrer-Policy']
+  );
+});
+
+test('the repository itself declares every required header', () => {
+  const a = new SecurityAuditor();
+  assert.deepEqual(a.checkSecurityHeaders(), { passed: true });
+});
+
+test('a configuration check that throws fails the run instead of passing', async () => {
+  const a = auditor();
+  a.log = () => {};
+  a.checkSecurityHeaders = () => {
+    throw new Error('synthetic');
+  };
+  a.checkInputValidation = () => ({ passed: true });
+  a.checkRateLimiting = () => ({ passed: true });
+  a.checkEnvironmentSecurity = () => ({ passed: true });
+  a.checkApiSecurity = () => ({ passed: true });
+
+  await a.checkSecurityConfigurations();
+
+  assert.equal(a.issues.length, 1);
+  assert.equal(a.issues[0].level, 'critical');
+  assert.match(a.issues[0].message, /Security Headers: check could not run/);
+  assert.equal(a.buildReport().status, 'FAIL');
+});

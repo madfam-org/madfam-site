@@ -4,7 +4,13 @@ import { getTranslations } from 'next-intl/server';
 import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
 import { Container } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
-import { PLATFORMS, LAYERS, isComingSoon, hasFreeTier } from '@/lib/data/platforms';
+import {
+  PLATFORMS,
+  LAYERS,
+  isComingSoon,
+  hasFreeTier,
+  lifecycleLabelKey,
+} from '@/lib/data/platforms';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -126,9 +132,7 @@ export default async function PlatformsPage({ params }: Props) {
                                 : platformsT(`shared.access.${platform.track}`)}
                             </span>
                             <Badge variant="program" className="text-[10px]">
-                              {platformsT(
-                                `shared.status.${platform.status === 'production' ? 'production' : 'productionBeta'}`
-                              )}
+                              {platformsT(lifecycleLabelKey(platform))}
                             </Badge>
                           </div>
                         </Link>

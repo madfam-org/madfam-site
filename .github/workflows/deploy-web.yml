@@ -91,11 +91,17 @@ jobs:
           # has to arrive here, not in the runtime Secret.
           # GIT_SHA/BUILD_TIME feed /api/version and the OCI revision label
           # (findings S1-008/S1-011); NEXT_PUBLIC_ENV fixes S1-022.
+          #
+          # NEXT_PUBLIC_PLAUSIBLE_DOMAIN is deliberately NOT passed (S1-017,
+          # C-026): plausible.madfam.io does not resolve yet (operator item
+          # O49), so the tag only produced failing requests. With the domain
+          # unset the layout renders no Plausible script and the CSP drops the
+          # origin. Re-add `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io` here once
+          # O49 is done; the code path is unchanged.
           build-args: |
             GIT_SHA=${{ github.sha }}
             BUILD_TIME=${{ steps.meta.outputs.build_time }}
             NEXT_PUBLIC_ENV=production
-            NEXT_PUBLIC_PLAUSIBLE_DOMAIN=${{ vars.PLAUSIBLE_DOMAIN || 'madfam.io' }}
             NEXT_PUBLIC_PLAUSIBLE_HOST=${{ vars.PLAUSIBLE_HOST || 'https://plausible.madfam.io' }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}

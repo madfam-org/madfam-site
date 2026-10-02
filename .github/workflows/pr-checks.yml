@@ -7,7 +7,8 @@ on:
 jobs:
   pr-validation:
     name: PR Validation
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
+    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    timeout-minutes: 5
 
     steps:
       - name: Checkout code
@@ -34,7 +35,8 @@ jobs:
 
   changed-files:
     name: Detect Changed Files
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
+    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    timeout-minutes: 5
     outputs:
       web: ${{ steps.filter.outputs.web }}
       packages: ${{ steps.filter.outputs.packages }}
@@ -59,9 +61,12 @@ jobs:
 
   lighthouse:
     name: Lighthouse CI
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
+    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    timeout-minutes: 25
     needs: changed-files
     if: needs.changed-files.outputs.web == 'true'
+    outputs:
+      outcome: ${{ steps.lhci.outcome }}
 
     steps:
       - name: Checkout code
@@ -93,18 +98,29 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
 
+      # Real Lighthouse run against the standalone server (lighthouserc.js).
+      # Advisory until the pre-existing assertion failures are fixed: the
+      # outcome is reported in the job summary and the PR comment instead of
+      # the old `command -v lhci` guard that skipped it silently (S1-004).
       - name: Run Lighthouse CI
-        run: |
-          if command -v lhci &> /dev/null; then
-            pnpm exec lhci autorun || echo "Lighthouse CI not fully configured"
-          fi
+        id: lhci
+        run: pnpm exec lhci autorun
         env:
+          SKIP_ENV_VALIDATION: true
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         continue-on-error: true
 
+      - name: Summarize Lighthouse
+        if: always()
+        env:
+          OUTCOME: ${{ steps.lhci.outcome }}
+        run: |
+          echo "### Lighthouse CI (advisory): ${OUTCOME}" >> "$GITHUB_STEP_SUMMARY"
+
   size-limit:
     name: Bundle Size Check
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
+    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    timeout-minutes: 25
     needs: changed-files
     if: needs.changed-files.outputs.web == 'true'
 
@@ -138,20 +154,23 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
 
+      # Blocking bundle budgets (.bundlewatch.config.js). This used to sit
+      # behind `command -v bundlewatch`, which is always false for a local
+      # devDependency, so it never ran (S1-004).
       - name: Check bundle size
-        run: |
-          if command -v bundlewatch &> /dev/null; then
-            pnpm exec bundlewatch || echo "Bundle size check not configured"
-          fi
+        run: pnpm exec bundlewatch --config .bundlewatch.config.js
         env:
           BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
-        continue-on-error: true
 
   accessibility:
-    name: Accessibility Tests
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
+    name: Accessibility + E2E smoke
+    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    timeout-minutes: 30
     needs: changed-files
     if: needs.changed-files.outputs.web == 'true'
+    outputs:
+      a11y: ${{ steps.a11y.outcome }}
+      e2e: ${{ steps.e2e.outcome }}
 
     steps:
       - name: Checkout code
@@ -184,16 +203,63 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
 
+      # Playwright's webServer boots the standalone server from this build
+      # (`serve:standalone`), the same server the image runs. The job never
+      # built before, and the spec sat outside testDir ("No tests found").
+      - name: Build
+        run: pnpm build
+        env:
+          SKIP_ENV_VALIDATION: true
+          NODE_ENV: production
+
+      # Advisory until the pre-existing violations are fixed; the outcome is
+      # reported in the summary and the PR comment (S1-004).
       - name: Run accessibility tests
+        id: a11y
         run: |
           cd apps/web
-          pnpm test:a11y || echo "Accessibility tests not configured"
+          pnpm test:a11y --project=chromium
+        env:
+          SKIP_ENV_VALIDATION: true
         continue-on-error: true
+
+      - name: Run e2e smoke
+        id: e2e
+        run: |
+          cd apps/web
+          pnpm exec playwright test --grep-invert @accessibility --project=chromium
+        env:
+          SKIP_ENV_VALIDATION: true
+        continue-on-error: true
+
+      - name: Summarize browser checks
+        if: always()
+        env:
+          A11Y: ${{ steps.a11y.outcome }}
+          E2E: ${{ steps.e2e.outcome }}
+        run: |
+          {
+            echo "### Browser checks (advisory)"
+            echo "| Check | Outcome |"
+            echo "|---|---|"
+            echo "| Accessibility (axe, @accessibility) | ${A11Y} |"
+            echo "| E2E smoke (standalone server) | ${E2E} |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report/
+          retention-days: 14
+          if-no-files-found: ignore
 
   comment:
     name: PR Comment
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
-    needs: [pr-validation, lighthouse, size-limit]
+    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    timeout-minutes: 5
+    needs: [pr-validation, changed-files, lighthouse, size-limit, accessibility]
     if: always()
     permissions:
       pull-requests: write
@@ -202,8 +268,58 @@ jobs:
     steps:
       - name: Comment PR
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_VALIDATION: ${{ needs.pr-validation.result }}
+          WEB_CHANGED: ${{ needs.changed-files.outputs.web }}
+          BUNDLE: ${{ needs.size-limit.result }}
+          LIGHTHOUSE: ${{ needs.lighthouse.outputs.outcome || needs.lighthouse.result }}
+          A11Y: ${{ needs.accessibility.outputs.a11y || needs.accessibility.result }}
+          E2E: ${{ needs.accessibility.outputs.e2e || needs.accessibility.result }}
         with:
           script: |
+            // The comment reports what actually happened. It used to say
+            // "All quality checks completed!" whatever the results (S1-004).
+            const env = process.env;
+            const icon = r =>
+              ({ success: '✅', failure: '❌', cancelled: '⚪', skipped: '⏭️' })[r] || '❔';
+            const blocking = [
+              ['PR title', env.PR_VALIDATION],
+              ['Bundle size budgets', env.BUNDLE],
+            ];
+            const advisory = [
+              ['Lighthouse CI', env.LIGHTHOUSE],
+              ['Accessibility (axe)', env.A11Y],
+              ['E2E smoke (standalone server)', env.E2E],
+            ];
+            const blockingFailed = blocking.some(([, r]) => r === 'failure' || r === 'cancelled');
+            const advisoryFailed = advisory.some(([, r]) => r === 'failure');
+            const headline = blockingFailed
+              ? '❌ A blocking check failed.'
+              : advisoryFailed
+                ? '⚠️ Blocking checks passed; advisory checks report failures (see the job summaries).'
+                : '✅ All checks that ran passed.';
+            const row = ([name, r]) => `| ${name} | ${icon(r)} ${r || 'n/a'} |`;
+            const note =
+              env.WEB_CHANGED === 'true'
+                ? ''
+                : '\n_No `apps/web/**` or `packages/**` changes: browser and bundle checks were skipped._\n';
+
+            const output = [
+              '## Quality Gates Report',
+              '',
+              headline,
+              note,
+              '| Blocking | Result |',
+              '|---|---|',
+              ...blocking.map(row),
+              '',
+              '| Advisory (does not block) | Result |',
+              '|---|---|',
+              ...advisory.map(row),
+              '',
+              `[Workflow run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`,
+            ].join('\n');
+
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -214,28 +330,18 @@ jobs:
               return comment.user.type === 'Bot' && comment.body.includes('Quality Gates Report');
             });
 
-            const output = `## Quality Gates Report
-
-            ✅ All quality checks completed!
-
-            - PR Validation: ${{ needs.pr-validation.result }}
-            - Lighthouse: ${{ needs.lighthouse.result }}
-            - Bundle Size: ${{ needs.size-limit.result }}
-
-            *This is an automated message*`;
-
             if (botComment) {
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 comment_id: botComment.id,
-                body: output
+                body: output,
               });
             } else {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: output
+                body: output,
               });
             }

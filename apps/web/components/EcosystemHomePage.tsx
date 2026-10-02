@@ -10,7 +10,6 @@ import { EcosystemLayerGrid } from '@/components/ecosystem/EcosystemLayerGrid';
 import { EcosystemFlowDiagram } from '@/components/ecosystem/EcosystemFlowDiagram';
 import { PersonaCards } from '@/components/ecosystem/PersonaCards';
 import { OfferPathRouter } from '@/components/ecosystem/OfferPathRouter';
-import { MetricsBar } from '@/components/ecosystem/MetricsBar';
 import { getLicenseSummary, getSelfServeNames } from '@/lib/data/platforms';
 
 // ─── Maker Node Services ──────────────────────────────────────────────────────
@@ -396,8 +395,8 @@ export function EcosystemHomePage() {
         </Container>
       </section>
 
-      {/* ── 7. Metrics Bar (proof points) ────────────────────────────────── */}
-      <MetricsBar />
+      {/* ── 7. (removed) Metrics bar: its two counters were not owned by the
+           registry and server-rendered "0" (R11, finding L1-017 / M1-007). ── */}
 
       {/* ── 8. Final CTA ─────────────────────────────────────────────────── */}
       <section

@@ -1,61 +1,4 @@
 {
-  "api": {
-    "title": "Referência API",
-    "subtitle": "Referência completa para endpoints da API MADFAM, autenticação e exemplos de integração.",
-    "baseUrl": "URL base",
-    "authentication": "Autenticação",
-    "assessment": "Avaliação",
-    "calculator": "Calculadora",
-    "leads": "Leads",
-    "codeExamples": "Exemplos de código",
-    "authExample": "Exemplo de autenticação",
-    "assessmentExample": "Envio de avaliação",
-    "categories": {
-      "authentication": "Autenticação",
-      "assessment": "Avaliação IA",
-      "calculator": "Calculadora ROI",
-      "leads": "Gestão de Leads"
-    },
-    "docs": {
-      "authGuide": "Guia de Autenticação",
-      "rateLimits": "Limites e Cotas",
-      "errorCodes": "Referência de Códigos de Erro",
-      "sdks": "SDKs e Bibliotecas"
-    },
-    "rateLimiting": {
-      "title": "Limite de requisições",
-      "subtitle": "Requisições de API são limitadas para garantir uso justo e estabilidade do sistema.",
-      "perMinute": "Requisições por minuto",
-      "perHour": "Requisições por hora",
-      "perDay": "Requisições por dia"
-    },
-    "endpoints": {
-      "auth": {
-        "login": "Autenticar usuário e receber token de acesso",
-        "refresh": "Atualizar token de acesso usando token de atualização",
-        "logout": "Invalidar sessão e tokens do usuário"
-      },
-      "assessment": {
-        "submit": "Enviar avaliação de prontidão IA",
-        "retrieve": "Recuperar resultados da avaliação"
-      },
-      "calculator": {
-        "calculate": "Calcular ROI baseado em parâmetros de entrada",
-        "presets": "Obter presets de cálculo específicos por indústria"
-      },
-      "leads": {
-        "submit": "Enviar um novo lead",
-        "list": "Listar todos os leads (somente admin)",
-        "update": "Atualizar status do lead"
-      }
-    },
-    "quickLinks": {
-      "authGuide": "Guia de Autenticação",
-      "rateLimits": "Limites de Taxa",
-      "errorCodes": "Códigos de Erro",
-      "sdks": "SDKs e Bibliotecas"
-    }
-  },
   "dashboard": {
     "title": "Painel",
     "welcome": "Bem-vindo de volta",
@@ -91,7 +34,6 @@
     "helpfulLinks": "Links úteis",
     "products": "Produtos",
     "about": "Sobre nós",
-    "contact": "Contato",
-    "aiAssessment": "Avaliação IA"
+    "contact": "Contato"
   }
 }
