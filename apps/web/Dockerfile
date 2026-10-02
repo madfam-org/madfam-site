@@ -37,6 +37,11 @@ ARG NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io
 ENV NEXT_PUBLIC_PLAUSIBLE_DOMAIN=${NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
 ARG NEXT_PUBLIC_PLAUSIBLE_HOST=https://plausible.madfam.io
 ENV NEXT_PUBLIC_PLAUSIBLE_HOST=${NEXT_PUBLIC_PLAUSIBLE_HOST}
+# This Dockerfile builds the production image only (Dockerfile.dev is the dev
+# one). Without it lib/environment.ts falls back to 'development' and
+# /api/feature-flags reported prod as development (finding S1-022).
+ARG NEXT_PUBLIC_ENV=production
+ENV NEXT_PUBLIC_ENV=${NEXT_PUBLIC_ENV}
 # Build the web app
 RUN pnpm turbo build --filter=@madfam-site/web
 
@@ -60,5 +65,18 @@ USER nextjs
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+ARG NEXT_PUBLIC_ENV=production
+ENV NEXT_PUBLIC_ENV=${NEXT_PUBLIC_ENV}
+
+# Deploy proof (findings S1-008/S1-011): the commit and build time are baked in
+# last so the layers above stay cacheable. /api/version serves them and the
+# Deploy Web `verify` job polls it until production answers the merged SHA.
+ARG GIT_SHA=unknown
+ARG BUILD_TIME=unknown
+ENV GIT_SHA=${GIT_SHA}
+ENV BUILD_TIME=${BUILD_TIME}
+LABEL org.opencontainers.image.source="https://github.com/madfam-org/madfam-site" \
+      org.opencontainers.image.revision="${GIT_SHA}" \
+      org.opencontainers.image.created="${BUILD_TIME}"
 
 CMD ["node", "apps/web/server.js"]

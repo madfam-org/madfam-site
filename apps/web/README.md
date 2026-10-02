@@ -97,7 +97,9 @@ API_SECRET=your-secret-key
 - `/api/leads` - Lead capture and management
 - `/api/assessment` - Assessment processing (coming soon)
 - `/api/calculator` - ROI calculations (coming soon)
-- `/api/health` - Health check endpoint
+- `/api/health` - Readiness/health (downstream services informational, `unknown` when unset)
+- `/api/health/live` - Liveness (process only)
+- `/api/version` - Deployed commit SHA and build time
 
 ## Components
 
