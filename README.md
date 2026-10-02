@@ -158,50 +158,35 @@ Three conversion paths into the MADFAM ecosystem:
 
 ### Key Pages & Routes
 
-All routes support internationalization with Spanish (es), English (en), and Portuguese (pt) locales:
+Every route is locale-prefixed (`/es`, `/en`, `/pt`); `apps/web/app/[locale]/` is the source of truth.
 
-**Public Pages**
+**Public pages**
 
-- `/` - Ecosystem homepage (solarpunk landing)
-- `/ecosystem` - Ecosystem Membership page (pricing, comparison, FAQ)
-- `/products` - Platform showcase with Free/Pro tier badges
-- `/solutions` - Primavera Maker Node, Co-Labs, and Showtech
-- `/solutions/maker-node` - Primavera Maker Node dedicated page
-- `/programs` - Creator programs (Launch, Scale, Partner)
-- `/about` - Company information
-- `/impact` - ESG and sustainability metrics
-
-**Interactive Tools**
-
-- `/assessment` - AI capability assessment tool
-- `/calculator` - ROI and cost calculator
-- `/estimator` - Project estimation tool
-
-**Content**
-
-- `/blog` - Articles and guides
-- `/case-studies` - Customer success stories
-- `/showcase` - Technology demonstrations
-- `/guides` - Documentation and tutorials
-
-**Demos**
-
-- `/demo/dhanam` - Financial wellness platform demo
-- `/demo/forge-sight` - Analytics platform demo
-
-**User Portal**
-
-- `/dashboard` - User dashboard and analytics
-- `/auth/signin` - Authentication page
-
-**Legal**
-
-- `/privacy` - Privacy policy
-- `/terms` - Terms of service
-- `/cookies` - Cookie policy
+- `/` - Home
+- `/ecosystem` - Ecosystem overview
+- `/value-ladder` - The value ladder
+- `/platforms`, `/platforms/[slug]` - The platform catalog and one page per platform
+- `/products` - Products
+- `/solutions`, `/solutions/maker-node`, `/solutions/colabs` - Solutions
+- `/programs` - Programs
+- `/nauta` - Nauta
+- `/impact` - Impact
+- `/about` - About
+- `/careers` - Careers
 - `/contact` - Contact form
 
-> **Note**: Routes are automatically localized. For example, `/products` becomes `/es/productos` in Spanish and `/pt/produtos` in Portuguese.
+**Legal and email**
+
+- `/privacy`, `/terms`, `/cookies` - Legal notices
+- `/unsubscribe` - Email opt-out
+
+**Removed routes** redirect. Permanent (308): `/case-studies`, `/docs`, `/api`, `/guides` → `/platforms`;
+`/blog` → home; `/estimator`, `/calculator`, `/assessment` → `/contact`; `/services` → `/programs`.
+Temporary (307): `/showcase` → `/platforms`; `/dashboard` → home; `/auth/*` → Janua;
+`/demo/dhanam`, `/demo/forge-sight` → the product sites.
+
+Localized slugs such as `/es/productos` are rewrites: they serve the same page, whose canonical URL
+stays `/es/products`.
 
 ## 🛠️ Technology Stack
 
@@ -272,21 +257,17 @@ The Docker configuration includes:
 
 ## 🔌 API Routes
 
-The application provides a comprehensive REST API:
+The API lives in `apps/web/app/api/`:
 
-### Core Endpoints
-
-- `/api/assessment/*` - AI capability assessment processing and results
-- `/api/calculator/*` - ROI and project cost calculations
-- `/api/leads/*` - Lead management, scoring, and activity tracking
-- `/api/auth/*` - Janua authentication endpoints
-
-### Utility Endpoints
-
-- `/api/csrf-token` - CSRF token generation for security
-- `/api/feature-flags` - Environment-specific feature flag retrieval
-- `/api/logs` - Application logging and monitoring
-- `/api/webhook/*` - External integrations (n8n, Slack, etc.)
+- `/api/leads` - Lead capture from the contact form (`/api/leads/demo`, for the removed demo pages, is no longer called by the site)
+- `/api/search` - Site search
+- `/api/unsubscribe` - Email opt-out
+- `/api/feature-flags` - Environment-specific feature flags
+- `/api/logs` - Client log intake
+- `/api/webhook/n8n`, `/api/webhook/cms` - Webhook receivers (the CMS is retired, R52)
+- `/api/health` - Readiness; downstream services are informational and report `unknown` when unset
+- `/api/health/live` - Liveness (process only)
+- `/api/version` - Deployed commit SHA and build time; the Deploy Web verify job waits for it to serve the new commit
 
 ### Security Features
 
