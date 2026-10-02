@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { Badge } from '@/components/corporate/Badge';
-import { PLATFORMS, isComingSoon } from '@/lib/data/platforms';
+import { PLATFORMS, hasFreeTier, isComingSoon } from '@/lib/data/platforms';
 
 interface PlatformGridProps {
   /** Optional heading override — defaults to the `ecosystem.platformGrid.title` translation */
@@ -13,6 +13,10 @@ interface PlatformGridProps {
 export function PlatformGrid({ title }: PlatformGridProps = {}) {
   const t = useTranslations('ecosystem.platformGrid');
   const tMaker = useTranslations('ecosystem.makerNode');
+  // Tier chips use the same registry-backed wording as /platforms (finding
+  // M1-004 / C-010): a "free tier" chip only where the registry lists a `free`
+  // tier, otherwise a plain self-serve chip. No hard-coded "Free + Pro".
+  const tPlatforms = useTranslations('platforms.shared');
   const locale = useLocale();
 
   const heading = title ?? t('title');
@@ -60,14 +64,9 @@ export function PlatformGrid({ title }: PlatformGridProps = {}) {
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{platform.category}</p>
                 <div className="flex items-center gap-2">
                   {platform.track === 'self-serve' ? (
-                    <>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
-                        {t('freeTier')}
-                      </span>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-leaf/10 text-leaf border border-leaf/20">
-                        {t('proTier')}
-                      </span>
-                    </>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                      {tPlatforms(hasFreeTier(platform.slug) ? 'freeTier' : 'badges.selfServe')}
+                    </span>
                   ) : (
                     <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
                       {platform.track === 'platform' ? t('platformAccess') : t('ecosystemAccess')}
