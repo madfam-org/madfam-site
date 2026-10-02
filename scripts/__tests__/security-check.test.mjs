@@ -210,3 +210,89 @@ async function exitCodeOf(a) {
 
   return code;
 }
+
+// --- Security header detection (finding S1-017): next.config.js + middleware --
+
+const NEXT_CONFIG_FIXTURE = `
+const SECURITY_HEADERS = [
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
+];
+`;
+const MIDDLEWARE_FIXTURE = `
+  const response = intlMiddleware(request);
+  response.headers.set('Content-Security-Policy', csp);
+`;
+
+test('headers declared in next.config.js + CSP in middleware pass', () => {
+  assert.deepEqual(
+    SecurityAuditor.missingSecurityHeaders({
+      nextConfig: NEXT_CONFIG_FIXTURE,
+      middleware: MIDDLEWARE_FIXTURE,
+    }),
+    []
+  );
+});
+
+test('headers set in middleware (the old layout) still count', () => {
+  const middleware = `
+    response.headers.set('X-Frame-Options', 'DENY');
+    response.headers.set('X-Content-Type-Options', 'nosniff');
+    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    response.headers.set('Strict-Transport-Security', 'max-age=31536000');
+    response.headers.set('Content-Security-Policy', csp);
+  `;
+  assert.deepEqual(SecurityAuditor.missingSecurityHeaders({ nextConfig: '', middleware }), []);
+});
+
+test('a header that is genuinely absent is reported', () => {
+  const nextConfig = NEXT_CONFIG_FIXTURE.replace(/.*X-Frame-Options.*\n/, '');
+  assert.deepEqual(
+    SecurityAuditor.missingSecurityHeaders({ nextConfig, middleware: MIDDLEWARE_FIXTURE }),
+    ['X-Frame-Options']
+  );
+});
+
+test('a missing CSP is reported', () => {
+  assert.deepEqual(
+    SecurityAuditor.missingSecurityHeaders({ nextConfig: NEXT_CONFIG_FIXTURE, middleware: '' }),
+    ['Content-Security-Policy']
+  );
+});
+
+test('a header named only in a comment does not count', () => {
+  const nextConfig = `${NEXT_CONFIG_FIXTURE.replace(/.*Referrer-Policy.*\n/, '')}
+  // { key: 'Referrer-Policy', value: 'no-referrer' }
+  /* response.headers.set('Referrer-Policy', 'x') */
+  `;
+  assert.deepEqual(
+    SecurityAuditor.missingSecurityHeaders({ nextConfig, middleware: MIDDLEWARE_FIXTURE }),
+    ['Referrer-Policy']
+  );
+});
+
+test('the repository itself declares every required header', () => {
+  const a = new SecurityAuditor();
+  assert.deepEqual(a.checkSecurityHeaders(), { passed: true });
+});
+
+test('a configuration check that throws fails the run instead of passing', async () => {
+  const a = auditor();
+  a.log = () => {};
+  a.checkSecurityHeaders = () => {
+    throw new Error('synthetic');
+  };
+  a.checkInputValidation = () => ({ passed: true });
+  a.checkRateLimiting = () => ({ passed: true });
+  a.checkEnvironmentSecurity = () => ({ passed: true });
+  a.checkApiSecurity = () => ({ passed: true });
+
+  await a.checkSecurityConfigurations();
+
+  assert.equal(a.issues.length, 1);
+  assert.equal(a.issues[0].level, 'critical');
+  assert.match(a.issues[0].message, /Security Headers: check could not run/);
+  assert.equal(a.buildReport().status, 'FAIL');
+});

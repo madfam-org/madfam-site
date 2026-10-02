@@ -167,38 +167,86 @@ class SecurityAuditor {
           });
         }
       } catch (error) {
-        this.log(`${check.name}: Check failed - ${error.message}`, 'warn');
+        // Fail closed: a check that cannot run proves nothing. It used to be
+        // logged as a warning and the run still passed.
+        this.log(`${check.name}: Check failed - ${error.message}`, 'error');
+        this.issues.push({
+          level: check.critical ? 'critical' : 'moderate',
+          message: `${check.name}: check could not run (${error.message})`,
+          details: {},
+        });
       }
     }
   }
 
+  /**
+   * Security headers are declared in two places (finding S1-017): the static
+   * set in `headers()` of apps/web/next.config.js (every path), and the
+   * per-request nonce CSP in apps/web/middleware.ts. A header counts only when
+   * it is actually declared — a `key: '<Name>'` entry in next.config.js or a
+   * `headers.set('<Name>', …)` call in middleware.ts — not when its name merely
+   * appears in a comment.
+   */
   checkSecurityHeaders() {
-    const middlewareFiles = ['apps/web/middleware.ts', 'apps/web/app/middleware.ts'];
-
-    const requiredHeaders = ['X-Frame-Options', 'X-Content-Type-Options', 'Referrer-Policy'];
-
-    for (const file of middlewareFiles) {
-      if (fs.existsSync(file)) {
-        const content = fs.readFileSync(file, 'utf-8');
-        const missingHeaders = requiredHeaders.filter(header => !content.includes(header));
-
-        if (missingHeaders.length === 0) {
-          return { passed: true };
-        } else {
-          return {
-            passed: false,
-            message: `Missing security headers: ${missingHeaders.join(', ')}`,
-            details: { file, missingHeaders },
-          };
-        }
-      }
+    const sources = {
+      nextConfig: 'apps/web/next.config.js',
+      middleware: 'apps/web/middleware.ts',
+    };
+    const missingFiles = Object.values(sources).filter(file => !fs.existsSync(file));
+    if (missingFiles.length > 0) {
+      return {
+        passed: false,
+        message: `Security header sources not found: ${missingFiles.join(', ')}`,
+        details: { expectedFiles: Object.values(sources) },
+      };
     }
 
+    const missingHeaders = SecurityAuditor.missingSecurityHeaders({
+      nextConfig: fs.readFileSync(sources.nextConfig, 'utf-8'),
+      middleware: fs.readFileSync(sources.middleware, 'utf-8'),
+    });
+
+    if (missingHeaders.length === 0) {
+      return { passed: true };
+    }
     return {
       passed: false,
-      message: 'No security middleware found',
-      details: { expectedFiles: middlewareFiles },
+      message: `Missing security headers: ${missingHeaders.join(', ')}`,
+      details: { sources, missingHeaders },
     };
+  }
+
+  /**
+   * A getter, not a property assigned after the class: the CLI entry point
+   * starts the audit before the end of this module has run.
+   */
+  static get REQUIRED_SECURITY_HEADERS() {
+    return [
+      'Content-Security-Policy',
+      'X-Frame-Options',
+      'X-Content-Type-Options',
+      'Referrer-Policy',
+      'Strict-Transport-Security',
+    ];
+  }
+
+  static missingSecurityHeaders({ nextConfig = '', middleware = '' }) {
+    const stripComments = text =>
+      text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    const declared = new Set();
+    const collect = (text, pattern) => {
+      for (const match of stripComments(text).matchAll(pattern)) {
+        declared.add(match[1].toLowerCase());
+      }
+    };
+    collect(nextConfig, /\bkey:\s*['"]([\w-]+)['"]/g);
+    collect(middleware, /headers\.set\(\s*['"]([\w-]+)['"]/g);
+    collect(nextConfig, /headers\.set\(\s*['"]([\w-]+)['"]/g);
+    collect(middleware, /\bkey:\s*['"]([\w-]+)['"]/g);
+
+    return SecurityAuditor.REQUIRED_SECURITY_HEADERS.filter(
+      header => !declared.has(header.toLowerCase())
+    );
   }
 
   checkInputValidation() {

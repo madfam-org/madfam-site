@@ -6,9 +6,29 @@ const { removedSurfaceRedirects } = require('./lib/removed-surfaces.js');
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
+/**
+ * Security headers for every response. `X-XSS-Protection: 0` disables the
+ * legacy XSS auditor, which modern guidance recommends over `1; mode=block`
+ * (the auditor itself could be abused); the CSP is the real protection.
+ */
+const SECURITY_HEADERS = [
+  { key: 'X-DNS-Prefetch-Control', value: 'on' },
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'X-XSS-Protection', value: '0' },
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+  },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // No `X-Powered-By: Next.js` (finding S1-017).
+  poweredByHeader: false,
   transpilePackages: [
     '@madfam-site/ui',
     '@madfam-site/core',
@@ -225,40 +245,15 @@ const nextConfig = {
     return rewrites;
   },
 
+  // Single source for the static security headers (finding S1-017). They
+  // apply to every path — pages, /_next/static, /_next/image and /api — so
+  // all responses agree. middleware.ts adds only the per-request,
+  // nonce-based Content-Security-Policy on pages.
   async headers() {
     return [
       {
         source: '/:path*',
-        headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains',
-          },
-        ],
+        headers: SECURITY_HEADERS,
       },
       // API Routes specific headers
       {
