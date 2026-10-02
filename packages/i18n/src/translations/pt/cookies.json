@@ -66,31 +66,20 @@
     }
   },
   "banner": {
-    "title": "Usamos cookies",
-    "description": "Utilizamos cookies para melhorar sua experiência, analisar o tráfego do site e personalizar conteúdo. Você pode personalizar suas preferências ou aceitar todos os cookies.",
-    "acceptAll": "Aceitar Todos",
-    "necessaryOnly": "Apenas Necessários",
-    "customize": "Personalizar",
-    "closeAriaLabel": "Fechar banner de cookies"
-  },
-  "settings": {
-    "title": "Preferências de Cookies",
-    "save": "Salvar Preferências",
-    "cancel": "Cancelar",
+    "title": "Cookies neste site",
+    "description": "Usamos apenas cookies necessários e de preferência. Não usamos cookies analíticos nem de publicidade: nossa análise (Plausible, hospedado por nós) funciona sem cookies.",
     "necessary": {
-      "title": "Cookies Necessários",
-      "description": "Estes cookies são essenciais para o funcionamento adequado do site. Não podem ser desabilitados."
+      "title": "Necessários",
+      "description": "fazem o site funcionar e o protegem contra tráfego automatizado."
     },
-    "analytics": {
-      "title": "Cookies Analíticos",
-      "description": "Nos ajudam a entender como os visitantes interagem com nosso site coletando informações de forma anônima."
+    "preference": {
+      "title": "De preferência",
+      "description": "lembram o idioma que você escolheu."
     },
-    "marketing": {
-      "title": "Cookies de Marketing",
-      "description": "Usados para rastrear visitantes em sites para permitir que editores exibam anúncios relevantes e interessantes."
-    }
+    "dismiss": "Entendi",
+    "closeAriaLabel": "Fechar aviso de cookies"
   },
   "footer": {
-    "text": "Ao continuar usando nosso site, você consente nosso uso de cookies conforme descrito em nossa <privacy>Política de Privacidade</privacy> e <terms>Termos de Serviço</terms>."
+    "text": "Detalhes na nossa <cookies>Política de Cookies</cookies> e na nossa <privacy>Política de Privacidade</privacy>."
   }
 }
