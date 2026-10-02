@@ -154,7 +154,14 @@ class SecurityAuditor {
           });
         }
       } catch (error) {
-        this.log(`${check.name}: Check failed - ${error.message}`, 'warn');
+        // Fail closed: a check that cannot run proves nothing. It used to be
+        // logged as a warning and the run still passed.
+        this.log(`${check.name}: Check failed - ${error.message}`, 'error');
+        this.issues.push({
+          level: check.critical ? 'critical' : 'moderate',
+          message: `${check.name}: check could not run (${error.message})`,
+          details: {},
+        });
       }
     }
   }
@@ -194,6 +201,20 @@ class SecurityAuditor {
       message: `Missing security headers: ${missingHeaders.join(', ')}`,
       details: { sources, missingHeaders },
     };
+  }
+
+  /**
+   * A getter, not a property assigned after the class: the CLI entry point
+   * starts the audit before the end of this module has run.
+   */
+  static get REQUIRED_SECURITY_HEADERS() {
+    return [
+      'Content-Security-Policy',
+      'X-Frame-Options',
+      'X-Content-Type-Options',
+      'Referrer-Policy',
+      'Strict-Transport-Security',
+    ];
   }
 
   static missingSecurityHeaders({ nextConfig = '', middleware = '' }) {
@@ -562,13 +583,5 @@ if (require.main === module) {
     process.exit(1);
   });
 }
-
-SecurityAuditor.REQUIRED_SECURITY_HEADERS = [
-  'Content-Security-Policy',
-  'X-Frame-Options',
-  'X-Content-Type-Options',
-  'Referrer-Policy',
-  'Strict-Transport-Security',
-];
 
 module.exports = SecurityAuditor;
