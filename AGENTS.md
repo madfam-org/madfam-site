@@ -424,7 +424,7 @@ pnpm test
 - Nonce-based CSP with `strict-dynamic` for script-src
 - Input validation with Zod
 - Redis-backed rate limiting (falls back to in-memory)
-- Sentry error tracking (guarded by env var)
+- No third-party error tracker: Sentry was removed (ruling PL-2, 2026-10-01)
 - No secrets in code
 - Sanitize user content
 - Use environment variables

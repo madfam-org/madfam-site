@@ -16,12 +16,6 @@ export default function Error({
   const locale = useLocale();
 
   useEffect(() => {
-    // Report to Sentry if configured
-    import('@sentry/nextjs').then(Sentry => {
-      if (Sentry.isInitialized()) {
-        Sentry.captureException(error);
-      }
-    });
     console.error('Application error:', error);
   }, [error]);
 

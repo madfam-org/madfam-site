@@ -310,14 +310,6 @@ const nextConfig = {
   },
 };
 
-// Sentry integration (only when DSN is configured)
-const { withSentryConfig } =
-  process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
-    ? // eslint-disable-next-line @typescript-eslint/no-require-imports
-      require('@sentry/nextjs')
-    : { withSentryConfig: config => config };
-
-module.exports = withSentryConfig(withNextIntl(nextConfig), {
-  silent: true,
-  hideSourceMaps: true,
-});
+// Sentry was removed (ruling PL-2, 2026-10-01): it was inert (no
+// instrumentation.ts, no DSN at build) and carried open advisories.
+module.exports = withNextIntl(nextConfig);
