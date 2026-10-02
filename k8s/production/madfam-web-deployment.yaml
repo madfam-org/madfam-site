@@ -1,3 +1,6 @@
+# Boundary checkpoint (2026-10-01, madfam-site): public-safe manifest shape only; no node
+# identity, IPs or secret values belong here (public sink). Policy:
+# internal-devops/docs/repo-boundary-contract.md
 ---
 apiVersion: apps/v1
 kind: Deployment
