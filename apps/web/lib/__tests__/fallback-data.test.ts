@@ -50,17 +50,6 @@ import {
 } from '../fallback-data';
 
 describe('Fallback Data Manager', () => {
-  const BLOG_SLUGS = [
-    'future-ai-business-transformation',
-    'building-scalable-digital-platforms',
-    'customer-success-automation',
-  ] as const;
-
-  const CASE_STUDY_SLUGS = [
-    'makerspace-fabrication-automation',
-    'agriexport-ai-transformation',
-  ] as const;
-
   it('FALLBACK_DATA_VERSION is defined as 1.0.0', () => {
     expect(FALLBACK_DATA_VERSION).toBe('1.0.0');
   });
@@ -74,25 +63,14 @@ describe('Fallback Data Manager', () => {
   });
 
   describe('getBlogPosts', () => {
-    it('returns all 3 fallback blog posts', () => {
-      const posts = fallbackDataManager.getBlogPosts();
-
-      expect(posts).toHaveLength(3);
-      const slugs = posts.map(p => p.slug);
-      for (const slug of BLOG_SLUGS) {
-        expect(slugs).toContain(slug);
-      }
+    it('carries no fallback blog posts (the invented ones were removed)', () => {
+      expect(fallbackDataManager.getBlogPosts()).toEqual([]);
     });
   });
 
   describe('getBlogPost', () => {
-    it('finds the correct post by slug', () => {
-      const post = fallbackDataManager.getBlogPost('future-ai-business-transformation');
-
-      expect(post).not.toBeNull();
-      expect(post!.slug).toBe('future-ai-business-transformation');
-      expect(post!.title).toBe('The Future of AI in Business Transformation');
-      expect(post!.status).toBe('published');
+    it('no longer resolves a removed invented post', () => {
+      expect(fallbackDataManager.getBlogPost('customer-success-automation')).toBeNull();
     });
 
     it('returns null for a non-existent slug', () => {
@@ -103,25 +81,14 @@ describe('Fallback Data Manager', () => {
   });
 
   describe('getCaseStudies', () => {
-    it('returns all 2 case studies', () => {
-      const studies = fallbackDataManager.getCaseStudies();
-
-      expect(studies).toHaveLength(2);
-      const slugs = studies.map(s => s.slug);
-      for (const slug of CASE_STUDY_SLUGS) {
-        expect(slugs).toContain(slug);
-      }
+    it('carries no fallback case studies (the invented clients were removed)', () => {
+      expect(fallbackDataManager.getCaseStudies()).toEqual([]);
     });
   });
 
   describe('getCaseStudy', () => {
-    it('finds the correct case study by slug', () => {
-      const study = fallbackDataManager.getCaseStudy('makerspace-fabrication-automation');
-
-      expect(study).not.toBeNull();
-      expect(study!.slug).toBe('makerspace-fabrication-automation');
-      expect(study!.client).toBe('Red de MakerSpaces LATAM');
-      expect(study!.results).toHaveLength(3);
+    it('no longer resolves a removed invented case study', () => {
+      expect(fallbackDataManager.getCaseStudy('makerspace-fabrication-automation')).toBeNull();
     });
 
     it('returns null for a non-existent slug', () => {
@@ -152,8 +119,8 @@ describe('Fallback Data Manager', () => {
       expect(info.version).toBe('1.0.0');
       expect(info.lastUpdated).toBeDefined();
       expect(info.counts).toEqual({
-        blogPosts: 3,
-        caseStudies: 2,
+        blogPosts: 0,
+        caseStudies: 0,
         teamMembers: 4,
       });
     });
