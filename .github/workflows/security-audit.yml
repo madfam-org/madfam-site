@@ -58,7 +58,7 @@ jobs:
           echo "🛡️ Checking security configuration..."
           
           # Check for security headers in middleware
-          if grep -r "X-Frame-Options\|X-Content-Type-Options\|Referrer-Policy" apps/web/middleware.ts > /dev/null; then
+          if grep -r "X-Frame-Options\|X-Content-Type-Options\|Referrer-Policy" apps/web/next.config.js apps/web/middleware.ts > /dev/null; then
             echo "✅ Security headers configured"
           else
             echo "⚠️ Security headers might be missing"
