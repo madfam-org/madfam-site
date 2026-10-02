@@ -19,7 +19,8 @@ permissions:
 
 jobs:
   auto-merge:
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-latest' }}
+    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    timeout-minutes: 10
     # Only run on Dependabot PRs
     if: github.actor == 'dependabot[bot]'
     steps:
