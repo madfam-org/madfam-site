@@ -96,43 +96,47 @@ export function SolutionCard({ solution }: SolutionCardProps) {
         <p className="text-neutral-600 text-sm leading-relaxed">{solution.description}</p>
       </div>
 
-      {/* Capabilities */}
-      <div className="mb-6">
-        <h4 className="font-semibold text-neutral-900 text-sm mb-3">
-          {t('corporate.solutions.mainCapabilities')}
-        </h4>
-        <div className="grid grid-cols-2 gap-2">
-          {solution.capabilities.slice(0, 4).map((capability, index) => (
-            <div key={index} className="text-xs text-neutral-600 flex items-center gap-1">
-              <span className={cn('w-1.5 h-1.5 rounded-full', `bg-${solution.accent}-400`)} />
-              {capability}
-            </div>
-          ))}
+      {/* Capabilities (omitted when a solution lists none) */}
+      {solution.capabilities.length > 0 && (
+        <div className="mb-6">
+          <h4 className="font-semibold text-neutral-900 text-sm mb-3">
+            {t('corporate.solutions.mainCapabilities')}
+          </h4>
+          <div className="grid grid-cols-2 gap-2">
+            {solution.capabilities.slice(0, 4).map((capability, index) => (
+              <div key={index} className="text-xs text-neutral-600 flex items-center gap-1">
+                <span className={cn('w-1.5 h-1.5 rounded-full', `bg-${solution.accent}-400`)} />
+                {capability}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Products */}
-      <div className="mb-6">
-        <h4 className="font-semibold text-neutral-900 text-sm mb-3">
-          {t('corporate.solutions.mainProducts')}
-        </h4>
-        <div className="flex flex-wrap gap-2">
-          {solution.products.slice(0, 3).map((product, index) => (
-            <span
-              key={index}
-              className={cn(
-                'px-2 py-1 rounded text-xs border',
-                product.comingSoon
-                  ? 'bg-neutral-50 text-neutral-500 border-neutral-200'
-                  : `${colors.button} border-transparent`
-              )}
-            >
-              {product.name}
-              {product.comingSoon && ` ${t('common.comingSoonBrackets')}`}
-            </span>
-          ))}
+      {/* Products (omitted when a solution lists none) */}
+      {solution.products.length > 0 && (
+        <div className="mb-6">
+          <h4 className="font-semibold text-neutral-900 text-sm mb-3">
+            {t('corporate.solutions.mainProducts')}
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {solution.products.slice(0, 3).map((product, index) => (
+              <span
+                key={index}
+                className={cn(
+                  'px-2 py-1 rounded text-xs border',
+                  product.comingSoon
+                    ? 'bg-neutral-50 text-neutral-500 border-neutral-200'
+                    : `${colors.button} border-transparent`
+                )}
+              >
+                {product.name}
+                {product.comingSoon && ` ${t('common.comingSoonBrackets')}`}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Actions */}
       <div className="flex gap-3">

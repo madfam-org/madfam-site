@@ -54,17 +54,9 @@ export default async function SolutionsPage({ params }: Props) {
       description: t('colabs.description'),
       badge: 'by MADFAM',
       accent: 'blue' as const,
-      capabilities: [
-        t('colabs.capabilities.0'),
-        t('colabs.capabilities.1'),
-        t('colabs.capabilities.2'),
-        t('colabs.capabilities.3'),
-      ],
-      products: [
-        { name: 'MADLAB', url: '/solutions/colabs#madlab' },
-        { name: 'Workshops', url: '/solutions/colabs#workshops' },
-        { name: 'Bootcamps', url: '/solutions/colabs#bootcamps' },
-      ],
+      // No capability or program list: none is confirmed active (default K3).
+      capabilities: [],
+      products: [],
       internalUrl: '/solutions/colabs',
     },
   ];

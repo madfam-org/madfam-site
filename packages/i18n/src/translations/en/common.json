@@ -72,9 +72,6 @@
       "units": "Solutions"
     },
     "resources": {
-      "assessment": "AI Assessment",
-      "calculator": "ROI Calculator",
-      "guides": "Guides",
       "contact": "Contact"
     },
     "social": {
@@ -97,11 +94,9 @@
     "switchToDark": "Switch to dark mode"
   },
   "metadata": {
-    "email": "Email",
-    "whatsapp": "WhatsApp"
+    "email": "Email"
   },
   "learnMore": "Learn more",
-  "aiAssessment": "AI Assessment",
   "freeConsultation": "Free consultation",
   "tryFree": "Try free",
   "comingSoon": "Coming soon",
