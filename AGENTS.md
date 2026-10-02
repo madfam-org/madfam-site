@@ -377,8 +377,6 @@ Optional (services activate when configured):
 
 ```env
 REDIS_URL=                        # Multi-pod rate limiting & CMS cache
-SENTRY_DSN=                       # Server-side error tracking
-NEXT_PUBLIC_SENTRY_DSN=           # Client-side error tracking
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=     # Plausible analytics
 RESEND_API_KEY=                   # Email sending via Resend
 RESEND_FROM_EMAIL=                # Sender address (default: hello@madfam.io)
@@ -407,7 +405,11 @@ pnpm test
 - **Development**: `pnpm dev`
 - **Staging**: Push to staging branch
 - **Production**: push to `main` → CI builds → GHCR → digest commit into
-  `k8s/production` → ArgoCD syncs. **Enclii is the only deployment path.** MADFAM
+  `k8s/production` → ArgoCD syncs. Only changes under the deploy paths
+  (`apps/web/**`, `packages/**` and the root manifests) build an image; the
+  workflow's verify job then waits up to 15 minutes for
+  `https://madfam.io/api/version` to report the commit and opens an issue if it
+  does not (S1a). **Enclii is the only deployment path.** MADFAM
   migrated completely off Vercel (owner confirmation, 2026-09-04); the Vercel
   configuration was deleted from this repo on that date.
 
