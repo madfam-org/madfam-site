@@ -13,7 +13,6 @@ import {
   getBandRungs,
   getExtraSlices,
   getRegistrySlices,
-  dhanamCheckoutUrl,
   KALYA_DISCOVERY_CALL_URL,
   type BandId,
   type LadderRung,
@@ -269,10 +268,10 @@ export default async function ValueLadderPage({ params }: Props) {
                         {t('bands.slice.grants')}
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {registrySlices.map(p => (
+                        {registrySlices.map(({ platform: p, target }) => (
                           <a
                             key={p.slug}
-                            href={dhanamCheckoutUrl(p.slug)}
+                            href={target.href}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-neutral-200 dark:border-gray-700 text-sm text-neutral-800 dark:text-neutral-200 hover:border-lavender/50 hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
@@ -284,7 +283,7 @@ export default async function ValueLadderPage({ params }: Props) {
                         {extraSlices.map(s => (
                           <a
                             key={s.slug}
-                            href={dhanamCheckoutUrl(s.checkoutSlug)}
+                            href={s.target.href}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-neutral-200 dark:border-gray-700 text-sm text-neutral-800 dark:text-neutral-200 hover:border-lavender/50 hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
@@ -318,12 +317,14 @@ export default async function ValueLadderPage({ params }: Props) {
                             {formatPrice(bundle.pricing)}
                           </p>
                           <a
-                            href={dhanamCheckoutUrl(bundle.checkoutSlug)}
+                            href={bundle.href}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                           >
-                            {t('cta.selfServe')}
+                            {t(
+                              bundle.motion === 'self-serve' ? 'cta.selfServe' : 'cta.discoveryCall'
+                            )}
                           </a>
                         </div>
                       ))}
@@ -333,44 +334,32 @@ export default async function ValueLadderPage({ params }: Props) {
                   {/* Bands 3 & 4 — the registry's Nauta tiers */}
                   {(band.id === 'erp' || band.id === 'vcto') && (
                     <div className="grid sm:grid-cols-2 gap-4">
-                      {bandRungs[band.id].map(rung => {
-                        const selfServe = rung.motion === 'self-serve' && rung.checkoutSlug;
-                        return (
-                          <div
-                            key={rung.id}
-                            className="rounded-xl border border-neutral-200 dark:border-gray-800 p-5 flex flex-col"
+                      {bandRungs[band.id].map(rung => (
+                        <div
+                          key={rung.id}
+                          className="rounded-xl border border-neutral-200 dark:border-gray-800 p-5 flex flex-col"
+                        >
+                          <h4 className="font-bold text-neutral-900 dark:text-white mb-1">
+                            {rung.label}
+                          </h4>
+                          <p className="text-2xl font-bold text-neutral-900 dark:text-white mb-1">
+                            {formatPrice(rung.pricing)}
+                          </p>
+                          <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 flex-1">
+                            {t(`bands.${band.id}.grants`)}
+                          </p>
+                          <a
+                            href={rung.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                           >
-                            <h4 className="font-bold text-neutral-900 dark:text-white mb-1">
-                              {rung.label}
-                            </h4>
-                            <p className="text-2xl font-bold text-neutral-900 dark:text-white mb-1">
-                              {formatPrice(rung.pricing)}
-                            </p>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 flex-1">
-                              {t(`bands.${band.id}.grants`)}
-                            </p>
-                            {selfServe && rung.checkoutSlug ? (
-                              <a
-                                href={dhanamCheckoutUrl(rung.checkoutSlug)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
-                              >
-                                {t('cta.selfServe')}
-                              </a>
-                            ) : (
-                              <a
-                                href={KALYA_DISCOVERY_CALL_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
-                              >
-                                {t('cta.discoveryCall')}
-                              </a>
+                            {t(
+                              rung.motion === 'self-serve' ? 'cta.selfServe' : 'cta.discoveryCall'
                             )}
-                          </div>
-                        );
-                      })}
+                          </a>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>

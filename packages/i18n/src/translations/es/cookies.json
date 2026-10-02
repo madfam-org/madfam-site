@@ -66,31 +66,20 @@
     }
   },
   "banner": {
-    "title": "Usamos cookies",
-    "description": "Utilizamos cookies para mejorar tu experiencia, analizar el tráfico del sitio y personalizar el contenido. Puedes personalizar tus preferencias o aceptar todas las cookies.",
-    "acceptAll": "Aceptar Todas",
-    "necessaryOnly": "Solo Necesarias",
-    "customize": "Personalizar",
-    "closeAriaLabel": "Cerrar banner de cookies"
-  },
-  "settings": {
-    "title": "Preferencias de Cookies",
-    "save": "Guardar Preferencias",
-    "cancel": "Cancelar",
+    "title": "Cookies en este sitio",
+    "description": "Solo usamos cookies necesarias y de preferencia. No usamos cookies analíticas ni de publicidad: nuestra analítica (Plausible, alojado por nosotros) funciona sin cookies.",
     "necessary": {
-      "title": "Cookies Necesarias",
-      "description": "Estas cookies son esenciales para que el sitio web funcione correctamente. No se pueden desactivar."
+      "title": "Necesarias",
+      "description": "hacen que el sitio funcione y lo protegen contra tráfico automatizado."
     },
-    "analytics": {
-      "title": "Cookies Analíticas",
-      "description": "Nos ayudan a entender cómo interactúan los visitantes con nuestro sitio web recopilando información de forma anónima."
+    "preference": {
+      "title": "De preferencia",
+      "description": "recuerdan el idioma que elegiste."
     },
-    "marketing": {
-      "title": "Cookies de Marketing",
-      "description": "Se utilizan para rastrear visitantes en sitios web y permitir a los editores mostrar anuncios relevantes e interesantes."
-    }
+    "dismiss": "Entendido",
+    "closeAriaLabel": "Cerrar aviso de cookies"
   },
   "footer": {
-    "text": "Al continuar usando nuestro sitio, consientes nuestro uso de cookies como se describe en nuestra <privacy>Política de Privacidad</privacy> y <terms>Términos de Servicio</terms>."
+    "text": "Detalles en nuestra <cookies>Política de Cookies</cookies> y nuestra <privacy>Política de Privacidad</privacy>."
   }
 }

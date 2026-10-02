@@ -27,7 +27,8 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:a11y": "playwright test --grep @accessibility",
-    "test:security": "node ../../scripts/security-check.js"
+    "test:security": "node ../../scripts/security-check.js",
+    "serve:standalone": "cp -R .next/static .next/standalone/apps/web/.next/ && cp -R public .next/standalone/apps/web/ && HOSTNAME=127.0.0.1 PORT=${PORT:-3000} node .next/standalone/apps/web/server.js"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
@@ -38,7 +39,6 @@
     "@madfam-site/ui": "workspace:*",
     "@prisma/client": "6.1.0",
     "@radix-ui/react-slot": "^1.3.3",
-    "@sentry/nextjs": "^9.27.0",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -46,7 +46,7 @@
     "ioredis": "^5.10.1",
     "jose": "^6.2.12",
     "lucide-react": "^0.553.0",
-    "next": "15.5.25",
+    "next": "15.5.27",
     "next-intl": "^4.14.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -83,7 +83,7 @@
     "tsx": "^4.23.13",
     "typescript": "^5.9.3",
     "vite": "^7.3.5",
-    "vitest": "^4.1.10",
+    "vitest": "^4.1.11",
     "webpack": "^5.111.0"
   }
 }

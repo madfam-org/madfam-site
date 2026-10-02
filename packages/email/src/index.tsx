@@ -2,6 +2,7 @@ import { render } from '@react-email/render';
 import { WelcomeEmail } from './templates/WelcomeEmail';
 import { AssessmentResultsEmail } from './templates/AssessmentResultsEmail';
 import { ROIResultsEmail } from './templates/ROIResultsEmail';
+import { ENTITY_LINE, emailLanguage, siteUrl } from './brand';
 
 export interface EmailTemplate {
   subject: string;
@@ -9,19 +10,24 @@ export interface EmailTemplate {
   text: string;
 }
 
+/** Any language tag (`es`, `es-MX`, `en`, `pt-BR`, …); normalised to es/en/pt. */
+export type EmailLanguageTag = string;
+
 export interface WelcomeEmailData {
   name: string;
-  language: 'es-MX' | 'en-US';
-  tier: string;
+  language?: EmailLanguageTag;
+  /** Ignored; kept so already-queued payloads still render. */
+  tier?: string;
 }
 
 export interface AssessmentResultsEmailData {
   assessmentId: string;
   score: number;
-  tier: string;
+  /** Ignored; kept so already-queued payloads still render. */
+  tier?: string;
   strengths: string[];
   recommendations: string[];
-  language?: 'es-MX' | 'en-US';
+  language?: EmailLanguageTag;
 }
 
 export interface ROIResultsEmailData {
@@ -41,29 +47,36 @@ export interface ROIResultsEmailData {
       costReduction: string;
     };
   };
-  language?: 'es-MX' | 'en-US';
+  language?: EmailLanguageTag;
 }
 
 export class EmailService {
   private getSubject(template: string, data: any): string {
     const subjects = {
-      'es-MX': {
-        welcome: 'Bienvenido a MADFAM - Tu socio en transformación digital',
-        'assessment-results': 'Resultados de tu evaluación de preparación para IA',
-        'roi-results': 'Resultados de tu análisis de ROI',
-        'project-estimate-results': 'Estimación de tu proyecto - MADFAM',
+      es: {
+        welcome: 'Recibimos tu mensaje — MADFAM',
+        'assessment-results': 'Resultados de tu evaluación — MADFAM',
+        'roi-results': 'Resultados de tu análisis de ROI — MADFAM',
+        'project-estimate-results': 'Estimación de tu proyecto — MADFAM',
       },
-      'en-US': {
-        welcome: 'Welcome to MADFAM - Your digital transformation partner',
-        'assessment-results': 'Your AI Readiness Assessment Results',
-        'roi-results': 'Your ROI Analysis Results',
-        'project-estimate-results': 'Your Project Estimate - MADFAM',
+      en: {
+        welcome: 'We received your message — MADFAM',
+        'assessment-results': 'Your assessment results — MADFAM',
+        'roi-results': 'Your ROI analysis results — MADFAM',
+        'project-estimate-results': 'Your project estimate — MADFAM',
+      },
+      pt: {
+        welcome: 'Recebemos sua mensagem — MADFAM',
+        'assessment-results': 'Resultados da sua avaliação — MADFAM',
+        'roi-results': 'Resultados da sua análise de ROI — MADFAM',
+        'project-estimate-results': 'Estimativa do seu projeto — MADFAM',
       },
     };
 
-    const language: 'es-MX' | 'en-US' = data.language || 'es-MX';
-    const subjectMap = subjects[language];
-    return subjectMap[template as keyof typeof subjectMap] || 'MADFAM Notification';
+    // Callers pass `es`/`en`/`pt` (the site locales) or legacy `es-MX`/`en-US`;
+    // an unknown tag used to index a missing map and throw.
+    const subjectMap = subjects[emailLanguage(data?.language)];
+    return subjectMap[template as keyof typeof subjectMap] || 'MADFAM';
   }
 
   async renderWelcomeEmail(data: WelcomeEmailData): Promise<EmailTemplate> {
@@ -98,6 +111,8 @@ export class EmailService {
       <p>Total estimate: ${data.results.pricing.total} ${data.results.pricing.currency}</p>
       <p>Timeline: ${data.results.timeline.minWeeks}-${data.results.timeline.maxWeeks} weeks</p>
       <p>We'll contact you soon to discuss your project in detail.</p>
+      <hr />
+      <p><a href="${siteUrl()}">madfam.io</a><br />${ENTITY_LINE}</p>
     `;
     const text = this.htmlToText(html);
     const subject = this.getSubject('project-estimate-results', data);
@@ -165,6 +180,17 @@ export class EmailService {
 
 // Export template components
 export { WelcomeEmail, AssessmentResultsEmail, ROIResultsEmail };
+
+// Shared sender, link and entity facts (R46, R37/R47)
+export {
+  DEFAULT_FROM,
+  DEFAULT_SITE_URL,
+  ENTITY_LINE,
+  SENDER_ADDRESS,
+  SENDER_NAME,
+  emailLanguage,
+  siteUrl,
+} from './brand';
 
 // Export service instance
 export const emailService = new EmailService();

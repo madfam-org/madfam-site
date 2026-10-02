@@ -1,9 +1,6 @@
 // Auto-generated file - Do not edit manually
 import common from './common.json';
-import assessment from './assessment.json';
-import calculator from './calculator.json';
 import compare from './compare.json';
-import estimator from './estimator.json';
 import products from './products.json';
 import corporate from './corporate.json';
 import legal from './legal.json';
@@ -21,10 +18,7 @@ import nauta from './nauta.json';
 export default {
   common,
   ...common, // Spread common at root level for backward compatibility
-  assessment,
-  calculator,
   compare,
-  estimator,
   products,
   corporate,
   ...pages,

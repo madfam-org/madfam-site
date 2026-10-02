@@ -1,6 +1,8 @@
 // CommonJS config file: require() is the module system here.
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const createNextIntlPlugin = require('next-intl/plugin');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { removedSurfaceRedirects } = require('./lib/removed-surfaces.js');
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
@@ -157,6 +159,10 @@ const nextConfig = {
         permanent: true,
       },
 
+      // Template and lead-magnet pages removed (ruling CX-3) — see
+      // lib/removed-surfaces.js for the paths, destinations and why.
+      ...removedSurfaceRedirects(),
+
       // Services to Programs mapping (permanent)
       {
         source: '/services',
@@ -225,11 +231,6 @@ const nextConfig = {
       { source: '/pt/contato', destination: '/pt/contact' },
       // Legacy routes
       { source: '/pt/carreiras', destination: '/pt/careers' },
-      { source: '/pt/documentacao', destination: '/pt/docs' },
-      { source: '/pt/guias', destination: '/pt/guides' },
-      { source: '/pt/avaliacao', destination: '/pt/assessment' },
-      { source: '/pt/calculadora', destination: '/pt/calculator' },
-      { source: '/pt/estimador', destination: '/pt/estimator' },
       { source: '/pt/privacidade', destination: '/pt/privacy' },
       { source: '/pt/termos', destination: '/pt/terms' },
       { source: '/pt/cookies', destination: '/pt/cookies' }
@@ -305,14 +306,6 @@ const nextConfig = {
   },
 };
 
-// Sentry integration (only when DSN is configured)
-const { withSentryConfig } =
-  process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
-    ? // eslint-disable-next-line @typescript-eslint/no-require-imports
-      require('@sentry/nextjs')
-    : { withSentryConfig: config => config };
-
-module.exports = withSentryConfig(withNextIntl(nextConfig), {
-  silent: true,
-  hideSourceMaps: true,
-});
+// Sentry was removed (ruling PL-2, 2026-10-01): it was inert (no
+// instrumentation.ts, no DSN at build) and carried open advisories.
+module.exports = withNextIntl(nextConfig);

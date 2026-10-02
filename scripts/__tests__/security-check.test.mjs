@@ -90,6 +90,98 @@ test('a real-looking secret assignment is still reported', () => {
   assert.deepEqual(SecurityAuditor.findSecretAssignments(content), ['API_SECRET']);
 });
 
+// --- Dependency audit (finding S1-005): fail closed, read error.stdout ------
+
+const FIXTURES = path.join(path.dirname(new URL(import.meta.url).pathname), 'fixtures');
+const fixture = name => fs.readFileSync(path.join(FIXTURES, name), 'utf-8');
+
+/** An execSync stand-in that behaves like `pnpm audit` finding something: exit 1, JSON on stdout. */
+function auditExitsNonZeroWith(stdout) {
+  return () => {
+    const error = new Error('Command failed: pnpm audit --json');
+    error.status = 1;
+    error.stdout = stdout;
+    throw error;
+  };
+}
+
+test('non-zero pnpm audit exit: counts come from error.stdout, not zeros', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(auditExitsNonZeroWith(fixture('pnpm-audit-high.json')));
+
+  assert.equal(a.depHigh, 1);
+  assert.equal(a.depModerate, 2);
+  assert.equal(a.depLow, 1);
+  assert.equal(a.depCritical, 0);
+  assert.equal(a.issues.length, 0);
+  const report = a.buildReport();
+  assert.equal(report.summary.dependencies.high, 1);
+});
+
+test('a high-severity fixture fails the run when SECURITY_FAIL_ON=high', async () => {
+  const a = auditor();
+  a.log = () => {};
+  a.failOn = SecurityAuditor.normalizeFailOn('high');
+  await a.checkDependencies(auditExitsNonZeroWith(fixture('pnpm-audit-high.json')));
+
+  assert.equal(a.buildReport().status, 'FAIL');
+  assert.equal(await exitCodeOf(a), 1);
+});
+
+test('a high-severity fixture is reported but passes under the default (critical) threshold', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(auditExitsNonZeroWith(fixture('pnpm-audit-high.json')));
+
+  const report = a.buildReport();
+  assert.equal(report.summary.failOn, 'critical');
+  assert.equal(report.summary.dependencies.high, 1);
+  assert.equal(report.status, 'PASS');
+});
+
+test('a critical-severity fixture fails the run', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(auditExitsNonZeroWith(fixture('pnpm-audit-critical.json')));
+
+  assert.equal(a.depCritical, 1);
+  assert.equal(a.buildReport().status, 'FAIL');
+  assert.equal(await exitCodeOf(a), 1);
+});
+
+test('an audit that cannot run fails closed', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(() => {
+    throw new Error('spawn pnpm ENOENT');
+  });
+
+  assert.equal(a.issues.length, 1);
+  assert.match(a.issues[0].message, /could not run/);
+  assert.equal(a.buildReport().status, 'FAIL');
+});
+
+test('unparseable audit output fails closed', async () => {
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(auditExitsNonZeroWith('ERR_PNPM_AUDIT_BAD_RESPONSE 503'));
+
+  assert.equal(a.buildReport().status, 'FAIL');
+});
+
+test('a clean audit (exit 0) parses to zeros and passes', async () => {
+  const clean = JSON.stringify({
+    metadata: { vulnerabilities: { info: 0, low: 0, moderate: 0, high: 0, critical: 0 } },
+  });
+  const a = auditor();
+  a.log = () => {};
+  await a.checkDependencies(() => clean);
+
+  assert.equal(a.issues.length, 0);
+  assert.equal(a.buildReport().status, 'PASS');
+});
+
 /** Runs generateReport() in a temp cwd with process.exit stubbed, and returns the code. */
 async function exitCodeOf(a) {
   const cwd = process.cwd();

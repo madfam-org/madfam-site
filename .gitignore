@@ -65,3 +65,8 @@ media/
 # Generated security scan artifact (scripts/security-check.js) — do not commit
 security-report.json
 
+
+# Browser-based CI gates (Playwright, Lighthouse CI) write their reports here
+.lighthouseci/
+apps/web/playwright-report/
+apps/web/test-results/

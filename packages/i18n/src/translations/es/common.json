@@ -58,7 +58,7 @@
       "programs": "Programas"
     },
     "ecosystem": {
-      "membership": "Membresía",
+      "membership": "Lista de espera",
       "nauta": "Nauta ERP",
       "valueLadder": "Escalera de valor",
       "pricing": "Precios",
@@ -72,9 +72,6 @@
       "units": "Soluciones"
     },
     "resources": {
-      "assessment": "Evaluación de IA",
-      "calculator": "Calculadora de ROI",
-      "guides": "Guías",
       "contact": "Contacto"
     },
     "social": {
@@ -97,11 +94,9 @@
     "switchToDark": "Cambiar a modo oscuro"
   },
   "metadata": {
-    "email": "Email",
-    "whatsapp": "WhatsApp"
+    "email": "Email"
   },
   "learnMore": "Conocer más",
-  "aiAssessment": "Evaluación IA",
   "freeConsultation": "Consulta gratuita",
   "tryFree": "Probar gratis",
   "comingSoon": "Próximamente",
