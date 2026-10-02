@@ -27,7 +27,8 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:a11y": "playwright test --grep @accessibility",
-    "test:security": "node ../../scripts/security-check.js"
+    "test:security": "node ../../scripts/security-check.js",
+    "serve:standalone": "cp -R .next/static .next/standalone/apps/web/.next/ && cp -R public .next/standalone/apps/web/ && HOSTNAME=127.0.0.1 PORT=${PORT:-3000} node .next/standalone/apps/web/server.js"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
