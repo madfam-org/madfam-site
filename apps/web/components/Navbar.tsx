@@ -120,11 +120,6 @@ export function Navbar() {
               icon: '🌱',
             },
             {
-              name: t('showcase') || 'Showcase',
-              href: `/${locale}/case-studies`,
-              icon: '✨',
-            },
-            {
               name: t('careers') || 'Careers',
               href: getLocalizedUrl('careers', locale),
               icon: '💼',

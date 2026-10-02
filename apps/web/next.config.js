@@ -4,9 +4,29 @@ const createNextIntlPlugin = require('next-intl/plugin');
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
+/**
+ * Security headers for every response. `X-XSS-Protection: 0` disables the
+ * legacy XSS auditor, which modern guidance recommends over `1; mode=block`
+ * (the auditor itself could be abused); the CSP is the real protection.
+ */
+const SECURITY_HEADERS = [
+  { key: 'X-DNS-Prefetch-Control', value: 'on' },
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'X-XSS-Protection', value: '0' },
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+  },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // No `X-Powered-By: Next.js` (finding S1-017).
+  poweredByHeader: false,
   transpilePackages: [
     '@madfam-site/ui',
     '@madfam-site/core',
@@ -112,6 +132,31 @@ const nextConfig = {
         permanent: false,
       },
 
+      // Invented proof removed (2026-10-01 stability + messaging audit,
+      // findings L1-002/M1-001): the case studies, blog posts and testimonials
+      // were fabricated. Real, permissioned client stories may come back; until
+      // then these URLs move permanently. `:path*` also matches the bare index.
+      {
+        source: '/:locale(es|en|pt)/case-studies/:path*',
+        destination: '/:locale/platforms',
+        permanent: true,
+      },
+      {
+        source: '/:locale(es|en|pt)/blog/:path*',
+        destination: '/:locale',
+        permanent: true,
+      },
+      {
+        source: '/es/casos-de-estudio/:path*',
+        destination: '/es/platforms',
+        permanent: true,
+      },
+      {
+        source: '/pt/casos-de-sucesso/:path*',
+        destination: '/pt/platforms',
+        permanent: true,
+      },
+
       // Services to Programs mapping (permanent)
       {
         source: '/services',
@@ -180,7 +225,6 @@ const nextConfig = {
       { source: '/pt/contato', destination: '/pt/contact' },
       // Legacy routes
       { source: '/pt/carreiras', destination: '/pt/careers' },
-      { source: '/pt/casos-de-sucesso', destination: '/pt/case-studies' },
       { source: '/pt/documentacao', destination: '/pt/docs' },
       { source: '/pt/guias', destination: '/pt/guides' },
       { source: '/pt/avaliacao', destination: '/pt/assessment' },
@@ -200,40 +244,15 @@ const nextConfig = {
     return rewrites;
   },
 
+  // Single source for the static security headers (finding S1-017). They
+  // apply to every path — pages, /_next/static, /_next/image and /api — so
+  // all responses agree. middleware.ts adds only the per-request,
+  // nonce-based Content-Security-Policy on pages.
   async headers() {
     return [
       {
         source: '/:path*',
-        headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains',
-          },
-        ],
+        headers: SECURITY_HEADERS,
       },
       // API Routes specific headers
       {
