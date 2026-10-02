@@ -2,7 +2,9 @@
 
 ## Overview
 
-The MADFAM website API provides endpoints for lead generation, assessment, and analytics. All API routes are implemented as Next.js API routes.
+The MADFAM website API provides endpoints for lead capture, search, email opt-out and deploy health. All API routes are Next.js route handlers in `apps/web/app/api/`.
+
+> The endpoint list below was checked against `apps/web/app/api/` on 2026-10-02. The base configuration, request format, rate-limit and environment sections are older and are due for review in batch S14 (public repo docs).
 
 ## Base Configuration
 
@@ -12,26 +14,31 @@ The MADFAM website API provides endpoints for lead generation, assessment, and a
 
 ## Available Endpoints
 
-### 📊 Assessment API
+### 📧 Lead Management
 
-**POST** `/api/assessment`
+**POST** `/api/leads`
 
-- AI readiness assessment evaluation
-- Returns scores and recommendations
+- Captures leads from the contact form
 
-### 🔐 Authentication
+**GET** `/api/leads`
 
-**[...nextauth]** `/api/auth/*`
+- Lists leads; requires `Authorization: Bearer <API_SECRET>`
 
-- NextAuth.js authentication endpoints
-- Handles signin, signout, sessions
+**POST** `/api/leads/demo`
 
-### 💰 ROI Calculator
+- Demo-request leads for the removed demo pages; no longer called by the site
 
-**POST** `/api/calculator`
+### 🔎 Search
 
-- Calculate ROI for AI implementations
-- Returns financial projections
+**GET** `/api/search`
+
+- Site search; query `q` (2–200 characters) and `locale` (`es`, `en` or `pt`)
+
+### ✉️ Unsubscribe
+
+**POST** `/api/unsubscribe`
+
+- Records an email opt-out
 
 ### 🚩 Feature Flags
 
@@ -40,27 +47,29 @@ The MADFAM website API provides endpoints for lead generation, assessment, and a
 - Retrieve active feature flags
 - Controls feature visibility
 
-### 📧 Lead Management
-
-**POST** `/api/leads`
-
-- Capture new leads
-- Tier interest scoring
-- CRM integration
-
 ### 📝 Logging
 
 **POST** `/api/logs`
 
-- Application logging endpoint
-- Error tracking
+- Client log intake (**GET** returns a health stub)
 
 ### 🔗 Webhooks
 
 **POST** `/api/webhook/n8n`
 
-- N8N workflow integration
-- Process automation triggers
+- N8N workflow integration (**GET** is an authenticated health check)
+
+**POST** `/api/webhook/cms`
+
+- CMS cache invalidation; nothing sends to it since the CMS was retired (R52)
+
+### 🩺 Health and version
+
+**GET** `/api/health` - Readiness; downstream services are informational and report `unknown` when unset
+
+**GET** `/api/health/live` - Liveness (process only); used by the Kubernetes liveness and startup probes
+
+**GET** `/api/version` - `{ "sha", "buildTime" }` of the deployed build; the Deploy Web verify job waits for it to serve the new commit
 
 ## Request/Response Format
 
@@ -149,4 +158,4 @@ NEXT_PUBLIC_API_URL=https://...
 
 ---
 
-Last Updated: November 2024
+Last Updated: 2026-10-02 (endpoint list)

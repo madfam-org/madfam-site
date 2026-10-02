@@ -66,7 +66,8 @@ run by `.github/workflows/public-hygiene.yml`. Read their `classes_skipped=` and
   `security.ts`, `cms/`, `data/`).
 - **`apps/cms`** — retired Payload app (R52): not deployed. The web app enables
   its CMS client only when `NEXT_PUBLIC_CMS_URL` is set (production does not
-  set it); blog and case-study routes render shipped i18n content.
+  set it). The blog and case-study routes were removed on 2026-10-01 and
+  answer 308; the site renders shipped i18n content only.
 
 ## Packages
 
