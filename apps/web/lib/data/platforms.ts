@@ -28,6 +28,7 @@ import {
   type EngagementTrack,
   type PlatformLayer,
   type PlatformStatus,
+  type RegistryLifecycle,
   type RegistryProduct,
   type RetiredProduct,
 } from './platforms.generated';
@@ -84,6 +85,8 @@ export interface Platform {
   icon: string;
   layer: PlatformLayer;
   status: PlatformStatus;
+  /** The registry's lifecycle (live / beta / degraded / incubating). */
+  lifecycle: RegistryLifecycle;
   externalUrl?: string;
   githubUrl?: string;
   /** Track that determines how this platform is sold/consumed. */
@@ -131,6 +134,7 @@ function mergePlatform(product: RegistryProduct, presentation: PlatformPresentat
     icon: product.icon,
     layer: product.layer,
     status: product.status,
+    lifecycle: product.lifecycle,
     ...(product.externalUrl ? { externalUrl: product.externalUrl } : {}),
     ...(product.githubUrl ? { githubUrl: product.githubUrl } : {}),
     track: product.track,
@@ -222,16 +226,27 @@ export function hasFreeTier(slug: string): boolean {
 }
 
 /**
+ * The i18n key (platforms namespace) for a platform's lifecycle badge, read
+ * from the registry's `lifecycle` (ruling MH-5, findings L1-007 / M1-015):
+ * live → "En producción", degraded → "Disponible — servicio degradado",
+ * beta → "Beta", incubating → "Próximamente". Degraded products used to be
+ * labelled "Acceso Anticipado", the same as beta.
+ */
+export function lifecycleLabelKey(platform: Platform): string {
+  return `shared.lifecycle.${platform.lifecycle}`;
+}
+
+/**
  * The i18n key (platforms namespace) for a platform's primary call to action,
- * driven by lifecycle (finding C-011): a product the registry marks live and
- * that has its own domain gets a plain "go to the platform" CTA; anything else
- * keeps the overlay's label (early access, waitlist, contact). Live products
- * used to say "Get early access".
+ * driven by lifecycle (finding C-011, ruling MH-5): a product that exists
+ * (live, beta or degraded — the lifecycle badge says which) and whose CTA goes
+ * to its own domain gets "Ir a la plataforma"; an incubating product says
+ * "Próximamente"; anything else keeps the overlay's label (waitlist, contact).
+ * Live products used to say "Obtener Acceso Anticipado".
  */
 export function primaryCtaLabelKey(platform: Platform): string {
-  if (platform.status === 'production' && platform.primaryCTA.type === 'external') {
-    return 'shared.visitPlatform';
-  }
+  if (platform.lifecycle === 'incubating') return lifecycleLabelKey(platform);
+  if (platform.primaryCTA.type === 'external') return 'shared.visitPlatform';
   return platform.primaryCTA.labelKey;
 }
 

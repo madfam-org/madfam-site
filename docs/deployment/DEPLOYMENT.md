@@ -34,16 +34,21 @@ only deployment path.
 ## How a change reaches production
 
 1. A pull request merges to `main`.
-2. If it touches `apps/web/**` or `packages/**`, the **Deploy Web** workflow
+2. If it touches `apps/web/**`, `packages/**` or a root build input (`package.json`,
+   `pnpm-lock.yaml`, `.npmrc`, `pnpm-workspace.yaml`, `turbo.json`), the **Deploy Web** workflow
    (`.github/workflows/deploy-web.yml`) runs:
-   - builds the multi-stage `apps/web/Dockerfile` image,
+   - builds the multi-stage `apps/web/Dockerfile` image with `GIT_SHA` (the merged commit) and
+     `BUILD_TIME` baked in (also the OCI label `org.opencontainers.image.revision`),
    - pushes it to `ghcr.io/madfam-org/madfam-site/web`,
    - signs it with cosign (keyless OIDC),
    - commits the new image **digest** into `k8s/production/kustomization.yaml`
      (`deploy(web): update digest to <sha>`),
-   - reports the lifecycle event to Enclii.
+   - reports the lifecycle event to Enclii (a failed callback is a visible warning, not a failure).
 3. ArgoCD watches `k8s/production` (see `infra/argocd/config.json`) with automated sync, prune and
    self-heal, and rolls the Deployment to the new digest.
+4. The workflow's **verify** job polls `https://madfam.io/api/version` until it answers the merged
+   commit. If production does not serve it within 15 minutes, the job fails and opens (or comments
+   on) the issue "Deploy Web: madfam.io is not serving the deployed commit".
 
 Changes that touch only `k8s/production/**` deploy through step 3 alone (no image build). Changes
 that touch only docs or non-deploy workflows do not deploy.
@@ -89,15 +94,33 @@ images.
 
 ## Verifying a deploy
 
-- The Deploy Web run is green and the `deploy(web): update digest to <sha>` commit is on `main`.
-- `https://madfam.io/api/health` answers, and the page you changed shows the change.
+- The Deploy Web run is green, **including its `verify` job**: that job is the proof that
+  production serves the commit, not just that a digest was pinned.
+- By hand: `curl -s https://madfam.io/api/version` returns `{"sha": "<merged commit>", "buildTime": …}`.
+- Health endpoints:
+  - `/api/health/live` — process only, no downstream calls (liveness/startup probes).
+  - `/api/health` — readiness: always 200 while the process answers; downstream services are
+    informational (`unknown` when not configured) and never fail it.
 - Enclii shows the new revision healthy.
+
+To exercise the verify job without deploying, dispatch Deploy Web with `verify_only: true` and an
+`expected_sha` (a deliberately wrong SHA must fail the job and open the issue).
 
 ## Rolling back
 
 Roll back through Enclii. In GitOps terms a rollback is restoring the previous image digest in
-`k8s/production/kustomization.yaml` on `main` (revert the digest commit); ArgoCD then converges the
-cluster to it. Do not `kubectl set image` in production — self-heal reverts it.
+`k8s/production/kustomization.yaml` on `main`:
+
+1. Find the `deploy(web): update digest to <sha8>` commit of the bad release
+   (`git log --oneline -- k8s/production/kustomization.yaml`).
+2. Revert it in a pull request (`git revert <digest-commit>`) and merge. The change touches only
+   `kustomization.yaml`, which Deploy Web ignores, so no image is built.
+3. ArgoCD re-syncs `k8s/production` to the previous digest; `https://madfam.io/api/version` then
+   answers the previous commit.
+4. Revert or fix the offending source change on `main` too. Otherwise the next Deploy Web run builds
+   `main` again and re-pins the bad code.
+
+Do not `kubectl set image` in production — self-heal reverts it.
 
 ## Local production build
 

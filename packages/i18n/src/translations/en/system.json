@@ -1,61 +1,4 @@
 {
-  "api": {
-    "title": "API Reference",
-    "subtitle": "Complete reference for MADFAM API endpoints, authentication, and integration examples.",
-    "baseUrl": "Base URL",
-    "authentication": "Authentication",
-    "assessment": "Assessment",
-    "calculator": "Calculator",
-    "leads": "Leads",
-    "codeExamples": "Code examples",
-    "authExample": "Authentication example",
-    "assessmentExample": "Assessment submission",
-    "categories": {
-      "authentication": "Authentication",
-      "assessment": "AI Assessment",
-      "calculator": "ROI Calculator",
-      "leads": "Lead Management"
-    },
-    "docs": {
-      "authGuide": "Authentication Guide",
-      "rateLimits": "Rate Limits & Quotas",
-      "errorCodes": "Error Codes Reference",
-      "sdks": "SDKs & Libraries"
-    },
-    "rateLimiting": {
-      "title": "Rate limiting",
-      "subtitle": "API requests are limited to ensure fair use and system stability.",
-      "perMinute": "Requests per minute",
-      "perHour": "Requests per hour",
-      "perDay": "Requests per day"
-    },
-    "endpoints": {
-      "auth": {
-        "login": "Authenticate user and receive access token",
-        "refresh": "Refresh access token using refresh token",
-        "logout": "Invalidate user session and tokens"
-      },
-      "assessment": {
-        "submit": "Submit AI readiness assessment",
-        "retrieve": "Retrieve assessment results"
-      },
-      "calculator": {
-        "calculate": "Calculate ROI based on input parameters",
-        "presets": "Get industry-specific calculation presets"
-      },
-      "leads": {
-        "submit": "Submit a new lead",
-        "list": "List all leads (admin only)",
-        "update": "Update lead status"
-      }
-    },
-    "quickLinks": {
-      "authGuide": "Authentication Guide",
-      "rateLimits": "Rate Limits",
-      "errorCodes": "Error Codes",
-      "sdks": "SDKs & Libraries"
-    }
-  },
   "dashboard": {
     "title": "Dashboard",
     "welcome": "Welcome back",
@@ -91,7 +34,6 @@
     "helpfulLinks": "Helpful links",
     "products": "Products",
     "about": "About us",
-    "contact": "Contact",
-    "aiAssessment": "AI Assessment"
+    "contact": "Contact"
   }
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
-import { primaryCtaLabelKey, type Platform } from '@/lib/data/platforms';
+import { lifecycleLabelKey, primaryCtaLabelKey, type Platform } from '@/lib/data/platforms';
 import { Badge } from '@/components/corporate/Badge';
 import { Newsletter } from '@/components/ui/Newsletter';
 import { cn } from '@/components/ui/utils';
@@ -103,15 +103,11 @@ function CTAButton({
   );
 }
 
-const STATUS_I18N_MAP: Record<string, string> = {
-  production: 'production',
-  'production-beta': 'productionBeta',
-  'coming-soon': 'comingSoon',
-  'in-development': 'inDevelopment',
-};
-
 export function PlatformHero({ platform, i18nKey, locale }: PlatformHeroProps) {
   const t = useTranslations('platforms');
+  const metrics = t.has(`${i18nKey}.metrics`)
+    ? Object.entries(t.raw(`${i18nKey}.metrics`) as Record<string, string>)
+    : [];
 
   return (
     <section
@@ -138,10 +134,7 @@ export function PlatformHero({ platform, i18nKey, locale }: PlatformHeroProps) {
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Status badge */}
         <div className="mb-6">
-          <StatusBadge
-            status={platform.status}
-            label={t(`shared.status.${STATUS_I18N_MAP[platform.status] || platform.status}`)}
-          />
+          <StatusBadge status={platform.status} label={t(lifecycleLabelKey(platform))} />
         </div>
 
         {/* Platform icon and name */}
@@ -170,10 +163,11 @@ export function PlatformHero({ platform, i18nKey, locale }: PlatformHeroProps) {
           {t(`${i18nKey}.tagline`)}
         </p>
 
-        {/* Key metrics */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
-          {Object.entries(t.raw(`${i18nKey}.metrics`) as Record<string, string>).map(
-            ([metricKey, value]) => (
+        {/* Key metrics. Only what a product's copy can stand behind (R11): the
+            unowned figures were removed, so a product may have none. */}
+        {metrics.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
+            {metrics.map(([metricKey, value]) => (
               <div
                 key={metricKey}
                 className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm px-6 py-5"
@@ -183,9 +177,9 @@ export function PlatformHero({ platform, i18nKey, locale }: PlatformHeroProps) {
                 </p>
                 <p className="text-sm text-gray-400 mt-1 capitalize">{metricKey}</p>
               </div>
-            )
-          )}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

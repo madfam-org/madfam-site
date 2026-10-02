@@ -16,7 +16,6 @@
     "businessSolutions": "Nuestras Soluciones",
     "comingSoon": "Próximamente",
     "moreSolutionsDesc": "Más soluciones en desarrollo",
-    "caseStudies": "Casos de Éxito",
     "featuredWork": "Trabajo Destacado",
     "allCases": "Ver Todos",
     "securityCompliance": "Seguridad y Cumplimiento",
@@ -29,8 +28,7 @@
     "ecosystem": "Ecosistema",
     "makerNode": "Maker Node",
     "joinEcosystem": "Únete al Ecosistema",
-    "explorePlatforms": "Explorar Plataformas",
-    "showcase": "Showcase"
+    "explorePlatforms": "Explorar Plataformas"
   },
   "cta": {
     "learnMore": "Conocer más",
@@ -60,7 +58,7 @@
       "programs": "Programas"
     },
     "ecosystem": {
-      "membership": "Membresía",
+      "membership": "Lista de espera",
       "nauta": "Nauta ERP",
       "valueLadder": "Escalera de valor",
       "pricing": "Precios",
@@ -74,9 +72,6 @@
       "units": "Soluciones"
     },
     "resources": {
-      "assessment": "Evaluación de IA",
-      "calculator": "Calculadora de ROI",
-      "guides": "Guías",
       "contact": "Contacto"
     },
     "social": {
@@ -99,11 +94,9 @@
     "switchToDark": "Cambiar a modo oscuro"
   },
   "metadata": {
-    "email": "Email",
-    "whatsapp": "WhatsApp"
+    "email": "Email"
   },
   "learnMore": "Conocer más",
-  "aiAssessment": "Evaluación IA",
   "freeConsultation": "Consulta gratuita",
   "tryFree": "Probar gratis",
   "comingSoon": "Próximamente",

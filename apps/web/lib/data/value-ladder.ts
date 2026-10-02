@@ -48,10 +48,12 @@ export interface LadderRung {
   band: BandId;
   /** The registry's label for the tier. Never written here. */
   label: string;
-  /** Dhanam checkout product slug. Registry-owned. */
+  /** The registry's `commerce.checkout_slug`, present only on a self-serve rung. */
   checkoutSlug?: string;
   pricing: TierPricing;
   motion: LadderMotion;
+  /** Where the rung's CTA goes. See `ctaTarget`. */
+  href: string;
 }
 
 export interface LadderBand {
@@ -67,8 +69,10 @@ export interface LadderBand {
 
 export const BANDS: LadderBand[] = [
   { id: 'slice', order: 1, icon: '🧩', motion: 'self-serve' },
-  { id: 'bundle', order: 2, icon: '🎁', motion: 'self-serve' },
-  { id: 'erp', order: 3, icon: '🏢', motion: 'self-serve' },
+  // A bundle is not a registry product and has no checkout of its own (CX-1).
+  { id: 'bundle', order: 2, icon: '🎁', motion: 'discovery-call' },
+  // Ruling R27: no self-serve Nauta ERP while Dhanam sells no ERP plan.
+  { id: 'erp', order: 3, icon: '🏢', motion: 'discovery-call' },
   { id: 'vcto', order: 4, icon: '🧭', motion: 'discovery-call' },
 ];
 
@@ -98,23 +102,58 @@ function registryTier(slug: string, tierId: string): RegistryTier | undefined {
   return REGISTRY_COMMERCE[slug]?.tiers.find(tier => tier.id === tierId);
 }
 
-/**
- * Live Dhanam checkout targets for products whose registry entry declares no
- * `checkout_slug` yet. That is a REGISTRY GAP, not a site decision: the value is
- * a link target — never a price and never a tier label — and the registry
- * overrides it the moment it carries one. Nothing may be added here to work
- * around a missing price.
- */
-const CHECKOUT_SLUG_FALLBACK: Record<string, string> = {
-  nauta: 'nauta-erp',
-};
+// ─── CTA targets ─────────────────────────────────────────────────────────────
+
+// Kalya discovery-call booking (Band 4, or anyone who wants help). Canonical
+// host is kalya.app; `/madfam` is MADFAM's live booking page (tenant live since
+// 2026-08-30, verified 2026-09-23). Ruling R27 routes every "talk to us" CTA
+// here.
+export const KALYA_DISCOVERY_CALL_URL = 'https://kalya.app/madfam';
+
+/** The one product whose own pricing page is a Dhanam checkout: Dhanam itself. */
+const DHANAM_SITE_SLUG = 'dhanam';
 
 /**
- * The checkout slug for a registry product. The registry's own `checkout_slug`
- * when it declares one, then the known live target, then the product slug.
+ * Where a CTA for a product goes. Ruling CX-1 (2026-10-01):
+ *
+ * - The product is self-serve only when the registry declares a
+ *   `commerce.checkout_slug` for it. There is no site-side fallback slug: a
+ *   product the registry does not sell self-serve is not sold self-serve here.
+ * - A self-serve product links its own front door (`domains.primary`), because
+ *   that is where its plans and sign-up live. Dhanam's `/pricing` page ignores
+ *   any `product=` parameter, so a `dhan.am/pricing?product=<other>` link lands
+ *   the visitor on Dhanam's own plans — the one exception is Dhanam itself.
+ * - Everything else goes to the Kalya discovery call.
  */
-export function registryCheckoutSlug(slug: string): string {
-  return REGISTRY_COMMERCE[slug]?.checkoutSlug ?? CHECKOUT_SLUG_FALLBACK[slug] ?? slug;
+export type CtaTarget =
+  | { motion: 'self-serve'; checkoutSlug: string; href: string }
+  | { motion: 'discovery-call'; href: string };
+
+const DISCOVERY_CALL: CtaTarget = { motion: 'discovery-call', href: KALYA_DISCOVERY_CALL_URL };
+
+/** The registry's checkout slug for a product (site slug), if it declares one. */
+export function registryCheckoutSlug(siteSlug: string): string | undefined {
+  return REGISTRY_COMMERCE[siteSlug]?.checkoutSlug;
+}
+
+/** Dhanam's own pricing page, tagged with the ladder source. Dhanam only. */
+function dhanamPricingUrl(checkoutSlug: string): string {
+  const url = new URL('https://dhan.am/pricing');
+  url.searchParams.set('product', checkoutSlug);
+  url.searchParams.set('source', 'ladder');
+  return url.toString();
+}
+
+/** The CTA target for one product, by site slug. */
+export function ctaTarget(siteSlug: string): CtaTarget {
+  const checkoutSlug = registryCheckoutSlug(siteSlug);
+  if (!checkoutSlug) return DISCOVERY_CALL;
+  if (siteSlug === DHANAM_SITE_SLUG) {
+    return { motion: 'self-serve', checkoutSlug, href: dhanamPricingUrl(checkoutSlug) };
+  }
+  const primary = REGISTRY_PRODUCTS[siteSlug]?.externalUrl;
+  if (!primary) return DISCOVERY_CALL;
+  return { motion: 'self-serve', checkoutSlug, href: primary };
 }
 
 /**
@@ -129,45 +168,53 @@ export function getBandRungs(bandId: BandId): LadderRung[] {
   const tier = registryTier(source.slug, source.tierId);
   if (!tier) return [];
 
+  // A rung is self-serve only when its band is AND the registry sells the
+  // product self-serve; otherwise it is a discovery call.
+  const target = getBand(bandId).motion === 'self-serve' ? ctaTarget(source.slug) : DISCOVERY_CALL;
+
   return [
     {
       id: tier.id,
       band: bandId,
       label: tier.label,
-      checkoutSlug: registryCheckoutSlug(source.slug),
+      ...(target.motion === 'self-serve' ? { checkoutSlug: target.checkoutSlug } : {}),
       pricing: tier.pricing,
-      motion: getBand(bandId).motion,
+      motion: target.motion,
+      href: target.href,
     },
   ];
 }
 
 // ─── Band 2 (curated bundles) ────────────────────────────────────────────────
 // A bundle is a composition of registry products, not a registry product, so it
-// has no tier and no price of its own. It renders the pending wording until a
-// bundle SKU exists in the registry with a ratified price. The launch anchor
-// set is "MX Fiscal" and "Design→Sell".
+// has no tier, no price and no checkout of its own. It renders the pending
+// wording and the discovery-call CTA until a bundle SKU exists in the registry.
+// The launch anchor set is "MX Fiscal" and "Design→Sell".
 
 export interface LadderBundle {
   /** i18n key suffix within `valueLadder.bundles.*`. */
   id: string;
   /** Site slugs of the platform slices this bundle composes. */
   slices: string[];
-  checkoutSlug: string;
   pricing: TierPricing;
+  motion: LadderMotion;
+  href: string;
 }
 
 export const BUNDLES: LadderBundle[] = [
   {
     id: 'mx-fiscal',
     slices: ['karafiel', 'tezca'],
-    checkoutSlug: 'bundle-mx-fiscal',
     pricing: PENDING_PRICE,
+    motion: 'discovery-call',
+    href: KALYA_DISCOVERY_CALL_URL,
   },
   {
     id: 'design-to-sell',
     slices: ['yantra4d', 'forge-sight', 'cotiza-studio'],
-    checkoutSlug: 'bundle-design-to-sell',
     pricing: PENDING_PRICE,
+    motion: 'discovery-call',
+    href: KALYA_DISCOVERY_CALL_URL,
   },
 ];
 
@@ -188,11 +235,12 @@ const REGISTRY_SLICE_SLUGS = [
 ] as const;
 
 /**
- * Client-facing slices sold self-serve at Band 1 that have no presentation
- * overlay on this site, so they never become a `PLATFORMS` entry. They still
- * belong on the ladder, so they are listed by registry slug and rendered from
- * registry facts: the registry's display name, the registry's icon, the
- * registry's checkout slug. Nothing about them is typed here.
+ * Client-facing Band 1 slices that have no presentation overlay on this site,
+ * so they never become a `PLATFORMS` entry. They still belong on the ladder, so
+ * they are listed by registry slug and rendered from registry facts: the
+ * registry's display name, the registry's icon, the registry's checkout slug.
+ * Nothing about them is typed here. One without a registry checkout slug
+ * (acervo, today) links the discovery call.
  */
 const EXTRA_SLICE_SLUGS = ['kalya', 'selva', 'symbiosis', 'acervo'] as const;
 
@@ -201,14 +249,19 @@ export interface ExtraSlice {
   /** Registry display name — a brand mark, not translated. */
   name: string;
   icon: string;
-  checkoutSlug: string;
+  target: CtaTarget;
+}
+
+export interface RegistrySlice {
+  platform: Platform;
+  target: CtaTarget;
 }
 
 /** Platform slices resolved from the registry, in the public reading order. */
-export function getRegistrySlices(): Platform[] {
-  return REGISTRY_SLICE_SLUGS.map(slug => PLATFORMS.find(p => p.slug === slug)).filter(
-    (p): p is Platform => Boolean(p)
-  );
+export function getRegistrySlices(): RegistrySlice[] {
+  return REGISTRY_SLICE_SLUGS.map(slug => PLATFORMS.find(p => p.slug === slug))
+    .filter((p): p is Platform => Boolean(p))
+    .map(platform => ({ platform, target: ctaTarget(platform.slug) }));
 }
 
 /** Extra slices resolved from the registry. A slug the registry drops disappears. */
@@ -221,27 +274,11 @@ export function getExtraSlices(): ExtraSlice[] {
       slug,
       name: product.name,
       icon: product.icon,
-      checkoutSlug: registryCheckoutSlug(slug),
+      target: ctaTarget(slug),
     });
   }
   return slices;
 }
-
-// ─── CTA targets ─────────────────────────────────────────────────────────────
-
-/** Dhanam self-serve checkout, tagged with the ladder source. */
-export function dhanamCheckoutUrl(productSlug: string): string {
-  const url = new URL('https://dhan.am/pricing');
-  url.searchParams.set('product', productSlug);
-  url.searchParams.set('source', 'ladder');
-  return url.toString();
-}
-
-// Kalya discovery-call booking (Band 4, or anyone who wants help). Canonical
-// host is kalya.app; `/madfam` is MADFAM's live booking page (tenant live since
-// 2026-08-30, verified 2026-09-23). Ruling R27 routes every "talk to us" CTA
-// here.
-export const KALYA_DISCOVERY_CALL_URL = 'https://kalya.app/madfam';
 
 // ─── Self-selector ("Encuentra tu escalón") ─────────────────────────────────
 // Two questions map a visitor to a band + a candidate SKU set.
@@ -284,8 +321,10 @@ export interface LadderRecommendation {
   upsellBand?: BandId;
   pricing: TierPricing;
   motion: LadderMotion;
-  /** Dhanam checkout slug for the primary self-serve CTA, when applicable. */
+  /** Registry checkout slug, present only when `motion` is self-serve. */
   checkoutSlug?: string;
+  /** Primary CTA target: the product's own front door, or the discovery call. */
+  href: string;
 }
 
 /**
@@ -316,20 +355,21 @@ export function recommendRung(need: NeedId, size: SizeId): LadderRecommendation 
       candidates: option.candidates,
       ...(band === 'erp' ? { upsellBand: 'vcto' as BandId } : {}),
       pricing: rung?.pricing ?? PENDING_PRICE,
-      motion: rung?.motion ?? getBand(band).motion,
-      ...(rung?.motion === 'self-serve' ? { checkoutSlug: rung.checkoutSlug } : {}),
+      motion: rung?.motion ?? 'discovery-call',
+      ...(rung?.checkoutSlug ? { checkoutSlug: rung.checkoutSlug } : {}),
+      href: rung?.href ?? KALYA_DISCOVERY_CALL_URL,
     };
   }
 
-  // Band 2 (bundle) — a composition, priced upstream when a bundle SKU exists.
+  // Band 2 (bundle) — a composition with no checkout of its own: discovery call.
   if (band === 'bundle') {
     return {
       band,
       candidates: option.candidates,
       upsellBand: 'erp',
       pricing: PENDING_PRICE,
-      motion: 'self-serve',
-      checkoutSlug: option.candidates[0],
+      motion: 'discovery-call',
+      href: KALYA_DISCOVERY_CALL_URL,
     };
   }
 
@@ -337,12 +377,14 @@ export function recommendRung(need: NeedId, size: SizeId): LadderRecommendation 
   // (for design-to-sell needs) or the ERP as the natural next rung. Slice prices
   // are per-product and live on the product's own page, so the ladder routes the
   // visitor to the product rather than restating a price it does not own.
+  const target = ctaTarget(option.candidates[0] ?? '');
   return {
     band: 'slice',
     candidates: option.candidates,
     upsellBand: size === 'solo' ? 'bundle' : 'erp',
     pricing: PENDING_PRICE,
-    motion: 'self-serve',
-    checkoutSlug: registryCheckoutSlug(option.candidates[0] ?? ''),
+    motion: target.motion,
+    ...(target.motion === 'self-serve' ? { checkoutSlug: target.checkoutSlug } : {}),
+    href: target.href,
   };
 }

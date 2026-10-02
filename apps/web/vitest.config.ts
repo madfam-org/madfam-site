@@ -42,6 +42,8 @@ export default defineConfig({
       '@madfam-site/core': path.resolve(__dirname, '../../packages/core/src'),
       '@madfam-site/analytics': path.resolve(__dirname, '../../packages/analytics/src'),
       '@madfam-site/ui': path.resolve(__dirname, '../../packages/ui/src'),
+      // Same mapping as tsconfig `paths`: the email package is consumed from source.
+      '@madfam-site/email': path.resolve(__dirname, '../../packages/email/src'),
     },
   },
 });

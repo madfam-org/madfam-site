@@ -1,3 +1,4 @@
+import { DEFAULT_FROM } from './brand';
 import { emailService } from './index';
 
 interface EmailOptions {
@@ -21,7 +22,9 @@ export class EmailSender {
   constructor() {
     this.apiKey = process.env.RESEND_API_KEY || '';
     this.apiUrl = 'https://api.resend.com/emails';
-    this.defaultFrom = process.env.RESEND_FROM_EMAIL || 'hello@madfam.io';
+    // Ruling R46: the platform sender is `MADFAM <hola@madfam.io>`. An
+    // operator may override it per environment; the code default is the ruling.
+    this.defaultFrom = process.env.RESEND_FROM_EMAIL || DEFAULT_FROM;
   }
 
   async sendEmail({ to, template, data, from }: EmailOptions): Promise<EmailResult> {

@@ -30,7 +30,7 @@
       "tagline": "Several curated tools for a whole job.",
       "oneLine": "When you have a whole workflow, not a single task.",
       "grants": "A set of platforms that already work together, bought in one step.",
-      "valueVs": "Versus a generic suite: only the pieces your workflow needs, integrated, priced below the sum of the parts.",
+      "valueVs": "Versus a generic suite: only the pieces your workflow needs, integrated.",
       "priceNote": ""
     },
     "erp": {
@@ -38,7 +38,7 @@
       "tagline": "Your services behind one door, brand, and bill.",
       "oneLine": "When you already run several tools and want to unify them under your brand.",
       "grants": "All your entitled services behind one door, one identity, and one bill, under your brand.",
-      "valueVs": "Against Zoho or Odoo: it replaces the admin console with best-of-breed pieces, native to Mexican tax rules, and below the incumbent.",
+      "valueVs": "Against Zoho or Odoo: it replaces the admin console with best-of-breed pieces, native to Mexican tax rules.",
       "priceNote": ""
     },
     "vcto": {
@@ -117,7 +117,7 @@
         "description": "Your data and access are yours. Export and drop a rung without losing anything."
       },
       "vctoInBox": {
-        "title": "vCTO in the box",
+        "title": "vCTO available",
         "description": "Whenever you want, a fractional CTO runs it all for you. The top rung is always available."
       },
       "bestOfBreed": {

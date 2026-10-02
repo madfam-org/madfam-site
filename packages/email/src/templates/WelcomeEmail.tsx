@@ -14,86 +14,99 @@ import {
   Text,
 } from '@react-email/components';
 
+import {
+  DISCOVERY_CALL_URL,
+  ENTITY_LINE,
+  emailLanguage,
+  localizedSiteUrl,
+  logoUrl,
+  siteUrl,
+} from '../brand';
+
 interface WelcomeEmailProps {
   name: string;
-  language: 'es-MX' | 'en-US';
-  tier: string;
+  /** Any language tag (`es`, `es-MX`, `en`, `pt-BR`, …); normalised to es/en/pt. */
+  language?: string;
+  /**
+   * Accepted for backwards compatibility with queued payloads and ignored: the
+   * consultancy-era service tiers it used to name are retired.
+   */
+  tier?: string;
 }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+// Copy in the site's voice (copy deck R14: es-MX «tú»). No response-time
+// promise (R47) and no consultancy framing.
+const CONTENT = {
+  es: {
+    preview: 'Recibimos tu mensaje — MADFAM',
+    heading: 'Gracias por escribirnos',
+    greeting: (name: string) => `Hola, ${name}:`,
+    intro: 'Recibimos tu mensaje. Una persona del equipo lo leerá y te responderá por correo.',
+    meanwhile:
+      'Mientras tanto, puedes conocer nuestras plataformas o agendar una llamada de descubrimiento.',
+    cta: 'Ver las plataformas',
+    call: 'Agendar una llamada',
+    signature: 'Equipo MADFAM',
+  },
+  en: {
+    preview: 'We received your message — MADFAM',
+    heading: 'Thanks for writing to us',
+    greeting: (name: string) => `Hi ${name},`,
+    intro: 'We received your message. Someone on the team will read it and reply by email.',
+    meanwhile: 'In the meantime, you can explore our platforms or book a discovery call.',
+    cta: 'Explore the platforms',
+    call: 'Book a call',
+    signature: 'The MADFAM team',
+  },
+  pt: {
+    preview: 'Recebemos sua mensagem — MADFAM',
+    heading: 'Obrigado por nos escrever',
+    greeting: (name: string) => `Olá, ${name}:`,
+    intro: 'Recebemos sua mensagem. Uma pessoa da equipe vai lê-la e responder por e-mail.',
+    meanwhile:
+      'Enquanto isso, você pode conhecer nossas plataformas ou agendar uma chamada de descoberta.',
+    cta: 'Ver as plataformas',
+    call: 'Agendar uma chamada',
+    signature: 'Equipe MADFAM',
+  },
+} as const;
 
-export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({ name, language = 'es-MX', tier }) => {
-  const content = {
-    'es-MX': {
-      preview: 'Bienvenido a MADFAM - Tu socio en transformación digital',
-      greeting: `¡Hola ${name}!`,
-      welcome: 'Bienvenido a MADFAM',
-      intro:
-        'Gracias por tu interés en nuestros servicios. Somos especialistas en transformación digital y automatización inteligente.',
-      tierInfo: `Basado en tu consulta, creemos que nuestro servicio ${tier} podría ser perfecto para ti.`,
-      nextSteps: 'Próximos pasos:',
-      step1: 'Revisaremos tu solicitud en las próximas 24 horas',
-      step2: 'Te contactaremos para agendar una consulta gratuita',
-      step3: 'Desarrollaremos una propuesta personalizada',
-      cta: 'Agenda una consulta',
-      footer: 'Si tienes alguna pregunta, no dudes en contactarnos.',
-      signature: 'Equipo MADFAM',
-    },
-    'en-US': {
-      preview: 'Welcome to MADFAM - Your digital transformation partner',
-      greeting: `Hello ${name}!`,
-      welcome: 'Welcome to MADFAM',
-      intro:
-        'Thank you for your interest in our services. We specialize in digital transformation and intelligent automation.',
-      tierInfo: `Based on your inquiry, we believe our ${tier} service could be perfect for you.`,
-      nextSteps: 'Next steps:',
-      step1: 'We will review your request within the next 24 hours',
-      step2: 'We will contact you to schedule a free consultation',
-      step3: 'We will develop a personalized proposal',
-      cta: 'Schedule a consultation',
-      footer: "If you have any questions, please don't hesitate to contact us.",
-      signature: 'MADFAM Team',
-    },
-  };
-
-  const t = content[language];
+export const WelcomeEmail: React.FC<WelcomeEmailProps> = ({ name, language }) => {
+  const lang = emailLanguage(language);
+  const t = CONTENT[lang];
 
   return (
-    <Html>
+    <Html lang={lang}>
       <Head />
       <Preview>{t.preview}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Img src={`${baseUrl}/logo.png`} width="170" height="50" alt="MADFAM" style={logo} />
-          <Heading style={h1}>{t.welcome}</Heading>
-          <Text style={text}>{t.greeting}</Text>
+          <Img src={logoUrl()} width="56" height="57" alt="MADFAM" style={logo} />
+          <Heading style={h1}>{t.heading}</Heading>
+          <Text style={text}>{t.greeting(name)}</Text>
           <Text style={text}>{t.intro}</Text>
-          <Text style={text}>{t.tierInfo}</Text>
+          <Text style={text}>{t.meanwhile}</Text>
 
           <Section style={buttonContainer}>
-            <Button style={button} href={`${baseUrl}/contact`}>
+            <Button style={button} href={localizedSiteUrl(lang, '/platforms')}>
               {t.cta}
             </Button>
           </Section>
+          <Text style={centered}>
+            <Link href={DISCOVERY_CALL_URL} style={link}>
+              {t.call}
+            </Link>
+          </Text>
 
-          <Section style={nextStepsContainer}>
-            <Heading style={h2}>{t.nextSteps}</Heading>
-            <Text style={text}>1. {t.step1}</Text>
-            <Text style={text}>2. {t.step2}</Text>
-            <Text style={text}>3. {t.step3}</Text>
-          </Section>
-
-          <Hr style={hr} />
-          <Text style={text}>{t.footer}</Text>
           <Text style={signature}>{t.signature}</Text>
 
           <Hr style={hr} />
           <Text style={footer}>
-            <Link href={`${baseUrl}`} style={link}>
+            <Link href={siteUrl()} style={link}>
               madfam.io
             </Link>
+            <br />
+            {ENTITY_LINE}
           </Text>
         </Container>
       </Body>
@@ -124,14 +137,6 @@ const h1 = {
   margin: '0 0 20px',
 };
 
-const h2 = {
-  color: '#0A0E27',
-  fontSize: '20px',
-  fontWeight: '600',
-  lineHeight: '28px',
-  margin: '30px 0 15px',
-};
-
 const text = {
   color: '#374151',
   fontSize: '16px',
@@ -158,11 +163,9 @@ const button = {
   maxWidth: '200px',
 };
 
-const nextStepsContainer = {
-  backgroundColor: '#f9fafb',
-  borderRadius: '8px',
-  padding: '20px',
-  margin: '32px 0',
+const centered = {
+  ...text,
+  textAlign: 'center' as const,
 };
 
 const hr = {

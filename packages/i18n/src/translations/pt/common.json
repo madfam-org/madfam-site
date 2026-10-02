@@ -16,7 +16,6 @@
     "businessSolutions": "Soluções de Negócio",
     "comingSoon": "Em Breve",
     "moreSolutionsDesc": "Mais soluções em desenvolvimento",
-    "caseStudies": "Casos de Sucesso",
     "featuredWork": "Trabalho em Destaque",
     "allCases": "Ver Todos",
     "securityCompliance": "Segurança e Conformidade",
@@ -29,8 +28,7 @@
     "ecosystem": "Ecossistema",
     "makerNode": "Maker Node",
     "joinEcosystem": "Junte-se ao Ecossistema",
-    "explorePlatforms": "Explorar Plataformas",
-    "showcase": "Showcase"
+    "explorePlatforms": "Explorar Plataformas"
   },
   "cta": {
     "learnMore": "Saiba mais",
@@ -60,7 +58,7 @@
       "programs": "Programas"
     },
     "ecosystem": {
-      "membership": "Assinatura",
+      "membership": "Lista de espera",
       "nauta": "Nauta ERP",
       "valueLadder": "Escada de valor",
       "pricing": "Preços",
@@ -74,9 +72,6 @@
       "units": "Soluções"
     },
     "resources": {
-      "assessment": "Avaliação de IA",
-      "calculator": "Calculadora de ROI",
-      "guides": "Guias",
       "contact": "Contato"
     },
     "social": {
@@ -99,12 +94,10 @@
     "switchToDark": "Mudar para modo escuro"
   },
   "metadata": {
-    "email": "E-mail",
-    "whatsapp": "WhatsApp"
+    "email": "E-mail"
   },
   "getStarted": "Começar",
   "learnMore": "Saiba mais",
-  "aiAssessment": "Avaliação IA",
   "freeConsultation": "Consulta gratuita",
   "tryFree": "Testar grátis",
   "comingSoon": "Em breve",
