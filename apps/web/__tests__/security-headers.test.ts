@@ -80,16 +80,24 @@ describe('Content-Security-Policy', () => {
     expect(csp).toContain("object-src 'none'");
   });
 
-  it('allows no Vercel or Google analytics origins', () => {
+  it('allows no Vercel or Google origins', () => {
     for (const origin of [
       'vercel.live',
       'vercel-insights.com',
       'googletagmanager.com',
       'google-analytics.com',
       'analytics.google.com',
+      'fonts.googleapis.com',
+      'fonts.gstatic.com',
     ]) {
       expect(csp).not.toContain(origin);
     }
+    expect(csp).not.toMatch(/vercel|google|gstatic/i);
+  });
+
+  it('loads styles and fonts from this origin only', () => {
+    expect(csp).toContain("style-src 'self' 'unsafe-inline';");
+    expect(csp).toContain("font-src 'self';");
   });
 
   it('allows the Plausible origin only when the build renders Plausible', () => {
