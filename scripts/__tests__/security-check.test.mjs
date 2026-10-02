@@ -185,3 +185,22 @@ test('the repository itself declares every required header', () => {
   const a = new SecurityAuditor();
   assert.deepEqual(a.checkSecurityHeaders(), { passed: true });
 });
+
+test('a configuration check that throws fails the run instead of passing', async () => {
+  const a = auditor();
+  a.log = () => {};
+  a.checkSecurityHeaders = () => {
+    throw new Error('synthetic');
+  };
+  a.checkInputValidation = () => ({ passed: true });
+  a.checkRateLimiting = () => ({ passed: true });
+  a.checkEnvironmentSecurity = () => ({ passed: true });
+  a.checkApiSecurity = () => ({ passed: true });
+
+  await a.checkSecurityConfigurations();
+
+  assert.equal(a.issues.length, 1);
+  assert.equal(a.issues[0].level, 'critical');
+  assert.match(a.issues[0].message, /Security Headers: check could not run/);
+  assert.equal(a.buildReport().status, 'FAIL');
+});
