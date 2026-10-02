@@ -53,6 +53,27 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "react-dom"
         update-types: ["version-update:semver-major"]
+      # Coordinated majors (issue #261; finding S1-013, batch S7). Each of these
+      # was raised, went red or planted an inconsistent lockfile, was closed
+      # and was raised again (#267-#269 -> #320, #322, #323):
+      #   - prisma + @prisma/client must move together (Prisma 7 driver-adapter
+      #     and config model; Prisma runs in the web API routes),
+      #   - vite 8 + @vitejs/plugin-react 6 + vitest move together, and the
+      #     root `overrides.vite` pin has to change with them,
+      #   - zod 4 and typescript majors touch every schema / type surface.
+      # They arrive as owned migration PRs, not as Dependabot bumps.
+      - dependency-name: "prisma"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@prisma/client"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vitejs/plugin-react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "zod"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
     # One group for every non-major update across the workspace. A previous
     # `dev-dependencies` group was removed: it also used `patterns: ["*"]`, and
     # since a dependency joins the FIRST group it matches, it never captured
