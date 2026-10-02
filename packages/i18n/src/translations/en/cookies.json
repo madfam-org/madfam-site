@@ -66,31 +66,20 @@
     }
   },
   "banner": {
-    "title": "We use cookies",
-    "description": "We use cookies to enhance your experience, analyze site traffic, and personalize content. You can customize your preferences or accept all cookies.",
-    "acceptAll": "Accept All",
-    "necessaryOnly": "Necessary Only",
-    "customize": "Customize",
-    "closeAriaLabel": "Close cookie banner"
-  },
-  "settings": {
-    "title": "Cookie Preferences",
-    "save": "Save Preferences",
-    "cancel": "Cancel",
+    "title": "Cookies on this site",
+    "description": "We only use necessary and preference cookies. We use no analytics or advertising cookies: our analytics (Plausible, self-hosted) works without cookies.",
     "necessary": {
-      "title": "Necessary Cookies",
-      "description": "These cookies are essential for the website to function properly. They cannot be disabled."
+      "title": "Necessary",
+      "description": "keep the site working and protect it from automated traffic."
     },
-    "analytics": {
-      "title": "Analytics Cookies",
-      "description": "Help us understand how visitors interact with our website by collecting and reporting information anonymously."
+    "preference": {
+      "title": "Preference",
+      "description": "remember the language you chose."
     },
-    "marketing": {
-      "title": "Marketing Cookies",
-      "description": "Used to track visitors across websites to allow publishers to display relevant and engaging advertisements."
-    }
+    "dismiss": "Got it",
+    "closeAriaLabel": "Close cookie notice"
   },
   "footer": {
-    "text": "By continuing to use our site, you consent to our use of cookies as described in our <privacy>Privacy Policy</privacy> and <terms>Terms of Service</terms>."
+    "text": "Details in our <cookies>Cookie Policy</cookies> and our <privacy>Privacy Policy</privacy>."
   }
 }

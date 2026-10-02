@@ -10,6 +10,8 @@
  * - Shared domain reputation
  */
 
+import { SENDER_ADDRESS, SENDER_NAME, siteUrl } from './brand';
+
 interface JanuaEmailResult {
   success: boolean;
   message_id?: string;
@@ -89,8 +91,10 @@ export async function sendEmailViaJanua(
       subject: options.subject,
       html: options.html,
       text: options.text,
-      from_email: options.from_email,
-      from_name: options.from_name || 'MADFAM',
+      // Ruling R46: platform sender `MADFAM <hola@madfam.io>` unless the caller
+      // names another.
+      from_email: options.from_email || SENDER_ADDRESS,
+      from_name: options.from_name || SENDER_NAME,
       tags: {
         ...options.tags,
         source_app: SOURCE_APP,
@@ -141,8 +145,10 @@ export async function sendTemplateEmailViaJanua(
       template: options.template,
       variables: options.variables,
       subject: options.subject,
-      from_email: options.from_email,
-      from_name: options.from_name || 'MADFAM',
+      // Ruling R46: platform sender `MADFAM <hola@madfam.io>` unless the caller
+      // names another.
+      from_email: options.from_email || SENDER_ADDRESS,
+      from_name: options.from_name || SENDER_NAME,
       tags: options.tags,
       source_app: SOURCE_APP,
       source_type: sourceType,
@@ -188,7 +194,8 @@ export async function sendWelcomeEmail(to: string[], userName: string): Promise<
       variables: {
         user_name: userName,
         app_name: 'MADFAM',
-        login_url: process.env.NEXT_PUBLIC_APP_URL || 'https://madfam.io',
+        // madfam.io has no sign-in (R42); the link is the public site.
+        login_url: siteUrl(),
         support_email: 'hello@madfam.io',
       },
     },
