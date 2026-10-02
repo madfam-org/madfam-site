@@ -16,7 +16,6 @@
     "businessSolutions": "Nuestras Soluciones",
     "comingSoon": "Próximamente",
     "moreSolutionsDesc": "Más soluciones en desarrollo",
-    "caseStudies": "Casos de Éxito",
     "featuredWork": "Trabajo Destacado",
     "allCases": "Ver Todos",
     "securityCompliance": "Seguridad y Cumplimiento",
@@ -29,8 +28,7 @@
     "ecosystem": "Ecosistema",
     "makerNode": "Maker Node",
     "joinEcosystem": "Únete al Ecosistema",
-    "explorePlatforms": "Explorar Plataformas",
-    "showcase": "Showcase"
+    "explorePlatforms": "Explorar Plataformas"
   },
   "cta": {
     "learnMore": "Conocer más",

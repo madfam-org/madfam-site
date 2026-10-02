@@ -180,172 +180,6 @@
       "sendResume": "Enviar seu currículo"
     }
   },
-  "caseStudies": {
-    "title": "Casos de sucesso",
-    "subtitle": "Histórias reais de como ajudamos empresas a se transformar e prosperar na era digital.",
-    "challenge": "Desafio",
-    "solution": "Solução",
-    "results": "Resultados",
-    "readFullCase": "Ler caso completo",
-    "noCaseStudies": "Não há casos de estudo disponíveis no momento.",
-    "fallback": {
-      "0": {
-        "title": "Transformação Digital: De Legacy para Cloud-Native",
-        "client": "Global Manufacturing Corp",
-        "industry": "Manufatura",
-        "challenge": "Sistemas desatualizados limitando o crescimento e a eficiência operacional",
-        "solution": "Revisão digital completa com migração para nuvem e análise impulsionada por IA",
-        "results": {
-          "0": {
-            "metric": "Redução de Custos",
-            "value": "40%",
-            "description": "redução nos custos operacionais"
-          },
-          "1": {
-            "metric": "Velocidade",
-            "value": "3x",
-            "description": "mais rápido para o mercado"
-          },
-          "2": {
-            "metric": "Disponibilidade",
-            "value": "99.9%",
-            "description": "disponibilidade do sistema alcançada"
-          }
-        }
-      },
-      "1": {
-        "title": "Construindo uma Plataforma de Trading de Nova Geração",
-        "client": "FinTech Innovations",
-        "industry": "Serviços Financeiros",
-        "challenge": "Necessidade de processamento em tempo real e conformidade regulatória",
-        "solution": "Plataforma personalizada com insights impulsionados por ML e conformidade automatizada",
-        "results": {
-          "0": { "metric": "Latência", "value": "10ms", "description": "latência média" },
-          "1": {
-            "metric": "Conformidade",
-            "value": "100%",
-            "description": "conformidade regulatória"
-          },
-          "2": { "metric": "Economia", "value": "$2M", "description": "economizados anualmente" }
-        }
-      },
-      "2": {
-        "title": "Sistema de Atendimento ao Paciente Impulsionado por IA",
-        "client": "Healthcare Plus",
-        "industry": "Saúde",
-        "challenge": "Dados de pacientes fragmentados e coordenação de cuidados ineficiente",
-        "solution": "Plataforma unificada de saúde com análise preditiva",
-        "results": {
-          "0": {
-            "metric": "Resultados",
-            "value": "30%",
-            "description": "melhoria nos resultados dos pacientes"
-          },
-          "1": {
-            "metric": "Eficiência",
-            "value": "50%",
-            "description": "redução no tempo administrativo"
-          },
-          "2": {
-            "metric": "Satisfação",
-            "value": "2x",
-            "description": "aumento na satisfação do paciente"
-          }
-        }
-      }
-    }
-  },
-  "showcase": {
-    "title": "Vitrine de Componentes",
-    "toggleDarkMode": "Alternar Modo Escuro",
-    "sections": {
-      "buttons": "Variantes de Botões",
-      "services": "Cartões de Serviços",
-      "products": "Cartões de Produtos",
-      "features": "Recursos Principais",
-      "testimonials": "Depoimentos"
-    },
-    "buttons": {
-      "primary": "Primário",
-      "secondary": "Secundário",
-      "creative": "Criativo",
-      "outline": "Contorno",
-      "ghost": "Fantasma",
-      "danger": "Perigo",
-      "success": "Sucesso",
-      "loading": "Carregando",
-      "withIcon": "Com Ícone"
-    },
-    "badges": {
-      "recommended": "Recomendado",
-      "popular": "Popular"
-    },
-    "featureFlag": {
-      "comingSoon": "Calculadora Interativa em Breve!",
-      "active": "Calculadora de ROI Ativa!",
-      "activeDescription": "Esta seção é exibida porque o sinalizador de recurso INTERACTIVE_CALCULATOR está ativado."
-    },
-    "features": {
-      "subtitle": "CAPACIDADES",
-      "description": "Tudo o que você precisa para transformar seu negócio com IA",
-      "automation": "Automação de Processos",
-      "automationDesc": "Otimize seus fluxos de trabalho com automação inteligente que aprende e se adapta às necessidades do seu negócio.",
-      "ai": "Integração de IA",
-      "aiDesc": "Integre perfeitamente a inteligência artificial aos seus sistemas existentes para melhorar a tomada de decisões e a produtividade.",
-      "transformation": "Transformação Digital",
-      "transformationDesc": "Transformação empresarial completa com tecnologia de ponta e implementação estratégica de IA."
-    },
-    "heroSubtitle": "COMPONENTES MADFAM",
-    "testimonials": {
-      "0": {
-        "quote": "MADFAM transformou nossas operações com suas soluções de IA. O ROI foi evidente em semanas.",
-        "name": "Maria González",
-        "role": "CEO",
-        "company": "TechCorp México"
-      },
-      "1": {
-        "quote": "A expertise da equipe em IA e design thinking os diferencia. Altamente recomendados!",
-        "name": "Carlos Rivera",
-        "role": "Diretor de Inovação",
-        "company": "StartupMX"
-      },
-      "2": {
-        "quote": "Profissionais, inovadores e orientados a resultados. MADFAM é nosso parceiro de IA preferido.",
-        "name": "Ana Martínez",
-        "role": "CTO",
-        "company": "FinTech Solutions"
-      }
-    }
-  },
-  "blog": {
-    "title": "Blog e insights",
-    "subtitle": "Pensamentos, histórias e ideias do time MADFAM sobre tecnologia, inovação e transformação empresarial.",
-    "readMore": "Leia mais",
-    "by": "Por",
-    "minRead": "min de leitura",
-    "backToBlog": "Voltar ao Blog",
-    "noPosts": "Não há publicações de blog disponíveis no momento.",
-    "fallback": {
-      "0": {
-        "title": "O Futuro da IA na Transformação Empresarial",
-        "excerpt": "Explore como a inteligência artificial está transformando o cenário empresarial e criando novas oportunidades de crescimento e inovação.",
-        "author": "Equipe MADFAM",
-        "tag": "IA e Inovação"
-      },
-      "1": {
-        "title": "Construindo Plataformas Digitais Escaláveis: Guia Técnico",
-        "excerpt": "Aprenda os princípios arquitetônicos chave e as melhores práticas para construir plataformas que possam crescer com seu negócio.",
-        "author": "Engenharia MADFAM",
-        "tag": "Técnico"
-      },
-      "2": {
-        "title": "História de Sucesso: Transformando Operações com Automação",
-        "excerpt": "Como ajudamos um fabricante líder a reduzir custos operacionais em 40% através de soluções inteligentes de automação.",
-        "author": "Equipe MADFAM",
-        "tag": "Casos de Sucesso"
-      }
-    }
-  },
   "guides": {
     "title": "Guias e tutoriais",
     "subtitle": "Guias passo a passo para ajudá-lo a aproveitar ao máximo os serviços da MADFAM e criar soluções incríveis.",
@@ -473,8 +307,6 @@
         "title": "Recursos",
         "description": "Recursos adicionais e materiais de suporte",
         "items": {
-          "caseStudies": "Casos de Sucesso",
-          "blog": "Blog e Novidades",
           "support": "Centro de Suporte",
           "community": "Fórum da Comunidade"
         }
@@ -573,14 +405,6 @@
     "careers": {
       "title": "Carreiras — MADFAM",
       "description": "Trabalhe em um estúdio mexicano que constrói e opera um ecossistema de plataformas abertas."
-    },
-    "blog": {
-      "title": "Blog — MADFAM",
-      "description": "Notas da oficina: decisões técnicas, lições de operação e guias do ecossistema MADFAM."
-    },
-    "caseStudies": {
-      "title": "Casos — MADFAM",
-      "description": "Histórias reais, com permissão e com números que podemos sustentar."
     },
     "guides": {
       "title": "Guias — MADFAM",

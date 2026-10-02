@@ -112,6 +112,31 @@ const nextConfig = {
         permanent: false,
       },
 
+      // Invented proof removed (2026-10-01 stability + messaging audit,
+      // findings L1-002/M1-001): the case studies, blog posts and testimonials
+      // were fabricated. Real, permissioned client stories may come back; until
+      // then these URLs move permanently. `:path*` also matches the bare index.
+      {
+        source: '/:locale(es|en|pt)/case-studies/:path*',
+        destination: '/:locale/platforms',
+        permanent: true,
+      },
+      {
+        source: '/:locale(es|en|pt)/blog/:path*',
+        destination: '/:locale',
+        permanent: true,
+      },
+      {
+        source: '/es/casos-de-estudio/:path*',
+        destination: '/es/platforms',
+        permanent: true,
+      },
+      {
+        source: '/pt/casos-de-sucesso/:path*',
+        destination: '/pt/platforms',
+        permanent: true,
+      },
+
       // Services to Programs mapping (permanent)
       {
         source: '/services',
@@ -180,7 +205,6 @@ const nextConfig = {
       { source: '/pt/contato', destination: '/pt/contact' },
       // Legacy routes
       { source: '/pt/carreiras', destination: '/pt/careers' },
-      { source: '/pt/casos-de-sucesso', destination: '/pt/case-studies' },
       { source: '/pt/documentacao', destination: '/pt/docs' },
       { source: '/pt/guias', destination: '/pt/guides' },
       { source: '/pt/avaliacao', destination: '/pt/assessment' },
