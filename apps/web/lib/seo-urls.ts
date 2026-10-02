@@ -62,7 +62,6 @@ export const LEGACY_PATH_ALIASES: Record<string, string> = {
   '/contacto': '/contact',
   '/contato': '/contact',
   '/carreiras': '/careers',
-  '/casos-de-sucesso': '/case-studies',
   '/documentacao': '/docs',
   '/guias': '/guides',
   '/avaliacao': '/assessment',

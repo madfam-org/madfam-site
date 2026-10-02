@@ -25,7 +25,6 @@ const filesToFix = [
   './app/[locale]/dashboard/page.tsx',
   './app/[locale]/cookies/page.tsx',
   './app/[locale]/contact/page.tsx',
-  './app/[locale]/case-studies/page.tsx',
   './app/[locale]/careers/page.tsx',
   './app/[locale]/auth/signin/page.tsx',
 ];

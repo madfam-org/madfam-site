@@ -51,8 +51,6 @@ export default async function DocsPage({ params }: { params: Promise<{ locale: s
       title: t('categories.resources.title'),
       description: t('categories.resources.description'),
       items: [
-        { title: t('categories.resources.items.caseStudies'), href: '/case-studies' },
-        { title: t('categories.resources.items.blog'), href: '/blog' },
         { title: t('categories.resources.items.support'), href: '/contact' },
         { title: t('categories.resources.items.community'), href: 'https://github.com/madfam-org' },
       ],
