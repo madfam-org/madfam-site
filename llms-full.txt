@@ -121,7 +121,11 @@ produces no CSS is usually one that exists only in that file.
 ## Deployment
 
 **Enclii only.** Push to `main` → GitHub Actions builds → GHCR → a digest commit
-into `k8s/production` → ArgoCD syncs. MADFAM has completely migrated off Vercel
+into `k8s/production` → ArgoCD syncs. Only changes under the deploy paths
+(`apps/web/**`, `packages/**` and the root manifests) build an image; the
+workflow's verify job then waits up to 15 minutes for
+`https://madfam.io/api/version` to report the commit and opens an issue if it
+does not (S1a). MADFAM has completely migrated off Vercel
 (owner confirmation, 2026-09-04) and the Vercel configuration was deleted from
 this repository on that date. Any document describing a Vercel deploy path is
 historical and is banner-labelled as such.
