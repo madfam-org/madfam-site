@@ -97,7 +97,14 @@ export const DEMO_SAMPLE_FILES = [
 ];
 
 const SOURCE_FILE = /\.(?:[cm]?[jt]sx?)$/;
-const TEST_FILE = /(?:^|\/)__tests__\/|\.(?:test|spec)\.[cm]?[jt]sx?$/;
+/** A path inside a `__tests__` directory (anywhere in the path). */
+const TEST_DIRECTORY = /(?:^|\/)__tests__\//;
+/** A `*.test.*` / `*.spec.*` source file name (anchored at the end). */
+const TEST_SUFFIX = /\.(?:test|spec)\.[cm]?[jt]sx?$/;
+
+function isTestFile(relative) {
+  return TEST_DIRECTORY.test(relative) || TEST_SUFFIX.test(relative);
+}
 
 /**
  * Every source file under the guarded trees, relative to `root`, minus the
@@ -114,7 +121,7 @@ export function treeEntries(root = repoRoot) {
         if (dirent.name !== 'node_modules') walk(child);
       } else if (
         SOURCE_FILE.test(child) &&
-        !TEST_FILE.test(child) &&
+        !isTestFile(child) &&
         child !== GENERATED_MODULE &&
         !DEMO_SAMPLE_FILES.includes(child)
       ) {
