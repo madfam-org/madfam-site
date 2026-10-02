@@ -29,10 +29,7 @@ function mergeRuntimeMessages(modules) {
   return {
     common,
     ...common,
-    assessment: modules.assessment || {},
-    calculator: modules.calculator || {},
     compare: modules.compare || {},
-    estimator: modules.estimator || {},
     products: modules.products || {},
     corporate: modules.corporate || {},
     ...pages,

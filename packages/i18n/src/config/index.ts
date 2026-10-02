@@ -34,10 +34,7 @@ export const i18nConfig = {
       '/contact': '/contacto',
 
       // PRESERVE: Existing routes
-      '/assessment': '/evaluacion',
-      '/calculator': '/calculadora',
       '/careers': '/carreras',
-      '/docs': '/documentacion',
       '/privacy': '/privacidad',
       '/terms': '/terminos',
       '/cookies': '/cookies',
@@ -54,11 +51,6 @@ export const i18nConfig = {
       '/about': '/sobre',
       '/contact': '/contato',
       '/careers': '/carreiras',
-      '/docs': '/documentacao',
-      '/guides': '/guias',
-      '/assessment': '/avaliacao',
-      '/calculator': '/calculadora',
-      '/estimator': '/estimador',
       '/privacy': '/privacidade',
       '/terms': '/termos',
       '/cookies': '/cookies',

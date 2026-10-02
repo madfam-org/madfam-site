@@ -82,7 +82,6 @@
     "viewSolutions": "Explore solutions",
     "viewProducts": "View products",
     "exploreProducts": "Explore product demos",
-    "takeAssessment": "Take AI Assessment",
     "specializedUnits": "Specialized solutions",
     "premiumProducts": "Production-ready platforms",
     "title": "Transform Operations with AI—From Strategy to Production",
@@ -96,49 +95,12 @@
     "mainCapabilities": "Core Capabilities",
     "mainProducts": "Main products",
     "colabs": {
-      "tagline": "Collaboration and Educational Innovation Center",
-      "description": "Co-creation space where education, technology and creativity converge to train new generations",
-      "capabilities": {
-        "0": "STEAM Educational Programs",
-        "1": "Innovation Labs",
-        "2": "Workshops and Bootcamps",
-        "3": "Strategic Collaborations"
-      },
+      "tagline": "Learning by doing",
+      "description": "Co-Labs is our educational collaboration program: workshops, labs and projects where students, teachers and makers build with the same tools we use.",
       "page": {
         "badge": "by MADFAM",
-        "startCollaboration": "Start Collaboration",
-        "viewPrograms": "View Programs",
-        "capabilitiesTitle": "Our Capabilities",
-        "capabilityDescriptions": {
-          "0": "Comprehensive educational programs combining science, technology, engineering, art and mathematics",
-          "1": "Spaces equipped with cutting-edge technology for experimentation and hands-on learning",
-          "2": "Intensive training programs in emerging technologies and agile methodologies",
-          "3": "Alliances with educational institutions and leading innovation companies"
-        },
-        "programsTitle": "Active Programs",
-        "programsSubtitle": "Ongoing initiatives transforming education and training new generations",
-        "active": "Active",
-        "inCollaborationWith": "In collaboration with:",
-        "learnMore": "Learn More",
-        "partnershipsTitle": "Strategic Collaborations",
-        "partnershipsSubtitle": "We work with the best institutions and companies to create unique educational experiences",
-        "partners": {
-          "educational": {
-            "name": "Educational Institutions",
-            "description": "Universities, schools and training centers"
-          },
-          "tech": {
-            "name": "Tech Companies",
-            "description": "Leaders in innovation and technology development"
-          },
-          "social": {
-            "name": "Social Organizations",
-            "description": "NGOs and foundations committed to education"
-          }
-        },
-        "ctaTitle": "Ready to transform education?",
-        "ctaSubtitle": "Join MADFAM Co-Labs and be part of the educational revolution shaping new generations.",
-        "visitPartner": "Visit La Ciencia del Juego"
+        "title": "Co-Labs: learning by doing",
+        "cta": "I want to collaborate"
       }
     },
     "makerNode": {
@@ -229,7 +191,6 @@
     "includedPlatforms": "Included platforms",
     "deliveredBy": "Delivered by:",
     "requestInfo": "Request information",
-    "evaluate": "Evaluate",
     "strategyEnablement": {
       "name": "Launch Program",
       "description": "Strategic consulting and enablement for startups and founders entering the MADFAM ecosystem",
@@ -288,8 +249,7 @@
     },
     "hero": {
       "title": "Programs for Creators and Teams",
-      "subtitle": "Launch, scale, or partner — structured paths to get the most from the MADFAM ecosystem",
-      "assessmentCta": "Get Started"
+      "subtitle": "Launch, scale, or partner — structured paths to get the most from the MADFAM ecosystem"
     },
     "migration": {
       "title": "Service Migration Update",
@@ -308,18 +268,6 @@
       "scale": {
         "title": "Partner",
         "description": "We embed technology for long-term growth"
-      }
-    },
-    "tools": {
-      "title": "Explore the Ecosystem",
-      "description": "Discover platforms, get a fabrication quote, or join the ecosystem membership",
-      "assessment": {
-        "title": "Explore Platforms",
-        "description": "Find the right platforms for your project"
-      },
-      "calculator": {
-        "title": "Get a Fabrication Quote",
-        "description": "Instant pricing for 3D printing, CNC, and laser cutting"
       }
     }
   },
@@ -358,7 +306,6 @@
   "cta": {
     "title": "Ready to transform your organization?",
     "subtitle": "Find the platform or program that fits your project.",
-    "takeAssessment": "Take AI Assessment",
     "contactNow": "Contact Now"
   },
   "badges": {
