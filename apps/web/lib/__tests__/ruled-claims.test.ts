@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { PLATFORMS, lifecycleLabelKey, primaryCtaLabelKey } from '@/lib/data/platforms';
@@ -103,6 +103,26 @@ describe('ruled-claims stop-list (S3)', () => {
     const home = readFileSync(join(__dirname, '../../components/EcosystemHomePage.tsx'), 'utf8');
     expect(home).not.toContain('MetricsBar');
   });
+});
+
+/**
+ * SITE-01 (front-door audit 2026-10-03, P0): /pt/about said "Junte-se a centenas
+ * de empresas…", a client count nobody can source (R9/R11). The stop-list above
+ * reads three bundles; this scans EVERY bundle of every locale, pages.json
+ * included, for the shapes an invented count takes.
+ */
+const INVENTED_COUNTS =
+  /centenas de (empresas|clientes|negócios)|cientos de (empresas|clientes|negocios)|hundreds of (companies|businesses|clients|customers)|miles de (empresas|clientes)|milhares de (empresas|clientes)|thousands of (companies|businesses|clients|customers)/i;
+
+describe('no invented client counts (SITE-01)', () => {
+  for (const locale of LOCALES) {
+    const dir = join(root, `packages/i18n/src/translations/${locale}`);
+    for (const file of readdirSync(dir).filter(name => name.endsWith('.json'))) {
+      it(`${locale}/${file} claims no client count`, () => {
+        expect(readFileSync(join(dir, file), 'utf8')).not.toMatch(INVENTED_COUNTS);
+      });
+    }
+  }
 });
 
 describe('lifecycle badge and CTA (MH-5)', () => {
