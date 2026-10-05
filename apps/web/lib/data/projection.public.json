@@ -32,7 +32,6 @@
           "npm.madfam.io",
           "status.madfam.io",
           "grafana.enclii.dev",
-          "prometheus.enclii.dev",
           "alertmanager.enclii.dev"
         ]
       },
@@ -570,8 +569,12 @@
       },
       "domains": {
         "primary": "voxa.madfam.io",
-        "hosts": [],
-        "infra_hosts": []
+        "hosts": [
+          "voxa-app.madfam.io"
+        ],
+        "infra_hosts": [
+          "voxa-api.madfam.io"
+        ]
       },
       "site": {
         "category": "Applications",
@@ -587,8 +590,7 @@
           "family",
           "clinic"
         ],
-        "admin_tier": "admin",
-        "checkout_slug": "voxa"
+        "admin_tier": "admin"
       }
     },
     {

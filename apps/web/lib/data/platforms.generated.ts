@@ -670,7 +670,6 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
           },
         },
       ],
-      checkoutSlug: 'voxa',
     },
   },
   'phynd-crm': {
@@ -1682,7 +1681,6 @@ export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = {
         },
       },
     ],
-    checkoutSlug: 'voxa',
   },
   'phynd-crm': {
     tiers: [
@@ -2001,7 +1999,7 @@ export const REGISTRY_SOURCE = {
   registryVersion: 4,
   lastUpdated: '2026-09-23',
   generatedFrom: 'internal-devops/ecosystem/registry/products.yaml',
-  sha256: 'db2c4ed38fac5dbe86e860929d271d9ca3d7fa85bf2ffba63672ba0e1998d5b0',
+  sha256: 'df253f61cb880447bf9965ca059816b0edae4495770032b4eab763694cbb6d15',
   productCount: 32,
   retiredCount: 3,
 } as const;
