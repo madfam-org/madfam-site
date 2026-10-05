@@ -1999,7 +1999,7 @@ export const REGISTRY_SOURCE = {
   registryVersion: 4,
   lastUpdated: '2026-09-23',
   generatedFrom: 'internal-devops/ecosystem/registry/products.yaml',
-  sha256: 'df253f61cb880447bf9965ca059816b0edae4495770032b4eab763694cbb6d15',
+  sha256: 'b60cbcbe42306345db81f402d6fc7507afcebc27c65341e4962a178b2711a507',
   productCount: 32,
   retiredCount: 3,
 } as const;
