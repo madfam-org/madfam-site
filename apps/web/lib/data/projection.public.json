@@ -484,7 +484,7 @@
       "repo": {
         "name": "digifab-quoting",
         "github_org": "madfam-org",
-        "visibility": "public",
+        "visibility": "private",
         "language": "TypeScript"
       },
       "domains": {
