@@ -557,7 +557,6 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     license: 'Proprietary',
     order: 12,
     externalUrl: 'https://cotiza.studio',
-    githubUrl: 'https://github.com/madfam-org/digifab-quoting',
     commerce: {
       tiers: [
         {
@@ -1999,7 +1998,7 @@ export const REGISTRY_SOURCE = {
   registryVersion: 4,
   lastUpdated: '2026-09-23',
   generatedFrom: 'internal-devops/ecosystem/registry/products.yaml',
-  sha256: 'b60cbcbe42306345db81f402d6fc7507afcebc27c65341e4962a178b2711a507',
+  sha256: '6c5f625efa74b3c3b0419dca1aee8c8f532a940778316271eec280565273fbe1',
   productCount: 32,
   retiredCount: 3,
 } as const;
