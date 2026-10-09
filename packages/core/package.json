@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@madfam-site/i18n": "workspace:*",
-    "zod": "3.24.1"
+    "zod": "3.25.76"
   },
   "devDependencies": {
-    "@types/node": "^26.6.1",
+    "@types/node": "^26.6.4",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3"
   }
