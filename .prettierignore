@@ -1,3 +1,0 @@
-# Vendored, byte-identical copy of the private registry projection. Reformatting
-# it would break the freshness hash in apps/web/lib/data/platforms.generated.ts.
-apps/web/lib/data/projection.public.json

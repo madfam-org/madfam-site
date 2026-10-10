@@ -1,0 +1,606 @@
+{
+  "home": {
+    "hero": {
+      "title": "Donde la IA encuentra la creatividad humana",
+      "titlePart1": "Donde la IA encuentra la ",
+      "titlePart2": "creatividad humana",
+      "subtitle": "MADFAM transforma empresas con soluciones impulsadas por IA. Desde diseño 3D hasta asociaciones estratégicas vCTO, entregamos innovación en cada nivel.",
+      "cta": "Comenzar",
+      "exploreServices": "Explorar servicios",
+      "viewProducts": "Ver productos"
+    },
+    "services": {
+      "title": "Programas de Transformación",
+      "subtitle": "Desde diseño y fabricación hasta alianzas estratégicas, tenemos el programa adecuado para tus necesidades.",
+      "viewAll": "Ver todos los programas"
+    },
+    "products": {
+      "title": "Nuestros productos",
+      "subtitle": "Plataformas y herramientas desarrolladas por nuestras unidades especializadas"
+    },
+    "cta": {
+      "title": "¿Listo para transformar tu negocio?",
+      "subtitle": "Descubre cómo MADFAM puede llevar tu empresa al siguiente nivel con IA y creatividad.",
+      "scheduleFree": "Agendar consulta gratuita",
+      "getStarted": "Comenzar",
+      "learnMore": "Saber más",
+      "button": "Comenzar"
+    }
+  },
+  "about": {
+    "title": "Somos MADFAM",
+    "subtitle": "Innovaciones MADFAM es un estudio mexicano que construye y opera un ecosistema de plataformas abiertas e interconectadas — sobre infraestructura propia — para creadores, makers y negocios de América Latina.",
+    "mission": {
+      "title": "Nuestra Misión",
+      "description": "Democratizar el acceso a tecnología de vanguardia, permitiendo que empresas de todos los tamaños compitan en la era digital con soluciones creativas y accesibles."
+    },
+    "vision": {
+      "title": "Nuestra Visión",
+      "description": "Ser el catalizador de la transformación digital en Latinoamérica, creando un futuro donde la IA y la creatividad humana trabajen en perfecta armonía."
+    },
+    "values": {
+      "title": "Nuestros Valores",
+      "subtitle": "Los principios que guían cada decisión, proyecto y relación en MADFAM",
+      "innovation": "Innovación constante",
+      "integrity": "Integridad absoluta",
+      "collaboration": "Colaboración genuina",
+      "excellence": "Excelencia en todo",
+      "impact": "Impacto positivo"
+    },
+    "team": {
+      "title": "El equipo",
+      "subtitle": "Un equipo pequeño y multidisciplinario entre software, manufactura y diseño."
+    },
+    "cta": {
+      "title": "¿Listo para ser parte de la familia?",
+      "subtitle": "Únete a nosotros en la misión de transformar el futuro de los negocios",
+      "scheduleCall": "Trabajemos juntos",
+      "viewOpportunities": "Ver oportunidades",
+      "seeWork": "Ver las plataformas",
+      "joinTeam": "Trabaja con nosotros"
+    }
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "¿Listo para transformar tu negocio? Hablemos sobre cómo podemos ayudarte.",
+    "hero": {
+      "titlePrefix": "Hablemos sobre tu",
+      "titleHighlight": "próximo proyecto",
+      "subtitle": "Estamos listos para ayudarte a transformar tu empresa con IA. Cuéntanos tus necesidades y encontraremos la solución perfecta."
+    },
+    "form": {
+      "title": "Solicita información",
+      "name": "Nombre completo",
+      "email": "Email corporativo",
+      "company": "Empresa",
+      "phone": "Teléfono",
+      "service": "Servicio de interés",
+      "message": "¿Cómo podemos ayudarte?",
+      "submit": "Enviar mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado con éxito!",
+      "error": "Error al enviar mensaje. Por favor intenta de nuevo."
+    },
+    "info": {
+      "title": "Otras formas de contacto",
+      "email": "Email",
+      "phone": "Teléfono",
+      "address": "Dirección",
+      "hours": "Horario de atención",
+      "monday": "Lunes a Viernes",
+      "time": "9:00 - 18:00 CST"
+    },
+    "alternativeContact": {
+      "title": "Otras formas de contactarnos",
+      "location": "Ubicación",
+      "city": "Cuernavaca, Morelos, México",
+      "remoteService": "Servicio remoto global",
+      "businessHours": "Horario de atención",
+      "weekdays": "Lunes - Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "closed": "Cerrado",
+      "responseTime": "Respondemos en menos de 24 horas hábiles"
+    },
+    "immediateHelp": {
+      "title": "¿Necesitas ayuda inmediata?",
+      "subtitle": "Agenda una videollamada de 15 minutos para resolver tus dudas",
+      "scheduleCall": "Agendar llamada rápida →"
+    }
+  },
+  "careers": {
+    "title": "Únete al equipo MADFAM",
+    "subtitle": "Estamos construyendo el futuro de la transformación empresarial. Únete a nosotros para crear soluciones innovadoras que ayuden a las empresas a prosperar en la era digital.",
+    "culture": {
+      "title": "Nuestra cultura",
+      "innovation": {
+        "title": "Innovación primero",
+        "description": "Adoptamos nuevas tecnologías y soluciones creativas para resolver problemas complejos."
+      },
+      "collaboration": {
+        "title": "Espíritu colaborativo",
+        "description": "Creemos en el poder del trabajo en equipo y valoramos las perspectivas diversas."
+      },
+      "growth": {
+        "title": "Mentalidad de crecimiento",
+        "description": "Estamos comprometidos con el aprendizaje continuo y el desarrollo personal."
+      }
+    },
+    "benefits": {
+      "title": "Beneficios y ventajas",
+      "list": {
+        "health": "Seguro de salud integral",
+        "pto": "Política flexible de vacaciones",
+        "remote": "Cultura remota primero",
+        "learning": "Presupuesto de aprendizaje y desarrollo",
+        "bonus": "Bonos por desempeño",
+        "home": "Apoyo para home office"
+      }
+    },
+    "positions": {
+      "title": "Posiciones abiertas",
+      "department": "Departamento",
+      "location": "Ubicación",
+      "type": "Tipo",
+      "applyNow": "Aplicar ahora",
+      "list": {
+        "seniorFullStack": {
+          "title": "Ingeniero Full-Stack Senior",
+          "department": "Ingeniería",
+          "location": "Remoto / Ciudad de México",
+          "type": "Tiempo completo",
+          "description": "Buscamos un ingeniero experimentado para ayudar a construir soluciones escalables para nuestros clientes empresariales."
+        },
+        "aiMl": {
+          "title": "Ingeniero IA/ML",
+          "department": "Laboratorio de Innovación",
+          "location": "Remoto",
+          "type": "Tiempo completo",
+          "description": "Únete a nuestro equipo para desarrollar soluciones de IA de vanguardia que transformen empresas."
+        },
+        "productDesigner": {
+          "title": "Diseñador de Producto",
+          "department": "Diseño",
+          "location": "Ciudad de México",
+          "type": "Tiempo completo",
+          "description": "Crea experiencias hermosas e intuitivas para nuestros productos y plataformas digitales."
+        },
+        "bizDev": {
+          "title": "Gerente de Desarrollo de Negocios",
+          "department": "Ventas",
+          "location": "Ciudad de México / Remoto",
+          "type": "Tiempo completo",
+          "description": "Ayúdanos a expandir nuestro alcance y construir relaciones con clientes empresariales."
+        }
+      }
+    },
+    "cta": {
+      "title": "¿No ves la posición correcta?",
+      "subtitle": "Siempre estamos buscando personas talentosas. ¡Envíanos tu currículum y hablemos!",
+      "sendResume": "Enviar tu currículum"
+    }
+  },
+  "caseStudies": {
+    "title": "Casos de Éxito",
+    "subtitle": "Historias reales de cómo hemos ayudado a empresas a transformarse y prosperar en la era digital.",
+    "challenge": "Desafío",
+    "solution": "Solución",
+    "results": "Resultados",
+    "readFullCase": "Leer caso completo",
+    "noCaseStudies": "No hay casos de estudio disponibles en este momento.",
+    "fallback": {
+      "0": {
+        "title": "Transformación Digital: De Legacy a Cloud-Native",
+        "client": "Global Manufacturing Corp",
+        "industry": "Manufactura",
+        "challenge": "Sistemas obsoletos limitando el crecimiento y la eficiencia operativa",
+        "solution": "Revisión digital completa con migración a la nube y analítica impulsada por IA",
+        "results": {
+          "0": {
+            "metric": "Reducción de Costos",
+            "value": "40%",
+            "description": "reducción en costos operativos"
+          },
+          "1": { "metric": "Velocidad", "value": "3x", "description": "más rápido al mercado" },
+          "2": {
+            "metric": "Disponibilidad",
+            "value": "99.9%",
+            "description": "disponibilidad del sistema lograda"
+          }
+        }
+      },
+      "1": {
+        "title": "Construyendo una Plataforma de Trading de Nueva Generación",
+        "client": "FinTech Innovations",
+        "industry": "Servicios Financieros",
+        "challenge": "Necesidad de procesamiento en tiempo real y cumplimiento regulatorio",
+        "solution": "Plataforma personalizada con insights impulsados por ML y cumplimiento automatizado",
+        "results": {
+          "0": { "metric": "Latencia", "value": "10ms", "description": "latencia promedio" },
+          "1": {
+            "metric": "Cumplimiento",
+            "value": "100%",
+            "description": "cumplimiento regulatorio"
+          },
+          "2": { "metric": "Ahorro", "value": "$2M", "description": "ahorrados anualmente" }
+        }
+      },
+      "2": {
+        "title": "Sistema de Atención al Paciente Impulsado por IA",
+        "client": "Healthcare Plus",
+        "industry": "Salud",
+        "challenge": "Datos de pacientes fragmentados y coordinación de atención ineficiente",
+        "solution": "Plataforma unificada de salud con analítica predictiva",
+        "results": {
+          "0": {
+            "metric": "Resultados",
+            "value": "30%",
+            "description": "mejora en resultados de pacientes"
+          },
+          "1": {
+            "metric": "Eficiencia",
+            "value": "50%",
+            "description": "reducción en tiempo administrativo"
+          },
+          "2": {
+            "metric": "Satisfacción",
+            "value": "2x",
+            "description": "aumento en satisfacción del paciente"
+          }
+        }
+      }
+    }
+  },
+  "showcase": {
+    "title": "Vitrina de Componentes",
+    "toggleDarkMode": "Alternar Modo Oscuro",
+    "sections": {
+      "buttons": "Variantes de Botones",
+      "services": "Tarjetas de Servicios",
+      "products": "Tarjetas de Productos",
+      "features": "Características Clave",
+      "testimonials": "Testimonios"
+    },
+    "buttons": {
+      "primary": "Primario",
+      "secondary": "Secundario",
+      "creative": "Creativo",
+      "outline": "Contorno",
+      "ghost": "Fantasma",
+      "danger": "Peligro",
+      "success": "Éxito",
+      "loading": "Cargando",
+      "withIcon": "Con Ícono"
+    },
+    "badges": {
+      "recommended": "Recomendado",
+      "popular": "Popular"
+    },
+    "featureFlag": {
+      "comingSoon": "¡Calculadora Interactiva Próximamente!",
+      "active": "¡Calculadora ROI Activa!",
+      "activeDescription": "Esta sección se muestra porque la bandera de características INTERACTIVE_CALCULATOR está habilitada."
+    },
+    "features": {
+      "subtitle": "CAPACIDADES",
+      "description": "Todo lo que necesitas para transformar tu negocio con IA",
+      "automation": "Automatización de Procesos",
+      "automationDesc": "Optimiza tus flujos de trabajo con automatización inteligente que aprende y se adapta a las necesidades de tu negocio.",
+      "ai": "Integración de IA",
+      "aiDesc": "Integra perfectamente la inteligencia artificial en tus sistemas existentes para mejorar la toma de decisiones y la productividad.",
+      "transformation": "Transformación Digital",
+      "transformationDesc": "Transformación empresarial completa con tecnología de vanguardia e implementación estratégica de IA."
+    },
+    "heroSubtitle": "COMPONENTES MADFAM",
+    "testimonials": {
+      "0": {
+        "quote": "MADFAM transformó nuestras operaciones con sus soluciones de IA. El ROI fue evidente en semanas.",
+        "name": "María González",
+        "role": "CEO",
+        "company": "TechCorp México"
+      },
+      "1": {
+        "quote": "La experiencia del equipo en IA y design thinking los distingue. ¡Altamente recomendados!",
+        "name": "Carlos Rivera",
+        "role": "Director de Innovación",
+        "company": "StartupMX"
+      },
+      "2": {
+        "quote": "Profesionales, innovadores y orientados a resultados. MADFAM es nuestro socio de IA preferido.",
+        "name": "Ana Martínez",
+        "role": "CTO",
+        "company": "FinTech Solutions"
+      }
+    }
+  },
+  "blog": {
+    "title": "Blog e Insights",
+    "subtitle": "Pensamientos, historias e ideas del equipo MADFAM sobre tecnología, innovación y transformación empresarial.",
+    "readMore": "Leer más",
+    "by": "Por",
+    "minRead": "min de lectura",
+    "backToBlog": "Volver al Blog",
+    "noPosts": "No hay publicaciones de blog disponibles en este momento.",
+    "fallback": {
+      "0": {
+        "title": "El Futuro de la IA en la Transformación Empresarial",
+        "excerpt": "Explora cómo la inteligencia artificial está transformando el panorama empresarial y creando nuevas oportunidades de crecimiento e innovación.",
+        "author": "Equipo MADFAM",
+        "tag": "IA e Innovación"
+      },
+      "1": {
+        "title": "Construyendo Plataformas Digitales Escalables: Guía Técnica",
+        "excerpt": "Aprende los principios arquitectónicos clave y las mejores prácticas para construir plataformas que puedan crecer con tu negocio.",
+        "author": "Ingeniería MADFAM",
+        "tag": "Técnico"
+      },
+      "2": {
+        "title": "Historia de Éxito: Transformando Operaciones con Automatización",
+        "excerpt": "Cómo ayudamos a un fabricante líder a reducir costos operativos en un 40% mediante soluciones inteligentes de automatización.",
+        "author": "Equipo MADFAM",
+        "tag": "Casos de Éxito"
+      }
+    }
+  },
+  "guides": {
+    "title": "Guías y Tutoriales",
+    "subtitle": "Guías paso a paso para ayudarte a aprovechar al máximo los servicios de MADFAM y crear soluciones increíbles.",
+    "featured": {
+      "badge": "Guía destacada",
+      "title": "Tutorial Completo de Integración",
+      "description": "Aprende a integrar los servicios de MADFAM de principio a fin con nuestro tutorial completo.",
+      "startTutorial": "Comenzar tutorial"
+    },
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "categories": {
+      "gettingStarted": "Comenzando",
+      "integration": "Guías de Integración",
+      "bestPractices": "Mejores Prácticas",
+      "useCases": "Casos de Uso"
+    },
+    "items": {
+      "quickStart": {
+        "title": "Guía de Inicio Rápido",
+        "description": "Comienza a usar los servicios de MADFAM en menos de 10 minutos",
+        "duration": "10 min"
+      },
+      "platformOverview": {
+        "title": "Descripción de la Plataforma",
+        "description": "Comprende la arquitectura y capacidades de los servicios de MADFAM",
+        "duration": "15 min"
+      },
+      "authSetup": {
+        "title": "Configuración de Autenticación",
+        "description": "Configura la autenticación para tus aplicaciones",
+        "duration": "20 min"
+      },
+      "restApi": {
+        "title": "Integración con API REST",
+        "description": "Guía completa para integrarte con nuestras APIs REST",
+        "duration": "30 min"
+      },
+      "webhookConfig": {
+        "title": "Configuración de Webhooks",
+        "description": "Configura webhooks para notificaciones de eventos en tiempo real",
+        "duration": "25 min"
+      },
+      "sdkImpl": {
+        "title": "Implementación de SDK",
+        "description": "Uso de nuestros SDKs para JavaScript, Python y Java",
+        "duration": "45 min"
+      },
+      "securityBest": {
+        "title": "Mejores Prácticas de Seguridad",
+        "description": "Asegura que tu integración siga los estándares de seguridad",
+        "duration": "30 min"
+      },
+      "perfOptimization": {
+        "title": "Optimización de Rendimiento",
+        "description": "Optimiza tus llamadas API y reduce la latencia",
+        "duration": "40 min"
+      },
+      "errorHandling": {
+        "title": "Estrategias de Manejo de Errores",
+        "description": "Construye aplicaciones resilientes con manejo adecuado de errores",
+        "duration": "35 min"
+      },
+      "aiChatbot": {
+        "title": "Construir un Chatbot IA",
+        "description": "Guía paso a paso para crear un chatbot inteligente",
+        "duration": "60 min"
+      },
+      "processAutomation": {
+        "title": "Automatización de Procesos",
+        "description": "Automatiza procesos empresariales con nuestro motor de flujos de trabajo",
+        "duration": "45 min"
+      },
+      "analyticsDashboard": {
+        "title": "Dashboard de Analítica de Datos",
+        "description": "Crea dashboards de analítica en tiempo real",
+        "duration": "50 min"
+      }
+    },
+    "videoTutorials": {
+      "title": "Tutoriales en video",
+      "description": "¿Prefieres aprender a través de videos? Visita nuestro canal de YouTube para tutoriales y demos en video.",
+      "watchYoutube": "Ver en YouTube"
+    }
+  },
+  "docs": {
+    "title": "Documentación",
+    "subtitle": "Todo lo que necesitas saber para trabajar con los servicios y plataformas de MADFAM.",
+    "searchPlaceholder": "Buscar documentación...",
+    "categories": {
+      "gettingStarted": {
+        "title": "Comenzando",
+        "description": "Guías de inicio rápido y descripción general de servicios",
+        "items": {
+          "intro": "Introducción a MADFAM",
+          "services": "Descripción de Servicios",
+          "architecture": "Arquitectura de Plataforma",
+          "security": "Seguridad y Cumplimiento"
+        }
+      },
+      "api": {
+        "title": "Documentación API",
+        "description": "Documentación técnica para nuestras APIs e integraciones",
+        "items": {
+          "reference": "Referencia API",
+          "authentication": "Autenticación",
+          "rateLimiting": "Límites de Tasa",
+          "webhooks": "Webhooks"
+        }
+      },
+      "guides": {
+        "title": "Guías y Tutoriales",
+        "description": "Guías paso a paso para casos de uso comunes",
+        "items": {
+          "integrationGuides": "Guías de Integración",
+          "bestPractices": "Mejores Prácticas",
+          "migration": "Guía de Migración",
+          "troubleshooting": "Solución de Problemas"
+        }
+      },
+      "resources": {
+        "title": "Recursos",
+        "description": "Recursos adicionales y materiales de soporte",
+        "items": {
+          "caseStudies": "Casos de Éxito",
+          "blog": "Blog y Novedades",
+          "support": "Centro de Soporte",
+          "community": "Foro de la Comunidad"
+        }
+      }
+    },
+    "popularTopics": "Temas populares",
+    "popularTopicLabels": {
+      "authentication": "Autenticación",
+      "apiKeys": "Claves API",
+      "webhooks": "Webhooks",
+      "rateLimits": "Límites de Tasa",
+      "errorHandling": "Manejo de Errores",
+      "dataSecurity": "Seguridad de Datos",
+      "integration": "Integración",
+      "migration": "Migración"
+    },
+    "needHelp": {
+      "title": "¿Necesitas ayuda?",
+      "subtitle": "¿No encuentras lo que buscas? Nuestro equipo de soporte está aquí para ayudar.",
+      "contactSupport": "Contactar soporte",
+      "viewFaq": "Ver preguntas frecuentes"
+    }
+  },
+  "services": {
+    "level1": {
+      "title": "Sprint estratégico",
+      "quickDescription": "Un programa de entrada enfocado en descubrimiento, preparación de IA y planificación de implementación."
+    },
+    "level2": {
+      "title": "Construir y lanzar",
+      "quickDescription": "Construcción de productos, plataformas y flujos de trabajo que pasan de prototipo a producción."
+    },
+    "level3": {
+      "title": "Alianza estratégica",
+      "quickDescription": "Soporte vCTO y de transformación a largo plazo para equipos que escalan operaciones con IA."
+    }
+  },
+  "hero": {
+    "title": "Donde la creatividad humana encuentra precisión con IA",
+    "subtitle": "MADFAM construye productos, flujos de trabajo y programas impulsados por IA para equipos listos para pasar de la experimentación al impacto.",
+    "cta": {
+      "primary": "Iniciar evaluación",
+      "secondary": "Ver casos de éxito"
+    }
+  },
+  "search": {
+    "button": "Buscar",
+    "placeholder": "Buscar servicios, productos, páginas...",
+    "searching": "Buscando...",
+    "noResults": "No se encontraron resultados. Intenta con otro término.",
+    "noResultsFor": "No se encontraron resultados para \"{query}\"",
+    "tryDifferentTerms": "Intenta con otros términos de búsqueda",
+    "startTyping": "Empieza a escribir para buscar",
+    "navigate": "Navegar",
+    "select": "Seleccionar",
+    "close": "Cerrar"
+  },
+  "cookies": {
+    "title": "Política de Cookies",
+    "lastUpdated": "Última actualización",
+    "sections": {
+      "whatAreCookies": {
+        "title": "¿Qué son las cookies?",
+        "description": "Las cookies son pequeños archivos de texto que se almacenan en tu computadora o dispositivo móvil cuando visitas un sitio web. Permiten que los sitios web reconozcan tu dispositivo y almacenen información sobre tus preferencias o acciones."
+      },
+      "howWeUse": {
+        "title": "Cómo usamos las cookies",
+        "description": "Utilizamos diferentes tipos de cookies para varios propósitos:",
+        "essential": "Cookies esenciales",
+        "analytics": "Cookies de análisis",
+        "preference": "Cookies de preferencias",
+        "marketing": "Cookies de marketing"
+      },
+      "managing": {
+        "title": "Gestionar tus cookies",
+        "description": "Puedes controlar y gestionar las cookies de varias maneras. Ten en cuenta que eliminar o bloquear cookies puede afectar tu experiencia de usuario."
+      },
+      "contact": {
+        "title": "Contáctanos",
+        "description": "Si tienes alguna pregunta sobre nuestro uso de cookies, contáctanos:",
+        "email": "Email",
+        "phone": "Teléfono",
+        "address": "Dirección"
+      }
+    }
+  },
+  "seo": {
+    "about": {
+      "title": "Empresa — Innovaciones MADFAM",
+      "description": "Quiénes somos: una casa políglota mexicana que construye y opera un ecosistema de plataformas abiertas desde Cuernavaca, Morelos."
+    },
+    "contact": {
+      "title": "Contacto — MADFAM",
+      "description": "Escríbenos: plataformas, proyectos, comunidad, alianzas o prensa. Te responde una persona."
+    },
+    "careers": {
+      "title": "Carreras — MADFAM",
+      "description": "Trabaja en un estudio mexicano que construye y opera un ecosistema de plataformas abiertas."
+    },
+    "blog": {
+      "title": "Blog — MADFAM",
+      "description": "Notas del taller: decisiones técnicas, lecciones de operación y guías del ecosistema MADFAM."
+    },
+    "caseStudies": {
+      "title": "Casos — MADFAM",
+      "description": "Historias reales, con permiso y con números que podemos sostener."
+    },
+    "guides": {
+      "title": "Guías — MADFAM",
+      "description": "Cómo resolver cosas concretas con el ecosistema MADFAM: emitir tu primer CFDI, cotizar una pieza, montar identidad propia."
+    },
+    "docs": {
+      "title": "Documentación — MADFAM",
+      "description": "Documentación de las plataformas y servicios del ecosistema MADFAM."
+    },
+    "privacy": {
+      "title": "Política de privacidad — MADFAM",
+      "description": "Cómo Innovaciones MADFAM S.A.S. de C.V. trata los datos personales que recaba en madfam.io y cómo ejercer tus derechos."
+    },
+    "terms": {
+      "title": "Términos y condiciones — MADFAM",
+      "description": "Términos de uso de madfam.io, operado por Innovaciones MADFAM S.A.S. de C.V."
+    },
+    "cookies": {
+      "title": "Política de cookies — MADFAM",
+      "description": "Qué cookies usa madfam.io y cómo gestionarlas."
+    },
+    "unsubscribe": {
+      "title": "Cancelar suscripción — MADFAM",
+      "description": "Deja de recibir correos de marketing de MADFAM."
+    }
+  }
+}

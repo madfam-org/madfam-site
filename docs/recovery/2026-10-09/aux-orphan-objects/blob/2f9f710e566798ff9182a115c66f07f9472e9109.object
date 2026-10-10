@@ -1,0 +1,133 @@
+{
+  "name": "madfam-corporate",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MADFAM Corporate Website - AI-driven consultancy and product studio",
+  "author": "MADFAM <hello@madfam.io>",
+  "license": "UNLICENSED",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:web": "pnpm --filter @madfam-site/web dev",
+    "build": "turbo build",
+    "build:web": "pnpm --filter @madfam-site/web build",
+    "build:production": "turbo build --env-mode=production",
+    "start:web": "pnpm --filter @madfam-site/web start",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "clean": "turbo clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
+    "typecheck": "turbo typecheck",
+    "docker:dev": "docker-compose up web-dev",
+    "docker:prod": "docker-compose up web",
+    "docker:build": "docker-compose build",
+    "prepare": "husky",
+    "validate:translations": "node scripts/validate-translations.js",
+    "generate:platforms": "node scripts/generate-platform-registry.mjs --apply",
+    "check:platforms": "node scripts/generate-platform-registry.mjs --check",
+    "check:projection-freshness": "node scripts/check-projection-freshness.mjs",
+    "find:missing-translations": "node scripts/find-missing-translations.js",
+    "check:translations": "npm run validate:translations && npm run find:missing-translations",
+    "test:scripts": "node --test scripts/__tests__/format-check.test.mjs scripts/__tests__/lint-staged-config.test.mjs scripts/__tests__/no-hand-typed-prices.test.mjs scripts/__tests__/platform-registry.test.mjs scripts/__tests__/projection-freshness.test.mjs scripts/__tests__/security-check.test.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@lhci/cli": "^0.15.1",
+    "@types/node": "^26.6.1",
+    "audit-ci": "^7.1.0",
+    "axe-core": "4.13.0",
+    "bundlewatch": "^0.4.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "next": "15.5.25",
+    "nyc": "^17.1.0",
+    "prettier": "^3.9.8",
+    "shadcn": "^4.21.0",
+    "turbo": "2.10.13"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.15.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "lint-staged": {
+    "apps/web/**/*.{ts,tsx,js,jsx}": [
+      "pnpm --filter @madfam-site/web lint:staged",
+      "pnpm --filter @madfam-site/web typecheck:staged"
+    ],
+    "packages/i18n/src/translations/**/*.json": [
+      "pnpm check:translations"
+    ],
+    "**/*.{ts,tsx,js,jsx,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "pnpm": {
+    "overrides": {
+      "express@<4.20.0": ">=4.20.0",
+      "form-data": ">=4.0.6",
+      "@types/node-fetch>form-data": ">=4.0.6",
+      "on-headers@<1.1.0": ">=1.1.0",
+      "body-parser@<1.20.3": ">=1.20.3",
+      "next@>=14.0.0 <14.2.10": ">=14.2.10",
+      "send@<0.19.0": ">=0.19.0",
+      "serve-static@<1.16.0": ">=1.16.0",
+      "next@>=9.5.5 <14.2.15": ">=14.2.15",
+      "next@>=14.0.0 <14.2.21": ">=14.2.21",
+      "path-to-regexp@<0.1.10": ">=0.1.10",
+      "esbuild@<=0.24.2": ">=0.25.0",
+      "next@>=14.0.0 <14.2.25": ">=14.2.25",
+      "cookie@<0.7.0": ">=0.7.0",
+      "next@<14.2.24": ">=14.2.24",
+      "path-to-regexp@<0.1.12": ">=0.1.12",
+      "next@>=13.0 <14.2.30": ">=14.2.30",
+      "prismjs@<1.30.0": ">=1.30.0",
+      "axios@<0.30.2": ">=0.30.2",
+      "tar-fs@<3.1.1": ">=3.1.1",
+      "dompurify": ">=3.4.11",
+      "fast-redact": ">=3.5.0",
+      "playwright": ">=1.56.1",
+      "undici": ">=8.5.0",
+      "js-yaml": ">=4.2.0 <5",
+      "tmp": ">=0.2.6",
+      "uuid@<11.1.1": ">=11.1.1",
+      "picomatch@<4.0.4": ">=4.0.4",
+      "postcss@<8.5.10": ">=8.5.10",
+      "yaml@<2.8.3": ">=2.8.3",
+      "lodash@<4.17.23": ">=4.17.23",
+      "brace-expansion@<2.0.3": ">=2.0.3",
+      "brace-expansion@>=3.0.0 <3.0.2": ">=3.0.2",
+      "brace-expansion@>=4.0.0 <5.0.5": ">=5.0.5",
+      "path-to-regexp@<0.1.13": ">=0.1.13",
+      "rollup@<4.59.0": ">=4.59.0",
+      "minimatch@<9.0.7": ">=9.0.7",
+      "minimatch@>=10.0.0 <10.2.3": ">=10.2.3",
+      "diff@<5.2.2": ">=5.2.2",
+      "diff@>=6.0.0 <8.0.3": ">=8.0.3",
+      "qs@<6.14.2": ">=6.14.2",
+      "basic-ftp@<5.3.1": ">=5.3.1",
+      "serialize-javascript@<7.0.5": ">=7.0.5",
+      "svgo@>=3.0.0 <3.3.3": ">=3.3.3 <4",
+      "flatted@<3.4.2": ">=3.4.2",
+      "lodash-es@<4.18.0": ">=4.18.0",
+      "fast-uri@<3.1.2": ">=3.1.2 <4",
+      "axios@<0.32.0": ">=0.32.0 <1",
+      "follow-redirects@<1.16.0": ">=1.16.0",
+      "ip-address@<10.1.1": ">=10.1.1",
+      "qs@>=6.11.1 <6.15.2": ">=6.15.2",
+      "brace-expansion@>=5.0.0 <5.0.6": ">=5.0.6",
+      "@babel/core@<7.29.6": ">=7.29.6 <8",
+      "vite": "^7.3.5",
+      "ws": ">=8.21.0",
+      "esbuild@0.28.0": ">=0.28.1",
+      "@opentelemetry/core@>=2.0.0 <2.8.0": ">=2.8.0"
+    }
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.12"
+  }
+}

@@ -1,7 +1,0 @@
-Read AGENTS.md first; it is canonical. Never put secrets in agent chat.
-
-Design: follow the tokens in the `@theme` block of apps/web/app/globals.css and
-docs/guides/brand/. The site's fonts (Inter, Poppins, Space Mono, loaded in
-apps/web/app/layout.tsx) are deliberate — do not swap them out. Prefer cohesive
-palettes from the tokens, careful spacing and restrained motion over generic
-defaults.

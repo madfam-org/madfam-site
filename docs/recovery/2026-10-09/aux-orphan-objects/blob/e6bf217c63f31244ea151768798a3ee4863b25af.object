@@ -1,0 +1,264 @@
+name: Deploy Web
+
+on:
+  workflow_dispatch:
+    inputs:
+      verify_only:
+        description: "Skip the build and only run the verify job (tests the post-deploy check without deploying)"
+        type: boolean
+        default: false
+      expected_sha:
+        description: "SHA the verify job waits for on https://madfam.io/api/version (default: the run's commit)"
+        type: string
+        default: ""
+  push:
+    branches: [main]
+    # Root manifests are inputs to the image too (overrides, lockfile, registry
+    # config, workspace and turbo graph): a root-only security bump used to
+    # merge green and never reach production (finding S1-011).
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".npmrc"
+      - "pnpm-workspace.yaml"
+      - "turbo.json"
+      - "!k8s/production/kustomization.yaml"
+
+concurrency:
+  group: madfam-site-kustomization-main
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  # Exposed as env because the secrets context is not permitted in step-level
+  # `if:` expressions (the workflow fails to parse otherwise).
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  IMAGE_NAME: madfam-org/madfam-site/web
+
+jobs:
+  build-and-push:
+    name: Build & Push Web Image
+    if: ${{ !inputs.verify_only }}
+    runs-on: ${{ vars.DEPLOY_RUNNER_LABEL != '' && vars.DEPLOY_RUNNER_LABEL || (vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04') }}
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # MADFAM_BOT_PAT went invalid ~2026-04-27 and broke every deploy since
+          # (checkout 128: "could not read Username"). The built-in token is
+          # sufficient: same-repo checkout, GHCR push via packages:write, and
+          # the digest commit via contents:write.
+          token: ${{ github.token }}
+
+      - name: Log in to GHCR
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Log in to Docker Hub
+        # Rate-limit mitigation only — skip when credentials are not configured
+        if: ${{ env.DOCKERHUB_USERNAME != '' }}
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Build metadata
+        id: meta
+        run: echo "build_time=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        id: build
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          file: apps/web/Dockerfile
+          push: true
+          # NEXT_PUBLIC_* are inlined by Next at build time, so analytics config
+          # has to arrive here, not in the runtime Secret.
+<<<<<<< origin/w0/s1a-deploy-proof
+          # GIT_SHA/BUILD_TIME feed /api/version and the OCI revision label
+          # (findings S1-008/S1-011); NEXT_PUBLIC_ENV fixes S1-022.
+          build-args: |
+            GIT_SHA=${{ github.sha }}
+            BUILD_TIME=${{ steps.meta.outputs.build_time }}
+            NEXT_PUBLIC_ENV=production
+            NEXT_PUBLIC_PLAUSIBLE_DOMAIN=${{ vars.PLAUSIBLE_DOMAIN || 'madfam.io' }}
+=======
+          #
+          # NEXT_PUBLIC_PLAUSIBLE_DOMAIN is deliberately NOT passed (S1-017,
+          # C-026): plausible.madfam.io does not resolve yet (operator item
+          # O49), so the tag only produced failing requests. With the domain
+          # unset the layout renders no Plausible script and the CSP drops the
+          # origin. Re-add `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io` here once
+          # O49 is done; the code path is unchanged.
+          build-args: |
+>>>>>>> HEAD
+            NEXT_PUBLIC_PLAUSIBLE_HOST=${{ vars.PLAUSIBLE_HOST || 'https://plausible.madfam.io' }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+          sbom: false
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3.9.1
+
+      # Retry: 2026-08-26 crea-frontend run 33010085743 lost a deploy when
+      # GitHub's OIDC endpoint returned non-JSON ("invalid character 'u'") and
+      # cosign died. Image was pushed, digest never pinned, ArgoCD never rolled.
+      - name: Sign image with cosign
+        env:
+          IMAGE_REF: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}
+        run: |
+          set -euo pipefail
+          signed=0
+          for wait in 0 20 60; do
+            if [ "$wait" -gt 0 ]; then
+              echo "::warning::cosign sign failed for ${IMAGE_REF} (transient OIDC/Fulcio/Rekor?); retrying in ${wait}s..."
+              sleep "$wait"
+            fi
+            if cosign sign --yes "${IMAGE_REF}"; then
+              signed=1
+              break
+            fi
+          done
+          if [ "$signed" -ne 1 ]; then
+            echo "::error::cosign sign failed 3 times for ${IMAGE_REF}."
+            echo "::error::The image was BUILT AND PUSHED but is NOT signed, so it will not be"
+            echo "::error::pinned and ArgoCD will not roll it: the live host is still serving the"
+            echo "::error::PREVIOUS build even though this commit is on main. Rerun the failed jobs."
+            exit 1
+          fi
+
+      - name: Commit image digest
+        run: |
+          DIGEST="${{ steps.build.outputs.digest }}"
+          git config user.name "madfam-bot"
+          git config user.email "bot@madfam.dev"
+          for ATTEMPT in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cd k8s/production
+            kustomize edit set image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${DIGEST}
+            cd ../..
+            git add k8s/production/kustomization.yaml
+            git diff --staged --quiet && echo "No changes to commit" && exit 0
+            git commit -m "deploy(web): update digest to ${GITHUB_SHA::8}"
+            git push origin main && exit 0
+            echo "Retry $ATTEMPT..."
+            sleep $((ATTEMPT * 2))
+          done
+          echo "Failed after 3 attempts"
+          exit 1
+
+      # Visible but non-blocking: the image is already pushed and pinned, so a
+      # failed callback must not fail the deploy, but it must not vanish either
+      # (it used to be `curl -s … || true`).
+      - name: Report lifecycle event
+        if: always()
+        env:
+          ENCLII_CALLBACK_TOKEN: ${{ secrets.ENCLII_CALLBACK_TOKEN }}
+          JOB_STATUS: ${{ job.status }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          if [ "$JOB_STATUS" = "success" ]; then
+            EVENT_TYPE="image_pushed"
+          else
+            EVENT_TYPE="build_failed"
+          fi
+          # Values are SHAs, refs, a digest and a login: no JSON escaping needed.
+          payload="{\"repo_full_name\": \"madfam-org/madfam-site\", \"commit_sha\": \"${GITHUB_SHA}\",
+            \"branch\": \"${GITHUB_REF_NAME}\", \"ref\": \"${GITHUB_REF}\", \"event_type\": \"${EVENT_TYPE}\",
+            \"source\": \"ci_callback\", \"message\": \"madfam-web ${JOB_STATUS} (digest: ${DIGEST})\",
+            \"metadata\": {\"service\": \"madfam-web\", \"image\": \"${REGISTRY}/${IMAGE_NAME}\",
+            \"digest\": \"${DIGEST}\", \"workflow\": \"deploy-web\", \"actor\": \"${GITHUB_ACTOR}\"}}"
+          if ! curl -sS --fail-with-body --max-time 20 -X POST \
+            "https://api.enclii.dev/v1/callbacks/lifecycle-event" \
+            -H "Authorization: Bearer ${ENCLII_CALLBACK_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "$payload"; then
+            echo "::warning::Enclii lifecycle callback failed (event ${EVENT_TYPE}); Enclii will not show this deploy. The image and digest commit are unaffected."
+          fi
+
+  # Post-deploy proof (finding S1-011): the digest commit only says what ArgoCD
+  # SHOULD roll out. This job waits until madfam.io itself serves the commit
+  # (via /api/version, baked from GIT_SHA) and fails visibly, with an issue,
+  # when it does not within 15 minutes.
+  verify:
+    name: Verify madfam.io serves the commit
+    needs: build-and-push
+    if: ${{ always() && (needs.build-and-push.result == 'success' || (needs.build-and-push.result == 'skipped' && inputs.verify_only)) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      issues: write
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha || github.sha }}
+      VERSION_URL: https://madfam.io/api/version
+      DEADLINE_SECONDS: "900"
+    steps:
+      - name: Poll /api/version until it serves the expected SHA
+        id: poll
+        run: |
+          set -uo pipefail
+          if ! printf '%s' "$EXPECTED_SHA" | grep -Eq '^[0-9a-f]{7,40}$'; then
+            echo "::error::expected_sha must be a hex commit SHA, got: ${EXPECTED_SHA}"
+            exit 1
+          fi
+          start=$(date +%s)
+          observed=""
+          while :; do
+            body=$(curl -sS --max-time 10 -H 'Cache-Control: no-cache' \
+              -A "madfam-deploy-verify/${GITHUB_RUN_ID}" \
+              "${VERSION_URL}?run=${GITHUB_RUN_ID}-$(date +%s)" 2>&1) || body=""
+            observed=$(printf '%s' "$body" | jq -r '.sha // empty' 2>/dev/null || true)
+            elapsed=$(( $(date +%s) - start ))
+            echo "t+${elapsed}s served=${observed:-<no answer>} expected=${EXPECTED_SHA}"
+            if [ -n "$observed" ] && [ "$observed" = "$EXPECTED_SHA" ]; then
+              echo "madfam.io serves ${EXPECTED_SHA} after ${elapsed}s."
+              echo "### Deploy verified" >> "$GITHUB_STEP_SUMMARY"
+              echo "\`${VERSION_URL}\` serves \`${EXPECTED_SHA}\` (t+${elapsed}s)." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            if [ "$elapsed" -ge "$DEADLINE_SECONDS" ]; then
+              echo "observed=${observed:-none}" >> "$GITHUB_OUTPUT"
+              echo "::error::After ${DEADLINE_SECONDS}s madfam.io still serves '${observed:-no answer}', not ${EXPECTED_SHA}. The digest commit is on main but production did not roll (ArgoCD sync, image pull, probe or signature failure)."
+              exit 1
+            fi
+            sleep 20
+          done
+
+      - name: Open or update the deploy-verification issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          OBSERVED: ${{ steps.poll.outputs.observed }}
+        run: |
+          set -euo pipefail
+          title="Deploy Web: madfam.io is not serving the deployed commit"
+          body="Deploy Web verify failed: ${RUN_URL}. Expected \`${EXPECTED_SHA}\` from ${VERSION_URL}, production served \`${OBSERVED:-no answer}\`. Check the ArgoCD sync and pod rollout for madfam-web through Enclii; rollback steps are in docs/deployment/DEPLOYMENT.md."
+          existing=$(gh issue list --state open --search "\"${title}\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "${existing}" ]; then
+            gh issue comment "${existing}" --body "${body}"
+          else
+            gh issue create --title "${title}" --body "${body}"
+          fi

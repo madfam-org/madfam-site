@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: madfam-site
+
+resources:
+- namespace.yaml
+- madfam-web-deployment.yaml
+- madfam-web-service.yaml
+- network-policies.yaml
+- resource-quota.yaml
+- madfam-web-hpa.yaml
+# secrets-template.yaml excluded — managed manually via kubectl
+# Live secret has argocd.argoproj.io/sync-options: Prune=false annotation
+
+labels:
+- pairs:
+    app.kubernetes.io/part-of: madfam-platform
+    enclii.dev/managed-by: switchyard
+
+images:
+<<<<<<< HEAD
+- digest: sha256:e8be6cab172487b69dc2ace97119201ac05737dd032d0bc7cf0b3ad01253d91a
+  name: ghcr.io/madfam-org/madfam-site/cms
+  newName: ghcr.io/madfam-org/madfam-site/cms
+=======
+>>>>>>> 6d4f1ec (chore(k8s): stop deploying madfam-cms and retire the Deploy CMS workflow (R52))
+- digest: sha256:32b8603c61fafe22a82d0ac5044b9f423883efaa6364fa241253584a6a5c106c
+  name: ghcr.io/madfam-org/madfam-site/web
+  newName: ghcr.io/madfam-org/madfam-site/web
