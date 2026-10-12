@@ -4,6 +4,7 @@ import { ArrowUpRight as ArrowUpRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Badge } from './Badge';
+import { siteLink } from '@/lib/ecosystem-links';
 import { cn } from '@/lib/utils';
 
 interface SolutionCardProps {
@@ -154,9 +155,9 @@ export function SolutionCard({ solution }: SolutionCardProps) {
 
         {solution.externalUrl && !solution.comingSoon && (
           <Link
-            href={solution.externalUrl}
+            href={siteLink(solution.externalUrl, 'cta').href}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={siteLink(solution.externalUrl, 'cta').rel}
             className={cn(
               'px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2',
               solution.internalUrl

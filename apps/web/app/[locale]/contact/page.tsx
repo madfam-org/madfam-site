@@ -2,6 +2,10 @@ import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card, CardContent } from '@/components/ui';
 import { LeadForm } from '@/components/LeadForm';
 import { KALYA_DISCOVERY_CALL_URL } from '@/lib/data/value-ladder';
+import { siteLink } from '@/lib/ecosystem-links';
+
+// The discovery-call CTA leaves madfam.io as an own-site link (`lib/ecosystem-links.ts`).
+const DISCOVERY_CALL_LINK = siteLink(KALYA_DISCOVERY_CALL_URL, 'cta');
 
 export default async function ContactPage({
   params,
@@ -85,9 +89,9 @@ export default async function ContactPage({
                   {t('contact.immediateHelp.subtitle')}
                 </p>
                 <a
-                  href={KALYA_DISCOVERY_CALL_URL}
+                  href={DISCOVERY_CALL_LINK.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel={DISCOVERY_CALL_LINK.rel}
                   className="inline-flex items-center text-lavender font-medium hover:underline"
                 >
                   {t('contact.immediateHelp.scheduleCall')}

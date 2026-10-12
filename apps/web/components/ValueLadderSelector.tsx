@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { Button, Card, CardContent } from '@/components/ui';
 import {
   recommendRung,
-  KALYA_DISCOVERY_CALL_URL,
+  LADDER_DISCOVERY_CALL_URL,
   NEED_OPTIONS,
   SIZE_OPTIONS,
   type NeedId,
@@ -23,6 +23,7 @@ import {
   type BandId,
   type TierPricing,
 } from '@/lib/data/value-ladder';
+import { outboundRel } from '@/lib/ecosystem-links';
 
 export interface ValueLadderSelectorStrings {
   eyebrow: string;
@@ -175,16 +176,16 @@ export function ValueLadderSelector({ strings, ladderAnchor }: ValueLadderSelect
                 <a
                   href={selfServeHref}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel={outboundRel(selfServeHref)}
                   className="flex-1 px-5 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg text-center text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                 >
                   {strings.ctaSelfServe}
                 </a>
               )}
               <a
-                href={KALYA_DISCOVERY_CALL_URL}
+                href={LADDER_DISCOVERY_CALL_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={outboundRel(LADDER_DISCOVERY_CALL_URL)}
                 className={`flex-1 px-5 py-3 rounded-lg text-center text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender ${
                   showSelfServe
                     ? 'border border-neutral-300 dark:border-gray-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-gray-800'

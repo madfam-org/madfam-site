@@ -13,11 +13,12 @@ import {
   getBandRungs,
   getExtraSlices,
   getRegistrySlices,
-  KALYA_DISCOVERY_CALL_URL,
+  LADDER_DISCOVERY_CALL_URL,
   type BandId,
   type LadderRung,
   type TierPricing,
 } from '@/lib/data/value-ladder';
+import { outboundRel } from '@/lib/ecosystem-links';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -273,7 +274,7 @@ export default async function ValueLadderPage({ params }: Props) {
                             key={p.slug}
                             href={target.href}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel={outboundRel(target.href)}
                             className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-neutral-200 dark:border-gray-700 text-sm text-neutral-800 dark:text-neutral-200 hover:border-lavender/50 hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                           >
                             <span aria-hidden="true">{p.icon}</span>
@@ -285,7 +286,7 @@ export default async function ValueLadderPage({ params }: Props) {
                             key={s.slug}
                             href={s.target.href}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel={outboundRel(s.target.href)}
                             className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-neutral-200 dark:border-gray-700 text-sm text-neutral-800 dark:text-neutral-200 hover:border-lavender/50 hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                           >
                             <span aria-hidden="true">{s.icon}</span>
@@ -319,7 +320,7 @@ export default async function ValueLadderPage({ params }: Props) {
                           <a
                             href={bundle.href}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel={outboundRel(bundle.href)}
                             className="inline-flex items-center px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                           >
                             {t(
@@ -351,7 +352,7 @@ export default async function ValueLadderPage({ params }: Props) {
                           <a
                             href={rung.href}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel={outboundRel(rung.href)}
                             className="inline-flex items-center justify-center px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg text-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                           >
                             {t(
@@ -410,9 +411,9 @@ export default async function ValueLadderPage({ params }: Props) {
                 {t('hero.ctaFindRung')}
               </a>
               <a
-                href={KALYA_DISCOVERY_CALL_URL}
+                href={LADDER_DISCOVERY_CALL_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={outboundRel(LADDER_DISCOVERY_CALL_URL)}
                 className="px-8 py-3 border border-white text-white rounded-lg hover:bg-white/10 transition-colors font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {t('cta.discoveryCall')}

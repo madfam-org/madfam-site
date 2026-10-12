@@ -6,6 +6,11 @@ import {
   NAUTA_PILLARS,
   KALYA_DISCOVERY_CALL_URL,
 } from '@/lib/data/nauta-product';
+import { siteLink } from '@/lib/ecosystem-links';
+
+// Both hero CTAs leave madfam.io as own-site links (`lib/ecosystem-links.ts`).
+const FRONT_DOOR_LINK = siteLink(NAUTA_FRONT_DOOR_URL, 'cta');
+const DISCOVERY_CALL_LINK = siteLink(KALYA_DISCOVERY_CALL_URL, 'cta');
 
 // Corporate "about Nauta" summary (ruling R30). No prices, no tiers, no
 // checkout: the canonical page for Nauta is nauta.quest.
@@ -56,17 +61,17 @@ export default async function NautaPage({ params }: Props) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href={NAUTA_FRONT_DOOR_URL}
+                href={FRONT_DOOR_LINK.href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={FRONT_DOOR_LINK.rel}
                 className={primaryCta}
               >
                 {t('closing.visitSite')}
               </a>
               <a
-                href={KALYA_DISCOVERY_CALL_URL}
+                href={DISCOVERY_CALL_LINK.href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={DISCOVERY_CALL_LINK.rel}
                 className={secondaryCta}
               >
                 {t('cta.discoveryCall')}

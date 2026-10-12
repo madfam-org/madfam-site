@@ -6,6 +6,7 @@ import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
 import { primaryCtaLabelKey, type Platform } from '@/lib/data/platforms';
 import { Newsletter } from '@/components/ui/Newsletter';
 import { cn } from '@/components/ui/utils';
+import { siteLink } from '@/lib/ecosystem-links';
 
 interface PlatformCTAProps {
   platform: Platform;
@@ -98,9 +99,9 @@ export function PlatformCTA({ platform, i18nKey, locale, comingSoon }: PlatformC
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               {platform.primaryCTA.type === 'external' && platform.primaryCTA.url ? (
                 <Link
-                  href={platform.primaryCTA.url}
+                  href={siteLink(platform.primaryCTA.url, 'cta').href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel={siteLink(platform.primaryCTA.url, 'cta').rel}
                   className={cn(
                     'inline-flex items-center justify-center rounded-lg font-medium',
                     'bg-white text-obsidian hover:bg-gray-100 min-h-[48px] px-8 py-3 text-base',
