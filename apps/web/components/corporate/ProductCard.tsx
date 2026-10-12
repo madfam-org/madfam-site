@@ -4,6 +4,7 @@ import { ArrowUpRight as ArrowUpRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Badge } from './Badge';
+import { siteLink } from '@/lib/ecosystem-links';
 import { SDGInlineBadge } from '@/components/SDGBadge';
 
 interface ProductCardProps {
@@ -78,9 +79,9 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="flex gap-3">
         {product.primaryCta.external ? (
           <Link
-            href={product.primaryCta.url}
+            href={siteLink(product.primaryCta.url, 'cta').href}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={siteLink(product.primaryCta.url, 'cta').rel}
             className="flex-1 px-4 py-2 bg-neutral-900 text-white rounded-lg text-center text-sm font-medium hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2"
           >
             {product.primaryCta.label}

@@ -7,6 +7,7 @@ import { lifecycleLabelKey, primaryCtaLabelKey, type Platform } from '@/lib/data
 import { Badge } from '@/components/corporate/Badge';
 import { Newsletter } from '@/components/ui/Newsletter';
 import { cn } from '@/components/ui/utils';
+import { siteLink } from '@/lib/ecosystem-links';
 
 interface PlatformHeroProps {
   platform: Platform;
@@ -75,12 +76,13 @@ function CTAButton({
     cta.type === 'external' && cta.url ? cta.url : getLocalizedUrl('contact', locale as Locale);
 
   const isExternal = cta.type === 'external' && cta.url;
+  const outbound = isExternal ? siteLink(href, 'cta') : undefined;
 
   return (
     <Link
-      href={href}
+      href={outbound?.href ?? href}
       className={cn(baseStyles, variant === 'primary' ? primaryStyles : secondaryStyles)}
-      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      {...(outbound ? { target: '_blank', rel: outbound.rel } : {})}
     >
       {t(cta.labelKey)}
       {isExternal && (

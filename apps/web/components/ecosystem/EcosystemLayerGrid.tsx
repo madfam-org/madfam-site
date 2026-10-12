@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { LAYERS, getPlatformsByLayer, isComingSoon, type Platform } from '@/lib/data/platforms';
+import { siteLink } from '@/lib/ecosystem-links';
 
 // Slug-to-i18nKey mapping for platform translation lookups
 const SLUG_TO_I18N_KEY: Record<string, string> = {
@@ -84,12 +85,13 @@ function PlatformCard({
     ? `/${locale}/platforms/${platform.slug}`
     : (platform.externalUrl ?? `/${locale}/platforms/${platform.slug}`);
   const isExternal = !platform.hasDetailPage && !!platform.externalUrl;
+  const outbound = isExternal ? siteLink(href, 'cta') : undefined;
 
   return (
     <Link
-      href={href}
+      href={outbound?.href ?? href}
       target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener noreferrer' : undefined}
+      rel={outbound?.rel}
       className="block min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-leaf focus-visible:ring-offset-2 rounded-xl"
     >
       {cardContent}

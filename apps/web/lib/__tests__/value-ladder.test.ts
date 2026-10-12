@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
   BANDS,
   BUNDLES,
-  KALYA_DISCOVERY_CALL_URL,
+  LADDER_DISCOVERY_CALL_URL,
   NEED_OPTIONS,
   SIZE_OPTIONS,
   ctaTarget,
@@ -131,7 +131,7 @@ describe('value ladder CTAs (ruling CX-1)', () => {
 
   it('every non-self-serve CTA is the Kalya discovery call', () => {
     for (const cta of allCtas().filter(c => c.motion !== 'self-serve')) {
-      expect(cta.href, cta.where).toBe(KALYA_DISCOVERY_CALL_URL);
+      expect(cta.href, cta.where).toBe(LADDER_DISCOVERY_CALL_URL);
     }
   });
 
@@ -140,19 +140,82 @@ describe('value ladder CTAs (ruling CX-1)', () => {
     expect(erp).toBeDefined();
     expect(erp.motion).toBe('discovery-call');
     expect(erp.checkoutSlug).toBeUndefined();
-    expect(erp.href).toBe(KALYA_DISCOVERY_CALL_URL);
-    expect(recommendRung('unify', 'biz').href).toBe(KALYA_DISCOVERY_CALL_URL);
+    expect(erp.href).toBe(LADDER_DISCOVERY_CALL_URL);
+    expect(recommendRung('unify', 'biz').href).toBe(LADDER_DISCOVERY_CALL_URL);
     // No site-side fallback slug survives for a product the registry does not sell.
     expect(registryCheckoutSlug('nauta')).toBeUndefined();
     expect(ctaTarget('nauta').motion).toBe('discovery-call');
   });
 
   it('bundles and acervo go to the discovery call', () => {
-    for (const bundle of BUNDLES) expect(bundle.href).toBe(KALYA_DISCOVERY_CALL_URL);
-    expect(recommendRung('design-to-sell', 'team').href).toBe(KALYA_DISCOVERY_CALL_URL);
+    for (const bundle of BUNDLES) expect(bundle.href).toBe(LADDER_DISCOVERY_CALL_URL);
+    expect(recommendRung('design-to-sell', 'team').href).toBe(LADDER_DISCOVERY_CALL_URL);
     const acervo = getExtraSlices().find(s => s.slug === 'acervo');
     if (acervo && !projectionCheckoutSlug('acervo')) {
-      expect(acervo.target).toEqual({ motion: 'discovery-call', href: KALYA_DISCOVERY_CALL_URL });
+      expect(acervo.target).toEqual({ motion: 'discovery-call', href: LADDER_DISCOVERY_CALL_URL });
     }
+  });
+});
+
+/**
+ * Money-engine journeys 2026-10-11 (J3c): every ladder href leaves madfam.io as
+ * an own-site link on the `ladder` surface. Dhanam reads only `utm_*`, so the
+ * old `source=ladder` parameter is gone; `product` stays.
+ */
+describe('ladder links carry the ecosystem UTM set', () => {
+  // test/setup.ts points NEXT_PUBLIC_BASE_URL at localhost, from which nothing
+  // is tagged. Production builds leave it unset (SITE_URL = https://madfam.io),
+  // so load a fresh copy of the ladder under that value.
+  let L: typeof import('@/lib/data/value-ladder');
+
+  beforeAll(async () => {
+    vi.stubEnv('NEXT_PUBLIC_BASE_URL', 'https://madfam.io');
+    vi.resetModules();
+    L = await import('@/lib/data/value-ladder');
+  });
+
+  afterAll(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  function ctaHrefs(): string[] {
+    const hrefs = [
+      L.LADDER_DISCOVERY_CALL_URL,
+      ...L.BUNDLES.map(b => b.href),
+      ...L.getRegistrySlices().map(s => s.target.href),
+      ...L.getExtraSlices().map(s => s.target.href),
+      ...(['erp', 'vcto'] as BandId[]).flatMap(b => L.getBandRungs(b).map(r => r.href)),
+    ];
+    for (const need of L.NEED_OPTIONS) {
+      for (const size of L.SIZE_OPTIONS) hrefs.push(L.recommendRung(need.id, size).href);
+    }
+    return hrefs;
+  }
+
+  it('tags every ladder href with utm_source=madfam.io, medium ecosystem, campaign ladder', () => {
+    for (const href of ctaHrefs()) {
+      const url = new URL(href);
+      expect(url.searchParams.get('utm_source'), href).toBe('madfam.io');
+      expect(url.searchParams.get('utm_medium'), href).toBe('ecosystem');
+      expect(url.searchParams.get('utm_campaign'), href).toBe('ladder');
+      expect(url.searchParams.has('source'), href).toBe(false);
+    }
+  });
+
+  it('keeps the Kalya booking page as the discovery-call destination', () => {
+    const url = new URL(L.LADDER_DISCOVERY_CALL_URL);
+    expect(`${url.origin}${url.pathname}`).toBe(L.KALYA_DISCOVERY_CALL_URL);
+  });
+
+  it("keeps Dhanam's product parameter and drops source=ladder", () => {
+    const target = L.ctaTarget('dhanam');
+    if (target.motion !== 'self-serve') return; // the registry sells no Dhanam checkout today
+    const url = new URL(target.href);
+    expect(url.hostname).toBe('dhan.am');
+    expect(url.pathname).toBe('/pricing');
+    expect(url.searchParams.get('product')).toBe(target.checkoutSlug);
+    expect(url.searchParams.has('source')).toBe(false);
+    expect(url.searchParams.get('utm_campaign')).toBe('ladder');
   });
 });

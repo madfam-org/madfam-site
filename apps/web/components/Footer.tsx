@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { Container } from '@/components/ui';
 import { getFooterPlatforms } from '@/lib/data/platforms';
+import { siteLink } from '@/lib/ecosystem-links';
 
 export function Footer() {
   const t = useTranslations();
@@ -112,9 +113,9 @@ export function Footer() {
                       <li key={item.name}>
                         {item.external ? (
                           <a
-                            href={item.href}
+                            href={siteLink(item.href, 'footer').href}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel={siteLink(item.href, 'footer').rel}
                             className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender"
                           >
                             {item.name}

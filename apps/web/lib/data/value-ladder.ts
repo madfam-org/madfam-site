@@ -24,6 +24,7 @@
 // ladder live in the PRIVATE internal-devops repo and are cited by name only.
 // Policy: internal-devops/docs/repo-boundary-contract.md
 
+import { siteLink } from '../ecosystem-links';
 import { PLATFORMS, type Platform } from './platforms';
 import {
   REGISTRY_COMMERCE,
@@ -110,6 +111,20 @@ function registryTier(slug: string, tierId: string): RegistryTier | undefined {
 // here.
 export const KALYA_DISCOVERY_CALL_URL = 'https://kalya.app/madfam';
 
+/**
+ * Every href the ladder renders leaves madfam.io tagged as an own-site link on
+ * the `ladder` surface (`lib/ecosystem-links.ts`):
+ * `utm_source=madfam.io&utm_medium=ecosystem&utm_campaign=ladder`, rendered with
+ * `rel="noopener"`. Destinations read `utm_*` (Dhanam's attribution reads only
+ * `utm_*`), which is why the old `source=ladder` parameter is gone.
+ */
+function ladderHref(url: string): string {
+  return siteLink(url, 'ladder').href;
+}
+
+/** The Kalya discovery call, as the ladder links it. */
+export const LADDER_DISCOVERY_CALL_URL = ladderHref(KALYA_DISCOVERY_CALL_URL);
+
 /** The one product whose own pricing page is a Dhanam checkout: Dhanam itself. */
 const DHANAM_SITE_SLUG = 'dhanam';
 
@@ -129,19 +144,18 @@ export type CtaTarget =
   | { motion: 'self-serve'; checkoutSlug: string; href: string }
   | { motion: 'discovery-call'; href: string };
 
-const DISCOVERY_CALL: CtaTarget = { motion: 'discovery-call', href: KALYA_DISCOVERY_CALL_URL };
+const DISCOVERY_CALL: CtaTarget = { motion: 'discovery-call', href: LADDER_DISCOVERY_CALL_URL };
 
 /** The registry's checkout slug for a product (site slug), if it declares one. */
 export function registryCheckoutSlug(siteSlug: string): string | undefined {
   return REGISTRY_COMMERCE[siteSlug]?.checkoutSlug;
 }
 
-/** Dhanam's own pricing page, tagged with the ladder source. Dhanam only. */
+/** Dhanam's own pricing page for one product, tagged as a ladder link. Dhanam only. */
 function dhanamPricingUrl(checkoutSlug: string): string {
   const url = new URL('https://dhan.am/pricing');
   url.searchParams.set('product', checkoutSlug);
-  url.searchParams.set('source', 'ladder');
-  return url.toString();
+  return ladderHref(url.toString());
 }
 
 /** The CTA target for one product, by site slug. */
@@ -153,7 +167,7 @@ export function ctaTarget(siteSlug: string): CtaTarget {
   }
   const primary = REGISTRY_PRODUCTS[siteSlug]?.externalUrl;
   if (!primary) return DISCOVERY_CALL;
-  return { motion: 'self-serve', checkoutSlug, href: primary };
+  return { motion: 'self-serve', checkoutSlug, href: ladderHref(primary) };
 }
 
 /**
@@ -207,14 +221,14 @@ export const BUNDLES: LadderBundle[] = [
     slices: ['karafiel', 'tezca'],
     pricing: PENDING_PRICE,
     motion: 'discovery-call',
-    href: KALYA_DISCOVERY_CALL_URL,
+    href: LADDER_DISCOVERY_CALL_URL,
   },
   {
     id: 'design-to-sell',
     slices: ['yantra4d', 'forge-sight', 'cotiza-studio'],
     pricing: PENDING_PRICE,
     motion: 'discovery-call',
-    href: KALYA_DISCOVERY_CALL_URL,
+    href: LADDER_DISCOVERY_CALL_URL,
   },
 ];
 
@@ -357,7 +371,7 @@ export function recommendRung(need: NeedId, size: SizeId): LadderRecommendation 
       pricing: rung?.pricing ?? PENDING_PRICE,
       motion: rung?.motion ?? 'discovery-call',
       ...(rung?.checkoutSlug ? { checkoutSlug: rung.checkoutSlug } : {}),
-      href: rung?.href ?? KALYA_DISCOVERY_CALL_URL,
+      href: rung?.href ?? LADDER_DISCOVERY_CALL_URL,
     };
   }
 
@@ -369,7 +383,7 @@ export function recommendRung(need: NeedId, size: SizeId): LadderRecommendation 
       upsellBand: 'erp',
       pricing: PENDING_PRICE,
       motion: 'discovery-call',
-      href: KALYA_DISCOVERY_CALL_URL,
+      href: LADDER_DISCOVERY_CALL_URL,
     };
   }
 
