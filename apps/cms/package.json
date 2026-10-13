@@ -14,7 +14,7 @@
     "@payloadcms/richtext-slate": "^3.89.0",
     "cross-env": "^10.1.0",
     "dotenv": "^16.4.5",
-    "express": "^5.2.1",
+    "express": "^5.3.0",
     "path-to-regexp": "0.1.13",
     "payload": "^3.89.0",
     "ts-node": "^10.9.2",
@@ -22,10 +22,10 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "@types/node": "^26.6.1",
+    "@types/node": "^26.6.5",
     "css-minimizer-webpack-plugin": "^5.0.1",
     "mini-css-extract-plugin": "^2.10.2",
     "nodemon": "^3.1.14",
-    "webpack": "^5.111.0"
+    "webpack": "^5.111.1"
   }
 }
