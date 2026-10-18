@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui';
+import { leadUtm, sessionStore } from '@/lib/attribution';
 
 const INTENTS = [
   'platform',
@@ -97,6 +98,9 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
       budget: data.budget || undefined,
       region: data.region,
       followUp: data.followUp,
+      // Campaign attribution: the leads API stores utm_source/medium/campaign
+      // on the Lead row (lib/attribution.ts).
+      ...leadUtm(window.location.search, sessionStore()),
     };
 
     // Track form submission start

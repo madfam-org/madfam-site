@@ -189,6 +189,35 @@ describe('LeadForm Component', () => {
     });
   });
 
+  it('sends the first utm_* touch of the session in the lead metadata', async () => {
+    window.sessionStorage.setItem(
+      'madfam.utm',
+      JSON.stringify({ utm_source: 'newsletter', utm_medium: 'email', utm_campaign: 'oct-2026' })
+    );
+    mockFetch.mockResolvedValueOnce({
+      json: () => Promise.resolve({ success: true, leadId: 'lead-utm' }),
+    });
+
+    try {
+      render(<LeadForm />);
+      await fillRequiredFields();
+      await user.click(screen.getByRole('button', { name: /enviar solicitud/i }));
+
+      await waitFor(() => {
+        expect(mockFetch).toHaveBeenCalled();
+      });
+      const body = JSON.parse(mockFetch.mock.calls[0][1].body as string);
+      expect(body.metadata).toMatchObject({
+        intent: 'platform',
+        utm_source: 'newsletter',
+        utm_medium: 'email',
+        utm_campaign: 'oct-2026',
+      });
+    } finally {
+      window.sessionStorage.removeItem('madfam.utm');
+    }
+  });
+
   it('should show loading state while submitting', async () => {
     // Make the fetch call take some time
     mockFetch.mockImplementation(
