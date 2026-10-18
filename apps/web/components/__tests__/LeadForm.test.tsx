@@ -189,7 +189,7 @@ describe('LeadForm Component', () => {
     });
   });
 
-  it('sends the session's first utm_* touch in the lead metadata', async () => {
+  it('sends the first utm_* touch of the session in the lead metadata', async () => {
     window.sessionStorage.setItem(
       'madfam.utm',
       JSON.stringify({ utm_source: 'newsletter', utm_medium: 'email', utm_campaign: 'oct-2026' })
