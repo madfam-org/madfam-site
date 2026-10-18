@@ -1225,6 +1225,42 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
     order: 34,
     externalUrl: 'https://ld.madfam.io',
   },
+  pliego: {
+    slug: 'pliego',
+    registrySlug: 'pliego',
+    name: 'Pliego',
+    icon: '📃',
+    category: 'Applications',
+    layer: 'applications',
+    track: 'ecosystem',
+    status: 'coming-soon',
+    lifecycle: 'incubating',
+    license: 'AGPL-3.0',
+    order: 35,
+    externalUrl: 'https://pliego.madfam.io',
+    githubUrl: 'https://github.com/madfam-org/pliego',
+    commerce: {
+      tiers: [],
+    },
+  },
+  primavera3d: {
+    slug: 'primavera3d',
+    registrySlug: 'primavera3d',
+    name: 'Primavera3D',
+    icon: '🌱',
+    category: 'Applications',
+    layer: 'applications',
+    track: 'ecosystem',
+    status: 'production',
+    lifecycle: 'live',
+    license: 'Proprietary',
+    order: 37,
+    externalUrl: 'https://primavera3d.pro',
+    githubUrl: 'https://github.com/madfam-org/primavera3d',
+    commerce: {
+      tiers: [],
+    },
+  },
 };
 
 /** Catalog order, as the registry declares it. */
@@ -1261,6 +1297,8 @@ export const REGISTRY_PRODUCT_ORDER: string[] = [
   'telesia',
   'marca',
   'lexidrop',
+  'pliego',
+  'primavera3d',
 ];
 
 /**
@@ -1980,6 +2018,12 @@ export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = {
       },
     ],
   },
+  pliego: {
+    tiers: [],
+  },
+  primavera3d: {
+    tiers: [],
+  },
 };
 
 /**
@@ -1998,7 +2042,7 @@ export const REGISTRY_SOURCE = {
   registryVersion: 4,
   lastUpdated: '2026-09-23',
   generatedFrom: 'internal-devops/ecosystem/registry/products.yaml',
-  sha256: '6c5f625efa74b3c3b0419dca1aee8c8f532a940778316271eec280565273fbe1',
-  productCount: 32,
+  sha256: '4d46353b4b5ef330b49b76b953638360efac45241c530d14f4499ce0cea11c97',
+  productCount: 34,
   retiredCount: 3,
 } as const;
