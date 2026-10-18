@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
+import { AttributionCapture } from '@/components/AttributionCapture';
 import { CookieConsent } from '@/components/CookieConsent';
 import { Footer } from '@/components/Footer';
 import { GlobalAnalytics } from '@/components/GlobalAnalytics';
@@ -54,6 +55,7 @@ export default async function LocaleLayout({
       <NextIntlClientProvider messages={messages} locale={locale}>
         <OrganizationStructuredData />
         <GlobalAnalytics />
+        <AttributionCapture />
 
         {/* Skip Navigation Link for Accessibility */}
         <a href="#main-content" className="skip-link sr-only-focusable">
