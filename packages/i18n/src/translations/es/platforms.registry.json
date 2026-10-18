@@ -128,5 +128,13 @@
   "lexidrop": {
     "name": "LexiDrop",
     "license": "Proprietary"
+  },
+  "pliego": {
+    "name": "Pliego",
+    "license": "AGPL-3.0"
+  },
+  "primavera3d": {
+    "name": "Primavera3D",
+    "license": "Proprietary"
   }
 }

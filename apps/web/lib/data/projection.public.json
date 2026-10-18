@@ -1245,6 +1245,69 @@
         "icon": "🌐",
         "show_in_banner": false
       }
+    },
+    {
+      "slug": "pliego",
+      "display_name": "Pliego",
+      "lifecycle": "incubating",
+      "lifecycle_verified": "2026-10-10",
+      "license": "AGPL-3.0",
+      "layer": "stem",
+      "repo": {
+        "name": "pliego",
+        "github_org": "madfam-org",
+        "visibility": "public",
+        "language": "Python + JavaScript"
+      },
+      "domains": {
+        "primary": "pliego.madfam.io",
+        "hosts": [
+          "pliego-app.madfam.io",
+          "pliego-api.madfam.io"
+        ],
+        "infra_hosts": []
+      },
+      "site": {
+        "category": "Applications",
+        "track": "ecosystem",
+        "order": 35,
+        "icon": "📃",
+        "show_in_banner": false
+      },
+      "commerce": {
+        "tiers": [],
+        "admin_tier": "admin"
+      }
+    },
+    {
+      "slug": "primavera3d",
+      "display_name": "Primavera3D",
+      "lifecycle": "live",
+      "lifecycle_verified": "2026-10-18",
+      "license": "Proprietary",
+      "layer": "fruit",
+      "repo": {
+        "name": "primavera3d",
+        "github_org": "madfam-org",
+        "visibility": "public",
+        "language": "TypeScript"
+      },
+      "domains": {
+        "primary": "primavera3d.pro",
+        "hosts": [],
+        "infra_hosts": []
+      },
+      "site": {
+        "category": "Applications",
+        "track": "ecosystem",
+        "order": 37,
+        "icon": "🌱",
+        "show_in_banner": false
+      },
+      "commerce": {
+        "tiers": [],
+        "admin_tier": "admin"
+      }
     }
   ],
   "retired": [
