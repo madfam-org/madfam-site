@@ -12,7 +12,13 @@
  * standard campaign parameters are kept; nothing identifies the visitor.
  */
 
-export const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'] as const;
+export const UTM_KEYS = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_term',
+  'utm_content',
+] as const;
 export type UtmKey = (typeof UTM_KEYS)[number];
 export type Utm = Partial<Record<UtmKey, string>>;
 

@@ -53,7 +53,9 @@ describe('rememberUtm / leadUtm', () => {
   });
 
   it('falls back to the current page, then to nothing', () => {
-    expect(leadUtm('?utm_source=direct-link', memoryStore())).toEqual({ utm_source: 'direct-link' });
+    expect(leadUtm('?utm_source=direct-link', memoryStore())).toEqual({
+      utm_source: 'direct-link',
+    });
     expect(leadUtm('', memoryStore())).toEqual({});
     expect(leadUtm('', undefined)).toEqual({});
   });
