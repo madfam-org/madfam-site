@@ -812,7 +812,6 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
           },
         },
       ],
-      checkoutSlug: 'kalya',
     },
   },
   symbiosis: {
@@ -852,7 +851,6 @@ export const REGISTRY_PRODUCTS: Record<string, RegistryProduct> = {
           },
         },
       ],
-      checkoutSlug: 'symbiosis',
     },
   },
   nauta: {
@@ -1803,7 +1801,6 @@ export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = {
         },
       },
     ],
-    checkoutSlug: 'kalya',
   },
   symbiosis: {
     tiers: [
@@ -1829,7 +1826,6 @@ export const REGISTRY_COMMERCE: Record<string, RegistryCommerce> = {
         },
       },
     ],
-    checkoutSlug: 'symbiosis',
   },
   nauta: {
     tiers: [
@@ -2042,7 +2038,7 @@ export const REGISTRY_SOURCE = {
   registryVersion: 4,
   lastUpdated: '2026-09-23',
   generatedFrom: 'internal-devops/ecosystem/registry/products.yaml',
-  sha256: '4d46353b4b5ef330b49b76b953638360efac45241c530d14f4499ce0cea11c97',
+  sha256: '0cd8120be8c7f262105766af1945859cf5678fd07db5783cda2ff34f17daf38e',
   productCount: 34,
   retiredCount: 3,
 } as const;
