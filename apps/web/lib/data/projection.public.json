@@ -740,8 +740,7 @@
           "solo": "Solo",
           "team": "Equipo",
           "biz": "Negocio"
-        },
-        "checkout_slug": "kalya"
+        }
       }
     },
     {
@@ -784,8 +783,7 @@
           "free": "Gratis",
           "team": "Equipo",
           "biz": "Negocio"
-        },
-        "checkout_slug": "symbiosis"
+        }
       }
     },
     {
