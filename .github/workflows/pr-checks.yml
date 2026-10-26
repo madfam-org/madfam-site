@@ -252,7 +252,9 @@ jobs:
         with:
           name: playwright-report
           path: apps/web/playwright-report/
-          retention-days: 14
+          # ~0.2 GiB of the org's artifact storage at 14 days (2026-10-26).
+          # A PR's report is read during review; five days covers that.
+          retention-days: 5
           if-no-files-found: ignore
 
   comment:
