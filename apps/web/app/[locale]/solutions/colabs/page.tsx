@@ -2,6 +2,7 @@ import { ArrowLeft as ArrowLeftIcon } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `MADFAM Co-Labs - ${t('tagline')}`,
       description: t('description'),
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

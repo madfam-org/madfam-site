@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { localizedAlternates } from '@/lib/seo';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
 /**
  * Title, description, canonical + hreflang for a simple route (finding C-023:
@@ -21,7 +22,13 @@ export async function routeMetadata(
     title,
     description,
     alternates,
-    openGraph: { title, description, type: 'website', url: alternates.canonical },
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      url: alternates.canonical,
+      images: [DEFAULT_OG_IMAGE],
+    },
     ...(options.noIndex ? { robots: { index: false, follow: true } } : {}),
   };
 }

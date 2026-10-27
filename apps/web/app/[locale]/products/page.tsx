@@ -6,6 +6,7 @@ import { Container } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
 import { ProductCard } from '@/components/corporate/ProductCard';
 import { PLATFORMS, LAYERS, isComingSoon, primaryCtaLabelKey } from '@/lib/data/platforms';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         t('meta.description') || 'Open platforms for creators, makers, and entrepreneurs.',
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

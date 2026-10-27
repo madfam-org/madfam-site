@@ -285,6 +285,12 @@ const nextConfig = {
     ];
   },
 
+  // Render title, description, canonical and Open Graph tags in <head> for
+  // every user agent. Next 15 otherwise streams metadata into <body> for agents
+  // it does not list as bots, and tools and crawlers outside that list (link
+  // previews, Lighthouse) then report the page as having no description.
+  htmlLimitedBots: /.*/,
+
   // Next.js 15+ external packages configuration
   serverExternalPackages: ['@prisma/client'],
 

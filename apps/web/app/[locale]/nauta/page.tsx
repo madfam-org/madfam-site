@@ -7,6 +7,7 @@ import {
   KALYA_DISCOVERY_CALL_URL,
 } from '@/lib/data/nauta-product';
 import { siteLink } from '@/lib/ecosystem-links';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
 // Both hero CTAs leave madfam.io as own-site links (`lib/ecosystem-links.ts`).
 const FRONT_DOOR_LINK = siteLink(NAUTA_FRONT_DOOR_URL, 'cta');
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t('meta.title'),
       description: t('meta.description'),
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
       url: NAUTA_FRONT_DOOR_URL,
     },
   };

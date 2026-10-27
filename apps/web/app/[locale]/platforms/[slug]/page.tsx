@@ -5,6 +5,7 @@ import { getPlatformBySlug, getPlatformsWithDetailPages } from '@/lib/data/platf
 import { JsonLd } from '@/components/JsonLd';
 import { PlatformShowcase } from '@/components/platforms/PlatformShowcase';
 import { breadcrumbLd, softwareApplicationLd } from '@/lib/structured-data';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -54,6 +55,7 @@ export async function generateMetadata({ params }: PlatformPageProps): Promise<M
       title: `${platform.name} — ${tagline} | MADFAM`,
       description: valueProp,
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

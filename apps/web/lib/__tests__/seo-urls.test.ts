@@ -1,7 +1,8 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
+  DEFAULT_OG_IMAGE,
   LEGACY_PATH_ALIASES,
   SITE_URL,
   canonicalPath,
@@ -49,5 +50,35 @@ describe('seo-urls', () => {
       if (source === destination) continue;
       expect(LEGACY_PATH_ALIASES[source], source).toBe(destination);
     }
+  });
+
+  // A page that sets `openGraph` replaces the parent's whole object, so a block
+  // without `images` publishes no share image for that page.
+  it('ships the default share image and every openGraph block includes images', () => {
+    const appDir = join(__dirname, '../../app');
+    expect(existsSync(join(__dirname, '../../public', DEFAULT_OG_IMAGE.url))).toBe(true);
+
+    const files = (readdirSync(appDir, { recursive: true }) as string[]).filter(f =>
+      /page\.tsx$/.test(f)
+    );
+    const missing = files.filter(f => {
+      const src = readFileSync(join(appDir, f), 'utf8');
+      const at = src.indexOf('openGraph: {');
+      return at !== -1 && !src.slice(at, at + 600).includes('images:');
+    });
+    expect(missing).toEqual([]);
+  });
+
+  // Next streams metadata into <body> for agents outside `htmlLimitedBots`;
+  // matching every agent keeps title, description and Open Graph in <head>.
+  it('renders metadata in <head> for ordinary browsers and link-preview agents', () => {
+    const config = readFileSync(join(__dirname, '../../next.config.js'), 'utf8');
+    const match = /htmlLimitedBots:\s*\/(.+)\/,/.exec(config);
+    expect(match).not.toBeNull();
+    const bots = new RegExp(match![1]);
+    const browser =
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36';
+    expect(bots.test(browser)).toBe(true);
+    expect(bots.test('WhatsApp/2.23')).toBe(true);
   });
 });
