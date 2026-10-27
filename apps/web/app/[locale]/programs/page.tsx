@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { Badge } from '@/components/corporate/Badge';
 import { ProgramCard } from '@/components/corporate/ProgramCard';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t('meta.title'),
       description: t('meta.description'),
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

@@ -16,6 +16,19 @@ export const PATHNAME_HEADER = 'x-madfam-pathname';
 /** Request header next-intl's middleware sets with the resolved locale. */
 export const LOCALE_HEADER = 'x-next-intl-locale';
 
+/**
+ * The site-wide share image (public/images/og-default.jpg, 1200x630). A page
+ * that sets its own `openGraph` replaces the parent's whole object, so every
+ * `openGraph` block includes it explicitly. Relative URLs resolve against
+ * `metadataBase` (app/layout.tsx).
+ */
+export const DEFAULT_OG_IMAGE = {
+  url: '/images/og-default.jpg',
+  width: 1200,
+  height: 630,
+  alt: 'MADFAM — Innovaciones MADFAM S.A.S. de C.V.',
+};
+
 /** Normalise a locale-less path: '' for the home page, '/x/y' otherwise. */
 export function normalisePath(path: string = ''): string {
   if (!path || path === '/') return '';

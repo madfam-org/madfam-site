@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { Container, Heading } from '@/components/ui';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -9,6 +10,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('meta.title'),
     description: t('meta.description'),
+    openGraph: {
+      title: t('meta.title'),
+      description: t('meta.description'),
+      type: 'website',
+      images: [DEFAULT_OG_IMAGE],
+    },
   };
 }
 

@@ -19,6 +19,7 @@ import {
   type TierPricing,
 } from '@/lib/data/value-ladder';
 import { outboundRel } from '@/lib/ecosystem-links';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -37,6 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t('meta.title'),
       description: t('meta.description'),
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

@@ -4,7 +4,13 @@ import { Inter, Poppins, Space_Mono } from 'next/font/google';
 import { DarkModeScript } from './dark-mode-script';
 import { BrandThemeProvider } from '@/components/ui';
 import { PLAUSIBLE_HOST } from '@/lib/plausible';
-import { LOCALE_HEADER, SEO_DEFAULT_LOCALE, SEO_LOCALES, type SeoLocale } from '@/lib/seo-urls';
+import {
+  LOCALE_HEADER,
+  SEO_DEFAULT_LOCALE,
+  SEO_LOCALES,
+  SITE_URL,
+  type SeoLocale,
+} from '@/lib/seo-urls';
 import './globals.css';
 
 const inter = Inter({
@@ -28,6 +34,8 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  // Resolves the file-based opengraph-image / twitter-image URLs.
+  metadataBase: new URL(SITE_URL),
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
