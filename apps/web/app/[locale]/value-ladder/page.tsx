@@ -132,9 +132,6 @@ export default async function ValueLadderPage({ params }: Props) {
       <section className="py-16 lg:py-24">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
-            <p className="text-sm font-semibold uppercase tracking-wide text-leaf mb-4">
-              {t('hero.eyebrow')}
-            </p>
             <h1 className="text-4xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6">
               {t('hero.title')}
             </h1>

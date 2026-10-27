@@ -31,7 +31,7 @@ export function MembershipWaitlist() {
             {t('subtitle')}
           </p>
 
-          <Link href={getLocalizedUrl('contact', locale)}>
+          <Link href={`${getLocalizedUrl('contact', locale)}?intent=ecosystem-membership`}>
             <Button
               size="lg"
               className="w-full bg-gradient-to-r from-leaf to-lavender hover:from-leaf/90 hover:to-lavender/90 text-white font-semibold"

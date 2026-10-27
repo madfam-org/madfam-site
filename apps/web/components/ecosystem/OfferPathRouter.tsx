@@ -37,9 +37,6 @@ export function OfferPathRouter(): React.ReactElement {
           >
             {t('section.title')}
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
-            {t('section.subtitle')}
-          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-4">

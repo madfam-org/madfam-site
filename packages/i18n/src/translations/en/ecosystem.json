@@ -221,7 +221,6 @@
     "section": {
       "eyebrow": "Choose your path",
       "title": "MADFAM is not one offer. It is an operating environment.",
-      "subtitle": "Start where your intent is clearest. The site should route you to the right product, build track, membership surface, or strategic conversation without forcing you to decode the whole ecosystem first.",
       "bestFor": "Best for"
     },
     "platform": {
@@ -230,7 +229,6 @@
       "description": "Find the MADFAM product that fits your workflow, then move into the broader ecosystem when the work expands.",
       "recommendedFor": "Creators, operators, founders, and teams with a specific product need.",
       "proof1": "Self-serve where ready",
-      "proof2": "External app routes respected",
       "proof3": "Product-specific access",
       "cta": "Explore products"
     },
