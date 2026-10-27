@@ -6,6 +6,8 @@ import { useTranslations, useLocale } from 'next-intl';
 import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
 import { Container, Button, BrandParticles } from '@/components/ui';
 import { Badge } from '@/components/corporate/Badge';
+import { getPlatformBySlug } from '@/lib/data/platforms';
+import { siteLink } from '@/lib/ecosystem-links';
 
 // ─── Static Data ──────────────────────────────────────────────────────────────
 
@@ -109,6 +111,12 @@ const ECOSYSTEM_CONNECTIONS = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
+// Quote requests go to Cotiza (the registry's quoting product), not the contact form.
+const QUOTE_LINK = siteLink(
+  getPlatformBySlug('cotiza-studio')?.externalUrl ?? 'https://cotiza.studio',
+  'cta'
+);
+
 export function MakerNodePage() {
   const t = useTranslations('ecosystem.makerNodePage');
   const locale = useLocale() as Locale;
@@ -174,7 +182,7 @@ export function MakerNodePage() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 items-center pt-4">
-              <Link href={getLocalizedUrl('contact', locale)}>
+              <a href={QUOTE_LINK.href} target="_blank" rel={QUOTE_LINK.rel}>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-leaf to-lavender hover:from-leaf/90 hover:to-lavender/90 text-white font-semibold px-8 py-3 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 min-w-[180px]"
@@ -182,9 +190,9 @@ export function MakerNodePage() {
                 >
                   {t('cta.primary')}
                 </Button>
-              </Link>
+              </a>
 
-              <Link href={getLocalizedUrl('contact', locale)}>
+              <Link href={`${getLocalizedUrl('contact', locale)}?intent=build-with-madfam`}>
                 <Button
                   variant="outline"
                   size="lg"
@@ -465,7 +473,7 @@ export function MakerNodePage() {
             <p className="text-xl text-white/70 mb-12 leading-relaxed">{t('cta.subtitle')}</p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={getLocalizedUrl('contact', locale)}>
+              <a href={QUOTE_LINK.href} target="_blank" rel={QUOTE_LINK.rel}>
                 <Button
                   size="xl"
                   className="bg-gradient-to-r from-leaf to-lavender hover:from-leaf/90 hover:to-lavender/90 text-white font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 min-w-[200px]"
@@ -473,9 +481,9 @@ export function MakerNodePage() {
                 >
                   {t('cta.primary')}
                 </Button>
-              </Link>
+              </a>
 
-              <Link href={getLocalizedUrl('contact', locale)}>
+              <Link href={`${getLocalizedUrl('contact', locale)}?intent=build-with-madfam`}>
                 <Button
                   variant="outline"
                   size="xl"

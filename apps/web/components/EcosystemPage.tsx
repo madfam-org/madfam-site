@@ -101,7 +101,7 @@ export function EcosystemPage() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 items-center pt-2">
-              <Link href={getLocalizedUrl('contact', locale)}>
+              <Link href={`${getLocalizedUrl('contact', locale)}?intent=ecosystem-membership`}>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-leaf to-lavender hover:from-leaf/90 hover:to-lavender/90 text-white font-semibold px-8 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
@@ -109,7 +109,7 @@ export function EcosystemPage() {
                   {t('hero.ctaPrimary')}
                 </Button>
               </Link>
-              <Link href={getLocalizedUrl('contact', locale)}>
+              <Link href={getLocalizedUrl('products', locale)}>
                 <Button
                   variant="outline"
                   size="lg"
@@ -374,7 +374,7 @@ export function EcosystemPage() {
             <p className="text-lg text-white/70 mb-10">{t('cta.subtitle')}</p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={getLocalizedUrl('contact', locale)}>
+              <Link href={`${getLocalizedUrl('contact', locale)}?intent=ecosystem-membership`}>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-leaf to-lavender hover:from-leaf/90 hover:to-lavender/90 text-white font-semibold px-10 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
@@ -383,7 +383,7 @@ export function EcosystemPage() {
                 </Button>
               </Link>
 
-              <Link href={getLocalizedUrl('contact', locale)}>
+              <Link href={getLocalizedUrl('products', locale)}>
                 <Button
                   variant="outline"
                   size="lg"

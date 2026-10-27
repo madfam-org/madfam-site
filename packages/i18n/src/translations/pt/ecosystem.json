@@ -221,7 +221,6 @@
     "section": {
       "eyebrow": "Escolha seu caminho",
       "title": "MADFAM não é uma única oferta. É um ambiente operacional.",
-      "subtitle": "Comece onde sua intenção está mais clara. O site deve levar você ao produto, build track, associação ou conversa estratégica correta sem exigir que decodifique todo o ecossistema primeiro.",
       "bestFor": "Ideal para"
     },
     "platform": {
@@ -230,7 +229,6 @@
       "description": "Encontre o produto MADFAM adequado ao seu fluxo de trabalho e avance para o ecossistema quando o trabalho crescer.",
       "recommendedFor": "Criadores, operadores, founders e equipes com uma necessidade específica de produto.",
       "proof1": "Self-serve quando pronto",
-      "proof2": "Rotas externas respeitadas",
       "proof3": "Acesso específico por produto",
       "cta": "Explorar produtos"
     },

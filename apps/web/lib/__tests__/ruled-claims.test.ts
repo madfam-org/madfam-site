@@ -178,3 +178,24 @@ describe('lifecycle badge and CTA (MH-5)', () => {
     }
   });
 });
+
+/**
+ * Internal brief language must not ship as public copy (messaging house §9:
+ * "El sitio debe…", "Rutas externas respetadas", "frente público").
+ */
+describe('no internal brief language in public copy', () => {
+  const BANNED = [
+    /el sitio debe|the site should|o site deve/i,
+    /rutas externas respetadas|external app routes respected|rotas externas respeitadas/i,
+    /frente público|public front door|porta pública/i,
+    /build track/i,
+  ];
+  for (const locale of LOCALES) {
+    for (const name of ['ecosystem', 'valueLadder', 'common', 'pages'] as const) {
+      it(`${locale}/${name}.json carries no internal brief phrase`, () => {
+        const text = raw(locale, name);
+        for (const pattern of BANNED) expect(text, String(pattern)).not.toMatch(pattern);
+      });
+    }
+  }
+});
