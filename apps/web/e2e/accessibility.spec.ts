@@ -1,48 +1,8 @@
 import { test, expect } from '@playwright/test';
-import AxeBuilder from '@axe-core/playwright';
 
 test.describe('Accessibility Tests @accessibility', () => {
-  test('homepage should not have automatically detectable accessibility violations', async ({
-    page,
-  }) => {
-    await page.goto('/');
-
-    const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze();
-
-    expect(accessibilityScanResults.violations).toEqual([]);
-  });
-
-  test('products page should not have accessibility violations', async ({ page }) => {
-    await page.goto('/products');
-
-    const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze();
-
-    expect(accessibilityScanResults.violations).toEqual([]);
-  });
-
-  test('programs page should not have accessibility violations', async ({ page }) => {
-    await page.goto('/programs');
-
-    const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze();
-
-    expect(accessibilityScanResults.violations).toEqual([]);
-  });
-
-  test('contact form should be accessible', async ({ page }) => {
-    await page.goto('/contact');
-
-    const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze();
-
-    expect(accessibilityScanResults.violations).toEqual([]);
-  });
+  // Per-page axe scans live in accessibility-matrix.spec.ts (light and dark,
+  // 1440 and 390 px, with a baseline that may only shrink).
 
   test('navigation should be keyboard accessible', async ({ page }) => {
     await page.goto('/');
