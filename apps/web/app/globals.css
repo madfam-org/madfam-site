@@ -69,10 +69,6 @@
     --color-surface: var(--color-pearl);
     --color-muted: var(--logo-gray-medium);
 
-    /* Typography */
-    --font-poppins: 'Poppins';
-    --font-inter: 'Inter';
-    --font-space-mono: 'Space Mono';
     
     /* === ACCESSIBILITY-FOCUSED SEMANTIC TOKENS === */
     
