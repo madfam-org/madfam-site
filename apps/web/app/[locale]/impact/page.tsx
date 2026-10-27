@@ -98,10 +98,15 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
       <section className="py-16 lg:py-24 bg-gradient-to-br from-brand-green/5 to-brand-purple/5">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
-            <Heading level={1} className="text-4xl lg:text-6xl font-bold text-neutral-900 mb-6">
+            <Heading
+              level={1}
+              className="text-4xl lg:text-6xl font-bold text-neutral-900 mb-6 dark:text-white"
+            >
               {t('hero.title')}
             </Heading>
-            <p className="text-xl text-neutral-600 mb-8 leading-relaxed">{corporateT('purpose')}</p>
+            <p className="text-xl text-neutral-600 mb-8 leading-relaxed dark:text-neutral-400">
+              {corporateT('purpose')}
+            </p>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-green/10 rounded-full text-sm text-brand-green">
               <span className="w-2 h-2 bg-brand-green rounded-full animate-pulse" />
               {t('hero.badge')}
@@ -114,10 +119,10 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
       <section className="py-16">
         <Container>
           <div className="mb-12 text-center">
-            <Heading level={2} className="text-3xl font-bold text-neutral-900 mb-4">
+            <Heading level={2} className="text-3xl font-bold text-neutral-900 mb-4 dark:text-white">
               {t('sdgAlignment.title')}
             </Heading>
-            <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            <p className="text-lg text-neutral-600 max-w-3xl mx-auto dark:text-neutral-400">
               {t('sdgAlignment.description')}
             </p>
           </div>
@@ -127,15 +132,15 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
             {sdgMappings.map(mapping => (
               <div
                 key={mapping.product}
-                className="bg-white rounded-xl border border-neutral-200 p-6 hover:shadow-lg transition-shadow"
+                className="bg-white rounded-xl border border-neutral-200 p-6 hover:shadow-lg transition-shadow dark:bg-gray-900 dark:border-gray-800"
               >
                 <div className="flex items-start gap-4">
                   <div className="text-3xl">{mapping.icon}</div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-neutral-900 mb-2">
+                    <h3 className="text-xl font-semibold text-neutral-900 mb-2 dark:text-white">
                       {mapping.product}
                     </h3>
-                    <p className="text-neutral-600 mb-4">{mapping.summary}</p>
+                    <p className="text-neutral-600 mb-4 dark:text-neutral-400">{mapping.summary}</p>
                     <div className="flex flex-wrap gap-2">
                       {mapping.sdgs.map(sdg => {
                         const sdgNumber = getSDGNumber(sdg);
@@ -167,43 +172,53 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
       </section>
 
       {/* Pillars Section */}
-      <section className="py-16 bg-neutral-50">
+      <section className="py-16 bg-neutral-50 dark:bg-white/5">
         <Container>
           <div className="mb-12 text-center">
-            <Heading level={2} className="text-3xl font-bold text-neutral-900 mb-4">
+            <Heading level={2} className="text-3xl font-bold text-neutral-900 mb-4 dark:text-white">
               {t('pillars.title')}
             </Heading>
-            <p className="text-lg text-neutral-600 max-w-3xl mx-auto">{t('pillars.description')}</p>
+            <p className="text-lg text-neutral-600 max-w-3xl mx-auto dark:text-neutral-400">
+              {t('pillars.description')}
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div className="bg-white p-6 rounded-xl border border-neutral-200">
+            <div className="bg-white p-6 rounded-xl border border-neutral-200 dark:bg-gray-900 dark:border-gray-800">
               <div className="text-3xl mb-3">♾️</div>
               <h3 className="font-semibold text-lg mb-2">
                 {corporateT('pillars.circularity.title')}
               </h3>
-              <p className="text-sm text-neutral-600">{corporateT('pillars.circularity.body')}</p>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                {corporateT('pillars.circularity.body')}
+              </p>
             </div>
-            <div className="bg-white p-6 rounded-xl border border-neutral-200">
+            <div className="bg-white p-6 rounded-xl border border-neutral-200 dark:bg-gray-900 dark:border-gray-800">
               <div className="text-3xl mb-3">📍</div>
               <h3 className="font-semibold text-lg mb-2">
                 {corporateT('pillars.traceability.title')}
               </h3>
-              <p className="text-sm text-neutral-600">{corporateT('pillars.traceability.body')}</p>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                {corporateT('pillars.traceability.body')}
+              </p>
             </div>
-            <div className="bg-white p-6 rounded-xl border border-neutral-200">
+            <div className="bg-white p-6 rounded-xl border border-neutral-200 dark:bg-gray-900 dark:border-gray-800">
               <div className="text-3xl mb-3">🔐</div>
               <h3 className="font-semibold text-lg mb-2">
                 {corporateT('pillars.ethicalData.title')}
               </h3>
-              <p className="text-sm text-neutral-600">{corporateT('pillars.ethicalData.body')}</p>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                {corporateT('pillars.ethicalData.body')}
+              </p>
             </div>
-            <div className="bg-white p-6 rounded-xl border border-neutral-200">
+            <div className="bg-white p-6 rounded-xl border border-neutral-200 dark:bg-gray-900 dark:border-gray-800">
               <div className="text-3xl mb-3">🌎</div>
               <h3 className="font-semibold text-lg mb-2">
                 {corporateT('pillars.latamTalent.title')}
               </h3>
-              <p className="text-sm text-neutral-600">{corporateT('pillars.latamTalent.body')}</p>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                {corporateT('pillars.latamTalent.body')}
+              </p>
             </div>
           </div>
         </Container>

@@ -215,7 +215,10 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.name')} *
           </label>
           <input
@@ -224,7 +227,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
             id="name"
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? 'name-error' : undefined}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
             placeholder={t('placeholders.name')}
           />
           {errors.name && (
@@ -235,7 +238,10 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.email')} *
           </label>
           <input
@@ -244,7 +250,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
             id="email"
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? 'email-error' : undefined}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
             placeholder={t('placeholders.email')}
           />
           {errors.email && (
@@ -257,27 +263,33 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
 
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="company"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.company')}
           </label>
           <input
             {...register('company')}
             type="text"
             id="company"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
             placeholder={t('placeholders.company')}
           />
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.phone')}
           </label>
           <input
             {...register('phone')}
             type="tel"
             id="phone"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
             placeholder={t('placeholders.phone')}
           />
         </div>
@@ -285,7 +297,10 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
 
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="intent" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="intent"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.intent')} *
           </label>
           <select
@@ -293,7 +308,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
             id="intent"
             aria-invalid={!!errors.intent}
             aria-describedby={errors.intent ? 'intent-error' : undefined}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
           >
             {INTENTS.map(intent => (
               <option key={intent} value={intent}>
@@ -309,7 +324,10 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
         </div>
 
         <div>
-          <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="timeline"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.timeline')} *
           </label>
           <select
@@ -317,7 +335,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
             id="timeline"
             aria-invalid={!!errors.timeline}
             aria-describedby={errors.timeline ? 'timeline-error' : undefined}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
           >
             <option value="">{t('options.select')}</option>
             {TIMELINES.map(timeline => (
@@ -336,13 +354,16 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
 
       <div className="grid md:grid-cols-3 gap-6">
         <div>
-          <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="budget"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.budget')}
           </label>
           <select
             {...register('budget')}
             id="budget"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
           >
             <option value="">{t('options.select')}</option>
             {BUDGETS.map(budget => (
@@ -354,7 +375,10 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
         </div>
 
         <div>
-          <label htmlFor="region" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="region"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.region')} *
           </label>
           <input
@@ -363,7 +387,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
             id="region"
             aria-invalid={!!errors.region}
             aria-describedby={errors.region ? 'region-error' : undefined}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
             placeholder={t('placeholders.region')}
           />
           {errors.region && (
@@ -374,7 +398,10 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
         </div>
 
         <div>
-          <label htmlFor="followUp" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="followUp"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t('fields.followUp')} *
           </label>
           <select
@@ -382,7 +409,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
             id="followUp"
             aria-invalid={!!errors.followUp}
             aria-describedby={errors.followUp ? 'followUp-error' : undefined}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
           >
             {FOLLOW_UP.map(channel => (
               <option key={channel} value={channel}>
@@ -399,7 +426,10 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+        <label
+          htmlFor="message"
+          className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+        >
           {t('fields.message')} *
         </label>
         <textarea
@@ -408,7 +438,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
           rows={5}
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? 'message-error' : undefined}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lavender focus:border-transparent bg-white dark:border-gray-700 dark:bg-gray-900 dark:text-pearl"
           placeholder={t('placeholders.message')}
         />
         {errors.message && (
@@ -435,7 +465,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
       )}
 
       <div className="flex items-center justify-between gap-4">
-        <p className="text-sm text-gray-500">* {t('requiredFields')}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">* {t('requiredFields')}</p>
         <Button
           type="submit"
           variant="primary"
