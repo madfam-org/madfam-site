@@ -1,31 +1,14 @@
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
-import { Inter, Poppins, Space_Mono } from 'next/font/google';
 import { DarkModeScript } from './dark-mode-script';
 import { BrandThemeProvider } from '@/components/ui';
 import { PLAUSIBLE_HOST } from '@/lib/plausible';
 import { LOCALE_HEADER, SEO_DEFAULT_LOCALE, SEO_LOCALES, type SeoLocale } from '@/lib/seo-urls';
 import './globals.css';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-poppins',
-  display: 'swap',
-});
-
-const spaceMono = Space_Mono({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-space-mono',
-  display: 'swap',
-});
+// No web fonts are loaded. Inter, Poppins and Space Mono were preloaded on
+// every page (8 files) while every element rendered in the system stack, because
+// nothing applied them. The brand typeface is chosen with the visual direction.
 
 export const metadata: Metadata = {
   icons: {
@@ -54,11 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const plausibleHost = PLAUSIBLE_HOST;
 
   return (
-    <html
-      lang={lang}
-      suppressHydrationWarning
-      className={`${inter.variable} ${poppins.variable} ${spaceMono.variable}`}
-    >
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <DarkModeScript nonce={nonce} />
         {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
