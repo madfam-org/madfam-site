@@ -62,7 +62,7 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
               <p className="text-gray-700 dark:text-gray-300 mb-6">{t('positions.empty')}</p>
               <Link
                 href={`/${locale}/contact`}
-                className="inline-flex items-center px-6 py-3 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors font-medium"
+                className="inline-flex items-center px-6 py-3 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors font-medium dark:bg-pearl dark:text-obsidian dark:hover:bg-white"
               >
                 {t('positions.cta')}
               </Link>

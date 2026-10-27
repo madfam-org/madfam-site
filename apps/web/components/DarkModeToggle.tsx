@@ -23,14 +23,11 @@ export function DarkModeToggle() {
   useEffect(() => {
     if (darkMode === null) return;
 
-    // Update document class and localStorage
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    // Apply the theme. `.light` is what lets an explicit light choice beat a
+    // dark OS preference (see the `dark` variant in globals.css).
+    const classes = document.documentElement.classList;
+    classes.toggle('dark', darkMode);
+    classes.toggle('light', !darkMode);
   }, [darkMode]);
 
   // Listen for system theme changes
@@ -49,7 +46,11 @@ export function DarkModeToggle() {
   }, []);
 
   const toggleDarkMode = () => {
-    setDarkMode(prev => !prev);
+    // Persist only an explicit choice, so visitors who never touch the toggle
+    // keep following their OS setting.
+    const next = !darkMode;
+    localStorage.setItem('theme', next ? 'dark' : 'light');
+    setDarkMode(next);
   };
 
   // Don't render until we know the theme to avoid flashing

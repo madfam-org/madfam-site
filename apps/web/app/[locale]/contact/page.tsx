@@ -28,7 +28,9 @@ export default async function ContactPage({
               {t('contact.hero.titlePrefix')}{' '}
               <span className="gradient-text">{t('contact.hero.titleHighlight')}</span>
             </Heading>
-            <p className="text-xl text-obsidian/70">{t('contact.hero.subtitle')}</p>
+            <p className="text-xl text-obsidian/70 dark:text-pearl/70">
+              {t('contact.hero.subtitle')}
+            </p>
           </div>
         </Container>
       </section>
@@ -74,8 +76,10 @@ export default async function ContactPage({
                     </div>
                     <div>
                       <p className="font-medium">{t('contact.alternativeContact.location')}</p>
-                      <p className="text-obsidian/70">{t('contact.alternativeContact.city')}</p>
-                      <p className="text-sm text-obsidian/60">
+                      <p className="text-obsidian/70 dark:text-pearl/70">
+                        {t('contact.alternativeContact.city')}
+                      </p>
+                      <p className="text-sm text-obsidian/60 dark:text-pearl/60">
                         {t('contact.alternativeContact.remoteService')}
                       </p>
                     </div>
@@ -85,7 +89,7 @@ export default async function ContactPage({
 
               <div className="bg-gradient-to-br from-lavender/10 to-sun/10 rounded-xl p-6">
                 <h3 className="font-heading text-lg mb-2">{t('contact.immediateHelp.title')}</h3>
-                <p className="text-sm text-obsidian/70 mb-4">
+                <p className="text-sm text-obsidian/70 mb-4 dark:text-pearl/70">
                   {t('contact.immediateHelp.subtitle')}
                 </p>
                 <a

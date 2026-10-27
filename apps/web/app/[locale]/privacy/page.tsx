@@ -17,10 +17,12 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
             <Heading level={1} className="mb-6">
               {t('privacy.title')}
             </Heading>
-            <p className="text-lg text-obsidian/70">
+            <p className="text-lg text-obsidian/70 dark:text-pearl/70">
               {t('privacy.lastUpdated', { date: t('privacy.lastUpdatedDate') })}
             </p>
-            <p className="mt-2 text-sm text-obsidian/60">{t('privacy.reviewNote')}</p>
+            <p className="mt-2 text-sm text-obsidian/60 dark:text-pearl/60">
+              {t('privacy.reviewNote')}
+            </p>
           </div>
         </Container>
       </section>

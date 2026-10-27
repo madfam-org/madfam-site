@@ -50,10 +50,12 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
-        <p className="text-neutral-600 text-sm leading-relaxed mb-4">{product.description}</p>
+        <p className="text-neutral-600 text-sm leading-relaxed mb-4 dark:text-neutral-400">
+          {product.description}
+        </p>
 
-        <div className="bg-neutral-50 rounded-lg p-3">
-          <p className="text-neutral-700 text-sm">
+        <div className="bg-neutral-50 rounded-lg p-3 dark:bg-white/5">
+          <p className="text-neutral-700 text-sm dark:text-neutral-300">
             <span className="font-medium">{t('corporate.products.idealFor')}</span>{' '}
             {product.audience}
           </p>
@@ -62,12 +64,15 @@ export function ProductCard({ product }: ProductCardProps) {
 
       {/* Features */}
       <div className="mb-6">
-        <h4 className="font-semibold text-neutral-900 text-sm mb-3">
+        <h4 className="font-semibold text-neutral-900 text-sm mb-3 dark:text-white">
           {t('corporate.products.mainFeatures')}
         </h4>
         <ul className="space-y-2">
           {product.features.map((feature, index) => (
-            <li key={index} className="text-neutral-600 text-sm flex items-start gap-2">
+            <li
+              key={index}
+              className="text-neutral-600 text-sm flex items-start gap-2 dark:text-neutral-400"
+            >
               <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
               {feature}
             </li>
@@ -82,7 +87,7 @@ export function ProductCard({ product }: ProductCardProps) {
             href={siteLink(product.primaryCta.url, 'cta').href}
             target="_blank"
             rel={siteLink(product.primaryCta.url, 'cta').rel}
-            className="flex-1 px-4 py-2 bg-neutral-900 text-white rounded-lg text-center text-sm font-medium hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2"
+            className="flex-1 px-4 py-2 bg-neutral-900 text-white rounded-lg text-center text-sm font-medium hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2 dark:bg-pearl dark:text-obsidian dark:hover:bg-white"
           >
             {product.primaryCta.label}
             <ArrowUpRightIcon className="w-4 h-4" />
@@ -90,7 +95,7 @@ export function ProductCard({ product }: ProductCardProps) {
         ) : (
           <Link
             href={product.primaryCta.url}
-            className="flex-1 px-4 py-2 bg-neutral-900 text-white rounded-lg text-center text-sm font-medium hover:bg-neutral-800 transition-colors"
+            className="flex-1 px-4 py-2 bg-neutral-900 text-white rounded-lg text-center text-sm font-medium hover:bg-neutral-800 transition-colors dark:bg-pearl dark:text-obsidian dark:hover:bg-white"
           >
             {product.primaryCta.label}
           </Link>
@@ -98,7 +103,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <Link
           href={product.secondaryCta.url}
-          className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg text-sm font-medium hover:bg-neutral-50 transition-colors"
+          className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg text-sm font-medium hover:bg-neutral-50 transition-colors dark:border-gray-700 dark:text-neutral-300 dark:hover:bg-white/5"
         >
           {product.secondaryCta.label}
         </Link>

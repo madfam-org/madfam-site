@@ -102,7 +102,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <Heading level={3} className="mb-4">
                 {t('mission.title')}
               </Heading>
-              <p className="text-lg text-obsidian/70">{corporateT('mission')}</p>
+              <p className="text-lg text-obsidian/70 dark:text-pearl/70">{corporateT('mission')}</p>
             </div>
             <div className="text-center md:text-left">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sun/10 mb-6">
@@ -111,31 +111,33 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <Heading level={3} className="mb-4">
                 {t('vision.title')}
               </Heading>
-              <p className="text-lg text-obsidian/70">{corporateT('vision')}</p>
+              <p className="text-lg text-obsidian/70 dark:text-pearl/70">{corporateT('vision')}</p>
             </div>
           </div>
         </Container>
       </section>
 
       {/* Pillars */}
-      <section className="section bg-pearl">
+      <section className="section bg-pearl dark:bg-white/5">
         <Container>
           <div className="text-center mb-12">
             <Heading level={2} className="mb-4">
               {t('values.title')}
             </Heading>
-            <p className="text-lg text-obsidian/70 max-w-3xl mx-auto">{t('values.subtitle')}</p>
+            <p className="text-lg text-obsidian/70 max-w-3xl mx-auto dark:text-pearl/70">
+              {t('values.subtitle')}
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {pillars.map(pillar => (
               <div
                 key={pillar.key}
-                className="text-center p-6 rounded-2xl bg-white shadow-sm hover:shadow-lg transition-shadow"
+                className="text-center p-6 rounded-2xl bg-white shadow-sm hover:shadow-lg transition-shadow dark:bg-gray-900"
               >
                 <div className="text-5xl mb-4">{pillar.icon}</div>
                 <h3 className="font-heading text-lg font-semibold mb-3">{pillar.title}</h3>
-                <p className="text-obsidian/70">{pillar.description}</p>
+                <p className="text-obsidian/70 dark:text-pearl/70">{pillar.description}</p>
               </div>
             ))}
           </div>
@@ -149,7 +151,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <Heading level={2} className="mb-4">
               {t('team.title')}
             </Heading>
-            <p className="text-lg text-obsidian/70 mb-8">{t('team.subtitle')}</p>
+            <p className="text-lg text-obsidian/70 mb-8 dark:text-pearl/70">{t('team.subtitle')}</p>
             <Link href={getLocalizedUrl('careers', currentLocale)}>
               <Button variant="outline" size="lg">
                 {t('cta.joinTeam')}
