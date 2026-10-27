@@ -56,7 +56,9 @@ export function EcosystemFlowDiagram({
         if (!platform) return null;
 
         const isHighlighted = highlightSlug === step.slug;
-        const isMuted = highlightSlug !== null && !isHighlighted;
+        // Mute the other steps only when one is highlighted. `!== null` alone was true
+        // for `undefined`, so the home page rendered every step muted.
+        const isMuted = highlightSlug !== undefined && highlightSlug !== null && !isHighlighted;
         const stepLabel = t(step.stepKey);
 
         // Determine styling based on highlight state

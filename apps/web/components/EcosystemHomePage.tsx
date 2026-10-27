@@ -40,7 +40,8 @@ export function EcosystemHomePage() {
   const layerGridRef = useRef<HTMLElement>(null);
 
   function scrollToLayerGrid() {
-    layerGridRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    layerGridRef.current?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
   }
 
   return (
