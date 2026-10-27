@@ -50,6 +50,8 @@ type LeadFormData = z.infer<ReturnType<typeof createLeadFormSchema>>;
 interface LeadFormProps {
   source?: string;
   initialIntent?: string;
+  /** Catalog slug of the product the visitor came from, if any. */
+  product?: string;
   onSuccess?: () => void;
 }
 
@@ -57,7 +59,7 @@ function normalizeIntent(intent?: string): string {
   return INTENTS.includes(intent as (typeof INTENTS)[number]) && intent ? intent : 'platform';
 }
 
-export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadFormProps) {
+export function LeadForm({ source = 'website', initialIntent, product, onSuccess }: LeadFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const t = useTranslations('leadForm');
@@ -94,6 +96,7 @@ export function LeadForm({ source = 'website', initialIntent, onSuccess }: LeadF
     const metadata = {
       intent: data.intent,
       offerPath: data.intent,
+      ...(product ? { product } : {}),
       timeline: data.timeline,
       budget: data.budget || undefined,
       region: data.region,
