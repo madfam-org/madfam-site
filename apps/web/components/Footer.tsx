@@ -136,12 +136,14 @@ export function Footer() {
             )}
           </div>
 
-          <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-white/10">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-4">
                 <span className="font-heading text-2xl font-bold">MADFAM</span>
-                <span className="text-white/50">•</span>
-                <p className="text-white/70">{t('footer.tagline')}</p>
+                <span className="text-gray-500 dark:text-white/50" aria-hidden="true">
+                  •
+                </span>
+                <p className="text-gray-600 dark:text-white/70">{t('footer.tagline')}</p>
               </div>
 
               <div className="flex items-center gap-6">
@@ -151,7 +153,7 @@ export function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/70 hover:text-white transition-colors"
+                    className="text-gray-600 hover:text-gray-900 dark:text-white/70 dark:hover:text-white transition-colors"
                     aria-label={item.name}
                   >
                     {item.icon === 'in' && (
@@ -189,24 +191,27 @@ export function Footer() {
               </div>
             </div>
 
-            <div className="mt-8 pt-8 border-t border-white/10">
-              <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
+            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-white/10">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600 dark:text-white/60">
                 <p>
                   © {currentYear} {t('legal.entity.line')}. {t('common.footer.rights')}
                 </p>
                 <div className="flex gap-6">
                   <Link
                     href={`/${locale}/privacy`}
-                    className="hover:text-white/70 transition-colors"
+                    className="hover:text-gray-900 dark:hover:text-white transition-colors"
                   >
                     {t('common.footer.privacy')}
                   </Link>
-                  <Link href={`/${locale}/terms`} className="hover:text-white/70 transition-colors">
+                  <Link
+                    href={`/${locale}/terms`}
+                    className="hover:text-gray-900 dark:hover:text-white transition-colors"
+                  >
                     {t('common.footer.terms')}
                   </Link>
                   <Link
                     href={`/${locale}/cookies`}
-                    className="hover:text-white/70 transition-colors"
+                    className="hover:text-gray-900 dark:hover:text-white transition-colors"
                   >
                     {t('footer.cookies')}
                   </Link>
