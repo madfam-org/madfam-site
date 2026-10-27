@@ -7,6 +7,7 @@ import { Badge } from '@/components/corporate/Badge';
 import { ProductCard } from '@/components/corporate/ProductCard';
 import { PLATFORMS, LAYERS, isComingSoon, primaryCtaLabelKey } from '@/lib/data/platforms';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
+import { contactHref } from '@/lib/contact-link';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -63,7 +64,10 @@ export default async function ProductsPage({ params }: Props) {
   // Derive products from platform registry (single source of truth)
   const products = PLATFORMS.map(p => {
     const key = slugToKey(p.slug);
-    const detailHref = p.hasDetailPage ? `/${locale}/platforms/${p.slug}` : (p.externalUrl ?? '#');
+    const productContact = contactHref(locale as Locale, { intent: 'platform', product: p.slug });
+    const detailHref = p.hasDetailPage
+      ? `/${locale}/platforms/${p.slug}`
+      : (p.externalUrl ?? productContact);
     return {
       name: p.name,
       description: platformsT(`${key}.valueProp`),
@@ -76,13 +80,13 @@ export default async function ProductsPage({ params }: Props) {
       comingSoon: isComingSoon(p),
       primaryCta: {
         label: platformsT(primaryCtaLabelKey(p)),
-        url: isComingSoon(p) ? '#' : (p.externalUrl ?? detailHref),
+        url: isComingSoon(p) ? productContact : (p.externalUrl ?? detailHref),
         external: !isComingSoon(p) && !!p.externalUrl,
         comingSoon: isComingSoon(p),
       },
       secondaryCta: {
         label: commonT('nav.contact'),
-        url: detailHref,
+        url: productContact,
       },
       features: Array.from({ length: Math.min(p.featureCount, 3) }, (_, i) =>
         platformsT(`${key}.features.${i}`)

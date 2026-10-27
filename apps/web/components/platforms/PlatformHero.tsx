@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { getLocalizedUrl, type Locale } from '@madfam-site/i18n';
+import { type Locale } from '@madfam-site/i18n';
 import { lifecycleLabelKey, primaryCtaLabelKey, type Platform } from '@/lib/data/platforms';
 import { Badge } from '@/components/corporate/Badge';
 import { Newsletter } from '@/components/ui/Newsletter';
 import { cn } from '@/components/ui/utils';
 import { siteLink } from '@/lib/ecosystem-links';
+import { contactHref } from '@/lib/contact-link';
 
 interface PlatformHeroProps {
   platform: Platform;
@@ -42,11 +43,13 @@ function StatusBadge({ status, label }: { status: string; label: string }) {
 function CTAButton({
   cta,
   locale,
+  product,
   t,
   variant,
 }: {
   cta: Platform['primaryCTA'];
   locale: string;
+  product: string;
   t: ReturnType<typeof useTranslations>;
   variant: 'primary' | 'secondary';
 }) {
@@ -73,7 +76,9 @@ function CTAButton({
   }
 
   const href =
-    cta.type === 'external' && cta.url ? cta.url : getLocalizedUrl('contact', locale as Locale);
+    cta.type === 'external' && cta.url
+      ? cta.url
+      : contactHref(locale as Locale, { intent: 'platform', product });
 
   const isExternal = cta.type === 'external' && cta.url;
   const outbound = isExternal ? siteLink(href, 'cta') : undefined;
@@ -188,10 +193,17 @@ export function PlatformHero({ platform, i18nKey, locale }: PlatformHeroProps) {
           <CTAButton
             cta={{ ...platform.primaryCTA, labelKey: primaryCtaLabelKey(platform) }}
             locale={locale}
+            product={platform.slug}
             t={t}
             variant="primary"
           />
-          <CTAButton cta={platform.secondaryCTA} locale={locale} t={t} variant="secondary" />
+          <CTAButton
+            cta={platform.secondaryCTA}
+            locale={locale}
+            product={platform.slug}
+            t={t}
+            variant="secondary"
+          />
         </div>
       </div>
     </section>

@@ -7,6 +7,7 @@ import { primaryCtaLabelKey, type Platform } from '@/lib/data/platforms';
 import { Newsletter } from '@/components/ui/Newsletter';
 import { cn } from '@/components/ui/utils';
 import { siteLink } from '@/lib/ecosystem-links';
+import { contactHref } from '@/lib/contact-link';
 
 interface PlatformCTAProps {
   platform: Platform;
@@ -127,7 +128,10 @@ export function PlatformCTA({ platform, i18nKey, locale, comingSoon }: PlatformC
                 </Link>
               ) : (
                 <Link
-                  href={getLocalizedUrl('contact', locale as Locale)}
+                  href={contactHref(locale as Locale, {
+                    intent: 'platform',
+                    product: platform.slug,
+                  })}
                   className={cn(
                     'inline-flex items-center justify-center rounded-lg font-medium',
                     'bg-white text-obsidian hover:bg-gray-100 min-h-[48px] px-8 py-3 text-base',

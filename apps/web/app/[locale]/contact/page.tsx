@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card, CardContent } from '@/components/ui';
 import { LeadForm } from '@/components/LeadForm';
+import { catalogProductSlug } from '@/lib/contact-link';
 import { KALYA_DISCOVERY_CALL_URL } from '@/lib/data/value-ladder';
 import { siteLink } from '@/lib/ecosystem-links';
 
@@ -12,10 +13,10 @@ export default async function ContactPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ intent?: string }>;
+  searchParams: Promise<{ intent?: string; product?: string }>;
 }) {
   await params; // Validate params exist
-  const { intent } = await searchParams;
+  const { intent, product } = await searchParams;
   const t = await getTranslations();
 
   return (
@@ -44,7 +45,11 @@ export default async function ContactPage({
               <Card variant="elevated">
                 <CardContent className="p-8">
                   <h2 className="font-heading text-2xl mb-6">{t('contact.form.title')}</h2>
-                  <LeadForm source="contact-page" initialIntent={intent} />
+                  <LeadForm
+                    source="contact-page"
+                    initialIntent={intent}
+                    product={catalogProductSlug(product)}
+                  />
                 </CardContent>
               </Card>
             </div>
@@ -64,8 +69,8 @@ export default async function ContactPage({
                     </div>
                     <div>
                       <p className="font-medium">{t('common.metadata.email')}</p>
-                      <a href="mailto:hello@madfam.io" className="text-lavender hover:underline">
-                        hello@madfam.io
+                      <a href="mailto:hola@madfam.io" className="text-lavender hover:underline">
+                        hola@madfam.io
                       </a>
                     </div>
                   </div>

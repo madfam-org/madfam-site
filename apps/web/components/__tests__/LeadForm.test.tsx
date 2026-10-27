@@ -218,6 +218,22 @@ describe('LeadForm Component', () => {
     }
   });
 
+  it('records the product the visitor came from in the lead metadata', async () => {
+    mockFetch.mockResolvedValueOnce({
+      json: () => Promise.resolve({ success: true, leadId: 'lead-product' }),
+    });
+
+    render(<LeadForm initialIntent="platform" product="karafiel" />);
+    await fillRequiredFields();
+    await user.click(screen.getByRole('button', { name: /enviar solicitud/i }));
+
+    await waitFor(() => {
+      expect(mockFetch).toHaveBeenCalled();
+    });
+    const body = JSON.parse(mockFetch.mock.calls[0][1].body as string);
+    expect(body.metadata).toMatchObject({ intent: 'platform', product: 'karafiel' });
+  });
+
   it('should show loading state while submitting', async () => {
     // Make the fetch call take some time
     mockFetch.mockImplementation(
