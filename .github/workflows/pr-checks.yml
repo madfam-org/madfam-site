@@ -232,8 +232,10 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true
 
+      # Still runs (and reports) when the blocking accessibility step failed.
       - name: Run e2e smoke
         id: e2e
+        if: success() || failure()
         run: |
           cd apps/web
           pnpm exec playwright test --grep-invert @accessibility --project=chromium
@@ -283,7 +285,8 @@ jobs:
           PR_VALIDATION: ${{ needs.pr-validation.result }}
           WEB_CHANGED: ${{ needs.changed-files.outputs.web }}
           BUNDLE: ${{ needs.size-limit.result }}
-          LIGHTHOUSE: ${{ needs.lighthouse.outputs.outcome || needs.lighthouse.result }}
+          # Job result: covers both the desktop and the 390 px Lighthouse runs.
+          LIGHTHOUSE: ${{ needs.lighthouse.result }}
           A11Y: ${{ needs.accessibility.outputs.a11y || needs.accessibility.result }}
           E2E: ${{ needs.accessibility.outputs.e2e || needs.accessibility.result }}
         with:
@@ -296,12 +299,10 @@ jobs:
             const blocking = [
               ['PR title', env.PR_VALIDATION],
               ['Bundle size budgets', env.BUNDLE],
+              ['Lighthouse CI (desktop + 390 px)', env.LIGHTHOUSE],
+              ['Accessibility (axe matrix, light/dark, 1440/390 px)', env.A11Y],
             ];
-            const advisory = [
-              ['Lighthouse CI', env.LIGHTHOUSE],
-              ['Accessibility (axe)', env.A11Y],
-              ['E2E smoke (standalone server)', env.E2E],
-            ];
+            const advisory = [['E2E smoke (standalone server)', env.E2E]];
             const blockingFailed = blocking.some(([, r]) => r === 'failure' || r === 'cancelled');
             const advisoryFailed = advisory.some(([, r]) => r === 'failure');
             const headline = blockingFailed
