@@ -257,14 +257,27 @@ export function getSelfServeNames(): string[] {
     .map(p => p.name);
 }
 
+/** Licences the Open Source Initiative approves, as the registry spells them. */
+const OSI_LICENSES = new Set([
+  'AGPL-3.0',
+  'GPL-3.0',
+  'LGPL-3.0',
+  'MPL-2.0',
+  'Apache-2.0',
+  'MIT',
+  'BSD-2-Clause',
+  'BSD-3-Clause',
+]);
+
 /**
- * Licence facts for copy that talks about "our code": how many catalog
- * products the registry lists as AGPL-3.0, out of how many (finding C-010:
- * the site used to claim every product was "MIT or AGPL").
+ * The openness line (ruling R57 b): how many catalog platforms publish their
+ * code, meaning an OSI-approved licence AND a public repository in the
+ * registry, out of how many. Counting the AGPL licence alone overstated it,
+ * because several AGPL products keep their repository private.
  */
-export function getLicenseSummary(): { agpl: number; total: number } {
+export function getOpenSourceSummary(): { open: number; total: number } {
   return {
-    agpl: PLATFORMS.filter(p => p.license === 'AGPL-3.0').length,
+    open: PLATFORMS.filter(p => OSI_LICENSES.has(p.license) && Boolean(p.githubUrl)).length,
     total: PLATFORMS.length,
   };
 }

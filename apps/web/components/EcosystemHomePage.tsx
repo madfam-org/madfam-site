@@ -10,7 +10,7 @@ import { EcosystemLayerGrid } from '@/components/ecosystem/EcosystemLayerGrid';
 import { EcosystemFlowDiagram } from '@/components/ecosystem/EcosystemFlowDiagram';
 import { PersonaCards } from '@/components/ecosystem/PersonaCards';
 import { OfferPathRouter } from '@/components/ecosystem/OfferPathRouter';
-import { getLicenseSummary, getSelfServeNames } from '@/lib/data/platforms';
+import { getOpenSourceSummary, getSelfServeNames } from '@/lib/data/platforms';
 import { KALYA_DISCOVERY_CALL_URL } from '@/lib/data/value-ladder';
 import { siteLink } from '@/lib/ecosystem-links';
 
@@ -36,7 +36,7 @@ export function EcosystemHomePage() {
   // Registry-derived facts for copy (C-010): which products are self-serve,
   // and how many catalog products are AGPL-3.0. Never hand-typed.
   const selfServeProducts = getSelfServeNames().join(', ');
-  const licenseSummary = getLicenseSummary();
+  const openSourceSummary = getOpenSourceSummary();
   const layerGridRef = useRef<HTMLElement>(null);
 
   function scrollToLayerGrid() {
@@ -266,7 +266,7 @@ export function EcosystemHomePage() {
                   {tWhy(`${key}.title`)}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {tWhy(`${key}.description`, licenseSummary)}
+                  {tWhy(`${key}.description`, openSourceSummary)}
                 </p>
               </div>
             ))}
