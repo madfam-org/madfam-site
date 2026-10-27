@@ -11,6 +11,7 @@ import { Navbar } from '@/components/Navbar';
 import { OrganizationStructuredData } from '@/components/StructuredData';
 import { locales, getMessages, type Locale } from '@/i18n.config';
 import { PATHNAME_HEADER, localizedAlternates, pathWithoutLocale } from '@/lib/seo';
+import { MotionPreferences } from '@/components/MotionPreferences';
 
 export function generateStaticParams() {
   return locales.map(locale => ({ locale }));
@@ -53,21 +54,23 @@ export default async function LocaleLayout({
   return (
     <LoggerProvider>
       <NextIntlClientProvider messages={messages} locale={locale}>
-        <OrganizationStructuredData />
-        <GlobalAnalytics />
-        <AttributionCapture />
+        <MotionPreferences>
+          <OrganizationStructuredData />
+          <GlobalAnalytics />
+          <AttributionCapture />
 
-        {/* Skip Navigation Link for Accessibility */}
-        <a href="#main-content" className="skip-link sr-only-focusable">
-          Skip to main content
-        </a>
+          {/* Skip Navigation Link for Accessibility */}
+          <a href="#main-content" className="skip-link sr-only-focusable">
+            Skip to main content
+          </a>
 
-        <Navbar />
-        <main id="main-content" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
-        <CookieConsent />
+          <Navbar />
+          <main id="main-content" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer />
+          <CookieConsent />
+        </MotionPreferences>
       </NextIntlClientProvider>
     </LoggerProvider>
   );
