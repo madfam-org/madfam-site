@@ -186,9 +186,10 @@ export function Navbar() {
     <nav
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled
-          ? 'bg-white/95 dark:bg-obsidian/95 backdrop-blur-lg shadow-sm'
-          : 'bg-transparent',
+        // Solid from the first pixel: over full-bleed heroes a transparent bar
+        // left theme-coloured text on a surface of the opposite tone.
+        'bg-white/95 dark:bg-obsidian/95 backdrop-blur-lg border-b border-gray-200/80 dark:border-white/10',
+        isScrolled && 'shadow-sm',
         isHidden && 'transform -translate-y-full'
       )}
       style={{
@@ -321,7 +322,7 @@ export function Navbar() {
                       className={cn(
                         'relative py-2 text-base font-semibold transition-all duration-300',
                         item.highlight
-                          ? 'text-leaf dark:text-sun'
+                          ? 'text-[var(--logo-green)] dark:text-sun'
                           : 'text-obsidian/90 dark:text-pearl/90 hover:text-obsidian dark:hover:text-pearl'
                       )}
                     >
@@ -354,7 +355,7 @@ export function Navbar() {
                 </Link>
                 <Link
                   href={getLocalizedUrl('ecosystem', locale)}
-                  className="relative px-5 py-2.5 rounded-lg font-semibold text-sm overflow-hidden group bg-gradient-to-r from-leaf to-sun text-white hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                  className="relative px-5 py-2.5 rounded-lg font-semibold text-sm overflow-hidden group bg-gradient-to-r from-leaf to-sun text-obsidian hover:shadow-lg transition-all duration-300 transform hover:scale-105"
                 >
                   <span className="relative z-10">
                     {t('joinEcosystem') || 'Join the Ecosystem'}
@@ -369,7 +370,8 @@ export function Navbar() {
           <button
             className="xl:hidden relative w-12 h-12 flex items-center justify-center rounded-xl hover:bg-obsidian/5 dark:hover:bg-pearl/5 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? t('closeMenu') : t('openMenu')}
+            aria-expanded={mobileMenuOpen}
           >
             <div className="w-6 h-5 relative flex flex-col justify-between">
               <span
@@ -462,7 +464,7 @@ export function Navbar() {
                 </Link>
                 <Link
                   href={getLocalizedUrl('ecosystem', locale)}
-                  className="block w-full px-4 py-3 bg-gradient-to-r from-leaf to-sun text-white rounded-lg text-center font-medium"
+                  className="block w-full px-4 py-3 bg-gradient-to-r from-leaf to-sun text-obsidian rounded-lg text-center font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {t('joinEcosystem') || 'Join the Ecosystem'}

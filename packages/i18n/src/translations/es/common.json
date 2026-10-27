@@ -1,5 +1,7 @@
 {
   "nav": {
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
     "home": "Inicio",
     "services": "Servicios",
     "products": "Productos",
