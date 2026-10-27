@@ -1,11 +1,10 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cookie, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui';
 
 /**
  * Cookie notice. It states what the site actually does and asks for nothing.
@@ -67,79 +66,54 @@ export function CookieConsent() {
     <AnimatePresence>
       {showBanner && (
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="fixed bottom-0 left-0 right-0 sm:bottom-8 sm:left-8 sm:right-8 z-50"
+          exit={{ y: 40, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-x-0 bottom-0 z-50 sm:inset-x-4 sm:bottom-4"
           role="region"
           aria-label={t('banner.title')}
         >
-          <div className="bg-white dark:bg-gray-900 rounded-t-2xl sm:rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800">
-            <div className="p-6 sm:p-8">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <Cookie className="w-8 h-8 text-sun" aria-hidden="true" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-heading font-semibold mb-2">{t('banner.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    {t('banner.description')}
-                  </p>
-                  <ul className="text-sm text-gray-600 dark:text-gray-400 mb-6 space-y-1">
-                    <li>
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {t('banner.necessary.title')}
-                      </span>{' '}
-                      — {t('banner.necessary.description')}
-                    </li>
-                    <li>
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {t('banner.preference.title')}
-                      </span>{' '}
-                      — {t('banner.preference.description')}
-                    </li>
-                  </ul>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={dismiss}
-                    className="w-full sm:w-auto"
+          {/* One compact bar: the notice asks for nothing, so it should not
+              cover the page. The full breakdown lives on the cookie policy. */}
+          <div className="mx-auto flex max-w-7xl flex-col gap-2 border-t border-gray-200 bg-white px-4 py-3 shadow-lg dark:border-gray-800 dark:bg-gray-900 sm:flex-row sm:items-center sm:gap-4 sm:rounded-xl sm:border">
+            <p className="flex-1 text-sm leading-snug text-gray-700 dark:text-gray-300">
+              {t('banner.description')}{' '}
+              {t.rich('footer.text', {
+                cookies: chunks => (
+                  <Link
+                    href={`/${locale}/cookies`}
+                    className="underline underline-offset-2 hover:text-gray-900 dark:hover:text-white"
                   >
-                    {t('banner.dismiss')}
-                  </Button>
-                </div>
-                <button
-                  onClick={dismiss}
-                  className="flex-shrink-0 p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-                  aria-label={t('banner.closeAriaLabel')}
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            <div className="px-6 py-3 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-800">
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {t.rich('footer.text', {
-                  cookies: chunks => (
-                    <Link
-                      href={`/${locale}/cookies`}
-                      className="underline hover:text-gray-700 dark:hover:text-gray-300"
-                    >
-                      {chunks}
-                    </Link>
-                  ),
-                  privacy: chunks => (
-                    <Link
-                      href={`/${locale}/privacy`}
-                      className="underline hover:text-gray-700 dark:hover:text-gray-300"
-                    >
-                      {chunks}
-                    </Link>
-                  ),
-                })}
-              </p>
+                    {chunks}
+                  </Link>
+                ),
+                privacy: chunks => (
+                  <Link
+                    href={`/${locale}/privacy`}
+                    className="underline underline-offset-2 hover:text-gray-900 dark:hover:text-white"
+                  >
+                    {chunks}
+                  </Link>
+                ),
+              })}
+            </p>
+            <div className="flex items-center gap-2 self-end sm:self-auto">
+              <button
+                type="button"
+                onClick={dismiss}
+                className="min-h-[44px] rounded-lg bg-obsidian px-4 text-sm font-medium text-pearl hover:bg-obsidian/90 dark:bg-pearl dark:text-obsidian dark:hover:bg-white"
+              >
+                {t('banner.dismiss')}
+              </button>
+              <button
+                type="button"
+                onClick={dismiss}
+                className="flex h-11 w-11 items-center justify-center rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+                aria-label={t('banner.closeAriaLabel')}
+              >
+                <X className="h-5 w-5" aria-hidden="true" />
+              </button>
             </div>
           </div>
         </motion.div>
