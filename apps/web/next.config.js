@@ -255,6 +255,15 @@ const nextConfig = {
         source: '/:path*',
         headers: SECURITY_HEADERS,
       },
+      // Teammate vCards (public/c/*.vcf, lib/team-cards.ts): an explicit
+      // vCard type so a phone offers "add contact" instead of a download.
+      {
+        source: '/c/:file([a-z0-9-]+\\.vcf)',
+        headers: [
+          { key: 'Content-Type', value: 'text/vcard; charset=utf-8' },
+          { key: 'Content-Disposition', value: 'inline' },
+        ],
+      },
       // API Routes specific headers
       {
         source: '/api/:path*',
