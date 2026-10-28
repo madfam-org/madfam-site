@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { localizedAlternates } from '@/lib/seo';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 import { TEAM_CARDS, bookingUrl, cardCopy, findTeamCard } from '@/lib/team-cards';
 
 export const dynamicParams = false;
@@ -23,7 +24,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: localizedAlternates(locale, `/c/${card.slug}`),
-    openGraph: { title, description, type: 'profile' },
+    openGraph: { title, description, type: 'profile', images: [DEFAULT_OG_IMAGE] },
     // A person's card is reached by QR, not by search.
     robots: { index: false, follow: true },
   };
