@@ -12,11 +12,23 @@ export interface TeamCard {
   name: string;
   email: string;
   title?: string;
+  linkedin?: string;
 }
 
 export const TEAM_CARDS: readonly TeamCard[] = [
-  { slug: 'aldo', name: 'Aldo Ruiz Luna', email: 'aldo@madfam.io' },
-  { slug: 'carolina', name: 'Carolina Hernández Mora', email: 'caro@madfam.io' },
+  {
+    slug: 'aldo',
+    name: 'Aldo Ruiz Luna',
+    email: 'aldo@madfam.io',
+    title: 'Founder and Principal Engineer',
+    linkedin: 'https://www.linkedin.com/in/aldoruizluna/',
+  },
+  {
+    slug: 'carolina',
+    name: 'Carolina Hernández Mora',
+    email: 'caro@madfam.io',
+    linkedin: 'https://www.linkedin.com/in/carohernandezmora/',
+  },
 ];
 
 export function findTeamCard(slug: string): TeamCard | undefined {
@@ -38,12 +50,20 @@ type CardLocale = 'es' | 'en' | 'pt';
 
 export const CARD_COPY: Record<
   CardLocale,
-  { saveContact: string; email: string; book: string; site: string; description: string }
+  {
+    saveContact: string;
+    email: string;
+    book: string;
+    linkedin: string;
+    site: string;
+    description: string;
+  }
 > = {
   es: {
     saveContact: 'Guardar contacto',
     email: 'Escribir correo',
     book: 'Agendar una llamada',
+    linkedin: 'Ver LinkedIn',
     site: 'Conocer MADFAM',
     description: 'Tarjeta de contacto en MADFAM',
   },
@@ -51,6 +71,7 @@ export const CARD_COPY: Record<
     saveContact: 'Save contact',
     email: 'Send an email',
     book: 'Book a call',
+    linkedin: 'View LinkedIn',
     site: 'Discover MADFAM',
     description: 'Contact card at MADFAM',
   },
@@ -58,6 +79,7 @@ export const CARD_COPY: Record<
     saveContact: 'Salvar contato',
     email: 'Enviar e-mail',
     book: 'Agendar uma chamada',
+    linkedin: 'Ver LinkedIn',
     site: 'Conhecer a MADFAM',
     description: 'Cartão de contato na MADFAM',
   },
