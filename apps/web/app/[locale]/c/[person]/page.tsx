@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { ArrowUpRight, CalendarDays, Linkedin, Mail, UserPlus } from 'lucide-react';
 import { localizedAlternates } from '@/lib/seo';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 import { TEAM_CARDS, bookingUrl, cardCopy, findTeamCard } from '@/lib/team-cards';
@@ -30,6 +31,15 @@ export async function generateMetadata({
   };
 }
 
+// The card inherits the home hero's world (EcosystemHomePage): obsidian ground,
+// leaf/lavender glows, the leaf→lavender→sun brand gradient and its pulsing
+// halo as the one moving thing. The primary action sets obsidian text on
+// leaf→sun so it clears AA; white on leaf does not.
+const focusRing =
+  'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sun';
+
+const secondaryAction = `group flex items-center gap-4 w-full rounded-xl border border-white/15 bg-white/5 px-5 py-4 text-pearl transition-colors duration-200 hover:border-white/35 hover:bg-white/10 ${focusRing}`;
+
 export default async function TeamCardPage({
   params,
 }: {
@@ -41,47 +51,84 @@ export default async function TeamCardPage({
   const t = cardCopy(locale);
 
   return (
-    <main className="min-h-screen flex items-center justify-center py-16 bg-gradient-to-br from-obsidian/5 to-lavender/5">
-      <div className="max-w-md w-full mx-4 p-8 bg-white rounded-xl shadow-sm text-center">
-        <h1 className="text-2xl font-semibold text-obsidian">{card.name}</h1>
-        <p className="mt-1 text-obsidian/70">{card.title ? `${card.title} · MADFAM` : 'MADFAM'}</p>
-        <p className="mt-1 text-sm text-obsidian/60">{card.email}</p>
+    <main className="relative isolate min-h-[100svh] overflow-hidden bg-obsidian px-4 pt-24 pb-16 selection:bg-lavender/50 selection:text-pearl">
+      <div
+        aria-hidden="true"
+        className="absolute -top-24 -left-24 -z-10 h-96 w-96 rounded-full bg-leaf/20 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -right-24 -bottom-24 -z-10 h-96 w-96 rounded-full bg-lavender/25 blur-3xl"
+      />
 
-        <div className="mt-8 space-y-3">
-          <a
-            href={`/c/${card.slug}.vcf`}
-            download={`${card.slug}.vcf`}
-            className="block w-full py-3 bg-obsidian text-white rounded-lg font-medium hover:bg-obsidian/90 transition-colors"
-          >
-            {t.saveContact}
-          </a>
-          <a
-            href={bookingUrl(card.slug)}
-            className="block w-full py-3 border border-obsidian/20 text-obsidian rounded-lg font-medium hover:bg-obsidian/5 transition-colors"
-          >
-            {t.book}
-          </a>
-          {card.linkedin && (
+      <div className="relative mx-auto w-full max-w-md">
+        <div
+          aria-hidden="true"
+          className="absolute -inset-6 rounded-[2rem] bg-gradient-to-r from-leaf via-lavender to-sun opacity-25 blur-3xl motion-safe:animate-pulse"
+        />
+
+        <div className="relative rounded-2xl bg-gradient-to-br from-leaf via-lavender to-sun p-px shadow-[0_24px_64px_-16px_rgba(0,0,0,0.6)]">
+          <article className="rounded-2xl bg-obsidian/95 px-6 pt-8 pb-6 sm:px-8">
+            {/* OKLCH interpolation: the sRGB leaf→lavender blend passes through gray. */}
+            <h1 className="bg-linear-to-r/oklch from-leaf via-lavender to-sun bg-clip-text text-[2.6rem] leading-[1.05] font-bold tracking-[-0.03em] text-balance text-transparent">
+              {card.name}
+            </h1>
+            <p className="mt-3 text-lg leading-snug text-pearl/90">
+              {card.title ?? 'Innovaciones MADFAM'}
+            </p>
+            {card.title && <p className="mt-1 text-base text-pearl/70">Innovaciones MADFAM</p>}
+
             <a
-              href={card.linkedin}
-              rel="noopener"
-              className="block w-full py-3 border border-obsidian/20 text-obsidian rounded-lg font-medium hover:bg-obsidian/5 transition-colors"
+              href={`/c/${card.slug}.vcf`}
+              download={`${card.slug}.vcf`}
+              className={`mt-8 flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-leaf to-sun px-5 py-4 text-lg font-bold text-obsidian shadow-[0_12px_32px_-12px_rgba(107,203,119,0.7)] transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.99] ${focusRing}`}
             >
-              {t.linkedin}
+              <UserPlus aria-hidden="true" className="h-5 w-5" strokeWidth={2.25} />
+              {t.saveContact}
             </a>
-          )}
-          <a
-            href={`mailto:${card.email}`}
-            className="block w-full py-3 border border-obsidian/20 text-obsidian rounded-lg font-medium hover:bg-obsidian/5 transition-colors"
-          >
-            {t.email}
-          </a>
-          <a
-            href={`/${locale}`}
-            className="block w-full py-3 text-obsidian/70 rounded-lg font-medium hover:text-obsidian transition-colors"
-          >
-            {t.site}
-          </a>
+
+            <div className="mt-3 space-y-3">
+              <a href={bookingUrl(card.slug)} className={secondaryAction}>
+                <CalendarDays aria-hidden="true" className="h-5 w-5 text-sun" strokeWidth={1.75} />
+                <span className="flex-1 font-medium">{t.book}</span>
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="h-4 w-4 text-pearl/50 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </a>
+              {card.linkedin && (
+                <a href={card.linkedin} rel="noopener" className={secondaryAction}>
+                  <Linkedin
+                    aria-hidden="true"
+                    className="h-5 w-5 text-lavender"
+                    strokeWidth={1.75}
+                  />
+                  <span className="flex-1 font-medium">{t.linkedin}</span>
+                  <ArrowUpRight
+                    aria-hidden="true"
+                    className="h-4 w-4 text-pearl/50 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </a>
+              )}
+              <a href={`mailto:${card.email}`} className={secondaryAction}>
+                <Mail aria-hidden="true" className="h-5 w-5 text-leaf" strokeWidth={1.75} />
+                <span className="flex-1 min-w-0">
+                  <span className="block font-medium">{t.email}</span>
+                  <span className="block truncate text-sm text-pearl/70">{card.email}</span>
+                </span>
+              </a>
+            </div>
+
+            <div className="mt-8 flex items-center justify-between gap-4 border-t border-white/10 pt-5 text-sm">
+              <span className="font-mono text-pearl/80">{card.shortLink}</span>
+              <a
+                href={`/${locale}`}
+                className={`font-medium text-pearl/80 underline decoration-lavender/60 underline-offset-4 transition-colors hover:text-pearl ${focusRing}`}
+              >
+                {t.site}
+              </a>
+            </div>
+          </article>
         </div>
       </div>
     </main>
