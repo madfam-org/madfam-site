@@ -61,6 +61,15 @@ export default async function TeamCardPage({
           >
             {t.book}
           </a>
+          {card.linkedin && (
+            <a
+              href={card.linkedin}
+              rel="noopener"
+              className="block w-full py-3 border border-obsidian/20 text-obsidian rounded-lg font-medium hover:bg-obsidian/5 transition-colors"
+            >
+              {t.linkedin}
+            </a>
+          )}
           <a
             href={`mailto:${card.email}`}
             className="block w-full py-3 border border-obsidian/20 text-obsidian rounded-lg font-medium hover:bg-obsidian/5 transition-colors"
