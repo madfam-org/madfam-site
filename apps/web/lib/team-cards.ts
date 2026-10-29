@@ -61,6 +61,10 @@ export const CARD_COPY: Record<
     linkedin: string;
     site: string;
     description: string;
+    /** The 3D paper card (components/paper-card). */
+    flipCard: string;
+    cardHint: string;
+    paperEngine: string;
   }
 > = {
   es: {
@@ -70,6 +74,9 @@ export const CARD_COPY: Record<
     linkedin: 'Ver LinkedIn',
     site: 'Conocer MADFAM',
     description: 'Tarjeta de contacto en MADFAM',
+    flipCard: 'Voltear la tarjeta',
+    cardHint: 'Arrastra una esquina para doblarla · toca para voltearla',
+    paperEngine: 'Física de papel: Pliego',
   },
   en: {
     saveContact: 'Save contact',
@@ -78,6 +85,9 @@ export const CARD_COPY: Record<
     linkedin: 'View LinkedIn',
     site: 'Discover MADFAM',
     description: 'Contact card at MADFAM',
+    flipCard: 'Flip the card',
+    cardHint: 'Drag a corner to bend it · tap to flip it',
+    paperEngine: 'Paper physics: Pliego',
   },
   pt: {
     saveContact: 'Salvar contato',
@@ -86,6 +96,9 @@ export const CARD_COPY: Record<
     linkedin: 'Ver LinkedIn',
     site: 'Conhecer a MADFAM',
     description: 'Cartão de contato na MADFAM',
+    flipCard: 'Virar o cartão',
+    cardHint: 'Arraste um canto para dobrá-lo · toque para virá-lo',
+    paperEngine: 'Física do papel: Pliego',
   },
 };
 
