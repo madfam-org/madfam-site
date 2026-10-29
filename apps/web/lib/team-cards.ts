@@ -13,6 +13,8 @@ export interface TeamCard {
   email: string;
   title?: string;
   linkedin?: string;
+  /** The printed marca link, shown on the card so it can be read aloud. */
+  shortLink: string;
 }
 
 export const TEAM_CARDS: readonly TeamCard[] = [
@@ -22,12 +24,14 @@ export const TEAM_CARDS: readonly TeamCard[] = [
     email: 'aldo@madfam.io',
     title: 'Founder and Principal Engineer',
     linkedin: 'https://www.linkedin.com/in/aldoruizluna/',
+    shortLink: 'madf.am/aldo',
   },
   {
     slug: 'carolina',
     name: 'Carolina Hernández Mora',
     email: 'caro@madfam.io',
     linkedin: 'https://www.linkedin.com/in/carohernandezmora/',
+    shortLink: 'madf.am/caro',
   },
 ];
 
