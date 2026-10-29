@@ -15,7 +15,7 @@
  *       After deploy: the marca redirect, card page, vCard, presenter, manifest, QR.
  */
 /* eslint-disable no-console -- a CLI: stdout is its interface */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { TEAM_CARDS, type TeamCard, findTeamCard, qrSrc, shortSlug } from '../../lib/team-cards';
 import { SITE_ORIGIN, cardUrl, shortUrl, teamCardFiles, validateCard } from './files';
@@ -54,11 +54,21 @@ function validateAll(): void {
   if (problems.length > 0) fail(`invalid lib/team-cards.ts entry:\n  ${problems.join('\n  ')}`);
 }
 
+/** One read, no exists-then-read race: null when the file is not there yet. */
+function readIfPresent(path: string): string | null {
+  try {
+    return readFileSync(path, 'utf8');
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null;
+    throw error;
+  }
+}
+
 function writeFiles(check: boolean): number {
   let drift = 0;
   for (const file of teamCardFiles(TEAM_CARDS)) {
     const target = join(PUBLIC_DIR, file.path);
-    const current = existsSync(target) ? readFileSync(target, 'utf8') : null;
+    const current = readIfPresent(target);
     if (current === file.contents) {
       console.log(`  ok       public/${file.path}`);
       continue;
