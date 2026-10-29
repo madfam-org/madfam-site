@@ -30,6 +30,7 @@ export const TEAM_CARDS: readonly TeamCard[] = [
     slug: 'carolina',
     name: 'Carolina Hernández Mora',
     email: 'caro@madfam.io',
+    title: 'Lead Industrial and Product Designer',
     linkedin: 'https://www.linkedin.com/in/carohernandezmora/',
     shortLink: 'madf.am/caro',
   },
