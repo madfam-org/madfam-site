@@ -1,7 +1,8 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { CARD_COPY, TEAM_CARDS, appName, qrSrc, shortSlug } from '../team-cards';
+import { cardVcf, offlineVcard, teamCardFiles, validateCard } from '../../scripts/team-cards/files';
+import { CARD_COPY, TEAM_CARDS, type TeamCard, appName, qrSrc, shortSlug } from '../team-cards';
 
 const publicDir = join(__dirname, '../../public');
 
@@ -20,6 +21,48 @@ describe('team cards', () => {
       );
     }
   );
+
+  // public/c is generated from TEAM_CARDS; a hand edit on either side fails here.
+  it.each(teamCardFiles(TEAM_CARDS).map(file => [file.path, file] as const))(
+    'public/%s matches lib/team-cards.ts (regenerate: pnpm --filter @madfam-site/web team-cards)',
+    (path, file) => {
+      expect(readFileSync(join(publicDir, path), 'utf8')).toBe(file.contents);
+    }
+  );
+
+  it('passes the work-contact-only rules', () => {
+    expect(TEAM_CARDS.flatMap(validateCard)).toEqual([]);
+    for (const card of TEAM_CARDS) {
+      expect(cardVcf(card)).not.toMatch(/^TEL/m);
+      expect(offlineVcard(card)).not.toMatch(/^TEL/m);
+    }
+  });
+
+  it('writes a CRLF vCard with N, escaped text and no phone', () => {
+    const card: TeamCard = {
+      slug: 'ana-ejemplo',
+      name: 'Ana de la Luz Ejemplo',
+      givenName: 'Ana',
+      familyName: 'de la Luz Ejemplo',
+      email: 'ana@madfam.io',
+      title: 'Design, Research; Ops',
+      shortLink: 'madf.am/ana',
+    };
+    expect(offlineVcard(card).split('\r\n')).toEqual([
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'N:de la Luz Ejemplo;Ana;;;',
+      'FN:Ana de la Luz Ejemplo',
+      'ORG:MADFAM',
+      'TITLE:Design\\, Research\\; Ops',
+      'EMAIL:ana@madfam.io',
+      'URL:https://madf.am/ana',
+      'END:VCARD',
+      '',
+    ]);
+    expect(validateCard({ ...card, email: 'ana@gmail.com' })).toHaveLength(1);
+    expect(validateCard({ ...card, title: 'Cel. 55 1234 5678' })).toHaveLength(1);
+  });
 
   it('has presenter copy in every locale', () => {
     for (const copy of Object.values(CARD_COPY)) {

@@ -28,6 +28,7 @@
     "test:e2e:headed": "playwright test --headed",
     "test:a11y": "playwright test --grep @accessibility",
     "test:security": "node ../../scripts/security-check.js",
+    "team-cards": "tsx scripts/team-cards/cli.ts",
     "serve:standalone": "cp -R .next/static .next/standalone/apps/web/.next/ && cp -R public .next/standalone/apps/web/ && HOSTNAME=127.0.0.1 PORT=${PORT:-3000} node .next/standalone/apps/web/server.js"
   },
   "dependencies": {
@@ -66,6 +67,7 @@
     "@types/bcryptjs": "^3.0.0",
     "@types/ioredis": "^5.0.0",
     "@types/node": "^26.6.1",
+    "@types/qrcode": "1.5.5",
     "@types/react": "^19.2.4",
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^8.70.0",
@@ -77,8 +79,10 @@
     "eslint-config-next": "^15.5.2",
     "eslint-plugin-import": "^2.32.0",
     "jsdom": "^26.1.0",
+    "jsqr": "1.4.0",
     "postcss": "^8.5.28",
     "prisma": "6.1.0",
+    "qrcode": "1.5.4",
     "tailwindcss": "4.3.3",
     "tsx": "^4.23.13",
     "typescript": "^5.9.3",
