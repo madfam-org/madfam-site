@@ -27,6 +27,8 @@ const focusRing =
 
 export interface KalyaBookingProps {
   attribution: BookingAttribution;
+  /** The Kalya event type to open; omitted, MADFAM's generic discovery call. */
+  eventType?: string;
   className?: string;
 }
 
@@ -37,7 +39,7 @@ export interface KalyaBookingProps {
  * says `ready` the visitor sees a loading state with the plain Kalya link; if
  * it never does (CSP refusal, network, timeout) the link becomes the action.
  */
-export function KalyaBooking({ attribution, className }: KalyaBookingProps) {
+export function KalyaBooking({ attribution, eventType, className }: KalyaBookingProps) {
   const t = useTranslations('common.booking');
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [src, setSrc] = useState<string | null>(null);
@@ -54,9 +56,10 @@ export function KalyaBooking({ attribution, className }: KalyaBookingProps) {
         hostOrigin: window.location.origin,
         ref: window.location.pathname,
         attribution: { utm_source, utm_medium, utm_campaign, utm_content, utm_term },
+        eventType,
       })
     );
-  }, [utm_source, utm_medium, utm_campaign, utm_content, utm_term]);
+  }, [utm_source, utm_medium, utm_campaign, utm_content, utm_term, eventType]);
 
   useEffect(() => {
     function onMessage(event: MessageEvent) {

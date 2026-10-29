@@ -10,6 +10,11 @@ import { kalyaBookingUrl, type BookingAttribution } from '@/lib/kalya-embed';
 
 export interface BookingLauncherProps {
   attribution: BookingAttribution;
+  /** The Kalya event type the dialog opens; omitted, MADFAM's discovery call. */
+  eventType?: string;
+  /** Dialog heading and subheading; omitted, the discovery-call copy. */
+  dialogTitle?: string;
+  dialogSubtitle?: string;
   children: ReactNode;
   className?: string;
   /** Where the plain link opens when the in-page booking is not used. */
@@ -34,6 +39,9 @@ function isPlainClick(event: MouseEvent): boolean {
  */
 export function BookingLauncher({
   attribution,
+  eventType,
+  dialogTitle,
+  dialogSubtitle,
   children,
   className,
   target,
@@ -109,9 +117,11 @@ export function BookingLauncher({
                       id={titleId}
                       className="bg-linear-to-r/oklch from-leaf via-lavender to-sun bg-clip-text text-2xl leading-tight font-bold tracking-[-0.02em] text-balance text-transparent sm:text-3xl"
                     >
-                      {t('dialogTitle')}
+                      {dialogTitle ?? t('dialogTitle')}
                     </h2>
-                    <p className="mt-1 text-base text-pearl/75">{t('dialogSubtitle')}</p>
+                    <p className="mt-1 text-base text-pearl/75">
+                      {dialogSubtitle ?? t('dialogSubtitle')}
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -124,7 +134,7 @@ export function BookingLauncher({
                 </header>
 
                 <div className="flex-1 [scrollbar-color:rgb(250_250_250/0.25)_transparent] [scrollbar-width:thin] overflow-y-auto overscroll-contain px-3 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
-                  {embedMounted && <KalyaBooking attribution={attribution} />}
+                  {embedMounted && <KalyaBooking attribution={attribution} eventType={eventType} />}
                 </div>
               </div>
             </div>

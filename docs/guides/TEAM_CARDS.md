@@ -66,8 +66,17 @@ Append to `TEAM_CARDS` in `apps/web/lib/team-cards.ts`:
   title: 'Lead Industrial and Product Designer', // optional
   linkedin: 'https://www.linkedin.com/in/carohernandezmora/', // optional
   shortLink: 'madf.am/caro',        // the code minted in step 1
+  bookingEventType: 'llamada-carolina', // their own Kalya event type, see below
 },
 ```
+
+The card's «Agendar una llamada» books `bookingEventType` on Kalya's `madfam`
+tenant, so the booking alert reaches the teammate, not a shared inbox. Declare
+it in Kalya before this card ships: in `madfam-org/kalya`
+`prisma/provision/madfam-tenant.json`, add a host with the teammate's name and
+`notifyEmail`, plus an event type with this slug on that host. Then dry-run and
+apply it as `docs/PROVISIONING.md` §5.1 describes. Until it is applied, the
+dialog falls back to the plain Kalya link after 8 s.
 
 ### 3. Generate
 
