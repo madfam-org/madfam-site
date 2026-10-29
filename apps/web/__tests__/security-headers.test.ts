@@ -100,6 +100,34 @@ describe('Content-Security-Policy', () => {
     expect(csp).toContain("font-src 'self';");
   });
 
+  it('frames exactly one origin: Kalya, for the in-page booking flow', () => {
+    const frameSrc = csp.match(/frame-src ([^;]*);/)?.[1];
+    expect(frameSrc).toBe('https://kalya.app');
+    expect(csp).not.toMatch(/frame-src[^;]*\*/);
+    // madfam.io itself still refuses to be framed.
+    expect(csp).toContain("frame-ancestors 'none';");
+  });
+
+  it('frames the configured local Kalya, and never a value that is not a bare origin', async () => {
+    const frameSrcWith = async (value: string) => {
+      vi.stubEnv('NEXT_PUBLIC_KALYA_ORIGIN', value);
+      vi.resetModules();
+      const mod = await import('../middleware');
+      return mod.buildContentSecurityPolicy('bm9uY2U=').match(/frame-src ([^;]*);/)?.[1];
+    };
+    try {
+      expect(await frameSrcWith('http://localhost:3100')).toBe('http://localhost:3100');
+      expect(await frameSrcWith('https://*.kalya.app')).toBe('https://kalya.app');
+      expect(await frameSrcWith("https://kalya.app; script-src 'unsafe-eval'")).toBe(
+        'https://kalya.app'
+      );
+      expect(await frameSrcWith('http://kalya.app')).toBe('https://kalya.app');
+    } finally {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    }
+  });
+
   it('allows the Plausible origin only when the build renders Plausible', () => {
     // NEXT_PUBLIC_PLAUSIBLE_DOMAIN is unset in tests (as in production until O49).
     expect(csp).not.toContain('plausible');

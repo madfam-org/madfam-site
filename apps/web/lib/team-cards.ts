@@ -7,6 +7,8 @@
  *
  * Work contact only: this repo is public, so no personal phone numbers.
  */
+import { cardAttribution, kalyaBookingUrl } from './kalya-embed';
+
 export interface TeamCard {
   slug: string;
   name: string;
@@ -58,15 +60,11 @@ export function findTeamCard(slug: string): TeamCard | undefined {
   return TEAM_CARDS.find(card => card.slug === slug);
 }
 
-/** kalya's MADFAM booking page, tagged so a booking says which card sent it. */
+/** kalya's MADFAM booking page, tagged so a booking says which card sent it.
+ *  The card's CTA opens the same flow in-page (components/booking); this is
+ *  its href, so no-JS or a failed embed still reaches Kalya. */
 export function bookingUrl(slug: string): string {
-  const params = new URLSearchParams({
-    utm_source: 'madf.am',
-    utm_medium: 'qr',
-    utm_campaign: 'tarjeta',
-    utm_content: slug,
-  });
-  return `https://kalya.app/madfam?${params.toString()}`;
+  return kalyaBookingUrl(cardAttribution(slug));
 }
 
 type CardLocale = 'es' | 'en' | 'pt';

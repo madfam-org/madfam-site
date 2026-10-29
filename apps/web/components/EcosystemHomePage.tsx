@@ -11,8 +11,8 @@ import { EcosystemFlowDiagram } from '@/components/ecosystem/EcosystemFlowDiagra
 import { PersonaCards } from '@/components/ecosystem/PersonaCards';
 import { OfferPathRouter } from '@/components/ecosystem/OfferPathRouter';
 import { getOpenSourceSummary, getSelfServeNames } from '@/lib/data/platforms';
-import { KALYA_DISCOVERY_CALL_URL } from '@/lib/data/value-ladder';
-import { siteLink } from '@/lib/ecosystem-links';
+import { BookingLauncher } from '@/components/booking/BookingLauncher';
+import { siteAttribution } from '@/lib/kalya-embed';
 
 // ─── Maker Node Services ──────────────────────────────────────────────────────
 
@@ -24,8 +24,10 @@ const MAKER_SERVICES = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-// Ruling R27: every discovery-call CTA books on Kalya, not the contact form.
-const DISCOVERY_CALL_LINK = siteLink(KALYA_DISCOVERY_CALL_URL, 'cta');
+// Ruling R27: every discovery-call CTA books on Kalya, not the contact form —
+// in-page through BookingLauncher, with Kalya's own page as the link fallback.
+const HERO_BOOKING = siteAttribution('home-hero');
+const TRACKS_BOOKING = siteAttribution('home-tracks');
 
 export function EcosystemHomePage() {
   const t = useTranslations('ecosystem.homepage');
@@ -92,14 +94,14 @@ export function EcosystemHomePage() {
 
             {/* Dual-track CTA: self-serve (try platforms) vs white-glove (book) */}
             <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <a href={DISCOVERY_CALL_LINK.href} target="_blank" rel={DISCOVERY_CALL_LINK.rel}>
+              <BookingLauncher attribution={HERO_BOOKING} target="_blank">
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-leaf to-lavender hover:from-leaf/90 hover:to-lavender/90 text-white font-semibold px-8 py-3 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                 >
                   {tEng('whiteGlove.cta')}
                 </Button>
-              </a>
+              </BookingLauncher>
 
               <Button
                 variant="outline"
@@ -231,11 +233,11 @@ export function EcosystemHomePage() {
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-1">
                 {tEng('whiteGlove.description')}
               </p>
-              <a href={DISCOVERY_CALL_LINK.href} target="_blank" rel={DISCOVERY_CALL_LINK.rel}>
+              <BookingLauncher attribution={TRACKS_BOOKING} target="_blank">
                 <Button size="lg" className="w-full bg-lavender hover:bg-lavender/90 text-white">
                   {tEng('whiteGlove.cta')}
                 </Button>
-              </a>
+              </BookingLauncher>
             </div>
           </div>
         </Container>

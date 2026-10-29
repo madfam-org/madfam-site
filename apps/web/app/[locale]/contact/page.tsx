@@ -2,11 +2,11 @@ import { getTranslations } from 'next-intl/server';
 import { Container, Heading, Card, CardContent } from '@/components/ui';
 import { LeadForm } from '@/components/LeadForm';
 import { catalogProductSlug } from '@/lib/contact-link';
-import { KALYA_DISCOVERY_CALL_URL } from '@/lib/data/value-ladder';
-import { siteLink } from '@/lib/ecosystem-links';
+import { BookingLauncher } from '@/components/booking/BookingLauncher';
+import { siteAttribution } from '@/lib/kalya-embed';
 
-// The discovery-call CTA leaves madfam.io as an own-site link (`lib/ecosystem-links.ts`).
-const DISCOVERY_CALL_LINK = siteLink(KALYA_DISCOVERY_CALL_URL, 'cta');
+// The discovery call opens MADFAM's Kalya flow in-page; its href is Kalya's own page.
+const DISCOVERY_CALL_BOOKING = siteAttribution('contact');
 
 export default async function ContactPage({
   params,
@@ -97,14 +97,13 @@ export default async function ContactPage({
                 <p className="text-sm text-obsidian/70 mb-4 dark:text-pearl/70">
                   {t('contact.immediateHelp.subtitle')}
                 </p>
-                <a
-                  href={DISCOVERY_CALL_LINK.href}
+                <BookingLauncher
+                  attribution={DISCOVERY_CALL_BOOKING}
                   target="_blank"
-                  rel={DISCOVERY_CALL_LINK.rel}
                   className="inline-flex items-center text-lavender font-medium hover:underline"
                 >
                   {t('contact.immediateHelp.scheduleCall')}
-                </a>
+                </BookingLauncher>
               </div>
             </div>
           </div>

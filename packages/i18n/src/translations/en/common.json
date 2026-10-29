@@ -112,5 +112,19 @@
   "products": {
     "documentation": "Documentation"
   },
-  "skipToContent": "Skip to main content"
+  "skipToContent": "Skip to main content",
+  "booking": {
+    "dialogTitle": "Book a discovery call",
+    "dialogSubtitle": "30 minutes on video with the MADFAM team.",
+    "close": "Close",
+    "frameTitle": "MADFAM booking calendar on Kalya",
+    "loading": "Loading the calendar…",
+    "notLoading": "Not loading? Open it on Kalya",
+    "failed": "We could not show the calendar here.",
+    "openInKalya": "Open the calendar on Kalya",
+    "newTab": "(opens in a new tab)",
+    "bookedTitle": "Done, your call is booked.",
+    "bookedWhen": "See you on {when}.",
+    "bookedDetails": "The details are below."
+  }
 }

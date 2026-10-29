@@ -112,5 +112,19 @@
   "products": {
     "documentation": "Documentação"
   },
-  "skipToContent": "Pular para o conteúdo principal"
+  "skipToContent": "Pular para o conteúdo principal",
+  "booking": {
+    "dialogTitle": "Agende uma chamada de descoberta",
+    "dialogSubtitle": "30 minutos por videochamada com a equipe da MADFAM.",
+    "close": "Fechar",
+    "frameTitle": "Agenda da MADFAM no Kalya",
+    "loading": "Carregando a agenda…",
+    "notLoading": "Não carrega? Abra no Kalya",
+    "failed": "Não conseguimos mostrar a agenda aqui.",
+    "openInKalya": "Abrir a agenda no Kalya",
+    "newTab": "(abre em uma nova aba)",
+    "bookedTitle": "Pronto, sua chamada está agendada.",
+    "bookedWhen": "Até {when}.",
+    "bookedDetails": "Os detalhes estão abaixo."
+  }
 }

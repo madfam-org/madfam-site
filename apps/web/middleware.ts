@@ -1,6 +1,7 @@
 import { i18nConfig } from '@madfam-site/i18n';
 import createIntlMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
+import { KALYA_ORIGIN } from '@/lib/kalya-embed';
 import { PLAUSIBLE_DOMAIN, PLAUSIBLE_HOST } from '@/lib/plausible';
 import { PATHNAME_HEADER } from '@/lib/seo-urls';
 
@@ -84,6 +85,9 @@ export default function middleware(request: NextRequest) {
  *   (NEXT_PUBLIC_PLAUSIBLE_DOMAIN set at build time).
  * - Fonts are 'self' only: next/font self-hosts them at build time, so no page
  *   requests fonts.googleapis.com or fonts.gstatic.com.
+ * - frame-src names exactly one origin: Kalya, for the in-page booking flow
+ *   (components/booking). KALYA_ORIGIN is a validated bare origin, never a
+ *   wildcard, and is the same constant the iframe uses.
  */
 export function buildContentSecurityPolicy(nonce: string): string {
   const analytics = PLAUSIBLE_DOMAIN ? ` ${PLAUSIBLE_HOST}` : '';
@@ -99,7 +103,7 @@ export function buildContentSecurityPolicy(nonce: string): string {
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
-    frame-src 'none';
+    frame-src ${KALYA_ORIGIN};
     worker-src 'self' blob:;
     manifest-src 'self';
     upgrade-insecure-requests;
