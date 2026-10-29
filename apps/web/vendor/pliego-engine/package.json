@@ -1,0 +1,51 @@
+{
+  "name": "@pliego/engine",
+  "version": "0.1.0",
+  "description": "Pliego paper physics engine: rigid kinematics (Tier R) and compliant implicit/XPBD physics (Tier C) for sheet documents.",
+  "type": "module",
+  "license": "AGPL-3.0-only",
+  "author": "Innovaciones MADFAM S.A.S. de C.V.",
+  "homepage": "https://pliego.madfam.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madfam-org/pliego.git",
+    "directory": "packages/engine"
+  },
+  "bugs": {
+    "url": "https://github.com/madfam-org/pliego/issues"
+  },
+  "keywords": [
+    "paper",
+    "origami",
+    "kirigami",
+    "physics",
+    "xpbd",
+    "fold",
+    "sheet"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./src/index.js",
+  "types": "./types/index.d.ts",
+  "files": [
+    "src/",
+    "types/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.madfam.io/"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  }
+}
