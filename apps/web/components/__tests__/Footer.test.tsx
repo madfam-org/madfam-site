@@ -24,4 +24,17 @@ describe('Footer', () => {
     );
     expect(copyrightText).toBeInTheDocument();
   });
+
+  // Owner ruling 2026-10-28: a curated platform column closed by a link to the
+  // full catalog, and Nauta named once.
+  it('closes the curated platform column with a link to every platform', () => {
+    render(<Footer />, { locale: 'en' });
+
+    expect(screen.getByRole('link', { name: 'All platforms →' })).toHaveAttribute(
+      'href',
+      '/en/products'
+    );
+    expect(screen.getAllByRole('link', { name: /Nauta/ })).toHaveLength(1);
+    expect(screen.queryByRole('link', { name: 'Janua' })).not.toBeInTheDocument();
+  });
 });

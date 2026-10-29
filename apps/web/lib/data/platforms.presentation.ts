@@ -53,6 +53,13 @@ export interface PlatformPresentation {
   hasTechSpecs: boolean;
   /** True when a dedicated platform detail page exists at /platforms/[slug]. */
   hasDetailPage: boolean;
+  /**
+   * True for the few platforms the site footer lists by name (owner ruling
+   * 2026-10-28: the ones that are ready and that MADFAM has implemented with
+   * success). Every other catalog platform stays one click away through the
+   * footer's "all platforms" link. Absent → not in the footer.
+   */
+  inFooter?: boolean;
 }
 
 /**
@@ -85,6 +92,7 @@ export const PLATFORM_PRESENTATION: Record<string, PlatformPresentation> = {
     hasComparison: true,
     hasTechSpecs: true,
     hasDetailPage: true,
+    inFooter: true,
   },
   janua: {
     accentColor: {
@@ -186,6 +194,7 @@ export const PLATFORM_PRESENTATION: Record<string, PlatformPresentation> = {
     hasComparison: true,
     hasTechSpecs: false,
     hasDetailPage: true,
+    inFooter: true,
   },
   fortuna: {
     accentColor: {
@@ -258,6 +267,7 @@ export const PLATFORM_PRESENTATION: Record<string, PlatformPresentation> = {
     hasComparison: false,
     hasTechSpecs: false,
     hasDetailPage: false,
+    inFooter: true,
   },
   tezca: {
     accentColor: {
@@ -283,6 +293,7 @@ export const PLATFORM_PRESENTATION: Record<string, PlatformPresentation> = {
     hasComparison: false,
     hasTechSpecs: true,
     hasDetailPage: true,
+    inFooter: true,
   },
   avala: {
     accentColor: {
@@ -333,6 +344,7 @@ export const PLATFORM_PRESENTATION: Record<string, PlatformPresentation> = {
     hasComparison: false,
     hasTechSpecs: true,
     hasDetailPage: true,
+    inFooter: true,
   },
   'cotiza-studio': {
     accentColor: {
@@ -541,6 +553,7 @@ export const PLATFORM_PRESENTATION: Record<string, PlatformPresentation> = {
     hasComparison: false,
     hasTechSpecs: false,
     hasDetailPage: false,
+    inFooter: true,
   },
   meridian: {
     accentColor: {

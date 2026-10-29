@@ -13,13 +13,21 @@ export function Footer() {
   // The platform column is rendered from the ecosystem registry (names, order
   // and hrefs all come from apps/web/lib/data/platforms.generated.ts). It used
   // to be a hand-kept list in every locale bundle, which is how it drifted out
-  // of step with the catalog it advertises.
+  // of step with the catalog it advertises. Only the curated `inFooter` few are
+  // named; the last link opens the full catalog.
   const navigation = {
-    platforms: getFooterPlatforms(locale).map(item => ({
-      name: item.name,
-      href: item.href,
-      external: item.external,
-    })),
+    platforms: [
+      ...getFooterPlatforms(locale).map(item => ({
+        name: item.name,
+        href: item.href,
+        external: item.external,
+      })),
+      {
+        name: t('footer.platforms.all'),
+        href: getLocalizedUrl('products', locale),
+        external: false,
+      },
+    ],
     services: [
       {
         name: t('footer.services.makerNode'),
@@ -38,11 +46,6 @@ export function Footer() {
       },
     ],
     ecosystem: [
-      {
-        name: t('footer.ecosystem.nauta'),
-        href: getLocalizedUrl('nauta', locale),
-        external: false,
-      },
       {
         name: t('footer.ecosystem.valueLadder'),
         href: getLocalizedUrl('value-ladder', locale),

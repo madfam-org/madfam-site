@@ -54,6 +54,9 @@
       "ecosystem": "Ecosistema",
       "company": "Empresa"
     },
+    "platforms": {
+      "all": "Todas las plataformas →"
+    },
     "services": {
       "makerNode": "Primavera Maker Node",
       "colabs": "MADFAM Co-Labs",
@@ -61,7 +64,6 @@
     },
     "ecosystem": {
       "membership": "Lista de espera",
-      "nauta": "Nauta ERP",
       "valueLadder": "Escalera de valor",
       "pricing": "Precios",
       "openSource": "Open Source",
