@@ -1,17 +1,16 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Container } from '@/components/ui';
-import {
-  NAUTA_FRONT_DOOR_URL,
-  NAUTA_PILLARS,
-  KALYA_DISCOVERY_CALL_URL,
-} from '@/lib/data/nauta-product';
+import { BookingLauncher } from '@/components/booking/BookingLauncher';
+import { NAUTA_FRONT_DOOR_URL, NAUTA_PILLARS } from '@/lib/data/nauta-product';
 import { siteLink } from '@/lib/ecosystem-links';
+import { siteAttribution } from '@/lib/kalya-embed';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 
-// Both hero CTAs leave madfam.io as own-site links (`lib/ecosystem-links.ts`).
+// The front-door CTA leaves madfam.io as an own-site link (`lib/ecosystem-links.ts`);
+// the discovery call opens MADFAM's Kalya flow in-page, Kalya's page as its href.
 const FRONT_DOOR_LINK = siteLink(NAUTA_FRONT_DOOR_URL, 'cta');
-const DISCOVERY_CALL_LINK = siteLink(KALYA_DISCOVERY_CALL_URL, 'cta');
+const DISCOVERY_CALL_BOOKING = siteAttribution('nauta');
 
 // Corporate "about Nauta" summary (ruling R30). No prices, no tiers, no
 // checkout: the canonical page for Nauta is nauta.quest.
@@ -70,14 +69,13 @@ export default async function NautaPage({ params }: Props) {
               >
                 {t('closing.visitSite')}
               </a>
-              <a
-                href={DISCOVERY_CALL_LINK.href}
+              <BookingLauncher
+                attribution={DISCOVERY_CALL_BOOKING}
                 target="_blank"
-                rel={DISCOVERY_CALL_LINK.rel}
                 className={secondaryCta}
               >
                 {t('cta.discoveryCall')}
-              </a>
+              </BookingLauncher>
             </div>
           </div>
         </Container>
