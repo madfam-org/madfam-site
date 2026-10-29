@@ -12,6 +12,7 @@ import { OrganizationStructuredData } from '@/components/StructuredData';
 import { locales, getMessages, type Locale } from '@/i18n.config';
 import { PATHNAME_HEADER, localizedAlternates, pathWithoutLocale } from '@/lib/seo';
 import { MotionPreferences } from '@/components/MotionPreferences';
+import { SkipLink } from '@/components/SkipLink';
 
 export function generateStaticParams() {
   return locales.map(locale => ({ locale }));
@@ -59,10 +60,7 @@ export default async function LocaleLayout({
           <GlobalAnalytics />
           <AttributionCapture />
 
-          {/* Skip Navigation Link for Accessibility */}
-          <a href="#main-content" className="skip-link sr-only-focusable">
-            Skip to main content
-          </a>
+          <SkipLink />
 
           <Navbar />
           <main id="main-content" tabIndex={-1}>

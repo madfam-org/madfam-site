@@ -419,11 +419,14 @@
     color: var(--text-error);
   }
   
-  /* Skip Link - For keyboard navigation */
+  /* Skip Link - For keyboard navigation. Fixed above the fixed navbar and
+     moved up by its own full height, so no sliver of it shows until it takes
+     focus (a fixed -40px offset left the bottom 4px of a 44px link visible). */
   .skip-link {
-    position: absolute;
-    top: -40px;
+    position: fixed;
+    top: 0;
     left: 6px;
+    transform: translateY(-100%);
     background: var(--bg-primary);
     color: var(--text-primary);
     padding: 8px;
@@ -431,11 +434,11 @@
     border-radius: 0 0 4px 4px;
     border: 2px solid var(--border-accent);
     z-index: 999;
-    transition: top 0.3s ease;
+    transition: transform 0.3s ease;
   }
   
   .skip-link:focus {
-    top: 0;
+    transform: translateY(0);
   }
   
   /* Focus Management */
