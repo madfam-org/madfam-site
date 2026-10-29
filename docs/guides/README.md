@@ -33,6 +33,7 @@ Component library documentation and usage
 - **MOBILE_OPTIMIZATION_GUIDE.md** - Mobile-first optimization
 - **USER_GUIDE.md** - End-user documentation
 - **EXTERNAL_LINKS_QUICK_REFERENCE.md** - External link management
+- **TEAM_CARDS.md** - Onboard a teammate's networking card (marca code, vCard, posters)
 
 ## 🎯 Quick Start
 
