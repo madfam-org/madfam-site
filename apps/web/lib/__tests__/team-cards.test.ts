@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { cardVcf, offlineVcard, teamCardFiles, validateCard } from '../../scripts/team-cards/files';
+import { KALYA_DISCOVERY_EVENT_TYPE } from '../kalya-embed';
 import { CARD_COPY, TEAM_CARDS, type TeamCard, appName, qrSrc, shortSlug } from '../team-cards';
 
 const publicDir = join(__dirname, '../../public');
@@ -47,6 +48,7 @@ describe('team cards', () => {
       email: 'ana@madfam.io',
       title: 'Design, Research; Ops',
       shortLink: 'madf.am/ana',
+      bookingEventType: 'llamada-ana',
     };
     expect(offlineVcard(card).split('\r\n')).toEqual([
       'BEGIN:VCARD',
@@ -62,6 +64,22 @@ describe('team cards', () => {
     ]);
     expect(validateCard({ ...card, email: 'ana@gmail.com' })).toHaveLength(1);
     expect(validateCard({ ...card, title: 'Cel. 55 1234 5678' })).toHaveLength(1);
+  });
+
+  it("books each teammate's own Kalya event type, never a shared one", () => {
+    const eventTypes = TEAM_CARDS.map(card => card.bookingEventType);
+    for (const eventType of eventTypes) {
+      expect(eventType).toMatch(/^[a-z0-9-]{1,64}$/);
+      expect(eventType).not.toBe(KALYA_DISCOVERY_EVENT_TYPE);
+    }
+    expect(new Set(eventTypes).size).toBe(eventTypes.length);
+  });
+
+  it("titles the booking dialog with the teammate's given name in every locale", () => {
+    for (const copy of Object.values(CARD_COPY)) {
+      expect(copy.bookTitle).toContain('{name}');
+      expect(copy.bookSubtitle).not.toMatch(/MADFAM/);
+    }
   });
 
   it('has presenter copy in every locale', () => {

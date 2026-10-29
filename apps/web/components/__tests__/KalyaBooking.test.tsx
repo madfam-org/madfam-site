@@ -138,6 +138,28 @@ describe('BookingLauncher', () => {
     expect(document.querySelector('dialog iframe')).not.toBeNull();
   });
 
+  it("opens a teammate's own event type when the card names one", () => {
+    HTMLDialogElement.prototype.showModal = vi.fn();
+    render(
+      <BookingLauncher
+        attribution={cardAttribution('carolina')}
+        eventType="llamada-carolina"
+        dialogTitle="Agenda una llamada con Carolina"
+        dialogSubtitle="30 minutos por videollamada."
+      >
+        Agendar
+      </BookingLauncher>
+    );
+    fireEvent.click(screen.getByRole('link', { name: 'Agendar' }));
+    const src = new URL(frame().src);
+    expect(src.pathname).toBe('/embed/madfam/llamada-carolina');
+    expect(src.searchParams.get('utm_content')).toBe('carolina');
+    expect(
+      screen.getByRole('heading', { name: 'Agenda una llamada con Carolina', hidden: true })
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/equipo de MADFAM/)).not.toBeInTheDocument();
+  });
+
   it('leaves modified clicks to the browser', () => {
     const showModal = vi.fn();
     HTMLDialogElement.prototype.showModal = showModal;

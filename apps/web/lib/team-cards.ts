@@ -25,6 +25,10 @@ export interface TeamCard {
   linkedin?: string;
   /** The printed marca link, shown on the card so it can be read aloud. */
   shortLink: string;
+  /** This teammate's own Kalya event type (`madfam` tenant). It is booked
+   *  with their own host, so the booking alert reaches them, not a shared
+   *  inbox. Declared in kalya's prisma/provision/madfam-tenant.json. */
+  bookingEventType: string;
 }
 
 export const TEAM_CARDS: readonly TeamCard[] = [
@@ -37,6 +41,7 @@ export const TEAM_CARDS: readonly TeamCard[] = [
     title: 'Founder and Principal Engineer',
     linkedin: 'https://www.linkedin.com/in/aldoruizluna/',
     shortLink: 'madf.am/aldo',
+    bookingEventType: 'llamada-aldo',
   },
   {
     slug: 'carolina',
@@ -47,6 +52,7 @@ export const TEAM_CARDS: readonly TeamCard[] = [
     title: 'Lead Industrial and Product Designer',
     linkedin: 'https://www.linkedin.com/in/carohernandezmora/',
     shortLink: 'madf.am/caro',
+    bookingEventType: 'llamada-carolina',
   },
 ];
 
@@ -73,8 +79,9 @@ export function findTeamCard(slug: string): TeamCard | undefined {
 }
 
 /** kalya's MADFAM booking page, tagged so a booking says which card sent it.
- *  The card's CTA opens the same flow in-page (components/booking); this is
- *  its href, so no-JS or a failed embed still reaches Kalya. */
+ *  The card's CTA opens the teammate's own event type in-page
+ *  (components/booking); this is its href, so no-JS or a failed embed still
+ *  reaches Kalya, whose service list names the teammate. */
 export function bookingUrl(slug: string): string {
   return kalyaBookingUrl(cardAttribution(slug));
 }
@@ -87,6 +94,9 @@ export const CARD_COPY: Record<
     saveContact: string;
     email: string;
     book: string;
+    /** The booking dialog's heading; `{name}` is the teammate's givenName. */
+    bookTitle: string;
+    bookSubtitle: string;
     linkedin: string;
     site: string;
     description: string;
@@ -99,6 +109,8 @@ export const CARD_COPY: Record<
     saveContact: 'Guardar contacto',
     email: 'Escribir correo',
     book: 'Agendar una llamada',
+    bookTitle: 'Agenda una llamada con {name}',
+    bookSubtitle: '30 minutos por videollamada.',
     linkedin: 'Ver LinkedIn',
     site: 'Conocer MADFAM',
     present: 'Presentar mi QR',
@@ -110,6 +122,8 @@ export const CARD_COPY: Record<
     saveContact: 'Save contact',
     email: 'Send an email',
     book: 'Book a call',
+    bookTitle: 'Book a call with {name}',
+    bookSubtitle: '30 minutes on video.',
     linkedin: 'View LinkedIn',
     site: 'Discover MADFAM',
     present: 'Present my QR',
@@ -121,6 +135,8 @@ export const CARD_COPY: Record<
     saveContact: 'Salvar contato',
     email: 'Enviar e-mail',
     book: 'Agendar uma chamada',
+    bookTitle: 'Agende uma chamada com {name}',
+    bookSubtitle: '30 minutos por videochamada.',
     linkedin: 'Ver LinkedIn',
     site: 'Conhecer a MADFAM',
     present: 'Apresentar meu QR',
