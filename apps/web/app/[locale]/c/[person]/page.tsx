@@ -120,7 +120,13 @@ export default async function TeamCardPage({
             </div>
 
             <div className="mt-8 flex items-center justify-between gap-4 border-t border-white/10 pt-5 text-sm">
-              <span className="font-mono text-pearl/80">{card.shortLink}</span>
+              <a
+                href={`/${locale}/c/${card.slug}/qr`}
+                className={`font-mono text-pearl/80 underline decoration-white/25 underline-offset-4 hover:text-pearl ${focusRing}`}
+                aria-label={`${t.present}: ${card.shortLink}`}
+              >
+                {card.shortLink}
+              </a>
               <a
                 href={`/${locale}`}
                 className={`font-medium text-pearl/80 underline decoration-lavender/60 underline-offset-4 transition-colors hover:text-pearl ${focusRing}`}

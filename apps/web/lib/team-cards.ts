@@ -35,6 +35,24 @@ export const TEAM_CARDS: readonly TeamCard[] = [
   },
 ];
 
+/** The short slug printed in the QR (`madf.am/caro` → `caro`). */
+export function shortSlug(card: TeamCard): string {
+  return card.shortLink.split('/').pop() ?? card.slug;
+}
+
+/** The QR for `card.shortLink`: public/c/{shortSlug}-qr.svg, rendered with
+ *  marca's @madfam/qr (square modules, ECC Q) so it matches what marca mints.
+ *  Regenerate it if a shortLink changes; the team-cards test checks it exists. */
+export function qrSrc(card: TeamCard): string {
+  return `/c/${shortSlug(card)}-qr.svg`;
+}
+
+/** Home-screen name for the presenter app: "Caro", "Aldo". */
+export function appName(card: TeamCard): string {
+  const short = shortSlug(card);
+  return short.charAt(0).toUpperCase() + short.slice(1);
+}
+
 export function findTeamCard(slug: string): TeamCard | undefined {
   return TEAM_CARDS.find(card => card.slug === slug);
 }
@@ -61,6 +79,9 @@ export const CARD_COPY: Record<
     linkedin: string;
     site: string;
     description: string;
+    present: string;
+    scanHint: string;
+    viewCard: string;
   }
 > = {
   es: {
@@ -69,6 +90,9 @@ export const CARD_COPY: Record<
     book: 'Agendar una llamada',
     linkedin: 'Ver LinkedIn',
     site: 'Conocer MADFAM',
+    present: 'Presentar mi QR',
+    scanHint: 'Escanea para ver mi tarjeta',
+    viewCard: 'Ver tarjeta',
     description: 'Tarjeta de contacto en MADFAM',
   },
   en: {
@@ -77,6 +101,9 @@ export const CARD_COPY: Record<
     book: 'Book a call',
     linkedin: 'View LinkedIn',
     site: 'Discover MADFAM',
+    present: 'Present my QR',
+    scanHint: 'Scan to see my card',
+    viewCard: 'View card',
     description: 'Contact card at MADFAM',
   },
   pt: {
@@ -85,6 +112,9 @@ export const CARD_COPY: Record<
     book: 'Agendar uma chamada',
     linkedin: 'Ver LinkedIn',
     site: 'Conhecer a MADFAM',
+    present: 'Apresentar meu QR',
+    scanHint: 'Escaneie para ver meu cartão',
+    viewCard: 'Ver cartão',
     description: 'Cartão de contato na MADFAM',
   },
 };
