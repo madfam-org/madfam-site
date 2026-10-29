@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { ArrowUpRight, CalendarCheck } from 'lucide-react';
 import { analytics } from '@madfam-site/analytics';
 import { cn } from '@/components/ui/utils';
@@ -30,12 +30,6 @@ export interface KalyaBookingProps {
   className?: string;
 }
 
-function formatWhen(iso: string, locale: string): string | null {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return null;
-  return new Intl.DateTimeFormat(locale, { dateStyle: 'full', timeStyle: 'short' }).format(date);
-}
-
 /**
  * MADFAM's Kalya booking flow inside madfam.io: an auto-resizing iframe of
  * Kalya's embed surface driven by the `kalya-embed/v1` messages
@@ -45,7 +39,6 @@ function formatWhen(iso: string, locale: string): string | null {
  */
 export function KalyaBooking({ attribution, className }: KalyaBookingProps) {
   const t = useTranslations('common.booking');
-  const locale = useLocale();
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [src, setSrc] = useState<string | null>(null);
   const [state, dispatch] = useReducer(kalyaEmbedReducer, INITIAL_EMBED_STATE);
@@ -88,8 +81,6 @@ export function KalyaBooking({ attribution, className }: KalyaBookingProps) {
     return () => window.clearTimeout(timer);
   }, [src]);
 
-  const when = state.booked ? formatWhen(state.booked.start, locale) : null;
-
   return (
     <div className={cn('relative', className)}>
       {state.booked && (
@@ -100,7 +91,6 @@ export function KalyaBooking({ attribution, className }: KalyaBookingProps) {
           <CalendarCheck aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-leaf" />
           <p className="text-base leading-snug">
             <span className="block font-semibold">{t('bookedTitle')}</span>
-            {when && <span className="block text-pearl/80">{t('bookedWhen', { when })}</span>}
             <span className="block text-sm text-pearl/70">{t('bookedDetails')}</span>
           </p>
         </div>

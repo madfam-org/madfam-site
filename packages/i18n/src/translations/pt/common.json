@@ -124,7 +124,6 @@
     "openInKalya": "Abrir a agenda no Kalya",
     "newTab": "(abre em uma nova aba)",
     "bookedTitle": "Pronto, sua chamada está agendada.",
-    "bookedWhen": "Até {when}.",
     "bookedDetails": "Os detalhes estão abaixo."
   }
 }

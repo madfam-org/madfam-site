@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowUpRight, CalendarDays, Linkedin, Mail, UserPlus } from 'lucide-react';
+import { ArrowUpRight, CalendarDays, ChevronRight, Linkedin, Mail, UserPlus } from 'lucide-react';
 import { localizedAlternates } from '@/lib/seo';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-urls';
 import { BookingLauncher } from '@/components/booking/BookingLauncher';
@@ -94,9 +94,10 @@ export default async function TeamCardPage({
               <BookingLauncher attribution={cardAttribution(card.slug)} className={secondaryAction}>
                 <CalendarDays aria-hidden="true" className="h-5 w-5 text-sun" strokeWidth={1.75} />
                 <span className="flex-1 font-medium">{t.book}</span>
-                <ArrowUpRight
+                {/* Chevron, not the ↗ of the outbound links below: booking opens on this page. */}
+                <ChevronRight
                   aria-hidden="true"
-                  className="h-4 w-4 text-pearl/50 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="h-4 w-4 text-pearl/50 transition-transform duration-200 group-hover:translate-x-0.5"
                 />
               </BookingLauncher>
               {card.linkedin && (

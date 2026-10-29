@@ -89,7 +89,7 @@ export function BookingLauncher({
             onClick={event => {
               if (event.target === event.currentTarget) close();
             }}
-            className="m-0 h-[100dvh] max-h-none w-full max-w-none overflow-hidden border-0 bg-transparent p-0 text-left text-pearl backdrop:bg-obsidian/80 backdrop:backdrop-blur-sm sm:m-auto sm:h-auto sm:max-h-[min(92dvh,60rem)] sm:w-[min(100%_-_2rem,44rem)] sm:rounded-2xl"
+            className="m-0 scheme-dark h-[100dvh] max-h-none w-full max-w-none overflow-hidden border-0 bg-transparent p-0 text-left text-pearl backdrop:bg-obsidian/80 backdrop:backdrop-blur-sm sm:m-auto sm:h-auto sm:max-h-[min(92dvh,60rem)] sm:w-[min(100%_-_2rem,44rem)] sm:rounded-2xl"
           >
             <div className="h-full bg-gradient-to-br from-leaf via-lavender to-sun sm:rounded-2xl sm:p-px">
               <div className="relative isolate flex h-full flex-col overflow-hidden bg-obsidian sm:max-h-[calc(min(92dvh,60rem)_-_2px)] sm:rounded-2xl">
@@ -123,7 +123,7 @@ export function BookingLauncher({
                   </button>
                 </header>
 
-                <div className="flex-1 overflow-y-auto overscroll-contain px-3 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
+                <div className="flex-1 [scrollbar-color:rgb(250_250_250/0.25)_transparent] [scrollbar-width:thin] overflow-y-auto overscroll-contain px-3 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
                   {embedMounted && <KalyaBooking attribution={attribution} />}
                 </div>
               </div>
