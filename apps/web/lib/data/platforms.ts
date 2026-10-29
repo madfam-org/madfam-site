@@ -105,6 +105,8 @@ export interface Platform {
   hasTechSpecs: boolean;
   /** True when a dedicated platform detail page exists at /platforms/[slug]. */
   hasDetailPage: boolean;
+  /** True when the site footer lists this platform by name. */
+  inFooter: boolean;
   category: string; // Display category for products page grouping
   /** SPDX identifier, from the registry. */
   license: string;
@@ -146,6 +148,7 @@ function mergePlatform(product: RegistryProduct, presentation: PlatformPresentat
     hasComparison: presentation.hasComparison,
     hasTechSpecs: presentation.hasTechSpecs,
     hasDetailPage: presentation.hasDetailPage,
+    inFooter: presentation.inFooter ?? false,
     category: product.category,
     license: product.license,
     ...(product.dataLicense ? { dataLicense: product.dataLicense } : {}),
@@ -290,14 +293,16 @@ export interface FooterPlatformLink {
 }
 
 /**
- * The footer's platform column, in the registry's order. A platform with an
+ * The footer's platform column: only the platforms the overlay marks
+ * `inFooter` (the curated few that are ready and proven, owner ruling
+ * 2026-10-28), in the registry's order. The Footer closes the column with a
+ * link to the full catalog, so no platform is orphaned. A platform with an
  * in-site detail page links to it; one whose canonical landing is its own
- * domain links there. Neither the names nor the hrefs are hand-kept any more —
- * this replaces the `footer.platforms.*` block that used to be maintained by
- * hand in every locale bundle and had drifted out of step with the catalog.
+ * domain links there. Neither the names nor the hrefs are hand-kept — they
+ * come from the registry merge, as before.
  */
 export function getFooterPlatforms(locale: string): FooterPlatformLink[] {
-  return PLATFORMS.filter(p => !isComingSoon(p)).map(p =>
+  return PLATFORMS.filter(p => p.inFooter && !isComingSoon(p)).map(p =>
     p.hasDetailPage || !p.externalUrl
       ? { slug: p.slug, name: p.name, href: `/${locale}/platforms/${p.slug}`, external: false }
       : { slug: p.slug, name: p.name, href: p.externalUrl, external: true }
