@@ -13,7 +13,7 @@ env:
 # Public PR validation can use standard hosted capacity without a compute charge.
 # Only superseded PR runs are canceled; main, schedules and deployment lanes finish.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
