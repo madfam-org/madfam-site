@@ -10,10 +10,16 @@ env:
   HUSKY: 0
   CI: true
 
+# Public PR validation can use standard hosted capacity without a compute charge.
+# Only superseded PR runs are canceled; main, schedules and deployment lanes finish.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   networkpolicy-port-lint:
     name: NetworkPolicy port consistency
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-24.04' || (vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04') }}
     timeout-minutes: 3
     # Prevents the 2026-05-04 status.enclii.dev outage class:
     # NetworkPolicy `ports:` clauses that don't intersect the selected pods'
@@ -32,7 +38,7 @@ jobs:
 
   quality-gates:
     name: Quality Gates
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-24.04' || (vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04') }}
     timeout-minutes: 20
 
     strategy:
@@ -89,7 +95,7 @@ jobs:
 
   build:
     name: Build Check
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-24.04' || (vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04') }}
     timeout-minutes: 25
     needs: quality-gates
 
@@ -111,6 +117,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Compiler intermediates only; install, build and every assertion still run.
+      - name: Cache Next.js compiler intermediates
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: apps/web/.next/cache
+          key: ${{ runner.os }}-next-node22-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-next-node22-${{ hashFiles('pnpm-lock.yaml') }}-
+
       - name: Generate Prisma Client
         run: |
           cd apps/web
@@ -127,7 +142,7 @@ jobs:
 
   security:
     name: Security Audit
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-24.04' || (vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04') }}
     timeout-minutes: 10
 
     steps:
