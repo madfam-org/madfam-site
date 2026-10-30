@@ -9,10 +9,16 @@ on:
     # Run at 6:00 AM UTC every Monday
     - cron: '0 6 * * 1'
 
+# Public PR validation can use standard hosted capacity without a compute charge.
+# Only superseded PR runs are canceled; main, schedules and deployment lanes finish.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   analyze:
     name: Analyze
-    runs-on: ${{ vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04' }}
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-24.04' || (vars.ARC_BOOTSTRAP_COMPLETE == 'true' && 'madfam-runners-blue' || 'ubuntu-24.04') }}
     timeout-minutes: 30
     permissions:
       actions: read
