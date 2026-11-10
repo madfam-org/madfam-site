@@ -6,7 +6,7 @@
   "privacy": {
     "title": "Política de Privacidad",
     "lastUpdated": "Última actualización: {date}",
-    "lastUpdatedDate": "23 de septiembre de 2026",
+    "lastUpdatedDate": "10 de noviembre de 2026",
     "intro": {
       "title": "1. Introducción",
       "content": "Innovaciones MADFAM S.A.S. de C.V. («MADFAM», «nosotros»), con domicilio en Cuernavaca, Morelos, México, es la responsable del tratamiento de los datos personales que recabamos a través de madfam.io. Esta política describe qué datos recabamos, para qué los usamos, cómo los protegemos y cómo puedes ejercer tus derechos."
@@ -25,10 +25,9 @@
       "automaticInfo": {
         "title": "2.2 Información recopilada automáticamente",
         "items": [
-          "Dirección IP y ubicación aproximada",
-          "Tipo de navegador y dispositivo",
-          "Páginas visitadas y tiempo de permanencia",
-          "Fuente de referencia (cómo llegaste a nuestro sitio)"
+          "Tu dirección IP y datos técnicos de tu navegador y dispositivo, que nuestro proveedor de red (Cloudflare) procesa para entregarte el sitio y protegerlo contra tráfico automatizado",
+          "Si nos envías un formulario: tu dirección IP, el tipo de navegador y dispositivo, la página desde la que lo enviaste y, si llegaste desde un enlace de campaña, sus parámetros (utm_*)",
+          "Hoy no usamos herramientas de analítica web: no registramos qué páginas visitas ni cuánto tiempo permaneces en ellas"
         ]
       }
     },
@@ -66,13 +65,13 @@
     },
     "cookies": {
       "title": "6. Cookies y Tecnologías Similares",
-      "description": "Utilizamos cookies y tecnologías similares para:",
+      "description": "Usamos cookies y tecnologías similares solo para:",
       "items": [
-        "Mantener tus preferencias",
-        "Analizar el tráfico del sitio (mediante Plausible Analytics)",
-        "Mejorar la funcionalidad del sitio"
+        "Recordar tus preferencias (idioma y tema claro/oscuro)",
+        "Proteger el sitio contra tráfico automatizado (Cloudflare)",
+        "Conservar, mientras dure tu visita, los parámetros de campaña con los que llegaste, para incluirlos si nos envías un formulario"
       ],
-      "note": "Puedes configurar tu navegador para rechazar cookies, aunque esto puede afectar la funcionalidad del sitio."
+      "note": "Hoy no usamos herramientas de analítica web ni cookies de publicidad. Si en el futuro activamos analítica, actualizaremos este aviso y la Política de Cookies antes de hacerlo. Puedes configurar tu navegador para rechazar cookies, aunque esto puede afectar la funcionalidad del sitio."
     },
     "userRights": {
       "title": "7. Tus Derechos",

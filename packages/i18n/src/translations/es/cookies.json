@@ -1,11 +1,11 @@
 {
   "title": "Política de Cookies",
   "lastUpdated": "Última actualización: {date}",
-  "lastUpdatedDate": "23 de septiembre de 2026",
+  "lastUpdatedDate": "10 de noviembre de 2026",
   "sections": {
     "whatAreCookies": {
       "title": "¿Qué son las cookies?",
-      "description": "Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas nuestro sitio web. Nos ayudan a brindarte una mejor experiencia recordando tus preferencias y analizando cómo usas nuestro sitio."
+      "description": "Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas nuestro sitio web. Hacen que el sitio funcione y recuerdan tus preferencias."
     },
     "howWeUse": {
       "title": "Cómo usamos las cookies",
@@ -15,7 +15,7 @@
       "preference": "Cookies de Preferencia",
       "marketing": "Cookies de Marketing",
       "essentialDescription": "Hacen que el sitio funcione: navegación entre páginas, idioma elegido y protección contra tráfico automatizado.",
-      "analyticsDescription": "Hoy no usamos cookies analíticas: la analítica del sitio (Plausible, alojado por nosotros) funciona sin cookies ni identificadores persistentes.",
+      "analyticsDescription": "Hoy no usamos cookies analíticas ni ninguna herramienta de analítica web: el sitio no carga scripts de analítica ni mide tus visitas. Si en el futuro activamos analítica, actualizaremos esta política y nuestro aviso de privacidad antes de hacerlo.",
       "preferenceDescription": "Recuerdan tus preferencias, como el idioma.",
       "marketingDescription": "Hoy no usamos cookies de marketing ni de publicidad."
     },
@@ -31,7 +31,7 @@
       "session": "Sesión",
       "cloudflareCookie": "Protección contra bots (Cloudflare)",
       "thirtyMinutes": "30 minutos",
-      "localStorage": "Tu elección sobre cookies y el tema claro/oscuro se guardan en el almacenamiento local de tu navegador; no se envían a nuestros servidores."
+      "localStorage": "Que ya cerraste el aviso de cookies y el tema claro/oscuro se guardan en el almacenamiento local de tu navegador. Si llegas desde un enlace con parámetros de campaña (utm_*), los guardamos en el almacenamiento de sesión de esa pestaña, que se borra al cerrarla. Nada de esto se envía a nuestros servidores, salvo los parámetros de campaña, que se incluyen solo si nos envías un formulario."
     },
     "thirdParty": {
       "title": "Cookies de terceros",
@@ -67,7 +67,7 @@
   },
   "banner": {
     "title": "Cookies en este sitio",
-    "description": "Solo usamos cookies necesarias y de preferencia. No usamos cookies analíticas ni de publicidad: nuestra analítica (Plausible, alojado por nosotros) funciona sin cookies.",
+    "description": "Solo usamos cookies necesarias y de preferencia. No usamos cookies analíticas ni de publicidad, y hoy el sitio no usa ninguna herramienta de analítica.",
     "necessary": {
       "title": "Necesarias",
       "description": "hacen que el sitio funcione y lo protegen contra tráfico automatizado."

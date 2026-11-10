@@ -1,11 +1,11 @@
 {
   "title": "Política de Cookies",
   "lastUpdated": "Última atualização: {date}",
-  "lastUpdatedDate": "23 de setembro de 2026",
+  "lastUpdatedDate": "10 de novembro de 2026",
   "sections": {
     "whatAreCookies": {
       "title": "O que são cookies?",
-      "description": "Cookies são pequenos arquivos de texto que são armazenados em seu dispositivo quando você visita nosso site. Eles nos ajudam a proporcionar uma melhor experiência lembrando suas preferências e analisando como você usa nosso site."
+      "description": "Cookies são pequenos arquivos de texto armazenados em seu dispositivo quando você visita nosso site. Eles fazem o site funcionar e lembram suas preferências."
     },
     "howWeUse": {
       "title": "Como usamos cookies",
@@ -15,7 +15,7 @@
       "preference": "Cookies de Preferência",
       "marketing": "Cookies de Marketing",
       "essentialDescription": "Fazem o site funcionar: navegação entre páginas, o idioma escolhido e proteção contra tráfego automatizado.",
-      "analyticsDescription": "Hoje não usamos cookies analíticos: a análise do site (Plausible, hospedado por nós) funciona sem cookies nem identificadores persistentes.",
+      "analyticsDescription": "Hoje não usamos cookies analíticos nem nenhuma ferramenta de análise web: o site não carrega scripts de análise nem mede suas visitas. Se no futuro ativarmos análise, atualizaremos esta política e nosso aviso de privacidade antes de fazê-lo.",
       "preferenceDescription": "Lembram suas preferências, como o idioma.",
       "marketingDescription": "Hoje não usamos cookies de marketing nem de publicidade."
     },
@@ -31,7 +31,7 @@
       "session": "Sessão",
       "cloudflareCookie": "Proteção contra bots (Cloudflare)",
       "thirtyMinutes": "30 minutos",
-      "localStorage": "Sua escolha sobre cookies e o tema claro/escuro ficam no armazenamento local do seu navegador; não são enviados aos nossos servidores."
+      "localStorage": "O fato de você ter fechado o aviso de cookies e o tema claro/escuro ficam no armazenamento local do seu navegador. Se você chegar por um link com parâmetros de campanha (utm_*), nós os guardamos no armazenamento de sessão dessa aba, que é apagado quando você a fecha. Nada disso é enviado aos nossos servidores, exceto os parâmetros de campanha, que são incluídos apenas se você nos enviar um formulário."
     },
     "thirdParty": {
       "title": "Cookies de terceiros",
@@ -67,7 +67,7 @@
   },
   "banner": {
     "title": "Cookies neste site",
-    "description": "Usamos apenas cookies necessários e de preferência. Não usamos cookies analíticos nem de publicidade: nossa análise (Plausible, hospedado por nós) funciona sem cookies.",
+    "description": "Usamos apenas cookies necessários e de preferência. Não usamos cookies analíticos nem de publicidade, e hoje o site não usa nenhuma ferramenta de análise.",
     "necessary": {
       "title": "Necessários",
       "description": "fazem o site funcionar e o protegem contra tráfego automatizado."

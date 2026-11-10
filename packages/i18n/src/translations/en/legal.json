@@ -6,7 +6,7 @@
   "privacy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: {date}",
-    "lastUpdatedDate": "September 23, 2026",
+    "lastUpdatedDate": "November 10, 2026",
     "intro": {
       "title": "1. Introduction",
       "content": "Innovaciones MADFAM S.A.S. de C.V. (\"MADFAM\", \"we\"), with its registered address in Cuernavaca, Morelos, Mexico, is the controller of the personal data we collect through madfam.io. This policy describes what data we collect, what we use it for, how we protect it and how you can exercise your rights."
@@ -25,10 +25,9 @@
       "automaticInfo": {
         "title": "2.2 Information collected automatically",
         "items": [
-          "IP address and approximate location",
-          "Browser type and device",
-          "Pages visited and time spent",
-          "Referral source (how you reached our site)"
+          "Your IP address and technical data about your browser and device, which our network provider (Cloudflare) processes to deliver the site and protect it from automated traffic",
+          "If you send us a form: your IP address, your browser and device type, the page you sent it from and, if you arrived through a campaign link, its parameters (utm_*)",
+          "We use no web analytics tool today: we do not record which pages you visit or how long you stay on them"
         ]
       }
     },
@@ -66,13 +65,13 @@
     },
     "cookies": {
       "title": "6. Cookies and Similar Technologies",
-      "description": "We use cookies and similar technologies to:",
+      "description": "We use cookies and similar technologies only to:",
       "items": [
-        "Maintain your preferences",
-        "Analyze site traffic (via Plausible Analytics)",
-        "Improve site functionality"
+        "Remember your preferences (language and light/dark theme)",
+        "Protect the site from automated traffic (Cloudflare)",
+        "Keep, for the length of your visit, the campaign parameters you arrived with, so they are included if you send us a form"
       ],
-      "note": "You can configure your browser to reject cookies, although this may affect site functionality."
+      "note": "We use no web analytics tool and no advertising cookies today. If we turn on analytics in the future, we will update this notice and the Cookie Policy before we do. You can configure your browser to reject cookies, although this may affect site functionality."
     },
     "userRights": {
       "title": "7. Your Rights",

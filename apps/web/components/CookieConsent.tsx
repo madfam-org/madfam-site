@@ -11,9 +11,12 @@ import { useState, useEffect } from 'react';
  *
  * The site's own cookie policy (`/[locale]/cookies`, `cookies` namespace) lists
  * only strictly necessary cookies (the next-intl locale cookie and Cloudflare's
- * bot-management cookie) and preference storage (language, theme). Analytics
- * is self-hosted Plausible, which sets no cookie (ruling R41), and there are no
- * marketing or advertising cookies. So there is nothing to opt in to: no
+ * bot-management cookie) and preference storage (language, theme). No analytics
+ * runs today: production builds withhold NEXT_PUBLIC_PLAUSIBLE_DOMAIN, so no
+ * analytics script loads and no event is sent (the notices say so, and
+ * lib/__tests__/analytics-notice-guard.test.ts keeps the build and the words
+ * together). There are no marketing or advertising cookies either. So there is
+ * nothing to opt in to: no
  * analytics or marketing toggle, no "accept all", and no "by continuing you
  * consent" wording (finding M1-030). If the site ever adds a non-essential
  * cookie, it needs a real opt-in here first, and the policy page updated.
@@ -23,7 +26,8 @@ import { useState, useEffect } from 'react';
  * to analytics/marketing cookies that never existed; it is removed on load.
  */
 const NOTICE_KEY = 'cookie-notice';
-const NOTICE_VERSION = '2026-10-01';
+// Bumped when the notice copy changes, so the notice shows once more.
+const NOTICE_VERSION = '2026-11-10';
 const LEGACY_CONSENT_KEY = 'cookie-consent';
 
 function readStorage(key: string): string | null {

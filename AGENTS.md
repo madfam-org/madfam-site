@@ -111,8 +111,12 @@ node-identity class is deliberately not expressed in a public script.
 - **No sign-in on madfam.io.** The ecosystem login is Janua; nothing here may
   verify a Janua token with a shared HS256 secret (R42).
 - **AI crawlers** are allowed on this public landing (R40); `app/robots.ts` is
-  the only robots source. **Analytics** is self-hosted Plausible at
-  `plausible.madfam.io`, never Plausible Cloud (R41).
+  the only robots source. **Analytics**, when enabled, is self-hosted
+  Plausible at `plausible.madfam.io`, never Plausible Cloud (R41). It is
+  **off in production today** (`NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is withheld at
+  build) and the privacy notice and cookie policy say no analytics runs:
+  enabling it means changing that copy first, through counsel review
+  (`lib/__tests__/analytics-notice-guard.test.ts` holds the two together).
 - **Retired names never render:** PENNY (→ Selva), SPARK, Primavera3D (→
   Primavera Maker Node), penny.onl, forgesight.quest (Forgesight is
   `forgesight.app`), Showtech, the "business units" / "AI consultancy" framing.
@@ -481,7 +485,7 @@ All detailed documentation is in `/docs/`:
 - **Rate limiting**: Redis-backed (multi-pod safe) with in-memory fallback
 - **CMS cache**: Write-through Redis cache with webhook invalidation
 - **Search**: Server-side search API at `/api/search`
-- **Analytics**: Plausible via `sendBeacon` (no cookie consent needed)
+- **Analytics**: Plausible via `sendBeacon` (no cookie consent needed); off in production until the notices describe it
 - **Email**: Resend integration via email queue processor
 
 ---

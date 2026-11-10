@@ -33,8 +33,9 @@ ARG NEXT_PUBLIC_JANUA_URL=https://auth.madfam.io
 ENV NEXT_PUBLIC_JANUA_URL=${NEXT_PUBLIC_JANUA_URL}
 # Analytics is also NEXT_PUBLIC_*, so it must be present at build time — setting
 # it in the runtime Secret or Deployment env does nothing (Next inlines it).
-# Empty by default: no Plausible tag until plausible.madfam.io exists (O49;
-# see the build-args note in deploy-web.yml).
+# Empty by default: no Plausible tag until plausible.madfam.io exists (O49)
+# and the privacy and cookie notices describe it (see the build-args note in
+# deploy-web.yml and lib/__tests__/analytics-notice-guard.test.ts).
 ARG NEXT_PUBLIC_PLAUSIBLE_DOMAIN=
 ENV NEXT_PUBLIC_PLAUSIBLE_DOMAIN=${NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
 ARG NEXT_PUBLIC_PLAUSIBLE_HOST=https://plausible.madfam.io
