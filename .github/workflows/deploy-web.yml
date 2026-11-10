@@ -97,7 +97,10 @@ jobs:
           # O49), so the tag only produced failing requests. With the domain
           # unset the layout renders no Plausible script and the CSP drops the
           # origin. Re-add `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=madfam.io` here once
-          # O49 is done; the code path is unchanged.
+          # O49 is done AND the privacy notice and cookie policy describe the
+          # analytics (they state today that none runs); the code path is
+          # unchanged. apps/web/lib/__tests__/analytics-notice-guard.test.ts
+          # fails until both change together.
           build-args: |
             GIT_SHA=${{ github.sha }}
             BUILD_TIME=${{ steps.meta.outputs.build_time }}

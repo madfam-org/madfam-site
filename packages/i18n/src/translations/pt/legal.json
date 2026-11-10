@@ -6,7 +6,7 @@
   "privacy": {
     "title": "Política de Privacidade",
     "lastUpdated": "Última atualização: {date}",
-    "lastUpdatedDate": "23 de setembro de 2026",
+    "lastUpdatedDate": "10 de novembro de 2026",
     "intro": {
       "title": "1. Introdução",
       "content": "A Innovaciones MADFAM S.A.S. de C.V. (\"MADFAM\", \"nós\"), com endereço em Cuernavaca, Morelos, México, é a controladora dos dados pessoais que coletamos por meio de madfam.io. Esta política descreve quais dados coletamos, para que os usamos, como os protegemos e como você pode exercer seus direitos."
@@ -25,10 +25,9 @@
       "automaticInfo": {
         "title": "2.2 Informações coletadas automaticamente",
         "items": [
-          "Endereço IP e localização aproximada",
-          "Tipo de navegador e dispositivo",
-          "Páginas visitadas e tempo de permanência",
-          "Fonte de referência (como chegou ao nosso site)"
+          "Seu endereço IP e dados técnicos do seu navegador e dispositivo, que nosso provedor de rede (Cloudflare) processa para entregar o site e protegê-lo contra tráfego automatizado",
+          "Se você nos enviar um formulário: seu endereço IP, o tipo de navegador e dispositivo, a página de onde o enviou e, se chegou por um link de campanha, seus parâmetros (utm_*)",
+          "Hoje não usamos ferramentas de análise web: não registramos quais páginas você visita nem quanto tempo permanece nelas"
         ]
       }
     },
@@ -66,13 +65,13 @@
     },
     "cookies": {
       "title": "6. Cookies e Tecnologias Similares",
-      "description": "Usamos cookies e tecnologias similares para:",
+      "description": "Usamos cookies e tecnologias similares apenas para:",
       "items": [
-        "Manter suas preferências",
-        "Analisar o tráfego do site (via Plausible Analytics)",
-        "Melhorar a funcionalidade do site"
+        "Lembrar suas preferências (idioma e tema claro/escuro)",
+        "Proteger o site contra tráfego automatizado (Cloudflare)",
+        "Guardar, durante a sua visita, os parâmetros de campanha com que você chegou, para incluí-los se você nos enviar um formulário"
       ],
-      "note": "Você pode configurar seu navegador para rejeitar cookies, embora isso possa afetar a funcionalidade do site."
+      "note": "Hoje não usamos ferramentas de análise web nem cookies de publicidade. Se no futuro ativarmos análise, atualizaremos este aviso e a Política de Cookies antes de fazê-lo. Você pode configurar seu navegador para rejeitar cookies, embora isso possa afetar a funcionalidade do site."
     },
     "userRights": {
       "title": "7. Seus Direitos",

@@ -1,11 +1,11 @@
 {
   "title": "Cookie Policy",
   "lastUpdated": "Last updated: {date}",
-  "lastUpdatedDate": "September 23, 2026",
+  "lastUpdatedDate": "November 10, 2026",
   "sections": {
     "whatAreCookies": {
       "title": "What are cookies?",
-      "description": "Cookies are small text files that are stored on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and analyzing how you use our site."
+      "description": "Cookies are small text files that are stored on your device when you visit our website. They make the site work and remember your preferences."
     },
     "howWeUse": {
       "title": "How we use cookies",
@@ -15,7 +15,7 @@
       "preference": "Preference Cookies",
       "marketing": "Marketing Cookies",
       "essentialDescription": "These make the site work: page navigation, your chosen language and protection against automated traffic.",
-      "analyticsDescription": "We do not use analytics cookies today: the site analytics (Plausible, self-hosted) work without cookies or persistent identifiers.",
+      "analyticsDescription": "We do not use analytics cookies or any web analytics tool today: the site loads no analytics scripts and does not measure your visits. If we turn on analytics in the future, we will update this policy and our privacy notice before we do.",
       "preferenceDescription": "These remember your preferences, such as language.",
       "marketingDescription": "We do not use marketing or advertising cookies today."
     },
@@ -31,7 +31,7 @@
       "session": "Session",
       "cloudflareCookie": "Bot protection (Cloudflare)",
       "thirtyMinutes": "30 minutes",
-      "localStorage": "Your cookie choice and the light/dark theme are kept in your browser's local storage; they are not sent to our servers."
+      "localStorage": "That you closed the cookie notice and the light/dark theme are kept in your browser's local storage. If you arrive through a link with campaign parameters (utm_*), we keep them in that tab's session storage, which is cleared when you close it. None of this is sent to our servers, except the campaign parameters, which are included only if you send us a form."
     },
     "thirdParty": {
       "title": "Third-party cookies",
@@ -67,7 +67,7 @@
   },
   "banner": {
     "title": "Cookies on this site",
-    "description": "We only use necessary and preference cookies. We use no analytics or advertising cookies: our analytics (Plausible, self-hosted) works without cookies.",
+    "description": "We only use necessary and preference cookies. We use no analytics or advertising cookies, and the site uses no analytics tool today.",
     "necessary": {
       "title": "Necessary",
       "description": "keep the site working and protect it from automated traffic."
