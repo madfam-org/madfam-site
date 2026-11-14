@@ -21,6 +21,11 @@ const serverEnvSchema = z.object({
   N8N_API_KEY: z.string().min(16).optional(),
   N8N_WEBHOOK_URL: z.string().url().optional(),
 
+  // PhyndCRM lead intake (optional): lib/phynd-crm.ts sends nothing unless both
+  // are set. Server-only, never NEXT_PUBLIC_*.
+  PHYND_CRM_BASE_URL: z.string().url().optional(),
+  PHYND_CRM_EVENTS_SECRET: z.string().optional(),
+
   // Email Service
   RESEND_API_KEY: z.string().startsWith('re_').optional(),
   RESEND_FROM_EMAIL: z.string().email().optional(),
