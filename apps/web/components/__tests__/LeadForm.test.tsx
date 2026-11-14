@@ -170,6 +170,7 @@ describe('LeadForm Component', () => {
             budget: '100k-500k-mxn',
             region: 'CDMX',
             followUp: 'email',
+            page: '/',
           },
           source: 'website',
           preferredLanguage: 'es',
@@ -215,6 +216,33 @@ describe('LeadForm Component', () => {
       });
     } finally {
       window.sessionStorage.removeItem('madfam.utm');
+    }
+  });
+
+  it('sends the stored external referrer and the current page path in the lead metadata', async () => {
+    window.sessionStorage.setItem('madfam.referrer', 'https://news.example.test/post');
+    window.history.pushState({}, '', '/es/contact?utm_source=x');
+    mockFetch.mockResolvedValueOnce({
+      json: () => Promise.resolve({ success: true, leadId: 'lead-ref' }),
+    });
+
+    try {
+      render(<LeadForm source="contact-page" />);
+      await fillRequiredFields();
+      await user.click(screen.getByRole('button', { name: /enviar solicitud/i }));
+
+      await waitFor(() => {
+        expect(mockFetch).toHaveBeenCalled();
+      });
+      const body = JSON.parse(mockFetch.mock.calls[0][1].body as string);
+      expect(body.metadata).toMatchObject({
+        referrer: 'https://news.example.test/post',
+        page: '/es/contact',
+      });
+      expect(body.source).toBe('contact-page');
+    } finally {
+      window.sessionStorage.removeItem('madfam.referrer');
+      window.history.pushState({}, '', '/');
     }
   });
 

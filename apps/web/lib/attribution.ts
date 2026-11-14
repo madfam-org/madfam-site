@@ -10,6 +10,10 @@
  * tab's session (first campaign touch wins, like Dhanam's set-once
  * attribution) and merged into the lead's metadata on submit. Only the five
  * standard campaign parameters are kept; nothing identifies the visitor.
+ *
+ * The external page that sent the visitor (`document.referrer`) is kept the
+ * same way, once per session: only when it is an http(s) URL on another origin,
+ * reduced to origin + path (no query or fragment), and length-capped.
  */
 
 export const UTM_KEYS = [
@@ -23,6 +27,7 @@ export type UtmKey = (typeof UTM_KEYS)[number];
 export type Utm = Partial<Record<UtmKey, string>>;
 
 export const UTM_STORAGE_KEY = 'madfam.utm';
+export const REFERRER_STORAGE_KEY = 'madfam.referrer';
 const MAX_VALUE_LENGTH = 200;
 
 type KeyValueStore = Pick<Storage, 'getItem' | 'setItem'>;
@@ -68,6 +73,49 @@ export function rememberUtm(search: string, storage: KeyValueStore | undefined):
   if (isEmpty(utm) || !isEmpty(storedUtm(storage))) return;
   try {
     storage.setItem(UTM_STORAGE_KEY, JSON.stringify(utm));
+  } catch {
+    // Storage full or blocked: attribution is best effort, the lead still posts.
+  }
+}
+
+/**
+ * An external referrer as origin + path, or undefined when it is empty, not an
+ * http(s) URL, or on the site's own origin (an internal navigation).
+ */
+export function pickReferrer(referrer: string, ownOrigin: string): string | undefined {
+  if (!referrer) return undefined;
+  try {
+    const url = new URL(referrer);
+    if (url.protocol !== 'https:' && url.protocol !== 'http:') return undefined;
+    if (url.origin === ownOrigin) return undefined;
+    return `${url.origin}${url.pathname === '/' ? '' : url.pathname}`.slice(0, MAX_VALUE_LENGTH);
+  } catch {
+    return undefined;
+  }
+}
+
+/** The stored external referrer, or undefined when none (or storage is unusable). */
+export function storedReferrer(storage: KeyValueStore | undefined): string | undefined {
+  if (!storage) return undefined;
+  try {
+    const value = storage.getItem(REFERRER_STORAGE_KEY);
+    return value ? value.slice(0, MAX_VALUE_LENGTH) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/** Keeps the session's first external referrer. */
+export function rememberReferrer(
+  referrer: string,
+  ownOrigin: string,
+  storage: KeyValueStore | undefined
+): void {
+  if (!storage || storedReferrer(storage)) return;
+  const value = pickReferrer(referrer, ownOrigin);
+  if (!value) return;
+  try {
+    storage.setItem(REFERRER_STORAGE_KEY, value);
   } catch {
     // Storage full or blocked: attribution is best effort, the lead still posts.
   }

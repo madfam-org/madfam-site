@@ -17,7 +17,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui';
-import { leadUtm, sessionStore } from '@/lib/attribution';
+import { leadUtm, sessionStore, storedReferrer } from '@/lib/attribution';
 
 const INTENTS = [
   'platform',
@@ -93,6 +93,7 @@ export function LeadForm({ source = 'website', initialIntent, product, onSuccess
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
+    const referrer = storedReferrer(sessionStore());
     const metadata = {
       intent: data.intent,
       offerPath: data.intent,
@@ -104,6 +105,9 @@ export function LeadForm({ source = 'website', initialIntent, product, onSuccess
       // Campaign attribution: the leads API stores utm_source/medium/campaign
       // on the Lead row (lib/attribution.ts).
       ...leadUtm(window.location.search, sessionStore()),
+      ...(referrer ? { referrer } : {}),
+      // The page the form was posted from (path only), for the CRM's landing page.
+      page: window.location.pathname,
     };
 
     // Track form submission start
