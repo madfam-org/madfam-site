@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
+import { deliverLeadToCrm } from '@/lib/phynd-crm';
 import { prisma } from '@/lib/prisma';
 import { withRateLimit } from '@/lib/rate-limit';
 import { validateBearerToken } from '@/lib/security';
@@ -194,6 +195,12 @@ async function handlePOST(request: NextRequest) {
         });
       });
     }
+
+    // Send the stored lead to PhyndCRM as a signed `site.lead.captured` event.
+    // Best effort, like the n8n webhook: not awaited, and it logs instead of
+    // rejecting, so a CRM outage never fails or delays the submission. A no-op
+    // unless PHYND_CRM_BASE_URL and PHYND_CRM_EVENTS_SECRET are both set.
+    void deliverLeadToCrm(lead, validatedData);
 
     return NextResponse.json({
       success: true,
