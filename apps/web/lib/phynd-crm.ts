@@ -8,14 +8,19 @@ import { apiLogger } from './logger';
  * a signed `site.lead.captured` event, so the person becomes a contact and a
  * lead there, with the campaign that brought them.
  *
- * Server-only: `PHYND_CRM_BASE_URL` and `PHYND_CRM_EVENTS_SECRET` are read from
- * the server environment at call time and must never become `NEXT_PUBLIC_*`
- * variables. With either one unset nothing is sent.
+ * Server-only: `PHYND_CRM_BASE_URL` and `PHYND_CRM_LEAD_INTAKE_SECRET` are read
+ * from the server environment at call time and must never become
+ * `NEXT_PUBLIC_*` variables. With either one unset (or blank) nothing is sent.
+ * The secret is the lead-intake route's own signing key and is used exactly as
+ * provisioned, never trimmed, because the receiver verifies with the raw value.
  *
- * Best effort, like the n8n webhook in `/api/leads`: one attempt with a 5 s
- * timeout, and a failure is logged with the lead id and never thrown, because
- * the lead is already stored here. The event id is derived from the lead row
- * id, so sending the same lead again dedups on the CRM side.
+ * Best effort, like the n8n webhook in `/api/leads`: up to three attempts, each
+ * with a 5 s timeout. A network error, a timeout, a 429 or a 5xx is retried
+ * after a short jittered pause (~0.5 s, then ~2 s); a 3xx or another 4xx is
+ * not. Every attempt sends the same body under a fresh signature. A final
+ * failure is logged once with the lead id and never thrown, because the lead is
+ * already stored here. The event id is derived from the lead row id, so a
+ * repeated delivery dedups on the CRM side.
  */
 
 const LEAD_INTAKE_PATH = '/api/webhooks/lead-intake';
@@ -23,6 +28,17 @@ const SIGNATURE_HEADER = 'x-madfam-signature';
 const EVENT_TYPE = 'site.lead.captured';
 const EVENT_SOURCE = 'madfam-site';
 const DELIVERY_TIMEOUT_MS = 5000;
+/** The pause before each retry; each is stretched by up to +50% jitter. */
+export const RETRY_DELAYS_MS: readonly number[] = [500, 2000];
+
+/** The CRM's column limits: `name`, `email`, `company` are varchar(255) and
+ *  `phone` varchar(50). Lengths are counted in characters, as Postgres does. */
+const MAX_NAME_LENGTH = 255;
+const MAX_COMPANY_LENGTH = 255;
+const MAX_PHONE_LENGTH = 50;
+const MAX_EMAIL_LENGTH = 255;
+/** The receiver keeps at most 500 characters of a page path. */
+const MAX_PAGE_LENGTH = 500;
 
 /** The RFC 4122 URL namespace as raw bytes: the UUIDv5 namespace of event ids. */
 const UUID_NAMESPACE_URL = Buffer.from('6ba7b8119dad11d180b400c04fd430c8', 'hex');
@@ -40,10 +56,11 @@ export interface LeadSubmission {
   company?: string;
   phone?: string;
   message?: string;
-  /** Where the form lives, e.g. `contact-page`. */
+  /** Which form this is, e.g. `contact-page`. A label, not a page: not sent. */
   source?: string;
   preferredLanguage?: string;
-  /** The form's qualification and campaign fields: intent, product, utm_*. */
+  /** The form's qualification and campaign fields: intent, product, utm_*,
+   *  plus `page` (the path the form was posted from) and `referrer`. */
   metadata?: Record<string, unknown>;
 }
 
@@ -72,6 +89,22 @@ export type LeadDelivery = 'skipped' | 'delivered' | 'failed';
 /** A trimmed, non-blank string, or undefined for anything else. */
 function text(value: unknown): string | undefined {
   return typeof value === 'string' ? value.trim() || undefined : undefined;
+}
+
+/** Characters (code points, as Postgres counts them) in a string. */
+function charLength(value: string): number {
+  return Array.from(value).length;
+}
+
+/** The first `max` characters, never splitting a surrogate pair. */
+function cut(value: string, max: number): string {
+  return charLength(value) > max ? Array.from(value).slice(0, max).join('') : value;
+}
+
+/** The form's page path: a trimmed value starting with `/`, length-capped. */
+function pagePath(value: unknown): string | undefined {
+  const path = text(value);
+  return path?.startsWith('/') ? cut(path, MAX_PAGE_LENGTH) : undefined;
 }
 
 /** Keeps only the keys that carry a value, so no key is ever sent empty. */
@@ -107,12 +140,22 @@ export function leadEventId(leadId: string): string {
   ].join('-');
 }
 
-/** Maps a stored lead and its submission onto the `site.lead.captured` contract. */
+/**
+ * Maps a stored lead and its submission onto the `site.lead.captured` contract,
+ * within the CRM's column limits: `name` and `company` are cut to 255
+ * characters, and a `phone` longer than 50 is left out (the lead still goes).
+ * An email over 255 cannot be stored at all; deliverLeadToCrm skips that lead.
+ *
+ * `context.page` is the path the form was posted from (`metadata.page`), not
+ * the form's `source` label, which names a form rather than a page.
+ */
 export function buildLeadCapturedEvent(
   lead: StoredLead,
   submission: LeadSubmission
 ): SiteLeadCapturedEvent {
   const metadata = submission.metadata ?? {};
+  const phone = text(submission.phone);
+  const company = text(submission.company);
   return {
     schema_version: '1',
     event_id: leadEventId(lead.id),
@@ -121,16 +164,16 @@ export function buildLeadCapturedEvent(
     occurred_at: (lead.createdAt ?? new Date()).toISOString(),
     payload: {
       lead: {
-        name: submission.name.trim(),
+        name: cut(submission.name.trim(), MAX_NAME_LENGTH),
         email: submission.email.trim(),
         ...present({
-          phone: submission.phone,
-          company: submission.company,
+          phone: phone && charLength(phone) <= MAX_PHONE_LENGTH ? phone : undefined,
+          company: company && cut(company, MAX_COMPANY_LENGTH),
           message: submission.message,
         }),
       },
       context: present({
-        page: submission.source,
+        page: pagePath(metadata.page),
         locale: submission.preferredLanguage,
         // The product the visitor came from, else the offer path they chose.
         plan_interest: text(metadata.product) ?? metadata.intent,
@@ -180,29 +223,33 @@ function failureReason(error: unknown, timedOut: boolean): string {
   return error.name;
 }
 
-/**
- * Sends the lead to PhyndCRM. Resolves to what happened and never rejects, so
- * the caller can leave it un-awaited: `skipped` when the integration is not
- * configured, `failed` (logged) on a bad base URL, a timeout, a network error
- * or a non-2xx answer.
- */
-export async function deliverLeadToCrm(
-  lead: StoredLead,
-  submission: LeadSubmission
-): Promise<LeadDelivery> {
-  const baseUrl = process.env.PHYND_CRM_BASE_URL?.trim();
-  const secret = process.env.PHYND_CRM_EVENTS_SECRET;
-  if (!baseUrl || !secret) return 'skipped';
-
-  const url = intakeUrl(baseUrl);
-  if (!url) {
-    apiLogger.error('PhyndCRM lead delivery failed', undefined, {
-      leadId: lead.id,
-      reason: 'invalid_base_url',
-    });
-    return 'failed';
+/** Releases a response body without reading it, so the socket is freed now
+ *  rather than at garbage collection. Never throws. */
+function releaseBody(response: Response): void {
+  try {
+    response.body?.cancel().catch(() => undefined);
+  } catch {
+    // Nothing to release.
   }
+}
 
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/** The jittered pause before retry number `index` (0-based). */
+function retryDelayMs(index: number): number {
+  const base = RETRY_DELAYS_MS[index] ?? 0;
+  return base + Math.floor(Math.random() * (base / 2));
+}
+
+/** One attempt's outcome. Only a network error, a timeout, a 429 or a 5xx is
+ *  worth retrying; a 3xx or another 4xx would fail the same way again. */
+type Attempt = { ok: true } | { ok: false; retryable: boolean; status?: number; reason?: string };
+
+/** One signed POST with its own timeout. Signed per attempt, so a retry
+ *  carries a fresh timestamp over the same bytes. */
+async function attemptDelivery(url: string, secret: string, rawBody: string): Promise<Attempt> {
   const controller = new AbortController();
   let timedOut = false;
   const timer = setTimeout(() => {
@@ -211,8 +258,6 @@ export async function deliverLeadToCrm(
   }, DELIVERY_TIMEOUT_MS);
 
   try {
-    const event = buildLeadCapturedEvent(lead, submission);
-    const rawBody = JSON.stringify(event);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -225,24 +270,76 @@ export async function deliverLeadToCrm(
       redirect: 'manual',
       signal: controller.signal,
     });
+    releaseBody(response);
+    if (response.ok) return { ok: true };
+    const { status } = response;
+    return { ok: false, retryable: status === 429 || status >= 500, status };
+  } catch (error) {
+    return { ok: false, retryable: true, reason: failureReason(error, timedOut) };
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
-    if (!response.ok) {
+/**
+ * Sends the lead to PhyndCRM. Resolves to what happened and never rejects, so
+ * the caller can leave it un-awaited: `skipped` when the integration is not
+ * configured, or (logged) when the email is longer than the CRM can store;
+ * `failed` (logged once) on a bad base URL, or when the last attempt still met
+ * a timeout, a network error or a non-2xx answer.
+ */
+export async function deliverLeadToCrm(
+  lead: StoredLead,
+  submission: LeadSubmission
+): Promise<LeadDelivery> {
+  try {
+    const baseUrl = process.env.PHYND_CRM_BASE_URL?.trim();
+    const secret = process.env.PHYND_CRM_LEAD_INTAKE_SECRET;
+    if (!baseUrl || !secret?.trim()) return 'skipped';
+
+    const url = intakeUrl(baseUrl);
+    if (!url) {
       apiLogger.error('PhyndCRM lead delivery failed', undefined, {
         leadId: lead.id,
-        status: response.status,
+        reason: 'invalid_base_url',
       });
       return 'failed';
     }
 
-    apiLogger.info('Lead delivered to PhyndCRM', { leadId: lead.id, eventId: event.event_id });
-    return 'delivered';
+    if (charLength(submission.email.trim()) > MAX_EMAIL_LENGTH) {
+      apiLogger.warn('PhyndCRM lead delivery skipped', {
+        leadId: lead.id,
+        reason: 'email_too_long',
+      });
+      return 'skipped';
+    }
+
+    const event = buildLeadCapturedEvent(lead, submission);
+    const rawBody = JSON.stringify(event);
+
+    for (let attempt = 1; ; attempt++) {
+      const result = await attemptDelivery(url, secret, rawBody);
+      if (result.ok) {
+        apiLogger.info('Lead delivered to PhyndCRM', { leadId: lead.id, eventId: event.event_id });
+        return 'delivered';
+      }
+      if (!result.retryable || attempt > RETRY_DELAYS_MS.length) {
+        apiLogger.error('PhyndCRM lead delivery failed', undefined, {
+          leadId: lead.id,
+          ...(result.status !== undefined ? { status: result.status } : { reason: result.reason }),
+          attempts: attempt,
+        });
+        return 'failed';
+      }
+      await sleep(retryDelayMs(attempt - 1));
+    }
   } catch (error) {
+    // Building or signing the event should not throw; if it ever does, the
+    // stored lead and the visitor's response must not notice.
     apiLogger.error('PhyndCRM lead delivery failed', undefined, {
       leadId: lead.id,
-      reason: failureReason(error, timedOut),
+      reason: failureReason(error, false),
     });
     return 'failed';
-  } finally {
-    clearTimeout(timer);
   }
 }

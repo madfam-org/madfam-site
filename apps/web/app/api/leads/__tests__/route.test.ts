@@ -349,6 +349,22 @@ describe('Leads API', () => {
       );
     });
 
+    it('returns 400 for a name that is only whitespace', async () => {
+      const req = makeRequest('http://localhost:3000/api/leads', {
+        method: 'POST',
+        body: JSON.stringify(validLeadPayload({ name: '   \t ' })),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const res = await POST(req);
+      const body = await res.json();
+
+      expect(res.status).toBe(400);
+      expect(body.errors).toEqual(
+        expect.arrayContaining([expect.objectContaining({ field: 'name' })])
+      );
+    });
+
     it('returns 400 when body is empty', async () => {
       const req = makeRequest('http://localhost:3000/api/leads', {
         method: 'POST',

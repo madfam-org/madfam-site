@@ -12,7 +12,7 @@ import { validateBearerToken } from '@/lib/security';
 // Lead schema validation
 const leadSchema = z.object({
   email: z.string().email('Email inválido'),
-  name: z.string().min(2, 'Nombre debe tener al menos 2 caracteres'),
+  name: z.string().trim().min(2, 'Nombre debe tener al menos 2 caracteres'),
   company: z.string().optional(),
   phone: z.string().optional(),
   message: z.string().optional(),
@@ -197,9 +197,10 @@ async function handlePOST(request: NextRequest) {
     }
 
     // Send the stored lead to PhyndCRM as a signed `site.lead.captured` event.
-    // Best effort, like the n8n webhook: not awaited, and it logs instead of
-    // rejecting, so a CRM outage never fails or delays the submission. A no-op
-    // unless PHYND_CRM_BASE_URL and PHYND_CRM_EVENTS_SECRET are both set.
+    // Best effort, like the n8n webhook: not awaited (its bounded retries run
+    // after the response), and it logs instead of rejecting, so a CRM outage
+    // never fails or delays the submission. A no-op unless PHYND_CRM_BASE_URL
+    // and PHYND_CRM_LEAD_INTAKE_SECRET are both set.
     void deliverLeadToCrm(lead, validatedData);
 
     return NextResponse.json({

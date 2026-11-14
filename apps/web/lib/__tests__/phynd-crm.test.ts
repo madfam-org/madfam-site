@@ -19,6 +19,7 @@ vi.mock('@/lib/logger', () => ({
 // ---------------------------------------------------------------------------
 
 import {
+  RETRY_DELAYS_MS,
   buildLeadCapturedEvent,
   deliverLeadToCrm,
   leadEventId,
@@ -33,7 +34,7 @@ import { apiLogger } from '@/lib/logger';
 
 const BASE_URL = 'https://crm.example.test';
 const INTAKE_URL = 'https://crm.example.test/api/webhooks/lead-intake';
-const SECRET = 'shared-events-secret-for-tests-only';
+const SECRET = 'lead-intake-secret-for-tests-only';
 const NOW = '2026-11-13T18:00:00.000Z';
 const NOW_SECONDS = 1794592800;
 const UUID_V5 = /^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -56,6 +57,8 @@ const SUBMISSION: LeadSubmission = {
     timeline: '30-days',
     region: 'Morelos',
     followUp: 'email',
+    page: '/es/contact',
+    referrer: 'https://news.example.test/post',
     utm_source: 'newsletter',
     utm_medium: 'email',
     utm_campaign: 'oct-2026',
@@ -70,6 +73,19 @@ interface SentRequest {
 }
 
 const fetchMock = vi.fn();
+
+/** Runs a delivery to the end: retries wait on (fake) timers. */
+async function settle<T>(pending: Promise<T>): Promise<T> {
+  await vi.runAllTimersAsync();
+  return pending;
+}
+
+function sentRequests(): SentRequest[] {
+  return fetchMock.mock.calls.map(([url, init]) => ({
+    url: url as string,
+    init: init as SentRequest['init'],
+  }));
+}
 
 function sentRequest(): SentRequest {
   const [url, init] = fetchMock.mock.calls[0] as [string, SentRequest['init']];
@@ -91,7 +107,7 @@ beforeEach(() => {
   vi.setSystemTime(new Date(NOW));
   vi.stubGlobal('fetch', fetchMock);
   vi.stubEnv('PHYND_CRM_BASE_URL', BASE_URL);
-  vi.stubEnv('PHYND_CRM_EVENTS_SECRET', SECRET);
+  vi.stubEnv('PHYND_CRM_LEAD_INTAKE_SECRET', SECRET);
   fetchMock.mockReset();
   fetchMock.mockResolvedValue(new Response(null, { status: 202 }));
 });
@@ -137,13 +153,15 @@ describe('buildLeadCapturedEvent', () => {
           company: 'Talleres Ñandú',
           message: 'Queremos facturar con Karafiel desde enero.',
         },
-        context: { page: 'contact-page', locale: 'es', plan_interest: 'karafiel' },
+        // The page is the path the form was posted from, not the form label.
+        context: { page: '/es/contact', locale: 'es', plan_interest: 'karafiel' },
         attribution: {
           utm_source: 'newsletter',
           utm_medium: 'email',
           utm_campaign: 'oct-2026',
           utm_content: 'hero',
           utm_term: 'cfdi',
+          referrer: 'https://news.example.test/post',
         },
       },
     });
@@ -162,8 +180,9 @@ describe('buildLeadCapturedEvent', () => {
 
     expect(event.payload).toStrictEqual({
       lead: { name: 'Juan Perez', email: 'juan@example.com' },
-      // No product, so the offer path the visitor chose is the interest.
-      context: { page: 'website', locale: 'en', plan_interest: 'build-with-madfam' },
+      // No product, so the offer path the visitor chose is the interest. The
+      // `source` label is not a page and is not sent.
+      context: { locale: 'en', plan_interest: 'build-with-madfam' },
       attribution: {},
     });
     expect(JSON.stringify(event)).not.toMatch(/null|""/);
@@ -189,6 +208,38 @@ describe('buildLeadCapturedEvent', () => {
     });
 
     expect(payload.attribution).toStrictEqual({ referrer: 'https://news.example.test/post' });
+  });
+
+  it('sends only a path as the page, and caps its length', () => {
+    const pageOf = (page: unknown) =>
+      buildLeadCapturedEvent(LEAD, { ...SUBMISSION, metadata: { page } }).payload.context.page;
+
+    expect(pageOf('/en/pricing')).toBe('/en/pricing');
+    expect(pageOf('contact-page')).toBeUndefined();
+    expect(pageOf('https://elsewhere.example.test/x')).toBeUndefined();
+    expect(pageOf(7)).toBeUndefined();
+    expect(pageOf(`/${'p'.repeat(800)}`)).toHaveLength(500);
+  });
+
+  it('fits name, company and phone into the CRM columns', () => {
+    const {
+      payload: { lead },
+    } = buildLeadCapturedEvent(LEAD, {
+      ...SUBMISSION,
+      name: `${'ñ'.repeat(300)}`,
+      company: `${'😀'.repeat(300)}`,
+      phone: '5'.repeat(51),
+    });
+
+    expect(Array.from(lead.name)).toHaveLength(255);
+    // Cut by character, never in the middle of a surrogate pair.
+    expect(lead.company).toBe('😀'.repeat(255));
+    // A phone that cannot be stored is left out; the lead still goes.
+    expect(lead).not.toHaveProperty('phone');
+    expect(lead.email).toBe(SUBMISSION.email);
+
+    const atLimit = buildLeadCapturedEvent(LEAD, { ...SUBMISSION, phone: '5'.repeat(50) });
+    expect(atLimit.payload.lead.phone).toBe('5'.repeat(50));
   });
 
   it('dates the event now when the row carries no createdAt', () => {
@@ -220,12 +271,13 @@ describe('deliverLeadToCrm', () => {
     ['the base URL is unset', undefined, SECRET],
     ['the base URL is empty', '', SECRET],
     ['the secret is empty', BASE_URL, ''],
+    ['the secret is only whitespace', BASE_URL, ' \n '],
   ])('sends nothing and logs nothing when %s', async (_case, baseUrl, secret) => {
     vi.unstubAllEnvs();
     delete process.env.PHYND_CRM_BASE_URL;
-    delete process.env.PHYND_CRM_EVENTS_SECRET;
+    delete process.env.PHYND_CRM_LEAD_INTAKE_SECRET;
     if (baseUrl !== undefined) vi.stubEnv('PHYND_CRM_BASE_URL', baseUrl);
-    if (secret !== undefined) vi.stubEnv('PHYND_CRM_EVENTS_SECRET', secret);
+    if (secret !== undefined) vi.stubEnv('PHYND_CRM_LEAD_INTAKE_SECRET', secret);
 
     await expect(deliverLeadToCrm(LEAD, SUBMISSION)).resolves.toBe('skipped');
 
@@ -255,6 +307,47 @@ describe('deliverLeadToCrm', () => {
     expect(init.headers['x-madfam-signature']).toBe(`t=${NOW_SECONDS},v1=${expected}`);
   });
 
+  it('signs with the secret exactly as provisioned, surrounding whitespace included', async () => {
+    vi.stubEnv('PHYND_CRM_LEAD_INTAKE_SECRET', ` ${SECRET}\n`);
+
+    await deliverLeadToCrm(LEAD, SUBMISSION);
+
+    const { init } = sentRequest();
+    const expected = createHmac('sha256', ` ${SECRET}\n`)
+      .update(`${NOW_SECONDS}.${init.body}`)
+      .digest('hex');
+    expect(init.headers['x-madfam-signature']).toBe(`t=${NOW_SECONDS},v1=${expected}`);
+  });
+
+  it('does not fall back to the old shared key name', async () => {
+    vi.unstubAllEnvs();
+    delete process.env.PHYND_CRM_LEAD_INTAKE_SECRET;
+    vi.stubEnv('PHYND_CRM_BASE_URL', BASE_URL);
+    vi.stubEnv('PHYND_CRM_EVENTS_SECRET', SECRET);
+
+    await expect(deliverLeadToCrm(LEAD, SUBMISSION)).resolves.toBe('skipped');
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('skips a lead whose email is longer than the CRM can store, logging the lead id only', async () => {
+    const email = `${'a'.repeat(244)}@example.com`;
+    expect(email).toHaveLength(256);
+
+    await expect(deliverLeadToCrm(LEAD, { ...SUBMISSION, email })).resolves.toBe('skipped');
+
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(apiLogger.warn).toHaveBeenCalledTimes(1);
+    expect(apiLogger.warn).toHaveBeenCalledWith('PhyndCRM lead delivery skipped', {
+      leadId: LEAD.id,
+      reason: 'email_too_long',
+    });
+    expect(everythingLogged()).not.toContain(email);
+
+    await expect(deliverLeadToCrm(LEAD, { ...SUBMISSION, email: email.slice(1) })).resolves.toBe(
+      'delivered'
+    );
+  });
+
   it('tolerates a trailing slash on the base URL', async () => {
     vi.stubEnv('PHYND_CRM_BASE_URL', `${BASE_URL}/`);
 
@@ -263,16 +356,19 @@ describe('deliverLeadToCrm', () => {
     expect(sentRequest().url).toBe(INTAKE_URL);
   });
 
-  it.each([301, 401, 503])(
-    'reports a %i answer with the lead id and status, without throwing',
+  it.each([301, 400, 401, 404, 422])(
+    'reports a %i answer once with the lead id and status, without retrying',
     async status => {
       fetchMock.mockResolvedValue(new Response(null, { status }));
 
-      await expect(deliverLeadToCrm(LEAD, SUBMISSION)).resolves.toBe('failed');
+      await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('failed');
 
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(apiLogger.error).toHaveBeenCalledTimes(1);
       expect(apiLogger.error).toHaveBeenCalledWith('PhyndCRM lead delivery failed', undefined, {
         leadId: LEAD.id,
         status,
+        attempts: 1,
       });
     }
   );
@@ -281,11 +377,14 @@ describe('deliverLeadToCrm', () => {
     const cause = Object.assign(new Error('connect ECONNREFUSED'), { code: 'ECONNREFUSED' });
     fetchMock.mockRejectedValue(new TypeError(`fetch failed for ${INTAKE_URL}`, { cause }));
 
-    await expect(deliverLeadToCrm(LEAD, SUBMISSION)).resolves.toBe('failed');
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('failed');
 
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    expect(apiLogger.error).toHaveBeenCalledTimes(1);
     expect(apiLogger.error).toHaveBeenCalledWith('PhyndCRM lead delivery failed', undefined, {
       leadId: LEAD.id,
       reason: 'ECONNREFUSED',
+      attempts: 3,
     });
   });
 
@@ -294,15 +393,16 @@ describe('deliverLeadToCrm', () => {
       throw 'boom';
     });
 
-    await expect(deliverLeadToCrm(LEAD, SUBMISSION)).resolves.toBe('failed');
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('failed');
 
     expect(apiLogger.error).toHaveBeenCalledWith('PhyndCRM lead delivery failed', undefined, {
       leadId: LEAD.id,
       reason: 'unknown',
+      attempts: 3,
     });
   });
 
-  it('gives up after 5 seconds and reports a timeout', async () => {
+  it('aborts each attempt after 5 seconds, retries, and reports a timeout', async () => {
     let signal: AbortSignal | undefined;
     fetchMock.mockImplementation(
       (_url: string, init: RequestInit) =>
@@ -316,12 +416,16 @@ describe('deliverLeadToCrm', () => {
     await vi.advanceTimersByTimeAsync(4999);
     expect(signal?.aborted).toBe(false);
     await vi.advanceTimersByTimeAsync(1);
-
-    await expect(delivery).resolves.toBe('failed');
     expect(signal?.aborted).toBe(true);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+
+    await expect(settle(delivery)).resolves.toBe('failed');
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    expect(apiLogger.error).toHaveBeenCalledTimes(1);
     expect(apiLogger.error).toHaveBeenCalledWith('PhyndCRM lead delivery failed', undefined, {
       leadId: LEAD.id,
       reason: 'timeout',
+      attempts: 3,
     });
   });
 
@@ -344,9 +448,9 @@ describe('deliverLeadToCrm', () => {
       .mockResolvedValueOnce(new Response(null, { status: 401 }))
       .mockRejectedValueOnce(new TypeError(`fetch failed for ${INTAKE_URL}`, { cause }));
 
-    await deliverLeadToCrm(LEAD, SUBMISSION);
-    await deliverLeadToCrm(LEAD, SUBMISSION);
-    await deliverLeadToCrm(LEAD, SUBMISSION);
+    await settle(deliverLeadToCrm(LEAD, SUBMISSION));
+    await settle(deliverLeadToCrm(LEAD, SUBMISSION));
+    await settle(deliverLeadToCrm(LEAD, SUBMISSION));
 
     const signature = sentRequest().init.headers['x-madfam-signature'].split('v1=')[1];
     const logged = everythingLogged();
@@ -355,5 +459,115 @@ describe('deliverLeadToCrm', () => {
     expect(logged).not.toContain(SECRET);
     expect(logged).not.toContain(signature);
     expect(logged).not.toContain('crm.example.test');
+  });
+});
+
+describe('deliverLeadToCrm retries', () => {
+  it('succeeds on the first try with a single request', async () => {
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('delivered');
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(apiLogger.error).not.toHaveBeenCalled();
+    expect(apiLogger.warn).not.toHaveBeenCalled();
+  });
+
+  it('retries a 503 and delivers the same body on the second attempt', async () => {
+    fetchMock
+      .mockResolvedValueOnce(new Response('busy', { status: 503 }))
+      .mockResolvedValueOnce(new Response(null, { status: 202 }));
+
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('delivered');
+
+    const [first, second] = sentRequests();
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(second.init.body).toBe(first.init.body);
+    expect(apiLogger.error).not.toHaveBeenCalled();
+  });
+
+  it('waits ~0.5 s and then ~2 s before the retries', async () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0);
+    fetchMock.mockImplementation(() => Promise.resolve(new Response(null, { status: 502 })));
+
+    const delivery = deliverLeadToCrm(LEAD, SUBMISSION);
+    await vi.advanceTimersByTimeAsync(RETRY_DELAYS_MS[0] - 1);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    await vi.advanceTimersByTimeAsync(RETRY_DELAYS_MS[1] - 1);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    await expect(delivery).resolves.toBe('failed');
+    vi.mocked(Math.random).mockRestore();
+  });
+
+  it('gives up after three 429 answers and logs once', async () => {
+    fetchMock.mockImplementation(() => Promise.resolve(new Response(null, { status: 429 })));
+
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('failed');
+
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    expect(apiLogger.error).toHaveBeenCalledTimes(1);
+    expect(apiLogger.error).toHaveBeenCalledWith('PhyndCRM lead delivery failed', undefined, {
+      leadId: LEAD.id,
+      status: 429,
+      attempts: 3,
+    });
+  });
+
+  it('does not retry a 400', async () => {
+    fetchMock.mockResolvedValue(new Response(null, { status: 400 }));
+
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('failed');
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('retries a timed-out attempt and delivers on the next one', async () => {
+    fetchMock
+      .mockImplementationOnce(
+        (_url: string, init: RequestInit) =>
+          new Promise((_resolve, reject) => {
+            init.signal?.addEventListener('abort', () => reject(new Error('aborted')));
+          })
+      )
+      .mockResolvedValueOnce(new Response(null, { status: 202 }));
+
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('delivered');
+
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(sentRequests()[1].init.signal?.aborted).toBe(false);
+    expect(apiLogger.error).not.toHaveBeenCalled();
+  });
+
+  it('signs every attempt with a fresh timestamp over the same body', async () => {
+    vi.setSystemTime(new Date('2026-11-13T18:00:00.800Z'));
+    fetchMock.mockImplementation(() => Promise.resolve(new Response(null, { status: 500 })));
+
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('failed');
+
+    const requests = sentRequests();
+    expect(new Set(requests.map(({ init }) => init.body)).size).toBe(1);
+    expect(JSON.parse(requests[0].init.body).event_id).toBe(leadEventId(LEAD.id));
+    const timestamps = requests.map(({ init }) => {
+      const signature = init.headers['x-madfam-signature'];
+      const t = Number(/^t=(\d+),/.exec(signature)?.[1]);
+      const expected = createHmac('sha256', SECRET).update(`${t}.${init.body}`).digest('hex');
+      expect(signature).toBe(`t=${t},v1=${expected}`);
+      return t;
+    });
+    expect(timestamps).toHaveLength(3);
+    expect(timestamps[1]).toBeGreaterThan(timestamps[0]);
+    expect(timestamps[2]).toBeGreaterThan(timestamps[1]);
+  });
+
+  it('releases every response body it does not read', async () => {
+    const responses = [new Response('busy', { status: 503 }), new Response('{}', { status: 202 })];
+    const cancels = responses.map(response => vi.spyOn(response.body as ReadableStream, 'cancel'));
+    fetchMock.mockResolvedValueOnce(responses[0]).mockResolvedValueOnce(responses[1]);
+
+    await expect(settle(deliverLeadToCrm(LEAD, SUBMISSION))).resolves.toBe('delivered');
+
+    for (const cancel of cancels) expect(cancel).toHaveBeenCalledTimes(1);
   });
 });
