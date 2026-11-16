@@ -65,7 +65,15 @@ redirect and should not become the source of truth again.
   operational, pricing, client and audit context out.
 - Use redacted summaries and canonical links when cross-referencing private
   context. Never copy Vault paths, secret names with retrieval detail, or raw
-  break-glass `kubectl`/SSH procedures into this repo.
+  break-glass `kubectl`/SSH procedures into this repo, with the one exception
+  below.
+- **Value-free secret mappings (owner ruling, 2026-11-15).** A Kubernetes
+  ExternalSecret manifest under `k8s/production/` may name the secret store,
+  the store path and the property it maps, because this repo's deploy syncs
+  only that directory and the platform's rules require a product's mappings to
+  live in the product's own repo. Such a manifest must never hold a value, a
+  token, a retrieval command or an operator procedure, and every one carries
+  the boundary-checkpoint comment. Everything else in this section stands.
 - If uncertain, place the detail in `internal-devops` and keep a short pointer
   here.
 - Any public doc carrying ecosystem context must include one short boundary note
@@ -74,7 +82,8 @@ redirect and should not become the source of truth again.
 **Never publish from this repo:** node hostnames, any public IP, hardware model
 numbers or capacity figures, the Cloudflare tunnel identifier, cost ledgers,
 internal hourly rates, revenue or ROI projections, Vault paths or secret names
-with retrieval detail, incident diagnoses and evidence trails, client identities
+with retrieval detail (other than the value-free mappings allowed above),
+incident diagnoses and evidence trails, client identities
 or engagement detail, operator local paths.
 
 **Already public and stays public:** the topology _shape_ — a 4-node bare-metal

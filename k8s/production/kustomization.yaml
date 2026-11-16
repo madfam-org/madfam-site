@@ -13,6 +13,7 @@ resources:
 - network-policies.yaml
 - resource-quota.yaml
 - madfam-web-hpa.yaml
+- phynd-crm-lead-intake-externalsecret.yaml
 # secrets-template.yaml excluded — managed manually via kubectl
 # Live secret has argocd.argoproj.io/sync-options: Prune=false annotation
 
