@@ -51,6 +51,26 @@ spec:
               value: "0.0.0.0"
             - name: NEXT_TELEMETRY_DISABLED
               value: "1"
+            # ── CRM lead intake (apps/web/lib/phynd-crm.ts) ──────────────────
+            # A contact-form lead the site accepts is also sent, HMAC-signed, to
+            # the CRM's lead intake. The sender skips unless BOTH the base URL
+            # and the key are set, so with the URL below and no key yet nothing
+            # is sent and the form behaves exactly as before.
+            - name: PHYND_CRM_BASE_URL
+              value: "https://crm.madfam.io"
+            # The lead-intake signing key, from its own dedicated Secret (never
+            # madfam-site-secrets, so a missing value cannot affect the site's
+            # other keys). Optional: until the Secret exists the pod still
+            # starts and the sender stays silent. It must equal the CRM's
+            # lead-intake key and the other senders'. Activation: provision it
+            # through the platform's secret intake, wait for the sync, then
+            # restart this Deployment (env is read at container start).
+            - name: PHYND_CRM_LEAD_INTAKE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: madfam-site-phynd-crm-lead-intake
+                  key: PHYND_CRM_LEAD_INTAKE_SECRET
+                  optional: true
           envFrom:
             - secretRef:
                 name: madfam-site-secrets
