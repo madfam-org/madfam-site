@@ -1,4 +1,15 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
+vi.mock('@/lib/crm-lead-outbox', () => ({
+  crmLeadIntakeHealth: vi.fn(() =>
+    Promise.resolve({
+      configured: false,
+      missing: ['PHYND_CRM_LEAD_INTAKE_SECRET'],
+      outbox: { available: true, pending: 2, dead: 1, oldestPendingAt: '2026-11-20T10:00:00.000Z' },
+    })
+  ),
+}));
+
 import { GET } from '../route';
 
 describe('GET /api/health', () => {
@@ -62,5 +73,19 @@ describe('GET /api/health', () => {
     expect(fetchSpy.mock.calls[0]?.[0]).toBe('https://janua.invalid/health');
     expect(body.services.janua.status).toBe('ok');
     expect(body.dependencies).toBe('ok');
+  });
+
+  it('reports the CRM lead intake (missing names, outbox backlog) without changing the status', async () => {
+    vi.stubEnv('JANUA_API_URL', '');
+    vi.stubEnv('COTIZA_API_URL', '');
+    const response = await GET();
+    const body = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(body.crmLeadIntake).toEqual({
+      configured: false,
+      missing: ['PHYND_CRM_LEAD_INTAKE_SECRET'],
+      outbox: { available: true, pending: 2, dead: 1, oldestPendingAt: '2026-11-20T10:00:00.000Z' },
+    });
   });
 });

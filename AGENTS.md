@@ -159,6 +159,30 @@ foundry's public copy and opens an issue when this site falls behind.
 - Above the fold, say what it is, who it is for and how to start; put prices
   only where the ruling allows.
 
+## CRM lead intake (durable, 2026-11-20)
+
+- `/api/leads` stores the `Lead` row, then starts `captureLeadForCrm`
+  (`apps/web/lib/crm-lead-outbox.ts`) without awaiting it. The submission
+  succeeds once the lead is stored. The analytics and welcome-email writes
+  after it are logged on failure; they never turn a stored lead into a 500.
+- The capture writes the signed `site.lead.captured` body to `CrmLeadDelivery`
+  (one row per lead) before sending it. `instrumentation.ts` →
+  `lib/crm-lead-replay.ts` re-sends pending rows every minute on every pod,
+  claiming each row first (`lockedUntil`). Backoff: 1 min, doubling, capped at
+  6 h. A row turns `dead` after 20 attempts, or at once on 400/413/422. To
+  re-queue it, set `status='pending', attempts=0`.
+- A missing `PHYND_CRM_BASE_URL` / `PHYND_CRM_LEAD_INTAKE_SECRET` holds leads
+  (stored, not sent) and logs one error at start-up in production.
+  `GET /api/health` reports `crmLeadIntake` (missing names, outbox `pending` /
+  `dead`) as information only.
+- The payload carries the site's qualification: `context.budget`,
+  `context.timeframe` and `context.site_score`, plus the same values as note
+  lines at the end of `lead.message`. The CRM's lead intake has no columns for
+  them yet; it keeps the raw event, and the message becomes the lead's note.
+- This app has no migrations directory. `CrmLeadDelivery` reaches a database
+  through `prisma db push` (an operator step). Until then, the capture falls
+  back to the direct 3-attempt send.
+
 ## Maintenance
 
 Regenerate or repair these files with

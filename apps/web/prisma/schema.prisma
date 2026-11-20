@@ -81,6 +81,7 @@ model Lead {
   calculations Calculation[]
   notes       LeadNote[]
   activities  LeadActivity[]
+  crmDelivery CrmLeadDelivery?
 
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -88,6 +89,35 @@ model Lead {
   @@index([email])
   @@index([status])
   @@index([createdAt])
+}
+
+// The lead's delivery to PhyndCRM's lead intake (lib/crm-lead-outbox.ts).
+// Written right after the Lead row, BEFORE anything is sent, so a CRM outage
+// or a missing key never loses the lead: the in-process replay
+// (instrumentation.ts) re-sends `pending` rows with backoff, and after 20
+// attempts (or a body the CRM refuses as malformed) the row turns `dead`,
+// counted in GET /api/health (crmLeadIntake). One row per lead.
+model CrmLeadDelivery {
+  id            String    @id @default(cuid())
+  leadId        String    @unique
+  lead          Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  // leadEventId(leadId): the CRM deduplicates on it.
+  eventId       String    @unique
+  // The exact JSON signed and sent on every attempt (re-signed each time).
+  body          String
+  // pending | delivered | dead
+  status        String    @default("pending")
+  attempts      Int       @default(0)
+  nextAttemptAt DateTime  @default(now())
+  // Claim: the pod sending this row holds it until then.
+  lockedUntil   DateTime?
+  // HTTP status or transport failure of the last attempt; never the body.
+  lastError     String?
+  deliveredAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status, nextAttemptAt])
 }
 
 model LeadNote {

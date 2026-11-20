@@ -151,10 +151,19 @@ describe('buildLeadCapturedEvent', () => {
           email: 'maria@example.com',
           phone: '+52-555-1234',
           company: 'Talleres Ñandú',
-          message: 'Queremos facturar con Karafiel desde enero.',
+          // The site's qualification rides at the end of the message, which
+          // the intake turns into the lead's note.
+          message:
+            'Queremos facturar con Karafiel desde enero.\n\n' +
+            'Calificación del sitio (madfam.io):\n- Plazo: 30-days',
         },
         // The page is the path the form was posted from, not the form label.
-        context: { page: '/es/contact', locale: 'es', plan_interest: 'karafiel' },
+        context: {
+          page: '/es/contact',
+          locale: 'es',
+          plan_interest: 'karafiel',
+          timeframe: '30-days',
+        },
         attribution: {
           utm_source: 'newsletter',
           utm_medium: 'email',
@@ -165,6 +174,37 @@ describe('buildLeadCapturedEvent', () => {
         },
       },
     });
+  });
+
+  it('carries the stored budget, timeframe and site score as context fields and note lines', () => {
+    const event = buildLeadCapturedEvent(
+      { ...LEAD, budget: '500k-plus-mxn', timeframe: 'now', score: 85 },
+      {
+        ...SUBMISSION,
+        metadata: { ...SUBMISSION.metadata, budget: 'ignored', timeline: 'ignored' },
+      }
+    );
+    expect(event.payload.context).toMatchObject({
+      budget: '500k-plus-mxn',
+      timeframe: 'now',
+      site_score: '85',
+    });
+    expect(event.payload.lead.message).toBe(
+      'Queremos facturar con Karafiel desde enero.\n\n' +
+        'Calificación del sitio (madfam.io):\n' +
+        '- Presupuesto: 500k-plus-mxn\n- Plazo: now\n- Puntaje del sitio: 85/100'
+    );
+  });
+
+  it('sends the qualification as the whole message when the visitor wrote none, score 0 included', () => {
+    const event = buildLeadCapturedEvent(
+      { id: LEAD.id, score: 0 },
+      { name: 'Juan Perez', email: 'juan@example.com', metadata: { budget: '50k-100k-mxn' } }
+    );
+    expect(event.payload.lead.message).toBe(
+      'Calificación del sitio (madfam.io):\n- Presupuesto: 50k-100k-mxn\n- Puntaje del sitio: 0/100'
+    );
+    expect(event.payload.context).toStrictEqual({ budget: '50k-100k-mxn', site_score: '0' });
   });
 
   it('omits every key that has no value instead of sending it empty', () => {
