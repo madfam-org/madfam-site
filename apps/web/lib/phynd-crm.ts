@@ -14,13 +14,16 @@ import { apiLogger } from './logger';
  * The secret is the lead-intake route's own signing key and is used exactly as
  * provisioned, never trimmed, because the receiver verifies with the raw value.
  *
- * Best effort, like the n8n webhook in `/api/leads`: up to three attempts, each
- * with a 5 s timeout. A network error, a timeout, a 429 or a 5xx is retried
- * after a short jittered pause (~0.5 s, then ~2 s); a 3xx or another 4xx is
- * not. Every attempt sends the same body under a fresh signature. A final
- * failure is logged once with the lead id and never thrown, because the lead is
- * already stored here. The event id is derived from the lead row id, so a
- * repeated delivery dedups on the CRM side.
+ * One round is up to three attempts, each with a 5 s timeout. A network
+ * error, a timeout, a 429 or a 5xx is retried after a short jittered pause
+ * (~0.5 s, then ~2 s); a 3xx or another 4xx is not. Every attempt sends the
+ * same body under a fresh signature. The event id is derived from the lead row
+ * id, so a repeated delivery dedups on the CRM side.
+ *
+ * `/api/leads` does not call deliverLeadToCrm directly: it calls
+ * captureLeadForCrm (`lib/crm-lead-outbox.ts`), which stores the event in
+ * `CrmLeadDelivery` and replays it until the CRM accepts it, and falls back to
+ * deliverLeadToCrm only when that table cannot be written.
  */
 
 const LEAD_INTAKE_PATH = '/api/webhooks/lead-intake';
@@ -43,10 +46,15 @@ const MAX_PAGE_LENGTH = 500;
 /** The RFC 4122 URL namespace as raw bytes: the UUIDv5 namespace of event ids. */
 const UUID_NAMESPACE_URL = Buffer.from('6ba7b8119dad11d180b400c04fd430c8', 'hex');
 
-/** The stored lead row: the event's identity and its time. */
+/** The stored lead row: the event's identity, its time, and the site's own
+ *  qualification of it (`budget`, `timeframe` and `score` as `/api/leads`
+ *  stored them). */
 export interface StoredLead {
   id: string;
   createdAt?: Date | null;
+  budget?: string | null;
+  timeframe?: string | null;
+  score?: number | null;
 }
 
 /** The submission `/api/leads` accepted, as its schema validates it. */
@@ -72,7 +80,18 @@ export interface SiteLeadCapturedEvent {
   occurred_at: string;
   payload: {
     lead: { name: string; email: string; phone?: string; company?: string; message?: string };
-    context: { page?: string; locale?: string; plan_interest?: string };
+    /** `budget`, `timeframe` and `site_score` are the site's qualification.
+     *  The lead intake has no column for them yet: it keeps them in its raw
+     *  event record, and the same three values ride in `lead.message`, which
+     *  becomes the lead's note (see qualificationNote). */
+    context: {
+      page?: string;
+      locale?: string;
+      plan_interest?: string;
+      budget?: string;
+      timeframe?: string;
+      site_score?: string;
+    };
     attribution: {
       utm_source?: string;
       utm_medium?: string;
@@ -140,6 +159,40 @@ export function leadEventId(leadId: string): string {
   ].join('-');
 }
 
+/** The site's qualification of a lead: the stored value, else the form's. */
+function qualification(
+  lead: StoredLead,
+  metadata: Record<string, unknown>
+): { budget?: string; timeframe?: string; siteScore?: string } {
+  const { score } = lead;
+  return {
+    budget: text(lead.budget) ?? text(metadata.budget),
+    timeframe: text(lead.timeframe) ?? text(metadata.timeline),
+    siteScore:
+      typeof score === 'number' && Number.isFinite(score) ? String(Math.round(score)) : undefined,
+  };
+}
+
+/**
+ * The qualification as note lines, so staff see it in the CRM today: the lead
+ * intake turns `lead.message` into the lead's note and has no field of its own
+ * for budget, timeframe or score. Undefined when there is nothing to add.
+ */
+export function qualificationNote(q: {
+  budget?: string;
+  timeframe?: string;
+  siteScore?: string;
+}): string | undefined {
+  const lines = [
+    q.budget && `- Presupuesto: ${q.budget}`,
+    q.timeframe && `- Plazo: ${q.timeframe}`,
+    q.siteScore && `- Puntaje del sitio: ${q.siteScore}/100`,
+  ].filter((line): line is string => Boolean(line));
+  return lines.length > 0
+    ? ['Calificación del sitio (madfam.io):', ...lines].join('\n')
+    : undefined;
+}
+
 /**
  * Maps a stored lead and its submission onto the `site.lead.captured` contract,
  * within the CRM's column limits: `name` and `company` are cut to 255
@@ -148,6 +201,10 @@ export function leadEventId(leadId: string): string {
  *
  * `context.page` is the path the form was posted from (`metadata.page`), not
  * the form's `source` label, which names a form rather than a page.
+ *
+ * The site's qualification (budget, timeframe, its own 0-100 score) goes in
+ * `context.budget` / `context.timeframe` / `context.site_score` and, as note
+ * lines, at the end of `lead.message` (qualificationNote).
  */
 export function buildLeadCapturedEvent(
   lead: StoredLead,
@@ -156,6 +213,10 @@ export function buildLeadCapturedEvent(
   const metadata = submission.metadata ?? {};
   const phone = text(submission.phone);
   const company = text(submission.company);
+  const q = qualification(lead, metadata);
+  const note = qualificationNote(q);
+  const written = text(submission.message);
+  const message = written && note ? `${written}\n\n${note}` : (written ?? note);
   return {
     schema_version: '1',
     event_id: leadEventId(lead.id),
@@ -169,7 +230,7 @@ export function buildLeadCapturedEvent(
         ...present({
           phone: phone && charLength(phone) <= MAX_PHONE_LENGTH ? phone : undefined,
           company: company && cut(company, MAX_COMPANY_LENGTH),
-          message: submission.message,
+          message,
         }),
       },
       context: present({
@@ -177,6 +238,9 @@ export function buildLeadCapturedEvent(
         locale: submission.preferredLanguage,
         // The product the visitor came from, else the offer path they chose.
         plan_interest: text(metadata.product) ?? metadata.intent,
+        budget: q.budget,
+        timeframe: q.timeframe,
+        site_score: q.siteScore,
       }),
       attribution: present({
         utm_source: metadata.utm_source,
@@ -200,7 +264,7 @@ export function signEventBody(rawBody: string, secret: string, timestamp: number
 }
 
 /** `<base>/api/webhooks/lead-intake`, or null unless that is an absolute http(s) URL. */
-function intakeUrl(baseUrl: string): string | null {
+export function intakeUrl(baseUrl: string): string | null {
   let base = baseUrl;
   while (base.endsWith('/')) base = base.slice(0, -1);
   const url = `${base}${LEAD_INTAKE_PATH}`;
@@ -246,6 +310,50 @@ function retryDelayMs(index: number): number {
 /** One attempt's outcome. Only a network error, a timeout, a 429 or a 5xx is
  *  worth retrying; a 3xx or another 4xx would fail the same way again. */
 type Attempt = { ok: true } | { ok: false; retryable: boolean; status?: number; reason?: string };
+
+/** The CRM settings from the server environment, or null for a missing one.
+ *  The secret is used exactly as provisioned (never trimmed); blank = unset. */
+export function crmConfig(): { baseUrl: string | null; secret: string | null } {
+  const baseUrl = process.env.PHYND_CRM_BASE_URL?.trim();
+  const secret = process.env.PHYND_CRM_LEAD_INTAKE_SECRET;
+  return { baseUrl: baseUrl ? baseUrl : null, secret: secret?.trim() ? secret : null };
+}
+
+/** An email the CRM cannot store (over 255 characters). */
+export function emailTooLong(email: string): boolean {
+  return charLength(email.trim()) > MAX_EMAIL_LENGTH;
+}
+
+/** What a run of attempts came to (the outbox records it). */
+export interface RoundResult {
+  delivered: boolean;
+  attempts: number;
+  /** The CRM's HTTP status on the last failed attempt, when it answered. */
+  status?: number;
+  /** The transport failure of the last attempt (timeout, ECONNREFUSED, …). */
+  reason?: string;
+}
+
+/**
+ * POSTs one serialized event up to `maxAttempts` times, retrying only a
+ * network error, a timeout, a 429 or a 5xx after a jittered pause. Same bytes
+ * every attempt under a fresh signature. Never throws; logs nothing.
+ */
+export async function sendLeadBody(
+  url: string,
+  secret: string,
+  rawBody: string,
+  maxAttempts: number
+): Promise<RoundResult> {
+  for (let attempt = 1; ; attempt++) {
+    const result = await attemptDelivery(url, secret, rawBody);
+    if (result.ok) return { delivered: true, attempts: attempt };
+    if (!result.retryable || attempt >= maxAttempts) {
+      return { delivered: false, attempts: attempt, status: result.status, reason: result.reason };
+    }
+    await sleep(retryDelayMs(attempt - 1));
+  }
+}
 
 /** One signed POST with its own timeout. Signed per attempt, so a retry
  *  carries a fresh timestamp over the same bytes. */
@@ -317,22 +425,17 @@ export async function deliverLeadToCrm(
     const event = buildLeadCapturedEvent(lead, submission);
     const rawBody = JSON.stringify(event);
 
-    for (let attempt = 1; ; attempt++) {
-      const result = await attemptDelivery(url, secret, rawBody);
-      if (result.ok) {
-        apiLogger.info('Lead delivered to PhyndCRM', { leadId: lead.id, eventId: event.event_id });
-        return 'delivered';
-      }
-      if (!result.retryable || attempt > RETRY_DELAYS_MS.length) {
-        apiLogger.error('PhyndCRM lead delivery failed', undefined, {
-          leadId: lead.id,
-          ...(result.status !== undefined ? { status: result.status } : { reason: result.reason }),
-          attempts: attempt,
-        });
-        return 'failed';
-      }
-      await sleep(retryDelayMs(attempt - 1));
+    const round = await sendLeadBody(url, secret, rawBody, RETRY_DELAYS_MS.length + 1);
+    if (round.delivered) {
+      apiLogger.info('Lead delivered to PhyndCRM', { leadId: lead.id, eventId: event.event_id });
+      return 'delivered';
     }
+    apiLogger.error('PhyndCRM lead delivery failed', undefined, {
+      leadId: lead.id,
+      ...(round.status !== undefined ? { status: round.status } : { reason: round.reason }),
+      attempts: round.attempts,
+    });
+    return 'failed';
   } catch (error) {
     // Building or signing the event should not throw; if it ever does, the
     // stored lead and the visitor's response must not notice.

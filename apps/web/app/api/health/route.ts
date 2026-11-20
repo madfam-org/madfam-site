@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { crmLeadIntakeHealth, type CrmLeadIntakeHealth } from '@/lib/crm-lead-outbox';
 
 // Readiness + informational health (finding S1-008).
 //
@@ -35,6 +36,25 @@ export interface HealthResponse {
     janua: ServiceHealth;
     cotiza: ServiceHealth;
   };
+  /** Which CRM variables are missing (names only) and the lead outbox backlog.
+   *  Informational like the services: it never changes the status code. */
+  crmLeadIntake: CrmLeadIntakeHealth | { outbox: { available: false; error: 'timeout' } };
+}
+
+/** The CRM lead detail within the same short budget as the services. */
+async function crmDetail(): Promise<HealthResponse['crmLeadIntake']> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<HealthResponse['crmLeadIntake']>(resolve => {
+    timer = setTimeout(
+      () => resolve({ outbox: { available: false, error: 'timeout' } }),
+      DOWNSTREAM_TIMEOUT_MS
+    );
+  });
+  try {
+    return await Promise.race([crmLeadIntakeHealth(), timeout]);
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function checkService(url: string | undefined): Promise<ServiceHealth> {
@@ -75,9 +95,10 @@ function rollUp(statuses: ServiceStatus[]): ServiceStatus {
 }
 
 export async function GET() {
-  const [janua, cotiza] = await Promise.all([
+  const [janua, cotiza, crmLeadIntake] = await Promise.all([
     checkService(process.env.JANUA_API_URL),
     checkService(process.env.COTIZA_API_URL),
+    crmDetail(),
   ]);
 
   const body: HealthResponse = {
@@ -86,6 +107,7 @@ export async function GET() {
     environment: process.env.NEXT_PUBLIC_ENV || process.env.NODE_ENV || 'development',
     dependencies: rollUp([janua.status, cotiza.status]),
     services: { janua, cotiza },
+    crmLeadIntake,
   };
 
   return NextResponse.json(body, {

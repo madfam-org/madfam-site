@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { withCsrfProtection } from '@/lib/csrf';
 import { apiLogger } from '@/lib/logger';
-import { deliverLeadToCrm } from '@/lib/phynd-crm';
+import { captureLeadForCrm } from '@/lib/crm-lead-outbox';
 import { prisma } from '@/lib/prisma';
 import { withRateLimit } from '@/lib/rate-limit';
 import { validateBearerToken } from '@/lib/security';
@@ -128,26 +128,41 @@ async function handlePOST(request: NextRequest) {
       },
     });
 
+    // The lead is stored: from here on the visitor's submission succeeds.
+    // Send it to PhyndCRM as a signed `site.lead.captured` event. Durable
+    // (lib/crm-lead-outbox.ts): the event is stored in CrmLeadDelivery first
+    // and replayed until the CRM accepts it, so a CRM outage or a missing key
+    // delays the lead, never loses it. Not awaited (its first round runs after
+    // the response) and it never rejects.
+    void captureLeadForCrm(lead, validatedData);
+
     // Track analytics
     analytics.trackLeadCaptured({
       source: validatedData.source,
       form: 'main-lead-form',
     });
 
-    // Track in database analytics
-    await prisma.analyticsEvent.create({
-      data: {
-        event: 'lead_captured',
-        properties: {
-          leadId: lead.id,
-          score: lead.score,
-          source: lead.source,
+    // Track in database analytics. The lead is already stored, so a failure
+    // here is logged and the submission still succeeds.
+    try {
+      await prisma.analyticsEvent.create({
+        data: {
+          event: 'lead_captured',
+          properties: {
+            leadId: lead.id,
+            score: lead.score,
+            source: lead.source,
+          },
+          url: request.headers.get('referer') || undefined,
+          userAgent,
+          ipAddress,
         },
-        url: request.headers.get('referer') || undefined,
-        userAgent,
-        ipAddress,
-      },
-    });
+      });
+    } catch (error) {
+      apiLogger.error('Failed to record lead_captured analytics event', error as Error, {
+        leadId: lead.id,
+      });
+    }
 
     apiLogger.info('Lead captured successfully', {
       leadId: lead.id,
@@ -155,19 +170,24 @@ async function handlePOST(request: NextRequest) {
       source: lead.source,
     });
 
-    // Queue welcome email
-    await prisma.emailQueue.create({
-      data: {
-        to: [lead.email],
-        subject:
-          validatedData.preferredLanguage === 'es' ? 'Bienvenido a MADFAM' : 'Welcome to MADFAM',
-        template: 'welcome',
+    // Queue welcome email. Same rule: the stored lead must not turn into a
+    // failed submission because a follow-up write failed.
+    try {
+      await prisma.emailQueue.create({
         data: {
-          name: validatedData.name,
-          language: validatedData.preferredLanguage,
+          to: [lead.email],
+          subject:
+            validatedData.preferredLanguage === 'es' ? 'Bienvenido a MADFAM' : 'Welcome to MADFAM',
+          template: 'welcome',
+          data: {
+            name: validatedData.name,
+            language: validatedData.preferredLanguage,
+          },
         },
-      },
-    });
+      });
+    } catch (error) {
+      apiLogger.error('Failed to queue welcome email', error as Error, { leadId: lead.id });
+    }
 
     // Trigger n8n webhook
     if (process.env.N8N_WEBHOOK_URL) {
@@ -195,13 +215,6 @@ async function handlePOST(request: NextRequest) {
         });
       });
     }
-
-    // Send the stored lead to PhyndCRM as a signed `site.lead.captured` event.
-    // Best effort, like the n8n webhook: not awaited (its bounded retries run
-    // after the response), and it logs instead of rejecting, so a CRM outage
-    // never fails or delays the submission. A no-op unless PHYND_CRM_BASE_URL
-    // and PHYND_CRM_LEAD_INTAKE_SECRET are both set.
-    void deliverLeadToCrm(lead, validatedData);
 
     return NextResponse.json({
       success: true,

@@ -13,6 +13,10 @@ vi.mock('@/lib/prisma', () => ({
   },
 }));
 
+vi.mock('@/lib/crm-lead-outbox', () => ({
+  captureLeadForCrm: vi.fn(() => Promise.resolve('delivered')),
+}));
+
 vi.mock('@/lib/logger', () => ({
   apiLogger: {
     info: vi.fn(),
@@ -89,6 +93,7 @@ vi.mock('@prisma/client', () => ({
 import { POST, GET } from '../route';
 import { prisma } from '@/lib/prisma';
 import { validateBearerToken } from '@/lib/security';
+import { captureLeadForCrm } from '@/lib/crm-lead-outbox';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -152,6 +157,69 @@ describe('Leads API', () => {
   // =========================================================================
   // POST /api/leads
   // =========================================================================
+
+  describe('POST /api/leads → CRM capture', () => {
+    it('hands the stored lead to the durable CRM capture, once, without awaiting it', async () => {
+      const stored = { id: 'lead-crm', email: 'test@company.com', score: 70, source: 'WEBSITE' };
+      vi.mocked(prisma.lead.create).mockResolvedValue(stored as never);
+      vi.mocked(prisma.analyticsEvent.create).mockResolvedValue({} as never);
+      vi.mocked(prisma.emailQueue.create).mockResolvedValue({} as never);
+      // A capture that never settles must not hold the response.
+      vi.mocked(captureLeadForCrm).mockReturnValueOnce(new Promise(() => undefined));
+
+      const res = await POST(
+        makeRequest('http://localhost:3000/api/leads', {
+          method: 'POST',
+          body: JSON.stringify(validLeadPayload()),
+          headers: { 'Content-Type': 'application/json' },
+        })
+      );
+
+      expect(res.status).toBe(200);
+      expect(captureLeadForCrm).toHaveBeenCalledTimes(1);
+      expect(captureLeadForCrm).toHaveBeenCalledWith(
+        stored,
+        expect.objectContaining({ email: 'test@company.com', name: 'Maria Garcia' })
+      );
+    });
+
+    it('succeeds once the lead is stored, even when the follow-up writes fail', async () => {
+      vi.mocked(prisma.lead.create).mockResolvedValue({
+        id: 'lead-stored',
+        email: 'test@company.com',
+        score: 50,
+        source: 'WEBSITE',
+      } as never);
+      vi.mocked(prisma.analyticsEvent.create).mockRejectedValue(new Error('db hiccup'));
+      vi.mocked(prisma.emailQueue.create).mockRejectedValue(new Error('db hiccup'));
+
+      const res = await POST(
+        makeRequest('http://localhost:3000/api/leads', {
+          method: 'POST',
+          body: JSON.stringify(validLeadPayload()),
+          headers: { 'Content-Type': 'application/json' },
+        })
+      );
+      const body = await res.json();
+
+      expect(res.status).toBe(200);
+      expect(body).toMatchObject({ success: true, leadId: 'lead-stored' });
+      expect(captureLeadForCrm).toHaveBeenCalledTimes(1);
+    });
+
+    it('sends nothing to the CRM when the lead could not be stored', async () => {
+      vi.mocked(prisma.lead.create).mockRejectedValue(new Error('db down'));
+      const res = await POST(
+        makeRequest('http://localhost:3000/api/leads', {
+          method: 'POST',
+          body: JSON.stringify(validLeadPayload()),
+          headers: { 'Content-Type': 'application/json' },
+        })
+      );
+      expect(res.status).toBe(500);
+      expect(captureLeadForCrm).not.toHaveBeenCalled();
+    });
+  });
 
   describe('POST /api/leads', () => {
     it('creates a lead with valid data', async () => {
