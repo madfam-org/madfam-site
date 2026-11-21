@@ -145,7 +145,7 @@ Three conversion paths into the MADFAM ecosystem:
 ### Technical Features
 
 - 🌐 **Internationalization**: Spanish (es), English (en), Portuguese (pt) with localized routes
-- 📊 **Privacy-first analytics** with Plausible (GDPR compliant)
+- 📊 **Privacy-first analytics** integration with Plausible (off in production until the privacy notice describes it)
 - 🎨 **Modern design system** with Tailwind CSS 4.x, custom color palette, and dark/light mode
 - 📱 **Mobile-first responsive design** optimized for all devices with 44px+ touch targets
 - 🚀 **Performance optimized** for 95+ Lighthouse scores

@@ -4,9 +4,10 @@ import { TranslationList } from '@/components/TranslationList';
 
 // Every string on this page comes from the `cookies` namespace (es/en/pt).
 // The cookie table lists only what the site actually sets: the next-intl
-// locale cookie (session) and Cloudflare's bot-management cookie. Analytics
-// (self-hosted Plausible) is cookieless; consent and theme live in
-// localStorage. Full text pending counsel/Tezca review (ruling R47).
+// locale cookie (session) and Cloudflare's bot-management cookie. No analytics
+// runs today (no analytics script ships in production builds); the notice
+// dismissal and theme live in localStorage, campaign parameters (utm_*) in
+// sessionStorage. Full text pending counsel/Tezca review (ruling R47).
 export default async function CookiesPage({ params }: { params: Promise<{ locale: string }> }) {
   await params; // Validate params exist
   const t = await getTranslations('cookies');
