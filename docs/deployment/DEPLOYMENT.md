@@ -83,11 +83,10 @@ images.
 - The app validates `DATABASE_URL`, `ENCRYPTION_KEY` and `API_SECRET` at start
   (`apps/web/lib/env.ts`); everything else is optional and switches a service on when set.
 - Values are managed with Enclii (backed by the secret store), never committed and never pasted
-  into chat, issues or PRs:
-
-  ```bash
-  enclii secrets set madfam-web <KEY>
-  ```
+  into chat, issues or PRs. Secret values go through Enclii's secret intake:
+  `enclii secrets intake targets` lists the intake targets, and `enclii secrets intake submit`
+  with the target and a `--reason` prompts for each value with masked input. `enclii secrets set`
+  takes `KEY=VALUE` on the command line, so it is only for non-secret settings.
 
 - Retired keys (no code reads them): `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, `JANUA_CLIENT_ID`,
   `JANUA_SECRET` (ruling R42 — madfam.io has no sign-in of its own), `PAYLOAD_SECRET` (R52).
