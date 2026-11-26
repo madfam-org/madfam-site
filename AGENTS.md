@@ -8,7 +8,7 @@
 
 <!-- MADFAM-AGENTS-CANONICAL v1 -->
 
-> Last Updated: 2026-09-23
+> Last Updated: 2026-11-26
 
 This is the canonical instruction file for Claude, Codex, and any other LLM
 agent working in this repository. `CLAUDE.md` is kept only as a compatibility
@@ -120,8 +120,16 @@ node-identity class is deliberately not expressed in a public script.
 - **No sign-in on madfam.io.** The ecosystem login is Janua; nothing here may
   verify a Janua token with a shared HS256 secret (R42).
 - **AI crawlers** are allowed on this public landing (R40); `app/robots.ts` is
-  the only robots source. **Analytics** is self-hosted Plausible at
-  `plausible.madfam.io`, never Plausible Cloud (R41).
+  the only robots source. As of 2026-11-26 `app/robots.ts` allows the R40 AI
+  crawlers, but the site's Cloudflare edge answers them 403, `/llms.txt`
+  included, so they cannot read this site.
+- **Analytics** must be self-hosted, first-party and cookieless, never a cloud
+  fallback (R41; amended 2026-11-12 so that the engine is self-hosted Umami if
+  its staging check passes, otherwise self-hosted Plausible). As of 2026-11-26
+  no analytics runs on madfam.io: the Plausible client is in the code but
+  switched off at build (`.github/workflows/deploy-web.yml` does not pass
+  `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`, so `app/layout.tsx` renders no script), and
+  `plausible.madfam.io` does not resolve.
 - **Retired names never render:** PENNY (→ Selva), SPARK, Primavera3D (→
   Primavera Maker Node), penny.onl, forgesight.quest (Forgesight is
   `forgesight.app`), Showtech, the "business units" / "AI consultancy" framing.
@@ -158,6 +166,9 @@ foundry's public copy and opens an issue when this site falls behind.
   carries offers or prices.
 - Above the fold, say what it is, who it is for and how to start; put prices
   only where the ruling allows.
+- State on 2026-11-26: AI crawlers are refused at the edge and no analytics
+  runs (see "Canonical sources and standing rulings" above and "Commercial
+  pipeline state" below).
 
 ## CRM lead intake (durable, 2026-11-20)
 
@@ -182,6 +193,36 @@ foundry's public copy and opens an issue when this site falls behind.
 - This app has no migrations directory. `CrmLeadDelivery` reaches a database
   through `prisma db push` (an operator step). Until then, the capture falls
   back to the direct 3-attempt send.
+
+## Commercial pipeline state (2026-11-26)
+
+> Boundary checkpoint (2026-11-26, madfam-site): states and dates only; no
+> lead or customer counts, no identities, no private record ids. Canonical
+> link target: the private `internal-devops` audit below.
+
+What is true for this site at each pipeline stage, read on `main` and with
+read-only public requests on 2026-11-26. The cross-repo source is the business
+pipeline audit of that date in the private operations repo:
+[`internal-devops` `audits/2026-11-26-business-pipeline/README.md`](https://github.com/madfam-org/internal-devops/blob/main/audits/2026-11-26-business-pipeline/README.md)
+(private).
+
+- **Discovery.** madfam.io answers and serves its generated sitemap and
+  robots file ("SEO / GEO checklist" above). AI crawlers get 403 at the edge
+  although `app/robots.ts` allows them, and no visitor analytics runs
+  ("Canonical sources and standing rulings" above).
+- **Prospecting.** The contact form stores each lead, scores it with a fixed
+  rule set and sends it to PhyndCRM as a signed `site.lead.captured` event
+  through the durable outbox ("CRM lead intake" above;
+  [`README.md`](README.md#-api-routes)). Whether production holds or delivers
+  leads was not checked by the audit; `GET /api/health` reports it.
+- **Conversion.** A product is self-serve only when the registry gives it a
+  checkout slug (Dhanam, Karafiel, Tezca, Forgesight, Selva, Cotiza,
+  Yantra4D; "Digital Platforms" below). Dhanam's hosted checkout is off in
+  production, so a signed-out visitor's checkout link opens the booking page.
+  Every other CTA goes to the Kalya discovery call.
+- **Virality.** The site shows no case studies or testimonials; `/case-studies`
+  redirects ([`README.md`](README.md), "Removed routes"), and the archive's
+  descriptions of them are historical ([`docs/archive/README.md`](docs/archive/README.md)).
 
 ## Maintenance
 
@@ -260,14 +301,20 @@ MADFAM is a solarpunk ecosystem of open platforms for creators, makers, and entr
 
 ### Digital Platforms (by MADFAM)
 
-Self-serve flagships (public sign-up, pricing, free tier or trial):
+Self-serve products (public sign-up and published prices). The set is decided by
+the registry's `commerce.checkout_slug` (`apps/web/lib/data/value-ladder.ts`), not by
+this list: on 2026-11-26 it is Dhanam, Karafiel, Tezca, Forgesight, Selva, Cotiza and
+Yantra4D. Dhanam's hosted checkout is off in production as of 2026-11-26, so a
+signed-out visitor's checkout link opens the booking page.
 
 - **Karafiel** (https://karafiel.mx): Mexican CFDI / RFC / SAT compliance
 - **Dhanam** (https://dhan.am): Financial wellness + ecosystem billing backbone
 - **Forgesight** (https://forgesight.app): Digital fabrication pricing intelligence
 - **Tezca** (https://tezca.mx): Mexican regulatory intelligence
-- **Fortuna** (https://fortuna.tube): Problem intelligence / NBI scoring API
-- **Rondelio** (https://rondel.io): Game intelligence cloud (TCG / tabletop)
+
+Fortuna (https://fortuna.tube, problem intelligence / NBI scoring API) and Rondelio
+(https://rondel.io, game intelligence cloud) have no checkout slug in the registry,
+so their CTAs go to the Kalya discovery call.
 
 Platform / infrastructure (B2B, white-glove default):
 
@@ -514,7 +561,7 @@ All detailed documentation is in `/docs/`:
 - **Rate limiting**: Redis-backed (multi-pod safe) with in-memory fallback
 - **CMS cache**: Write-through Redis cache with webhook invalidation
 - **Search**: Server-side search API at `/api/search`
-- **Analytics**: Plausible via `sendBeacon` (no cookie consent needed)
+- **Analytics**: `packages/analytics` sends by `sendBeacon` only when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is set; production does not set it, so nothing is sent (2026-11-26)
 - **Email**: Resend integration via email queue processor
 
 ---

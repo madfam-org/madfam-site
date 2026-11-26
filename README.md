@@ -18,7 +18,7 @@
 - 📊 Privacy-first analytics with enterprise-grade security
 - 🎨 Modern design system with Tailwind CSS 4 and dark/light mode
 
-**📅 Last Updated:** 2026-09-23
+**📅 Last Updated:** 2026-11-26
 
 > **Boundary checkpoint (2026-09-04, madfam-site).** This is a public repository (Lane C, public
 > corporate site). Setup steps, ports and variable _names_ are public-safe; node hostnames, IP
@@ -145,16 +145,16 @@ Three conversion paths into the MADFAM ecosystem:
 ### Technical Features
 
 - 🌐 **Internationalization**: Spanish (es), English (en), Portuguese (pt) with localized routes
-- 📊 **Privacy-first analytics** with Plausible (GDPR compliant)
+- 📊 **Analytics**: none live as of 2026-11-26; a cookieless self-hosted client is wired but switched off
 - 🎨 **Modern design system** with Tailwind CSS 4.x, custom color palette, and dark/light mode
 - 📱 **Mobile-first responsive design** optimized for all devices with 44px+ touch targets
 - 🚀 **Performance optimized** for 95+ Lighthouse scores
 - 🔒 **Enterprise-grade security** with CSP, CSRF protection, rate limiting, and security headers
-- 📈 **AI-powered lead generation** with intelligent scoring and activity tracking
+- 📈 **Lead capture** with a fixed rule-based score, stored and sent to the CRM as `site_score`
 - 🗄️ **Database-backed** with Prisma ORM and PostgreSQL
 - 🧪 **Comprehensive testing** with Vitest (unit) and Playwright (E2E)
 - 📧 **Email automation** with React Email templates and queue system
-- 🔌 **Integration ready** with n8n webhooks, Slack notifications, and third-party APIs
+- 🔌 **Optional n8n webhook** on lead capture; no Slack integration
 
 ### Key Pages & Routes
 
@@ -201,7 +201,7 @@ stays `/es/products`.
 | **i18n**       | next-intl             | 4.12.x  | Internationalization            |
 | **Database**   | Prisma + PostgreSQL   | 6.1.x   | Type-safe database ORM          |
 | **Auth**       | Janua (@janua/nextjs) | Latest  | Sovereign authentication        |
-| **Analytics**  | Plausible             | Latest  | Privacy-first analytics         |
+| **Analytics**  | Plausible (off)       | Latest  | Wired, not live (2026-11-26)    |
 | **CMS**        | Payload CMS           | 3.84.x  | Headless content management     |
 | **Testing**    | Vitest + Playwright   | 4.1.x   | Unit and E2E testing            |
 | **Deployment** | Enclii (K8s)          | Latest  | Production via sovereign PaaS   |
@@ -259,7 +259,7 @@ The Docker configuration includes:
 
 The API lives in `apps/web/app/api/`:
 
-- `/api/leads` - Lead capture from the contact form (`/api/leads/demo`, for the removed demo pages, is no longer called by the site)
+- `/api/leads` - Lead capture from the contact form; each lead is also sent to PhyndCRM as a signed `site.lead.captured` event through a durable outbox (`/api/leads/demo`, for the removed demo pages, is no longer called by the site)
 - `/api/search` - Site search
 - `/api/unsubscribe` - Email opt-out
 - `/api/feature-flags` - Environment-specific feature flags

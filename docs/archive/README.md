@@ -3,6 +3,8 @@
 > penny.onl, forgesight.quest, and Vercel / Railway / GitHub Pages hosting. Current
 > sources: [`AGENTS.md`](/AGENTS.md), [`ECOSYSTEM.md`](/ECOSYSTEM.md) and
 > [`docs/deployment/DEPLOYMENT.md`](/docs/deployment/DEPLOYMENT.md).
+> (2026-11-26) The case studies and testimonials described in this archive were removed from the
+> site and are not customer evidence.
 
 # Historical Documentation Archive
 
