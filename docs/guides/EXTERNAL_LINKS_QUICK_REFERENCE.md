@@ -65,7 +65,7 @@ Content-Security-Policy allows no Google origin (batch S5, 2026-10-02).
 | Method   | Link                                             |
 | -------- | ------------------------------------------------ |
 | WhatsApp | https://api.whatsapp.com/send?phone=525534106519 |
-| Email    | hello@madfam.io                                  |
+| Email    | hola@madfam.io                                   |
 
 ## Development URLs
 
