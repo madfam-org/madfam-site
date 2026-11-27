@@ -148,4 +148,16 @@ describe('email sender (R46)', () => {
     const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
     expect(`${body.from_name} <${body.from_email}>`).toBe(R46_FROM);
   });
+
+  // Ruling V8 (applies R101): conversation and sales go to hola@, help to support@.
+  // The welcome email goes to site leads, who have no product to get help with.
+  it('gives hola@madfam.io as the contact address in the welcome email (V8)', async () => {
+    vi.stubEnv('JANUA_INTERNAL_API_KEY', 'test-key');
+    vi.resetModules();
+    const { sendWelcomeEmail } = await import('@madfam-site/email/janua-sender');
+    fetchMock.mockResolvedValue({ ok: true, json: async () => ({ success: true }) });
+    await sendWelcomeEmail(['ana@example.com'], 'Ana');
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+    expect(body.variables.support_email).toBe('hola@madfam.io');
+  });
 });

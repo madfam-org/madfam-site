@@ -196,7 +196,8 @@ export async function sendWelcomeEmail(to: string[], userName: string): Promise<
         app_name: 'MADFAM',
         // madfam.io has no sign-in (R42); the link is the public site.
         login_url: siteUrl(),
-        support_email: 'hello@madfam.io',
+        // Ruling V8: conversation and sales go to hola@ (the R46 sender).
+        support_email: SENDER_ADDRESS,
       },
     },
     'onboarding'
